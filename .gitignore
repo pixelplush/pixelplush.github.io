@@ -102,3 +102,23 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Website Sources
+public/starter-kit/
+public/src/
+public/html/
+public/gulp-tasks/
+
+public/CHANGELOG.md
+
+.csscomb.json
+
+public/config.json
+
+public/gulpfile.js
+
+public/index.html
+
+public/package-lock.json
+
+public/package.json

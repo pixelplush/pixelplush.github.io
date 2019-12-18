@@ -1,0 +1,26 @@
+{
+  "name": "pixelplushwebsite",
+  "version": "1.0.0",
+  "description": "PixelPlush Website",
+  "main": "index.js",
+  "dependencies": {
+    "webwebweb": "^1.1.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/instafluff/PixelPlushWebsite.git"
+  },
+  "keywords": [
+    "PixelPlush"
+  ],
+  "author": "Instafluff",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/instafluff/PixelPlushWebsite/issues"
+  },
+  "homepage": "https://github.com/instafluff/PixelPlushWebsite#readme"
+}
