@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>PixelPlush Game Streams</title>
+  </head>
+  <body>
+    <div class="container">
+        <h1>PixelPlush Game Streams</h1>
+        <div id="currently-live"></div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+    $(document).ready(function() {
+        loadSessions();
+    });
+
+    async function loadSessions() {
+        const baseUrl = "https://api.instafluff.tv:8082";
+        let sessions = await fetch( `${baseUrl}/sessions` ).then( r => r.json() );
+        let live = await fetch( `${baseUrl}/live` ).then( r => r.json() );
+        // console.log( sessions, live );
+        $( "#currently-live" ).empty();
+        Object.keys( sessions ).forEach( s => {
+            if( sessions[ s ].live && sessions[ s ].players > 0 ) {
+                let session = sessions[ s ];
+                let liveInfo = live[ session.channel ];
+                $( "#currently-live" ).append( `
+                    <div class="card" style="width: 18rem;">
+                      <img src="${liveInfo.thumbnail.replace( "{width}", "640" ).replace( "{height}", "360" )}" class="card-img-top" alt="${liveInfo.title}">
+                      <div class="card-body">
+                        <h5 class="card-title">${liveInfo.username}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">${session.game}</h6>
+                        <p class="card-text">${session.players} Players, ${session.viewers} Viewers</p>
+                        <a href="https://twitch.tv/${session.channel}" target="_blank" class="btn btn-primary">Open Channel</a>
+                      </div>
+                    </div>` );
+            }
+        })
+    }
+    </script>
+  </body>
+</html>
