@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta name="keywords" content="pixelplush, game, development, studio, instafluff, maaya, art, web, dev, fun, relax, play">
+    <meta name="author" content="PixelPlush">
+    <title>Maze Game Link Generator - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/swiper.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/themes/semi-dark-layout.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/pages/dashboard-ecommerce.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
+    <!-- END: Custom CSS-->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern 1-column  navbar-sticky footer-static  fixed-footer" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+
+    <!-- BEGIN: Header-->
+    <div class="header-navbar-shadow"></div>
+    <nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item mr-auto"><a class="navbar-brand" href="index.html">
+                                <h2 class="brand-text mb-0"><img src="public/app-assets/images/logo/logo.png" height="27px" class="img-responsive"> <img src="public/app-assets/images/logo/text.png" height="27px" class="img-responsive"></h2>
+                            </a></li>
+                        </ul>
+                    </div>
+                    <ul class="nav navbar-nav float-right">
+                        <li class="nav-item d-none d-lg-block"><span>Games to Relax and Play<i class="bx bxs-heart pink mx-50 font-small-3"></i>Made By <a href="https://twitch.tv/maayainsane" target="_blank"><img src="public/app-assets/images/icon/maaya.gif" height="32px"> Maaya</a> &amp; <a href="https://twitch.tv/instafluff" target="_blank">Instafluff <img src="public/app-assets/images/icon/instafluff.gif" height="34px"></a></span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <section class="users-edit">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <ul class="nav nav-tabs mb-2" role="tablist">
+                                    <li class="nav-item current">
+                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#" aria-controls="account" role="tab" aria-selected="true">
+                                            <i class="bx bx-link mr-25"></i><span class="d-none d-sm-block">Maze Game Link Generator</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                        <!-- users edit media object start -->
+                                        <div class="media mb-2">
+                                            <a class="mr-2" href="#">
+                                                <img src="../../../app-assets/images/icon/icons8-cat-profile-64.png" alt="users avatar" class="users-avatar-shadow rounded-circle" height="64" width="64">
+                                            </a>
+                                            <div class="media-body">
+                                                <h4 id="account-username" class="media-heading">Anonymous User</h4>
+                                                <div class="col-12 px-0 d-flex">
+                                                    <a id="login" href="#" class="btn btn-sm btn-primary mr-25">Sign-In with Twitch</a>
+                                                    <a id="logout" href="#" class="btn btn-sm btn-light-secondary">Logout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- users edit media object ends -->
+                                        <!-- users edit account form start -->
+                                        <form novalidate="">
+                                            <div class="row">
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <div class="controls">
+                                                            <label>Twitch Channel Name</label>
+                                                            <input id="inputChannelName" type="text" class="form-control" placeholder="Your Twitch Channel Name" value="" required="" data-validation-required-message="This channel field is required">
+                                                        <div class="help-block"></div></div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Game Theme</label>
+                                                        <select class="form-control" id="inputGameTheme">
+                                                          <option>Wandering Wizards</option>
+                                                          <option>Trick or Treat (Halloween)</option>
+                                                          <option>Santa's Secret Service (Christmas)</option>
+                                                          <option>Frozen Frenzy (Winter)</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-sm-6">
+                                                    <div class="form-group">
+                                                        <label>Twitch Chat OAuth</label>
+                                                        <input type="text" class="form-control" id="inputChatOAuth" placeholder="Your Twitch Chat OAuth Token">
+                                                        <small id="oauthHelp" class="form-text text-muted">Keep this safe! This token allows sending chat messages as you.<br/>Get a Twitch Chat OAuth Token at <a href="http://twitchapps.com/tmi/" target="_blank">http://twitchapps.com/tmi/</a></small>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>End-Game Message Format</label>
+                                                        <input type="text" class="form-control" id="inputMessageFormat" value="USERNAME finished with POINTS!" placeholder="e.g. USERNAME finished with POINTS!">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table mt-1">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>Enable Boss</th>
+                                                                    <th>Prize Count</th>
+                                                                    <th>Trap Count</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableBoss" checked><label for="inputEnableBoss"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <input type="number" class="touchspin" id="inputPrizeCount" value="7" min="1" max="100" placeholder="Number of Prizes Spawned">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <input type="number" class="touchspin" id="inputTrapCount" value="5" min="1" max="100" placeholder="Number of Trap Spawned">
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12">
+                                                    <div class="form-group">
+                                                      <label for="outputOverlayLink">Overlay Link</label>
+                                                      <div class="input-group">
+                                                        <input type="text" class="form-control" id="outputOverlayLink">
+                                                        <div class="input-group-append">
+                                                          <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputOverlayLink">Click to Copy</button>
+                                                        </div>
+                                                      </div>
+                                                      <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <!-- users edit account form ends -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    </div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <p class="clearfix mb-0"><span class="float-left d-inline-block">Join our Discord and hang out with us! <a href="https://pixelplush.dev/discord" target="_blank"><u>https://pixelplush.dev/discord</u></a></span>
+          <span class="float-right d-inline-block"><script>document.write(new Date().getFullYear());</script> &copy; PIXELPLUSH&trade;</span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="public/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="public/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
+    <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="public/app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+    <script src="public/app-assets/js/core/app-menu.js"></script>
+    <script src="public/app-assets/js/core/app.js"></script>
+    <script src="public/app-assets/js/scripts/components.js"></script>
+    <script src="public/app-assets/js/scripts/footer.js"></script>
+    <!-- END: Theme JS-->
+
+    <script src="public/app-assets/js/scripts/forms/number-input.js"></script>
+
+    <script src="public/comfytwitch.min.js"></script>
+    <script>
+        const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
+        const baseUrl = window.location.origin;
+
+        $( "#login" ).hide();
+        $( "#logout" ).hide();
+
+        ComfyTwitch.Check()
+        .then( async result => {
+            if( result ) {
+                document.querySelector( "#account-username" ).innerText = result.login;
+                $( "#inputChannelName" ).val( result.login );
+                $( "#logout" ).show();
+                document.querySelector( "#logout" ).addEventListener( "click", function() {
+                    ComfyTwitch.Logout();
+                    window.location.reload();
+                });
+                let user = await ComfyTwitch.GetUser( clientId, result.user_id );
+                document.querySelector( "#account-username" ).innerText = user.display_name;
+            }
+            else {
+                $( "#login" ).show();
+                document.querySelector( "#login" ).addEventListener( "click", function() {
+                    localStorage.setItem( "redirectPage", window.location.href );
+                    ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email" ] );
+                });
+            }
+        });
+
+        let gameTheme = "index.html";
+        let channelName = "";
+        let isBossEnabled = true;
+        let chatOAuth = "";
+        let messageFormat = "USERNAME finished with POINTS!";
+        let prizeCount = "7";
+        let trapCount = "5";
+        const gameThemes = [ "index.html", "ghost.html", "christmas.html", "frozen.html" ];
+        $( "#inputGameTheme" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            gameTheme = gameThemes[ e.target.selectedIndex ];
+            generateLink();
+        });
+        $( "#inputEnableBoss" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            isBossEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputChannelName" ).on( "input", ( e ) => {
+            // console.log( e, "input" );
+            channelName = e.target.value;
+            generateLink();
+        });
+        $( "#inputChatOAuth" ).on( "input", ( e ) => {
+            // console.log( e, "input" );
+            chatOAuth = e.target.value;
+            generateLink();
+        });
+        $( "#inputMessageFormat" ).on( "input", ( e ) => {
+            messageFormat = e.target.value;
+            generateLink();
+        });
+        $( "#inputPrizeCount" ).on( "input", ( e ) => {
+            prizeCount = e.target.value;
+            generateLink();
+        });
+        $( "#inputTrapCount" ).on( "input", ( e ) => {
+            trapCount = e.target.value;
+            generateLink();
+        });
+        generateLink();
+
+        $( document ).ready(function() {
+            var clipboard = new ClipboardJS('.clipboard');
+        });
+
+        function generateLink() {
+            let baseLink = `https://www.instafluff.tv/WanderingWizards/web/${gameTheme}?`;
+            let params = [];
+            params.push( `channel=${channelName}` );
+            if( !isBossEnabled ) {
+                params.push( "noBoss=true" );
+            }
+            if( chatOAuth ) {
+                params.push( `oauth=${chatOAuth}` );
+                params.push( `messageFormat=${messageFormat}` );
+            }
+            params.push( `prizes=${prizeCount}` );
+            params.push( `traps=${trapCount}` );
+            // if( )
+            $( "#outputOverlayLink" ).val( baseLink + params.join( "&" ) );
+        }
+    </script>
+
+</body>
+<!-- END: Body-->
+
+</html>

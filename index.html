@@ -113,7 +113,7 @@
                                             <div class="dashboard-content-left pr-1">
                                                 <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
                                                 <p>Keep your viewers entertained during your breaks!</p>
-                                                <a href="https://www.instafluff.tv/WanderingWizards/web/link.html" class="btn btn-success glow">Add To Your Stream</a>
+                                                <a href="link.html" class="btn btn-success glow">Add To Your Stream</a>
                                             </div>
                                             <div class="dashboard-content-right">
                                                 <img src="public/app-assets/images/games/frozenfrenzy.gif" height="220" width="220" class="img-fluid" alt="Frozen Frenzy" />
@@ -136,7 +136,7 @@
                                             <div class="dashboard-content-left pr-1">
                                                 <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
                                                 <p>Keep your viewers entertained during your breaks!</p>
-                                                <a href="https://www.instafluff.tv/WanderingWizards/web/link.html" class="btn btn-success glow">Add To Your Stream</a>
+                                                <a href="link.html" class="btn btn-success glow">Add To Your Stream</a>
                                             </div>
                                             <div class="dashboard-content-right">
                                                 <img src="public/app-assets/images/games/santasecretservice.gif" height="220" width="220" class="img-fluid" alt="Santa's Secret Service" />
@@ -159,7 +159,7 @@
                                             <div class="dashboard-content-left pr-1">
                                                 <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
                                                 <p>Keep your viewers entertained during your breaks!</p>
-                                                <a href="https://www.instafluff.tv/WanderingWizards/web/link.html" class="btn btn-success glow">Add To Your Stream</a>
+                                                <a href="link.html" class="btn btn-success glow">Add To Your Stream</a>
                                             </div>
                                             <div class="dashboard-content-right">
                                                 <img src="public/app-assets/images/games/trickortreat.gif" height="220" width="220" class="img-fluid" alt="Trick or Treat" />
@@ -182,7 +182,7 @@
                                             <div class="dashboard-content-left pr-1">
                                                 <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
                                                 <p>Keep your viewers entertained during your breaks!</p>
-                                                <a href="https://www.instafluff.tv/WanderingWizards/web/link.html" class="btn btn-success glow">Add To Your Stream</a>
+                                                <a href="link.html" class="btn btn-success glow">Add To Your Stream</a>
                                             </div>
                                             <div class="dashboard-content-right">
                                                 <img src="public/app-assets/images/games/wanderingwizards.gif" height="220" width="220" class="img-fluid" alt="Wandering Wizards" />
@@ -208,7 +208,7 @@
     <!-- BEGIN: Footer-->
     <footer class="footer footer-static footer-light">
         <p class="clearfix mb-0"><span class="float-left d-inline-block">Join our Discord and hang out with us! <a href="https://pixelplush.dev/discord" target="_blank"><u>https://pixelplush.dev/discord</u></a></span>
-          <span class="float-right d-inline-block">2019 &copy; PIXELPLUSH&trade;</span>
+          <span class="float-right d-inline-block"><script>document.write(new Date().getFullYear());</script> &copy; PIXELPLUSH&trade;</span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
         </p>
     </footer>
@@ -235,6 +235,17 @@
     <script src="public/app-assets/js/scripts/footer.js"></script>
     <!-- END: Theme JS-->
 
+    <script src="public/comfytwitch.min.js"></script>
+    <script>
+        ComfyTwitch.Check()
+        .then( async result => {
+            if( result ) {
+                console.log( result );
+            }
+            else {
+            }
+        });
+    </script>
 </body>
 <!-- END: Body-->
 

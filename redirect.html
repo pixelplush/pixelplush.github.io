@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>PixelPlush Redirection</title>
+   </head>
+   <body>
+       <script src="public/comfytwitch.min.js"></script>
+       <script>
+           ComfyTwitch.Check()
+           .then( async result => {
+               if( result ) {
+                   console.log( result );
+               }
+               else {
+               }
+
+               // Check for redirect after login verification
+               let redirect = localStorage.getItem( "redirectPage" );
+               if( redirect ) {
+                   localStorage.removeItem( "redirectPage" );
+                   window.location.href = redirect;
+               }
+           });
+       </script>
+   </body>
+</html>

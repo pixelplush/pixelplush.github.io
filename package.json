@@ -4,7 +4,7 @@
   "description": "PixelPlush Website",
   "main": "index.js",
   "dependencies": {
-    "webwebweb": "^1.1.8"
+    "webwebweb": "^1.1.10"
   },
   "devDependencies": {},
   "scripts": {
