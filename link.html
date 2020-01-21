@@ -105,9 +105,9 @@
                                                 <img id="account-image" src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="users avatar" class="users-avatar-shadow rounded-circle" height="64" width="64">
                                             </a>
                                             <div class="media-body">
-                                                <h4 id="account-username" class="media-heading">Anonymous User</h4>
+                                                <h4 id="account-username" class="media-heading">Not Logged In</h4>
                                                 <div class="col-12 px-0 d-flex">
-                                                    <a id="login" href="#" class="btn btn-sm btn-primary mr-25">Sign-In with Twitch</a>
+                                                    <a id="login" href="#" class="btn btn-sm btn-primary mr-25">Log In with Twitch</a>
                                                     <a id="logout" href="#" class="btn btn-sm btn-light-secondary">Logout</a>
                                                 </div>
                                             </div>
@@ -120,7 +120,7 @@
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>Twitch Channel Name</label>
-                                                            <input id="inputChannelName" type="text" class="form-control" placeholder="Your Twitch Channel Name" value="" required="" data-validation-required-message="This channel field is required">
+                                                            <input id="inputChannelName" type="text" class="form-control" placeholder="Please Log In with Twitch" value="" required="" data-validation-required-message="This channel field is required" readonly>
                                                         <div class="help-block"></div></div>
                                                     </div>
                                                     <div class="form-group">
@@ -134,11 +134,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>Twitch Chat OAuth</label>
-                                                        <input type="text" class="form-control" id="inputChatOAuth" placeholder="Your Twitch Chat OAuth Token">
-                                                        <small id="oauthHelp" class="form-text text-muted">Keep this safe! This token allows sending chat messages as you.<br/>Get a Twitch Chat OAuth Token at <a href="http://twitchapps.com/tmi/" target="_blank">http://twitchapps.com/tmi/</a></small>
-                                                    </div>
+                                                    <!-- <div class="form-group"> -->
+                                                        <!-- <label>Twitch Chat OAuth</label> -->
+                                                        <input type="hidden" class="form-control" id="inputChatOAuth" placeholder="Your Twitch Chat OAuth Token">
+                                                        <!-- <small id="oauthHelp" class="form-text text-muted">Keep this safe! This token allows sending chat messages as you.<br/>Get a Twitch Chat OAuth Token at <a href="http://twitchapps.com/tmi/" target="_blank">http://twitchapps.com/tmi/</a></small> -->
+                                                    <!-- </div> -->
                                                     <div class="form-group">
                                                         <label>End-Game Message Format</label>
                                                         <input type="text" class="form-control" id="inputMessageFormat" value="USERNAME finished with POINTS!" placeholder="e.g. USERNAME finished with POINTS!">
@@ -152,6 +152,7 @@
                                                                     <th>Enable Boss</th>
                                                                     <th>Prize Count</th>
                                                                     <th>Trap Count</th>
+                                                                    <th>Enable End-Game Chat</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -169,6 +170,11 @@
                                                                     <td>
                                                                         <div class="input-group">
                                                                             <input type="number" class="touchspin" id="inputTrapCount" value="5" min="1" max="100" placeholder="Number of Trap Spawned">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableChat"><label for="inputEnableChat"></label>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -250,8 +256,13 @@
         ComfyTwitch.Check()
         .then( async result => {
             if( result ) {
+                console.log( result );
                 document.querySelector( "#account-username" ).innerText = result.login;
                 $( "#inputChannelName" ).val( result.login );
+                $( "#inputChatOAuth" ).val( `oauth:${result.token}` );
+                channelName = result.login;
+                chatOAuth = `oauth:${result.token}`;
+                generateLink();
                 $( "#logout" ).show();
                 document.querySelector( "#logout" ).addEventListener( "click", function() {
                     ComfyTwitch.Logout();
@@ -265,7 +276,7 @@
                 $( "#login" ).show();
                 document.querySelector( "#login" ).addEventListener( "click", function() {
                     localStorage.setItem( "redirectPage", window.location.href );
-                    ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email" ] );
+                    ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit" ] );
                 });
             }
         });
@@ -273,6 +284,7 @@
         let gameTheme = "index.html";
         let channelName = "";
         let isBossEnabled = true;
+        let isChatEnabled = false;
         let chatOAuth = "";
         let messageFormat = "USERNAME finished with POINTS!";
         let prizeCount = "7";
@@ -288,6 +300,10 @@
             isBossEnabled = e.target.checked;
             generateLink();
         });
+        $( "#inputEnableChat" ).on( "change", ( e ) => {
+            isChatEnabled = e.target.checked;
+            generateLink();
+        })
         $( "#inputChannelName" ).on( "input", ( e ) => {
             // console.log( e, "input" );
             channelName = e.target.value;
@@ -323,7 +339,7 @@
             if( !isBossEnabled ) {
                 params.push( "noBoss=true" );
             }
-            if( chatOAuth ) {
+            if( isChatEnabled && chatOAuth ) {
                 params.push( `oauth=${chatOAuth}` );
                 params.push( `messageFormat=${messageFormat}` );
             }
