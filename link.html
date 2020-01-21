@@ -92,7 +92,7 @@
                                         <!-- users edit media object start -->
                                         <div class="media mb-2">
                                             <a class="mr-2" href="#">
-                                                <img src="../../../app-assets/images/icon/icons8-cat-profile-64.png" alt="users avatar" class="users-avatar-shadow rounded-circle" height="64" width="64">
+                                                <img id="account-image" src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="users avatar" class="users-avatar-shadow rounded-circle" height="64" width="64">
                                             </a>
                                             <div class="media-body">
                                                 <h4 id="account-username" class="media-heading">Anonymous User</h4>
@@ -249,6 +249,7 @@
                 });
                 let user = await ComfyTwitch.GetUser( clientId, result.user_id );
                 document.querySelector( "#account-username" ).innerText = user.display_name;
+                document.querySelector( "#account-image" ).setAttribute( "src", user.profile_image_url );
             }
             else {
                 $( "#login" ).show();
