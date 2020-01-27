@@ -380,12 +380,24 @@
             messageFormat = e.target.value;
             generateLink();
         });
+        $( "#inputBossCount" ).on( "change", ( e ) => {
+            bossCount = e.target.value;
+            generateLink();
+        });
         $( "#inputBossCount" ).on( "input", ( e ) => {
             bossCount = e.target.value;
             generateLink();
         });
+        $( "#inputPrizeCount" ).on( "change", ( e ) => {
+            prizeCount = e.target.value;
+            generateLink();
+        });
         $( "#inputPrizeCount" ).on( "input", ( e ) => {
             prizeCount = e.target.value;
+            generateLink();
+        });
+        $( "#inputTrapCount" ).on( "change", ( e ) => {
+            trapCount = e.target.value;
             generateLink();
         });
         $( "#inputTrapCount" ).on( "input", ( e ) => {
@@ -427,7 +439,6 @@
             params.push( `bossEffect=${bossEffect}` );
             params.push( `prizes=${prizeCount}` );
             params.push( `traps=${trapCount}` );
-            // if( )
             $( "#outputOverlayLink" ).val( baseLink + params.join( "&" ) );
         }
     </script>
