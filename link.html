@@ -413,7 +413,7 @@
         }
 
         function generateLink() {
-            let baseLink = `https://www.instafluff.tv/WanderingWizards/web/${gameTheme}?`;
+            let baseLink = `https://www.instafluff.tv/WanderingWizards/web/${themeSettings[ gameTheme ].page}?`;
             let params = [];
             params.push( `channel=${channelName}` );
             if( !isBossEnabled ) {
