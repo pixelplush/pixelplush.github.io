@@ -130,6 +130,7 @@
                                                           <option>Trick or Treat (Halloween)</option>
                                                           <option>Santa's Secret Service (Christmas)</option>
                                                           <option>Frozen Frenzy (Winter)</option>
+                                                          <option selected>Cupid Heart Collection (Valentines)</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -151,6 +152,8 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th>Enable Boss</th>
+                                                                    <th>Boss Effect</th>
+                                                                    <th>Boss Count</th>
                                                                     <th>Prize Count</th>
                                                                     <th>Trap Count</th>
                                                                     <th>Enable End-Game Chat</th>
@@ -164,13 +167,24 @@
                                                                         </div>
                                                                     </td>
                                                                     <td>
+                                                                        <select class="form-control" id="inputBossEffect">
+                                                                          <option value="0">Steal Points</option>
+                                                                          <option value="1">Return to Spawn</option>
+                                                                        </select>
+                                                                    </td>
+                                                                    <td>
                                                                         <div class="input-group">
-                                                                            <input type="number" class="touchspin" id="inputPrizeCount" value="7" min="1" max="100" placeholder="Number of Prizes Spawned">
+                                                                            <input type="number" class="touchspin" id="inputBossCount" value="1" min="0" max="100" placeholder="Number of Bosses Spawned">
                                                                         </div>
                                                                     </td>
                                                                     <td>
                                                                         <div class="input-group">
-                                                                            <input type="number" class="touchspin" id="inputTrapCount" value="5" min="1" max="100" placeholder="Number of Trap Spawned">
+                                                                            <input type="number" class="touchspin" id="inputPrizeCount" value="7" min="1" max="214" placeholder="Number of Prizes Spawned">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <input type="number" class="touchspin" id="inputTrapCount" value="5" min="0" max="214" placeholder="Number of Trap Spawned">
                                                                         </div>
                                                                     </td>
                                                                     <td>
@@ -286,23 +300,66 @@
             }
         });
 
-        let gameTheme = "index.html";
+        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection" ];
+        const themeSettings = {
+            "wanderingwizards": {
+                page: "index.html",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+            },
+            "trickortreat": {
+                page: "ghost.html",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+            },
+            "santasecretservice": {
+                page: "christmas.html",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+            },
+            "frozenfrenzy": {
+                page: "frozen.html",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+            },
+            "cupidheartcollection": {
+                page: "cupid.html",
+                bosses: 3,
+                effect: 1,
+                prizes: 220 - 6,
+                traps: 0,
+                lockItemCount: true
+            },
+        };
+        const bossEffects = [ "steal", "base" ];
+        let gameTheme = gameThemes[ gameThemes.length - 1 ];
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
         let chatOAuth = "";
         let messageFormat = "USERNAME finished with POINTS!";
+        let bossEffect = bossEffects[ 0 ];
+        let bossCount = "1";
         let prizeCount = "7";
         let trapCount = "5";
-        const gameThemes = [ "index.html", "ghost.html", "christmas.html", "frozen.html" ];
         $( "#inputGameTheme" ).on( "change", ( e ) => {
             // console.log( e, "changed" );
             gameTheme = gameThemes[ e.target.selectedIndex ];
+            setThemeDefaults();
             generateLink();
         });
         $( "#inputEnableBoss" ).on( "change", ( e ) => {
             // console.log( e, "changed" );
             isBossEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputBossEffect" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            bossEffect = bossEffects[ e.target.selectedIndex ];
             generateLink();
         });
         $( "#inputEnableChat" ).on( "change", ( e ) => {
@@ -323,6 +380,10 @@
             messageFormat = e.target.value;
             generateLink();
         });
+        $( "#inputBossCount" ).on( "input", ( e ) => {
+            bossCount = e.target.value;
+            generateLink();
+        });
         $( "#inputPrizeCount" ).on( "input", ( e ) => {
             prizeCount = e.target.value;
             generateLink();
@@ -331,11 +392,25 @@
             trapCount = e.target.value;
             generateLink();
         });
+        setThemeDefaults();
         generateLink();
 
         $( document ).ready(function() {
             var clipboard = new ClipboardJS('.clipboard');
         });
+
+        function setThemeDefaults() {
+            bossEffect = bossEffects[ themeSettings[ gameTheme ].effect || 0 ];
+            bossCount = themeSettings[ gameTheme ].bosses;
+            prizeCount = themeSettings[ gameTheme ].prizes;
+            trapCount = themeSettings[ gameTheme ].traps;
+            $( "#inputBossEffect" ).val( themeSettings[ gameTheme ].effect || 0 );
+            $( "#inputBossCount" ).val( bossCount );
+            $( "#inputPrizeCount" ).val( prizeCount );
+            $( "#inputTrapCount" ).val( trapCount );
+            $( "#inputPrizeCount" ).prop( "disabled", themeSettings[ gameTheme ].lockItemCount ? true : false );
+            $( "#inputTrapCount" ).prop( "disabled", themeSettings[ gameTheme ].lockItemCount ? true : false );
+        }
 
         function generateLink() {
             let baseLink = `https://www.instafluff.tv/WanderingWizards/web/${gameTheme}?`;
@@ -348,6 +423,8 @@
                 params.push( `oauth=${chatOAuth}` );
                 params.push( `messageFormat=${messageFormat}` );
             }
+            params.push( `bosses=${bossCount}` );
+            params.push( `bossEffect=${bossEffect}` );
             params.push( `prizes=${prizeCount}` );
             params.push( `traps=${trapCount}` );
             // if( )
