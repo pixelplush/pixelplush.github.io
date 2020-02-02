@@ -18,5 +18,45 @@
     </head>
     <body>
         <div id="unicorn-display"></div>
+        <script>
+            setupGame( "Pixel Parachute", {
+                bg: "bcg",
+                clouds: [ "cloud1", "cloud2", "cloud3", "cloud4", "cloud5" ],
+                parachutes: [ "chute_green", "chute_pink", "chute_yellow" ],
+                characters: {
+                    "maaya": "maaya",
+                    "instafluff": "insta",
+                    "avellana": "avelana",
+                    "jimmy": "jimmy",
+                    "dobby": "dobby",
+                    "harry": "harry",
+                    "hermione": "hermione",
+                    "ron": "ron",
+                    "voldemort": "voldemort",
+                    "sammie": "sammie",
+                    "vampire": "vampire",
+                    "witch": "witch",
+                    "zombie": "zombie",
+                    "monster": "monster",
+                    "elf": "elf",
+                    "elfgirl": "elfgirl",
+                    "snowman": "snowman",
+                    "santa": "santa",
+                    "claus": "claus",
+                    "grinch": "grinch",
+                    "snowman": "snowman",
+                    "boybear": "bear",
+                    "girlbear": "beargirl",
+                },
+                playable: [ "maaya", "instafluff", "boybear", "girlbear" ],
+            }, {
+                channel: params.get( "channel" ),
+                oauth: params.get( "oauth" ),
+                messageFormat: params.get( "messageFormat" ),
+                overlay: params.get( "overlay" ),
+                clouds: params.get( "clouds" ),
+                hideTilDrop: params.get( "hideTilDrop" ),
+            });
+        </script>
     </body>
 </html>
