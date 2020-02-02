@@ -19,6 +19,7 @@
     <body>
         <div id="unicorn-display"></div>
         <script>
+            const params = new URLSearchParams( location.search );
             setupGame( "Pixel Parachute", {
                 bg: "bcg",
                 clouds: [ "cloud1", "cloud2", "cloud3", "cloud4", "cloud5" ],
