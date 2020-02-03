@@ -28,7 +28,7 @@
     <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
     <meta property="og:url" content="https://www.pixelplush.dev">
     <!-- <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff"> -->
-    <title>Maze Game Link Generator - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <title>Stream Game Overlay Link Generator - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
     <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
     <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -102,7 +102,7 @@
                                 <ul class="nav nav-tabs mb-2" role="tablist">
                                     <li class="nav-item current">
                                         <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#" aria-controls="account" role="tab" aria-selected="true">
-                                            <i class="bx bx-link mr-25"></i><span class="d-none d-sm-block">Maze Game Link Generator</span>
+                                            <i class="bx bx-link mr-25"></i><span class="d-none d-sm-block">Stream Game Overlay Link Generator</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -125,7 +125,7 @@
                                         <!-- users edit account form start -->
                                         <form novalidate="">
                                             <div class="row">
-                                                <div class="col-12 col-sm-6">
+                                                <div class="col-sm-6">
                                                     <div class="form-group">
                                                         <div class="controls">
                                                             <label>Twitch Channel Name</label>
@@ -133,17 +133,17 @@
                                                         <div class="help-block"></div></div>
                                                     </div>
                                                     <div class="form-group">
-                                                        <label>Game Theme</label>
+                                                        <label>Choose Game</label>
                                                         <select class="form-control" id="inputGameTheme">
                                                           <option>Wandering Wizards</option>
                                                           <option>Trick or Treat (Halloween)</option>
                                                           <option>Santa's Secret Service (Christmas)</option>
                                                           <option>Frozen Frenzy (Winter)</option>
                                                           <option selected>Cupid Heart Collection (Valentines)</option>
+                                                          <option>Pixel Parachute (Day)</option>
+                                                          <option>Pixel Parachute (Night)</option>
                                                         </select>
                                                     </div>
-                                                </div>
-                                                <div class="col-12 col-sm-6">
                                                     <!-- <div class="form-group"> -->
                                                         <!-- <label>Twitch Chat OAuth</label> -->
                                                         <input type="hidden" class="form-control" id="inputChatOAuth" placeholder="Your Twitch Chat OAuth Token">
@@ -155,11 +155,14 @@
                                                         <div id="inputMessageFormatDisabled" class="help-block">(Twitch Log In is needed to enable end-game chat)</div>
                                                     </div>
                                                 </div>
+                                                <div class="col-sm-6 text-center">
+                                                    <img id="game-preview" src="" height="220" width="220" class="img-fluid" alt="Game Preview" />
+                                                </div>
                                                 <div class="col-12">
                                                     <div class="table-responsive">
                                                         <table class="table mt-1">
                                                             <thead>
-                                                                <tr>
+                                                                <tr class="maze-game d-none">
                                                                     <th>Enable Boss</th>
                                                                     <th>Boss Effect</th>
                                                                     <th>Boss Count</th>
@@ -167,9 +170,15 @@
                                                                     <th>Trap Count</th>
                                                                     <th>Enable End-Game Chat</th>
                                                                 </tr>
+                                                                <tr class="parachute-game d-none">
+                                                                    <th>Overlay</th>
+                                                                    <th>Clouds</th>
+                                                                    <th>Hide Until Drop</th>
+                                                                    <th>Enable End-Game Chat</th>
+                                                                </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <tr>
+                                                                <tr class="maze-game d-none">
                                                                     <td>
                                                                         <div class="checkbox">
                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableBoss" checked><label for="inputEnableBoss"></label>
@@ -199,6 +208,28 @@
                                                                     <td>
                                                                         <div class="checkbox">
                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableChat" disabled><label for="inputEnableChat"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="parachute-game d-none">
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteOverlay"><label for="inputEnableParachuteOverlay"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteClouds" checked><label for="inputEnableParachuteClouds"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteHideTilDrop" checked><label for="inputEnableParachuteHideTilDrop"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteChat" disabled><label for="inputEnableParachuteChat"></label>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -286,6 +317,7 @@
                 $( "#inputChannelName" ).prop( "readonly", true );
                 $( "#inputMessageFormat" ).prop( "disabled", false );
                 $( "#inputEnableChat" ).prop( "disabled", false );
+                $( "#inputEnableParachuteChat" ).prop( "disabled", false );
                 $( "#inputMessageFormatDisabled" ).hide();
                 $( "#inputChatOAuth" ).val( `oauth:${result.token}` );
                 channelName = result.login;
@@ -309,43 +341,77 @@
             }
         });
 
-        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection" ];
+        const gameTypes = [ "maze", "parachute" ];
+        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "pixelparachuteday", "pixelparachutenight" ];
         const themeSettings = {
             "wanderingwizards": {
-                page: "index.html",
+                game: "maze",
+                page: "https://www.instafluff.tv/WanderingWizards/web/index.html",
+                preview: "/public/app-assets/images/games/wanderingwizards.gif",
                 bosses: 1,
                 prizes: 7,
                 traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
             },
             "trickortreat": {
-                page: "ghost.html",
+                game: "maze",
+                page: "https://www.instafluff.tv/WanderingWizards/web/ghost.html",
+                preview: "/public/app-assets/images/games/trickortreat.gif",
                 bosses: 1,
                 prizes: 7,
                 traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
             },
             "santasecretservice": {
-                page: "christmas.html",
+                game: "maze",
+                page: "https://www.instafluff.tv/WanderingWizards/web/christmas.html",
+                preview: "/public/app-assets/images/games/santasecretservice.gif",
                 bosses: 1,
                 prizes: 7,
                 traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
             },
             "frozenfrenzy": {
-                page: "frozen.html",
+                game: "maze",
+                page: "https://www.instafluff.tv/WanderingWizards/web/frozen.html",
+                preview: "/public/app-assets/images/games/frozenfrenzy.gif",
                 bosses: 1,
                 prizes: 7,
                 traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
             },
             "cupidheartcollection": {
-                page: "cupid.html",
+                game: "maze",
+                page: "https://www.instafluff.tv/WanderingWizards/web/cupid.html",
+                preview: "/public/app-assets/images/games/cupidheartcollection.gif",
                 bosses: 3,
                 effect: 1,
                 prizes: 220 - 6,
                 traps: 0,
-                lockItemCount: true
+                lockItemCount: true,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "pixelparachuteday": {
+                game: "parachute",
+                page: "https://www.pixelplush.dev/parachute/",
+                preview: "/public/app-assets/images/games/pixelparachuteday.gif",
+                overlay: false,
+                clouds: true,
+                hideTilDrop: false,
+                messageFormat: "USERNAME landed for POINTS!",
+            },
+            "pixelparachutenight": {
+                game: "parachute",
+                page: "https://www.pixelplush.dev/parachute/night.html",
+                preview: "/public/app-assets/images/games/pixelparachutenight.gif",
+                overlay: false,
+                clouds: true,
+                hideTilDrop: false,
+                messageFormat: "USERNAME landed for POINTS!",
             },
         };
         const bossEffects = [ "steal", "base" ];
-        let gameTheme = gameThemes[ gameThemes.length - 1 ];
+        let gameTheme = "cupidheartcollection";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
@@ -355,6 +421,9 @@
         let bossCount = "1";
         let prizeCount = "7";
         let trapCount = "5";
+        let isParachuteOverlay = false;
+        let isParachuteCloudsOn = true;
+        let isParachuteHideTilDrop = false;
         $( "#inputGameTheme" ).on( "change", ( e ) => {
             // console.log( e, "changed" );
             gameTheme = gameThemes[ e.target.selectedIndex ];
@@ -413,6 +482,26 @@
             trapCount = e.target.value;
             generateLink();
         });
+        $( "#inputEnableParachuteOverlay" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            isParachuteOverlay = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableParachuteClouds" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            isParachuteCloudsOn = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableParachuteHideTilDrop" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            isParachuteHideTilDrop = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableParachuteChat" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            isChatEnabled = e.target.checked;
+            generateLink();
+        });
         setThemeDefaults();
         generateLink();
 
@@ -421,33 +510,64 @@
         });
 
         function setThemeDefaults() {
+            gameTypes.forEach( g => $( `.${g}-game` ).addClass( "d-none" ) );
+            $( `.${ themeSettings[ gameTheme ].game }-game` ).removeClass( "d-none" );
+            $( "#game-preview" ).attr( "src", themeSettings[ gameTheme ].preview );
             bossEffect = bossEffects[ themeSettings[ gameTheme ].effect || 0 ];
             bossCount = themeSettings[ gameTheme ].bosses;
             prizeCount = themeSettings[ gameTheme ].prizes;
             trapCount = themeSettings[ gameTheme ].traps;
+            $( "#inputMessageFormat" ).val( themeSettings[ gameTheme ].messageFormat );
+            messageFormat = themeSettings[ gameTheme ].messageFormat;
             $( "#inputBossEffect" ).val( themeSettings[ gameTheme ].effect || 0 );
             $( "#inputBossCount" ).val( bossCount );
             $( "#inputPrizeCount" ).val( prizeCount );
             $( "#inputTrapCount" ).val( trapCount );
             $( "#inputPrizeCount" ).prop( "disabled", themeSettings[ gameTheme ].lockItemCount ? true : false );
             $( "#inputTrapCount" ).prop( "disabled", themeSettings[ gameTheme ].lockItemCount ? true : false );
+            isParachuteOverlay = themeSettings[ gameTheme ].overlay || false;
+            isParachuteCloudsOn = themeSettings[ gameTheme ].clouds || false;
+            isParachuteHideTilDrop = themeSettings[ gameTheme ].hideTilDrop || false;
+            $( "#inputEnableParachuteOverlay" ).prop( "checked", isParachuteOverlay );
+            $( "#inputEnableParachuteClouds" ).prop( "checked", isParachuteCloudsOn );
+            $( "#inputEnableParachuteHideTilDrop" ).prop( "checked", isParachuteOverlay );
+            $( "#inputEnableParachuteChat" ).prop( "checked", isChatEnabled );
         }
 
         function generateLink() {
-            let baseLink = `https://www.instafluff.tv/WanderingWizards/web/${themeSettings[ gameTheme ].page}?`;
+            let baseLink = `${themeSettings[ gameTheme ].page}?`;
             let params = [];
             params.push( `channel=${channelName}` );
-            if( !isBossEnabled ) {
-                params.push( "noBoss=true" );
+            switch( themeSettings[ gameTheme ].game ) {
+            case "maze":
+                if( !isBossEnabled ) {
+                    params.push( "noBoss=true" );
+                }
+                if( isChatEnabled && chatOAuth ) {
+                    params.push( `oauth=${chatOAuth}` );
+                    params.push( `messageFormat=${messageFormat}` );
+                }
+                params.push( `bosses=${bossCount}` );
+                params.push( `bossEffect=${bossEffect}` );
+                params.push( `prizes=${prizeCount}` );
+                params.push( `traps=${trapCount}` );
+                break;
+            case "parachute":
+                if( isParachuteOverlay ) {
+                    params.push( "overlay=true" );
+                }
+                if( isParachuteCloudsOn ) {
+                    params.push( "clouds=true" );
+                }
+                if( isParachuteHideTilDrop ) {
+                    params.push( "hideTilDrop=true" );
+                }
+                if( isChatEnabled && chatOAuth ) {
+                    params.push( `oauth=${chatOAuth}` );
+                    params.push( `messageFormat=${messageFormat}` );
+                }
+                break;
             }
-            if( isChatEnabled && chatOAuth ) {
-                params.push( `oauth=${chatOAuth}` );
-                params.push( `messageFormat=${messageFormat}` );
-            }
-            params.push( `bosses=${bossCount}` );
-            params.push( `bossEffect=${bossEffect}` );
-            params.push( `prizes=${prizeCount}` );
-            params.push( `traps=${trapCount}` );
             $( "#outputOverlayLink" ).val( baseLink + params.join( "&" ) );
         }
     </script>
