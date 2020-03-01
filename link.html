@@ -142,6 +142,7 @@
                                                           <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
                                                           <option value="pixelparachuteday">Pixel Parachute (Day)</option>
                                                           <option value="pixelparachutenight">Pixel Parachute (Night)</option>
+                                                          <option value="pixelplinko">Pixel Plinko</option>
                                                         </select>
                                                     </div>
                                                     <!-- <div class="form-group"> -->
@@ -174,6 +175,13 @@
                                                                     <th>No Background</th>
                                                                     <th>Clouds</th>
                                                                     <th>Hide Until Drop</th>
+                                                                    <th>Enable End-Game Chat</th>
+                                                                </tr>
+                                                                <tr class="plinko-game d-none">
+                                                                    <th>No Background</th>
+                                                                    <th>Clouds</th>
+                                                                    <th>Hide Until Start</th>
+                                                                    <th>Sound Volume</th>
                                                                     <th>Enable End-Game Chat</th>
                                                                 </tr>
                                                             </thead>
@@ -230,6 +238,33 @@
                                                                     <td>
                                                                         <div class="checkbox">
                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteChat" disabled><label for="inputEnableParachuteChat"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr class="plinko-game d-none">
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoOverlay"><label for="inputEnablePlinkoOverlay"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoClouds" checked><label for="inputEnablePlinkoClouds"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoHideTilStart" checked><label for="inputEnablePlinkoHideTilStart"></label>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="input-group">
+                                                                            <input type="number" class="touchspin" id="inputPlinkoVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="checkbox">
+                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoChat" disabled><label for="inputEnablePlinkoChat"></label>
                                                                         </div>
                                                                     </td>
                                                                 </tr>
@@ -319,6 +354,7 @@
                 $( "#inputMessageFormat" ).prop( "disabled", false );
                 $( "#inputEnableChat" ).prop( "disabled", false );
                 $( "#inputEnableParachuteChat" ).prop( "disabled", false );
+                $( "#inputEnablePlinkoChat" ).prop( "disabled", false );
                 $( "#inputMessageFormatDisabled" ).hide();
                 $( "#inputChatOAuth" ).val( `oauth:${result.token}` );
                 channelName = result.login;
@@ -342,8 +378,8 @@
             }
         });
 
-        const gameTypes = [ "maze", "parachute" ];
-        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "pixelparachuteday", "pixelparachutenight" ];
+        const gameTypes = [ "maze", "parachute", "plinko" ];
+        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "pixelparachuteday", "pixelparachutenight", "pixelplinko" ];
         const themeSettings = {
             "wanderingwizards": {
                 game: "maze",
@@ -410,9 +446,18 @@
                 hideTilDrop: false,
                 messageFormat: "USERNAME landed for POINTS!",
             },
+            "pixelplinko": {
+                game: "plinko",
+                page: "https://www.pixelplush.dev/plinko/",
+                preview: "/public/app-assets/images/games/pixelplinko.gif",
+                overlay: false,
+                clouds: true,
+                hideTilStart: false,
+                messageFormat: "USERNAME is a winner!",
+            },
         };
         const bossEffects = [ "steal", "base" ];
-        let gameTheme = params.get( "game" ) || "cupidheartcollection";
+        let gameTheme = params.get( "game" ) || "pixelplinko";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
@@ -425,6 +470,10 @@
         let isParachuteOverlay = false;
         let isParachuteCloudsOn = true;
         let isParachuteHideTilDrop = false;
+        let isPlinkoOverlay = false;
+        let isPlinkoCloudsOn = true;
+        let isPlinkoHideTilStart = false;
+        let plinkoVolume = "25";
         $( "#inputGameTheme" ).val( gameTheme );
         $( "#inputGameTheme" ).on( "change", ( e ) => {
             // console.log( e, "changed" );
@@ -485,22 +534,42 @@
             generateLink();
         });
         $( "#inputEnableParachuteOverlay" ).on( "change", ( e ) => {
-            // console.log( e, "changed" );
             isParachuteOverlay = e.target.checked;
             generateLink();
         });
         $( "#inputEnableParachuteClouds" ).on( "change", ( e ) => {
-            // console.log( e, "changed" );
             isParachuteCloudsOn = e.target.checked;
             generateLink();
         });
         $( "#inputEnableParachuteHideTilDrop" ).on( "change", ( e ) => {
-            // console.log( e, "changed" );
             isParachuteHideTilDrop = e.target.checked;
             generateLink();
         });
         $( "#inputEnableParachuteChat" ).on( "change", ( e ) => {
-            // console.log( e, "changed" );
+            isChatEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoOverlay" ).on( "change", ( e ) => {
+            isPlinkoOverlay = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoClouds" ).on( "change", ( e ) => {
+            isPlinkoCloudsOn = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoHideTilStart" ).on( "change", ( e ) => {
+            isPlinkoHideTilStart = e.target.checked;
+            generateLink();
+        });
+        $( "#inputPlinkoVolume" ).on( "change", ( e ) => {
+            plinkoVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoVolume" ).on( "input", ( e ) => {
+            plinkoVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoChat" ).on( "change", ( e ) => {
             isChatEnabled = e.target.checked;
             generateLink();
         });
@@ -534,6 +603,13 @@
             $( "#inputEnableParachuteClouds" ).prop( "checked", isParachuteCloudsOn );
             $( "#inputEnableParachuteHideTilDrop" ).prop( "checked", isParachuteOverlay );
             $( "#inputEnableParachuteChat" ).prop( "checked", isChatEnabled );
+            isPlinkoOverlay = themeSettings[ gameTheme ].overlay || false;
+            isPlinkoCloudsOn = themeSettings[ gameTheme ].clouds || false;
+            isPlinkoHideTilStart = themeSettings[ gameTheme ].hideTilStart || false;
+            $( "#inputEnablePlinkoOverlay" ).prop( "checked", isPlinkoOverlay );
+            $( "#inputEnablePlinkoClouds" ).prop( "checked", isPlinkoCloudsOn );
+            $( "#inputEnablePlinkoHideTilStart" ).prop( "checked", isPlinkoOverlay );
+            $( "#inputEnablePlinkoChat" ).prop( "checked", isChatEnabled );
         }
 
         function generateLink() {
@@ -563,6 +639,24 @@
                 }
                 if( isParachuteHideTilDrop ) {
                     linkParams.push( "hideTilDrop=true" );
+                }
+                if( isChatEnabled && chatOAuth ) {
+                    linkParams.push( `oauth=${chatOAuth}` );
+                    linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                break;
+            case "plinko":
+                if( isPlinkoOverlay ) {
+                    linkParams.push( "overlay=true" );
+                }
+                if( isPlinkoCloudsOn ) {
+                    linkParams.push( "clouds=true" );
+                }
+                if( isPlinkoHideTilStart ) {
+                    linkParams.push( "hideTilStart=true" );
+                }
+                if( plinkoVolume ) {
+                    linkParams.push( `volume=${plinkoVolume}` );
                 }
                 if( isChatEnabled && chatOAuth ) {
                     linkParams.push( `oauth=${chatOAuth}` );
