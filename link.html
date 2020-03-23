@@ -140,6 +140,7 @@
                                                           <option value="santasecretservice">Santa's Secret Service (Christmas)</option>
                                                           <option value="frozenfrenzy">Frozen Frenzy (Winter)</option>
                                                           <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
+                                                          <option value="easteregghunt">Easter Egg Hunt (Easter)</option>
                                                           <option value="pixelparachuteday">Pixel Parachute (Day)</option>
                                                           <option value="pixelparachutenight">Pixel Parachute (Night)</option>
                                                           <option value="pixelplinko">Pixel Plinko</option>
@@ -167,6 +168,7 @@
                                                                     <th>Enable Boss</th>
                                                                     <th>Boss Effect</th>
                                                                     <th>Boss Count</th>
+                                                                    <th>Trap Effect</th>
                                                                     <th>Prize Count</th>
                                                                     <th>Trap Count</th>
                                                                     <th>Enable Chat Announcement</th>
@@ -203,6 +205,12 @@
                                                                         <div class="input-group">
                                                                             <input type="number" class="touchspin" id="inputBossCount" value="1" min="0" max="100" placeholder="Number of Bosses Spawned">
                                                                         </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <select class="form-control" id="inputTrapEffect">
+                                                                          <option value="0">Points Penalty</option>
+                                                                          <option value="1">Trap Tunnels</option>
+                                                                        </select>
                                                                     </td>
                                                                     <td>
                                                                         <div class="input-group">
@@ -385,7 +393,7 @@
         });
 
         const gameTypes = [ "maze", "parachute", "plinko" ];
-        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "pixelparachuteday", "pixelparachutenight", "pixelplinko" ];
+        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "pixelparachuteday", "pixelparachutenight", "pixelplinko" ];
         const themeSettings = {
             "wanderingwizards": {
                 game: "maze",
@@ -434,6 +442,16 @@
                 lockItemCount: true,
                 messageFormat: "USERNAME finished with POINTS!",
             },
+            "easteregghunt": {
+                game: "maze",
+                page: "https://www.pixelplush.dev/maze/easter.html",
+                preview: "/public/app-assets/images/games/easteregghunt.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
             "pixelparachuteday": {
                 game: "parachute",
                 page: "https://www.pixelplush.dev/parachute/",
@@ -463,13 +481,15 @@
             },
         };
         const bossEffects = [ "steal", "base" ];
-        let gameTheme = params.get( "game" ) || "pixelplinko";
+        const trapEffects = [ "points", "tunnel" ];
+        let gameTheme = params.get( "game" ) || "easteregghunt";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
         let chatOAuth = "";
         let messageFormat = "USERNAME finished with POINTS!";
         let bossEffect = bossEffects[ 0 ];
+        let trapEffect = trapEffects[ 0 ];
         let bossCount = "1";
         let prizeCount = "7";
         let trapCount = "5";
@@ -496,6 +516,11 @@
         $( "#inputBossEffect" ).on( "change", ( e ) => {
             // console.log( e, "changed" );
             bossEffect = bossEffects[ e.target.selectedIndex ];
+            generateLink();
+        });
+        $( "#inputTrapEffect" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            trapEffect = trapEffects[ e.target.selectedIndex ];
             generateLink();
         });
         $( "#inputEnableChat" ).on( "change", ( e ) => {
@@ -599,6 +624,8 @@
             gameTypes.forEach( g => $( `.${g}-game` ).addClass( "d-none" ) );
             $( `.${ themeSettings[ gameTheme ].game }-game` ).removeClass( "d-none" );
             $( "#game-preview" ).attr( "src", themeSettings[ gameTheme ].preview );
+            isBossEnabled = themeSettings[ gameTheme ].bosses > 0;
+            $( "#inputEnableBoss" ).prop( "checked", themeSettings[ gameTheme ].bosses > 0 ? true : false );
             bossEffect = bossEffects[ themeSettings[ gameTheme ].effect || 0 ];
             bossCount = themeSettings[ gameTheme ].bosses;
             prizeCount = themeSettings[ gameTheme ].prizes;
@@ -606,6 +633,7 @@
             $( "#inputMessageFormat" ).val( themeSettings[ gameTheme ].messageFormat );
             messageFormat = themeSettings[ gameTheme ].messageFormat;
             $( "#inputBossEffect" ).val( themeSettings[ gameTheme ].effect || 0 );
+            $( "#inputTrapEffect" ).val( themeSettings[ gameTheme ].trapEffect || 0 );
             $( "#inputBossCount" ).val( bossCount );
             $( "#inputPrizeCount" ).val( prizeCount );
             $( "#inputTrapCount" ).val( trapCount );
