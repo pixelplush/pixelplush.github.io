@@ -83,7 +83,7 @@
                         <li>&nbsp;</li>
                         <li class="nav-item d-none d-lg-block">
                             <div class="not-logged-in">
-                                <a href="#login" class="btn btn-primary mr-25">Log In</a>
+                                <a id="login" href="#" class="btn btn-primary mr-25">Log In</a>
                             </div>
                             <div class="logged-in">
                             </div>
@@ -122,8 +122,8 @@
                                             </a>
                                             <div class="media-body">
                                                 <h4 id="account-username" class="media-heading">Not Logged In</h4>
-                                                <div class="col-12 px-0 d-flex logged-in">
-                                                    <a id="logout" href="#" class="btn btn-sm btn-light-secondary">Logout</a>
+                                                <div class="col-12 px-0 d-flex">
+                                                    <a id="logout" href="#" class="btn btn-sm btn-light-secondary logged-in">Logout</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -319,7 +319,6 @@
                 $( ".not-logged-in" ).show();
                 $( ".logged-in" ).hide();
 
-                $( "#login" ).show();
                 document.querySelector( "#login" ).addEventListener( "click", function() {
                     console.log( "Logging in!" );
                     localStorage.setItem( "redirectPage", window.location.href );
