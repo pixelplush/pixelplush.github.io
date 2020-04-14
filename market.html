@@ -358,6 +358,10 @@
                     let option = document.createElement( "option" );
                     option.value = item.id;
                     option.innerText = `${item.name} (${item.cost} Plush Coins)`;
+                    if( account.owned.includes( item.id ) ) {
+                        option.innerText = `${item.name} (Already Owned)`;
+                        option.disabled = true;
+                    }
                     itemList.appendChild( option );
                 }
             });
