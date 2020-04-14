@@ -158,7 +158,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 text-center">
-                                                    <img id="game-preview" src="" height="220" width="220" class="img-fluid" alt="Game Preview" />
+                                                    <img id="item-preview" src="" height="64" width="64" class="img-fluid" alt="Item Preview" />
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
@@ -225,6 +225,10 @@
         let twitch = {};
         let account = {};
         let catalog = {};
+        let items = {};
+        let animationTimer = null;
+        let animationFrame = 0;
+        let animationDir = 0;
 
         document.querySelector( "#inputItemType" ).addEventListener( "change", ( e ) => {
             // console.log( e, "changed" );
@@ -232,7 +236,7 @@
         });
 
         document.querySelector( "#inputItemList" ).addEventListener( "change", ( e ) => {
-            console.log( "changed" );
+            setItemPreview();
         });
 
         document.querySelector( "#test-coin-add" ).addEventListener( "click", async ( e ) => {
@@ -296,7 +300,13 @@
                     catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
                     }).then( r => r.json() );
 
-                    console.log( catalog );
+                    // console.log( catalog );
+
+                    catalog.forEach( x => {
+                        items[ x.id ] = x;
+                    });
+
+                    // console.log( items );
 
                     // Populate Catalog
                     // $( "#inputItemList" ).empty();
@@ -313,7 +323,7 @@
                 catch( error ) {
                     // TODO: Auth Failed
                     console.log( "Auth Validate Failed", error );
-                };
+                }
             }
             else {
                 $( ".not-logged-in" ).show();
@@ -343,6 +353,51 @@
                     itemList.appendChild( option );
                 }
             });
+            setItemPreview();
+        }
+
+        function setItemPreview() {
+            let item = items[ document.querySelector( "#inputItemList" ).value ];
+            let dir = "";
+            switch( item.type ) {
+                case "pet":
+                    dir = `pets/${item.path}`;
+                    break;
+                case "character":
+                default:
+                    dir = `${item.type}s/${item.id}`;
+                    break;
+            }
+            // console.log( item );
+            document.querySelector( "#item-preview" ).setAttribute( "src", `https://www.pixelplush.dev/assets/${dir}/${item.path}_front/${item.path}_front1.png` );
+
+            if( animationTimer ) {
+                clearInterval( animationTimer );
+            }
+            animationTimer = setInterval( () => {
+                animationFrame = ( animationFrame + 1 ) % 20;
+                if( animationFrame === 0 ) {
+                    animationDir = ( animationDir + 1 ) % 4;
+                }
+
+                let direction = "front";
+                switch( animationDir ) {
+                    case 0:
+                        direction = "front";
+                        break;
+                    case 1:
+                        direction = "left";
+                        break;
+                    case 2:
+                        direction = "back";
+                        break;
+                    case 3:
+                        direction = "right";
+                        break;
+                }
+
+                document.querySelector( "#item-preview" ).setAttribute( "src", `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animationFrame % 10 + 1}.png` );
+            }, 60 );
         }
     </script>
 
