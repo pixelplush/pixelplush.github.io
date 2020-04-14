@@ -58,6 +58,14 @@
     <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
     <!-- END: Custom CSS-->
 
+    <style>
+        .pixelated {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+    </style>
+
 </head>
 <!-- END: Head-->
 
@@ -158,7 +166,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-6 text-center">
-                                                    <img id="item-preview" src="" height="64" width="64" class="img-fluid" alt="Item Preview" />
+                                                    <img id="item-preview" src="" height="64" width="64" class="img-fluid pixelated" alt="Item Preview" />
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="form-group">
