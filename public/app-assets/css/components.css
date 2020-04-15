@@ -2522,6 +2522,41 @@ body.navbar-static .navbar-container .search-input.open {
   box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
 }
 
+.btn-twitch {
+  background-color: #9146ff;
+  color: #FFFFFF;
+  background-color: #9146ff;
+  border-color: #FFFFFF;
+}
+
+.btn-twitch:hover {
+  color: #FFFFFF;
+  background-color: #9146ff;
+  border-color: #9146ff;
+}
+
+.btn-twitch:focus, .btn-twitch.focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+
+.btn-twitch.disabled, .btn-twitch:disabled {
+  color: #FFFFFF;
+  background-color: #9146ff;
+  border-color: #FFFFFF;
+}
+
+.btn-twitch:not(:disabled):not(.disabled):active, .btn-twitch:not(:disabled):not(.disabled).active,
+.show > .btn-twitch.dropdown-toggle {
+  color: #FFFFFF;
+  background-color: #6441a5;
+  border-color: #dfdfdf;
+}
+
+.btn-twitch:not(:disabled):not(.disabled):active:focus, .btn-twitch:not(:disabled):not(.disabled).active:focus,
+.show > .btn-twitch.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.5);
+}
+
 .btn-twitter {
   background-color: #55acee;
   color: #324356;
