@@ -94,7 +94,7 @@
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
                         <li class="nav-item d-none d-lg-block">
                             <div class="not-logged-in">
-                                <a id="login" href="login.html" class="btn btn-primary mr-25">Log In</a>
+                                <a id="login" href="login.html?redirect=market.html" class="btn btn-primary mr-25">Log In</a>
                             </div>
                         </li>
                         <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
@@ -287,13 +287,6 @@
                                     <div class="card">
                                         <div class="card-content">
                                             <div class="card-body">
-                                                <ul class="nav nav-tabs mb-2" role="tablist">
-                                                    <li class="nav-item current">
-                                                        <a class="nav-link d-flex align-items-center active" id="account-tab" data-toggle="tab" href="#" aria-controls="account" role="tab" aria-selected="true">
-                                                            <i class="bx bx-cart mr-25"></i><span class="d-none d-sm-block">PixelPlush Goodies Market</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
                                                         <!-- users edit media object start -->
@@ -470,7 +463,7 @@
                         }
                     } ).then( r => r.json() );
 
-                    console.log( account );
+                    // console.log( account );
 
                     if( account.error ) {
                         throw "Login Error";
@@ -504,7 +497,7 @@
                     document.querySelector( "#inputItemType" ).value = "character";
                     populateItemList();
 
-                    document.querySelector( ".logout" ).addEventListener( "click", function() {
+                    $( ".logout" ).on( "click", function() {
                         ComfyTwitch.Logout();
                         window.location.reload();
                     });
