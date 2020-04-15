@@ -148,13 +148,14 @@
     <!-- BEGIN: Page JS-->
     <script src="public/comfytwitch.min.js"></script>
     <script>
+        const params = new URLSearchParams( location.search );
         const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
         const baseUrl = window.location.origin;
         const plushApiUrl = "https://blockparty.instafluff.tv:3000/v1"; //"http://localhost:3000/v1";
 
         document.querySelector( "#login-twitch" ).addEventListener( "click", function() {
             console.log( "Logging in!" );
-            localStorage.setItem( "redirectPage", window.location.href );
+            localStorage.setItem( "redirectPage", params.get( "redirect" ) || window.location.href );
             ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [] );
         });
 
@@ -176,7 +177,7 @@
 
                     // TODO: Redirect to logged in site!
                     console.log( "Logged in" );
-                    window.location.href = `${baseUrl}/market.html`;
+                    window.location.href = `${baseUrl}/index.html`;
                 }
                 catch( error ) {
                     // TODO: Auth Failed
