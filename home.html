@@ -27,15 +27,14 @@
     <meta property="og:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
     <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
     <meta property="og:url" content="https://www.pixelplush.dev">
-    <!-- <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff"> -->
-    <title>Stream Game Overlay Link Generator - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff">
+    <title>PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
     <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
     <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/vendors.min.css">
-    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/charts/apexcharts.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/swiper.min.css">
     <!-- END: Vendor CSS-->
@@ -86,7 +85,7 @@
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
                         <li class="nav-item d-none d-lg-block">
                             <div class="not-logged-in">
-                                <a id="login" href="login.html?redirect=market.html" class="btn btn-primary mr-25">Log In</a>
+                                <a id="login" href="login.html?redirect=twitch.html" class="btn btn-primary mr-25">Log In</a>
                             </div>
                         </li>
                         <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
@@ -229,7 +228,8 @@
             <div class="content-header row">
             </div>
             <div class="content-body">
-                <section class="users-edit">
+                <!-- Dashboard Ecommerce Starts -->
+                <section id="dashboard-ecommerce">
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
@@ -237,7 +237,7 @@
                                 <div class="col-md-3 mb-2 mb-md-0 pills-stacked">
                                     <ul class="nav nav-pills flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="home.html">
+                                            <a class="nav-link d-flex align-items-center active" href="home.html">
                                                 <i class="bx bx-home"></i>
                                                 <span>PixelPlush Home</span>
                                             </a>
@@ -249,7 +249,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center active" href="market.html">
+                                            <a class="nav-link d-flex align-items-center" href="market.html">
                                                 <img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
                                                 <span>Goodies Market</span>
                                             </a>
@@ -276,65 +276,232 @@
                                 </div>
                                 <!-- right content section -->
                                 <div class="col-md-9">
-                                    <div class="card">
-                                        <div class="card-content">
-                                            <div class="card-body">
-                                                <div class="tab-content">
-                                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-                                                        <!-- users edit media object start -->
-                                                        <div class="media mb-2">
-                                                            <a class="mr-2" href="#">
-                                                                <img src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" class="users-avatar-shadow rounded-circle account-image" height="64" width="64">
-                                                            </a>
-                                                            <div class="media-body">
-                                                                <h4 class="media-heading user-name">Not Logged In</h4>
-                                                                <div class="col-12 px-0 d-flex">
-                                                                    <a id="login" href="login.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
-                                                                    <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
-                                                                </div>
+                                    <div class="row">
+                                        <!-- Easter Egg Hunt -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Easter Egg Hunt</h3>
+                                                    <p class="mb-0">Easter Stream Overlay Maze Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Keep your viewers entertained during your breaks!</p>
+                                                                <a href="link.html?game=easteregghunt" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/easteregghunt.gif" height="220" width="220" class="img-fluid" alt="Cupid Heart Collection" />
                                                             </div>
                                                         </div>
-                                                        <!-- users edit media object ends -->
-                                                        <!-- users edit account form start -->
-                                                        <form novalidate="">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <div class="controls">
-                                                                            <label>Your PixelPlush Wallet</label>
-                                                                            <div class="input-group">
-                                                                                <input id="pixelplush-coins" type="text" class="form-control" value="" readonly>
-                                                                                <div class="input-group-append">
-                                                                                    <button id="test-coin-add" class="btn btn-secondary"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /></button>
-                                                                                </div>
-                                                                            </div>
-                                                                        <div class="help-block"></div></div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Choose Item Type</label>
-                                                                        <select class="form-control" id="inputItemType">
-                                                                          <option value="character">Character</option>
-                                                                          <option value="pet">Pet</option>
-                                                                          <option value="outfit">Outfit</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Item</label>
-                                                                        <select class="form-control" id="inputItemList">
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 text-center">
-                                                                    <img id="item-preview" src="" height="64" width="64" class="img-fluid pixelated" alt="Item Preview" />
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-success" type="button" id="buy-btn">Buy Item</button>
-                                                                    </div>
-                                                                </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Snowball Fight -->
+                                        <!-- <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Snowball Fight</h3>
+                                                    <p class="mb-0">Real-time Online Winter Battle<br/><strong>(Currently In Development)</strong></p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <p>Join in a festive snowball fight with friends!</p>
+                                                                <a href="https://www.instafluff.tv/WanderingWizards/web/snow.html" class="btn btn-primary glow">Click to Play</a>
                                                             </div>
-                                                        </form>
-                                                        <!-- users edit account form ends -->
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/snowballfight.gif" height="220" width="220" class="img-fluid" alt="Snowball Fight" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <!-- Pixel Plinko -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Pixel Plinko</h3>
+                                                    <p class="mb-0">Plinko Stream Overlay Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Add more fun to your stream for your viewers!</p>
+                                                                <a href="link.html?game=pixelplinko" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/pixelplinko.gif" height="220" width="220" class="img-fluid" alt="Pixel Plinko" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Pixel Parachute Day -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Pixel Parachute (Day)</h3>
+                                                    <p class="mb-0">Skydiving Stream Overlay Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Add more fun to your stream for your viewers!</p>
+                                                                <a href="link.html?game=pixelparachuteday" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/pixelparachuteday.gif" height="220" width="220" class="img-fluid" alt="Pixel Parachute (Day)" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Pixel Parachute Night -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Pixel Parachute (Night)</h3>
+                                                    <p class="mb-0">Skydiving Stream Overlay Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Add more fun to your stream for your viewers!</p>
+                                                                <a href="link.html?game=pixelparachutenight" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/pixelparachutenight.gif" height="220" width="220" class="img-fluid" alt="Pixel Parachute (Night)" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Cupid Heart Collection -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Cupid Heart Collection</h3>
+                                                    <p class="mb-0">Valentines Stream Overlay Maze Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Keep your viewers entertained during your breaks!</p>
+                                                                <a href="link.html?game=cupidheartcollection" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/cupidheartcollection.gif" height="220" width="220" class="img-fluid" alt="Cupid Heart Collection" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Frozen Frenzy -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Frozen Frenzy</h3>
+                                                    <p class="mb-0">Winter Stream Overlay Maze Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Keep your viewers entertained during your breaks!</p>
+                                                                <a href="link.html?game=frozenfrenzy" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/frozenfrenzy.gif" height="220" width="220" class="img-fluid" alt="Frozen Frenzy" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Santa's Secret Service -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Santa's Secret Service</h3>
+                                                    <p class="mb-0">Christmas Stream Overlay Maze Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Keep your viewers entertained during your breaks!</p>
+                                                                <a href="link.html?game=santasecretservice" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/santasecretservice.gif" height="220" width="220" class="img-fluid" alt="Santa's Secret Service" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Trick or Treat -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Trick or Treat</h3>
+                                                    <p class="mb-0">Halloween Stream Overlay Maze Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Keep your viewers entertained during your breaks!</p>
+                                                                <a href="link.html?game=trickortreat" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/trickortreat.gif" height="220" width="220" class="img-fluid" alt="Trick or Treat" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Wandering Wizards -->
+                                        <div class="col-xl-4 col-md-6 col-12 dashboard-greetings">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h3 class="greeting-text">Wandering Wizards</h3>
+                                                    <p class="mb-0">Stream Overlay Maze Game for Twitch</p>
+                                                </div>
+                                                <div class="card-content">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between align-items-end">
+                                                            <div class="dashboard-content-left pr-1">
+                                                                <!-- <h1 class="text-primary font-large-2 text-bold-500">Wandering Wizards</h1> -->
+                                                                <p>Keep your viewers entertained during your breaks!</p>
+                                                                <a href="link.html?game=wanderingwizards" class="btn btn-success glow">Add To Your Stream</a>
+                                                            </div>
+                                                            <div class="dashboard-content-right">
+                                                                <img src="public/app-assets/images/games/wanderingwizards.gif" height="220" width="220" class="img-fluid" alt="Wandering Wizards" />
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -345,6 +512,8 @@
                         </div>
                     </div>
                 </section>
+                <!-- Dashboard Ecommerce ends -->
+
             </div>
         </div>
     </div>
@@ -375,7 +544,6 @@
     <!-- BEGIN: Page Vendor JS-->
     <script src="public/app-assets/vendors/js/charts/apexcharts.min.js"></script>
     <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
-    <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -386,8 +554,6 @@
     <script src="public/app-assets/js/scripts/footer.js"></script>
     <!-- END: Theme JS-->
 
-    <script src="public/app-assets/js/scripts/forms/number-input.js"></script>
-
     <script src="public/comfytwitch.min.js"></script>
     <script>
         const params = new URLSearchParams( location.search );
@@ -396,50 +562,6 @@
         const plushApiUrl = "https://blockparty.instafluff.tv:3000/v1"; //"http://localhost:3000/v1";
         let twitch = {};
         let account = {};
-        let catalog = {};
-        let items = {};
-        let animationTimer = null;
-        let animationFrame = 0;
-        let animationDir = 0;
-
-        document.querySelector( "#inputItemType" ).addEventListener( "change", ( e ) => {
-            // console.log( e, "changed" );
-            populateItemList();
-        });
-
-        document.querySelector( "#inputItemList" ).addEventListener( "change", ( e ) => {
-            setItemPreview();
-        });
-
-        document.querySelector( "#test-coin-add" ).addEventListener( "click", async ( e ) => {
-            let result = await fetch( `${plushApiUrl}/accounts/coins/add`, {
-                method: "POST",
-                headers: {
-                    Twitch: ComfyTwitch.Token,
-                    PixelPlushAPI: "testapikey",
-                },
-                body: JSON.stringify( {
-                    coins: 50
-                })
-            } );
-            console.log( "added!", result );
-            window.location.reload();
-        });
-
-        document.querySelector( "#buy-btn" ).addEventListener( "click", async ( e ) => {
-            console.log( document.querySelector( "#inputItemList" ).value );
-            let result = await fetch( `${plushApiUrl}/shop/buy`, {
-                method: "POST",
-                headers: {
-                    Twitch: ComfyTwitch.Token,
-                },
-                body: JSON.stringify( {
-                    item: document.querySelector( "#inputItemList" ).value
-                })
-            } ).then( r => r.json() );
-            console.log( "buying!", result );
-            window.location.reload();
-        });
 
         $( ".not-logged-in" ).show();
         $( ".logged-in" ).hide();
@@ -468,27 +590,6 @@
                     $( ".user-name" ).text( account.displayName || account.username );
                     $( ".user-coins" ).text( account.coins );
 
-                    // document.querySelector( "#userid" ).innerText = r.key;
-                    document.querySelector( "#pixelplush-coins" ).setAttribute( "value", account.coins );
-
-                    catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
-                    }).then( r => r.json() );
-
-                    // console.log( catalog );
-
-                    catalog.forEach( x => {
-                        items[ x.id ] = x;
-                    });
-
-                    // console.log( items );
-
-                    // Populate Catalog
-                    // $( "#inputItemList" ).empty();
-
-                    // inputItemList
-                    document.querySelector( "#inputItemType" ).value = "character";
-                    populateItemList();
-
                     $( ".logout" ).on( "click", function() {
                         ComfyTwitch.Logout();
                         window.location.reload();
@@ -504,75 +605,7 @@
                 $( ".logged-in" ).hide();
             }
         });
-
-        $( document ).ready(function() {
-
-        });
-
-        function populateItemList() {
-            let itemType = document.querySelector( "#inputItemType" );
-            let itemList = document.querySelector( "#inputItemList" );
-            itemList.innerText = null;
-            catalog.forEach( ( item, index ) => {
-                if( item.type === itemType.value ) {
-                    let option = document.createElement( "option" );
-                    option.value = item.id;
-                    option.innerText = `${item.name} (${item.cost} Plush Coins)`;
-                    if( account.owned.includes( item.id ) ) {
-                        option.innerText = `${item.name} (Already Owned)`;
-                        option.disabled = true;
-                    }
-                    itemList.appendChild( option );
-                }
-            });
-            setItemPreview();
-        }
-
-        function setItemPreview() {
-            let item = items[ document.querySelector( "#inputItemList" ).value ];
-            let dir = "";
-            switch( item.type ) {
-                case "pet":
-                    dir = `pets/${item.path}`;
-                    break;
-                case "character":
-                default:
-                    dir = `${item.type}s/${item.id}`;
-                    break;
-            }
-            // console.log( item );
-            document.querySelector( "#item-preview" ).setAttribute( "src", `https://www.pixelplush.dev/assets/${dir}/${item.path}_front/${item.path}_front1.png` );
-
-            if( animationTimer ) {
-                clearInterval( animationTimer );
-            }
-            animationTimer = setInterval( () => {
-                animationFrame = ( animationFrame + 1 ) % 20;
-                if( animationFrame === 0 ) {
-                    animationDir = ( animationDir + 1 ) % 4;
-                }
-
-                let direction = "front";
-                switch( animationDir ) {
-                    case 0:
-                        direction = "front";
-                        break;
-                    case 1:
-                        direction = "left";
-                        break;
-                    case 2:
-                        direction = "back";
-                        break;
-                    case 3:
-                        direction = "right";
-                        break;
-                }
-
-                document.querySelector( "#item-preview" ).setAttribute( "src", `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animationFrame % 10 + 1}.png` );
-            }, 60 );
-        }
     </script>
-
 </body>
 <!-- END: Body-->
 
