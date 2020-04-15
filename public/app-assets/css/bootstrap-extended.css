@@ -499,7 +499,7 @@ label {
   content: ' ';
   height: 20px;
   width: 20px;
-  border: 1px solid #DFE3E7;
+  border: 2px solid #2c6de9;
   position: absolute;
   border-radius: 4px;
   top: 0;
@@ -524,7 +524,7 @@ label {
 
 .checkbox input:checked ~ label:before {
   background-color: #FFFFFF;
-  border: 1px solid #DFE3E7;
+  border: 2px solid #2c6de9;
 }
 
 .checkbox input:disabled ~ label::before {
@@ -534,7 +534,8 @@ label {
 }
 
 .checkbox input:disabled ~ label::after {
-  border-color: #b3c0ce !important;
+    border: 2px solid #b3c0ce;
+    background-color: #b3c0ce !important;
 }
 
 .checkbox.checkbox-shadow input:checked ~ label::before {
