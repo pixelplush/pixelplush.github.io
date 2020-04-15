@@ -150,12 +150,12 @@
     <script>
         const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
         const baseUrl = window.location.origin;
-        const plushApiUrl = "http://localhost:3000/v1";//"https://blockparty.instafluff.tv:3000/v1"; //"http://localhost:3000/v1";
+        const plushApiUrl = "https://blockparty.instafluff.tv:3000/v1"; //"http://localhost:3000/v1";
 
         document.querySelector( "#login-twitch" ).addEventListener( "click", function() {
             console.log( "Logging in!" );
             localStorage.setItem( "redirectPage", window.location.href );
-            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email" ] );
+            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [] );
         });
 
         ComfyTwitch.Check()
