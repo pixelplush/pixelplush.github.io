@@ -1011,7 +1011,7 @@
   var $scrollTop = $(window).scrollTop()
   if ($scrollTop > 20) {
     $(".navbar-sticky .main-header-navbar").css({
-      "background-color": "#ffff",
+      // "background-color": "#ffff",
       "box-shadow": "-8px 12px 18px 0 rgba(25, 42, 70, 0.13)"
     })
     $(".navbar-static .main-header-navbar").css({
@@ -1024,7 +1024,7 @@
   $(window).scroll(function () {
     if ($(this).scrollTop() > 20) {
       $(".navbar-sticky .main-header-navbar").css({
-        "background-color": "#ffff",
+        // "background-color": "#ffff",
         "box-shadow": "-8px 12px 18px 0 rgba(25, 42, 70, 0.13)"
       })
       $(".navbar-static .main-header-navbar").css({
@@ -1033,7 +1033,7 @@
       })
     } else {
       $(".navbar-sticky .main-header-navbar").css({
-        "background-color": "#f2f4f4",
+        // "background-color": "#f2f4f4",
         "box-shadow": "none"
       })
       $(".navbar-static .main-header-navbar").css({

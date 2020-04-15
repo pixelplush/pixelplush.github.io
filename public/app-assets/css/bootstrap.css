@@ -4513,7 +4513,7 @@ input[type="button"].btn-block {
   padding: 1.05rem 1.67rem;
   margin-bottom: 1rem;
   list-style: none;
-  background-color: #F2F4F4;
+  /* background-color: #F2F4F4; */
   border-radius: 0.267rem;
 }
 
