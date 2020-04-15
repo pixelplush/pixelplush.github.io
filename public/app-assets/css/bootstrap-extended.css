@@ -2282,13 +2282,19 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 /* specific style for Vertically Stacked Pills */
+.pills-stacked .nav-pills {
+  background-color: #FAEDCA;
+  border-radius: 0.267rem;
+}
+
 .pills-stacked .flex-column .nav-item {
   padding-bottom: 0;
   margin-bottom: 0;
+  margin-right: 0;
 }
 
 .pills-stacked .tab-content {
-  background-color: #FFFFFF;
+  /* background-color: #FFFFFF; */
   padding: 1.13rem 1.16rem 0.6rem 1.13rem;
   box-shadow: -8px 12px 18px 0 rgba(25, 42, 70, 0.13);
   border-radius: 0.267rem;
@@ -2297,7 +2303,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 .nav-tabs .nav-link,
 .nav-pills .nav-link {
-  background-color: #f2f4f4;
   color: #EC7358;
 }
 
