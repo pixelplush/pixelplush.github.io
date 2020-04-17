@@ -501,7 +501,7 @@
                                 <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
                                 <h5 class="mb-0">${item.name}</h5>
                                 <div class="pt-1">
-                                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.cost}</strong></button>
+                                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.cost === 0 ? "FREE" : item.cost}</strong></button>
                                 </div>
                               </div>
                             </div>
