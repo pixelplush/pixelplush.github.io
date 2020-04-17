@@ -7,52 +7,57 @@
     Author: PIXINVENT
     Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
+// variable declaration
+var usersTable;
+var usersDataArray = [];
+
 $(document).ready(function () {
 
-    // variable declaration
-    var usersTable;
-    var usersDataArray = [];
     // datatable initialization
-    if ($("#users-list-datatable").length > 0) {
-        usersTable = $("#users-list-datatable").DataTable({
-            responsive: true,
-            'columnDefs': [
-                {
-                    "orderable": false,
-                    "targets": [7]
-                }]
-        });
+    if ($("#transactions-list-datatable").length > 0) {
+        // usersTable = $("#transactions-list-datatable").DataTable({
+        //     responsive: true,
+        //     'columnDefs': [
+        //         {
+        //             target: 0,
+        //             type: 'datetime-moment'
+        //         },
+        //         {
+        //             "orderable": false,
+        //             "targets": [4]
+        //         }],
+        // });
     };
     // on click selected users data from table(page named page-users-list)
     // to store into local storage to get rendered on second page named page-users-view
-    $(document).on("click", "#users-list-datatable tr", function () {
-        $(this).find("td").each(function () {
-            usersDataArray.push($(this).text().trim())
-        })
-        localStorage.setItem("usersId", usersDataArray[0]);
-        localStorage.setItem("usersUsername", usersDataArray[1]);
-        localStorage.setItem("usersName", usersDataArray[2]);
-        localStorage.setItem("usersVerified", usersDataArray[4]);
-        localStorage.setItem("usersRole", usersDataArray[5]);
-        localStorage.setItem("usersStatus", usersDataArray[6]);
-    })
+    // $(document).on("click", "#transactions-list-datatable tr", function () {
+    //     $(this).find("td").each(function () {
+    //         usersDataArray.push($(this).text().trim())
+    //     })
+    //     localStorage.setItem("usersId", usersDataArray[0]);
+    //     localStorage.setItem("usersUsername", usersDataArray[1]);
+    //     localStorage.setItem("usersName", usersDataArray[2]);
+    //     localStorage.setItem("usersVerified", usersDataArray[4]);
+    //     localStorage.setItem("usersRole", usersDataArray[5]);
+    //     localStorage.setItem("usersStatus", usersDataArray[6]);
+    // })
     // render stored local storage data on page named page-users-view
-    if (localStorage.usersId !== undefined) {
-        $(".users-view-id").html(localStorage.getItem("usersId"));
-        $(".users-view-username").html(localStorage.getItem("usersUsername"));
-        $(".users-view-name").html(localStorage.getItem("usersName"));
-        $(".users-view-verified").html(localStorage.getItem("usersVerified"));
-        $(".users-view-role").html(localStorage.getItem("usersRole"));
-        $(".users-view-status").html(localStorage.getItem("usersStatus"));
-        // update badge color on status change
-        if ($(".users-view-status").text() === "Banned") {
-            $(".users-view-status").toggleClass("badge-light-success badge-light-danger")
-        }
-        // update badge color on status change
-        if ($(".users-view-status").text() === "Close") {
-            $(".users-view-status").toggleClass("badge-light-success badge-light-warning")
-        }
-    }
+    // if (localStorage.usersId !== undefined) {
+    //     $(".users-view-id").html(localStorage.getItem("usersId"));
+    //     $(".users-view-username").html(localStorage.getItem("usersUsername"));
+    //     $(".users-view-name").html(localStorage.getItem("usersName"));
+    //     $(".users-view-verified").html(localStorage.getItem("usersVerified"));
+    //     $(".users-view-role").html(localStorage.getItem("usersRole"));
+    //     $(".users-view-status").html(localStorage.getItem("usersStatus"));
+    //     // update badge color on status change
+    //     if ($(".users-view-status").text() === "Banned") {
+    //         $(".users-view-status").toggleClass("badge-light-success badge-light-danger")
+    //     }
+    //     // update badge color on status change
+    //     if ($(".users-view-status").text() === "Close") {
+    //         $(".users-view-status").toggleClass("badge-light-success badge-light-warning")
+    //     }
+    // }
     // page users list verified filter
     $("#users-list-verified").on("change", function () {
         var usersVerifiedSelect = $("#users-list-verified").val();

@@ -35,6 +35,7 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/toastr.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/charts/apexcharts.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/swiper.min.css">
@@ -52,6 +53,7 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="public/app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/css/pages/dashboard-ecommerce.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/plugins/extensions/toastr.min.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -84,7 +86,7 @@
                         </ul>
                     </div>
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
-                        <li class="nav-item d-none d-lg-block">
+                        <li class="nav-item d-lg-block not-logged-in">
                             <div class="not-logged-in">
                                 <a id="login" href="login.html?redirect=market.html" class="btn btn-primary mr-25">Log In</a>
                             </div>
@@ -205,7 +207,7 @@
                         </li> -->
                         <li class="dropdown dropdown-user nav-item logged-in">
                             <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                                <div class="user-nav d-lg-flex d-none"><span class="user-name">Not Logged In</span><span class="user-status"> <span class="user-coins"></span> <img class="pixelated" src="public/app-assets/images/icon/plush_coin.gif" height="18px" /></span> </div><span><img class="round account-image" src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" height="40" width="40"></span>
+                                <div class="user-nav d-lg-flex d-none"><span class="user-name">Not Logged In</span><span class="user-status"><img class="pixelated" src="public/app-assets/images/icon/plush_coin.gif" height="18px" /> <strong><span class="user-coins"></span></strong></span> </div><span class="avatar"><img class="round account-image" src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" height="40" width="40"><span class="avatar-status-online"></span></span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right pb-0">
                                 <a class="dropdown-item" href="customize.html"><i class="bx bx-user mr-50"></i> My Dressing Room</a>
@@ -282,63 +284,44 @@
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
                                                         <!-- users edit media object start -->
-                                                        <div class="media mb-2">
-                                                            <a class="mr-2" href="#">
-                                                                <img src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" class="users-avatar-shadow rounded-circle account-image" height="64" width="64">
-                                                            </a>
+                                                        <div class="media">
                                                             <div class="media-body">
-                                                                <h4 class="media-heading user-name">Not Logged In</h4>
-                                                                <div class="col-12 px-0 d-flex">
-                                                                    <a id="login" href="login.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
-                                                                    <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
+                                                                <div class="row">
+                                                                    <div class="col-3">
+                                                                        <span>Your Wallet:</span>
+                                                                        <h2 class="media-heading"><img class="pixelated" src="public/app-assets/images/icon/plush_coin.gif" height="32px" /> <strong><span class="user-coins"></span></strong></h2>
+                                                                        <!-- <div class="col-12 px-0 d-flex">
+                                                                            <a id="login" href="login.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
+                                                                            <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
+                                                                        </div> -->
+                                                                    </div>
+                                                                    <div class="col-9">
+                                                                        <h4 class="text-danger"><strong>Get More Plush Coins!</strong></h4>
+                                                                        <div class="row">
+                                                                            <div class="col-sm-3 col-6">
+                                                                                <button class="btn btn-dark" type="button" id="buy-btn"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 10</small><br/><strong>$2</strong> (Test)</button>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-6">
+                                                                                <button class="btn btn-warning" type="button" id="buy-btn"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 30</small><br/><strong>$6</strong> (Test)</button>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-6">
+                                                                                <button class="btn btn-success" type="button" id="buy-btn"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 100</small><br/><strong>$20</strong> (Test)</button>
+                                                                            </div>
+                                                                            <div class="col-sm-3 col-6">
+                                                                                <button class="btn btn-info" type="button" id="buy-btn"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 500</small><br/><strong>$100</strong> (Test)</button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <!-- users edit media object ends -->
-                                                        <!-- users edit account form start -->
-                                                        <form novalidate="">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <div class="controls">
-                                                                            <label>Your PixelPlush Wallet</label>
-                                                                            <div class="input-group">
-                                                                                <input id="pixelplush-coins" type="text" class="form-control" value="" readonly>
-                                                                                <div class="input-group-append">
-                                                                                    <button id="test-coin-add" class="btn btn-secondary"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /></button>
-                                                                                </div>
-                                                                            </div>
-                                                                        <div class="help-block"></div></div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Choose Item Type</label>
-                                                                        <select class="form-control" id="inputItemType">
-                                                                          <option value="character">Character</option>
-                                                                          <option value="pet">Pet</option>
-                                                                          <option value="outfit">Outfit</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Item</label>
-                                                                        <select class="form-control" id="inputItemList">
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 text-center">
-                                                                    <img id="item-preview" src="" height="64" width="64" class="img-fluid pixelated" alt="Item Preview" />
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <button class="btn btn-success" type="button" id="buy-btn">Buy Item</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </form>
-                                                        <!-- users edit account form ends -->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div id="catalog-list" class="row">
                                     </div>
                                 </div>
                             </div>
@@ -376,6 +359,7 @@
     <script src="public/app-assets/vendors/js/charts/apexcharts.min.js"></script>
     <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
     <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/toastr.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -400,31 +384,21 @@
         let items = {};
         let animationTimer = null;
         let animationFrame = 0;
-        let animationDir = 0;
 
-        document.querySelector( "#inputItemType" ).addEventListener( "change", ( e ) => {
-            // console.log( e, "changed" );
-            populateItemList();
-        });
-
-        document.querySelector( "#inputItemList" ).addEventListener( "change", ( e ) => {
-            setItemPreview();
-        });
-
-        document.querySelector( "#test-coin-add" ).addEventListener( "click", async ( e ) => {
-            let result = await fetch( `${plushApiUrl}/accounts/coins/add`, {
-                method: "POST",
-                headers: {
-                    Twitch: ComfyTwitch.Token,
-                    PixelPlushAPI: "testapikey",
-                },
-                body: JSON.stringify( {
-                    coins: 50
-                })
-            } );
-            console.log( "added!", result );
-            window.location.reload();
-        });
+        // document.querySelector( "#test-coin-add" ).addEventListener( "click", async ( e ) => {
+        //     let result = await fetch( `${plushApiUrl}/accounts/coins/add`, {
+        //         method: "POST",
+        //         headers: {
+        //             Twitch: ComfyTwitch.Token,
+        //             PixelPlushAPI: "testapikey",
+        //         },
+        //         body: JSON.stringify( {
+        //             coins: 50
+        //         })
+        //     } );
+        //     console.log( "added!", result );
+        //     window.location.reload();
+        // });
 
         document.querySelector( "#buy-btn" ).addEventListener( "click", async ( e ) => {
             console.log( document.querySelector( "#inputItemList" ).value );
@@ -469,7 +443,6 @@
                     $( ".user-coins" ).text( account.coins );
 
                     // document.querySelector( "#userid" ).innerText = r.key;
-                    document.querySelector( "#pixelplush-coins" ).setAttribute( "value", account.coins );
 
                     catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
                     }).then( r => r.json() );
@@ -486,7 +459,6 @@
                     // $( "#inputItemList" ).empty();
 
                     // inputItemList
-                    document.querySelector( "#inputItemType" ).value = "character";
                     populateItemList();
 
                     $( ".logout" ).on( "click", function() {
@@ -497,6 +469,7 @@
                 catch( error ) {
                     // TODO: Auth Failed
                     console.log( "Auth Validate Failed", error );
+                    toastr.error( error, "Authentication Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
                 }
             }
             else {
@@ -510,26 +483,83 @@
         });
 
         function populateItemList() {
-            let itemType = document.querySelector( "#inputItemType" );
-            let itemList = document.querySelector( "#inputItemList" );
-            itemList.innerText = null;
+            $( "#catalog-list" ).empty();
             catalog.forEach( ( item, index ) => {
-                if( item.type === itemType.value ) {
-                    let option = document.createElement( "option" );
-                    option.value = item.id;
-                    option.innerText = `${item.name} (${item.cost} Plush Coins)`;
-                    if( account.owned.includes( item.id ) ) {
-                        option.innerText = `${item.name} (Already Owned)`;
-                        option.disabled = true;
-                    }
-                    itemList.appendChild( option );
+                let typeBG = "primary";
+                switch( item.type ) {
+                    case "character":
+                        typeBG = "primary";
+                        break;
+                    case "pet":
+                        typeBG = "danger";
+                        break;
+                    default:
+                        typeBG = "primary";
+                        break;
                 }
+                if( account.owned.includes( item.id ) ) {
+                    $( "#catalog-list" ).append( `
+                        <div class="col-sm-3 col-6">
+                          <div id="item_${item.id}" class="card text-center bg-dark bg-light">
+                            <div class="card-content">
+                              <div class="card-body py-1">
+                                <div class="badge-circle badge-circle-lg badge-circle-light-${typeBG} mx-auto mb-50">
+                                  <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                </div>
+                                <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
+                                <h5 class="mb-0">${item.name}</h5>
+                                <div class="pt-1">
+                                    <button class="btn btn-sm btn-outline-secondary" type="button" disabled><strong>Owned</strong></button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    `);
+                }
+                else {
+                    $( "#catalog-list" ).append( `
+                        <div class="col-sm-3 col-6">
+                          <div id="item_${item.id}" class="card text-center">
+                            <div class="card-content">
+                              <div class="card-body py-1">
+                                <div class="badge-circle badge-circle-lg badge-circle-light-${typeBG} mx-auto mb-50">
+                                  <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                </div>
+                                <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
+                                <h5 class="mb-0">${item.name}</h5>
+                                <div class="pt-1">
+                                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.cost}</strong></button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                    `);
+                }
+
+                $( `#item_${item.id}` ).hover( function() {
+                    if( animationTimer ) {
+                        clearInterval( animationTimer );
+                    }
+                    animationTimer = setInterval( () => {
+                        animationFrame++;
+                        let preview = getItemPreview( item.id, animationFrame );
+                        if( document.querySelector( `#item_${item.id}_preview` ) ) {
+                            document.querySelector( `#item_${item.id}_preview` ).setAttribute( "src", preview );
+                        }
+                    }, 60 );
+                }, function() {
+                    clearInterval( animationTimer );
+                    animationFrame = 0;
+                    let preview = getItemPreview( item.id, 0 );
+                    document.querySelector( `#item_${item.id}_preview` ).setAttribute( "src", preview );
+                });
             });
-            setItemPreview();
         }
 
-        function setItemPreview() {
-            let item = items[ document.querySelector( "#inputItemList" ).value ];
+        function getItemPreview( itemId, frame ) {
+            let item = items[ itemId ];
             let dir = "";
             switch( item.type ) {
                 case "pet":
@@ -540,36 +570,57 @@
                     dir = `${item.type}s/${item.id}`;
                     break;
             }
-            // console.log( item );
-            document.querySelector( "#item-preview" ).setAttribute( "src", `https://www.pixelplush.dev/assets/${dir}/${item.path}_front/${item.path}_front1.png` );
 
-            if( animationTimer ) {
-                clearInterval( animationTimer );
+            let animFrame = frame % 10;
+            let direction = "front";
+            switch( Math.floor( ( frame % 80 ) / 20 ) ) {
+                case 0:
+                    direction = "front";
+                    break;
+                case 1:
+                    direction = "left";
+                    break;
+                case 2:
+                    direction = "back";
+                    break;
+                case 3:
+                    direction = "right";
+                    break;
             }
-            animationTimer = setInterval( () => {
-                animationFrame = ( animationFrame + 1 ) % 20;
-                if( animationFrame === 0 ) {
-                    animationDir = ( animationDir + 1 ) % 4;
-                }
 
-                let direction = "front";
-                switch( animationDir ) {
-                    case 0:
-                        direction = "front";
-                        break;
-                    case 1:
-                        direction = "left";
-                        break;
-                    case 2:
-                        direction = "back";
-                        break;
-                    case 3:
-                        direction = "right";
-                        break;
-                }
+            return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
+        }
 
-                document.querySelector( "#item-preview" ).setAttribute( "src", `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animationFrame % 10 + 1}.png` );
-            }, 60 );
+        async function buyItem( itemId ) {
+            try {
+                let result = await fetch( `${plushApiUrl}/shop/buy`, {
+                    method: "POST",
+                    headers: {
+                        Twitch: ComfyTwitch.Token,
+                    },
+                    body: JSON.stringify( {
+                        item: itemId
+                    })
+                } ).then( r => r.json() );
+                console.log( "buying!", result );
+                if( result.error ) {
+                    throw result.error;
+                }
+                // window.location.reload();
+
+                account = await fetch( `${plushApiUrl}/accounts`, {
+                    headers: {
+                        Twitch: ComfyTwitch.Token
+                    }
+                } ).then( r => r.json() );
+                $( ".user-coins" ).text( account.coins );
+                populateItemList();
+                toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+            }
+            catch( err ) {
+                console.log( err );
+                toastr.error( err, "Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+            }
         }
     </script>
 
