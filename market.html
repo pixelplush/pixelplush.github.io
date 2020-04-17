@@ -417,6 +417,8 @@
                     catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
                     }).then( r => r.json() );
 
+                    catalog = catalog.filter( x => !x.hidden );
+
                     // console.log( catalog );
 
                     catalog.forEach( x => {
@@ -518,7 +520,7 @@
                         if( document.querySelector( `#item_${item.id}_preview` ) ) {
                             document.querySelector( `#item_${item.id}_preview` ).setAttribute( "src", preview );
                         }
-                    }, 60 );
+                    }, 100 );
                 }, function() {
                     clearInterval( animationTimer );
                     animationFrame = 0;

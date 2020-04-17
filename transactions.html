@@ -444,11 +444,13 @@
                         });
                     }
 
+                    // console.log( transactions );
+
                     usersTable = $("#transactions-list-datatable").DataTable({
                         responsive: true,
                         "data": transactions,
                         "columns": [
-                            { "data": "date", type: 'date', render: function( data, type ) { return moment( data ).format( "llll" ); } },
+                            { "data": "date", render: function( data, type ) { return moment( data ).format( "llll" ); } },
                             { "data": "note" },
                             { "data": "description" },
                             { "data": "amount" },
@@ -456,8 +458,8 @@
                                 return `<span class="badge badge-light-${data === "complete" ? "success" : "warning"}">${data}</span>`;
                             } },
                         ],
-                        order: [
-                            [ 0, "desc"]
+                        "order": [
+                            [ 0, "desc" ]
                         ],
                     });
                 }
