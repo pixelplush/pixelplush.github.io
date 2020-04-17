@@ -413,30 +413,6 @@
                     $( ".user-coins" ).text( account.coins );
 
                     // document.querySelector( "#userid" ).innerText = r.key;
-
-                    catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
-                    }).then( r => r.json() );
-
-                    catalog = catalog.filter( x => !x.hidden );
-
-                    // console.log( catalog );
-
-                    catalog.forEach( x => {
-                        items[ x.id ] = x;
-                    });
-
-                    // console.log( items );
-
-                    // Populate Catalog
-                    // $( "#inputItemList" ).empty();
-
-                    // inputItemList
-                    populateItemList();
-
-                    $( ".logout" ).on( "click", function() {
-                        ComfyTwitch.Logout();
-                        window.location.reload();
-                    });
                 }
                 catch( error ) {
                     // TODO: Auth Failed
@@ -448,6 +424,30 @@
                 $( ".not-logged-in" ).show();
                 $( ".logged-in" ).hide();
             }
+
+            catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+            }).then( r => r.json() );
+
+            catalog = catalog.filter( x => !x.hidden );
+
+            // console.log( catalog );
+
+            catalog.forEach( x => {
+                items[ x.id ] = x;
+            });
+
+            // console.log( items );
+
+            // Populate Catalog
+            // $( "#inputItemList" ).empty();
+
+            // inputItemList
+            populateItemList();
+
+            $( ".logout" ).on( "click", function() {
+                ComfyTwitch.Logout();
+                window.location.reload();
+            });
         });
 
         $( document ).ready(function() {
@@ -469,7 +469,7 @@
                         typeBG = "primary";
                         break;
                 }
-                if( account.owned.includes( item.id ) ) {
+                if( account && account.owned && account.owned.includes( item.id ) ) {
                     $( "#catalog-list" ).append( `
                         <div class="col-sm-3 col-6">
                           <div id="item_${item.id}" class="card text-center bg-dark bg-light">
