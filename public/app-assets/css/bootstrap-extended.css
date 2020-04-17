@@ -2188,6 +2188,11 @@ input[type=number]::-webkit-outer-spin-button {
   width: 48px;
 }
 
+.badge-circle.badge-circle-xlg {
+  height: 72px;
+  width: 72px;
+}
+
 /*    Nav, Navtabs and Navpills   */
 /*-------------------------------*/
 .nav.nav-tabs .nav-item, .nav.nav-pills .nav-item {

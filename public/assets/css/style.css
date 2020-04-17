@@ -17,11 +17,11 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
 }
 
 .item-scale {
--webkit-transform: scale(1.4); /* Saf3.1+, Chrome */
-   -moz-transform: scale(1.4); /* FF3.5+ */
-    -ms-transform: scale(1.4); /* IE9 */
-     -o-transform: scale(1.4); /* Opera 10.5+ */
-        transform: scale(1.4);
+-webkit-transform: scale(2); /* Saf3.1+, Chrome */
+   -moz-transform: scale(2); /* FF3.5+ */
+    -ms-transform: scale(2); /* IE9 */
+     -o-transform: scale(2); /* Opera 10.5+ */
+        transform: scale(2);
 }
 
 .logged-in {
