@@ -299,16 +299,16 @@
                                                                         <h4 class="text-danger"><strong>Get More Plush Coins!</strong></h4>
                                                                         <div class="row">
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-dark" type="button" id="buy-btn"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 10</small><br/><strong>$2</strong> (Test)</button>
+                                                                                <button class="btn btn-dark" type="button" id="buy-btn-10" onclick="testAddCoins(10)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 10</small><br/><strong>$2</strong> (Test)</button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-warning" type="button" id="buy-btn"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 30</small><br/><strong>$6</strong> (Test)</button>
+                                                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="testAddCoins(30)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 30</small><br/><strong>$6</strong> (Test)</button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-success" type="button" id="buy-btn"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 100</small><br/><strong>$20</strong> (Test)</button>
+                                                                                <button class="btn btn-success" type="button" id="buy-btn-100" onclick="testAddCoins(100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 100</small><br/><strong>$20</strong> (Test)</button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-info" type="button" id="buy-btn"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 500</small><br/><strong>$100</strong> (Test)</button>
+                                                                                <button class="btn btn-info" type="button" id="buy-btn-500" onclick="testAddCoins(500)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 500</small><br/><strong>$100</strong> (Test)</button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -384,36 +384,6 @@
         let items = {};
         let animationTimer = null;
         let animationFrame = 0;
-
-        // document.querySelector( "#test-coin-add" ).addEventListener( "click", async ( e ) => {
-        //     let result = await fetch( `${plushApiUrl}/accounts/coins/add`, {
-        //         method: "POST",
-        //         headers: {
-        //             Twitch: ComfyTwitch.Token,
-        //             PixelPlushAPI: "testapikey",
-        //         },
-        //         body: JSON.stringify( {
-        //             coins: 50
-        //         })
-        //     } );
-        //     console.log( "added!", result );
-        //     window.location.reload();
-        // });
-
-        document.querySelector( "#buy-btn" ).addEventListener( "click", async ( e ) => {
-            console.log( document.querySelector( "#inputItemList" ).value );
-            let result = await fetch( `${plushApiUrl}/shop/buy`, {
-                method: "POST",
-                headers: {
-                    Twitch: ComfyTwitch.Token,
-                },
-                body: JSON.stringify( {
-                    item: document.querySelector( "#inputItemList" ).value
-                })
-            } ).then( r => r.json() );
-            console.log( "buying!", result );
-            window.location.reload();
-        });
 
         $( ".not-logged-in" ).show();
         $( ".logged-in" ).hide();
@@ -591,6 +561,32 @@
             return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
         }
 
+        async function testAddCoins( amount ) {
+            try {
+                let result = await fetch( `${plushApiUrl}/accounts/coins/add`, {
+                    method: "POST",
+                    headers: {
+                        Twitch: ComfyTwitch.Token,
+                        PixelPlushAPI: "testapikey",
+                    },
+                    body: JSON.stringify( {
+                        coins: amount
+                    })
+                } );
+                // console.log( "added!", result );
+                account = await fetch( `${plushApiUrl}/accounts`, {
+                    headers: {
+                        Twitch: ComfyTwitch.Token
+                    }
+                } ).then( r => r.json() );
+                $( ".user-coins" ).text( account.coins );
+                toastr.success( `${amount} Plush Coins Purchased!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+            }
+            catch( err ) {
+                toastr.error( err, "Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+            }
+        }
+
         async function buyItem( itemId ) {
             try {
                 let result = await fetch( `${plushApiUrl}/shop/buy`, {
@@ -618,7 +614,7 @@
                 toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
             }
             catch( err ) {
-                console.log( err );
+                // console.log( err );
                 toastr.error( err, "Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
             }
         }
