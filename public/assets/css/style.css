@@ -16,6 +16,12 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     image-rendering: crisp-edges;
 }
 
+.swal2-image {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
 .item-scale {
 -webkit-transform: scale(2); /* Saf3.1+, Chrome */
    -moz-transform: scale(2); /* FF3.5+ */

@@ -342,6 +342,7 @@
     <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
     <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
     <script src="public/app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -665,29 +666,46 @@
 
         async function buyItem( itemId ) {
             try {
-                let result = await fetch( `${plushApiUrl}/shop/buy`, {
-                    method: "POST",
-                    headers: {
-                        Twitch: ComfyTwitch.Token,
-                    },
-                    body: JSON.stringify( {
-                        item: itemId
-                    })
-                } ).then( r => r.json() );
-                console.log( "buying!", result );
-                if( result.error ) {
-                    throw result.error;
-                }
-                // window.location.reload();
+                Swal.fire({
+                    title: `Add ${items[ itemId ].name} to your account?`,
+                    // type: 'success',
+                    imageUrl: `${getItemPreview( itemId, 0 )}`,
+                    imageWidth: 48,
+                    imageHeight: 48,
+                    confirmButtonClass: 'btn btn-primary',
+                    cancelButtonClass: 'btn btn-danger ml-1',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes!',
+                    buttonsStyling: false,
+                }).then( async function( result ) {
+                    if( result.value ) {
+                        let result = await fetch( `${plushApiUrl}/shop/buy`, {
+                            method: "POST",
+                            headers: {
+                                Twitch: ComfyTwitch.Token,
+                            },
+                            body: JSON.stringify( {
+                                item: itemId
+                            })
+                        } ).then( r => r.json() );
+                        console.log( "buying!", result );
+                        if( result.error ) {
+                            throw result.error;
+                        }
+                        // window.location.reload();
 
-                account = await fetch( `${plushApiUrl}/accounts`, {
-                    headers: {
-                        Twitch: ComfyTwitch.Token
+                        account = await fetch( `${plushApiUrl}/accounts`, {
+                            headers: {
+                                Twitch: ComfyTwitch.Token
+                            }
+                        } ).then( r => r.json() );
+                        $( ".user-coins" ).text( account.coins );
+                        populateItemList();
+                        toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
                     }
-                } ).then( r => r.json() );
-                $( ".user-coins" ).text( account.coins );
-                populateItemList();
-                toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+                });
             }
             catch( err ) {
                 // console.log( err );
