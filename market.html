@@ -212,7 +212,7 @@
                             <div class="dropdown-menu dropdown-menu-right pb-0">
                                 <a class="dropdown-item" href="customize.html"><i class="bx bx-user mr-50"></i> My Dressing Room</a>
                                 <a class="dropdown-item" href="transactions.html"><i class="bx bx-check-square mr-50"></i> My Shopping History</a>
-                                <a class="dropdown-item" href="market.html"><i class="bx bx-cart mr-50"></i> Goodies Market (TEST)</a>
+                                <a class="dropdown-item" href="market.html"><i class="bx bx-cart mr-50"></i> Goodies Market</a>
                                 <a class="dropdown-item" href="https://pixelplush.dev/discord"><i class="bx bxl-discord mr-50"></i> PixelPlush Discord</a>
                                 <div class="dropdown-divider mb-0"></div><a class="dropdown-item logout" href="#"><i class="bx bx-power-off mr-50"></i> Logout</a>
                             </div>
@@ -253,7 +253,7 @@
                                         <li class="nav-item">
                                             <a class="nav-link d-flex align-items-center active" href="market.html">
                                                 <img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
-                                                <span>Goodies Market (TEST)</span>
+                                                <span>Goodies Market</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
@@ -296,19 +296,40 @@
                                                                         </div> -->
                                                                     </div>
                                                                     <div class="col-9">
-                                                                        <h4 class="text-danger"><strong>(Currently in Testing Mode. This is not yet linked to PayPal. It will not charge you and all data will be reset at launch)</strong></h4>
                                                                         <div class="row">
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-dark" type="button" id="buy-btn-10" onclick="testAddCoins(10)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 10</small><br/><strong>$2</strong> (Test)</button>
+                                                                                <button class="btn btn-dark" type="button" id="buy-btn-10" onclick="showCoinBuy(10, 2)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 10</small><br/><strong>$2</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="testAddCoins(30)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 30</small><br/><strong>$6</strong> (Test)</button>
+                                                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="showCoinBuy(30, 6)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 30</small><br/><strong>$6</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-success" type="button" id="buy-btn-100" onclick="testAddCoins(100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 100</small><br/><strong>$20</strong> (Test)</button>
+                                                                                <button class="btn btn-success" type="button" id="buy-btn-100" onclick="showCoinBuy(100, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 100</small><br/><strong>$20</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-info" type="button" id="buy-btn-500" onclick="testAddCoins(500)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 500</small><br/><strong>$100</strong> (Test)</button>
+                                                                                <button class="btn btn-info" type="button" id="buy-btn-500" onclick="showCoinBuy(500, 100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 500</small><br/><strong>$100</strong></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--info theme Modal -->
+                                                                    <div class="modal fade text-left show" id="coin-buy" tabindex="-1" role="dialog" aria-labelledby="plushcoin-buy" aria-modal="true">
+                                                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                                                            <div class="modal-content">
+                                                                                <div class="modal-header bg-warning">
+                                                                                    <h5 class="modal-title white" id="plushcoin-buy"><img src="public/app-assets/images/icon/plush_coin.gif" height="40px" class="pixelated" /> x <span id="coin-buy-amount"></span> Plush Coins!</h5>
+                                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                        <i class="bx bx-x"></i>
+                                                                                    </button>
+                                                                                </div>
+                                                                                <div class="modal-body">
+                                                                                    <h4 id="coin-buy-text"></h4>
+                                                                                    <div class="px-5 py-2">
+                                                                                        <div id="paypal-button-container"></div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="modal-footer">
+                                                                                    Use Plush Coins on special characters and pets!
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -360,6 +381,7 @@
     <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
     <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
     <script src="public/app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -372,12 +394,14 @@
 
     <script src="public/app-assets/js/scripts/forms/number-input.js"></script>
 
+    <script
+    src="https://www.paypal.com/sdk/js?client-id=ATBFQXbPPFSqBbTUEKKte45_WU6c-WeSEB_aXAVbDVaQuyD-nYdR4kCq-BiYnxH5-7QpCALpNm2Dlk3x"></script>
     <script src="public/comfytwitch.min.js"></script>
     <script>
         const params = new URLSearchParams( location.search );
         const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
         const baseUrl = window.location.origin;
-        const plushApiUrl = "https://blockparty.instafluff.tv:3000/v1"; //"http://localhost:3000/v1";
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
         let twitch = {};
         let account = {};
         let catalog = {};
@@ -563,32 +587,6 @@
             return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
         }
 
-        async function testAddCoins( amount ) {
-            try {
-                let result = await fetch( `${plushApiUrl}/accounts/coins/add`, {
-                    method: "POST",
-                    headers: {
-                        Twitch: ComfyTwitch.Token,
-                        PixelPlushAPI: "testapikey",
-                    },
-                    body: JSON.stringify( {
-                        coins: amount
-                    })
-                } );
-                // console.log( "added!", result );
-                account = await fetch( `${plushApiUrl}/accounts`, {
-                    headers: {
-                        Twitch: ComfyTwitch.Token
-                    }
-                } ).then( r => r.json() );
-                $( ".user-coins" ).text( account.coins );
-                toastr.success( `${amount} Plush Coins Purchased!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
-            }
-            catch( err ) {
-                toastr.error( err, "Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
-            }
-        }
-
         async function buyItem( itemId ) {
             try {
                 let result = await fetch( `${plushApiUrl}/shop/buy`, {
@@ -620,6 +618,109 @@
                 toastr.error( err, "Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
             }
         }
+
+        function showCoinBuy( coins, amount ) {
+            orderAmount = coins;
+            $("#coin-buy-amount").text( coins );
+            $("#coin-buy-text").text( `${coins} Plush Coins! That will be $${amount}, please.` );
+            $("#coin-buy").modal();
+        }
+
+        let transaction = {};
+        let orderAmount = 0;
+
+        paypal.Buttons({
+            style: {
+                layout: "horizontal",
+                color: "blue",
+                shape: "pill",
+            },
+            createOrder: async function( data, actions ) {
+                transaction = await fetch( `${plushApiUrl}/paypal/request`, {
+                    method: "POST",
+                    headers: {
+                        Twitch: ComfyTwitch.Token
+                    },
+                    body: JSON.stringify( {
+                        coins: orderAmount
+                    })
+                } ).then( r => r.json() );
+                if( !transaction.success ) {
+                    toastr.error( "Sorry, there seems to be an error...", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                    throw new Error( "Transaction Error" );
+                }
+                $("#coin-buy").modal("hide");
+                return actions.order.create({
+                    purchase_units: [{
+                        "reference_id": transaction.transactionId,
+                        "custom_id": account.key,
+                        "description": `PixelPlush Coins Purchase`,
+                        "custom": account.key,
+                        "amount": {
+                            "currency_code": "USD",
+                            "value": transaction.usd,
+                            "breakdown": {
+                                "item_total": {
+                                    "value": transaction.usd,
+                                    "currency_code": "USD"
+                                }
+                            }
+                        },
+                        "items": [
+                            {
+                                "name": `Plush Coins`,
+                                // "sku": "plushcoin",
+                                "unit_amount": {
+                                    "currency_code": "USD",
+                                    "value": transaction.price
+                                },
+                                "quantity": transaction.coins,
+                                "category": "DIGITAL_GOODS"
+                            }
+                        ]
+                    }],
+                    "order_application_context": {
+                        "brand_name": "PixelPlush Games"
+                    }
+                });
+            },
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    toastr.info( `One moment while we get your Plush Coins...`, "Processing...", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                    let item = transaction;
+                    let transactionTimer = setInterval( async () => {
+                        let result = await fetch( `${plushApiUrl}/transactions/status?id=${item.transactionId}` ).then( r => r.json() );
+                        if( result && result.status !== "pending" ) {
+                            clearInterval( transactionTimer );
+                            if( result.status === "complete" ) {
+                                // TODO: thank you celebration!
+                                account = await fetch( `${plushApiUrl}/accounts`, {
+                                    headers: {
+                                        Twitch: ComfyTwitch.Token
+                                    }
+                                } ).then( r => r.json() );
+                                $( ".user-coins" ).text( account.coins );
+                                toastr.success( `Plush Coins added!`, "Success", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                                Swal.fire({
+                                    title: "Thank you for the purchase!",
+                                    text: `You now have ${account.coins} Plush Coins!`,
+                                    type: "success",
+                                    confirmButtonClass: 'btn btn-primary',
+                                    buttonsStyling: false,
+                                });
+                            }
+                            else {
+                                // Error message window
+                                toastr.error( "There was an error: " + result.error, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                            }
+                        }
+                        else {
+                            toastr.warning( `Waiting for confirmation...`, "Processing...", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                        }
+                    }, 3000 );
+                });
+            }
+        }).render('#paypal-button-container');
     </script>
 
 </body>
