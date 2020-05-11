@@ -685,7 +685,7 @@
                 });
             },
             onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
+                return actions.order.capture().then(async function(details) {
                     toastr.info( `One moment while we get your Plush Coins...`, "Processing...", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                     let item = transaction;
                     let itemStatus = await fetch( `${plushApiUrl}/paypal/waiting`, {
