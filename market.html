@@ -742,19 +742,21 @@
                                     confirmButtonClass: 'btn btn-primary',
                                     buttonsStyling: false,
                                 }).then( function() {
-                                    setTimeout( () => {
-                                        Swal.fire({
-                                            title: "PixelPlush Balloon Bonus!",
-                                            text: `You also unlocked Pet ${newBalloons.map( x => items[ x ].name).join( ", " )}!`,
-                                            imageUrl: `${getItemPreview( newBalloons[ 0 ], 0 )}`,
-                                            imageWidth: 48,
-                                            imageHeight: 48,
-                                            animation: false,
-                                            customClass: 'animated bounceIn',
-                                            confirmButtonClass: 'btn btn-primary',
-                                            buttonsStyling: false,
-                                        });
-                                    }, 500 );
+                                    if( newBalloons.length > 0 ) {
+                                        setTimeout( () => {
+                                            Swal.fire({
+                                                title: "PixelPlush Balloon Bonus!",
+                                                text: `You also unlocked Pet ${newBalloons.map( x => items[ x ].name).join( ", " )}!`,
+                                                imageUrl: `${getItemPreview( newBalloons[ 0 ], 0 )}`,
+                                                imageWidth: 48,
+                                                imageHeight: 48,
+                                                animation: false,
+                                                customClass: 'animated bounceIn',
+                                                confirmButtonClass: 'btn btn-primary',
+                                                buttonsStyling: false,
+                                            });
+                                        }, 500 );
+                                    }
                                 });
                             }
                             else {
