@@ -412,8 +412,6 @@
             catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
             }).then( r => r.json() );
 
-            catalog = catalog.filter( x => !x.hidden || x.theme === "None" );
-
             // console.log( catalog );
 
             catalog.forEach( x => {
@@ -520,7 +518,7 @@
             }
 
             // Show the non-owned items
-            catalog.filter( x => x.theme !== "None" && !( account && account.owned && account.owned.includes( x.id ) ) ).forEach( ( item, index ) => {
+            catalog.filter( x => x.theme !== "None" && !x.hidden && !( account && account.owned && account.owned.includes( x.id ) ) ).forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
                     case "character":
