@@ -453,7 +453,7 @@
             catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
             }).then( r => r.json() );
 
-            catalog = catalog.filter( x => !x.hidden );
+            // catalog = catalog.filter( x => !x.hidden );
 
             // console.log( catalog );
 
@@ -514,7 +514,7 @@
                         </div>
                     `);
                 }
-                else {
+                else if( !item.hidden ) {
                     $( "#catalog-list" ).append( `
                         <div class="col-sm-3 col-6">
                           <div id="item_${item.id}" class="card text-center">
@@ -726,11 +726,13 @@
                             clearInterval( transactionTimer );
                             if( result.status === "complete" ) {
                                 // TODO: thank you celebration!
+                                let previousBalloons = account.owned.filter( x => x.startsWith( "pet_balloon" ) );
                                 account = await fetch( `${plushApiUrl}/accounts`, {
                                     headers: {
                                         Twitch: ComfyTwitch.Token
                                     }
                                 } ).then( r => r.json() );
+                                let newBalloons = account.owned.filter( x => x.startsWith( "pet_balloon" ) && !previousBalloons.includes( x ) );
                                 $( ".user-coins" ).text( account.coins );
                                 toastr.success( `Plush Coins added!`, "Success", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                                 Swal.fire({
@@ -739,6 +741,20 @@
                                     type: "success",
                                     confirmButtonClass: 'btn btn-primary',
                                     buttonsStyling: false,
+                                }).then( function() {
+                                    setTimeout( () => {
+                                        Swal.fire({
+                                            title: "PixelPlush Balloon Bonus!",
+                                            text: `You also unlocked Pet ${newBalloons.map( x => items[ x ].name).join( ", " )}!`,
+                                            imageUrl: `${getItemPreview( newBalloons[ 0 ], 0 )}`,
+                                            imageWidth: 48,
+                                            imageHeight: 48,
+                                            animation: false,
+                                            customClass: 'animated bounceIn',
+                                            confirmButtonClass: 'btn btn-primary',
+                                            buttonsStyling: false,
+                                        });
+                                    }, 500 );
                                 });
                             }
                             else {
