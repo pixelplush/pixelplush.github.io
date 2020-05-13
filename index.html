@@ -74,7 +74,7 @@
                         <ul class="nav navbar-nav">
                             <li class="nav-item mr-auto">
                                 <div class="navbar-brand">
-                                    <a href="home.html">
+                                    <a href="index.html">
                                         <img src="public/app-assets/images/logo/logo.png" height="27px" class="img-responsive"> <img src="public/app-assets/images/logo/text.png" height="27px" class="img-responsive">
                                     </a>
                                     <span class="font-small-3"><i class="bx bxs-heart pink mx-50 font-small-3"></i>By <a href="https://twitch.tv/maayainsane" target="_blank"><img src="public/app-assets/images/icon/maaya.gif" height="32px"> Maaya</a> &amp; <a href="https://twitch.tv/instafluff" target="_blank">Instafluff <img src="public/app-assets/images/icon/instafluff.gif" height="34px"></a></span>
@@ -85,7 +85,7 @@
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
                         <li class="nav-item d-lg-block not-logged-in">
                             <div class="not-logged-in">
-                                <a id="login" href="login.html?redirect=home.html" class="btn btn-primary mr-25">Log In</a>
+                                <a id="login" href="login.html?redirect=index.html" class="btn btn-primary mr-25">Log In</a>
                             </div>
                         </li>
                         <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
@@ -238,7 +238,7 @@
                                 <div class="col-md-3 mb-2 mb-md-0 pills-stacked">
                                     <ul class="nav nav-pills flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center active" href="home.html">
+                                            <a class="nav-link d-flex align-items-center active" href="index.html">
                                                 <i class="bx bx-home"></i>
                                                 <span>PixelPlush Home</span>
                                             </a>
@@ -271,6 +271,27 @@
                                             <a class="nav-link d-flex align-items-center" href="links">
                                                 <i class="bx bx-link"></i>
                                                 <span>Follow Us!</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href=""> </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="">
+                                                <span><strong>Currently Live:</strong></span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="">
+                                                <iframe id="featured-stream"
+                                                    src="https://player.twitch.tv/?channel=pixelplushgames"
+                                                    parent="pixelplush.dev"
+                                                    width="100%"
+                                                    frameborder="1"
+                                                    scrolling="no"
+                                                    muted="true"
+                                                    allowfullscreen="false">
+                                                </iframe>
                                             </a>
                                         </li>
                                     </ul>
@@ -595,6 +616,35 @@
                         ComfyTwitch.Logout();
                         window.location.reload();
                     });
+
+                    let currentChannel = "";
+                    let featureStream = async () => {
+                        let livestreams = await fetch( "https://api.pixelplush.dev/v1/analytics/sessions/live/short" )
+                        .then( r => r.json() );
+                        let nextChannel = "pixelplushgames";
+                        if( livestreams.length > 0 ) {
+                            // Set Twitch embed channel
+                            if( livestreams.includes( "maayainsane" ) ) {
+                                nextChannel = "maayainsane";
+                            }
+                            else if( livestreams.includes( "instafluff" ) ) {
+                                nextChannel = "instafluff";
+                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=instafluff" );
+                            }
+                            else {
+                                nextChannel = livestreams[ Math.floor( livestreams.length * Math.random() ) ];
+                            }
+                        }
+                        else {
+                            nextChannel = "pixelplushgames";
+                        }
+                        if( nextChannel != currentChannel ) {
+                            currentChannel = nextChannel;
+                            $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${currentChannel}` );
+                        }
+                    };
+                    setInterval( featureStream, 60000 * 3 );
+                    featureStream();
                 }
                 catch( error ) {
                     // TODO: Auth Failed
