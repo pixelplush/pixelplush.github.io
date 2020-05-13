@@ -481,6 +481,14 @@
 
         function populateItemList() {
             $( "#catalog-list" ).empty();
+            // market announcement
+            $( "#catalog-list" ).append( `
+                <div class="col-sm-6 col-6">
+                    <div id="market_announcement" class="card text-center">
+                        <img src="public/app-assets/images/logo/marketannouncement.png" class="img-fluid" alt="Goodies Market Promotion" />
+                    </div>
+                </div>
+            ` );
             catalog.forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
