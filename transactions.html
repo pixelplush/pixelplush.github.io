@@ -273,27 +273,6 @@
                                                 <span>Follow Us!</span>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href=""> </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="">
-                                                <span><strong>Currently Live:</strong></span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="">
-                                                <iframe id="featured-stream"
-                                                    src="https://player.twitch.tv/?channel=pixelplushgames"
-                                                    parent="pixelplush.dev"
-                                                    width="100%"
-                                                    frameborder="1"
-                                                    scrolling="no"
-                                                    muted="true"
-                                                    allowfullscreen="false">
-                                                </iframe>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </div>
                                 <!-- right content section -->
@@ -484,35 +463,6 @@
                             [ 0, "desc" ]
                         ],
                     });
-
-                    let currentChannel = "";
-                    let featureStream = async () => {
-                        let livestreams = await fetch( "https://api.pixelplush.dev/v1/analytics/sessions/live/short" )
-                        .then( r => r.json() );
-                        let nextChannel = "pixelplushgames";
-                        if( livestreams.length > 0 ) {
-                            // Set Twitch embed channel
-                            if( livestreams.includes( "maayainsane" ) ) {
-                                nextChannel = "maayainsane";
-                            }
-                            else if( livestreams.includes( "instafluff" ) ) {
-                                nextChannel = "instafluff";
-                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=instafluff" );
-                            }
-                            else {
-                                nextChannel = livestreams[ Math.floor( livestreams.length * Math.random() ) ];
-                            }
-                        }
-                        else {
-                            nextChannel = "pixelplushgames";
-                        }
-                        if( nextChannel != currentChannel ) {
-                            currentChannel = nextChannel;
-                            $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${currentChannel}` );
-                        }
-                    };
-                    setInterval( featureStream, 60000 * 3 );
-                    featureStream();
                 }
                 catch( error ) {
                     // TODO: Auth Failed
