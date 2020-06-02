@@ -340,8 +340,10 @@
                                                                           <option value="frozenfrenzy">Frozen Frenzy (Winter)</option>
                                                                           <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
                                                                           <option value="easteregghunt">Easter Egg Hunt (Easter)</option>
+                                                                          <option value="springspree">Spring Spree (Spring)</option>
                                                                           <option value="pixelparachuteday">Pixel Parachute (Day)</option>
                                                                           <option value="pixelparachutenight">Pixel Parachute (Night)</option>
+                                                                          <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
                                                                           <option value="pixelplinko">Pixel Plinko</option>
                                                                         </select>
                                                                     </div>
@@ -661,7 +663,7 @@
         });
 
         const gameTypes = [ "maze", "parachute", "plinko" ];
-        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "pixelparachuteday", "pixelparachutenight", "pixelplinko" ];
+        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko" ];
         const themeSettings = {
             "wanderingwizards": {
                 game: "maze",
@@ -720,6 +722,16 @@
                 traps: 5,
                 messageFormat: "USERNAME finished with POINTS!",
             },
+            "springspree": {
+                game: "maze",
+                page: "https://www.pixelplush.dev/maze/spring.html",
+                preview: "/public/app-assets/images/games/springspree.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
             "pixelparachuteday": {
                 game: "parachute",
                 page: "https://www.pixelplush.dev/parachute/",
@@ -738,6 +750,15 @@
                 hideTilDrop: true,
                 messageFormat: "USERNAME landed for POINTS!",
             },
+            "pixelparachuteretro": {
+                game: "parachute",
+                page: "https://www.pixelplush.dev/parachute/retro.html",
+                preview: "/public/app-assets/images/games/pixelparachuteretro.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+            },
             "pixelplinko": {
                 game: "plinko",
                 page: "https://www.pixelplush.dev/plinko/",
@@ -750,7 +771,7 @@
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameTheme = params.get( "game" ) || "easteregghunt";
+        let gameTheme = params.get( "game" ) || "springspree";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
