@@ -625,10 +625,11 @@
                             // Set Twitch embed channel
                             if( livestreams.includes( "maayainsane" ) ) {
                                 nextChannel = "maayainsane";
+                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=maayainsane&parent=www.pixelplush.dev" );
                             }
                             else if( livestreams.includes( "instafluff" ) ) {
                                 nextChannel = "instafluff";
-                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=instafluff" );
+                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=instafluff&parent=www.pixelplush.dev" );
                             }
                             else {
                                 nextChannel = livestreams[ Math.floor( livestreams.length * Math.random() ) ];
@@ -639,7 +640,7 @@
                         }
                         if( nextChannel != currentChannel ) {
                             currentChannel = nextChannel;
-                            $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${currentChannel}` );
+                            $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${currentChannel}&parent=www.pixelplush.dev` );
                         }
                     };
                     setInterval( featureStream, 60000 * 3 );
