@@ -495,25 +495,47 @@
                         break;
                 }
                 if( account && account.owned && account.owned.includes( item.id ) ) {
-                    $( "#catalog-list" ).append( `
-                        <div class="col-sm-3 col-6">
-                          <div id="item_${item.id}" class="card text-center bg-dark bg-light">
-                            <div class="card-content">
-                              <div class="card-body py-1">
-                                <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                                  <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
-                                </div>
-                                <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
-                                <h5 class="mb-0">${item.name}</h5>
-                                <div class="pt-1">
-                                    <button class="btn btn-sm btn-outline-secondary" type="button" disabled><strong>Owned</strong></button>
-                                    <button class="btn btn-sm btn-outline-secondary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong></strong></button>
+                    if( item.hidden ) {
+                        $( "#catalog-list" ).append( `
+                            <div class="col-sm-3 col-6">
+                              <div id="item_${item.id}" class="card text-center bg-dark bg-light">
+                                <div class="card-content">
+                                  <div class="card-body py-1">
+                                    <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
+                                      <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                    </div>
+                                    <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
+                                    <h5 class="mb-0">${item.name}</h5>
+                                    <div class="pt-1">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" disabled><strong>Owned</strong></button>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                    `);
+                        `);
+                    }
+                    else {
+                        $( "#catalog-list" ).append( `
+                            <div class="col-sm-3 col-6">
+                              <div id="item_${item.id}" class="card text-center bg-dark bg-light">
+                                <div class="card-content">
+                                  <div class="card-body py-1">
+                                    <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
+                                      <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                    </div>
+                                    <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
+                                    <h5 class="mb-0">${item.name}</h5>
+                                    <div class="pt-1">
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" disabled><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.cost === 0 ? "FREE" : item.cost}</strong></button>
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong></strong></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        `);
+                    }
                 }
                 else if( !item.hidden ) {
                     $( "#catalog-list" ).append( `
@@ -732,7 +754,7 @@
                     $( ".user-coins" ).text( account.coins );
                     populateItemList();
                     toastr.success( `You got a code for ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
-                    Swal.fire({
+                    Swal.fire( {
                         title: result.code,
                         text: `Ready! Here is your gift code for ${items[ itemId ].name}!`,
                         footer: `<strong>IMPORTANT:</strong> Save this code! It will disappear after you close this notification window.`,
@@ -750,7 +772,7 @@
                         confirmButtonColor: '#d33',
                         confirmButtonText: 'Okay, I saved it!',
                         buttonsStyling: false,
-                    });
+                    } );
                 }
             }
             catch( err ) {
