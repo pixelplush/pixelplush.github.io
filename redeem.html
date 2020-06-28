@@ -472,8 +472,97 @@
                     confirmButtonClass: 'btn btn-primary',
                     buttonsStyling: false,
                 });
+
+                if( !result.coins ) {
+                    let confirm = await Swal.fire({
+                        title: `Use ${items[ result.item ].name}?`,
+                        text: `Would you like to set ${items[ result.item ].name} as your active ${items[ result.item ].type}?`,
+                        // type: 'success',
+                        imageUrl: `${getItemPreview( result.item, 0 )}`,
+                        imageWidth: 48,
+                        imageHeight: 48,
+                        confirmButtonClass: 'btn btn-primary',
+                        cancelButtonClass: 'btn btn-danger ml-1',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes!',
+                        cancelButtonText: 'No',
+                        buttonsStyling: false,
+                    });
+                    if( confirm.value ) {
+                        await activateItem( result.item );
+                        toastr.success( `${items[ result.item ].name} is now selected!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+                    }
+                }
             }
         });
+
+        async function activateItem( itemId ) {
+            try {
+                console.log( itemId );
+                let result = await fetch( `${plushApiUrl}/accounts/design`, {
+                    method: "POST",
+                    headers: {
+                        Twitch: ComfyTwitch.Token,
+                    },
+                    body: JSON.stringify( {
+                        item: itemId
+                    })
+                } ).then( r => r.json() );
+                console.log( "activating!", result );
+                if( result.error ) {
+                    throw result.error;
+                }
+                // window.location.reload();
+
+                account = await fetch( `${plushApiUrl}/accounts`, {
+                    headers: {
+                        Twitch: ComfyTwitch.Token
+                    }
+                } ).then( r => r.json() );
+                $( ".user-coins" ).text( account.coins );
+                // toastr.success( `Set to ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+            }
+            catch( err ) {
+                // console.log( err );
+                toastr.error( err, "Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+            }
+        }
+
+        function getItemPreview( itemId, frame ) {
+            let item = items[ itemId ];
+            if( item.theme === "None" ) { return ""; }
+            let dir = "";
+            switch( item.type ) {
+                case "pet":
+                    dir = `pets/${item.path}`;
+                    break;
+                case "character":
+                default:
+                    dir = `${item.type}s/${item.id}`;
+                    break;
+            }
+
+            let animFrame = frame % 10;
+            let direction = "front";
+            switch( Math.floor( ( frame % 80 ) / 20 ) ) {
+                case 0:
+                    direction = "front";
+                    break;
+                case 1:
+                    direction = "left";
+                    break;
+                case 2:
+                    direction = "back";
+                    break;
+                case 3:
+                    direction = "right";
+                    break;
+            }
+
+            return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
+        }
     </script>
 
 </body>
