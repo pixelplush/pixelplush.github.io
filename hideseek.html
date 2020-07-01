@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <title>PixelPlush Hide n' Seek</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-135113520-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-135113520-1');
+    </script>
+    <link rel="stylesheet" href="web/fonts.css" />
+    <script src="https://cdn.jsdelivr.net/npm/tinycolor2/dist/tinycolor-min.js"></script>
+  </head>
+  <body>
+    <div id="unicorn-display"></div>
+    <a id="connect-link" href="" target="_blank"></a>
+    <script src="web/hideseek.min.js"></script>
+    <script>
+        const params = new URLSearchParams( location.search );
+        setupGame( "Hide n' Seek", {
+            path: "https://www.pixelplush.dev",
+            map: "game-maze/spring/floor",
+            objects: [ "objects/tree1", "objects/tree2", "objects/tree3", "objects/tree4" ],
+            fog: [ "effects/fog", "effects/fog3" ],
+            deathItem: "tombstone",
+            defaultNameColor: "#ffffff",
+            // lightCharacters: true,
+        },
+        {
+            channel: params.get( "channel" ),
+            oauth: params.get( "oauth" ),
+            messageFormat: params.get( "messageFormat" ),
+            addBoss: !params.get( "noBoss" ),
+            bossEffect: params.get( "bossEffect" ) || "death",
+            numBosses: params.get( "bosses" ) ? parseInt( params.get( "bosses" ) ) : 4,
+            numPrizes: params.get( "prizes" ) ? parseInt( params.get( "prizes" ) ) : 7,
+            numTraps: params.get( "traps" ) ? parseInt( params.get( "traps" ) ) : 5,
+            showBannerAd: false,
+            roomName: params.get( "room" ),
+            roomPass: params.get( "pass" ),
+            roomToken: params.get( "token" ),
+            roomServer: "http://localhost:80",
+        });
+    </script>
+  </body>
+</html>
