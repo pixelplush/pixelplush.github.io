@@ -14,14 +14,14 @@
   </head>
   <body>
     <div id="unicorn-display"></div>
-    <a id="connect-link" href="" target="_blank"></a>
+    <h1><a id="connect-link" href="" target="_blank"></a></h1>
     <script src="web/hideseek.min.js"></script>
     <script>
         const params = new URLSearchParams( location.search );
         setupGame( "Hide n' Seek", {
             path: "https://www.pixelplush.dev",
-            map: "game-maze/spring/floor",
-            objects: [ "objects/tree1", "objects/tree2", "objects/tree3", "objects/tree4" ],
+            map: "game-hideseek/floor_3",
+            objects: [ "objects/tree1", "objects/tree2", "objects/tree3", "objects/tree4", "objects/bush" ],
             fog: [ "effects/fog", "effects/fog3" ],
             deathItem: "tombstone",
             defaultNameColor: "#ffffff",
