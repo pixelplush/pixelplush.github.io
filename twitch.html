@@ -382,6 +382,7 @@
                                                                                     <th>Hide Until Drop</th>
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Enable Chat Announcement</th>
+                                                                                    <th>Enable Bits Droplets</th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th>Background</th>
@@ -455,6 +456,11 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteChat" disabled><label for="inputEnableParachuteChat"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteDroplets"><label for="inputEnableParachuteDroplets"></label>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -599,6 +605,7 @@
                     $( "#inputMessageFormat" ).prop( "disabled", false );
                     $( "#inputEnableChat" ).prop( "disabled", false );
                     $( "#inputEnableParachuteChat" ).prop( "disabled", false );
+                    $( "#inputEnableParachuteDroplets" ).prop( "disabled", false );
                     $( "#inputEnablePlinkoChat" ).prop( "disabled", false );
                     $( "#inputMessageFormatDisabled" ).hide();
                     $( "#inputChatOAuth" ).val( `oauth:${result.token}` );
@@ -796,6 +803,7 @@
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
+        let isDropletsEnabled = true;
         let chatOAuth = "";
         let messageFormat = "USERNAME finished with POINTS!";
         let bossEffect = bossEffects[ 0 ];
@@ -899,6 +907,10 @@
             isChatEnabled = e.target.checked;
             generateLink();
         });
+        $( "#inputEnableParachuteDroplets" ).on( "change", ( e ) => {
+            isDropletsEnabled = e.target.checked;
+            generateLink();
+        });
         $( "#inputEnablePlinkoOverlay" ).on( "change", ( e ) => {
             isPlinkoOverlay = !e.target.checked;
             generateLink();
@@ -956,6 +968,7 @@
             $( "#inputEnableParachuteClouds" ).prop( "checked", isParachuteCloudsOn );
             $( "#inputEnableParachuteHideTilDrop" ).prop( "checked", isParachuteOverlay );
             $( "#inputEnableParachuteChat" ).prop( "checked", isChatEnabled );
+            $( "#inputEnableParachuteDroplets" ).prop( "checked", isDropletsEnabled );
             isPlinkoOverlay = themeSettings[ gameTheme ].overlay || false;
             isPlinkoCloudsOn = themeSettings[ gameTheme ].clouds || false;
             isPlinkoHideTilStart = themeSettings[ gameTheme ].hideTilStart || false;
@@ -999,6 +1012,9 @@
                 if( isChatEnabled && chatOAuth ) {
                     linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                if( isDropletsEnabled ) {
+                    linkParams.push( `droplets=true` );
                 }
                 break;
             case "plinko":
