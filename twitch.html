@@ -345,6 +345,8 @@
                                                                           <option value="pixelparachutenight">Pixel Parachute (Night)</option>
                                                                           <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
                                                                           <option value="pixelplinko">Pixel Plinko</option>
+                                                                          <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
+                                                                          <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
                                                                         </select>
                                                                     </div>
                                                                     <!-- <div class="form-group"> -->
@@ -664,7 +666,7 @@
         });
 
         const gameTypes = [ "maze", "parachute", "plinko" ];
-        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko" ];
+        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue" ];
         const themeSettings = {
             "wanderingwizards": {
                 game: "maze",
@@ -769,10 +771,28 @@
                 hideTilStart: true,
                 messageFormat: "USERNAME is a winner!",
             },
+            "pixelparachutepoolred": {
+                game: "parachute",
+                page: "https://www.pixelplush.dev/parachute/pool_red.html",
+                preview: "/public/app-assets/images/games/pixelparachutepoolparty.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+            },
+            "pixelparachutepoolblue": {
+                game: "parachute",
+                page: "https://www.pixelplush.dev/parachute/pool_blue.html",
+                preview: "/public/app-assets/images/games/pixelparachutepoolparty.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+            },
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameTheme = params.get( "game" ) || "springspree";
+        let gameTheme = params.get( "game" ) || "pixelparachutepoolred";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
