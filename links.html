@@ -28,7 +28,7 @@
     <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
     <meta property="og:url" content="https://www.pixelplush.dev">
     <!-- <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff"> -->
-    <title>Games for Twitch - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <title>Follow PixelPlush! - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
     <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
     <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -59,6 +59,16 @@
     <!-- END: Custom CSS-->
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
+    <style>
+    .link-group a {
+        display: inline-flex;
+        align-items: center;
+        color: inherit;
+    }
+    .link-group-item img {
+        padding-right: 7px;
+    }
+    </style>
 </head>
 <!-- END: Head-->
 
@@ -244,7 +254,7 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center active" href="twitch.html">
+                                            <a class="nav-link d-flex align-items-center" href="twitch.html">
                                                 <i class="bx bxl-twitch"></i>
                                                 <span>Games for Twitch</span>
                                             </a>
@@ -268,30 +278,9 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="links.html">
+                                            <a class="nav-link d-flex align-items-center active" href="links">
                                                 <i class="bx bx-link"></i>
                                                 <span>Follow Us!</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href=""> </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="">
-                                                <span><strong>Currently Live:</strong></span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="">
-                                                <iframe id="featured-stream"
-                                                    src="https://player.twitch.tv/?channel=pixelplushgames&parent=www.pixelplush.dev"
-                                                    parent="pixelplush.dev"
-                                                    width="100%"
-                                                    frameborder="1"
-                                                    scrolling="no"
-                                                    muted="true"
-                                                    allowfullscreen="false">
-                                                </iframe>
                                             </a>
                                         </li>
                                     </ul>
@@ -303,208 +292,45 @@
                                             <div class="card-body">
                                                 <div class="tab-content">
                                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
-                                                        <!-- users edit media object start -->
-                                                        <div class="media mb-2">
-                                                            <a class="mr-2" href="#">
-                                                                <img src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" class="users-avatar-shadow rounded-circle account-image" height="64" width="64">
-                                                            </a>
-                                                            <div class="media-body">
-                                                                <h4 class="media-heading user-name">Not Logged In</h4>
-                                                                <div class="col-12 px-0 d-flex">
-                                                                    <!-- <a href="#" class="btn btn-sm btn-danger additional-permissions">Grant Additional Permissions</a> -->
-                                                                    <a id="login-twitch" href="#" class="btn btn-social btn-twitch btn-sm font-small-3 mr-md-1 mb-md-0 mb-1 additional-permissions">
-                                                                        <i class="bx bxl-twitch font-medium-3"></i><span class="pl-50 d-block text-center">Grant Chat Permissions</span>
-                                                                    </a>
-                                                                    <a href="login.html?redirect=twitch.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
-                                                                    <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- users edit media object ends -->
                                                         <!-- users edit account form start -->
                                                         <form novalidate="">
                                                             <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="form-group">
-                                                                        <div class="controls">
-                                                                            <label>Twitch Channel Name</label>
-                                                                            <input id="inputChannelName" type="text" class="form-control" placeholder="Your Twitch Channel Name" value="" required="" data-validation-required-message="This channel field is required">
-                                                                        <div class="help-block"></div></div>
-                                                                    </div>
-                                                                    <div class="form-group">
-                                                                        <label>Choose Game</label>
-                                                                        <select class="form-control" id="inputGameTheme">
-                                                                          <option value="wanderingwizards">Wandering Wizards</option>
-                                                                          <option value="trickortreat">Trick or Treat (Halloween)</option>
-                                                                          <option value="santasecretservice">Santa's Secret Service (Christmas)</option>
-                                                                          <option value="frozenfrenzy">Frozen Frenzy (Winter)</option>
-                                                                          <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
-                                                                          <option value="easteregghunt">Easter Egg Hunt (Easter)</option>
-                                                                          <option value="springspree">Spring Spree (Spring)</option>
-                                                                          <option value="pixelparachuteday">Pixel Parachute (Day)</option>
-                                                                          <option value="pixelparachutenight">Pixel Parachute (Night)</option>
-                                                                          <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
-                                                                          <option value="pixelplinko">Pixel Plinko</option>
-                                                                          <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
-                                                                          <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
-                                                                        </select>
-                                                                    </div>
-                                                                    <!-- <div class="form-group"> -->
-                                                                        <!-- <label>Twitch Chat OAuth</label> -->
-                                                                        <input type="hidden" class="form-control" id="inputChatOAuth" placeholder="Your Twitch Chat OAuth Token">
-                                                                        <!-- <small id="oauthHelp" class="form-text text-muted">Keep this safe! This token allows sending chat messages as you.<br/>Get a Twitch Chat OAuth Token at <a href="http://twitchapps.com/tmi/" target="_blank">http://twitchapps.com/tmi/</a></small> -->
-                                                                    <!-- </div> -->
-                                                                    <div class="form-group">
-                                                                        <label>Chat Announcement Message Format</label>
-                                                                        <input type="text" class="form-control" id="inputMessageFormat" value="USERNAME finished with POINTS!" placeholder="e.g. USERNAME finished with POINTS!" disabled>
-                                                                        <div id="inputMessageFormatDisabled" class="help-block">(Twitch Log In is needed to enable chat announcement)</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6 text-center">
-                                                                    <img id="game-preview" src="" height="220" width="220" class="img-fluid" alt="Game Preview" />
-                                                                </div>
                                                                 <div class="col-12">
-                                                                    <div class="table-responsive">
-                                                                        <table class="table mt-1">
-                                                                            <thead>
-                                                                                <tr class="maze-game d-none">
-                                                                                    <th>Enable Boss</th>
-                                                                                    <th>Boss Effect</th>
-                                                                                    <th>Boss Count</th>
-                                                                                    <th>Trap Effect</th>
-                                                                                    <th>Prize Count</th>
-                                                                                    <th>Trap Count</th>
-                                                                                    <th>Enable Chat Announcement</th>
-                                                                                </tr>
-                                                                                <tr class="parachute-game d-none">
-                                                                                    <th>Background</th>
-                                                                                    <th>Clouds</th>
-                                                                                    <th>Hide Until Drop</th>
-                                                                                    <th>Sound Volume</th>
-                                                                                    <th>Enable Chat Announcement</th>
-                                                                                    <th>Enable Bits Droplets</th>
-                                                                                </tr>
-                                                                                <tr class="plinko-game d-none">
-                                                                                    <th>Background</th>
-                                                                                    <th>Clouds</th>
-                                                                                    <th>Hide Until Start</th>
-                                                                                    <th>Sound Volume</th>
-                                                                                    <th>Enable Chat Announcement</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr class="maze-game d-none">
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableBoss" checked><label for="inputEnableBoss"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <select class="form-control" id="inputBossEffect">
-                                                                                          <option value="0">Steal Points</option>
-                                                                                          <option value="1">Return to Spawn</option>
-                                                                                        </select>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputBossCount" value="1" min="0" max="100" placeholder="Number of Bosses Spawned">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <select class="form-control" id="inputTrapEffect">
-                                                                                          <option value="0">Points Penalty</option>
-                                                                                          <option value="1">Trap Tunnels</option>
-                                                                                        </select>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputPrizeCount" value="7" min="1" max="214" placeholder="Number of Prizes Spawned">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputTrapCount" value="5" min="0" max="214" placeholder="Number of Trap Spawned">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableChat" disabled><label for="inputEnableChat"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr class="parachute-game d-none">
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteOverlay"><label for="inputEnableParachuteOverlay"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteClouds" checked><label for="inputEnableParachuteClouds"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteHideTilDrop" checked><label for="inputEnableParachuteHideTilDrop"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputParachuteVolume" value="25" min="0" max="100" placeholder="Sound Volume">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteChat" disabled><label for="inputEnableParachuteChat"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteDroplets"><label for="inputEnableParachuteDroplets"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr class="plinko-game d-none">
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoOverlay"><label for="inputEnablePlinkoOverlay"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoClouds" checked><label for="inputEnablePlinkoClouds"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoHideTilStart" checked><label for="inputEnablePlinkoHideTilStart"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputPlinkoVolume" value="25" min="0" max="100" placeholder="Sound Volume">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoChat" disabled><label for="inputEnablePlinkoChat"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
+                                                                    <div class="form-group">
+                                                                        <label>Follow us to stay updated with our games!</label>
+                                                                        <ul class="list-group link-group">
+                                                                            <li class="link-group-item list-group-item list-group-item-action list-group-item-warning"><a href="https://www.pixelplush.dev/discord" target="_blank"><img src="/public/app-assets/images/icon/discord.png" height="16px" alt="Discord icon"> Discord - <u>https://www.pixelplush.dev/discord</u></a></li>
+                                                                            <li class="link-group-item list-group-item list-group-item-action list-group-item-info"><a href="https://www.twitter.com/pixelplushgames" target="_blank"><img src="/public/app-assets/images/icon/twitter.png" height="16px" alt="Twitter icon"> Twitter - <u>https://www.twitter.com/pixelplushgames</u></a></li>
+                                                                            <li class="link-group-item list-group-item list-group-item-action list-group-item-danger"><a href="https://www.instagram.com/pixelplushgames" target="_blank"><img src="/public/app-assets/images/icon/instagram.png" height="16px" alt="Instagram icon"> Instagram - <u>https://www.instagram.com/pixelplushgames</u></a></li>
+                                                                            <!-- <li class="link-group-item list-group-item list-group-item-action list-group-item-primary"><a href="https://www.twitch.tv/pixelplushgames" target="_blank"><img src="/public/app-assets/images/icon/twitch.png" height="16px" alt="Twitch icon"> Twitch - <u>https://www.twitch.tv/pixelplushgames</u></a></li>
+                                                                            <li class="link-group-item list-group-item list-group-item-action"><a href="https://www.linkedin.com/company/pixelplush" target="_blank"><img src="/public/app-assets/images/icon/linkedin.png" height="16px" alt="LinkedIn icon"> LinkedIn - <u>https://www.linkedin.com/company/pixelplush</u></a></li>
+                                                                            <li class="link-group-item list-group-item list-group-item-action list-group-item-dark"><a href="https://www.github.com/pixelplush" target="_blank"><img src="/public/app-assets/images/icon/github.png" height="16px" alt="GitHub icon"> GitHub - <u>https://www.github.com/pixelplush</u></a></li> -->
+                                                                            <!-- <a href="#" class="list-group-item list-group-item-action">Twitter</a>
+                                                                            <a href="https://www.linkedin.com/company/pixelplush" target="_blank" class="list-group-item list-group-item-action list-group-item-dark">GitHub - <u>https://www.linkedin.com/company/pixelplush</u></a>
+                                                                            <a href="#" class="list-group-item list-group-item-action list-group-item-secondary">This is a secondary list group item</a>
+                                                                            <a href="#" class="list-group-item list-group-item-action list-group-item-success">This is a success list group item</a>
+                                                                            <a href="#" class="list-group-item list-group-item-action list-group-item-warning">This is a warning list group item</a>
+                                                                            <a href="#" class="list-group-item list-group-item-action list-group-item-light">This is a light list group item</a> -->
+                                                                        </ul>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                      <label for="outputOverlayLink">Overlay Link</label>
-                                                                      <div class="input-group">
-                                                                        <input type="text" class="form-control" id="outputOverlayLink" readonly>
-                                                                        <div class="input-group-append">
-                                                                          <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputOverlayLink">Click to Copy</button>
+                                                                        <label>PixelPlush Banners!</label>
+                                                                        <div class="list-unstyled">
+                                                                            <li class="media">
+                                                                                <div class="media-body">
+                                                                                    <img src="/public/app-assets/images/pages/banner2.png" alt="PixelPlush Banner">
+                                                                                    <img src="/public/app-assets/images/pages/banner4.png" alt="PixelPlush Banner">
+                                                                                </div>
+                                                                            </li>
+                                                                            <li class="media my-1">
+                                                                                <div class="media-body">
+                                                                                    <img src="/public/app-assets/images/pages/banner1.png" alt="PixelPlush Banner">
+                                                                                    <img src="/public/app-assets/images/pages/banner3.png" alt="PixelPlush Banner">
+                                                                                </div>
+                                                                            </li>
                                                                         </div>
-                                                                      </div>
-                                                                      <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
                                                                     </div>
                                                                 </div>
                                                             </div>
