@@ -383,6 +383,7 @@
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Enable Chat Announcement</th>
                                                                                     <th>Enable Bits Droplets</th>
+                                                                                    <th>Chat Command Text</th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th>Background</th>
@@ -461,6 +462,11 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteDroplets"><label for="inputEnableParachuteDroplets"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" id="inputParachuteCommand" value="" placeholder="Command (e.g. !drop)">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -750,6 +756,7 @@
                 clouds: true,
                 hideTilDrop: true,
                 messageFormat: "USERNAME landed for POINTS!",
+                command: "",
             },
             "pixelparachutenight": {
                 game: "parachute",
@@ -759,6 +766,7 @@
                 clouds: true,
                 hideTilDrop: true,
                 messageFormat: "USERNAME landed for POINTS!",
+                command: "",
             },
             "pixelparachuteretro": {
                 game: "parachute",
@@ -768,6 +776,7 @@
                 clouds: true,
                 hideTilDrop: true,
                 messageFormat: "USERNAME landed for POINTS!",
+                command: "",
             },
             "pixelplinko": {
                 game: "plinko",
@@ -786,6 +795,7 @@
                 clouds: true,
                 hideTilDrop: true,
                 messageFormat: "USERNAME landed for POINTS!",
+                command: "",
             },
             "pixelparachutepoolblue": {
                 game: "parachute",
@@ -795,6 +805,7 @@
                 clouds: true,
                 hideTilDrop: true,
                 messageFormat: "USERNAME landed for POINTS!",
+                command: "",
             },
         };
         const bossEffects = [ "steal", "base" ];
@@ -815,6 +826,7 @@
         let isParachuteCloudsOn = true;
         let isParachuteHideTilDrop = false;
         let parachuteVolume = "25";
+        let parachuteCommand = "";
         let isPlinkoOverlay = true;
         let isPlinkoCloudsOn = true;
         let isPlinkoHideTilStart = false;
@@ -901,6 +913,14 @@
         });
         $( "#inputParachuteVolume" ).on( "input", ( e ) => {
             parachuteVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCommand" ).on( "change", ( e ) => {
+            parachuteCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCommand" ).on( "input", ( e ) => {
+            parachuteCommand = e.target.value;
             generateLink();
         });
         $( "#inputEnableParachuteChat" ).on( "change", ( e ) => {
@@ -1008,6 +1028,9 @@
                 }
                 if( parachuteVolume ) {
                     linkParams.push( `volume=${parachuteVolume}` );
+                }
+                if( parachuteCommand ) {
+                    linkParams.push( `command=${parachuteCommand.replace("!", "")}` );
                 }
                 if( isChatEnabled && chatOAuth ) {
                     linkParams.push( `oauth=${chatOAuth}` );
