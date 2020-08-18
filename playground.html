@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6EJRXTPH3Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6EJRXTPH3Z');
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta name="keywords" content="pixelplush, game, development, studio, instafluff, maaya, art, web, dev, fun, relax, play">
+    <meta name="author" content="PixelPlush">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta name="twitter:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
+    <meta name="twitter:creator" content="PixelPlushGames">
+    <meta name="twitter:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
+    <meta property="og:url" content="https://www.pixelplush.dev">
+    <!-- <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff"> -->
+    <title>Games for Twitch - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/swiper.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/themes/semi-dark-layout.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/pages/dashboard-ecommerce.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
+    <link rel="stylesheet" href="web/fonts.css" />
+    <!-- END: Custom CSS-->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern 1-column  navbar-sticky footer-static  fixed-footer" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+
+    <!-- BEGIN: Header-->
+    <div class="header-navbar-shadow"></div>
+    <nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item mr-auto">
+                                <div class="navbar-brand">
+                                    <a href="index.html">
+                                        <img src="public/app-assets/images/logo/logo.png" height="27px" class="img-responsive"> <img src="public/app-assets/images/logo/text.png" height="27px" class="img-responsive">
+                                    </a>
+                                    <span class="font-small-3"><i class="bx bxs-heart pink mx-50 font-small-3"></i>By <a href="https://twitch.tv/maayainsane" target="_blank"><img src="public/app-assets/images/icon/maaya.gif" height="32px"> Maaya</a> &amp; <a href="https://twitch.tv/instafluff" target="_blank">Instafluff <img src="public/app-assets/images/icon/instafluff.gif" height="34px"></a></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="nav navbar-nav float-right d-flex align-items-center">
+                        <li class="nav-item d-lg-block not-logged-in">
+                            <div class="not-logged-in">
+                                <a id="login" href="login.html?redirect=twitch.html" class="btn btn-primary mr-25">Log In</a>
+                            </div>
+                        </li>
+                        <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
+                            <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                <li class="dropdown-menu-header">
+                                    <div class="dropdown-header px-1 py-75 d-flex justify-content-between"><span class="notification-title">7 new Notification</span><span class="text-bold-400 cursor-pointer">Mark all as read</span></div>
+                                </li>
+                                <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar mr-1 m-0"><img src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">Congratulate Socrates Itumay</span> for work anniversaries</h6><small class="notification-text">Mar 15 12:32pm</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="d-flex justify-content-between read-notification cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar mr-1 m-0"><img src="../../../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">New Message</span> received</h6><small class="notification-text">You have 18 unread messages</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center py-0">
+                                            <div class="media-left pr-0"><img class="mr-1" src="../../../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">Updates Available</span></h6><small class="notification-text">Sketch 50.2 is currently newly added</small>
+                                            </div>
+                                            <div class="media-right pl-0">
+                                                <div class="row border-left text-center">
+                                                    <div class="col-12 px-50 py-75 border-bottom">
+                                                        <h6 class="media-heading text-bold-500 mb-0">Update</h6>
+                                                    </div>
+                                                    <div class="col-12 px-50 py-75">
+                                                        <h6 class="media-heading mb-0">Close</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">LD</span></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">New customer</span> is registered</h6><small class="notification-text">1 hrs ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cursor-pointer">
+                                        <div class="media d-flex align-items-center justify-content-between">
+                                            <div class="media-left pr-0">
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">New Offers</h6>
+                                                </div>
+                                            </div>
+                                            <div class="media-right">
+                                                <div class="custom-control custom-switch">
+                                                    <input class="custom-control-input" type="checkbox" checked id="notificationSwtich">
+                                                    <label class="custom-control-label" for="notificationSwtich"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar bg-danger bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content"><i class="bx bxs-heart text-danger"></i></span></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">Application</span> has been approved</h6><small class="notification-text">6 hrs ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between read-notification cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar mr-1 m-0"><img src="../../../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">New file</span> has been uploaded</h6><small class="notification-text">4 hrs ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar bg-rgba-danger m-0 mr-1 p-25">
+                                                    <div class="avatar-content"><i class="bx bx-detail text-danger"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">Finance report</span> has been generated</h6><small class="notification-text">25 hrs ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center border-0">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar mr-1 m-0"><img src="../../../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">New customer</span> comment recieved</h6><small class="notification-text">2 days ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown-menu-footer"><a class="dropdown-item p-50 text-primary justify-content-center" href="javascript:void(0)">Read all notifications</a></li>
+                            </ul>
+                        </li> -->
+                        <li class="dropdown dropdown-user nav-item logged-in">
+                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="user-nav d-lg-flex d-none"><span class="user-name">Not Logged In</span><span class="user-status"><img class="pixelated" src="public/app-assets/images/icon/plush_coin.gif" height="18px" /> <strong><span class="user-coins"></span></strong></span> </div><span class="avatar"><img class="round account-image" src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" height="40" width="40"><span class="avatar-status-online"></span></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right pb-0">
+                                <a class="dropdown-item" href="customize.html"><i class="bx bx-user mr-50"></i> My Dressing Room</a>
+                                <a class="dropdown-item" href="transactions.html"><i class="bx bx-check-square mr-50"></i> My Shopping History</a>
+                                <a class="dropdown-item" href="market.html"><i class="bx bx-cart mr-50"></i> Goodies Market</a>
+                                <a class="dropdown-item" href="https://pixelplush.dev/discord"><i class="bx bxl-discord mr-50"></i> PixelPlush Discord</a>
+                                <div class="dropdown-divider mb-0"></div><a class="dropdown-item logout" href="#"><i class="bx bx-power-off mr-50"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <section class="users-edit">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <!-- left menu section -->
+                                <div class="col-md-3 mb-2 mb-md-0 pills-stacked">
+                                    <ul class="nav nav-pills flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="index.html">
+                                                <i class="bx bx-home"></i>
+                                                <span>PixelPlush Home</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center active" href="twitch.html">
+                                                <i class="bx bxl-twitch"></i>
+                                                <span>Games for Twitch</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="market.html">
+                                                <img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                <span>Goodies Market</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="customize.html">
+                                                <i class="bx bx-user"></i>
+                                                <span>My Dressing Room</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="transactions.html">
+                                                <i class="bx bx-check-square"></i>
+                                                <span>My Shopping History</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="links">
+                                                <i class="bx bx-link"></i>
+                                                <span>Follow Us!</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- right content section -->
+                                <div class="col-md-9">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                                        <!-- users edit media object start -->
+                                                        <div class="media mb-2">
+                                                            <a class="mr-2" href="#">
+                                                                <img src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" class="users-avatar-shadow rounded-circle account-image" height="64" width="64">
+                                                            </a>
+                                                            <div class="media-body">
+                                                                <h4 class="media-heading user-name">Not Logged In</h4>
+                                                                <div class="col-12 px-0 d-flex">
+                                                                    <a href="login.html?redirect=twitch.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
+                                                                    <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- users edit media object ends -->
+                                                        <div id="unicorn-display" style="width: 640px; height: 360px;"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    </div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <!-- <li class="nav-item d-none d-lg-block"></li> -->
+        <p class="clearfix mb-0"><span class="float-left d-inline-block"><i class="bx bxl-discord"></i> Join our Discord and hang out with us!<a href="https://pixelplush.dev/discord" target="_blank"><u>https://pixelplush.dev/discord</u></a></span>
+          <span class="float-right d-inline-block"><script>document.write(new Date().getFullYear());</script> &copy; PIXELPLUSH&trade;</span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="public/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="public/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
+    <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="public/app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+    <script src="public/app-assets/js/core/app-menu.js"></script>
+    <script src="public/app-assets/js/core/app.js"></script>
+    <script src="public/app-assets/js/scripts/components.js"></script>
+    <script src="public/app-assets/js/scripts/footer.js"></script>
+    <!-- END: Theme JS-->
+
+    <script src="public/app-assets/js/scripts/forms/number-input.js"></script>
+
+    <script src="public/comfytwitch.min.js"></script>
+    <script src="web/hideseek.min.js"></script>
+    <script>
+        const params = new URLSearchParams( location.search );
+        const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
+        const baseUrl = window.location.origin;
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+        let twitch = {};
+        let account = {};
+
+        $( ".not-logged-in" ).show();
+        $( ".logged-in" ).hide();
+        $( ".additional-permissions" ).hide();
+
+        ComfyTwitch.Check()
+        .then( async result => {
+            // console.log( result );
+            if( result ) {
+                try {
+                    account = await fetch( `${plushApiUrl}/accounts`, {
+                        headers: {
+                            Twitch: result.token
+                        }
+                    } ).then( r => r.json() );
+
+                    // console.log( account );
+
+                    if( account.error ) {
+                        throw "Login Error";
+                    }
+
+                    $( ".not-logged-in" ).hide();
+                    $( ".logged-in" ).show();
+
+                    $( ".account-image" ).attr( "src", account.profileImage );
+                    $( ".user-name" ).text( account.displayName || account.username );
+                    $( ".user-coins" ).text( account.coins );
+
+                    $( ".logout" ).on( "click", function() {
+                        ComfyTwitch.Logout();
+                        window.location.reload();
+                    });
+
+                    setupGame( "Pet Playground", {
+                        path: "https://www.pixelplush.dev",
+                        map: "game-hideseek/floor_magical_forest",
+                        objects: {
+                            "objects/magical_forest/bush1": 14,
+                            "objects/magical_forest/grass_blue": 10,
+                            "objects/magical_forest/grass_purple": 10,
+                            "objects/magical_forest/mushroom_big_blue": 40,
+                            "objects/magical_forest/mushroom_big_pink": 40,
+                            "objects/magical_forest/mushroom_small_blue": -4,
+                            "objects/magical_forest/mushroom_small_pink": -4,
+                            "objects/magical_forest/mushrooms_grass_pink": 46,
+                            "objects/magical_forest/mushrooms_grass_purple": 46,
+                            "objects/magical_forest/mushrooms_pink": 32,
+                            "objects/magical_forest/stones": -20,
+                            // "objects/tree1": 42,
+                            // "objects/tree2": 42,
+                            // "objects/tree3": 42,
+                            // "objects/tree4": 42,
+                            // "objects/bush": 14,
+                            // "items/stones": -20,
+                            // "items/flower2": -11,
+                            // "items/tombstone": -10,
+                            // "items/puddle": -100,
+                        },
+                        fog: [ "effects/fog", "effects/fog3" ],
+                        deathItem: "tombstone",
+                        defaultNameColor: "#ffffff",
+                        // lightCharacters: true,
+                    },
+                    {
+                        nobg: params.get( "nobg" ),
+                        account: account,
+                    });
+
+                    if( !window.FontInitialized ) {
+                        await waitFontInit();
+                    }
+                    CreateGame();
+                }
+                catch( error ) {
+                    // TODO: Auth Failed
+                    console.log( "Auth Validate Failed", error );
+                }
+            }
+            else {
+                $( ".not-logged-in" ).show();
+                $( ".logged-in" ).hide();
+            }
+        });
+
+        function waitFontInit() {
+            return new Promise( ( resolve, reject ) => {
+                let waitCounter = 60;
+                let waitInterval = setInterval( () => {
+                    waitCounter--;
+                    if( waitCounter <= 0 ) {
+                        clearInterval( waitInterval );
+                        reject();
+                    }
+                    if( window.FontInitialized ) {
+                        clearInterval( waitInterval );
+                        resolve();
+                    }
+                }, 500 );
+            });
+        }
+    </script>
+
+</body>
+<!-- END: Body-->
+
+</html>
