@@ -239,13 +239,13 @@
                                 <div class="col-md-3 mb-2 mb-md-0 pills-stacked">
                                     <ul class="nav nav-pills flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="index.html">
+                                            <a class="nav-link d-flex align-items-center active" href="index.html">
                                                 <i class="bx bx-home"></i>
                                                 <span>PixelPlush Home</span>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center active" href="twitch.html">
+                                            <a class="nav-link d-flex align-items-center" href="twitch.html">
                                                 <i class="bx bxl-twitch"></i>
                                                 <span>Games for Twitch</span>
                                             </a>
@@ -285,17 +285,43 @@
                                                     <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
                                                         <!-- users edit media object start -->
                                                         <div class="media mb-2">
-                                                            <a class="mr-2" href="#">
-                                                                <img src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" class="users-avatar-shadow rounded-circle account-image" height="64" width="64">
-                                                            </a>
                                                             <div class="media-body">
-                                                                <h4 class="media-heading user-name">Not Logged In</h4>
-                                                                <div class="col-12 px-0 d-flex">
-                                                                    <a href="login.html?redirect=twitch.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
-                                                                    <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
+                                                                <div class="float-right">
+                                                                    <div class="form-group">
+                                                                        <label for="inputRoomCode">Room Code</label>
+                                                                        <div class="input-group">
+                                                                          <input type="text" class="form-control" id="inputRoomCode">
+                                                                          <div class="input-group-append">
+                                                                            <button id="room-btn" class="btn btn-secondary" type="button">Go</button>
+                                                                          </div>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
+                                                                <h3 class="media-heading">Pixel Pet Playground!</h3>
+                                                                <small id="oauthHelp" class="form-text text-muted">Let your PixelPlush pets play together!</small>
                                                             </div>
                                                         </div>
+                                                        <form novalidate="">
+                                                            <div class="row">
+                                                                <!-- <div class="col-12">
+                                                                    <div class="form-group">
+                                                                      <label for="outputOverlayLink">Overlay Link</label>
+                                                                      <div class="input-group">
+                                                                        <input type="text" class="form-control" id="outputOverlayLink" readonly>
+                                                                        <div class="input-group-append">
+                                                                          <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputOverlayLink">Click to Copy</button>
+                                                                        </div>
+                                                                      </div>
+                                                                      <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
+                                                                    </div>
+                                                                </div> -->
+                                                            </div>
+                                                        </form>
                                                         <!-- users edit media object ends -->
                                                         <div id="unicorn-display" style="width: 640px; height: 360px;"></div>
                                                     </div>
@@ -426,6 +452,7 @@
                     },
                     {
                         nobg: params.get( "nobg" ),
+                        code: params.get( "code" ),
                         account: account,
                     });
 
@@ -433,6 +460,19 @@
                         await waitFontInit();
                     }
                     CreateGame();
+
+                    let roomCodeInterval = setInterval( () => {
+                        if( gameOptions.code ) {
+                            $( "#inputRoomCode" ).val( gameOptions.code );
+                            // console.log( gameOptions );
+                            clearInterval( roomCodeInterval );
+                        }
+                    }, 500 );
+
+                    $( "#room-btn" ).on( "click", () => {
+                        location.href = `?code=${$( "#inputRoomCode" ).val()}`;
+                        console.log( "click" );
+                    });
                 }
                 catch( error ) {
                     // TODO: Auth Failed
