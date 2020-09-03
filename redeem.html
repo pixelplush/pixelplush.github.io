@@ -445,6 +445,14 @@
                 }
                 $(this).val(foo);
             });
+
+            if( params.get( "code" ) ) {
+                var foo = params.get( "code" ).split("-").join(""); // remove hyphens
+                if( foo.length > 0 ) {
+                    foo = foo.match(new RegExp('.{1,4}', 'g')).join("-");
+                }
+                $("#coupon-code-form").val(foo);
+            }
         });
 
         $( "#redeem-btn" ).on( "click", async ( ev ) => {
