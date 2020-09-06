@@ -334,6 +334,7 @@
                                                                     <div class="form-group">
                                                                         <label>Choose Game</label>
                                                                         <select class="form-control" id="inputGameTheme">
+                                                                          <option value="fairyforest">Fairy Forest</option>
                                                                           <option value="wanderingwizards">Wandering Wizards</option>
                                                                           <option value="trickortreat">Trick or Treat (Halloween)</option>
                                                                           <option value="santasecretservice">Santa's Secret Service (Christmas)</option>
@@ -684,7 +685,7 @@
         });
 
         const gameTypes = [ "maze", "parachute", "plinko" ];
-        const gameThemes = [ "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue" ];
+        const gameThemes = [ "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue" ];
         const themeSettings = {
             "wanderingwizards": {
                 game: "maze",
@@ -753,6 +754,16 @@
                 traps: 5,
                 messageFormat: "USERNAME finished with POINTS!",
             },
+            "fairyforest": {
+                game: "maze",
+                page: "https://www.pixelplush.dev/maze/fairy.html",
+                preview: "/public/app-assets/images/games/fairyforest.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
             "pixelparachuteday": {
                 game: "parachute",
                 page: "https://www.pixelplush.dev/parachute/",
@@ -815,7 +826,7 @@
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameTheme = params.get( "game" ) || "pixelparachutepoolred";
+        let gameTheme = params.get( "game" ) || "fairyforest";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
