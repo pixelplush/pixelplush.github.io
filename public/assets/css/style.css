@@ -16,6 +16,21 @@ WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BET
     image-rendering: crisp-edges;
 }
 
+.strikeout {
+  /* font-size: 4em;
+  line-height: 1em; */
+  position: relative;
+}
+.strikeout::after {
+  border-bottom: 0.125em solid red;
+  content: "";
+  left: 0;
+  margin-top: calc(0.125em / 2 * -1);
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
 .swal2-image {
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
