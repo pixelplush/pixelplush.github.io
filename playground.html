@@ -288,7 +288,7 @@
                                                             <div class="media-body">
                                                                 <div class="float-right">
                                                                     <div class="form-group">
-                                                                        <label for="inputRoomCode">Room Code</label>
+                                                                        <label id="room-label" for="inputRoomCode">Room Code</label>
                                                                         <div class="input-group">
                                                                           <input type="text" class="form-control" id="inputRoomCode">
                                                                           <div class="input-group-append">
@@ -298,32 +298,34 @@
                                                                     </div>
                                                                 </div>
                                                                 <h3 class="media-heading">Pixel Pet Playground!</h3>
-                                                                <small id="oauthHelp" class="form-text text-muted">Let your PixelPlush pets play together!</small>
+                                                                <small id="oauthHelp" class="form-text text-muted">A hangout for PixelPlush pets to play together!</small>
                                                             </div>
                                                         </div>
+                                                        <!-- users edit media object ends -->
+                                                        <div id="unicorn-display" style="width: 640px; height: 360px;"></div>
+
                                                         <form novalidate="">
                                                             <div class="row">
-                                                                <!-- <div class="col-12">
+                                                                <div class="col-12">
                                                                     <div class="form-group">
-                                                                      <label for="outputOverlayLink">Overlay Link</label>
+                                                                      <label for="outputOverlayLink">Playground Room Link</label>
                                                                       <div class="input-group">
                                                                         <input type="text" class="form-control" id="outputOverlayLink" readonly>
                                                                         <div class="input-group-append">
                                                                           <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputOverlayLink">Click to Copy</button>
                                                                         </div>
                                                                       </div>
-                                                                      <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
+                                                                      <small id="oauthHelp" class="form-text text-muted">Copy and add this link and invite friends join this room!</small>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-12">
+                                                                <!-- <div class="col-12">
                                                                     <div class="form-group">
                                                                         <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
                                                                     </div>
                                                                 </div> -->
                                                             </div>
                                                         </form>
-                                                        <!-- users edit media object ends -->
-                                                        <div id="unicorn-display" style="width: 640px; height: 360px;"></div>
+                                                        <button id="fullscreen-button" class="btn btn-primary">Play in Fullscreen</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -347,7 +349,7 @@
     <footer class="footer footer-static footer-light">
         <!-- <li class="nav-item d-none d-lg-block"></li> -->
         <p class="clearfix mb-0"><span class="float-left d-inline-block"><i class="bx bxl-discord"></i> Join our Discord and hang out with us!<a href="https://pixelplush.dev/discord" target="_blank"><u>https://pixelplush.dev/discord</u></a></span>
-          <span class="float-right d-inline-block"><script>document.write(new Date().getFullYear());</script> &copy; PIXELPLUSH&trade;</span>
+          <span class="float-right d-inline-block"><a href="terms.html">TERMS OF USE</a> | <a href="terms.html">PRIVACY</a> | <script>document.write(new Date().getFullYear());</script> &copy; PIXELPLUSH&trade;</span>
             <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
         </p>
     </footer>
@@ -387,9 +389,27 @@
         let twitch = {};
         let account = {};
 
+        $( document ).ready(function() {
+            var clipboard = new ClipboardJS('.clipboard');
+        });
+
         $( ".not-logged-in" ).show();
         $( ".logged-in" ).hide();
         $( ".additional-permissions" ).hide();
+
+        $( "#fullscreen-button" ).on( "click", () => {
+            let canvas = document.getElementById( "unicorn-display" ).childNodes[ 0 ];
+            canvas.requestFullscreen();
+            // document.getElementById( "unicorn-display" ).requestFullscreen();
+        });
+        document.getElementById( "unicorn-display" ).addEventListener( "fullscreenchange", ( data ) => {
+            if( !!document.fullscreenElement ) {
+                // Fullscreen - scale the element to full width/height
+            }
+            else {
+                // width: 640px; height: 360px;
+            }
+        });
 
         ComfyTwitch.Check()
         .then( async result => {
@@ -464,6 +484,7 @@
                     let roomCodeInterval = setInterval( () => {
                         if( gameOptions.code ) {
                             $( "#inputRoomCode" ).val( gameOptions.code );
+                            $( "#outputOverlayLink" ).val( `${location.protocol}//${location.host}${location.pathname}?code=${gameOptions.code}` );
                             // console.log( gameOptions );
                             clearInterval( roomCodeInterval );
                         }
@@ -471,7 +492,6 @@
 
                     $( "#room-btn" ).on( "click", () => {
                         location.href = `?code=${$( "#inputRoomCode" ).val()}`;
-                        console.log( "click" );
                     });
                 }
                 catch( error ) {
