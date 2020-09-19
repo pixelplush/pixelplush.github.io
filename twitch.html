@@ -355,6 +355,7 @@
                                                                           <option value="pixelplinko">Pixel Plinko</option>
                                                                           <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
                                                                           <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
+                                                                          <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
                                                                         </select>
                                                                     </div>
                                                                     <!-- <div class="form-group"> -->
@@ -692,7 +693,7 @@
         });
 
         const gameTypes = [ "maze", "parachute", "plinko" ];
-        const gameThemes = [ "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue" ];
+        const gameThemes = [ "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn" ];
         const themeSettings = {
             "wanderingwizards": {
                 game: "maze",
@@ -824,6 +825,16 @@
                 game: "parachute",
                 page: "https://www.pixelplush.dev/parachute/pool_blue.html",
                 preview: "/public/app-assets/images/games/pixelparachutepoolpartyblue.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachuteautumn": {
+                game: "parachute",
+                page: "https://www.pixelplush.dev/parachute/autumn.html",
+                preview: "/public/app-assets/images/games/pixelparachuteautumn.gif",
                 overlay: true,
                 clouds: true,
                 hideTilDrop: true,
