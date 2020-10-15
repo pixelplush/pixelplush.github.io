@@ -387,9 +387,10 @@
                                                                                     <th>Clouds</th>
                                                                                     <th>Hide Until Drop</th>
                                                                                     <th>Sound Volume</th>
-                                                                                    <th>Enable Chat Announcement</th>
-                                                                                    <th>Enable Bits Droplets</th>
-                                                                                    <th>Chat Command Text</th>
+                                                                                    <th>Score in Chat</th>
+                                                                                    <th>Bit Cheers</th>
+                                                                                    <th>Chat Command</th>
+                                                                                    <th>Refresh Timer (secs)</th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th>Background</th>
@@ -473,6 +474,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="text" class="form-control" id="inputParachuteCommand" value="" placeholder="Command (e.g. !drop)">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -592,6 +598,12 @@
         $( ".not-logged-in" ).show();
         $( ".logged-in" ).hide();
         $( ".additional-permissions" ).hide();
+
+        $( "#inputParachuteRefresh" ).TouchSpin({
+            min: 60,
+            max: 3600,
+            step: 30,
+        });
 
         ComfyTwitch.Check()
         .then( async result => {
@@ -867,6 +879,7 @@
         let isParachuteCloudsOn = true;
         let isParachuteHideTilDrop = false;
         let parachuteVolume = "25";
+        let parachuteRefresh = "90";
         let parachuteCommand = "";
         let isPlinkoOverlay = true;
         let isPlinkoCloudsOn = true;
@@ -954,6 +967,14 @@
         });
         $( "#inputParachuteVolume" ).on( "input", ( e ) => {
             parachuteVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteRefresh" ).on( "change", ( e ) => {
+            parachuteRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteRefresh" ).on( "input", ( e ) => {
+            parachuteRefresh = e.target.value;
             generateLink();
         });
         $( "#inputParachuteCommand" ).on( "change", ( e ) => {
@@ -1073,6 +1094,9 @@
                 if( parachuteCommand ) {
                     linkParams.push( `command=${parachuteCommand.replace("!", "")}` );
                 }
+                if( parachuteRefresh ) {
+                    linkParams.push( `cooldown=${parachuteRefresh}000` );
+                }
                 if( isChatEnabled && chatOAuth ) {
                     linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
@@ -1094,6 +1118,9 @@
                 if( plinkoVolume ) {
                     linkParams.push( `volume=${plinkoVolume}` );
                 }
+                // if( plinkoRefresh ) {
+                //     linkParams.push( `cooldown=${plinkoRefresh}000` );
+                // }
                 if( isChatEnabled && chatOAuth ) {
                     linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
