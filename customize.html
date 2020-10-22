@@ -500,24 +500,51 @@
                     `);
                 }
                 else if( twitchSubs[ item.subscription.toLowerCase() ] ) {
-                    $( "#catalog-list" ).append( `
-                        <div class="col-sm-3 col-6">
-                          <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
-                            <div class="card-content">
-                              <div class="card-body py-1">
-                                <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
-                                  <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
-                                </div>
-                                <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
-                                <h5 class="mb-0">${item.name}</h5>
-                                <div class="pt-1">
-                                    <button class="btn btn-sm btn-twitch" type="button" onclick="activateItem('${item.id}')"><i class="bx bxl-twitch font-medium-3"></i> <strong>Select</strong></button>
+                    if( account.styles &&
+                        account.styles[ item.type ] && account.styles[ item.type ].includes( item.id ) ) {
+                        // Already queued
+                        $( "#catalog-list" ).append( `
+                            <div class="col-sm-3 col-6">
+                              <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                                <div class="card-content">
+                                  <div class="card-body py-1">
+                                    <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
+                                      <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                    </div>
+                                    <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
+                                    <h5 class="mb-0">${item.name}</h5>
+                                    <div class="pt-1">
+                                        <button class="btn btn-sm btn-twitch" type="button" onclick="activateItem('${item.id}')"><i class="bx bxl-twitch font-medium-3"></i> <strong>Select</strong></button>
+                                        <button class="btn btn-sm btn-danger" type="button" onclick="queueItem('${item.id}', false)"><strong>- List</strong></button>
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </div>
-                    `);
+                        `);
+                    }
+                    else {
+                        // Not queued
+                        $( "#catalog-list" ).append( `
+                            <div class="col-sm-3 col-6">
+                              <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                                <div class="card-content">
+                                  <div class="card-body py-1">
+                                    <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
+                                      <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                    </div>
+                                    <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
+                                    <h5 class="mb-0">${item.name}</h5>
+                                    <div class="pt-1">
+                                        <button class="btn btn-sm btn-twitch" type="button" onclick="activateItem('${item.id}')"><i class="bx bxl-twitch font-medium-3"></i> <strong>Select</strong></button>
+                                        <button class="btn btn-sm btn-secondary" type="button" onclick="queueItem('${item.id}', true)"><strong>+ List</strong></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        `);
+                    }
                 }
                 else {
                     $( "#catalog-list" ).append( `
@@ -598,24 +625,49 @@
                         `);
                     }
                     else {
-                        $( "#catalog-list" ).append( `
-                            <div class="col-sm-3 col-6">
-                              <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
-                                <div class="card-content">
-                                  <div class="card-body py-1">
-                                    <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
-                                      <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
-                                    </div>
-                                    <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
-                                    <h5 class="mb-0">${item.name}</h5>
-                                    <div class="pt-1">
-                                        <button class="btn btn-sm btn-secondary" type="button" onclick="activateItem('${item.id}')"><strong>Select</strong></button>
+                        if( account.styles &&
+                            account.styles[ item.type ] && account.styles[ item.type ].includes( item.id ) ) {
+                            $( "#catalog-list" ).append( `
+                                <div class="col-sm-3 col-6">
+                                  <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                                    <div class="card-content">
+                                      <div class="card-body py-1">
+                                        <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
+                                          <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                        </div>
+                                        <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
+                                        <h5 class="mb-0">${item.name}</h5>
+                                        <div class="pt-1">
+                                            <button class="btn btn-sm btn-secondary" type="button" onclick="activateItem('${item.id}')"><strong>Select</strong></button>
+                                            <button class="btn btn-sm btn-danger" type="button" onclick="queueItem('${item.id}', false)"><strong>- List</strong></button>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            </div>
-                        `);
+                            `);
+                        }
+                        else {
+                            $( "#catalog-list" ).append( `
+                                <div class="col-sm-3 col-6">
+                                  <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                                    <div class="card-content">
+                                      <div class="card-body py-1">
+                                        <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
+                                          <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                        </div>
+                                        <div class="text-muted line-ellipsis"><small>${item.type}</small></div>
+                                        <h5 class="mb-0">${item.name}</h5>
+                                        <div class="pt-1">
+                                            <button class="btn btn-sm btn-secondary" type="button" onclick="activateItem('${item.id}')"><strong>Select</strong></button>
+                                            <button class="btn btn-sm btn-secondary" type="button" onclick="queueItem('${item.id}', true)"><strong>+ List</strong></button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                            `);
+                        }
                     }
 
                     $( `#item_${item.id}` ).hover( function() {
@@ -789,6 +841,42 @@
                     },
                     body: JSON.stringify( {
                         item: itemId
+                    })
+                } ).then( r => r.json() );
+                console.log( "activating!", result );
+                if( result.error ) {
+                    throw result.error;
+                }
+                // window.location.reload();
+
+                account = await fetch( `${plushApiUrl}/accounts`, {
+                    headers: {
+                        Twitch: ComfyTwitch.Token
+                    }
+                } ).then( r => r.json() );
+                $( ".user-coins" ).text( account.coins );
+                populateItemList();
+                // toastr.success( `Set to ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+            }
+            catch( err ) {
+                // console.log( err );
+                toastr.error( err, "Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+            }
+        }
+
+        async function queueItem( itemId, queue = true ) {
+            try {
+                console.log( itemId, queue );
+                let result = await fetch( `${plushApiUrl}/accounts/design/list`, {
+                    method: "POST",
+                    headers: {
+                        Twitch: ComfyTwitch.Token,
+                    },
+                    body: queue ? JSON.stringify( {
+                        item: itemId
+                    }) : JSON.stringify( {
+                        item: itemId,
+                        remove: true
                     })
                 } ).then( r => r.json() );
                 console.log( "activating!", result );
