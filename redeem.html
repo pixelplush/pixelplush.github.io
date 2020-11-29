@@ -440,7 +440,8 @@
             catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
             }).then( r => r.json() );
 
-            catalog = catalog.filter( x => !x.hidden );
+            // Don't filter in Redemption page
+            // catalog = catalog.filter( x => !x.hidden );
 
             // console.log( catalog );
 
@@ -474,6 +475,7 @@
                     Twitch: ComfyTwitch.Token,
                 }
             } ).then( r => r.json() );
+            console.log( result );
             if( result.error ) {
                 toastr.error( "There was an error: " + result.error, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
             }
