@@ -871,7 +871,7 @@
                     toastr.success( `You got a code for ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
                     Swal.fire( {
                         title: result.code,
-                        text: `Ready! Here is your gift code for ${items[ itemId ].name}!`,
+                        html: `Ready! Here is your gift code for ${items[ itemId ].name}!<br/><br/>You can also gift it via this redeem link: <a href="https://www.pixelplush.dev/redeem.html?code=${result.code}">https://www.pixelplush.dev/redeem.html?code=${result.code}<a/>`,
                         footer: `<strong>IMPORTANT:</strong> Save this code! It will disappear after you close this notification window.`,
                         backdrop: `
                             rgba(0,0,123,0.4)
@@ -985,11 +985,13 @@
                             clearInterval( transactionTimer );
                             if( result.status === "complete" ) {
                                 // TODO: thank you celebration!
+                                let previousGiftboxes = account.owned.filter( x => x.startsWith( "pet_giftbox" ) );
                                 account = await fetch( `${plushApiUrl}/accounts`, {
                                     headers: {
                                         Twitch: ComfyTwitch.Token
                                     }
                                 } ).then( r => r.json() );
+                                let newGiftboxes = account.owned.filter( x => x.startsWith( "pet_giftbox" ) && !previousGiftboxes.includes( x ) );
                                 $( ".user-coins" ).text( account.coins );
                                 toastr.success( `Plush Coins added!`, "Success", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                                 Swal.fire({
@@ -998,6 +1000,22 @@
                                     type: "success",
                                     confirmButtonClass: 'btn btn-primary',
                                     buttonsStyling: false,
+                                }).then( function() {
+                                    if( newGiftboxes.length > 0 ) {
+                                        setTimeout( () => {
+                                            Swal.fire({
+                                                title: "PixelPlush Giftbox Bonus!",
+                                                text: `You also unlocked Pet ${newGiftboxes.map( x => items[ x ].name).join( ", " )}!`,
+                                                imageUrl: `${getItemPreview( newGiftboxes[ 0 ], 0 )}`,
+                                                imageWidth: 48,
+                                                imageHeight: 48,
+                                                animation: false,
+                                                customClass: 'animated bounceIn',
+                                                confirmButtonClass: 'btn btn-primary',
+                                                buttonsStyling: false,
+                                            });
+                                        }, 500 );
+                                    }
                                 });
                             }
                             else {
