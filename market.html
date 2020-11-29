@@ -985,13 +985,13 @@
                             clearInterval( transactionTimer );
                             if( result.status === "complete" ) {
                                 // TODO: thank you celebration!
-                                let previousGiftboxes = account.owned.filter( x => x.startsWith( "pet_giftbox" ) );
+                                let previousGiftboxes = account.owned.filter( x => x.startsWith( "pet_gift" ) );
                                 account = await fetch( `${plushApiUrl}/accounts`, {
                                     headers: {
                                         Twitch: ComfyTwitch.Token
                                     }
                                 } ).then( r => r.json() );
-                                let newGiftboxes = account.owned.filter( x => x.startsWith( "pet_giftbox" ) && !previousGiftboxes.includes( x ) );
+                                let newGiftboxes = account.owned.filter( x => x.startsWith( "pet_gift" ) && !previousGiftboxes.includes( x ) );
                                 $( ".user-coins" ).text( account.coins );
                                 toastr.success( `Plush Coins added!`, "Success", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                                 Swal.fire({
