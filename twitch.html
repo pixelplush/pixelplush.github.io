@@ -340,27 +340,41 @@
                                                                             <input id="inputChannelName" type="text" class="form-control" placeholder="Your Twitch Channel Name" value="" required="" data-validation-required-message="This channel field is required">
                                                                         <div class="help-block"></div></div>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label>Choose Game</label>
-                                                                        <select class="form-control" id="inputGameTheme">
-                                                                          <option value="autumnadventure">Autumn Adventure</option>
-                                                                          <option value="fairyforest">Fairy Forest</option>
-                                                                          <option value="wanderingwizards">Wandering Wizards</option>
-                                                                          <option value="trickortreat">Trick or Treat (Halloween)</option>
-                                                                          <option value="santasecretservice">Santa's Secret Service (Christmas)</option>
-                                                                          <option value="frozenfrenzy">Frozen Frenzy (Winter)</option>
-                                                                          <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
-                                                                          <option value="easteregghunt">Easter Egg Hunt (Easter)</option>
-                                                                          <option value="springspree">Spring Spree (Spring)</option>
-                                                                          <option value="pixelparachuteday">Pixel Parachute (Day)</option>
-                                                                          <option value="pixelparachutenight">Pixel Parachute (Night)</option>
-                                                                          <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
-                                                                          <option value="pixelplinko">Pixel Plinko</option>
-                                                                          <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
-                                                                          <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
-                                                                          <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
-                                                                          <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
-                                                                        </select>
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <div class="form-group">
+                                                                                <label>Choose Game</label>
+                                                                                <select class="form-control" id="inputGameType">
+                                                                                  <option value="parachute">Parachute Drop</option>
+                                                                                  <option value="maze">Pixel Maze</option>
+                                                                                  <option value="plinko">Plinko Bounce</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <div class="form-group">
+                                                                                <label>Choose Theme</label>
+                                                                                <select class="form-control" id="inputGameTheme">
+                                                                                  <option value="autumnadventure">Autumn Adventure</option>
+                                                                                  <option value="fairyforest">Fairy Forest</option>
+                                                                                  <option value="wanderingwizards">Wandering Wizards</option>
+                                                                                  <option value="trickortreat">Trick or Treat (Halloween)</option>
+                                                                                  <option value="santasecretservice">Santa's Secret Service (Christmas)</option>
+                                                                                  <option value="frozenfrenzy">Frozen Frenzy (Winter)</option>
+                                                                                  <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
+                                                                                  <option value="easteregghunt">Easter Egg Hunt (Easter)</option>
+                                                                                  <option value="springspree">Spring Spree (Spring)</option>
+                                                                                  <option value="pixelparachuteday">Pixel Parachute (Day)</option>
+                                                                                  <option value="pixelparachutenight">Pixel Parachute (Night)</option>
+                                                                                  <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
+                                                                                  <option value="pixelplinko">Pixel Plinko</option>
+                                                                                  <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
+                                                                                  <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
+                                                                                  <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
+                                                                                  <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                     <!-- <div class="form-group"> -->
                                                                         <!-- <label>Twitch Chat OAuth</label> -->
@@ -711,26 +725,9 @@
         const gameTypes = [ "maze", "parachute", "plinko" ];
         const gameThemes = [ "autumnadventure", "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween" ];
         const themeSettings = {
-            "wanderingwizards": {
-                game: "maze",
-                page: "https://www.pixelplush.dev/maze/index.html",
-                preview: "/public/app-assets/images/games/wanderingwizards.gif",
-                bosses: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "trickortreat": {
-                game: "maze",
-                page: "https://www.pixelplush.dev/maze/ghost.html",
-                preview: "/public/app-assets/images/games/trickortreat.gif",
-                bosses: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
             "santasecretservice": {
                 game: "maze",
+                name: "Santa's Secret Service (Christmas)",
                 page: "https://www.pixelplush.dev/maze/christmas.html",
                 preview: "/public/app-assets/images/games/santasecretservice.gif",
                 bosses: 1,
@@ -740,6 +737,7 @@
             },
             "frozenfrenzy": {
                 game: "maze",
+                name: "Frozen Frenzy (Winter)",
                 page: "https://www.pixelplush.dev/maze/frozen.html",
                 preview: "/public/app-assets/images/games/frozenfrenzy.gif",
                 bosses: 1,
@@ -747,8 +745,30 @@
                 traps: 5,
                 messageFormat: "USERNAME finished with POINTS!",
             },
+            "autumnadventure": {
+                game: "maze",
+                name: "Autumn Adventure",
+                page: "https://www.pixelplush.dev/maze/autumn.html",
+                preview: "/public/app-assets/images/games/autumnadventure.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "trickortreat": {
+                game: "maze",
+                name: "Trick or Treat (Halloween)",
+                page: "https://www.pixelplush.dev/maze/ghost.html",
+                preview: "/public/app-assets/images/games/trickortreat.gif",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
             "cupidheartcollection": {
                 game: "maze",
+                name: "Cupid Heart Collection (Valentines)",
                 page: "https://www.pixelplush.dev/maze/cupid.html",
                 preview: "/public/app-assets/images/games/cupidheartcollection.gif",
                 bosses: 3,
@@ -760,6 +780,7 @@
             },
             "easteregghunt": {
                 game: "maze",
+                name: "Easter Egg Hunt (Easter)",
                 page: "https://www.pixelplush.dev/maze/easter.html",
                 preview: "/public/app-assets/images/games/easteregghunt.gif",
                 bosses: 0,
@@ -770,6 +791,7 @@
             },
             "springspree": {
                 game: "maze",
+                name: "Spring Spree (Spring)",
                 page: "https://www.pixelplush.dev/maze/spring.html",
                 preview: "/public/app-assets/images/games/springspree.gif",
                 bosses: 0,
@@ -780,6 +802,7 @@
             },
             "fairyforest": {
                 game: "maze",
+                name: "Fairy Forest",
                 page: "https://www.pixelplush.dev/maze/fairy.html",
                 preview: "/public/app-assets/images/games/fairyforest.gif",
                 bosses: 0,
@@ -788,69 +811,21 @@
                 traps: 5,
                 messageFormat: "USERNAME finished with POINTS!",
             },
-            "autumnadventure": {
+            "wanderingwizards": {
                 game: "maze",
-                page: "https://www.pixelplush.dev/maze/autumn.html",
-                preview: "/public/app-assets/images/games/autumnadventure.gif",
-                bosses: 0,
-                trapEffect: 1,
+                name: "Wandering Wizards",
+                page: "https://www.pixelplush.dev/maze/index.html",
+                preview: "/public/app-assets/images/games/wanderingwizards.gif",
+                bosses: 1,
                 prizes: 7,
                 traps: 5,
                 messageFormat: "USERNAME finished with POINTS!",
             },
-            "pixelparachuteday": {
+            "pixelparachutechristmas": {
                 game: "parachute",
-                page: "https://www.pixelplush.dev/parachute/",
-                preview: "/public/app-assets/images/games/pixelparachuteday.gif",
-                overlay: true,
-                clouds: true,
-                hideTilDrop: true,
-                messageFormat: "USERNAME landed for POINTS!",
-                command: "",
-            },
-            "pixelparachutenight": {
-                game: "parachute",
-                page: "https://www.pixelplush.dev/parachute/night.html",
-                preview: "/public/app-assets/images/games/pixelparachutenight.gif",
-                overlay: true,
-                clouds: true,
-                hideTilDrop: true,
-                messageFormat: "USERNAME landed for POINTS!",
-                command: "",
-            },
-            "pixelparachuteretro": {
-                game: "parachute",
-                page: "https://www.pixelplush.dev/parachute/retro.html",
-                preview: "/public/app-assets/images/games/pixelparachuteretro.gif",
-                overlay: true,
-                clouds: true,
-                hideTilDrop: true,
-                messageFormat: "USERNAME landed for POINTS!",
-                command: "",
-            },
-            "pixelplinko": {
-                game: "plinko",
-                page: "https://www.pixelplush.dev/plinko/",
-                preview: "/public/app-assets/images/games/pixelplinko.gif",
-                overlay: true,
-                clouds: true,
-                hideTilStart: true,
-                messageFormat: "USERNAME is a winner!",
-            },
-            "pixelparachutepoolred": {
-                game: "parachute",
-                page: "https://www.pixelplush.dev/parachute/pool_red.html",
-                preview: "/public/app-assets/images/games/pixelparachutepoolparty.gif",
-                overlay: true,
-                clouds: true,
-                hideTilDrop: true,
-                messageFormat: "USERNAME landed for POINTS!",
-                command: "",
-            },
-            "pixelparachutepoolblue": {
-                game: "parachute",
-                page: "https://www.pixelplush.dev/parachute/pool_blue.html",
-                preview: "/public/app-assets/images/games/pixelparachutepoolpartyblue.gif",
+                name: "Christmas",
+                page: "https://www.pixelplush.dev/parachute/christmas.html",
+                preview: "/public/app-assets/images/games/pixelparachutechristmas.gif",
                 overlay: true,
                 clouds: true,
                 hideTilDrop: true,
@@ -859,6 +834,7 @@
             },
             "pixelparachuteautumn": {
                 game: "parachute",
+                name: "Autumn",
                 page: "https://www.pixelplush.dev/parachute/autumn.html",
                 preview: "/public/app-assets/images/games/pixelparachuteautumn.gif",
                 overlay: true,
@@ -869,6 +845,7 @@
             },
             "pixelparachutehalloween": {
                 game: "parachute",
+                name: "Halloween",
                 page: "https://www.pixelplush.dev/parachute/halloween.html",
                 preview: "/public/app-assets/images/games/pixelparachutehalloween.gif",
                 overlay: true,
@@ -877,10 +854,76 @@
                 messageFormat: "USERNAME landed for POINTS!",
                 command: "",
             },
+            "pixelparachutepoolred": {
+                game: "parachute",
+                name: "Pool Party - Red",
+                page: "https://www.pixelplush.dev/parachute/pool_red.html",
+                preview: "/public/app-assets/images/games/pixelparachutepoolparty.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachutepoolblue": {
+                game: "parachute",
+                name: "Pool Party - Blue",
+                page: "https://www.pixelplush.dev/parachute/pool_blue.html",
+                preview: "/public/app-assets/images/games/pixelparachutepoolpartyblue.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachuteretro": {
+                game: "parachute",
+                name: "Retro",
+                page: "https://www.pixelplush.dev/parachute/retro.html",
+                preview: "/public/app-assets/images/games/pixelparachuteretro.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachuteday": {
+                game: "parachute",
+                name: "Day",
+                page: "https://www.pixelplush.dev/parachute/",
+                preview: "/public/app-assets/images/games/pixelparachuteday.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachutenight": {
+                game: "parachute",
+                name: "Night",
+                page: "https://www.pixelplush.dev/parachute/night.html",
+                preview: "/public/app-assets/images/games/pixelparachutenight.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelplinko": {
+                game: "plinko",
+                name: "Day",
+                page: "https://www.pixelplush.dev/plinko/",
+                preview: "/public/app-assets/images/games/pixelplinko.gif",
+                overlay: true,
+                clouds: true,
+                hideTilStart: true,
+                messageFormat: "USERNAME is a winner!",
+            },
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameTheme = params.get( "game" ) || "autumnadventure";
+        let gameType = params.get( "type" ) || "parachute";
+        let gameTheme = params.get( "game" ) || "pixelparachutechristmas";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
@@ -902,10 +945,34 @@
         let isPlinkoCloudsOn = true;
         let isPlinkoHideTilStart = false;
         let plinkoVolume = "25";
+        $( "#inputGameType" ).val( gameType );
+        $( "#inputGameType" ).on( "change", ( e ) => {
+            gameType =  $( "#inputGameType" ).val();
+            $( "#inputGameTheme" ).empty();
+            Object.keys( themeSettings )
+                .filter( theme => ( themeSettings[ theme ].game === gameType ) )
+                .forEach( ( theme, i ) => {
+                    $( "#inputGameTheme" ).append( $( "<option />" ).val( theme ).text( themeSettings[ theme ].name ) );
+                    if( i === 0 ) {
+                        gameTheme = theme;
+                    }
+                });
+            setThemeDefaults();
+            generateLink();
+        });
+        $( "#inputGameTheme" ).empty();
+        Object.keys( themeSettings )
+            .filter( theme => ( themeSettings[ theme ].game === gameType ) )
+            .forEach( ( theme, i ) => {
+                $( "#inputGameTheme" ).append( $( "<option />" ).val( theme ).text( themeSettings[ theme ].name ) );
+                if( i === 0 ) {
+                    gameTheme = theme;
+                }
+            });
         $( "#inputGameTheme" ).val( gameTheme );
         $( "#inputGameTheme" ).on( "change", ( e ) => {
             // console.log( e, "changed" );
-            gameTheme = gameThemes[ e.target.selectedIndex ];
+            gameTheme = $( "#inputGameTheme" ).val();
             setThemeDefaults();
             generateLink();
         });
