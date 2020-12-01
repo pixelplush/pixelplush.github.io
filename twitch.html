@@ -551,6 +551,12 @@
                                                                         <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
                                                                     </div>
                                                                 </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                      <label>Game Instructions</label>
+                                                                      <small id="instructionsText" class="form-text text-muted"></small>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </form>
                                                         <!-- users edit account form ends -->
@@ -920,6 +926,11 @@
                 messageFormat: "USERNAME is a winner!",
             },
         };
+        const gameInstructions = {
+            "maze": "Type !play into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type !end to finish the game and show the leaderboard or !reset to restart the maze.",
+            "parachute": "Type !drop or your custom command into your channel chat to drop your character and try to land on the center of the target! Mods can use !resetdrop to restart the game or !queuedrop and then !startdrop to allow everyone to join the game and drop at the same time. Score commands are !droptop !droprecent !drophigh !droplow.",
+            "plinko": "Type !plinko into your channel chat to drop your character to try and land in the center column. Mods can use !resetplinko to restart the game",
+        };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
         let gameType = params.get( "type" ) || "parachute";
@@ -959,6 +970,7 @@
                 });
             setThemeDefaults();
             generateLink();
+            $( "#instructionsText" ).text( gameInstructions[ gameType ] );
         });
         $( "#inputGameTheme" ).empty();
         Object.keys( themeSettings )
@@ -969,6 +981,7 @@
                     gameTheme = theme;
                 }
             });
+        $( "#instructionsText" ).text( gameInstructions[ gameType ] );
         $( "#inputGameTheme" ).val( gameTheme );
         $( "#inputGameTheme" ).on( "change", ( e ) => {
             // console.log( e, "changed" );
