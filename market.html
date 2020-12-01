@@ -314,7 +314,7 @@
                                                                                 <button class="btn btn-dark" type="button" id="buy-btn-10" onclick="showCoinBuy(10, 2)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 10</small><br/><strong>$2</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-6">
-                                                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="showCoinBuy(30, 6)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 30</small><br/><strong>$6</strong></button>
+                                                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="showCoinBuy(20, 4)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 20</small><br/><strong>$4</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-6">
                                                                                 <button class="btn btn-success" type="button" id="buy-btn-100" onclick="showCoinBuy(100, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x 100</small><br/><strong>$20</strong></button>
@@ -511,6 +511,12 @@
 
         function populateItemList() {
             $( "#catalog-list" ).empty();
+            $( "#catalog-list" ).append( `
+            <!-- December 2020 Sale -->
+            <div class="col-sm-6 col-12">
+                <img src="public/app-assets/images/logo/december_sale_banner.jpg" class="img-fluid"/>
+            </div>
+            `);
             // Handle adding subscription items
             catalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
                 let typeBG = "primary";
@@ -615,7 +621,7 @@
                                     <h5 class="mb-0">${item.name}</h5>
                                     <div class="pt-1">
                                         <button class="btn btn-sm btn-outline-secondary" type="button" disabled><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost * 2}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost}</span>` : item.cost )}</strong></button>
-                                        <button class="btn btn-sm btn-outline-secondary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong></strong></button>
+                                        <button class="btn btn-sm btn-outline-secondary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost * 2 / 2}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost / 2 )}</strong></button>
                                     </div>
                                   </div>
                                 </div>
@@ -637,7 +643,7 @@
                                 <h5 class="mb-0">${item.name}</h5>
                                 <div class="pt-1">
                                     <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost * 2}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost}</span>` : item.cost )}</strong></button>
-                                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong></strong></button>
+                                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost * 2 / 2}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost / 2 )}</strong></button>
                                 </div>
                               </div>
                             </div>
@@ -832,6 +838,7 @@
             try {
                 let result = await Swal.fire({
                     title: `Create a gift code for ${items[ itemId ].name}?`,
+                    text: `December 50% Off Gifting Sale! This will use ${Math.floor( items[ itemId ].cost / 2)} coins`,
                     // type: 'success',
                     imageUrl: `${getItemPreview( itemId, 0 )}`,
                     imageWidth: 48,
@@ -899,7 +906,7 @@
         function showCoinBuy( coins, amount ) {
             orderAmount = coins;
             $("#coin-buy-amount").text( coins );
-            $("#coin-buy-text").text( `${coins} Plush Coins! That will be $${amount}, please.` );
+            $("#coin-buy-text").text( `${coins} Plush Coins for $${amount}! Exciting!` );
             $("#coin-buy").modal();
         }
 
