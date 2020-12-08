@@ -430,6 +430,7 @@
                                                                                     <th>Results in Chat</th>
                                                                                     <th>Hide Instructions</th>
                                                                                     <th>Hide Timer</th>
+                                                                                    <th>Default Countdown (secs)</th>
                                                                                     <th>Chat Command</th>
                                                                                     <th>Refresh Timer (secs)</th>
                                                                                 </tr>
@@ -581,6 +582,11 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
+                                                                                            <input type="number" class="" id="inputHillRollDefaultCountdown" value="0" min="0" max="3600" step="10" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
                                                                                             <input type="text" class="form-control" id="inputHillRollCommand" value="" placeholder="Command (e.g. !hill)">
                                                                                         </div>
                                                                                     </td>
@@ -692,7 +698,12 @@
             max: 3600,
             step: 30,
         });
-        $( "#inputHilRollRefresh" ).TouchSpin({
+        $( "#inputHillRollDefaultCountdown" ).TouchSpin({
+            min: 0,
+            max: 600,
+            step: 10,
+        });
+        $( "#inputHillRollRefresh" ).TouchSpin({
             min: 60,
             max: 3600,
             step: 30,
@@ -1017,12 +1028,13 @@
                 hideTilRoll: false,
                 hideInstructions: false,
                 hideTime: false,
+                defaultCountdown: 0,
                 messageFormat: "USERNAME finished #RANK in TIME!",
                 command: "",
             }
         };
         const gameInstructions = {
-            "hillroll": "Type !hill or your custom command into your channel chat to join the race with your character and try to be first to the ground! Mods can use !starthill [time in sec] to change the countdown or !resethill to restart the game.",
+            "hillroll": "Type !hill or your custom command into your channel chat to roll your character down the hill! Mods can use !resethill to restart the game or !queuehill and then !starthill [time in sec] to start a race. A default countdown time will always queue up races.",
             "maze": "Type !play into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type !end to finish the game and show the leaderboard or !reset to restart the maze.",
             "parachute": "Type !drop or your custom command into your channel chat to drop your character and try to land on the center of the target! Mods can use !resetdrop to restart the game or !queuedrop and then !startdrop to allow everyone to join the game and drop at the same time. Score commands are !droptop !droprecent !drophigh !droplow.",
             "plinko": "Type !plinko into your channel chat to drop your character to try and land in the center column. Mods can use !resetplinko to restart the game",
@@ -1057,6 +1069,7 @@
         let isHillRollOverlay = true;
         let isHillRollCloudsOn = true;
         let isHillRollHideTilRoll = false;
+        let hillRollDefaultCountdown = "0";
         let hillRollVolume = "25";
         let hillRollRefresh = "90";
         let hillRollCommand = "";
@@ -1238,6 +1251,14 @@
             hideTimer = e.target.checked;
             generateLink();
         });
+        $( "#inputHillRollDefaultCountdown" ).on( "change", ( e ) => {
+            hillRollDefaultCountdown = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollDefaultCountdown" ).on( "input", ( e ) => {
+            hillRollDefaultCountdown = e.target.value;
+            generateLink();
+        });
         $( "#inputHillRollVolume" ).on( "change", ( e ) => {
             hillRollVolume = e.target.value;
             generateLink();
@@ -1393,6 +1414,9 @@
                 }
                 if( isHillRollHideTilRoll ) {
                     linkParams.push( "hideTilRoll=true" );
+                }
+                if( hillRollDefaultCountdown ) {
+                    linkParams.push( `defaultCountdown=${hillRollDefaultCountdown}` );
                 }
                 if( hillRollVolume ) {
                     linkParams.push( `volume=${hillRollVolume}` );
