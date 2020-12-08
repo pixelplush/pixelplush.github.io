@@ -345,6 +345,7 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Game</label>
                                                                                 <select class="form-control" id="inputGameType">
+                                                                                  <option value="hillroll">Hill Rolling Race</option>
                                                                                   <option value="parachute">Parachute Drop</option>
                                                                                   <option value="maze">Pixel Maze</option>
                                                                                   <option value="plinko">Plinko Bounce</option>
@@ -372,6 +373,7 @@
                                                                                   <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
                                                                                   <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
                                                                                   <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
+                                                                                  <option value="pixelhillrollchristmas">Hill Rolling Race (Christmas)</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -419,6 +421,17 @@
                                                                                     <th>Hide Until Start</th>
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Enable Chat Announcement</th>
+                                                                                </tr>
+                                                                                <tr class="hillroll-game d-none">
+                                                                                    <th>Background</th>
+                                                                                    <th>Clouds</th>
+                                                                                    <th>Hide Until Start</th>
+                                                                                    <th>Sound Volume</th>
+                                                                                    <th>Results in Chat</th>
+                                                                                    <th>Hide Instructions</th>
+                                                                                    <th>Hide Timer</th>
+                                                                                    <th>Chat Command</th>
+                                                                                    <th>Refresh Timer (secs)</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -530,6 +543,53 @@
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
+                                                                                <tr class="hillroll-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollOverlay"><label for="inputEnableHillRollOverlay"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollClouds" checked><label for="inputEnableHillRollClouds"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollHideTilRoll"><label for="inputEnableHillRollHideTilRoll"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputHillRollVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollChat" disabled><label for="inputEnableHillRollChat"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollInstructions" checked><label for="inputEnableHillRollInstructions"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollTimer" checked><label for="inputEnableHillRollTimer"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" id="inputHillRollCommand" value="" placeholder="Command (e.g. !hill)">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputHillRollRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -632,6 +692,11 @@
             max: 3600,
             step: 30,
         });
+        $( "#inputHilRollRefresh" ).TouchSpin({
+            min: 60,
+            max: 3600,
+            step: 30,
+        });
 
         ComfyTwitch.Check()
         .then( async result => {
@@ -664,6 +729,9 @@
                     $( "#inputEnableParachuteChat" ).prop( "disabled", false );
                     $( "#inputEnableParachuteDroplets" ).prop( "disabled", false );
                     $( "#inputEnablePlinkoChat" ).prop( "disabled", false );
+                    $( "#inputEnableHillRollChat" ).prop( "disabled", false );
+                    $( "#inputEnableHillRollInstructions" ).prop( "disabled", false );
+                    $( "#inputEnableHillRollTimer" ).prop( "disabled", false );
                     $( "#inputMessageFormatDisabled" ).hide();
                     $( "#inputChatOAuth" ).val( `oauth:${result.token}` );
                     channelName = result.login;
@@ -674,6 +742,9 @@
                         console.log( "Need More Permissions" );
                         $( ".additional-permissions" ).show();
                         $( "#inputEnableChat" ).prop( "disabled", true );
+                        $( "#inputEnableParachuteChat" ).prop( "disabled", true );
+                        $( "#inputEnablePlinkoChat" ).prop( "disabled", true );
+                        $( "#inputEnableHillRollChat" ).prop( "disabled", true );
                         $( "#inputMessageFormatDisabled" ).show();
                     }
 
@@ -729,8 +800,8 @@
             });
         });
 
-        const gameTypes = [ "maze", "parachute", "plinko" ];
-        const gameThemes = [ "autumnadventure", "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween", "pixelplinkochristmas" ];
+        const gameTypes = [ "hillroll", "maze", "parachute", "plinko" ];
+        const gameThemes = [ "autumnadventure", "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween", "pixelplinkochristmas", "pixelhillrollchristmas" ];
         const themeSettings = {
             "santasecretservice": {
                 game: "maze",
@@ -936,20 +1007,36 @@
                 hideTilStart: true,
                 messageFormat: "USERNAME is a winner!",
             },
+            "pixelhillrollchristmas": {
+                game: "hillroll",
+                name: "Christmas",
+                page: "https://www.pixelplush.dev/hillroll/christmas.html",
+                preview: "/public/app-assets/images/games/hillrollchristmas.gif",
+                overlay: false,
+                clouds: true,
+                hideTilRoll: false,
+                hideInstructions: false,
+                hideTime: false,
+                messageFormat: "USERNAME finished #RANK in TIME!",
+                command: "",
+            }
         };
         const gameInstructions = {
+            "hillroll": "Type !hill or your custom command into your channel chat to join the race with your character and try to be first to the ground! Mods can use !starthill [time in sec] to change the countdown or !resethill to restart the game.",
             "maze": "Type !play into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type !end to finish the game and show the leaderboard or !reset to restart the maze.",
             "parachute": "Type !drop or your custom command into your channel chat to drop your character and try to land on the center of the target! Mods can use !resetdrop to restart the game or !queuedrop and then !startdrop to allow everyone to join the game and drop at the same time. Score commands are !droptop !droprecent !drophigh !droplow.",
             "plinko": "Type !plinko into your channel chat to drop your character to try and land in the center column. Mods can use !resetplinko to restart the game",
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameType = params.get( "type" ) || "parachute";
-        let gameTheme = params.get( "game" ) || "pixelparachutechristmas";
+        let gameType = params.get( "type" ) || "hillroll";
+        let gameTheme = params.get( "game" ) || "pixelhillrollchristmas";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
         let isDropletsEnabled = true;
+        let hideInstructions = false;
+        let hideTimer = false;
         let chatOAuth = "";
         let messageFormat = "USERNAME finished with POINTS!";
         let bossEffect = bossEffects[ 0 ];
@@ -967,6 +1054,12 @@
         let isPlinkoCloudsOn = true;
         let isPlinkoHideTilStart = false;
         let plinkoVolume = "25";
+        let isHillRollOverlay = true;
+        let isHillRollCloudsOn = true;
+        let isHillRollHideTilRoll = false;
+        let hillRollVolume = "25";
+        let hillRollRefresh = "90";
+        let hillRollCommand = "";
         $( "#inputGameType" ).val( gameType );
         $( "#inputGameType" ).on( "change", ( e ) => {
             gameType =  $( "#inputGameType" ).val();
@@ -1125,6 +1218,54 @@
             isChatEnabled = e.target.checked;
             generateLink();
         });
+        $( "#inputEnableHillRollOverlay" ).on( "change", ( e ) => {
+            isHillRollOverlay = !e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollClouds" ).on( "change", ( e ) => {
+            isHillRollCloudsOn = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollHideTilRoll" ).on( "change", ( e ) => {
+            isHillRollHideTilRoll = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollInstructions" ).on( "change", ( e ) => {
+            hideInstructions = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollTimer" ).on( "change", ( e ) => {
+            hideTimer = e.target.checked;
+            generateLink();
+        });
+        $( "#inputHillRollVolume" ).on( "change", ( e ) => {
+            hillRollVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollVolume" ).on( "input", ( e ) => {
+            hillRollVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollRefresh" ).on( "change", ( e ) => {
+            hillRollRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollRefresh" ).on( "input", ( e ) => {
+            hillRollRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollCommand" ).on( "change", ( e ) => {
+            hillRollCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollCommand" ).on( "input", ( e ) => {
+            hillRollCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnableHillRollChat" ).on( "change", ( e ) => {
+            isChatEnabled = e.target.checked;
+            generateLink();
+        });
         setThemeDefaults();
         generateLink();
 
@@ -1166,6 +1307,15 @@
             $( "#inputEnablePlinkoClouds" ).prop( "checked", isPlinkoCloudsOn );
             $( "#inputEnablePlinkoHideTilStart" ).prop( "checked", isPlinkoOverlay );
             $( "#inputEnablePlinkoChat" ).prop( "checked", isChatEnabled );
+            isHillRollOverlay = themeSettings[ gameTheme ].overlay || false;
+            isHillRollCloudsOn = themeSettings[ gameTheme ].clouds || false;
+            isHillRollHideTilRoll = themeSettings[ gameTheme ].hideTilRoll || false;
+            $( "#inputEnableHillRollOverlay" ).prop( "checked", !isHillRollOverlay );
+            $( "#inputEnableHillRollClouds" ).prop( "checked", isHillRollCloudsOn );
+            $( "#inputEnableHillRollHideTilRoll" ).prop( "checked", isHillRollOverlay );
+            $( "#inputEnableHillRollChat" ).prop( "checked", isChatEnabled );
+            $( "#inputEnableHillRollInstructions" ).prop( "checked", hideInstructions );
+            $( "#inputEnableHillRollTimer" ).prop( "checked", hideTimer );
         }
 
         function generateLink() {
@@ -1232,6 +1382,36 @@
                 if( isChatEnabled && chatOAuth ) {
                     linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                break;
+            case "hillroll":
+                if( isHillRollOverlay ) {
+                    linkParams.push( "overlay=true" );
+                }
+                if( isHillRollCloudsOn ) {
+                    linkParams.push( "clouds=true" );
+                }
+                if( isHillRollHideTilRoll ) {
+                    linkParams.push( "hideTilRoll=true" );
+                }
+                if( hillRollVolume ) {
+                    linkParams.push( `volume=${hillRollVolume}` );
+                }
+                if( hillRollCommand ) {
+                    linkParams.push( `command=${hillRollCommand.replace("!", "")}` );
+                }
+                if( hillRollRefresh ) {
+                    linkParams.push( `cooldown=${hillRollRefresh}000` );
+                }
+                if( isChatEnabled && chatOAuth ) {
+                    linkParams.push( `oauth=${chatOAuth}` );
+                    linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                if( hideInstructions ) {
+                    linkParams.push( `hideInstructions=true` );
+                }
+                if( hideTimer ) {
+                    linkParams.push( `hideTime=true` );
                 }
                 break;
             }
