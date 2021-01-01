@@ -512,12 +512,6 @@
 
         function populateItemList() {
             $( "#catalog-list" ).empty();
-            $( "#catalog-list" ).append( `
-            <!-- December 2020 Sale -->
-            <div class="col-sm-6 col-12">
-                <img src="public/app-assets/images/logo/december_sale_banner.jpg" class="img-fluid"/>
-            </div>
-            `);
             // Handle adding subscription items
             catalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
                 let typeBG = "primary";
