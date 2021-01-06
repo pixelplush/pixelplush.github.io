@@ -373,6 +373,8 @@
                                                                                   <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
                                                                                   <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
                                                                                   <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
+                                                                                  <option value="pixelparachutechristmas">Pixel Parachute (Christmas)</option>
+                                                                                  <option value="pixelparachutewinter">Pixel Parachute (Winter)</option>
                                                                                   <option value="pixelhillrollchristmas">Hill Rolling Race (Christmas)</option>
                                                                                 </select>
                                                                             </div>
@@ -812,7 +814,7 @@
         });
 
         const gameTypes = [ "hillroll", "maze", "parachute", "plinko" ];
-        const gameThemes = [ "autumnadventure", "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween", "pixelplinkochristmas", "pixelhillrollchristmas" ];
+        const gameThemes = [ "autumnadventure", "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween", "pixelparachutechristmas", "pixelparachutewinter", "pixelplinkochristmas", "pixelhillrollchristmas" ];
         const themeSettings = {
             "santasecretservice": {
                 game: "maze",
@@ -909,6 +911,17 @@
                 prizes: 7,
                 traps: 5,
                 messageFormat: "USERNAME finished with POINTS!",
+            },
+            "pixelparachutewinter" : {
+                game: "parachute",
+                name: "Winter",
+                page: "https://www.pixelplush.dev/parachute/winter.html",
+                preview: "/public/app-assets/images/games/pixelparachutewinter.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
             },
             "pixelparachutechristmas": {
                 game: "parachute",
