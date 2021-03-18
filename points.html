@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6EJRXTPH3Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6EJRXTPH3Z');
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta name="keywords" content="pixelplush, game, development, studio, instafluff, maaya, art, web, dev, fun, relax, play">
+    <meta name="author" content="PixelPlush">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta name="twitter:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
+    <meta name="twitter:creator" content="PixelPlushGames">
+    <meta name="twitter:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
+    <meta property="og:url" content="https://www.pixelplush.dev">
+    <!-- <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff"> -->
+    <title>Games for Twitch - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/swiper.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/themes/semi-dark-layout.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/core/menu/menu-types/vertical-menu.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/pages/dashboard-ecommerce.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
+    <!-- END: Custom CSS-->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu-modern 1-column  navbar-sticky footer-static  fixed-footer" data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
+
+    <!-- BEGIN: Header-->
+    <div class="header-navbar-shadow"></div>
+    <nav class="header-navbar main-header-navbar navbar-expand-lg navbar navbar-with-menu fixed-top ">
+        <div class="navbar-wrapper">
+            <div class="navbar-container content">
+                <div class="navbar-collapse" id="navbar-mobile">
+                    <div class="mr-auto float-left bookmark-wrapper d-flex align-items-center">
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item mr-auto">
+                                <div class="navbar-brand">
+                                    <a href="index.html">
+                                        <img src="public/app-assets/images/logo/logo.png" height="27px" class="img-responsive"> <img src="public/app-assets/images/logo/text.png" height="27px" class="img-responsive">
+                                    </a>
+                                    <span class="font-small-3"><i class="bx bxs-heart pink mx-50 font-small-3"></i>By <a href="https://twitch.tv/maayainsane" target="_blank"><img src="public/app-assets/images/icon/maaya.gif" height="32px"> Maaya</a> &amp; <a href="https://twitch.tv/instafluff" target="_blank">Instafluff <img src="public/app-assets/images/icon/instafluff.gif" height="34px"></a></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <ul class="nav navbar-nav float-right d-flex align-items-center">
+                        <li class="nav-item d-lg-block not-logged-in">
+                            <div class="not-logged-in">
+                                <a id="login" href="login.html?redirect=twitch.html" class="btn btn-primary mr-25">Log In</a>
+                            </div>
+                        </li>
+                        <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
+                            <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                <li class="dropdown-menu-header">
+                                    <div class="dropdown-header px-1 py-75 d-flex justify-content-between"><span class="notification-title">7 new Notification</span><span class="text-bold-400 cursor-pointer">Mark all as read</span></div>
+                                </li>
+                                <li class="scrollable-container media-list"><a class="d-flex justify-content-between" href="javascript:void(0)">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar mr-1 m-0"><img src="../../../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="39" width="39"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">Congratulate Socrates Itumay</span> for work anniversaries</h6><small class="notification-text">Mar 15 12:32pm</small>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="d-flex justify-content-between read-notification cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar mr-1 m-0"><img src="../../../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">New Message</span> received</h6><small class="notification-text">You have 18 unread messages</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center py-0">
+                                            <div class="media-left pr-0"><img class="mr-1" src="../../../app-assets/images/icon/sketch-mac-icon.png" alt="avatar" height="39" width="39"></div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">Updates Available</span></h6><small class="notification-text">Sketch 50.2 is currently newly added</small>
+                                            </div>
+                                            <div class="media-right pl-0">
+                                                <div class="row border-left text-center">
+                                                    <div class="col-12 px-50 py-75 border-bottom">
+                                                        <h6 class="media-heading text-bold-500 mb-0">Update</h6>
+                                                    </div>
+                                                    <div class="col-12 px-50 py-75">
+                                                        <h6 class="media-heading mb-0">Close</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar bg-primary bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content text-primary font-medium-2">LD</span></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">New customer</span> is registered</h6><small class="notification-text">1 hrs ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cursor-pointer">
+                                        <div class="media d-flex align-items-center justify-content-between">
+                                            <div class="media-left pr-0">
+                                                <div class="media-body">
+                                                    <h6 class="media-heading">New Offers</h6>
+                                                </div>
+                                            </div>
+                                            <div class="media-right">
+                                                <div class="custom-control custom-switch">
+                                                    <input class="custom-control-input" type="checkbox" checked id="notificationSwtich">
+                                                    <label class="custom-control-label" for="notificationSwtich"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar bg-danger bg-lighten-5 mr-1 m-0 p-25"><span class="avatar-content"><i class="bx bxs-heart text-danger"></i></span></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">Application</span> has been approved</h6><small class="notification-text">6 hrs ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between read-notification cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar mr-1 m-0"><img src="../../../app-assets/images/portrait/small/avatar-s-4.jpg" alt="avatar" height="39" width="39"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">New file</span> has been uploaded</h6><small class="notification-text">4 hrs ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar bg-rgba-danger m-0 mr-1 p-25">
+                                                    <div class="avatar-content"><i class="bx bx-detail text-danger"></i></div>
+                                                </div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">Finance report</span> has been generated</h6><small class="notification-text">25 hrs ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between cursor-pointer">
+                                        <div class="media d-flex align-items-center border-0">
+                                            <div class="media-left pr-0">
+                                                <div class="avatar mr-1 m-0"><img src="../../../app-assets/images/portrait/small/avatar-s-16.jpg" alt="avatar" height="39" width="39"></div>
+                                            </div>
+                                            <div class="media-body">
+                                                <h6 class="media-heading"><span class="text-bold-500">New customer</span> comment recieved</h6><small class="notification-text">2 days ago</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="dropdown-menu-footer"><a class="dropdown-item p-50 text-primary justify-content-center" href="javascript:void(0)">Read all notifications</a></li>
+                            </ul>
+                        </li> -->
+                        <li class="dropdown dropdown-user nav-item logged-in">
+                            <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                                <div class="user-nav d-lg-flex d-none"><span class="user-name">Not Logged In</span><span class="user-status"><img class="pixelated" src="public/app-assets/images/icon/plush_coin.gif" height="18px" /> <strong><span class="user-coins"></span></strong></span> </div><span class="avatar"><img class="round account-image" src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" height="40" width="40"><span class="avatar-status-online"></span></span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right pb-0">
+                                <a class="dropdown-item" href="customize.html"><i class="bx bx-user mr-50"></i> My Dressing Room</a>
+                                <a class="dropdown-item" href="transactions.html"><i class="bx bx-check-square mr-50"></i> My Shopping History</a>
+                                <a class="dropdown-item" href="market.html"><i class="bx bx-cart mr-50"></i> Goodies Market</a>
+                                <a class="dropdown-item" href="https://pixelplush.dev/discord"><i class="bx bxl-discord mr-50"></i> PixelPlush Discord</a>
+                                <div class="dropdown-divider mb-0"></div><a class="dropdown-item logout" href="#"><i class="bx bx-power-off mr-50"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END: Header-->
+
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <section class="users-edit">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="row">
+                                <!-- left menu section -->
+                                <div class="col-md-3 mb-2 mb-md-0 pills-stacked">
+                                    <ul class="nav nav-pills flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="index.html">
+                                                <i class="bx bx-home"></i>
+                                                <span>PixelPlush Home</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center active" href="twitch.html">
+                                                <i class="bx bxl-twitch"></i>
+                                                <span>Games for Twitch</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="scores.html">
+                                                <i class="bx bx-list-ol"></i>
+                                                <span>Top Scores</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="market.html">
+                                                <img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                <span>Goodies Market</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="customize.html">
+                                                <i class="bx bx-user"></i>
+                                                <span>My Dressing Room</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="playground.html">
+                                                <i class="bx bx-sun"></i>
+                                                <span>Pet Playground</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="transactions.html">
+                                                <i class="bx bx-check-square"></i>
+                                                <span>My Shopping History</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="links.html">
+                                                <i class="bx bx-link"></i>
+                                                <span>Follow Us!</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="">
+                                                <span><strong>Currently Live:</strong></span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="">
+                                                <iframe id="featured-stream"
+                                                    src="https://player.twitch.tv/?channel=pixelplushgames&parent=www.pixelplush.dev"
+                                                    parent="pixelplush.dev"
+                                                    width="100%"
+                                                    frameborder="1"
+                                                    scrolling="no"
+                                                    muted="true"
+                                                    allowfullscreen="false">
+                                                </iframe>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!-- right content section -->
+                                <div class="col-md-9">
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="tab-content">
+                                                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                                        <!-- users edit media object start -->
+                                                        <div class="media mb-2">
+                                                            <a class="mr-2" href="#">
+                                                                <img src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" class="users-avatar-shadow rounded-circle account-image" height="64" width="64">
+                                                            </a>
+                                                            <div class="media-body">
+                                                                <h4 class="media-heading user-name">Not Logged In</h4>
+                                                                <div class="col-12 px-0 d-flex">
+                                                                    <!-- <a href="#" class="btn btn-sm btn-danger additional-permissions">Grant Additional Permissions</a> -->
+                                                                    <a id="login-twitch" href="#" class="btn btn-social btn-twitch btn-sm font-small-3 mr-md-1 mb-md-0 mb-1 additional-permissions">
+                                                                        <i class="bx bxl-twitch font-medium-3"></i><span class="pl-50 d-block text-center">Grant Twitch Permissions</span>
+                                                                    </a>
+                                                                    <a href="login.html?redirect=twitch.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
+                                                                    <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!-- users edit media object ends -->
+                                                        <!-- users edit account form start -->
+                                                        <form novalidate="">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <div class="controls">
+                                                                            <label>Twitch Channel Name</label>
+                                                                            <input id="inputChannelName" type="text" class="form-control" placeholder="Your Twitch Channel Name" value="" required="" data-validation-required-message="This channel field is required">
+                                                                        <div class="help-block"></div></div>
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-6">
+                                                                            <div class="form-group">
+                                                                                <label>Choose Game</label>
+                                                                                <select class="form-control" id="inputGameType">
+                                                                                  <option value="hillroll">Hill Rolling Race</option>
+                                                                                  <option value="parachute">Parachute Drop</option>
+                                                                                  <option value="maze">Pixel Maze</option>
+                                                                                  <option value="plinko">Plinko Bounce</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-6">
+                                                                            <div class="form-group">
+                                                                                <label>Choose Theme</label>
+                                                                                <select class="form-control" id="inputGameTheme">
+                                                                                  <option value="autumnadventure">Autumn Adventure</option>
+                                                                                  <option value="fairyforest">Fairy Forest</option>
+                                                                                  <option value="wanderingwizards">Wandering Wizards</option>
+                                                                                  <option value="trickortreat">Trick or Treat (Halloween)</option>
+                                                                                  <option value="santasecretservice">Santa's Secret Service (Christmas)</option>
+                                                                                  <option value="frozenfrenzy">Frozen Frenzy (Winter)</option>
+                                                                                  <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
+                                                                                  <option value="easteregghunt">Easter Egg Hunt (Easter)</option>
+                                                                                  <option value="springspree">Spring Spree (Spring)</option>
+                                                                                  <option value="pixelparachuteday">Pixel Parachute (Day)</option>
+                                                                                  <option value="pixelparachutenight">Pixel Parachute (Night)</option>
+                                                                                  <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
+                                                                                  <option value="pixelplinko">Pixel Plinko</option>
+                                                                                  <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
+                                                                                  <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
+                                                                                  <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
+                                                                                  <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
+                                                                                  <option value="pixelparachutechristmas">Pixel Parachute (Christmas)</option>
+                                                                                  <option value="pixelparachutewinter">Pixel Parachute (Winter)</option>
+                                                                                  <option value="pixelhillrollchristmas">Hill Rolling Race (Christmas)</option>
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <!-- <div class="form-group"> -->
+                                                                        <!-- <label>Twitch Chat OAuth</label> -->
+                                                                        <input type="hidden" class="form-control" id="inputChatOAuth" placeholder="Your Twitch Chat OAuth Token">
+                                                                        <!-- <small id="oauthHelp" class="form-text text-muted">Keep this safe! This token allows sending chat messages as you.<br/>Get a Twitch Chat OAuth Token at <a href="http://twitchapps.com/tmi/" target="_blank">http://twitchapps.com/tmi/</a></small> -->
+                                                                    <!-- </div> -->
+                                                                    <div class="form-group">
+                                                                        <label>Chat Announcement Message Format</label>
+                                                                        <input type="text" class="form-control" id="inputMessageFormat" value="USERNAME finished with POINTS!" placeholder="e.g. USERNAME finished with POINTS!" disabled>
+                                                                        <div id="inputMessageFormatDisabled" class="help-block">(Twitch Log In is needed to enable chat announcement)</div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6 text-center">
+                                                                    <img id="game-preview" src="" height="220" width="220" class="img-fluid" alt="Game Preview" />
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table mt-1">
+                                                                            <thead>
+                                                                                <tr class="maze-game d-none">
+                                                                                    <th>Enable Boss</th>
+                                                                                    <th>Boss Effect</th>
+                                                                                    <th>Boss Count</th>
+                                                                                    <th>Trap Effect</th>
+                                                                                    <th>Prize Count</th>
+                                                                                    <th>Trap Count</th>
+                                                                                    <th>Enable Chat Announcement</th>
+                                                                                </tr>
+                                                                                <tr class="parachute-game d-none">
+                                                                                    <th>Background</th>
+                                                                                    <th>Clouds</th>
+                                                                                    <th>Hide Until Drop</th>
+                                                                                    <th>Sound Volume</th>
+                                                                                    <th>Score in Chat</th>
+                                                                                    <th>Bit Cheers</th>
+                                                                                    <th>Chat Command</th>
+                                                                                    <th>Refresh Timer (secs)</th>
+                                                                                </tr>
+                                                                                <tr class="plinko-game d-none">
+                                                                                    <th>Background</th>
+                                                                                    <th>Clouds</th>
+                                                                                    <th>Hide Until Start</th>
+                                                                                    <th>Sound Volume</th>
+                                                                                    <th>Enable Chat Announcement</th>
+                                                                                </tr>
+                                                                                <tr class="hillroll-game d-none">
+                                                                                    <th>Background</th>
+                                                                                    <th>Clouds</th>
+                                                                                    <th>Hide Until Start</th>
+                                                                                    <th>Sound Volume</th>
+                                                                                    <th>Results in Chat</th>
+                                                                                    <th>Hide Instructions</th>
+                                                                                    <th>Hide Timer</th>
+                                                                                    <th>Default Countdown (secs)</th>
+                                                                                    <th>Chat Command</th>
+                                                                                    <th>Refresh Timer (secs)</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr class="maze-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableBoss" checked><label for="inputEnableBoss"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <select class="form-control" id="inputBossEffect">
+                                                                                          <option value="0">Steal Points</option>
+                                                                                          <option value="1">Return to Spawn</option>
+                                                                                        </select>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputBossCount" value="1" min="0" max="100" placeholder="Number of Bosses Spawned">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <select class="form-control" id="inputTrapEffect">
+                                                                                          <option value="0">Points Penalty</option>
+                                                                                          <option value="1">Trap Tunnels</option>
+                                                                                        </select>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputPrizeCount" value="7" min="1" max="214" placeholder="Number of Prizes Spawned">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputTrapCount" value="5" min="0" max="214" placeholder="Number of Trap Spawned">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableChat" disabled><label for="inputEnableChat"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="parachute-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteOverlay"><label for="inputEnableParachuteOverlay"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteClouds" checked><label for="inputEnableParachuteClouds"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteHideTilDrop" checked><label for="inputEnableParachuteHideTilDrop"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputParachuteVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteChat" disabled><label for="inputEnableParachuteChat"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteDroplets"><label for="inputEnableParachuteDroplets"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" id="inputParachuteCommand" value="" placeholder="Command (e.g. !drop)">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="plinko-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoOverlay"><label for="inputEnablePlinkoOverlay"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoClouds" checked><label for="inputEnablePlinkoClouds"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoHideTilStart" checked><label for="inputEnablePlinkoHideTilStart"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputPlinkoVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoChat" disabled><label for="inputEnablePlinkoChat"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="hillroll-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollOverlay"><label for="inputEnableHillRollOverlay"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollClouds" checked><label for="inputEnableHillRollClouds"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollHideTilRoll"><label for="inputEnableHillRollHideTilRoll"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputHillRollVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollChat" disabled><label for="inputEnableHillRollChat"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollInstructions" checked><label for="inputEnableHillRollInstructions"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollTimer" checked><label for="inputEnableHillRollTimer"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputHillRollDefaultCountdown" value="0" min="0" max="3600" step="10" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" id="inputHillRollCommand" value="" placeholder="Command (e.g. !hill)">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputHillRollRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                      <label for="outputOverlayLink">Overlay Link</label>
+                                                                      <div class="input-group">
+                                                                        <input type="text" class="form-control" id="outputOverlayLink" readonly>
+                                                                        <div class="input-group-append">
+                                                                          <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputOverlayLink">Click to Copy</button>
+                                                                        </div>
+                                                                      </div>
+                                                                      <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                        <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                      <label>Game Instructions</label>
+                                                                      <small id="instructionsText" class="form-text text-muted"></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                        <!-- users edit account form ends -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+    </div>
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer class="footer footer-static footer-light">
+        <!-- <li class="nav-item d-none d-lg-block"></li> -->
+        <p class="clearfix mb-0"><span class="float-left d-inline-block"><i class="bx bxl-discord"></i> Join our Discord and hang out with us!<a href="https://pixelplush.dev/discord" target="_blank"><u>https://pixelplush.dev/discord</u></a></span>
+          <span class="float-right d-inline-block"><a href="terms.html">TERMS OF USE</a> | <a href="terms.html">PRIVACY</a> | <script>document.write(new Date().getFullYear());</script> &copy; PIXELPLUSH&trade;</span>
+            <button class="btn btn-primary btn-icon scroll-top" type="button"><i class="bx bx-up-arrow-alt"></i></button>
+        </p>
+    </footer>
+    <!-- END: Footer-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="public/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="public/app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="public/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
+    <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="public/app-assets/js/scripts/configs/vertical-menu-light.js"></script>
+    <script src="public/app-assets/js/core/app-menu.js"></script>
+    <script src="public/app-assets/js/core/app.js"></script>
+    <script src="public/app-assets/js/scripts/components.js"></script>
+    <script src="public/app-assets/js/scripts/footer.js"></script>
+    <!-- END: Theme JS-->
+
+    <script src="public/app-assets/js/scripts/forms/number-input.js"></script>
+
+    <script src="public/comfytwitch.min.js"></script>
+    <script>
+        const params = new URLSearchParams( location.search );
+        const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
+        const baseUrl = window.location.origin;
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+        let twitch = {};
+        let account = {};
+
+        $( ".not-logged-in" ).show();
+        $( ".logged-in" ).hide();
+        $( ".additional-permissions" ).hide();
+
+        $( "#inputParachuteRefresh" ).TouchSpin({
+            min: 60,
+            max: 3600,
+            step: 30,
+        });
+        $( "#inputHillRollDefaultCountdown" ).TouchSpin({
+            min: 0,
+            max: 600,
+            step: 10,
+        });
+        $( "#inputHillRollRefresh" ).TouchSpin({
+            min: 60,
+            max: 3600,
+            step: 30,
+        });
+
+        ComfyTwitch.Check()
+        .then( async result => {
+            console.log( result );
+            if( result ) {
+                try {
+                    account = await fetch( `${plushApiUrl}/accounts`, {
+                        headers: {
+                            Twitch: result.token
+                        }
+                    } ).then( r => r.json() );
+
+                    if( account.error ) {
+                        throw "Login Error";
+                    }
+
+                    $( ".not-logged-in" ).hide();
+                    $( ".logged-in" ).show();
+
+                    $( ".account-image" ).attr( "src", account.profileImage );
+                    $( ".user-name" ).text( account.displayName || account.username );
+                    $( ".user-coins" ).text( account.coins );
+
+                    $( "#inputChannelName" ).val( result.login );
+                    $( "#inputChannelName" ).prop( "readonly", true );
+                    $( "#inputMessageFormat" ).prop( "disabled", false );
+                    $( "#inputEnableChat" ).prop( "disabled", false );
+                    $( "#inputEnableParachuteChat" ).prop( "disabled", false );
+                    $( "#inputEnableParachuteDroplets" ).prop( "disabled", false );
+                    $( "#inputEnablePlinkoChat" ).prop( "disabled", false );
+                    $( "#inputEnableHillRollChat" ).prop( "disabled", false );
+                    $( "#inputEnableHillRollInstructions" ).prop( "disabled", false );
+                    $( "#inputEnableHillRollTimer" ).prop( "disabled", false );
+                    $( "#inputMessageFormatDisabled" ).hide();
+                    $( "#inputChatOAuth" ).val( `oauth:${result.token}` );
+                    channelName = result.login;
+                    chatOAuth = `oauth:${result.token}`;
+                    generateLink();
+
+                    if( ![ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ].every( v => ComfyTwitch.Scopes.includes( v ) ) ) {
+                        console.log( "Need More Permissions" );
+                        $( ".additional-permissions" ).show();
+                        $( "#inputEnableChat" ).prop( "disabled", true );
+                        $( "#inputEnableParachuteChat" ).prop( "disabled", true );
+                        $( "#inputEnablePlinkoChat" ).prop( "disabled", true );
+                        $( "#inputEnableHillRollChat" ).prop( "disabled", true );
+                        $( "#inputMessageFormatDisabled" ).show();
+                    }
+
+                    $( ".logout" ).on( "click", function() {
+                        ComfyTwitch.Logout();
+                        window.location.reload();
+                    });
+
+                    let currentChannel = "";
+                    let featureStream = async () => {
+                        let livestreams = await fetch( "https://api.pixelplush.dev/v1/analytics/sessions/live/short" )
+                        .then( r => r.json() );
+                        let nextChannel = "pixelplushgames";
+                        if( livestreams.length > 0 ) {
+                            // Set Twitch embed channel
+                            if( livestreams.includes( "maayainsane" ) ) {
+                                nextChannel = "maayainsane";
+                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=maayainsane&parent=www.pixelplush.dev" );
+                            }
+                            else if( livestreams.includes( "instafluff" ) ) {
+                                nextChannel = "instafluff";
+                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=instafluff&parent=www.pixelplush.dev" );
+                            }
+                            else {
+                                nextChannel = livestreams[ Math.floor( livestreams.length * Math.random() ) ];
+                            }
+                        }
+                        else {
+                            nextChannel = "pixelplushgames";
+                        }
+                        if( nextChannel != currentChannel ) {
+                            currentChannel = nextChannel;
+                            $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${currentChannel}&parent=www.pixelplush.dev` );
+                        }
+                    };
+                    setInterval( featureStream, 60000 * 3 );
+                    featureStream();
+                }
+                catch( error ) {
+                    // TODO: Auth Failed
+                    console.log( "Auth Validate Failed", error );
+                }
+            }
+            else {
+                $( ".not-logged-in" ).show();
+                $( ".logged-in" ).hide();
+            }
+
+            $( ".additional-permissions" ).on( "click", function() {
+                ComfyTwitch.Logout();
+                localStorage.setItem( "redirectPage", window.location.href );
+                ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ] );
+            });
+        });
+
+        const gameTypes = [ "hillroll", "maze", "parachute", "plinko" ];
+        const gameThemes = [ "autumnadventure", "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween", "pixelparachutechristmas", "pixelparachutewinter", "pixelplinkochristmas", "pixelhillrollchristmas" ];
+        const themeSettings = {
+            "santasecretservice": {
+                game: "maze",
+                name: "Santa's Secret Service (Christmas)",
+                page: "https://www.pixelplush.dev/maze/christmas.html",
+                preview: "/public/app-assets/images/games/santasecretservice.gif",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "frozenfrenzy": {
+                game: "maze",
+                name: "Frozen Frenzy (Winter)",
+                page: "https://www.pixelplush.dev/maze/frozen.html",
+                preview: "/public/app-assets/images/games/frozenfrenzy.gif",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "autumnadventure": {
+                game: "maze",
+                name: "Autumn Adventure",
+                page: "https://www.pixelplush.dev/maze/autumn.html",
+                preview: "/public/app-assets/images/games/autumnadventure.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "trickortreat": {
+                game: "maze",
+                name: "Trick or Treat (Halloween)",
+                page: "https://www.pixelplush.dev/maze/ghost.html",
+                preview: "/public/app-assets/images/games/trickortreat.gif",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "cupidheartcollection": {
+                game: "maze",
+                name: "Cupid Heart Collection (Valentines)",
+                page: "https://www.pixelplush.dev/maze/cupid.html",
+                preview: "/public/app-assets/images/games/cupidheartcollection.gif",
+                bosses: 3,
+                effect: 1,
+                prizes: 220 - 6,
+                traps: 0,
+                lockItemCount: true,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "easteregghunt": {
+                game: "maze",
+                name: "Easter Egg Hunt (Easter)",
+                page: "https://www.pixelplush.dev/maze/easter.html",
+                preview: "/public/app-assets/images/games/easteregghunt.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "springspree": {
+                game: "maze",
+                name: "Spring Spree (Spring)",
+                page: "https://www.pixelplush.dev/maze/spring.html",
+                preview: "/public/app-assets/images/games/springspree.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "fairyforest": {
+                game: "maze",
+                name: "Fairy Forest",
+                page: "https://www.pixelplush.dev/maze/fairy.html",
+                preview: "/public/app-assets/images/games/fairyforest.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "wanderingwizards": {
+                game: "maze",
+                name: "Wandering Wizards",
+                page: "https://www.pixelplush.dev/maze/index.html",
+                preview: "/public/app-assets/images/games/wanderingwizards.gif",
+                bosses: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
+            "pixelparachutewinter" : {
+                game: "parachute",
+                name: "Winter",
+                page: "https://www.pixelplush.dev/parachute/winter.html",
+                preview: "/public/app-assets/images/games/pixelparachutewinter.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachutechristmas": {
+                game: "parachute",
+                name: "Christmas",
+                page: "https://www.pixelplush.dev/parachute/christmas.html",
+                preview: "/public/app-assets/images/games/pixelparachutechristmas.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachuteautumn": {
+                game: "parachute",
+                name: "Autumn",
+                page: "https://www.pixelplush.dev/parachute/autumn.html",
+                preview: "/public/app-assets/images/games/pixelparachuteautumn.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachutehalloween": {
+                game: "parachute",
+                name: "Halloween",
+                page: "https://www.pixelplush.dev/parachute/halloween.html",
+                preview: "/public/app-assets/images/games/pixelparachutehalloween.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachutepoolred": {
+                game: "parachute",
+                name: "Pool Party - Red",
+                page: "https://www.pixelplush.dev/parachute/pool_red.html",
+                preview: "/public/app-assets/images/games/pixelparachutepoolparty.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachutepoolblue": {
+                game: "parachute",
+                name: "Pool Party - Blue",
+                page: "https://www.pixelplush.dev/parachute/pool_blue.html",
+                preview: "/public/app-assets/images/games/pixelparachutepoolpartyblue.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachuteretro": {
+                game: "parachute",
+                name: "Retro",
+                page: "https://www.pixelplush.dev/parachute/retro.html",
+                preview: "/public/app-assets/images/games/pixelparachuteretro.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachuteday": {
+                game: "parachute",
+                name: "Day",
+                page: "https://www.pixelplush.dev/parachute/",
+                preview: "/public/app-assets/images/games/pixelparachuteday.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachutenight": {
+                game: "parachute",
+                name: "Night",
+                page: "https://www.pixelplush.dev/parachute/night.html",
+                preview: "/public/app-assets/images/games/pixelparachutenight.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelplinkochristmas": {
+                game: "plinko",
+                name: "Christmas",
+                page: "https://www.pixelplush.dev/plinko/christmas.html",
+                preview: "/public/app-assets/images/games/pixelplinkochristmas.gif",
+                overlay: true,
+                clouds: true,
+                hideTilStart: true,
+                messageFormat: "USERNAME is a winner!",
+            },
+            "pixelplinko": {
+                game: "plinko",
+                name: "Day",
+                page: "https://www.pixelplush.dev/plinko/",
+                preview: "/public/app-assets/images/games/pixelplinko.gif",
+                overlay: true,
+                clouds: true,
+                hideTilStart: true,
+                messageFormat: "USERNAME is a winner!",
+            },
+            "pixelhillrollchristmas": {
+                game: "hillroll",
+                name: "Christmas",
+                page: "https://www.pixelplush.dev/hillroll/christmas.html",
+                preview: "/public/app-assets/images/games/hillrollchristmas.gif",
+                overlay: false,
+                clouds: true,
+                hideTilRoll: false,
+                hideInstructions: false,
+                hideTime: false,
+                defaultCountdown: 0,
+                messageFormat: "USERNAME finished RANK in TIME!",
+                command: "",
+            }
+        };
+        const gameInstructions = {
+            "hillroll": "Type !hill or your custom command into your channel chat to roll your character down the hill! Mods can use !resethill to restart the game or !queuehill and then !starthill [time in sec] to start a race. A default countdown time will always queue up races.",
+            "maze": "Type !play into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type !end to finish the game and show the leaderboard or !reset to restart the maze.",
+            "parachute": "Type !drop or your custom command into your channel chat to drop your character and try to land on the center of the target! Mods can use !resetdrop to restart the game or !queuedrop and then !startdrop to allow everyone to join the game and drop at the same time. Score commands are !droptop !droprecent !drophigh !droplow.",
+            "plinko": "Type !plinko into your channel chat to drop your character to try and land in the center column. Mods can use !resetplinko to restart the game",
+        };
+        const bossEffects = [ "steal", "base" ];
+        const trapEffects = [ "points", "tunnel" ];
+        let gameType = params.get( "type" ) || "hillroll";
+        let gameTheme = params.get( "game" ) || "pixelhillrollchristmas";
+        let channelName = "";
+        let isBossEnabled = true;
+        let isChatEnabled = false;
+        let isDropletsEnabled = true;
+        let hideInstructions = false;
+        let hideTimer = false;
+        let chatOAuth = "";
+        let messageFormat = "USERNAME finished with POINTS!";
+        let bossEffect = bossEffects[ 0 ];
+        let trapEffect = trapEffects[ 0 ];
+        let bossCount = "1";
+        let prizeCount = "7";
+        let trapCount = "5";
+        let isParachuteOverlay = true;
+        let isParachuteCloudsOn = true;
+        let isParachuteHideTilDrop = false;
+        let parachuteVolume = "25";
+        let parachuteRefresh = "90";
+        let parachuteCommand = "";
+        let isPlinkoOverlay = true;
+        let isPlinkoCloudsOn = true;
+        let isPlinkoHideTilStart = false;
+        let plinkoVolume = "25";
+        let isHillRollOverlay = true;
+        let isHillRollCloudsOn = true;
+        let isHillRollHideTilRoll = false;
+        let hillRollDefaultCountdown = "0";
+        let hillRollVolume = "25";
+        let hillRollRefresh = "90";
+        let hillRollCommand = "";
+        $( "#inputGameType" ).val( gameType );
+        $( "#inputGameType" ).on( "change", ( e ) => {
+            gameType =  $( "#inputGameType" ).val();
+            $( "#inputGameTheme" ).empty();
+            Object.keys( themeSettings )
+                .filter( theme => ( themeSettings[ theme ].game === gameType ) )
+                .forEach( ( theme, i ) => {
+                    $( "#inputGameTheme" ).append( $( "<option />" ).val( theme ).text( themeSettings[ theme ].name ) );
+                    if( i === 0 ) {
+                        gameTheme = theme;
+                    }
+                });
+            setThemeDefaults();
+            generateLink();
+            $( "#instructionsText" ).text( gameInstructions[ gameType ] );
+        });
+        $( "#inputGameTheme" ).empty();
+        Object.keys( themeSettings )
+            .filter( theme => ( themeSettings[ theme ].game === gameType ) )
+            .forEach( ( theme, i ) => {
+                $( "#inputGameTheme" ).append( $( "<option />" ).val( theme ).text( themeSettings[ theme ].name ) );
+                if( i === 0 ) {
+                    gameTheme = theme;
+                }
+            });
+        $( "#instructionsText" ).text( gameInstructions[ gameType ] );
+        $( "#inputGameTheme" ).val( gameTheme );
+        $( "#inputGameTheme" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            gameTheme = $( "#inputGameTheme" ).val();
+            setThemeDefaults();
+            generateLink();
+        });
+        $( "#inputEnableBoss" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            isBossEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputBossEffect" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            bossEffect = bossEffects[ e.target.selectedIndex ];
+            generateLink();
+        });
+        $( "#inputTrapEffect" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            trapEffect = trapEffects[ e.target.selectedIndex ];
+            generateLink();
+        });
+        $( "#inputEnableChat" ).on( "change", ( e ) => {
+            isChatEnabled = e.target.checked;
+            generateLink();
+        })
+        $( "#inputChannelName" ).on( "input", ( e ) => {
+            // console.log( e, "input" );
+            channelName = e.target.value;
+            generateLink();
+        });
+        $( "#inputChatOAuth" ).on( "input", ( e ) => {
+            // console.log( e, "input" );
+            chatOAuth = e.target.value;
+            generateLink();
+        });
+        $( "#inputMessageFormat" ).on( "input", ( e ) => {
+            messageFormat = e.target.value;
+            generateLink();
+        });
+        $( "#inputBossCount" ).on( "change", ( e ) => {
+            bossCount = e.target.value;
+            generateLink();
+        });
+        $( "#inputBossCount" ).on( "input", ( e ) => {
+            bossCount = e.target.value;
+            generateLink();
+        });
+        $( "#inputPrizeCount" ).on( "change", ( e ) => {
+            prizeCount = e.target.value;
+            generateLink();
+        });
+        $( "#inputPrizeCount" ).on( "input", ( e ) => {
+            prizeCount = e.target.value;
+            generateLink();
+        });
+        $( "#inputTrapCount" ).on( "change", ( e ) => {
+            trapCount = e.target.value;
+            generateLink();
+        });
+        $( "#inputTrapCount" ).on( "input", ( e ) => {
+            trapCount = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnableParachuteOverlay" ).on( "change", ( e ) => {
+            isParachuteOverlay = !e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableParachuteClouds" ).on( "change", ( e ) => {
+            isParachuteCloudsOn = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableParachuteHideTilDrop" ).on( "change", ( e ) => {
+            isParachuteHideTilDrop = e.target.checked;
+            generateLink();
+        });
+        $( "#inputParachuteVolume" ).on( "change", ( e ) => {
+            parachuteVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteVolume" ).on( "input", ( e ) => {
+            parachuteVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteRefresh" ).on( "change", ( e ) => {
+            parachuteRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteRefresh" ).on( "input", ( e ) => {
+            parachuteRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCommand" ).on( "change", ( e ) => {
+            parachuteCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCommand" ).on( "input", ( e ) => {
+            parachuteCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnableParachuteChat" ).on( "change", ( e ) => {
+            isChatEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableParachuteDroplets" ).on( "change", ( e ) => {
+            isDropletsEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoOverlay" ).on( "change", ( e ) => {
+            isPlinkoOverlay = !e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoClouds" ).on( "change", ( e ) => {
+            isPlinkoCloudsOn = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoHideTilStart" ).on( "change", ( e ) => {
+            isPlinkoHideTilStart = e.target.checked;
+            generateLink();
+        });
+        $( "#inputPlinkoVolume" ).on( "change", ( e ) => {
+            plinkoVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoVolume" ).on( "input", ( e ) => {
+            plinkoVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoChat" ).on( "change", ( e ) => {
+            isChatEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollOverlay" ).on( "change", ( e ) => {
+            isHillRollOverlay = !e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollClouds" ).on( "change", ( e ) => {
+            isHillRollCloudsOn = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollHideTilRoll" ).on( "change", ( e ) => {
+            isHillRollHideTilRoll = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollInstructions" ).on( "change", ( e ) => {
+            hideInstructions = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableHillRollTimer" ).on( "change", ( e ) => {
+            hideTimer = e.target.checked;
+            generateLink();
+        });
+        $( "#inputHillRollDefaultCountdown" ).on( "change", ( e ) => {
+            hillRollDefaultCountdown = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollDefaultCountdown" ).on( "input", ( e ) => {
+            hillRollDefaultCountdown = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollVolume" ).on( "change", ( e ) => {
+            hillRollVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollVolume" ).on( "input", ( e ) => {
+            hillRollVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollRefresh" ).on( "change", ( e ) => {
+            hillRollRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollRefresh" ).on( "input", ( e ) => {
+            hillRollRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollCommand" ).on( "change", ( e ) => {
+            hillRollCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputHillRollCommand" ).on( "input", ( e ) => {
+            hillRollCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnableHillRollChat" ).on( "change", ( e ) => {
+            isChatEnabled = e.target.checked;
+            generateLink();
+        });
+        setThemeDefaults();
+        generateLink();
+
+        $( document ).ready(function() {
+            var clipboard = new ClipboardJS('.clipboard');
+        });
+
+        function setThemeDefaults() {
+            gameTypes.forEach( g => $( `.${g}-game` ).addClass( "d-none" ) );
+            $( `.${ themeSettings[ gameTheme ].game }-game` ).removeClass( "d-none" );
+            $( "#game-preview" ).attr( "src", themeSettings[ gameTheme ].preview );
+            isBossEnabled = themeSettings[ gameTheme ].bosses > 0;
+            $( "#inputEnableBoss" ).prop( "checked", themeSettings[ gameTheme ].bosses > 0 ? true : false );
+            bossEffect = bossEffects[ themeSettings[ gameTheme ].effect || 0 ];
+            bossCount = themeSettings[ gameTheme ].bosses;
+            prizeCount = themeSettings[ gameTheme ].prizes;
+            trapCount = themeSettings[ gameTheme ].traps;
+            $( "#inputMessageFormat" ).val( themeSettings[ gameTheme ].messageFormat );
+            messageFormat = themeSettings[ gameTheme ].messageFormat;
+            $( "#inputBossEffect" ).val( themeSettings[ gameTheme ].effect || 0 );
+            $( "#inputTrapEffect" ).val( themeSettings[ gameTheme ].trapEffect || 0 );
+            $( "#inputBossCount" ).val( bossCount );
+            $( "#inputPrizeCount" ).val( prizeCount );
+            $( "#inputTrapCount" ).val( trapCount );
+            $( "#inputPrizeCount" ).prop( "disabled", themeSettings[ gameTheme ].lockItemCount ? true : false );
+            $( "#inputTrapCount" ).prop( "disabled", themeSettings[ gameTheme ].lockItemCount ? true : false );
+            isParachuteOverlay = themeSettings[ gameTheme ].overlay || false;
+            isParachuteCloudsOn = themeSettings[ gameTheme ].clouds || false;
+            isParachuteHideTilDrop = themeSettings[ gameTheme ].hideTilDrop || false;
+            $( "#inputEnableParachuteOverlay" ).prop( "checked", !isParachuteOverlay );
+            $( "#inputEnableParachuteClouds" ).prop( "checked", isParachuteCloudsOn );
+            $( "#inputEnableParachuteHideTilDrop" ).prop( "checked", isParachuteOverlay );
+            $( "#inputEnableParachuteChat" ).prop( "checked", isChatEnabled );
+            $( "#inputEnableParachuteDroplets" ).prop( "checked", isDropletsEnabled );
+            isPlinkoOverlay = themeSettings[ gameTheme ].overlay || false;
+            isPlinkoCloudsOn = themeSettings[ gameTheme ].clouds || false;
+            isPlinkoHideTilStart = themeSettings[ gameTheme ].hideTilStart || false;
+            $( "#inputEnablePlinkoOverlay" ).prop( "checked", !isPlinkoOverlay );
+            $( "#inputEnablePlinkoClouds" ).prop( "checked", isPlinkoCloudsOn );
+            $( "#inputEnablePlinkoHideTilStart" ).prop( "checked", isPlinkoOverlay );
+            $( "#inputEnablePlinkoChat" ).prop( "checked", isChatEnabled );
+            isHillRollOverlay = themeSettings[ gameTheme ].overlay || false;
+            isHillRollCloudsOn = themeSettings[ gameTheme ].clouds || false;
+            isHillRollHideTilRoll = themeSettings[ gameTheme ].hideTilRoll || false;
+            $( "#inputEnableHillRollOverlay" ).prop( "checked", !isHillRollOverlay );
+            $( "#inputEnableHillRollClouds" ).prop( "checked", isHillRollCloudsOn );
+            $( "#inputEnableHillRollHideTilRoll" ).prop( "checked", isHillRollOverlay );
+            $( "#inputEnableHillRollChat" ).prop( "checked", isChatEnabled );
+            $( "#inputEnableHillRollInstructions" ).prop( "checked", hideInstructions );
+            $( "#inputEnableHillRollTimer" ).prop( "checked", hideTimer );
+        }
+
+        function generateLink() {
+            let baseLink = `${themeSettings[ gameTheme ].page}?`;
+            let linkParams = [];
+            linkParams.push( `channel=${channelName}` );
+            switch( themeSettings[ gameTheme ].game ) {
+            case "maze":
+                if( !isBossEnabled ) {
+                    linkParams.push( "noBoss=true" );
+                }
+                if( isChatEnabled && chatOAuth ) {
+                    linkParams.push( `oauth=${chatOAuth}` );
+                    linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                linkParams.push( `bosses=${bossCount}` );
+                linkParams.push( `bossEffect=${bossEffect}` );
+                linkParams.push( `prizes=${prizeCount}` );
+                linkParams.push( `traps=${trapCount}` );
+                break;
+            case "parachute":
+                if( isParachuteOverlay ) {
+                    linkParams.push( "overlay=true" );
+                }
+                if( isParachuteCloudsOn ) {
+                    linkParams.push( "clouds=true" );
+                }
+                if( isParachuteHideTilDrop ) {
+                    linkParams.push( "hideTilDrop=true" );
+                }
+                if( parachuteVolume ) {
+                    linkParams.push( `volume=${parachuteVolume}` );
+                }
+                if( parachuteCommand ) {
+                    linkParams.push( `command=${parachuteCommand.replace("!", "")}` );
+                }
+                if( parachuteRefresh ) {
+                    linkParams.push( `cooldown=${parachuteRefresh}000` );
+                }
+                if( isChatEnabled && chatOAuth ) {
+                    linkParams.push( `oauth=${chatOAuth}` );
+                    linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                if( isDropletsEnabled ) {
+                    linkParams.push( `droplets=true` );
+                }
+                break;
+            case "plinko":
+                if( isPlinkoOverlay ) {
+                    linkParams.push( "overlay=true" );
+                }
+                if( isPlinkoCloudsOn ) {
+                    linkParams.push( "clouds=true" );
+                }
+                if( isPlinkoHideTilStart ) {
+                    linkParams.push( "hideTilStart=true" );
+                }
+                if( plinkoVolume ) {
+                    linkParams.push( `volume=${plinkoVolume}` );
+                }
+                // if( plinkoRefresh ) {
+                //     linkParams.push( `cooldown=${plinkoRefresh}000` );
+                // }
+                if( isChatEnabled && chatOAuth ) {
+                    linkParams.push( `oauth=${chatOAuth}` );
+                    linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                break;
+            case "hillroll":
+                if( isHillRollOverlay ) {
+                    linkParams.push( "overlay=true" );
+                }
+                if( isHillRollCloudsOn ) {
+                    linkParams.push( "clouds=true" );
+                }
+                if( isHillRollHideTilRoll ) {
+                    linkParams.push( "hideTilRoll=true" );
+                }
+                if( hillRollDefaultCountdown ) {
+                    linkParams.push( `defaultCountdown=${hillRollDefaultCountdown}` );
+                }
+                if( hillRollVolume ) {
+                    linkParams.push( `volume=${hillRollVolume}` );
+                }
+                if( hillRollCommand ) {
+                    linkParams.push( `command=${hillRollCommand.replace("!", "")}` );
+                }
+                if( hillRollRefresh ) {
+                    linkParams.push( `cooldown=${hillRollRefresh}000` );
+                }
+                if( isChatEnabled && chatOAuth ) {
+                    linkParams.push( `oauth=${chatOAuth}` );
+                    linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                if( hideInstructions ) {
+                    linkParams.push( `hideInstructions=true` );
+                }
+                if( hideTimer ) {
+                    linkParams.push( `hideTime=true` );
+                }
+                break;
+            }
+            $( "#outputOverlayLink" ).val( baseLink + linkParams.join( "&" ) );
+        }
+    </script>
+
+</body>
+<!-- END: Body-->
+
+</html>
