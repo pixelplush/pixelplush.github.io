@@ -330,10 +330,12 @@
                                                             </div>
                                                         </div>
                                                         <!-- users edit media object ends -->
+                                                        <h1>Welcome to the PixelPlush Beta Test Area!</h1>
+                                                        <h3 class="text-danger text-bold-500">Please Read: These games are available only during this limited-time testing phase and may be released as a Plush Coin feature in the future.</h3>
                                                         <!-- users edit account form start -->
                                                         <form novalidate="">
                                                             <div class="row">
-                                                                <div class="col-sm-6">
+                                                                <div class="col-sm-12">
                                                                     <div class="form-group">
                                                                         <div class="controls">
                                                                             <label>Twitch Channel Name</label>
@@ -345,10 +347,10 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Game</label>
                                                                                 <select class="form-control" id="inputGameType">
-                                                                                  <option value="hillroll">Hill Rolling Race</option>
-                                                                                  <option value="parachute">Parachute Drop</option>
-                                                                                  <option value="maze">Pixel Maze</option>
-                                                                                  <option value="plinko">Plinko Bounce</option>
+                                                                                  <option value="weather">Stream Weather</option>
+                                                                                  <option value="parachute" disabled>Parachute Drop</option>
+                                                                                  <option value="plinko" disabled>Plinko Bounce</option>
+                                                                                  <option value="confetti" disabled>Stream Confetti</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -356,26 +358,6 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Theme</label>
                                                                                 <select class="form-control" id="inputGameTheme">
-                                                                                  <option value="autumnadventure">Autumn Adventure</option>
-                                                                                  <option value="fairyforest">Fairy Forest</option>
-                                                                                  <option value="wanderingwizards">Wandering Wizards</option>
-                                                                                  <option value="trickortreat">Trick or Treat (Halloween)</option>
-                                                                                  <option value="santasecretservice">Santa's Secret Service (Christmas)</option>
-                                                                                  <option value="frozenfrenzy">Frozen Frenzy (Winter)</option>
-                                                                                  <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
-                                                                                  <option value="easteregghunt">Easter Egg Hunt (Easter)</option>
-                                                                                  <option value="springspree">Spring Spree (Spring)</option>
-                                                                                  <option value="pixelparachuteday">Pixel Parachute (Day)</option>
-                                                                                  <option value="pixelparachutenight">Pixel Parachute (Night)</option>
-                                                                                  <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
-                                                                                  <option value="pixelplinko">Pixel Plinko</option>
-                                                                                  <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
-                                                                                  <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
-                                                                                  <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
-                                                                                  <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
-                                                                                  <option value="pixelparachutechristmas">Pixel Parachute (Christmas)</option>
-                                                                                  <option value="pixelparachutewinter">Pixel Parachute (Winter)</option>
-                                                                                  <option value="pixelhillrollchristmas">Hill Rolling Race (Christmas)</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -391,21 +373,19 @@
                                                                         <div id="inputMessageFormatDisabled" class="help-block">(Twitch Log In is needed to enable chat announcement)</div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-6 text-center">
-                                                                    <img id="game-preview" src="" height="220" width="220" class="img-fluid" alt="Game Preview" />
-                                                                </div>
                                                                 <div class="col-12">
                                                                     <div class="table-responsive">
                                                                         <table class="table mt-1">
                                                                             <thead>
-                                                                                <tr class="maze-game d-none">
-                                                                                    <th>Enable Boss</th>
-                                                                                    <th>Boss Effect</th>
-                                                                                    <th>Boss Count</th>
-                                                                                    <th>Trap Effect</th>
-                                                                                    <th>Prize Count</th>
-                                                                                    <th>Trap Count</th>
-                                                                                    <th>Enable Chat Announcement</th>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <th>Rain</th>
+                                                                                    <th>Heavy Rain</th>
+                                                                                    <th>Lightning</th>
+                                                                                    <th>Rainbow</th>
+                                                                                    <th>Sunshine</th>
+                                                                                    <th>Blossoms</th>
+                                                                                    <th>Snow</th>
+                                                                                    <th>Blizzard</th>
                                                                                 </tr>
                                                                                 <tr class="parachute-game d-none">
                                                                                     <th>Background</th>
@@ -424,56 +404,47 @@
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Enable Chat Announcement</th>
                                                                                 </tr>
-                                                                                <tr class="hillroll-game d-none">
-                                                                                    <th>Background</th>
-                                                                                    <th>Clouds</th>
-                                                                                    <th>Hide Until Start</th>
-                                                                                    <th>Sound Volume</th>
-                                                                                    <th>Results in Chat</th>
-                                                                                    <th>Hide Instructions</th>
-                                                                                    <th>Hide Timer</th>
-                                                                                    <th>Default Countdown (secs)</th>
-                                                                                    <th>Chat Command</th>
-                                                                                    <th>Refresh Timer (secs)</th>
-                                                                                </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr class="maze-game d-none">
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableBoss" checked><label for="inputEnableBoss"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <select class="form-control" id="inputBossEffect">
-                                                                                          <option value="0">Steal Points</option>
-                                                                                          <option value="1">Return to Spawn</option>
-                                                                                        </select>
-                                                                                    </td>
+                                                                                <tr class="weather-game d-none">
                                                                                     <td>
                                                                                         <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputBossCount" value="1" min="0" max="100" placeholder="Number of Bosses Spawned">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <select class="form-control" id="inputTrapEffect">
-                                                                                          <option value="0">Points Penalty</option>
-                                                                                          <option value="1">Trap Tunnels</option>
-                                                                                        </select>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputPrizeCount" value="7" min="1" max="214" placeholder="Number of Prizes Spawned">
+                                                                                            <input type="number" class="" id="inputWeatherRain" value="100" min="0" max="100000" step="50" placeholder="Rain Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputTrapCount" value="5" min="0" max="214" placeholder="Number of Trap Spawned">
+                                                                                            <input type="number" class="" id="inputWeatherHeavyRain" value="100" min="0" max="100000" step="50" placeholder="Heavy Rain Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableChat" disabled><label for="inputEnableChat"></label>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLightning" value="100" min="0" max="100000" step="50" placeholder="Lightning Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherSunshine" value="100" min="0" max="100000" step="50" placeholder="Sunshine Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherBlossoms" value="100" min="0" max="100000" step="50" placeholder="Blossoms Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherSnow" value="100" min="0" max="100000" step="50" placeholder="Snow Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherBlizzard" value="100" min="0" max="100000" step="50" placeholder="Blizzard Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -543,58 +514,6 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoChat" disabled><label for="inputEnablePlinkoChat"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr class="hillroll-game d-none">
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollOverlay"><label for="inputEnableHillRollOverlay"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollClouds" checked><label for="inputEnableHillRollClouds"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollHideTilRoll"><label for="inputEnableHillRollHideTilRoll"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputHillRollVolume" value="25" min="0" max="100" placeholder="Sound Volume">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollChat" disabled><label for="inputEnableHillRollChat"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollInstructions" checked><label for="inputEnableHillRollInstructions"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollTimer" checked><label for="inputEnableHillRollTimer"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputHillRollDefaultCountdown" value="0" min="0" max="3600" step="10" placeholder="# Seconds">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="text" class="form-control" id="inputHillRollCommand" value="" placeholder="Command (e.g. !hill)">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputHillRollRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -709,6 +628,48 @@
             max: 3600,
             step: 30,
         });
+        
+        // Weathers
+        $( "#inputWeatherRain" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherHeavyRain" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherLightning" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherRainbow" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherSunshine" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherBlossoms" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherSnow" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherBlizzard" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
 
         ComfyTwitch.Check()
         .then( async result => {
@@ -810,104 +771,14 @@
             });
         });
 
-        const gameTypes = [ "hillroll", "maze", "parachute", "plinko" ];
-        const gameThemes = [ "autumnadventure", "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween", "pixelparachutechristmas", "pixelparachutewinter", "pixelplinkochristmas", "pixelhillrollchristmas" ];
+        const gameTypes = [ "weather", "maze", "parachute", "plinko" ];
         const themeSettings = {
-            "santasecretservice": {
-                game: "maze",
-                name: "Santa's Secret Service (Christmas)",
-                page: "https://www.pixelplush.dev/maze/christmas.html",
-                preview: "/public/app-assets/images/games/santasecretservice.gif",
-                bosses: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "frozenfrenzy": {
-                game: "maze",
-                name: "Frozen Frenzy (Winter)",
-                page: "https://www.pixelplush.dev/maze/frozen.html",
-                preview: "/public/app-assets/images/games/frozenfrenzy.gif",
-                bosses: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "autumnadventure": {
-                game: "maze",
-                name: "Autumn Adventure",
-                page: "https://www.pixelplush.dev/maze/autumn.html",
-                preview: "/public/app-assets/images/games/autumnadventure.gif",
-                bosses: 0,
-                trapEffect: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "trickortreat": {
-                game: "maze",
-                name: "Trick or Treat (Halloween)",
-                page: "https://www.pixelplush.dev/maze/ghost.html",
-                preview: "/public/app-assets/images/games/trickortreat.gif",
-                bosses: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "cupidheartcollection": {
-                game: "maze",
-                name: "Cupid Heart Collection (Valentines)",
-                page: "https://www.pixelplush.dev/maze/cupid.html",
-                preview: "/public/app-assets/images/games/cupidheartcollection.gif",
-                bosses: 3,
-                effect: 1,
-                prizes: 220 - 6,
-                traps: 0,
-                lockItemCount: true,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "easteregghunt": {
-                game: "maze",
-                name: "Easter Egg Hunt (Easter)",
-                page: "https://www.pixelplush.dev/maze/easter.html",
-                preview: "/public/app-assets/images/games/easteregghunt.gif",
-                bosses: 0,
-                trapEffect: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "springspree": {
-                game: "maze",
-                name: "Spring Spree (Spring)",
-                page: "https://www.pixelplush.dev/maze/spring.html",
-                preview: "/public/app-assets/images/games/springspree.gif",
-                bosses: 0,
-                trapEffect: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "fairyforest": {
-                game: "maze",
-                name: "Fairy Forest",
-                page: "https://www.pixelplush.dev/maze/fairy.html",
-                preview: "/public/app-assets/images/games/fairyforest.gif",
-                bosses: 0,
-                trapEffect: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
-            "wanderingwizards": {
-                game: "maze",
-                name: "Wandering Wizards",
-                page: "https://www.pixelplush.dev/maze/index.html",
-                preview: "/public/app-assets/images/games/wanderingwizards.gif",
-                bosses: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
+            "weather": {
+                game: "weather",
+                name: "Stream Weather",
+                page: "https://beta.pixelplush.dev/weather/index.html",
+                preview: "",
+                messageFormat: " ",
             },
             "pixelparachutewinter" : {
                 game: "parachute",
@@ -1021,29 +892,16 @@
             "pixelplinko": {
                 game: "plinko",
                 name: "Day",
-                page: "https://www.pixelplush.dev/plinko/",
+                page: "https://beta.pixelplush.dev/plinko/",
                 preview: "/public/app-assets/images/games/pixelplinko.gif",
                 overlay: true,
                 clouds: true,
                 hideTilStart: true,
                 messageFormat: "USERNAME is a winner!",
             },
-            "pixelhillrollchristmas": {
-                game: "hillroll",
-                name: "Christmas",
-                page: "https://www.pixelplush.dev/hillroll/christmas.html",
-                preview: "/public/app-assets/images/games/hillrollchristmas.gif",
-                overlay: false,
-                clouds: true,
-                hideTilRoll: false,
-                hideInstructions: false,
-                hideTime: false,
-                defaultCountdown: 0,
-                messageFormat: "USERNAME finished RANK in TIME!",
-                command: "",
-            }
         };
         const gameInstructions = {
+            "weather": "Channel rewards will be automatically added for you in your channel. Use !resetweather to refresh the rewards or !deleteweather to delete them.",
             "hillroll": "Type !hill or your custom command into your channel chat to roll your character down the hill! Mods can use !resethill to restart the game or !queuehill and then !starthill [time in sec] to start a race. A default countdown time will always queue up races.",
             "maze": "Type !play into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type !end to finish the game and show the leaderboard or !reset to restart the maze.",
             "parachute": "Type !drop or your custom command into your channel chat to drop your character and try to land on the center of the target! Mods can use !resetdrop to restart the game or !queuedrop and then !startdrop to allow everyone to join the game and drop at the same time. Score commands are !droptop !droprecent !drophigh !droplow.",
@@ -1051,8 +909,8 @@
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameType = params.get( "type" ) || "hillroll";
-        let gameTheme = params.get( "game" ) || "pixelhillrollchristmas";
+        let gameType = params.get( "type" ) || "weather";
+        let gameTheme = params.get( "game" ) || "weather";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
@@ -1083,6 +941,14 @@
         let hillRollVolume = "25";
         let hillRollRefresh = "90";
         let hillRollCommand = "";
+        let weatherRain = "100";
+        let weatherHeavyRain = "100";
+        let weatherLightning = "100";
+        let weatherRainbow = "100";
+        let weatherSunshine = "100";
+        let weatherBlossoms = "100";
+        let weatherSnow = "100";
+        let weatherBlizzard = "100";
         $( "#inputGameType" ).val( gameType );
         $( "#inputGameType" ).on( "change", ( e ) => {
             gameType =  $( "#inputGameType" ).val();
@@ -1297,6 +1163,70 @@
             isChatEnabled = e.target.checked;
             generateLink();
         });
+        $( "#inputWeatherRain" ).on( "change", ( e ) => {
+            weatherRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherRain" ).on( "input", ( e ) => {
+            weatherRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHeavyRain" ).on( "change", ( e ) => {
+            weatherHeavyRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHeavyRain" ).on( "input", ( e ) => {
+            weatherHeavyRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherLightning" ).on( "change", ( e ) => {
+            weatherLightning = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherLightning" ).on( "input", ( e ) => {
+            weatherLightning = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherRainbow" ).on( "change", ( e ) => {
+            weatherRainbow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherRainbow" ).on( "input", ( e ) => {
+            weatherRainbow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSunshine" ).on( "change", ( e ) => {
+            weatherSunshine = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSunshine" ).on( "input", ( e ) => {
+            weatherSunshine = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlossoms" ).on( "change", ( e ) => {
+            weatherBlossoms = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlossoms" ).on( "input", ( e ) => {
+            weatherBlossoms = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSnow" ).on( "change", ( e ) => {
+            weatherSnow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSnow" ).on( "input", ( e ) => {
+            weatherSnow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlizzard" ).on( "change", ( e ) => {
+            weatherBlizzard = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlizzard" ).on( "input", ( e ) => {
+            weatherBlizzard = e.target.value;
+            generateLink();
+        });
         setThemeDefaults();
         generateLink();
 
@@ -1354,18 +1284,32 @@
             let linkParams = [];
             linkParams.push( `channel=${channelName}` );
             switch( themeSettings[ gameTheme ].game ) {
-            case "maze":
-                if( !isBossEnabled ) {
-                    linkParams.push( "noBoss=true" );
+            case "weather":
+                linkParams.push( `oauth=${chatOAuth}` );
+                if( weatherRain !== "0" ) {
+                    linkParams.push( `rain=${weatherRain}` );
                 }
-                if( isChatEnabled && chatOAuth ) {
-                    linkParams.push( `oauth=${chatOAuth}` );
-                    linkParams.push( `messageFormat=${messageFormat}` );
+                if( weatherHeavyRain !== "0" ) {
+                    linkParams.push( `heavyrain=${weatherHeavyRain}` );
                 }
-                linkParams.push( `bosses=${bossCount}` );
-                linkParams.push( `bossEffect=${bossEffect}` );
-                linkParams.push( `prizes=${prizeCount}` );
-                linkParams.push( `traps=${trapCount}` );
+                if( weatherLightning !== "0" ) {
+                    linkParams.push( `lightning=${weatherLightning}` );
+                }
+                if( weatherRainbow !== "0" ) {
+                    linkParams.push( `rainbow=${weatherRainbow}` );
+                }
+                if( weatherSunshine !== "0" ) {
+                    linkParams.push( `sunshine=${weatherSunshine}` );
+                }
+                if( weatherBlossoms !== "0" ) {
+                    linkParams.push( `blossoms=${weatherBlossoms}` );
+                }
+                if( weatherSnow !== "0" ) {
+                    linkParams.push( `snow=${weatherSnow}` );
+                }
+                if( weatherBlizzard !== "0" ) {
+                    linkParams.push( `blizzard=${weatherBlizzard}` );
+                }
                 break;
             case "parachute":
                 if( isParachuteOverlay ) {
