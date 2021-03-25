@@ -382,6 +382,7 @@
                                                                                     <th>Heavy Rain</th>
                                                                                     <th>Lightning</th>
                                                                                     <th>Rainbow</th>
+                                                                                    <th>Hail</th>
                                                                                 </tr>
                                                                                 <tr class="parachute-game d-none">
                                                                                     <th>Background</th>
@@ -421,6 +422,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherHail" value="100" min="0" max="100000" step="50" placeholder="Hail Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -648,7 +654,7 @@
             max: 3600,
             step: 30,
         });
-        
+
         // Weathers
         $( "#inputWeatherRain" ).TouchSpin({
             min: 0,
@@ -686,6 +692,11 @@
             step: 10,
         });
         $( "#inputWeatherBlizzard" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherHail" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
@@ -969,6 +980,7 @@
         let weatherBlossoms = "100";
         let weatherSnow = "100";
         let weatherBlizzard = "100";
+        let weatherHail = "100";
         let weatherVolume = "25";
         $( "#inputGameType" ).val( gameType );
         $( "#inputGameType" ).on( "change", ( e ) => {
@@ -1248,6 +1260,14 @@
             weatherBlizzard = e.target.value;
             generateLink();
         });
+        $( "#inputWeatherHail" ).on( "change", ( e ) => {
+            weatherHail = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHail" ).on( "input", ( e ) => {
+            weatherHail = e.target.value;
+            generateLink();
+        });
         $( "#inputWeatherVolume" ).on( "change", ( e ) => {
             weatherVolume = e.target.value;
             generateLink();
@@ -1338,6 +1358,9 @@
                 }
                 if( weatherBlizzard !== "0" ) {
                     linkParams.push( `blizzard=${weatherBlizzard}` );
+                }
+                if( weatherHail !== "0" ) {
+                    linkParams.push( `hail=${weatherHail}` );
                 }
                 if( weatherVolume ) {
                     linkParams.push( `volume=${weatherVolume}` );
