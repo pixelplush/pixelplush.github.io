@@ -543,6 +543,17 @@
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
+                                                                        <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
+                                                                      <label>Game Instructions</label>
+                                                                      <small id="instructionsText" class="form-text text-muted"></small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="form-group">
                                                                       <label for="outputOverlayLink">Overlay Link</label>
                                                                       <div class="input-group">
                                                                         <input type="text" class="form-control" id="outputOverlayLink" readonly>
@@ -551,17 +562,6 @@
                                                                         </div>
                                                                       </div>
                                                                       <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                        <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                      <label>Game Instructions</label>
-                                                                      <small id="instructionsText" class="form-text text-muted"></small>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -921,7 +921,7 @@
             },
         };
         const gameInstructions = {
-            "weather": "Channel rewards will be automatically added for you in your channel. Use !resetweather to refresh the rewards or !deleteweather to delete them.",
+            "weather": "Channel rewards will be automatically added for you in your channel. Use !resetweather to refresh the rewards or !deleteweather to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created if you wish.",
             "hillroll": "Type !hill or your custom command into your channel chat to roll your character down the hill! Mods can use !resethill to restart the game or !queuehill and then !starthill [time in sec] to start a race. A default countdown time will always queue up races.",
             "maze": "Type !play into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type !end to finish the game and show the leaderboard or !reset to restart the maze.",
             "parachute": "Type !drop or your custom command into your channel chat to drop your character and try to land on the center of the target! Mods can use !resetdrop to restart the game or !queuedrop and then !startdrop to allow everyone to join the game and drop at the same time. Score commands are !droptop !droprecent !drophigh !droplow.",
