@@ -506,6 +506,7 @@
                                                                                     <th>Blossoms</th>
                                                                                     <th>Snow</th>
                                                                                     <th>Blizzard</th>
+                                                                                    <th>Volume</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -528,6 +529,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputWeatherBlizzard" value="100" min="0" max="100000" step="50" placeholder="Blizzard Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputWeatherVolume" value="25" min="0" max="100" placeholder="Sound Volume">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -963,6 +969,7 @@
         let weatherBlossoms = "100";
         let weatherSnow = "100";
         let weatherBlizzard = "100";
+        let weatherVolume = "25";
         $( "#inputGameType" ).val( gameType );
         $( "#inputGameType" ).on( "change", ( e ) => {
             gameType =  $( "#inputGameType" ).val();
@@ -1241,6 +1248,14 @@
             weatherBlizzard = e.target.value;
             generateLink();
         });
+        $( "#inputWeatherVolume" ).on( "change", ( e ) => {
+            weatherVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherVolume" ).on( "input", ( e ) => {
+            weatherVolume = e.target.value;
+            generateLink();
+        });
         setThemeDefaults();
         generateLink();
 
@@ -1323,6 +1338,9 @@
                 }
                 if( weatherBlizzard !== "0" ) {
                     linkParams.push( `blizzard=${weatherBlizzard}` );
+                }
+                if( weatherVolume ) {
+                    linkParams.push( `volume=${weatherVolume}` );
                 }
                 break;
             case "parachute":
