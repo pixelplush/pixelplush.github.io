@@ -355,7 +355,7 @@
                                                                                 <select class="form-control" id="inputGameType">
                                                                                   <option value="weather">Stream Weather</option>
                                                                                   <option value="parachute">Parachute Drop</option>
-                                                                                  <option value="plinko" disabled>Plinko Bounce</option>
+                                                                                  <option value="plinko">Plinko Bounce</option>
                                                                                   <option value="confetti" disabled>Stream Confetti</option>
                                                                                 </select>
                                                                             </div>
@@ -527,6 +527,12 @@
                                                                                     <th>Channel Point Cheers</th>
                                                                                     <th>Refresh Timer (secs)</th>
                                                                                 </tr>
+                                                                                <tr class="plinko-game d-none">
+                                                                                    <th>Enable Drop via Chat</th>
+                                                                                    <th>Chat Command</th>
+                                                                                    <th>Channel Point Cost</th>
+                                                                                    <th>Refresh Timer (secs)</th>
+                                                                                </tr>
                                                                             </thead>
                                                                             <tbody>
                                                                                 <tr class="weather-game d-none">
@@ -580,6 +586,28 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="plinko-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoCommand"><label for="inputEnablePlinkoCommand"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" id="inputPlinkoCommand" value="" placeholder="Command (e.g. !plinko)">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputPlinkoCPPlink" value="0" min="0" max="100000" step="50" placeholder="Channel Points Plinko Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputPlinkoRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -682,6 +710,16 @@
             min: 0,
             max: 100000,
             step: 10,
+        });
+        $( "#inputPlinkoCPPlink" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputPlinkoRefresh" ).TouchSpin({
+            min: 60,
+            max: 3600,
+            step: 30,
         });
         $( "#inputHillRollDefaultCountdown" ).TouchSpin({
             min: 0,
@@ -1018,6 +1056,9 @@
         let isPlinkoCloudsOn = true;
         let isPlinkoHideTilStart = false;
         let plinkoVolume = "25";
+        let plinkoCommand = "";
+        let plinkoCPPlink = "0";
+        let plinkoRefresh = "90";
         let isHillRollOverlay = true;
         let isHillRollCloudsOn = true;
         let isHillRollHideTilRoll = false;
@@ -1214,6 +1255,34 @@
             isChatEnabled = e.target.checked;
             generateLink();
         });
+        $( "#inputPlinkoCPPlink" ).on( "change", ( e ) => {
+            plinkoCPPlink = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoCPPlink" ).on( "input", ( e ) => {
+            plinkoCPPlink = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoCommand" ).on( "change", ( e ) => {
+            plinkoCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoCommand" ).on( "input", ( e ) => {
+            plinkoCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoRefresh" ).on( "change", ( e ) => {
+            plinkoRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoRefresh" ).on( "input", ( e ) => {
+            plinkoRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoCommand" ).on( "change", ( e ) => {
+            isCommandEnabled = e.target.checked;
+            generateLink();
+        });
         $( "#inputEnableHillRollOverlay" ).on( "change", ( e ) => {
             isHillRollOverlay = !e.target.checked;
             generateLink();
@@ -1392,6 +1461,7 @@
             $( "#inputEnablePlinkoClouds" ).prop( "checked", isPlinkoCloudsOn );
             $( "#inputEnablePlinkoHideTilStart" ).prop( "checked", isPlinkoOverlay );
             $( "#inputEnablePlinkoChat" ).prop( "checked", isChatEnabled );
+            $( "#inputEnablePlinkoCommand" ).prop( "checked", isCommandEnabled );
             isHillRollOverlay = themeSettings[ gameTheme ].overlay || false;
             isHillRollCloudsOn = themeSettings[ gameTheme ].clouds || false;
             isHillRollHideTilRoll = themeSettings[ gameTheme ].hideTilRoll || false;
@@ -1489,6 +1559,18 @@
                 }
                 if( plinkoVolume ) {
                     linkParams.push( `volume=${plinkoVolume}` );
+                }
+                if( plinkoCommand ) {
+                    linkParams.push( `command=${plinkoCommand.replace("!", "")}` );
+                }
+                if( plinkoRefresh ) {
+                    linkParams.push( `cooldown=${plinkoRefresh}000` );
+                }
+                if( plinkoCPPlink !== "0" ) {
+                    linkParams.push( `cpPlink=true&cpPlinkCost=${plinkoCPPlink}` );
+                }
+                if( isCommandEnabled ) {
+                    linkParams.push( `commandOn=true` );
                 }
                 // if( plinkoRefresh ) {
                 //     linkParams.push( `cooldown=${plinkoRefresh}000` );
