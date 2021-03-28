@@ -1465,10 +1465,10 @@
                     linkParams.push( `messageFormat=${messageFormat}` );
                 }
                 if( parachuteCPDrop !== "0" ) {
-                    linkParams.push( `cpDrop=${parachuteCPDrop}` );
+                    linkParams.push( `cpDrop=true&cpDropCost=${parachuteCPDrop}` );
                 }
                 if( parachuteCPDroplets !== "0" ) {
-                    linkParams.push( `cpDroplets=${parachuteCPDroplets}` );
+                    linkParams.push( `cpDroplets=true&cpDropletsCost=${parachuteCPDroplets}` );
                 }
                 if( isCommandEnabled ) {
                     linkParams.push( `commandOn=true` );
