@@ -634,7 +634,7 @@
                                                                         </div>
                                                                         <input type="password" class="form-control" id="outputOverlayLink" readonly>
                                                                         <div class="input-group-append">
-                                                                          <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputOverlayLink">Click to Copy</button>
+                                                                          <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-text="">Click to Copy</button>
                                                                         </div>
                                                                       </div>
                                                                       <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
@@ -1665,6 +1665,7 @@
                 break;
             }
             $( "#outputOverlayLink" ).val( baseLink + linkParams.join( "&" ) );
+            $( "#copy-btn" ).attr( "data-clipboard-text", baseLink + linkParams.join( "&" ) );
         }
     </script>
 
