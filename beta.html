@@ -1531,7 +1531,6 @@
                     linkParams.push( `cooldown=${parachuteRefresh}000` );
                 }
                 if( isChatEnabled && chatOAuth ) {
-                    linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
                 }
                 if( parachuteCPDrop !== "0" ) {
@@ -1546,6 +1545,7 @@
                 if( isDropletsEnabled ) {
                     linkParams.push( `droplets=true` );
                 }
+                linkParams.push( `oauth=${chatOAuth}` );
                 break;
             case "plinko":
                 if( isPlinkoOverlay ) {
@@ -1576,9 +1576,9 @@
                 //     linkParams.push( `cooldown=${plinkoRefresh}000` );
                 // }
                 if( isChatEnabled && chatOAuth ) {
-                    linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
                 }
+                linkParams.push( `oauth=${chatOAuth}` );
                 break;
             case "hillroll":
                 if( isHillRollOverlay ) {
