@@ -356,7 +356,7 @@
                                                                                   <option value="weather">Stream Weather</option>
                                                                                   <option value="parachute">Parachute Drop</option>
                                                                                   <option value="plinko">Plinko Bounce</option>
-                                                                                  <option value="confetti" disabled>Stream Confetti</option>
+                                                                                  <option value="confetti">Stream Confetti</option>
                                                                                 </select>
                                                                             </div>
                                                                         </div>
@@ -416,6 +416,9 @@
                                                                                     <th>Hide Until Start</th>
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Enable Chat Announcement</th>
+                                                                                </tr>
+                                                                                <tr class="confetti-game d-none">
+                                                                                    <th>Party Confetti</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -502,6 +505,13 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoChat" disabled><label for="inputEnablePlinkoChat"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="confetti-game d-none">
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiParty" value="100" min="0" max="100000" step="50" placeholder="Confetti Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -721,6 +731,11 @@
             max: 3600,
             step: 30,
         });
+        $( "#inputConfettiParty" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
         $( "#inputHillRollDefaultCountdown" ).TouchSpin({
             min: 0,
             max: 600,
@@ -879,7 +894,7 @@
             });
         });
 
-        const gameTypes = [ "weather", "maze", "parachute", "plinko" ];
+        const gameTypes = [ "weather", "maze", "parachute", "plinko", "confetti" ];
         const themeSettings = {
             "weather": {
                 game: "weather",
@@ -1018,6 +1033,13 @@
                 hideTilStart: true,
                 messageFormat: "USERNAME is a winner!",
             },
+            "confetti": {
+                game: "confetti",
+                name: "Confetti",
+                page: "https://beta.pixelplush.dev/confetti/",
+                preview: "",
+                messageFormat: "",
+            },
         };
         const gameInstructions = {
             "weather": "Set the channel points cost of each type of weather redemption to get a browser source overlay link. Setting the cost to 0 will disable that weather type. Channel rewards will be automatically added for you in your channel. Use !resetweather to refresh the rewards or !deleteweather to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
@@ -1025,6 +1047,7 @@
             "maze": "Type !play into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type !end to finish the game and show the leaderboard or !reset to restart the maze.",
             "parachute": "Drop your character and try to land on the center of the target! Set channel points cost to automatically create a drop redemption or type !drop or your custom command into your channel chat. Mods can use !resetdrop to restart the game or !queuedrop and then !startdrop to allow everyone to join the game and drop at the same time. Score commands are !droptop !droprecent !drophigh !droplow.",
             "plinko": "Type !plinko into your channel chat to drop your character to try and land in the center column. Mods can use !resetplinko to restart the game",
+            "confetti": "Set the channel points cost of the confetti redemption to get a browser source overlay link. Setting the cost to 0 will disable the confetti. Channel rewards will be automatically added for you in your channel. Use !resetconfetti to refresh the rewards or !deleteconfetti to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
@@ -1076,6 +1099,7 @@
         let weatherBlizzard = "100";
         let weatherHail = "100";
         let weatherVolume = "25";
+        let confettiParty = "100";
         
         $( "#inputGameType" ).val( gameType );
         $( "#inputGameType" ).on( "change", ( e ) => {
@@ -1419,6 +1443,14 @@
             weatherVolume = e.target.value;
             generateLink();
         });
+        $( "#inputConfettiParty" ).on( "change", ( e ) => {
+            confettiParty = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiParty" ).on( "input", ( e ) => {
+            confettiParty = e.target.value;
+            generateLink();
+        });
         setThemeDefaults();
         generateLink();
 
@@ -1612,6 +1644,12 @@
                 if( hideTimer ) {
                     linkParams.push( `hideTime=true` );
                 }
+                break;
+            case "confetti":
+                if( confettiParty !== "0" ) {
+                    linkParams.push( `cpConfetti=true&cpConfettiCost=${confettiParty}` );
+                }
+                linkParams.push( `oauth=${chatOAuth}` );
                 break;
             }
             $( "#outputOverlayLink" ).val( baseLink + linkParams.join( "&" ) );
