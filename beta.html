@@ -629,6 +629,9 @@
                                                                     <div class="form-group">
                                                                       <label for="outputOverlayLink">Overlay Link</label>
                                                                       <div class="input-group">
+                                                                        <div class="input-group-prepend">
+                                                                            <button id="link-showhide" class="btn btn-secondary" type="button"><i class="bx bx-show-alt"></i></button>
+                                                                        </div>
                                                                         <input type="password" class="form-control" id="outputOverlayLink" readonly>
                                                                         <div class="input-group-append">
                                                                           <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputOverlayLink">Click to Copy</button>
@@ -892,6 +895,15 @@
                 localStorage.setItem( "redirectPage", window.location.href );
                 ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ] );
             });
+        });
+
+        $( "#link-showhide" ).on( "click", function() {
+            if( document.getElementById( "outputOverlayLink" ).type === "password" ) {
+                document.getElementById( "outputOverlayLink" ).type = "text";
+            }
+            else {
+                document.getElementById( "outputOverlayLink" ).type = "password";
+            }
         });
 
         const gameTypes = [ "weather", "maze", "parachute", "plinko", "confetti" ];
