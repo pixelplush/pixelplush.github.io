@@ -364,6 +364,32 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input bg-primary" checked="" name="customCheck" id="checkboxChars">
+                                                            <label class="custom-control-label" for="checkboxChars">Characters</label>
+                                                        </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input bg-warning" checked="" name="customCheck" id="checkboxPets">
+                                                            <label class="custom-control-label" for="checkboxPets">Pets</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-8">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i class="bx bx-search"></i></span>
+                                                            </div>
+                                                            <input id="market-search" type="text" class="form-control">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div id="catalog-list" class="row">
                                     </div>
                                 </div>
@@ -515,13 +541,29 @@
         });
 
         $( document ).ready(function() {
-
+             $( "#market-search" ).on( "input", ( e ) => {
+                 populateItemList( e.target.value );
+             });
+             $( "#checkboxChars" ).on( "change", ( e ) => {
+                 populateItemList( $( "#market-search" ).val() );
+             });
+             $( "#checkboxPets" ).on( "change", ( e ) => {
+                 populateItemList( $( "#market-search" ).val() );
+             });
         });
 
-        function populateItemList() {
+        function populateItemList( searchText = "" ) {
             $( "#catalog-list" ).empty();
+            let filteredCatalog = catalog.filter( x => x.id.includes( searchText ) || x.theme.toLowerCase().includes( searchText ) );
+            if( !$( "#checkboxChars" ).prop( "checked" ) ) {
+                filteredCatalog = filteredCatalog.filter( x => x.type !== "character" );
+            }
+            if( !$( "#checkboxPets" ).prop( "checked" ) ) {
+                filteredCatalog = filteredCatalog.filter( x => x.type !== "pet" );
+            }
+
             // Handle adding subscription items
-            catalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
+            filteredCatalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
                     case "character":
@@ -534,7 +576,7 @@
                         typeBG = "primary";
                         break;
                 }
-                console.log( item );
+                // console.log( item );
                 if( twitchSubs[ item.subscription.toLowerCase() ] ) {
                     $( "#catalog-list" ).append( `
                         <div class="col-sm-3 col-6">
@@ -577,7 +619,7 @@
                 }
             });
 
-            catalog.forEach( ( item, index ) => {
+            filteredCatalog.forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
                     case "character":
