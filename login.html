@@ -111,7 +111,7 @@
                                 <!-- right section image -->
                                 <div class="col-md-6 d-md-block d-none text-center align-self-center p-3 h-100 bg-warning">
                                     <div class="card-content">
-                                        <img class="img-fluid rounded pixelated" src="public/app-assets/images/games/easteregghunt.gif" alt="PixelPlush Logo">
+                                        <img class="img-fluid rounded pixelated" id="game-image" src="public/app-assets/images/games/easteregghunt.gif" alt="PixelPlush Logo">
                                     </div>
                                 </div>
                             </div>
@@ -152,6 +152,14 @@
         const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
         const baseUrl = window.location.origin;
         const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+
+        const screenshots = [
+            "public/app-assets/images/games/pixelparachuteeaster.gif",
+            "public/app-assets/images/games/hillrollchristmas.gif",
+            "public/app-assets/images/games/pixelplinko.gif",
+            "public/app-assets/images/games/easteregghunt.gif",
+        ];
+        document.getElementById( "game-image" ).src = screenshots[ Math.floor( Math.random() * screenshots.length ) ];
 
         document.querySelector( "#login-twitch" ).addEventListener( "click", function() {
             console.log( "Logging in!" );
