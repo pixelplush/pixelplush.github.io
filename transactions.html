@@ -469,7 +469,7 @@
                         responsive: true,
                         "data": transactions,
                         "columns": [
-                            { "data": "date", render: function( data, type ) { return moment( data ).format( "llll" ); } },
+                            { "data": "date", render: function( data, type ) { return type === "sort" ? data : moment( data ).format( "llll" ); } },
                             { "data": "note" },
                             { "data": "description" },
                             { "data": "amount" },
