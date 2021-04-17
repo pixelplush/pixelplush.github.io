@@ -405,7 +405,7 @@
         const params = new URLSearchParams( location.search );
         const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
         const baseUrl = window.location.origin;
-        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+        const plushApiUrl = "http://localhost:3000/v1";
         let twitch = {};
         let account = {};
         let catalog = {};
@@ -818,6 +818,8 @@
             if( item.theme === "None" ) { return ""; }
             let dir = "";
             switch( item.type ) {
+                case "add-on":
+                    return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
                 case "pet":
                     dir = `pets/${item.path}`;
                     break;
