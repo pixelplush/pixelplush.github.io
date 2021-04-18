@@ -286,12 +286,6 @@
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="beta.html">
-                                                <i class="bx bxl-twitch"></i>
-                                                <span>Beta Testing Area</span>
-                                            </a>
-                                        </li>
-                                        <li class="nav-item">
                                             <a class="nav-link d-flex align-items-center" href="">
                                                 <span><strong>Currently Live:</strong></span>
                                             </a>
@@ -328,7 +322,7 @@
                                                                 <div class="col-12 px-0 d-flex">
                                                                     <!-- <a href="#" class="btn btn-sm btn-danger additional-permissions">Grant Additional Permissions</a> -->
                                                                     <a id="login-twitch" href="#" class="btn btn-social btn-twitch btn-sm font-small-3 mr-md-1 mb-md-0 mb-1 additional-permissions">
-                                                                        <i class="bx bxl-twitch font-medium-3"></i><span class="pl-50 d-block text-center">Grant Chat Permissions</span>
+                                                                        <i class="bx bxl-twitch font-medium-3"></i><span class="pl-50 d-block text-center">Grant Twitch Permissions</span>
                                                                     </a>
                                                                     <a href="login.html?redirect=twitch.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
                                                                     <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
@@ -351,6 +345,8 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Game</label>
                                                                                 <select class="form-control" id="inputGameType">
+                                                                                  <option value="weather">Stream Weather</option>
+                                                                                  <option value="confetti">Pixel Confetti</option>
                                                                                   <option value="hillroll">Hill Rolling Race</option>
                                                                                   <option value="parachute">Parachute Drop</option>
                                                                                   <option value="maze">Pixel Maze</option>
@@ -362,27 +358,19 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Theme</label>
                                                                                 <select class="form-control" id="inputGameTheme">
-                                                                                  <option value="autumnadventure">Autumn Adventure</option>
-                                                                                  <option value="fairyforest">Fairy Forest</option>
-                                                                                  <option value="wanderingwizards">Wandering Wizards</option>
-                                                                                  <option value="trickortreat">Trick or Treat (Halloween)</option>
-                                                                                  <option value="santasecretservice">Santa's Secret Service (Christmas)</option>
-                                                                                  <option value="frozenfrenzy">Frozen Frenzy (Winter)</option>
-                                                                                  <option value="cupidheartcollection">Cupid Heart Collection (Valentines)</option>
-                                                                                  <option value="easteregghunt">Easter Egg Hunt (Easter)</option>
-                                                                                  <option value="springspree">Spring Spree (Spring)</option>
-                                                                                  <option value="pixelparachuteday">Pixel Parachute (Day)</option>
-                                                                                  <option value="pixelparachutenight">Pixel Parachute (Night)</option>
-                                                                                  <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
-                                                                                  <option value="pixelplinko">Pixel Plinko</option>
-                                                                                  <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
-                                                                                  <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
-                                                                                  <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
-                                                                                  <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
-                                                                                  <option value="pixelparachutechristmas">Pixel Parachute (Christmas)</option>
-                                                                                  <option value="pixelparachutewinter">Pixel Parachute (Winter)</option>
-                                                                                  <option value="pixelhillrollchristmas">Hill Rolling Race (Christmas)</option>
                                                                                 </select>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                                <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-12">
+                                                                            <div class="form-group">
+                                                                            <label>Game Instructions</label>
+                                                                            <p class="text-danger additional-permissions">Note: Channel Points require additional Twitch permissions</p>
+                                                                            <p id="instructionsText" class="form-text text-muted"></p>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -397,7 +385,10 @@
                                                                     <div class="form-group plinko-game d-none">
                                                                         <p>The sound effects used in Plinko Bounce are from: Boing (<a href="https://freesound.org/people/Worldmaxter/sounds/471152/" target="_blank">https://freesound.org/people/Worldmaxter/sounds/471152/</a>) Win (<a href="https://freesound.org/people/shinephoenixstormcrow/sounds/337049/" target="_blank">https://freesound.org/people/shinephoenixstormcrow/sounds/337049/</a>)</p>
                                                                     </div>
-                                                                    <div class="form-group">
+                                                                    <div class="form-group weather-game d-none">
+                                                                        <p>The sound effects used in Stream Weather are from: Sunshine (<a href="https://freesound.org/people/InspectorJ/sounds/416529/" target="_blank">https://freesound.org/people/InspectorJ/sounds/416529/</a>) Rain (<a href="https://freesound.org/people/Legnalegna55/sounds/543649/" target="_blank">https://freesound.org/people/Legnalegna55/sounds/543649/</a>) Heavy Rain (<a href="https://freesound.org/people/Q.K./sounds/56311/" target="_blank">https://freesound.org/people/Q.K./sounds/56311/</a>) Rainbow (<a href="https://freesound.org/people/PixxelPro/sounds/144487/" target="_blank">https://freesound.org/people/PixxelPro/sounds/144487/</a>) Wind (<a href="https://freesound.org/people/atrempe1/sounds/559960/" target="_blank">https://freesound.org/people/atrempe1/sounds/559960/</a>) Thunders (<a href="https://gamesounds.xyz/?dir=Sonniss.com%20-%20GDC%202018%20-%20Game%20Audio%20Bundle/Soundrangers%20%E2%80%93%20Thunder" target="_blank">https://gamesounds.xyz/</a>)</p>
+                                                                    </div>
+                                                                    <div class="form-group parachute-game plinko-game d-none">
                                                                         <label>Chat Announcement Message Format</label>
                                                                         <input type="text" class="form-control" id="inputMessageFormat" value="USERNAME finished with POINTS!" placeholder="e.g. USERNAME finished with POINTS!" disabled>
                                                                         <div id="inputMessageFormatDisabled" class="help-block">(Twitch Log In is needed to enable chat announcement)</div>
@@ -410,6 +401,13 @@
                                                                     <div class="table-responsive">
                                                                         <table class="table mt-1">
                                                                             <thead>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <th>Rain (0 to disable)</th>
+                                                                                    <th>Heavy Rain</th>
+                                                                                    <th>Lightning</th>
+                                                                                    <th>Rainbow</th>
+                                                                                    <th>Hail</th>
+                                                                                </tr>
                                                                                 <tr class="maze-game d-none">
                                                                                     <th>Enable Boss</th>
                                                                                     <th>Boss Effect</th>
@@ -426,8 +424,6 @@
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Score in Chat</th>
                                                                                     <th>Bit Cheers</th>
-                                                                                    <th>Chat Command</th>
-                                                                                    <th>Refresh Timer (secs)</th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th>Background</th>
@@ -447,6 +443,9 @@
                                                                                     <th>Default Countdown (secs)</th>
                                                                                     <th>Chat Command</th>
                                                                                     <th>Refresh Timer (secs)</th>
+                                                                                </tr>
+                                                                                <tr class="confetti-game d-none">
+                                                                                    <th>Party Confetti</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -489,6 +488,33 @@
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherRain" value="100" min="0" max="100000" step="50" placeholder="Rain Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherHeavyRain" value="100" min="0" max="100000" step="50" placeholder="Heavy Rain Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLightning" value="100" min="0" max="100000" step="50" placeholder="Lightning Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherHail" value="100" min="0" max="100000" step="50" placeholder="Hail Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
                                                                                 <tr class="parachute-game d-none">
                                                                                     <td>
                                                                                         <div class="checkbox">
@@ -518,16 +544,6 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteDroplets"><label for="inputEnableParachuteDroplets"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="text" class="form-control" id="inputParachuteCommand" value="" placeholder="Command (e.g. !drop)">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -610,28 +626,133 @@
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
+                                                                                <tr class="confetti-game d-none">
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiParty" value="100" min="0" max="100000" step="50" placeholder="Confetti Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table mt-1">
+                                                                            <thead>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <th>Sunshine</th>
+                                                                                    <th>Blossoms</th>
+                                                                                    <th>Snow</th>
+                                                                                    <th>Blizzard</th>
+                                                                                    <th>Volume</th>
+                                                                                </tr>
+                                                                                <tr class="parachute-game d-none">
+                                                                                    <th>Enable Drop via Chat</th>
+                                                                                    <th>Chat Command</th>
+                                                                                    <th>Channel Point Cost</th>
+                                                                                    <th>Channel Point Cheers</th>
+                                                                                    <th>Refresh Timer (secs)</th>
+                                                                                </tr>
+                                                                                <tr class="plinko-game d-none">
+                                                                                    <th>Enable Drop via Chat</th>
+                                                                                    <th>Chat Command</th>
+                                                                                    <th>Channel Point Cost</th>
+                                                                                    <th>Refresh Timer (secs)</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherSunshine" value="100" min="0" max="100000" step="50" placeholder="Sunshine Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherBlossoms" value="100" min="0" max="100000" step="50" placeholder="Blossoms Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherSnow" value="100" min="0" max="100000" step="50" placeholder="Snow Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherBlizzard" value="100" min="0" max="100000" step="50" placeholder="Blizzard Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputWeatherVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="parachute-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteCommand"><label for="inputEnableParachuteCommand"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" id="inputParachuteCommand" value="" placeholder="Command (e.g. !drop)">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteCPDrop" value="0" min="0" max="100000" step="50" placeholder="Channel Points Drop Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteCPDroplets" value="0" min="0" max="100000" step="50" placeholder="Channel Points Cheer Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="plinko-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoCommand"><label for="inputEnablePlinkoCommand"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" id="inputPlinkoCommand" value="" placeholder="Command (e.g. !plinko)">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputPlinkoCPPlink" value="0" min="0" max="100000" step="50" placeholder="Channel Points Plinko Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputPlinkoRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-12">
                                                                     <div class="form-group">
-                                                                        <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
-                                                                      <label>Game Instructions</label>
-                                                                      <small id="instructionsText" class="form-text text-muted"></small>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-12">
-                                                                    <div class="form-group">
                                                                       <label for="outputOverlayLink">Overlay Link</label>
                                                                       <div class="input-group">
-                                                                        <input type="text" class="form-control" id="outputOverlayLink" readonly>
+                                                                        <div class="input-group-prepend">
+                                                                            <button id="link-showhide" class="btn btn-secondary" type="button"><i class="bx bx-show-alt"></i></button>
+                                                                        </div>
+                                                                        <input type="password" class="form-control" id="outputOverlayLink" readonly>
                                                                         <div class="input-group-append">
-                                                                          <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputOverlayLink">Click to Copy</button>
+                                                                          <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-text="">Click to Copy</button>
                                                                         </div>
                                                                       </div>
                                                                       <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
@@ -711,6 +832,31 @@
             max: 3600,
             step: 30,
         });
+        $( "#inputParachuteCPDrop" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputParachuteCPDroplets" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputPlinkoCPPlink" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputPlinkoRefresh" ).TouchSpin({
+            min: 60,
+            max: 3600,
+            step: 30,
+        });
+        $( "#inputConfettiParty" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
         $( "#inputHillRollDefaultCountdown" ).TouchSpin({
             min: 0,
             max: 600,
@@ -720,6 +866,53 @@
             min: 60,
             max: 3600,
             step: 30,
+        });
+
+        // Weathers
+        $( "#inputWeatherRain" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherHeavyRain" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherLightning" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherRainbow" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherSunshine" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherBlossoms" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherSnow" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherBlizzard" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherHail" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
         });
 
         ComfyTwitch.Check()
@@ -732,8 +925,6 @@
                             Twitch: result.token
                         }
                     } ).then( r => r.json() );
-
-                    // console.log( account );
 
                     if( account.error ) {
                         throw "Login Error";
@@ -762,7 +953,7 @@
                     chatOAuth = `oauth:${result.token}`;
                     generateLink();
 
-                    if( ![ "user:read:email", "chat:read", "chat:edit" ].every( v => ComfyTwitch.Scopes.includes( v ) ) ) {
+                    if( ![ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ].every( v => ComfyTwitch.Scopes.includes( v ) ) ) {
                         console.log( "Need More Permissions" );
                         $( ".additional-permissions" ).show();
                         $( "#inputEnableChat" ).prop( "disabled", true );
@@ -820,13 +1011,39 @@
             $( ".additional-permissions" ).on( "click", function() {
                 ComfyTwitch.Logout();
                 localStorage.setItem( "redirectPage", window.location.href );
-                ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit" ] );
+                ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ] );
             });
         });
 
-        const gameTypes = [ "hillroll", "maze", "parachute", "plinko" ];
-        const gameThemes = [ "autumnadventure", "fairyforest", "wanderingwizards", "trickortreat", "santasecretservice", "frozenfrenzy", "cupidheartcollection", "easteregghunt", "springspree", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelplinko", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween", "pixelparachutechristmas", "pixelparachutewinter", "pixelplinkochristmas", "pixelhillrollchristmas" ];
+        $( "#link-showhide" ).on( "click", function() {
+            if( document.getElementById( "outputOverlayLink" ).type === "password" ) {
+                document.getElementById( "outputOverlayLink" ).type = "text";
+            }
+            else {
+                document.getElementById( "outputOverlayLink" ).type = "password";
+            }
+        });
+
+        const gameTypes = [ "weather", "hillroll", "maze", "parachute", "plinko", "confetti" ];
         const themeSettings = {
+            "weather": {
+                game: "weather",
+                name: "Stream Weather (Premium)",
+                page: "https://www.pixelplush.dev/weather/index.html",
+                preview: "/public/app-assets/images/games/streamweather.gif",
+                messageFormat: " ",
+            },
+            "springspree": {
+                game: "maze",
+                name: "Spring Spree (Spring)",
+                page: "https://www.pixelplush.dev/maze/spring.html",
+                preview: "/public/app-assets/images/games/springspree.gif",
+                bosses: 0,
+                trapEffect: 1,
+                prizes: 7,
+                traps: 5,
+                messageFormat: "USERNAME finished with POINTS!",
+            },
             "santasecretservice": {
                 game: "maze",
                 name: "Santa's Secret Service (Christmas)",
@@ -891,17 +1108,6 @@
                 traps: 5,
                 messageFormat: "USERNAME finished with POINTS!",
             },
-            "springspree": {
-                game: "maze",
-                name: "Spring Spree (Spring)",
-                page: "https://www.pixelplush.dev/maze/spring.html",
-                preview: "/public/app-assets/images/games/springspree.gif",
-                bosses: 0,
-                trapEffect: 1,
-                prizes: 7,
-                traps: 5,
-                messageFormat: "USERNAME finished with POINTS!",
-            },
             "fairyforest": {
                 game: "maze",
                 name: "Fairy Forest",
@@ -922,6 +1128,28 @@
                 prizes: 7,
                 traps: 5,
                 messageFormat: "USERNAME finished with POINTS!",
+            },
+            "pixelparachutespring" : {
+                game: "parachute",
+                name: "Spring Blossoms (Premium)",
+                page: "https://www.pixelplush.dev/parachute/spring.html",
+                preview: "/public/app-assets/images/games/pixelparachutespring.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+            },
+            "pixelparachuteeaster" : {
+                game: "parachute",
+                name: "Easter",
+                page: "https://www.pixelplush.dev/parachute/easter.html",
+                preview: "/public/app-assets/images/games/pixelparachuteeaster.gif",
+                overlay: true,
+                clouds: true,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
             },
             "pixelparachutewinter" : {
                 game: "parachute",
@@ -1022,21 +1250,21 @@
                 messageFormat: "USERNAME landed for POINTS!",
                 command: "",
             },
-            "pixelplinkochristmas": {
-                game: "plinko",
-                name: "Christmas",
-                page: "https://www.pixelplush.dev/plinko/christmas.html",
-                preview: "/public/app-assets/images/games/pixelplinkochristmas.gif",
-                overlay: true,
-                clouds: true,
-                hideTilStart: true,
-                messageFormat: "USERNAME is a winner!",
-            },
             "pixelplinko": {
                 game: "plinko",
                 name: "Day",
                 page: "https://www.pixelplush.dev/plinko/",
                 preview: "/public/app-assets/images/games/pixelplinko.gif",
+                overlay: true,
+                clouds: true,
+                hideTilStart: true,
+                messageFormat: "USERNAME is a winner!",
+            },
+            "pixelplinkochristmas": {
+                game: "plinko",
+                name: "Christmas",
+                page: "https://www.pixelplush.dev/plinko/christmas.html",
+                preview: "/public/app-assets/images/games/pixelplinkochristmas.gif",
                 overlay: true,
                 clouds: true,
                 hideTilStart: true,
@@ -1055,21 +1283,31 @@
                 defaultCountdown: 0,
                 messageFormat: "USERNAME finished RANK in TIME!",
                 command: "",
-            }
+            },
+            "confetti": {
+                game: "confetti",
+                name: "Confetti",
+                page: "https://www.pixelplush.dev/confetti/",
+                preview: "/public/app-assets/images/games/pixelconfetti.gif",
+                messageFormat: "",
+            },
         };
         const gameInstructions = {
-            "hillroll": "Type !hill or your custom command into your channel chat to roll your character down the hill! Mods can use !resethill to restart the game or !queuehill and then !starthill [time in sec] to start a race. A default countdown time will always queue up races.",
-            "maze": "Type !play into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type !end to finish the game and show the leaderboard or !reset to restart the maze.",
-            "parachute": "Type !drop or your custom command into your channel chat to drop your character and try to land on the center of the target! Mods can use !resetdrop to restart the game or !queuedrop and then !startdrop to allow everyone to join the game and drop at the same time. Score commands are !droptop !droprecent !drophigh !droplow.",
-            "plinko": "Type !plinko into your channel chat to drop your character to try and land in the center column. Mods can use !resetplinko to restart the game",
+            "weather": "Our <a href='https://devpost.com/software/stream-weather' target='_blank'>Prize-Winning Twitch Overlay</a>! Set the channel points cost of each type of weather redemption to get a browser source overlay link. Setting the cost to 0 will disable that weather type. Channel rewards will be automatically added for you in your channel. Use <strong>!resetweather</strong> to refresh the rewards or <strong>!deleteweather</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
+            "hillroll": "Type <strong>!hill</strong> or your custom command into your channel chat to roll your character down the hill! Mods can use <strong>!resethill</strong> to restart the game or <strong>!queuehill</strong> and then <strong>!starthill [time in sec]</strong> to start a race. A default countdown time will always queue up races.",
+            "maze": "Type <strong>!play</strong> into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type <strong>!end</strong> to finish the game and show the leaderboard or <strong>!reset</strong> to restart the maze.",
+            "parachute": "Drop your character and try to land on the center of the target! Set channel points cost to automatically create a drop redemption or type !drop or your custom command into your channel chat. Mods can use <strong>!resetdrop</strong> to restart the game or <strong>!queuedrop</strong> and then <strong>!startdrop</strong> to allow everyone to join the game and drop at the same time. Score commands are <strong>!droptop !droprecent !drophigh !droplow.</strong>",
+            "plinko": "Type <strong>!plinko</strong> into your channel chat to drop your character to try and land in the center column. Mods can use <strong>!resetplinko</strong> to restart the game",
+            "confetti": "One of our <a href='https://devpost.com/software/pixel-confetti' target='_blank'>Twitch Hackathon Entries</a>! Set the channel points cost of the confetti redemption to get a browser source overlay link. Setting the cost to 0 will disable the confetti. Channel rewards will be automatically added for you in your channel. Use <strong>!resetconfetti</strong> to refresh the rewards or <strong>!deleteconfetti</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameType = params.get( "type" ) || "hillroll";
-        let gameTheme = params.get( "game" ) || "pixelhillrollchristmas";
+        let gameType = params.get( "type" ) || "weather";
+        let gameTheme = params.get( "game" ) || "weather";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
+        let isCommandEnabled = true;
         let isDropletsEnabled = true;
         let hideInstructions = false;
         let hideTimer = false;
@@ -1086,10 +1324,15 @@
         let parachuteVolume = "25";
         let parachuteRefresh = "90";
         let parachuteCommand = "";
+        let parachuteCPDrop = "0";
+        let parachuteCPDroplets = "0";
         let isPlinkoOverlay = true;
         let isPlinkoCloudsOn = true;
         let isPlinkoHideTilStart = false;
         let plinkoVolume = "25";
+        let plinkoCommand = "";
+        let plinkoCPPlink = "0";
+        let plinkoRefresh = "90";
         let isHillRollOverlay = true;
         let isHillRollCloudsOn = true;
         let isHillRollHideTilRoll = false;
@@ -1097,6 +1340,18 @@
         let hillRollVolume = "25";
         let hillRollRefresh = "90";
         let hillRollCommand = "";
+        let weatherRain = "100";
+        let weatherHeavyRain = "100";
+        let weatherLightning = "100";
+        let weatherRainbow = "100";
+        let weatherSunshine = "100";
+        let weatherBlossoms = "100";
+        let weatherSnow = "100";
+        let weatherBlizzard = "100";
+        let weatherHail = "100";
+        let weatherVolume = "25";
+        let confettiParty = "100";
+
         $( "#inputGameType" ).val( gameType );
         $( "#inputGameType" ).on( "change", ( e ) => {
             gameType =  $( "#inputGameType" ).val();
@@ -1111,7 +1366,7 @@
                 });
             setThemeDefaults();
             generateLink();
-            $( "#instructionsText" ).text( gameInstructions[ gameType ] );
+            $( "#instructionsText" ).html( gameInstructions[ gameType ] );
         });
         $( "#inputGameTheme" ).empty();
         Object.keys( themeSettings )
@@ -1122,7 +1377,7 @@
                     gameTheme = theme;
                 }
             });
-        $( "#instructionsText" ).text( gameInstructions[ gameType ] );
+        $( "#instructionsText" ).html( gameInstructions[ gameType ] );
         $( "#inputGameTheme" ).val( gameTheme );
         $( "#inputGameTheme" ).on( "change", ( e ) => {
             // console.log( e, "changed" );
@@ -1223,12 +1478,32 @@
             parachuteCommand = e.target.value;
             generateLink();
         });
+        $( "#inputEnableParachuteCommand" ).on( "change", ( e ) => {
+            isCommandEnabled = e.target.checked;
+            generateLink();
+        });
         $( "#inputEnableParachuteChat" ).on( "change", ( e ) => {
             isChatEnabled = e.target.checked;
             generateLink();
         });
         $( "#inputEnableParachuteDroplets" ).on( "change", ( e ) => {
             isDropletsEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputParachuteCPDrop" ).on( "change", ( e ) => {
+            parachuteCPDrop = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCPDrop" ).on( "input", ( e ) => {
+            parachuteCPDrop = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCPDroplets" ).on( "change", ( e ) => {
+            parachuteCPDroplets = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCPDroplets" ).on( "input", ( e ) => {
+            parachuteCPDroplets = e.target.value;
             generateLink();
         });
         $( "#inputEnablePlinkoOverlay" ).on( "change", ( e ) => {
@@ -1253,6 +1528,34 @@
         });
         $( "#inputEnablePlinkoChat" ).on( "change", ( e ) => {
             isChatEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputPlinkoCPPlink" ).on( "change", ( e ) => {
+            plinkoCPPlink = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoCPPlink" ).on( "input", ( e ) => {
+            plinkoCPPlink = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoCommand" ).on( "change", ( e ) => {
+            plinkoCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoCommand" ).on( "input", ( e ) => {
+            plinkoCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoRefresh" ).on( "change", ( e ) => {
+            plinkoRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoRefresh" ).on( "input", ( e ) => {
+            plinkoRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoCommand" ).on( "change", ( e ) => {
+            isCommandEnabled = e.target.checked;
             generateLink();
         });
         $( "#inputEnableHillRollOverlay" ).on( "change", ( e ) => {
@@ -1311,6 +1614,94 @@
             isChatEnabled = e.target.checked;
             generateLink();
         });
+        $( "#inputWeatherRain" ).on( "change", ( e ) => {
+            weatherRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherRain" ).on( "input", ( e ) => {
+            weatherRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHeavyRain" ).on( "change", ( e ) => {
+            weatherHeavyRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHeavyRain" ).on( "input", ( e ) => {
+            weatherHeavyRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherLightning" ).on( "change", ( e ) => {
+            weatherLightning = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherLightning" ).on( "input", ( e ) => {
+            weatherLightning = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherRainbow" ).on( "change", ( e ) => {
+            weatherRainbow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherRainbow" ).on( "input", ( e ) => {
+            weatherRainbow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSunshine" ).on( "change", ( e ) => {
+            weatherSunshine = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSunshine" ).on( "input", ( e ) => {
+            weatherSunshine = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlossoms" ).on( "change", ( e ) => {
+            weatherBlossoms = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlossoms" ).on( "input", ( e ) => {
+            weatherBlossoms = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSnow" ).on( "change", ( e ) => {
+            weatherSnow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSnow" ).on( "input", ( e ) => {
+            weatherSnow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlizzard" ).on( "change", ( e ) => {
+            weatherBlizzard = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlizzard" ).on( "input", ( e ) => {
+            weatherBlizzard = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHail" ).on( "change", ( e ) => {
+            weatherHail = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHail" ).on( "input", ( e ) => {
+            weatherHail = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherVolume" ).on( "change", ( e ) => {
+            weatherVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherVolume" ).on( "input", ( e ) => {
+            weatherVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiParty" ).on( "change", ( e ) => {
+            confettiParty = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiParty" ).on( "input", ( e ) => {
+            confettiParty = e.target.value;
+            generateLink();
+        });
         setThemeDefaults();
         generateLink();
 
@@ -1344,6 +1735,7 @@
             $( "#inputEnableParachuteClouds" ).prop( "checked", isParachuteCloudsOn );
             $( "#inputEnableParachuteHideTilDrop" ).prop( "checked", isParachuteOverlay );
             $( "#inputEnableParachuteChat" ).prop( "checked", isChatEnabled );
+            $( "#inputEnableParachuteCommand" ).prop( "checked", isCommandEnabled );
             $( "#inputEnableParachuteDroplets" ).prop( "checked", isDropletsEnabled );
             isPlinkoOverlay = themeSettings[ gameTheme ].overlay || false;
             isPlinkoCloudsOn = themeSettings[ gameTheme ].clouds || false;
@@ -1352,6 +1744,7 @@
             $( "#inputEnablePlinkoClouds" ).prop( "checked", isPlinkoCloudsOn );
             $( "#inputEnablePlinkoHideTilStart" ).prop( "checked", isPlinkoOverlay );
             $( "#inputEnablePlinkoChat" ).prop( "checked", isChatEnabled );
+            $( "#inputEnablePlinkoCommand" ).prop( "checked", isCommandEnabled );
             isHillRollOverlay = themeSettings[ gameTheme ].overlay || false;
             isHillRollCloudsOn = themeSettings[ gameTheme ].clouds || false;
             isHillRollHideTilRoll = themeSettings[ gameTheme ].hideTilRoll || false;
@@ -1368,6 +1761,39 @@
             let linkParams = [];
             linkParams.push( `channel=${channelName}` );
             switch( themeSettings[ gameTheme ].game ) {
+            case "weather":
+                if( weatherRain !== "0" ) {
+                    linkParams.push( `rain=${weatherRain}` );
+                }
+                if( weatherHeavyRain !== "0" ) {
+                    linkParams.push( `heavyrain=${weatherHeavyRain}` );
+                }
+                if( weatherLightning !== "0" ) {
+                    linkParams.push( `lightning=${weatherLightning}` );
+                }
+                if( weatherRainbow !== "0" ) {
+                    linkParams.push( `rainbow=${weatherRainbow}` );
+                }
+                if( weatherSunshine !== "0" ) {
+                    linkParams.push( `sunshine=${weatherSunshine}` );
+                }
+                if( weatherBlossoms !== "0" ) {
+                    linkParams.push( `blossoms=${weatherBlossoms}` );
+                }
+                if( weatherSnow !== "0" ) {
+                    linkParams.push( `snow=${weatherSnow}` );
+                }
+                if( weatherBlizzard !== "0" ) {
+                    linkParams.push( `blizzard=${weatherBlizzard}` );
+                }
+                if( weatherHail !== "0" ) {
+                    linkParams.push( `hail=${weatherHail}` );
+                }
+                if( weatherVolume ) {
+                    linkParams.push( `volume=${weatherVolume}` );
+                }
+                linkParams.push( `oauth=${chatOAuth}` );
+                break;
             case "maze":
                 if( !isBossEnabled ) {
                     linkParams.push( "noBoss=true" );
@@ -1401,12 +1827,21 @@
                     linkParams.push( `cooldown=${parachuteRefresh}000` );
                 }
                 if( isChatEnabled && chatOAuth ) {
-                    linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
+                }
+                if( parachuteCPDrop !== "0" ) {
+                    linkParams.push( `cpDrop=true&cpDropCost=${parachuteCPDrop}` );
+                }
+                if( parachuteCPDroplets !== "0" ) {
+                    linkParams.push( `cpDroplets=true&cpDropletsCost=${parachuteCPDroplets}` );
+                }
+                if( isCommandEnabled ) {
+                    linkParams.push( `commandOn=true` );
                 }
                 if( isDropletsEnabled ) {
                     linkParams.push( `droplets=true` );
                 }
+                linkParams.push( `oauth=${chatOAuth}` );
                 break;
             case "plinko":
                 if( isPlinkoOverlay ) {
@@ -1421,13 +1856,25 @@
                 if( plinkoVolume ) {
                     linkParams.push( `volume=${plinkoVolume}` );
                 }
+                if( plinkoCommand ) {
+                    linkParams.push( `command=${plinkoCommand.replace("!", "")}` );
+                }
+                if( plinkoRefresh ) {
+                    linkParams.push( `cooldown=${plinkoRefresh}000` );
+                }
+                if( plinkoCPPlink !== "0" ) {
+                    linkParams.push( `cpPlink=true&cpPlinkCost=${plinkoCPPlink}` );
+                }
+                if( isCommandEnabled ) {
+                    linkParams.push( `commandOn=true` );
+                }
                 // if( plinkoRefresh ) {
                 //     linkParams.push( `cooldown=${plinkoRefresh}000` );
                 // }
                 if( isChatEnabled && chatOAuth ) {
-                    linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
                 }
+                linkParams.push( `oauth=${chatOAuth}` );
                 break;
             case "hillroll":
                 if( isHillRollOverlay ) {
@@ -1462,8 +1909,15 @@
                     linkParams.push( `hideTime=true` );
                 }
                 break;
+            case "confetti":
+                if( confettiParty !== "0" ) {
+                    linkParams.push( `cpConfetti=true&cpConfettiCost=${confettiParty}` );
+                }
+                linkParams.push( `oauth=${chatOAuth}` );
+                break;
             }
             $( "#outputOverlayLink" ).val( baseLink + linkParams.join( "&" ) );
+            $( "#copy-btn" ).attr( "data-clipboard-text", baseLink + linkParams.join( "&" ) );
         }
     </script>
 
