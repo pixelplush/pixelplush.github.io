@@ -443,7 +443,7 @@
         const params = new URLSearchParams( location.search );
         const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
         const baseUrl = window.location.origin;
-        const plushApiUrl = "http://localhost:3000/v1";
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
         let twitch = {};
         let account = {};
         let catalog = {};
@@ -509,8 +509,8 @@
                 $( ".logged-in" ).hide();
             }
 
-            // catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
-            catalog = await fetch( "http://localhost:10000/catalog.json", {
+            catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+            // catalog = await fetch( "http://localhost:10000/catalog.json", {
             }).then( r => r.json() );
 
             // catalog = catalog.filter( x => !x.hidden );
@@ -734,8 +734,8 @@
             let dir = "";
             switch( item.type ) {
                 case "add-on":
-                    // return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
-                    return `http://localhost:10000/add-ons/${item.path}`;
+                    return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
+                    // return `http://localhost:10000/add-ons/${item.path}`;
                 case "pet":
                     dir = `pets/${item.path}`;
                     break;
@@ -806,25 +806,27 @@
                     $( ".user-coins" ).text( account.coins );
                     populateItemList();
                     toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
-                    let confirm = await Swal.fire({
-                        title: `Use ${items[ itemId ].name}?`,
-                        text: `Would you like to set ${items[ itemId ].name} as your active ${items[ itemId ].type}?`,
-                        // type: 'success',
-                        imageUrl: `${getItemPreview( itemId, 0 )}`,
-                        imageWidth: 48,
-                        imageHeight: 48,
-                        confirmButtonClass: 'btn btn-primary',
-                        cancelButtonClass: 'btn btn-danger ml-1',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes!',
-                        cancelButtonText: 'No',
-                        buttonsStyling: false,
-                    });
-                    if( confirm.value ) {
-                    await activateItem( itemId );
-                        toastr.success( `${items[ itemId ].name} is now selected!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+                    if( !itemId.startsWith( "addon" ) ) {
+                        let confirm = await Swal.fire({
+                            title: `Use ${items[ itemId ].name}?`,
+                            text: `Would you like to set ${items[ itemId ].name} as your active ${items[ itemId ].type}?`,
+                            // type: 'success',
+                            imageUrl: `${getItemPreview( itemId, 0 )}`,
+                            imageWidth: 48,
+                            imageHeight: 48,
+                            confirmButtonClass: 'btn btn-primary',
+                            cancelButtonClass: 'btn btn-danger ml-1',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes!',
+                            cancelButtonText: 'No',
+                            buttonsStyling: false,
+                        });
+                        if( confirm.value ) {
+                        await activateItem( itemId );
+                            toastr.success( `${items[ itemId ].name} is now selected!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+                        }
                     }
                 }
             }

@@ -399,7 +399,7 @@
         const params = new URLSearchParams( location.search );
         const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
         const baseUrl = window.location.origin;
-        const plushApiUrl = "http://localhost:3000/v1";
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
         let twitch = {};
         let account = {};
         let catalog = {};
@@ -514,6 +514,8 @@
             filteredCatalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
+                    case "add-on":
+                        return; // Skip Add-ons
                     case "character":
                         typeBG = "primary";
                         break;
@@ -647,6 +649,8 @@
                 filteredCatalog.filter( x => account.owned.includes( x.id ) || x.theme === "None" ).forEach( ( item, index ) => {
                     let typeBG = "primary";
                     switch( item.type ) {
+                        case "add-on":
+                            return; // Skip Add-ons
                         case "character":
                             typeBG = "primary";
                             break;
@@ -756,6 +760,8 @@
             filteredCatalog.filter( x => x.theme !== "None" && !x.hidden && !( account && account.owned && account.owned.includes( x.id ) ) ).forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
+                    case "add-on":
+                        return; // Skip Add-ons
                     case "character":
                         typeBG = "primary";
                         break;
