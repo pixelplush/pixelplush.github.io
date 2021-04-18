@@ -287,12 +287,6 @@
                                                 <span>Follow Us!</span>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="beta.html">
-                                                <i class="bx bxl-twitch"></i>
-                                                <span>Beta Testing Area</span>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </div>
                                 <!-- right content section -->
@@ -520,6 +514,8 @@
             filteredCatalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
+                    case "add-on":
+                        return; // Skip Add-ons
                     case "character":
                         typeBG = "primary";
                         break;
@@ -653,6 +649,8 @@
                 filteredCatalog.filter( x => account.owned.includes( x.id ) || x.theme === "None" ).forEach( ( item, index ) => {
                     let typeBG = "primary";
                     switch( item.type ) {
+                        case "add-on":
+                            return; // Skip Add-ons
                         case "character":
                             typeBG = "primary";
                             break;
@@ -762,6 +760,8 @@
             filteredCatalog.filter( x => x.theme !== "None" && !x.hidden && !( account && account.owned && account.owned.includes( x.id ) ) ).forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
+                    case "add-on":
+                        return; // Skip Add-ons
                     case "character":
                         typeBG = "primary";
                         break;
@@ -818,6 +818,8 @@
             if( item.theme === "None" ) { return ""; }
             let dir = "";
             switch( item.type ) {
+                case "add-on":
+                    return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
                 case "pet":
                     dir = `pets/${item.path}`;
                     break;

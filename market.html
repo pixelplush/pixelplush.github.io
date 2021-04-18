@@ -287,12 +287,6 @@
                                                 <span>Follow Us!</span>
                                             </a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link d-flex align-items-center" href="beta.html">
-                                                <i class="bx bxl-twitch"></i>
-                                                <span>Beta Testing Area</span>
-                                            </a>
-                                        </li>
                                     </ul>
                                 </div>
                                 <!-- right content section -->
@@ -476,7 +470,7 @@
                         }
                     } ).then( r => r.json() );
 
-                    // console.log( account );
+                    console.log( account );
 
                     if( account.error ) {
                         throw "Login Error";
@@ -516,6 +510,7 @@
             }
 
             catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+            // catalog = await fetch( "http://localhost:10000/catalog.json", {
             }).then( r => r.json() );
 
             // catalog = catalog.filter( x => !x.hidden );
@@ -572,6 +567,9 @@
                     case "pet":
                         typeBG = "danger";
                         break;
+                    case "add-on":
+                        typeBG = "success";
+                        break;
                     default:
                         typeBG = "primary";
                         break;
@@ -584,7 +582,7 @@
                             <div class="card-content">
                               <div class="card-body py-1">
                                 <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                                  <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                  <img id="item_${item.id}_preview" class="pixelated item-scale" width="26" src="${getItemPreview( item.id, 0 )}"/>
                                 </div>
                                 <div class="badge badge-pill badge-light-${typeBG} d-inline-flex align-items-center">
                                     <span>${item.type}</span>
@@ -623,8 +621,6 @@
                 }
             });
 
-            console.log( filteredCatalog );
-
             filteredCatalog.forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
@@ -633,6 +629,9 @@
                         break;
                     case "pet":
                         typeBG = "danger";
+                        break;
+                    case "add-on":
+                        typeBG = "success";
                         break;
                     default:
                         typeBG = "primary";
@@ -646,7 +645,7 @@
                                 <div class="card-content">
                                   <div class="card-body py-1">
                                     <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                                      <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                      <img id="item_${item.id}_preview" class="pixelated item-scale" width="26" src="${getItemPreview( item.id, 0 )}"/>
                                     </div>
                                     <div class="badge badge-pill badge-secondary d-inline-flex align-items-center">
                                         <span>${item.type}</span>
@@ -668,7 +667,7 @@
                                 <div class="card-content">
                                   <div class="card-body py-1">
                                     <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                                      <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                      <img id="item_${item.id}_preview" class="pixelated item-scale" width="26" src="${getItemPreview( item.id, 0 )}"/>
                                     </div>
                                     <div class="badge badge-pill badge-secondary d-inline-flex align-items-center">
                                         <span>${item.type}</span>
@@ -692,7 +691,7 @@
                             <div class="card-content">
                               <div class="card-body py-1">
                                 <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                                  <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
+                                  <img id="item_${item.id}_preview" class="pixelated item-scale" width="26" src="${getItemPreview( item.id, 0 )}"/>
                                 </div>
                                 <div class="badge badge-pill badge-${typeBG} d-inline-flex align-items-center">
                                     <span>${item.type}</span>
@@ -713,6 +712,7 @@
                     if( animationTimer ) {
                         clearInterval( animationTimer );
                     }
+                    if( item.type === "add-on" ) { return; }
                     animationTimer = setInterval( () => {
                         animationFrame++;
                         let preview = getItemPreview( item.id, animationFrame );
@@ -733,6 +733,9 @@
             let item = items[ itemId ];
             let dir = "";
             switch( item.type ) {
+                case "add-on":
+                    return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
+                    // return `http://localhost:10000/add-ons/${item.path}`;
                 case "pet":
                     dir = `pets/${item.path}`;
                     break;
@@ -803,25 +806,27 @@
                     $( ".user-coins" ).text( account.coins );
                     populateItemList();
                     toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
-                    let confirm = await Swal.fire({
-                        title: `Use ${items[ itemId ].name}?`,
-                        text: `Would you like to set ${items[ itemId ].name} as your active ${items[ itemId ].type}?`,
-                        // type: 'success',
-                        imageUrl: `${getItemPreview( itemId, 0 )}`,
-                        imageWidth: 48,
-                        imageHeight: 48,
-                        confirmButtonClass: 'btn btn-primary',
-                        cancelButtonClass: 'btn btn-danger ml-1',
-                        showCancelButton: true,
-                        confirmButtonColor: '#3085d6',
-                        cancelButtonColor: '#d33',
-                        confirmButtonText: 'Yes!',
-                        cancelButtonText: 'No',
-                        buttonsStyling: false,
-                    });
-                    if( confirm.value ) {
-                    await activateItem( itemId );
-                        toastr.success( `${items[ itemId ].name} is now selected!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+                    if( !itemId.startsWith( "addon" ) ) {
+                        let confirm = await Swal.fire({
+                            title: `Use ${items[ itemId ].name}?`,
+                            text: `Would you like to set ${items[ itemId ].name} as your active ${items[ itemId ].type}?`,
+                            // type: 'success',
+                            imageUrl: `${getItemPreview( itemId, 0 )}`,
+                            imageWidth: 48,
+                            imageHeight: 48,
+                            confirmButtonClass: 'btn btn-primary',
+                            cancelButtonClass: 'btn btn-danger ml-1',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes!',
+                            cancelButtonText: 'No',
+                            buttonsStyling: false,
+                        });
+                        if( confirm.value ) {
+                        await activateItem( itemId );
+                            toastr.success( `${items[ itemId ].name} is now selected!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+                        }
                     }
                 }
             }
