@@ -285,6 +285,19 @@ function Init() {
     //     }
     // };
 
+    // const testLongName = {
+    //     "id": "addon_parachute_blossoms",
+    //     "group": "Parachute Drop",
+    //     "name": "Spring Blossoms Theme (Parachute Drop)",
+    //     "description": "",
+    //     "theme": "PixelPlush",
+    //     "type": "add-on",
+    //     "path": "parachutedrop_spring.png",
+    //     "cost": 10
+    // };
+    //
+    // showItemAlert( testLongName, "Maayainsane" );
+
     // showItemAlert( testObject.data.item, testObject.data.account.displayName );
 }
 
@@ -336,7 +349,7 @@ function showItemAlert( item, name ) {
         fontFamily: 'Pixellari',
         fontSize: 42,
         // fontWeight: 'bold',
-        fill: "#ff6666",
+        fill: "#f95f5d",
         lineJoin: "round",
         // stroke: "#ff6666",
         // strokeThickness: 6,
@@ -345,16 +358,23 @@ function showItemAlert( item, name ) {
         fontFamily: 'Pixellari',
         fontSize: 42,
         // fontWeight: 'bold',
-        fill: "#663d14",
+        fill: "#663931",
         lineJoin: "round",
     } );
     let alertItemName = Unicorn.AddText( "alertitemname_" + alertId, item.name.toUpperCase(), x + 200, y + 100, {
         fontFamily: 'Pixellari',
         fontSize: 42,
         // fontWeight: 'bold',
-        fill: "#001f3d",
+        fill: "#3a4b62",
         lineJoin: "round",
     } );
+
+    // Center the text
+    const alertWidth = 759 - 200;
+    let textWidth = alertName.width + alertText.width + 10;
+    alertName.position.x = x + 170 + ( alertWidth - textWidth ) / 2;
+    alertText.position.x = alertName.position.x + 10 + alertName.width;
+    alertItemName.position.x = x + 170 + ( alertWidth - alertItemName.width ) / 2;
 
     alertQueue.push( {
         elements: [ alertBG, alertItem, alertName, alertText, alertItemName ],
@@ -395,7 +415,7 @@ function showCoinAlert( coins, name ) {
         fontFamily: 'Pixellari',
         fontSize: 42,
         // fontWeight: 'bold',
-        fill: "#ff6666",
+        fill: "#f95f5d",
         lineJoin: "round",
         // stroke: "#ff6666",
         // strokeThickness: 6,
@@ -404,16 +424,23 @@ function showCoinAlert( coins, name ) {
         fontFamily: 'Pixellari',
         fontSize: 42,
         // fontWeight: 'bold',
-        fill: "#663d14",
+        fill: "#663931",
         lineJoin: "round",
     } );
     let alertItemName = Unicorn.AddText( "alertitemname_" + alertId, `${coins} PLUSHCOINS`, x + 200, y + 100, {
         fontFamily: 'Pixellari',
         fontSize: 42,
         // fontWeight: 'bold',
-        fill: "#001f3d",
+        fill: "#3a4b62",
         lineJoin: "round",
     } );
+
+    // Center the text
+    const alertWidth = 759;
+    let textWidth = alertName.width + alertText.width + 10;
+    alertName.position.x = x + ( alertWidth - textWidth ) / 2;
+    alertText.position.x = alertName.position.x + 10 + alertName.width;
+    alertItemName.position.x = x + ( alertWidth - alertItemName.width ) / 2;
 
     alertQueue.push( {
         elements: [ alertBG, alertName, alertText, alertItemName ],
