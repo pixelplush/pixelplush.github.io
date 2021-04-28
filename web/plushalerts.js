@@ -31,7 +31,6 @@ socket.addEventListener( "message", function ( event ) {
     switch( data.data.type ) {
     case "item":
     case "coupon-item":
-    case "coupon":
         showItemAlert( data.data.item, data.data.account.displayName );
         break;
     case "coins":
