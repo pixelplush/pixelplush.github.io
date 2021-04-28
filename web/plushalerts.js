@@ -6,6 +6,7 @@ let catalog = {};
 let assetPath = "";
 let pingInterval = null;
 const NumFrames = 10;
+let gameVolume = 0.5;
 
 const socket = new ReconnectingWebSocket( "wss://api.pixelplush.dev" );
 
@@ -43,11 +44,13 @@ socket.addEventListener( "message", function ( event ) {
 });
 
 function setupGame( title, theme, options ) {
-  gameTitle = title;
-  gameTheme = theme;
-  gameOptions = options;
+    gameTitle = title;
+    gameTheme = theme;
+    gameOptions = options;
 
-  assetPath = gameTheme.path || "";
+    assetPath = gameTheme.path || "";
+
+    gameVolume = gameOptions.volume === undefined || gameOptions.volume === null ? 0.5 : parseInt( gameOptions.volume ) / 100;
 }
 window.setupGame = setupGame;
 
@@ -85,6 +88,9 @@ function Init() {
         Unicorn.Load( `alert_coin_light${i}`, `${assetPath}/assets/alerts/alert_coin_light/alert_coin_light${i+1}.png` );
         Unicorn.Load( `alert_coin_dark${i}`, `${assetPath}/assets/alerts/alert_coin_dark/alert_coin_dark${i+1}.png` );
     }
+    Unicorn.Load( "sfx_item", `${assetPath}/assets/alerts/Postive_Bubble_Jingle_01_1.wav` );
+    Unicorn.Load( "sfx_coins", `${assetPath}/assets/alerts/Coins_01.wav` );
+    Unicorn.Load( "sfx_bigcoins", `${assetPath}/assets/alerts/slots_bigwin_01.mp3` );
 
     // showCoinAlert( 100, "Instafluff" );
     //
@@ -388,6 +394,7 @@ function showItemAlert( item, name ) {
     }
 
     alertQueue.push( {
+        type: "item",
         elements: [ alertBG, alertItem, alertName, alertText, alertItemName ],
         yOffsets: [ 0, 90, 40, 40, 100 ],
         time: alertTime,
@@ -454,6 +461,7 @@ function showCoinAlert( coins, name ) {
     alertItemName.position.x = x + ( alertWidth - alertItemName.width ) / 2;
 
     alertQueue.push( {
+        type: coins >= 500 ? "bigcoin" : "coin",
         elements: [ alertBG, alertName, alertText, alertItemName ],
         yOffsets: [ 88.5, 40, 40, 100 ],
         time: alertTime,
@@ -471,6 +479,26 @@ function Update( timestamp, timeDiffInMs ) {
 
     if( alertQueue.length > 0 ) {
         // Animate the top one
+        if( alertQueue[ 0 ].time === alertTime ) {
+            // Play sound
+            switch( alertQueue[ 0 ].type ) {
+            case "item":
+                Unicorn.PlaySound( "sfx_item", {
+                    volume: gameVolume
+                } );
+                break;
+            case "coin":
+                Unicorn.PlaySound( "sfx_coins", {
+                    volume: gameVolume
+                } );
+                break;
+            case "bigcoin":
+                Unicorn.PlaySound( "sfx_bigcoins", {
+                    volume: gameVolume
+                } );
+                break;
+            }
+        }
         alertQueue[ 0 ].time -= timeDiff;
         if( alertQueue[ 0 ].time <= 0 ) {
             let item = alertQueue.shift();
@@ -538,6 +566,11 @@ async function OnChatCommand( user, command, message, flags, extra ) {
         ( command === "testcoinalert" ) ) {
         // Show Alert
         showCoinAlert( 100, user );
+    }
+    if( ( flags.broadcaster || flags.mod ) &&
+        ( command === "testbigcoinalert" ) ) {
+        // Show Alert
+        showCoinAlert( 500, user );
     }
 }
 
