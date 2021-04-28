@@ -24,15 +24,17 @@ socket.addEventListener( "open", function ( event ) {
 // Listen for messages
 socket.addEventListener( "message", function ( event ) {
     let data = JSON.parse( event.data );
+    if( data.type === "pong" ) {
+        return;
+    }
     // console.log( data );
     switch( data.data.type ) {
     case "item":
+    case "coupon-item":
         showItemAlert( data.data.item, data.data.account.displayName );
         break;
     case "coins":
         showCoinAlert( data.data.amount, data.data.account.displayName );
-        break;
-    case "pong":
         break;
     default:
         console.log( data );
