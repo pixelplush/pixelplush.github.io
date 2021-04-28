@@ -374,7 +374,16 @@ function showItemAlert( item, name ) {
     let textWidth = alertName.width + alertText.width + 10;
     alertName.position.x = x + 170 + ( alertWidth - textWidth ) / 2;
     alertText.position.x = alertName.position.x + 10 + alertName.width;
-    alertItemName.position.x = x + 170 + ( alertWidth - alertItemName.width ) / 2;
+    if( alertItemName.width < alertWidth ) {
+        alertItemName.position.x = x + 170 + ( alertWidth - alertItemName.width ) / 2;
+    }
+    else {
+        // Adjust to fit the width
+        let scale = alertWidth / alertItemName.width;
+        alertItemName.scale.x = scale;
+        alertItemName.scale.y = scale;
+        alertItemName.position.x = x + 170;
+    }
 
     alertQueue.push( {
         elements: [ alertBG, alertItem, alertName, alertText, alertItemName ],
