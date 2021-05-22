@@ -486,6 +486,8 @@
                 $( ".not-logged-in" ).show();
                 $( ".logged-in" ).hide();
                 if( channelName ) {
+                    $( "#inputChannelName" ).val( channelName );
+                    generateLink();
                     getScores();
                 }
             }
