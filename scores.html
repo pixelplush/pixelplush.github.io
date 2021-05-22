@@ -481,6 +481,9 @@
             else {
                 $( ".not-logged-in" ).show();
                 $( ".logged-in" ).hide();
+                if( channelName ) {
+                    getScores();
+                }
             }
         });
 
