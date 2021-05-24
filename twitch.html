@@ -984,7 +984,11 @@
                         let nextChannel = "pixelplushgames";
                         if( livestreams.length > 0 ) {
                             // Set Twitch embed channel
-                            if( livestreams.includes( "maayainsane" ) ) {
+                            if( livestreams.includes( "maayainsane" ) && livestreams.includes( "instafluff" ) ) {
+                                nextChannel = Math.random() < 0.5 ? "maayainsane" : "instafluff";
+                                $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${nextChannel}&parent=www.pixelplush.dev` );
+                            }
+                            else if( livestreams.includes( "maayainsane" ) ) {
                                 nextChannel = "maayainsane";
                                 $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=maayainsane&parent=www.pixelplush.dev" );
                             }
@@ -1969,7 +1973,7 @@
             $( "#outputOverlayLink" ).val( baseLink + linkParams.join( "&" ) );
             $( "#copy-btn" ).attr( "data-clipboard-text", baseLink + linkParams.join( "&" ) );
         }
-    
+
         function getItemPreview( itemId, frame ) {
             let item = items[ itemId ];
             let dir = "";
