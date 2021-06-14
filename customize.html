@@ -757,7 +757,7 @@
             }
 
             // Show the non-owned items
-            filteredCatalog.filter( x => !!x.subscription && x.theme !== "None" && !x.hidden && !( account && account.owned && account.owned.includes( x.id ) ) ).forEach( ( item, index ) => {
+            filteredCatalog.filter( x => !x.subscription && x.theme !== "None" && !x.hidden && !( account && account.owned && account.owned.includes( x.id ) ) ).forEach( ( item, index ) => {
                 let typeBG = "primary";
                 switch( item.type ) {
                     case "add-on":
