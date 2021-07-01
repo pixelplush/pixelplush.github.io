@@ -347,7 +347,6 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Game</label>
                                                                                 <select class="form-control" id="inputGameType">
-                                                                                  <option value="pridemonth">Pride Month Rainbow (Limited-Time)</option>
                                                                                   <option value="weather">Stream Weather</option>
                                                                                   <!-- <option value="confetti">Pixel Confetti</option> -->
                                                                                   <option value="hillroll">Hill Rolling Race</option>
@@ -1331,7 +1330,6 @@
             },
         };
         const gameInstructions = {
-            "pridemonth": "This month, PixelPlush is celebrating Pride Month with a <a href='https://tiltify.com/+pixelplush/happy-pride-month-from-pixelplush-games' target='_blank'>Tiltify Charity Campaign</a> and offering a limited-time Rainbow Twitch channel points redemption overlay to use during the month of June! The channel reward will be automatically added for you in your channel. Use <strong>!resetrainbow</strong> to refresh the reward or <strong>!deleterainbow</strong> to delete it. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
             "weather": "Our <a href='https://devpost.com/software/stream-weather' target='_blank'>Prize-Winning Twitch Overlay</a>! Set the channel points cost of each type of weather redemption to get a browser source overlay link. Setting the cost to 0 will disable that weather type. Channel rewards will be automatically added for you in your channel. Use <strong>!resetweather</strong> to refresh the rewards or <strong>!deleteweather</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
             "hillroll": "Type <strong>!hill</strong> or your custom command into your channel chat to roll your character down the hill! Mods can use <strong>!resethill</strong> to restart the game or <strong>!queuehill</strong> and then <strong>!starthill [time in sec]</strong> to start a race. A default countdown time will always queue up races.",
             "maze": "Type <strong>!play</strong> into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type <strong>!end</strong> to finish the game and show the leaderboard or <strong>!reset</strong> to restart the maze.",
@@ -1775,13 +1773,6 @@
                             <h3>${item.name}</h3>
                         `);
                         $( ".link-available" ).show();
-                    }
-                    else if( gameTheme === "pixelparachuterainbow" ) {
-                        $( "#addon-button" ).append( `
-                            <h5 class="text-danger"><strong>This Theme requires an Add-On currently only available through our Pride Month Tiltify Charity Campaign!</strong></h5>
-                            <a class="btn btn-sm btn-success" href="https://tiltify.com/+pixelplush/happy-pride-month-from-pixelplush-games" target="_blank">Open the Tiltify Campaign Page</a>
-                        `);
-                        $( ".link-available" ).hide();
                     }
                     else {
                         $( "#addon-button" ).append( `
