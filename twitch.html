@@ -987,40 +987,6 @@
                         ComfyTwitch.Logout();
                         window.location.reload();
                     });
-
-                    let currentChannel = "";
-                    let featureStream = async () => {
-                        let livestreams = await fetch( "https://api.pixelplush.dev/v1/analytics/sessions/live/short" )
-                        .then( r => r.json() );
-                        let nextChannel = "pixelplushgames";
-                        if( livestreams.length > 0 ) {
-                            // Set Twitch embed channel
-                            if( livestreams.includes( "maayainsane" ) && livestreams.includes( "instafluff" ) ) {
-                                nextChannel = Math.random() < 0.5 ? "maayainsane" : "instafluff";
-                                $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${nextChannel}&parent=www.pixelplush.dev` );
-                            }
-                            else if( livestreams.includes( "maayainsane" ) ) {
-                                nextChannel = "maayainsane";
-                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=maayainsane&parent=www.pixelplush.dev" );
-                            }
-                            else if( livestreams.includes( "instafluff" ) ) {
-                                nextChannel = "instafluff";
-                                $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=instafluff&parent=www.pixelplush.dev" );
-                            }
-                            else {
-                                nextChannel = livestreams[ Math.floor( livestreams.length * Math.random() ) ];
-                            }
-                        }
-                        else {
-                            nextChannel = "pixelplushgames";
-                        }
-                        if( nextChannel != currentChannel ) {
-                            currentChannel = nextChannel;
-                            $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${currentChannel}&parent=www.pixelplush.dev` );
-                        }
-                    };
-                    setInterval( featureStream, 60000 * 3 );
-                    featureStream();
                 }
                 catch( error ) {
                     // TODO: Auth Failed
@@ -1031,6 +997,40 @@
                 $( ".not-logged-in" ).show();
                 $( ".logged-in" ).hide();
             }
+
+            let currentChannel = "";
+            let featureStream = async () => {
+                let livestreams = await fetch( "https://api.pixelplush.dev/v1/analytics/sessions/live/short" )
+                .then( r => r.json() );
+                let nextChannel = "pixelplushgames";
+                if( livestreams.length > 0 ) {
+                    // Set Twitch embed channel
+                    if( livestreams.includes( "maayainsane" ) && livestreams.includes( "instafluff" ) ) {
+                        nextChannel = Math.random() < 0.5 ? "maayainsane" : "instafluff";
+                        $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${nextChannel}&parent=www.pixelplush.dev` );
+                    }
+                    else if( livestreams.includes( "maayainsane" ) ) {
+                        nextChannel = "maayainsane";
+                        $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=maayainsane&parent=www.pixelplush.dev" );
+                    }
+                    else if( livestreams.includes( "instafluff" ) ) {
+                        nextChannel = "instafluff";
+                        $("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=instafluff&parent=www.pixelplush.dev" );
+                    }
+                    else {
+                        nextChannel = livestreams[ Math.floor( livestreams.length * Math.random() ) ];
+                    }
+                }
+                else {
+                    nextChannel = "pixelplushgames";
+                }
+                if( nextChannel != currentChannel ) {
+                    currentChannel = nextChannel;
+                    $("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${currentChannel}&parent=www.pixelplush.dev` );
+                }
+            };
+            setInterval( featureStream, 60000 * 3 );
+            featureStream();
 
             setThemeDefaults();
             generateLink();
