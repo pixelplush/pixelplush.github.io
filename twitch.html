@@ -341,8 +341,8 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Game</label>
                                                                                 <select class="form-control" id="inputGameType">
+                                                                                  <option value="confetti">Pixel Confetti</option>
                                                                                   <option value="weather">Stream Weather</option>
-                                                                                  <!-- <option value="confetti">Pixel Confetti</option> -->
                                                                                   <option value="hillroll">Hill Rolling Race</option>
                                                                                   <option value="parachute">Parachute Drop</option>
                                                                                   <option value="maze">Pixel Maze</option>
@@ -444,6 +444,8 @@
                                                                                 </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <th>Party Confetti</th>
+                                                                                    <th>Bubbles</th>
+                                                                                    <th>Sound Volume</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -628,6 +630,16 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputConfettiParty" value="100" min="0" max="100000" step="50" placeholder="Confetti Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiBubbles" value="100" min="0" max="100000" step="50" placeholder="Bubbles Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputConfettiVolume" value="25" min="0" max="100" placeholder="Sound Volume">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -860,6 +872,11 @@
             max: 100000,
             step: 10,
         });
+        $( "#inputConfettiBubbles" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
         $( "#inputHillRollDefaultCountdown" ).TouchSpin({
             min: 0,
             max: 600,
@@ -1034,15 +1051,8 @@
             }
         });
 
-        const gameTypes = [ "pridemonth", "weather", "hillroll", "maze", "parachute", "plinko" ];//, "confetti" ];
+        const gameTypes = [ "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
         const themeSettings = {
-            "pridemonth": {
-                game: "pridemonth",
-                name: "Pride Rainbow (June)",
-                page: "https://beta.pixelplush.dev/rainbow/index.html",
-                preview: "/public/app-assets/images/games/rainbow300.png",
-                messageFormat: " ",
-            },
             "weather": {
                 game: "weather",
                 name: "Stream Weather (Premium)",
@@ -1321,20 +1331,21 @@
                 page: "https://www.pixelplush.dev/confetti/",
                 preview: "/public/app-assets/images/games/pixelconfetti.gif",
                 messageFormat: "",
+                requires: "addon_pixelconfetti",
             },
         };
         const gameInstructions = {
+            "confetti": "One of our <a href='https://devpost.com/software/pixel-confetti' target='_blank'>Twitch Hackathon Entries</a>! Set the channel points cost of the confetti redemption to get a browser source overlay link. Setting the cost to 0 will disable the confetti. Channel rewards will be automatically added for you in your channel. Use <strong>!resetconfetti</strong> to refresh the rewards or <strong>!deleteconfetti</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
             "weather": "Our <a href='https://devpost.com/software/stream-weather' target='_blank'>Prize-Winning Twitch Overlay</a>! Set the channel points cost of each type of weather redemption to get a browser source overlay link. Setting the cost to 0 will disable that weather type. Channel rewards will be automatically added for you in your channel. Use <strong>!resetweather</strong> to refresh the rewards or <strong>!deleteweather</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
             "hillroll": "Type <strong>!hill</strong> or your custom command into your channel chat to roll your character down the hill! Mods can use <strong>!resethill</strong> to restart the game or <strong>!queuehill</strong> and then <strong>!starthill [time in sec]</strong> to start a race. A default countdown time will always queue up races.",
             "maze": "Type <strong>!play</strong> into your channel chat to spawn your character and then you can type grid coordinates to pick up items (e.g. G6). Type <strong>!end</strong> to finish the game and show the leaderboard or <strong>!reset</strong> to restart the maze.",
             "parachute": "Drop your character and try to land on the center of the target! Set channel points cost to automatically create a drop redemption or type !drop or your custom command into your channel chat. Mods can use <strong>!resetdrop</strong> to restart the game or <strong>!queuedrop</strong> and then <strong>!startdrop</strong> to allow everyone to join the game and drop at the same time. Score commands are <strong>!droptop !droprecent !drophigh !droplow.</strong>",
             "plinko": "Type <strong>!plinko</strong> into your channel chat to drop your character to try and land in the center column. Mods can use <strong>!resetplinko</strong> to restart the game",
-            "confetti": "One of our <a href='https://devpost.com/software/pixel-confetti' target='_blank'>Twitch Hackathon Entries</a>! Set the channel points cost of the confetti redemption to get a browser source overlay link. Setting the cost to 0 will disable the confetti. Channel rewards will be automatically added for you in your channel. Use <strong>!resetconfetti</strong> to refresh the rewards or <strong>!deleteconfetti</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameType = params.get( "type" ) || "weather";
-        let gameTheme = params.get( "game" ) || "weather";
+        let gameType = params.get( "type" ) || "confetti";
+        let gameTheme = params.get( "game" ) || "confetti";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
@@ -1382,6 +1393,8 @@
         let weatherHail = "100";
         let weatherVolume = "25";
         let confettiParty = "100";
+        let confettiBubbles = "100";
+        let confettiVolume = "25";
 
         $( "#inputGameType" ).val( gameType );
         $( "#inputGameType" ).on( "change", ( e ) => {
@@ -1729,8 +1742,16 @@
             confettiParty = e.target.value;
             generateLink();
         });
-        $( "#inputConfettiParty" ).on( "input", ( e ) => {
-            confettiParty = e.target.value;
+        $( "#inputConfettiBubbles" ).on( "input", ( e ) => {
+            confettiBubbles = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiVolume" ).on( "change", ( e ) => {
+            confettiVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiVolume" ).on( "input", ( e ) => {
+            confettiVolume = e.target.value;
             generateLink();
         });
         ( async () => {
@@ -1828,9 +1849,6 @@
             let linkParams = [];
             linkParams.push( `channel=${channelName}` );
             switch( themeSettings[ gameTheme ].game ) {
-            case "pridemonth":
-                linkParams.push( `oauth=${chatOAuth}` );
-                break;
             case "weather":
                 if( weatherRain !== "0" ) {
                     linkParams.push( `rain=${weatherRain}` );
@@ -1982,6 +2000,12 @@
             case "confetti":
                 if( confettiParty !== "0" ) {
                     linkParams.push( `cpConfetti=true&cpConfettiCost=${confettiParty}` );
+                }
+                if( confettiBubbles !== "0" ) {
+                    linkParams.push( `cpBubbles=true&cpBubblesCost=${confettiBubbles}` );
+                }
+                if( confettiVolume ) {
+                    linkParams.push( `volume=${confettiVolume}` );
                 }
                 linkParams.push( `oauth=${chatOAuth}` );
                 break;
