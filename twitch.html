@@ -445,6 +445,7 @@
                                                                                 <tr class="confetti-game d-none">
                                                                                     <th>Party Confetti</th>
                                                                                     <th>Bubbles</th>
+                                                                                    <th>Balloons</th>
                                                                                     <th>Sound Volume</th>
                                                                                 </tr>
                                                                             </thead>
@@ -635,6 +636,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputConfettiBubbles" value="100" min="0" max="100000" step="50" placeholder="Bubbles Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiBalloons" value="100" min="0" max="100000" step="50" placeholder="Balloons Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1043,6 +1049,11 @@
             step: 10,
         });
         $( "#inputConfettiBubbles" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputConfettiBalloons" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
@@ -1612,6 +1623,7 @@
         let weatherVolume = "25";
         let confettiParty = "100";
         let confettiBubbles = "100";
+        let confettiBalloons = "100";
         let confettiVolume = "25";
         let confettiColors = {
             "red": true,
@@ -1991,6 +2003,10 @@
             confettiBubbles = e.target.value;
             generateLink();
         });
+        $( "#inputConfettiBalloons" ).on( "input", ( e ) => {
+            confettiBalloons = e.target.value;
+            generateLink();
+        });
         $( "#inputConfettiVolume" ).on( "change", ( e ) => {
             confettiVolume = e.target.value;
             generateLink();
@@ -2350,6 +2366,9 @@
                 }
                 if( confettiBubbles !== "0" ) {
                     linkParams.push( `cpBubbles=true&cpBubblesCost=${confettiBubbles}` );
+                }
+                if( confettiBalloons !== "0" ) {
+                    linkParams.push( `cpBalloons=true&cpBalloonsCost=${confettiBalloons}` );
                 }
                 if( confettiVolume ) {
                     linkParams.push( `volume=${confettiVolume}` );
