@@ -669,6 +669,7 @@
                                                                                     <th>Chat Command</th>
                                                                                     <th>Channel Point Cost</th>
                                                                                     <th>Channel Point Cheers</th>
+                                                                                    <th>Channel Point Group Drop</th>
                                                                                     <th>Refresh Timer (secs)</th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
@@ -740,6 +741,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputParachuteCPDroplets" value="0" min="0" max="100000" step="50" placeholder="Channel Points Cheer Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteCPQueue" value="0" min="0" max="100000" step="500" placeholder="Channel Points Group Drop Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1029,6 +1035,11 @@
             step: 10,
         });
         $( "#inputParachuteCPDroplets" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputParachuteCPQueue" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
@@ -1597,6 +1608,7 @@
         let parachuteCommand = "";
         let parachuteCPDrop = "0";
         let parachuteCPDroplets = "0";
+        let parachuteCPQueue = "0";
         let isPlinkoOverlay = true;
         let isPlinkoCloudsOn = true;
         let isPlinkoHideTilStart = false;
@@ -1805,6 +1817,14 @@
         });
         $( "#inputParachuteCPDroplets" ).on( "input", ( e ) => {
             parachuteCPDroplets = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCPQueue" ).on( "change", ( e ) => {
+            parachuteCPQueue = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteCPQueue" ).on( "input", ( e ) => {
+            parachuteCPQueue = e.target.value;
             generateLink();
         });
         $( "#inputEnablePlinkoOverlay" ).on( "change", ( e ) => {
@@ -2285,6 +2305,9 @@
                 }
                 if( parachuteCPDroplets !== "0" ) {
                     linkParams.push( `cpDroplets=true&cpDropletsCost=${parachuteCPDroplets}` );
+                }
+                if( parachuteCPQueue !== "0" ) {
+                    linkParams.push( `cpQueue=true&cpQueueCost=${parachuteCPQueue}` );
                 }
                 if( isCommandEnabled ) {
                     linkParams.push( `commandOn=true` );
