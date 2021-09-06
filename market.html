@@ -365,6 +365,10 @@
                                                             <input type="checkbox" class="custom-control-input bg-danger" checked="" name="customCheck" id="checkboxPets">
                                                             <label class="custom-control-label" for="checkboxPets">Pets</label>
                                                         </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input bg-success" checked="" name="customCheck" id="checkboxAddons">
+                                                            <label class="custom-control-label" for="checkboxAddons">Add-Ons</label>
+                                                        </div>
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="input-group">
@@ -539,6 +543,9 @@
              $( "#checkboxPets" ).on( "change", ( e ) => {
                  populateItemList( $( "#market-search" ).val() );
              });
+             $( "#checkboxAddons" ).on( "change", ( e ) => {
+                 populateItemList( $( "#market-search" ).val() );
+             });
         });
 
         function populateItemList( searchText = "" ) {
@@ -549,6 +556,9 @@
             }
             if( !$( "#checkboxPets" ).prop( "checked" ) ) {
                 filteredCatalog = filteredCatalog.filter( x => x.type !== "pet" );
+            }
+            if( !$( "#checkboxAddons" ).prop( "checked" ) ) {
+                filteredCatalog = filteredCatalog.filter( x => x.type !== "add-on" );
             }
 
             // Handle adding subscription items
