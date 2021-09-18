@@ -703,6 +703,7 @@
                                                                                     <th>Blossoms</th>
                                                                                     <th>Snow</th>
                                                                                     <th>Blizzard</th>
+                                                                                    <th>Leaf</th>
                                                                                     <th>Volume</th>
                                                                                 </tr>
                                                                                 <tr class="parachute-game d-none">
@@ -755,6 +756,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputWeatherBlizzard" value="100" min="0" max="100000" step="50" placeholder="Blizzard Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLeaf" value="100" min="0" max="100000" step="50" placeholder="Leaf Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1216,6 +1222,11 @@
             step: 10,
         });
         $( "#inputWeatherHail" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputWeatherLeaf" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
@@ -1752,8 +1763,8 @@
         };
         const bossEffects = [ "steal", "base" ];
         const trapEffects = [ "points", "tunnel" ];
-        let gameType = params.get( "type" ) || "confetti";
-        let gameTheme = params.get( "game" ) || "confetti";
+        let gameType = params.get( "type" ) || "chatflakes";
+        let gameTheme = params.get( "game" ) || "chatflakes";
         let channelName = "";
         let isBossEnabled = true;
         let isChatEnabled = false;
@@ -1800,6 +1811,7 @@
         let weatherSnow = "100";
         let weatherBlizzard = "100";
         let weatherHail = "100";
+        let weatherLeaf = "100";
         let weatherVolume = "25";
         let confettiParty = "100";
         let confettiBubbles = "100";
@@ -2189,6 +2201,14 @@
         });
         $( "#inputWeatherHail" ).on( "input", ( e ) => {
             weatherHail = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherLeaf" ).on( "change", ( e ) => {
+            weatherLeaf = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherLeaf" ).on( "input", ( e ) => {
+            weatherLeaf = e.target.value;
             generateLink();
         });
         $( "#inputWeatherVolume" ).on( "change", ( e ) => {
@@ -2679,6 +2699,9 @@
                 }
                 if( weatherHail !== "0" ) {
                     linkParams.push( `hail=${weatherHail}` );
+                }
+                if( weatherLeaf !== "0" ) {
+                    linkParams.push( `leaf=${weatherLeaf}` );
                 }
                 if( weatherVolume ) {
                     linkParams.push( `volume=${weatherVolume}` );
