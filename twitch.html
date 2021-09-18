@@ -341,6 +341,7 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Game</label>
                                                                                 <select class="form-control" id="inputGameType">
+                                                                                  <option value="chatflakes">Chat Flakes</option>
                                                                                   <option value="confetti">Pixel Confetti</option>
                                                                                   <option value="weather">Stream Weather</option>
                                                                                   <option value="hillroll">Hill Rolling Race</option>
@@ -447,6 +448,14 @@
                                                                                     <th>Bubbles</th>
                                                                                     <th>Balloons</th>
                                                                                     <th>Sound Volume</th>
+                                                                                </tr>
+                                                                                <tr class="chatflakes-game d-none">
+                                                                                    <th>Message Interval</th>
+                                                                                    <th># Particles Per Message</th>
+                                                                                    <th>Leaves</th>
+                                                                                    <th>Snow</th>
+                                                                                    <th>Blossoms</th>
+                                                                                    <th>Raindrops</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -646,6 +655,38 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="touchspin" id="inputConfettiVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="chatflakes-game d-none">
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputFlakesNth" value="1" min="1" max="1000" step="1" placeholder="Message Interval">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputFlakesNum" value="3" min="1" max="100" step="1" placeholder="Particles Per Message">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesLeaves"><label for="inputEnableFlakesLeaves"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesSnow"><label for="inputEnableFlakesSnow"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesBlossoms"><label for="inputEnableFlakesBlossoms"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesRain" checked><label for="inputEnableFlakesRain"></label>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1180,6 +1221,17 @@
             step: 10,
         });
 
+        $( "#inputFlakesNth" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
+        });
+        $( "#inputFlakesNum" ).TouchSpin({
+            min: 1,
+            max: 100,
+            step: 1,
+        });
+
         ComfyTwitch.Check()
         .then( async result => {
             // console.log( result );
@@ -1296,8 +1348,16 @@
             }
         });
 
-        const gameTypes = [ "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
+        const gameTypes = [ "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
         const themeSettings = {
+            "chatflakes": {
+                game: "chatflakes",
+                name: "Chat Flakes (Premium)",
+                page: "https://www.pixelplush.dev/flakes/index.html",
+                preview: "/public/app-assets/images/games/chatflakes.gif",
+                messageFormat: " ",
+                requires: "addon_chatflakes",
+            },
             "weather": {
                 game: "weather",
                 name: "Stream Weather (Premium)",
@@ -1682,6 +1742,7 @@
             },
         };
         const gameInstructions = {
+            "chatflakes": "Bring some subtle chat interaction into your stream! Turn chat messages into stream particles such as leaves, snowflaks, raindrops, and more!",
             "confetti": "One of our <a href='https://devpost.com/software/pixel-confetti' target='_blank'>Twitch Hackathon Entries</a>! Set the channel points cost of the confetti redemption to get a browser source overlay link. Setting the cost to 0 will disable the confetti. Channel rewards will be automatically added for you in your channel. Use <strong>!resetconfetti</strong> to refresh the rewards or <strong>!deleteconfetti</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
             "weather": "Our <a href='https://devpost.com/software/stream-weather' target='_blank'>Prize-Winning Twitch Overlay</a>! Set the channel points cost of each type of weather redemption to get a browser source overlay link. Setting the cost to 0 will disable that weather type. Channel rewards will be automatically added for you in your channel. Use <strong>!resetweather</strong> to refresh the rewards or <strong>!deleteweather</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
             "hillroll": "Type <strong>!hill</strong> or your custom command into your channel chat to roll your character down the hill! Mods can use <strong>!resethill</strong> to restart the game or <strong>!queuehill</strong> and then <strong>!starthill [time in sec]</strong> to start a race. A default countdown time will always queue up races.",
@@ -1781,6 +1842,12 @@
             "blue": false,
             "purple": false,
         };
+        let flakesNth = "1";
+        let flakesNum = "3";
+        let flakesLeaves = false;
+        let flakesSnow = false;
+        let flakesBlossoms = false;
+        let flakesRain = true;
 
         $( "#inputGameType" ).val( gameType );
         $( "#inputGameType" ).on( "change", ( e ) => {
@@ -2152,6 +2219,30 @@
             confettiVolume = e.target.value;
             generateLink();
         });
+        $( "#inputFlakesNth" ).on( "input", ( e ) => {
+            flakesNth = e.target.value;
+            generateLink();
+        });
+        $( "#inputFlakesNum" ).on( "input", ( e ) => {
+            flakesNum = e.target.value;
+            generateLink();
+        });
+        $( "#inputEnableFlakesLeaves" ).on( "change", ( e ) => {
+            flakesLeaves = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableFlakesSnow" ).on( "change", ( e ) => {
+            flakesSnow = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableFlakesBlossoms" ).on( "change", ( e ) => {
+            flakesBlossoms = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnableFlakesRain" ).on( "change", ( e ) => {
+            flakesRain = e.target.checked;
+            generateLink();
+        });
 
         $( "#inputEnableParachuteColor-rainbow" ).on( "change", ( e ) => {
             // if( e.target.checked ) {
@@ -2521,6 +2612,26 @@
                 linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
             }
             switch( themeSettings[ gameTheme ].game ) {
+            case "chatflakes":
+                if( flakesNth !== "0" ) {
+                    linkParams.push( `nth=${flakesNth}` );
+                }
+                if( flakesNum !== "0" ) {
+                    linkParams.push( `num=${flakesNum}` );
+                }
+                if( flakesLeaves ) {
+                    linkParams.push( `leaves=true` );
+                }
+                if( flakesSnow ) {
+                    linkParams.push( `snow=true` );
+                }
+                if( flakesBlossoms ) {
+                    linkParams.push( `blossoms=true` );
+                }
+                if( flakesRain ) {
+                    linkParams.push( `rain=true` );
+                }
+                break;
             case "weather":
                 if( weatherRain !== "0" ) {
                     linkParams.push( `rain=${weatherRain}` );
