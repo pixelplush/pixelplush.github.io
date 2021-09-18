@@ -2516,6 +2516,26 @@
 
         $( document ).ready(function() {
             var clipboard = new ClipboardJS('.clipboard');
+            clipboard.on('success', function(e) {
+                $( "#copy-btn" ).text( "Copied!" );
+                $( "#copy-btn" ).removeClass( "btn-secondary" );
+                $( "#copy-btn" ).addClass( "btn-success" );
+                setTimeout( () => {
+                    $( "#copy-btn" ).text( "Click to Copy" );
+                    $( "#copy-btn" ).removeClass( "btn-success" );
+                    $( "#copy-btn" ).addClass( "btn-secondary" );
+                }, 2000 );
+            });
+            clipboard.on('error', function(e) {
+                $( "#copy-btn" ).text( "Error!" );
+                $( "#copy-btn" ).removeClass( "btn-secondary" );
+                $( "#copy-btn" ).addClass( "btn-danger" );
+                setTimeout( () => {
+                    $( "#copy-btn" ).text( "Click to Copy" );
+                    $( "#copy-btn" ).removeClass( "btn-danger" );
+                    $( "#copy-btn" ).addClass( "btn-secondary" );
+                }, 2000 );
+            });
         });
 
         function setThemeDefaults() {
