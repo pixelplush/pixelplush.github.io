@@ -2671,6 +2671,7 @@
                 if( flakesRain ) {
                     linkParams.push( `rain=true` );
                 }
+                linkParams.push( `oauth=${chatOAuth}` );
                 break;
             case "weather":
                 if( weatherRain !== "0" ) {
