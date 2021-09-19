@@ -437,11 +437,6 @@
                                                                                     <th>Hide Until Start</th>
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Results in Chat</th>
-                                                                                    <th>Hide Instructions</th>
-                                                                                    <th>Hide Timer</th>
-                                                                                    <th>Default Countdown (secs)</th>
-                                                                                    <th>Chat Command</th>
-                                                                                    <th>Refresh Timer (secs)</th>
                                                                                 </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <th>Party Confetti</th>
@@ -610,31 +605,6 @@
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollChat" disabled><label for="inputEnableHillRollChat"></label>
                                                                                         </div>
                                                                                     </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollInstructions" checked><label for="inputEnableHillRollInstructions"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollTimer" checked><label for="inputEnableHillRollTimer"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputHillRollDefaultCountdown" value="0" min="0" max="3600" step="10" placeholder="# Seconds">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="text" class="form-control" id="inputHillRollCommand" value="" placeholder="Command (e.g. !hill)">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputHillRollRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
-                                                                                        </div>
-                                                                                    </td>
                                                                                 </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <td>
@@ -718,6 +688,13 @@
                                                                                     <th>Enable Drop via Chat</th>
                                                                                     <th>Chat Command</th>
                                                                                     <th>Channel Point Cost</th>
+                                                                                    <th>Refresh Timer (secs)</th>
+                                                                                </tr>
+                                                                                <tr class="hillroll-game d-none">
+                                                                                    <th>Hide Instructions</th>
+                                                                                    <th>Hide Timer</th>
+                                                                                    <th>Default Countdown (secs)</th>
+                                                                                    <th>Chat Command</th>
                                                                                     <th>Refresh Timer (secs)</th>
                                                                                 </tr>
                                                                                 <tr class="confetti-game d-none">
@@ -820,6 +797,33 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputPlinkoRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="hillroll-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollInstructions" checked><label for="inputEnableHillRollInstructions"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollTimer" checked><label for="inputEnableHillRollTimer"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputHillRollDefaultCountdown" value="0" min="0" max="3600" step="10" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text" class="form-control" id="inputHillRollCommand" value="" placeholder="Command (e.g. !hill)">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputHillRollRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
