@@ -77,7 +77,7 @@
 									<a href="index.html">
 										<img src="public/app-assets/images/logo/logo.png" height="27px" class="img-responsive"> <img src="public/app-assets/images/logo/text.png" height="27px" class="img-responsive">
 									</a>
-									<span class="font-small-3"><i class="bx bxs-heart pink mx-50 font-small-3"></i>By <a href="https://twitch.tv/maayainsane" target="_blank"><img src="public/app-assets/images/icon/maaya.gif" height="32px"> Maaya</a> &amp; <a href="https://twitch.tv/instafluff" target="_blank">Instafluff <img src="public/app-assets/images/icon/instafluff.gif" height="34px"></a></span>
+									<span class="font-small-3"><i class="bx bxs-heart pink mx-50 font-small-3"></i>By <a href="https://twitch.tv/maaya" target="_blank"><img src="public/app-assets/images/icon/maaya.gif" height="32px"> Maaya</a> &amp; <a href="https://twitch.tv/instafluff" target="_blank">Instafluff <img src="public/app-assets/images/icon/instafluff.gif" height="34px"></a></span>
 								</div>
 							</li>
 						</ul>
@@ -315,7 +315,7 @@
 										<div class="card-content">
 											<div class="card-body">
 												<p class="card-text">
-													Welcome to our website! We are two friends, <a href="https://twitch.tv/maayainsane" rel="noopener" target="_blank">Maaya</a> (Art) and <a href="https://twitch.tv/instafluff" rel="noopener" target="_blank">Instafluff</a> (Code), and PixelPlush is our game studio to make fun and relaxing games that bring people together, especially through live streams on Twitch!
+													Welcome to our website! We are two friends, <a href="https://twitch.tv/maaya" rel="noopener" target="_blank">Maaya</a> (Art) and <a href="https://twitch.tv/instafluff" rel="noopener" target="_blank">Instafluff</a> (Code), and PixelPlush is our game studio to make fun and relaxing games that bring people together, especially through live streams on Twitch!
 												</p>
 											</div>
 										</div>
@@ -1432,13 +1432,13 @@ ComfyTwitch.Check()
 		let nextChannel = "pixelplushgames";
 		if( livestreams.length > 0 ) {
 			// Set Twitch embed channel
-			if( livestreams.includes( "maayainsane" ) && livestreams.includes( "instafluff" ) ) {
-				nextChannel = Math.random() < 0.5 ? "maayainsane" : "instafluff";
+			if( livestreams.includes( "maaya" ) && livestreams.includes( "instafluff" ) ) {
+				nextChannel = Math.random() < 0.5 ? "maaya" : "instafluff";
 				$("#featured-stream").attr( "src", `https://player.twitch.tv/?channel=${nextChannel}&parent=www.pixelplush.dev` );
 			}
-			else if( livestreams.includes( "maayainsane" ) ) {
-				nextChannel = "maayainsane";
-				$("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=maayainsane&parent=www.pixelplush.dev" );
+			else if( livestreams.includes( "maaya" ) ) {
+				nextChannel = "maaya";
+				$("#featured-stream").attr( "src", "https://player.twitch.tv/?channel=maaya&parent=www.pixelplush.dev" );
 			}
 			else if( livestreams.includes( "instafluff" ) ) {
 				nextChannel = "instafluff";
