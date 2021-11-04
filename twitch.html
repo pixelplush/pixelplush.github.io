@@ -423,6 +423,7 @@
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Score in Chat</th>
                                                                                     <th>Bit Cheers</th>
+                                                                                    <th>Enable Drop via Chat</th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th>Background</th>
@@ -551,6 +552,11 @@
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteDroplets"><label for="inputEnableParachuteDroplets"></label>
                                                                                         </div>
                                                                                     </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteCommand"><label for="inputEnableParachuteCommand"></label>
+                                                                                        </div>
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <td>
@@ -677,18 +683,19 @@
                                                                                     <th>Volume</th>
                                                                                 </tr>
                                                                                 <tr class="parachute-game d-none">
-                                                                                    <th>Enable Drop via Chat</th>
                                                                                     <th>Chat Command</th>
                                                                                     <th>Channel Point Cost</th>
                                                                                     <th>Channel Point Cheers</th>
                                                                                     <th>Channel Point Group Drop</th>
                                                                                     <th>Refresh Timer (secs)</th>
+                                                                                    <th>Time Til Ready (secs)</th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th>Enable Drop via Chat</th>
                                                                                     <th>Chat Command</th>
                                                                                     <th>Channel Point Cost</th>
                                                                                     <th>Refresh Timer (secs)</th>
+                                                                                    <th>Time Til Ready (secs)</th>
                                                                                 </tr>
                                                                                 <tr class="hillroll-game d-none">
                                                                                     <th>Hide Instructions</th>
@@ -748,11 +755,6 @@
                                                                                 </tr>
                                                                                 <tr class="parachute-game d-none">
                                                                                     <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteCommand"><label for="inputEnableParachuteCommand"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
                                                                                         <div class="input-group">
                                                                                             <input type="text" class="form-control" id="inputParachuteCommand" value="" placeholder="Command (e.g. !drop)">
                                                                                         </div>
@@ -777,6 +779,11 @@
                                                                                             <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteGameReady" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <td>
@@ -797,6 +804,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputPlinkoRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputPlinkoGameReady" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1140,6 +1152,11 @@
             max: 3600,
             step: 30,
         });
+        $( "#inputParachuteGameReady" ).TouchSpin({
+            min: 0,
+            max: 3600,
+            step: 30,
+        });
         $( "#inputParachuteCPDrop" ).TouchSpin({
             min: 0,
             max: 100000,
@@ -1162,6 +1179,11 @@
         });
         $( "#inputPlinkoRefresh" ).TouchSpin({
             min: 60,
+            max: 3600,
+            step: 30,
+        });
+        $( "#inputPlinkoGameReady" ).TouchSpin({
+            min: 0,
             max: 3600,
             step: 30,
         });
@@ -1806,6 +1828,7 @@
         let isParachuteHideTilDrop = false;
         let parachuteVolume = "25";
         let parachuteRefresh = "90";
+        let parachuteGameReady = "0";
         let parachuteCommand = "";
         let parachuteCPDrop = "0";
         let parachuteCPDroplets = "0";
@@ -1817,6 +1840,7 @@
         let plinkoCommand = "";
         let plinkoCPPlink = "0";
         let plinkoRefresh = "90";
+        let plinkoGameReady = "0";
         let isHillRollOverlay = true;
         let isHillRollCloudsOn = true;
         let isHillRollHideTilRoll = false;
@@ -2001,6 +2025,14 @@
             parachuteRefresh = e.target.value;
             generateLink();
         });
+        $( "#inputParachuteGameReady" ).on( "change", ( e ) => {
+            parachuteGameReady = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteGameReady" ).on( "input", ( e ) => {
+            parachuteGameReady = e.target.value;
+            generateLink();
+        });
         $( "#inputParachuteCommand" ).on( "change", ( e ) => {
             parachuteCommand = e.target.value;
             generateLink();
@@ -2091,6 +2123,14 @@
         });
         $( "#inputPlinkoRefresh" ).on( "input", ( e ) => {
             plinkoRefresh = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoGameReady" ).on( "change", ( e ) => {
+            plinkoGameReady = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoGameReady" ).on( "input", ( e ) => {
+            plinkoGameReady = e.target.value;
             generateLink();
         });
         $( "#inputEnablePlinkoCommand" ).on( "change", ( e ) => {
@@ -2763,6 +2803,9 @@
                 if( parachuteRefresh ) {
                     linkParams.push( `cooldown=${parachuteRefresh}000` );
                 }
+                if( parachuteGameReady && parachuteGameReady !== "0" ) {
+                    linkParams.push( `readyTime=${parachuteGameReady}000` );
+                }
                 if( isChatEnabled && chatOAuth ) {
                     linkParams.push( `messageFormat=${messageFormat}` );
                 }
@@ -2801,6 +2844,9 @@
                 }
                 if( plinkoRefresh ) {
                     linkParams.push( `cooldown=${plinkoRefresh}000` );
+                }
+                if( plinkoGameReady && plinkoGameReady !== "0" ) {
+                    linkParams.push( `readyTime=${plinkoGameReady}000` );
                 }
                 if( plinkoCPPlink !== "0" ) {
                     linkParams.push( `cpPlink=true&cpPlinkCost=${plinkoCPPlink}` );
