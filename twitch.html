@@ -402,10 +402,11 @@
                                                                             <thead>
                                                                                 <tr class="weather-game d-none">
                                                                                     <th>Rain (0 to disable)</th>
+                                                                                    <th>Rain Time</th>
                                                                                     <th>Heavy Rain</th>
-                                                                                    <th>Lightning</th>
-                                                                                    <th>Rainbow</th>
+                                                                                    <th>Heavy Rain Time</th>
                                                                                     <th>Hail</th>
+                                                                                    <th>Hail Time</th>
                                                                                 </tr>
                                                                                 <tr class="maze-game d-none">
                                                                                     <th>Enable Boss</th>
@@ -505,22 +506,27 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherRainTime" value="5" min="1" max="1000" step="1" placeholder="Rain Time">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
                                                                                             <input type="number" class="" id="inputWeatherHeavyRain" value="100" min="0" max="100000" step="50" placeholder="Heavy Rain Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherLightning" value="100" min="0" max="100000" step="50" placeholder="Lightning Cost">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
+                                                                                            <input type="number" class="" id="inputWeatherHeavyRainTime" value="5" min="1" max="1000" step="1" placeholder="Heavy Rain Time">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputWeatherHail" value="100" min="0" max="100000" step="50" placeholder="Hail Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherHailTime" value="5" min="1" max="1000" step="1" placeholder="Hail Time">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -693,12 +699,12 @@
                                                                         <table class="table mt-1">
                                                                             <thead>
                                                                                 <tr class="weather-game d-none">
-                                                                                    <th>Sunshine</th>
                                                                                     <th>Blossoms</th>
+                                                                                    <th>Blossoms Time</th>
                                                                                     <th>Snow</th>
+                                                                                    <th>Snow Time</th>
                                                                                     <th>Blizzard</th>
-                                                                                    <th>Leaf</th>
-                                                                                    <th>Volume</th>
+                                                                                    <th>Blizzard Time</th>
                                                                                 </tr>
                                                                                 <tr class="parachute-game d-none">
                                                                                     <th>Chat Command</th>
@@ -742,12 +748,12 @@
                                                                                 <tr class="weather-game d-none">
                                                                                     <td>
                                                                                         <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherSunshine" value="100" min="0" max="100000" step="50" placeholder="Sunshine Cost">
+                                                                                            <input type="number" class="" id="inputWeatherBlossoms" value="100" min="0" max="100000" step="50" placeholder="Blossoms Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherBlossoms" value="100" min="0" max="100000" step="50" placeholder="Blossoms Cost">
+                                                                                            <input type="number" class="" id="inputWeatherBlossomsTime" value="5" min="1" max="1000" step="1" placeholder="Blossoms Time">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -757,17 +763,17 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherSnowTime" value="5" min="1" max="1000" step="1" placeholder="Snow Time">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
                                                                                             <input type="number" class="" id="inputWeatherBlizzard" value="100" min="0" max="100000" step="50" placeholder="Blizzard Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherLeaf" value="100" min="0" max="100000" step="50" placeholder="Leaf Cost">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputWeatherVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                            <input type="number" class="" id="inputWeatherBlizzardTime" value="5" min="1" max="1000" step="1" placeholder="Blizzard Time">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -957,6 +963,14 @@
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_rosegold.png" alt="Rose Gold"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_silver.png" alt="Silver"/></th>
                                                                                 </tr>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <th>Sunshine</th>
+                                                                                    <th>Lightning</th>
+                                                                                    <th>Rainbow</th>
+                                                                                    <th>Leaf</th>
+                                                                                    <th>Leaf Time</th>
+                                                                                    <th>Volume</th>
+                                                                                </tr>
                                                                             </thead>
                                                                             <tbody>
                                                                                 <tr class="parachute-game-extras d-none">
@@ -1061,6 +1075,38 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSilver" checked><label for="inputEnableConfettiSilver"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherSunshine" value="100" min="0" max="100000" step="50" placeholder="Sunshine Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLightning" value="100" min="0" max="100000" step="50" placeholder="Lightning Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLeaf" value="100" min="0" max="100000" step="50" placeholder="Leaf Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLeafTime" value="5" min="1" max="1000" step="1" placeholder="Leaf Time">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputWeatherVolume" value="25" min="0" max="100" placeholder="Sound Volume">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1252,10 +1298,20 @@
             max: 100000,
             step: 10,
         });
+        $( "#inputWeatherRainTime" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
+        });
         $( "#inputWeatherHeavyRain" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
+        });
+        $( "#inputWeatherHeavyRainTime" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
         });
         $( "#inputWeatherLightning" ).TouchSpin({
             min: 0,
@@ -1277,25 +1333,50 @@
             max: 100000,
             step: 10,
         });
+        $( "#inputWeatherBlossomsTime" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
+        });
         $( "#inputWeatherSnow" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
+        });
+        $( "#inputWeatherSnowTime" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
         });
         $( "#inputWeatherBlizzard" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
         });
+        $( "#inputWeatherBlizzardTime" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
+        });
         $( "#inputWeatherHail" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
         });
+        $( "#inputWeatherHailTime" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
+        });
         $( "#inputWeatherLeaf" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
+        });
+        $( "#inputWeatherLeafTime" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
         });
 
         $( "#inputFlakesNth" ).TouchSpin({
@@ -1882,15 +1963,22 @@
         let hillRollRefresh = "90";
         let hillRollCommand = "";
         let weatherRain = "100";
+        let weatherRainTime = "5";
         let weatherHeavyRain = "100";
+        let weatherHeavyRainTime = "5";
         let weatherLightning = "100";
         let weatherRainbow = "100";
         let weatherSunshine = "100";
         let weatherBlossoms = "100";
+        let weatherBlossomsTime = "5";
         let weatherSnow = "100";
+        let weatherSnowTime = "5";
         let weatherBlizzard = "100";
+        let weatherBlizzardTime = "5";
         let weatherHail = "100";
+        let weatherHailTime = "5";
         let weatherLeaf = "100";
+        let weatherLeafTime = "5";
         let weatherVolume = "25";
         let confettiParty = "100";
         let confettiIntensity = "300";
@@ -2237,12 +2325,28 @@
             weatherRain = e.target.value;
             generateLink();
         });
+        $( "#inputWeatherRainTime" ).on( "change", ( e ) => {
+            weatherRainTime = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherRainTime" ).on( "input", ( e ) => {
+            weatherRainTime = e.target.value;
+            generateLink();
+        });
         $( "#inputWeatherHeavyRain" ).on( "change", ( e ) => {
             weatherHeavyRain = e.target.value;
             generateLink();
         });
         $( "#inputWeatherHeavyRain" ).on( "input", ( e ) => {
             weatherHeavyRain = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHeavyRainTime" ).on( "change", ( e ) => {
+            weatherHeavyRainTime = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHeavyRainTime" ).on( "input", ( e ) => {
+            weatherHeavyRainTime = e.target.value;
             generateLink();
         });
         $( "#inputWeatherLightning" ).on( "change", ( e ) => {
@@ -2277,12 +2381,28 @@
             weatherBlossoms = e.target.value;
             generateLink();
         });
+        $( "#inputWeatherBlossomsTime" ).on( "change", ( e ) => {
+            weatherBlossomsTime = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlossomsTime" ).on( "input", ( e ) => {
+            weatherBlossomsTime = e.target.value;
+            generateLink();
+        });
         $( "#inputWeatherSnow" ).on( "change", ( e ) => {
             weatherSnow = e.target.value;
             generateLink();
         });
         $( "#inputWeatherSnow" ).on( "input", ( e ) => {
             weatherSnow = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSnowTime" ).on( "change", ( e ) => {
+            weatherSnowTime = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherSnowTime" ).on( "input", ( e ) => {
+            weatherSnowTime = e.target.value;
             generateLink();
         });
         $( "#inputWeatherBlizzard" ).on( "change", ( e ) => {
@@ -2293,6 +2413,14 @@
             weatherBlizzard = e.target.value;
             generateLink();
         });
+        $( "#inputWeatherBlizzardTime" ).on( "change", ( e ) => {
+            weatherBlizzardTime = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherBlizzardTime" ).on( "input", ( e ) => {
+            weatherBlizzardTime = e.target.value;
+            generateLink();
+        });
         $( "#inputWeatherHail" ).on( "change", ( e ) => {
             weatherHail = e.target.value;
             generateLink();
@@ -2301,12 +2429,28 @@
             weatherHail = e.target.value;
             generateLink();
         });
+        $( "#inputWeatherHailTime" ).on( "change", ( e ) => {
+            weatherHailTime = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherHailTime" ).on( "input", ( e ) => {
+            weatherHailTime = e.target.value;
+            generateLink();
+        });
         $( "#inputWeatherLeaf" ).on( "change", ( e ) => {
             weatherLeaf = e.target.value;
             generateLink();
         });
         $( "#inputWeatherLeaf" ).on( "input", ( e ) => {
             weatherLeaf = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherLeafTime" ).on( "change", ( e ) => {
+            weatherLeafTime = e.target.value;
+            generateLink();
+        });
+        $( "#inputWeatherLeafTime" ).on( "input", ( e ) => {
+            weatherLeafTime = e.target.value;
             generateLink();
         });
         $( "#inputWeatherVolume" ).on( "change", ( e ) => {
@@ -2809,10 +2953,10 @@
                 break;
             case "weather":
                 if( weatherRain !== "0" ) {
-                    linkParams.push( `rain=${weatherRain}` );
+                    linkParams.push( `rain=${weatherRain}&rainTime=${weatherRainTime}` );
                 }
                 if( weatherHeavyRain !== "0" ) {
-                    linkParams.push( `heavyrain=${weatherHeavyRain}` );
+                    linkParams.push( `heavyrain=${weatherHeavyRain}&heavyrainTime=${weatherHeavyRainTime}` );
                 }
                 if( weatherLightning !== "0" ) {
                     linkParams.push( `lightning=${weatherLightning}` );
@@ -2824,19 +2968,19 @@
                     linkParams.push( `sunshine=${weatherSunshine}` );
                 }
                 if( weatherBlossoms !== "0" ) {
-                    linkParams.push( `blossoms=${weatherBlossoms}` );
+                    linkParams.push( `blossoms=${weatherBlossoms}&blossomsTime=${weatherBlossomsTime}` );
                 }
                 if( weatherSnow !== "0" ) {
-                    linkParams.push( `snow=${weatherSnow}` );
+                    linkParams.push( `snow=${weatherSnow}&snowTime=${weatherSnowTime}` );
                 }
                 if( weatherBlizzard !== "0" ) {
-                    linkParams.push( `blizzard=${weatherBlizzard}` );
+                    linkParams.push( `blizzard=${weatherBlizzard}&blizzardTime=${weatherBlizzardTime}` );
                 }
                 if( weatherHail !== "0" ) {
-                    linkParams.push( `hail=${weatherHail}` );
+                    linkParams.push( `hail=${weatherHail}&hailTime=${weatherHailTime}` );
                 }
                 if( weatherLeaf !== "0" ) {
-                    linkParams.push( `leaf=${weatherLeaf}` );
+                    linkParams.push( `leaf=${weatherLeaf}&leafTime=${weatherLeafTime}` );
                 }
                 if( weatherVolume ) {
                     linkParams.push( `volume=${weatherVolume}` );
