@@ -718,6 +718,7 @@
                                                                                     <th>Enable Drop via Chat</th>
                                                                                     <th>Chat Command</th>
                                                                                     <th>Channel Point Cost</th>
+                                                                                    <th>Channel Point Group Plinko</th>
                                                                                     <th>Refresh Timer (secs)</th>
                                                                                     <th>Time Til Ready (secs)</th>
                                                                                 </tr>
@@ -823,6 +824,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputPlinkoCPPlink" value="0" min="0" max="100000" step="50" placeholder="Channel Points Plinko Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputPlinkoCPQueue" value="0" min="0" max="100000" step="500" placeholder="Channel Points Group Plinko Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1237,6 +1243,11 @@
             step: 10,
         });
         $( "#inputPlinkoCPPlink" ).TouchSpin({
+            min: 0,
+            max: 100000,
+            step: 10,
+        });
+        $( "#inputPlinkoCPQueue" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
@@ -1953,6 +1964,7 @@
         let plinkoVolume = "25";
         let plinkoCommand = "";
         let plinkoCPPlink = "0";
+        let plinkoCPQueue = "0";
         let plinkoRefresh = "90";
         let plinkoGameReady = "0";
         let isHillRollOverlay = true;
@@ -2239,6 +2251,14 @@
         });
         $( "#inputPlinkoCommand" ).on( "input", ( e ) => {
             plinkoCommand = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoCPQueue" ).on( "change", ( e ) => {
+            plinkoCPQueue = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoCPQueue" ).on( "input", ( e ) => {
+            plinkoCPQueue = e.target.value;
             generateLink();
         });
         $( "#inputPlinkoRefresh" ).on( "change", ( e ) => {
@@ -3057,6 +3077,9 @@
                 }
                 if( plinkoCommand ) {
                     linkParams.push( `command=${plinkoCommand.replace("!", "")}` );
+                }
+                if( plinkoCPQueue !== "0" ) {
+                    linkParams.push( `cpQueue=true&cpQueueCost=${plinkoCPQueue}` );
                 }
                 if( plinkoRefresh ) {
                     linkParams.push( `cooldown=${plinkoRefresh}000` );
