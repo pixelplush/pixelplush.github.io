@@ -441,8 +441,11 @@
                                                                                 </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <th>Party Confetti</th>
+                                                                                    <th># of Confetti</th>
                                                                                     <th>Bubbles</th>
+                                                                                    <th># of Bubbles</th>
                                                                                     <th>Balloons</th>
+                                                                                    <th># of Balloons</th>
                                                                                     <th>Sound Volume</th>
                                                                                 </tr>
                                                                                 <tr class="chatflakes-game d-none">
@@ -620,12 +623,27 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiPartyIntensity" value="300" min="50" max="10000" step="50" placeholder="Confetti Intensity">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
                                                                                             <input type="number" class="" id="inputConfettiBubbles" value="100" min="0" max="100000" step="50" placeholder="Bubbles Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiBubblesIntensity" value="300" min="50" max="10000" step="50" placeholder="Bubbles Intensity">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
                                                                                             <input type="number" class="" id="inputConfettiBalloons" value="100" min="0" max="100000" step="50" placeholder="Balloons Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiBalloonsIntensity" value="20" min="1" max="1000" step="1" placeholder="Balloons Intensity">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -1192,15 +1210,30 @@
             max: 100000,
             step: 10,
         });
+        $( "#inputConfettiPartyIntensity" ).TouchSpin({
+            min: 50,
+            max: 10000,
+            step: 10,
+        });
         $( "#inputConfettiBubbles" ).TouchSpin({
             min: 0,
             max: 100000,
+            step: 10,
+        });
+        $( "#inputConfettiBubblesIntensity" ).TouchSpin({
+            min: 50,
+            max: 10000,
             step: 10,
         });
         $( "#inputConfettiBalloons" ).TouchSpin({
             min: 0,
             max: 100000,
             step: 10,
+        });
+        $( "#inputConfettiBalloonsIntensity" ).TouchSpin({
+            min: 1,
+            max: 1000,
+            step: 1,
         });
         $( "#inputHillRollDefaultCountdown" ).TouchSpin({
             min: 0,
@@ -1860,8 +1893,11 @@
         let weatherLeaf = "100";
         let weatherVolume = "25";
         let confettiParty = "100";
+        let confettiIntensity = "300";
         let confettiBubbles = "100";
+        let bubblesIntensity = "300";
         let confettiBalloons = "100";
+        let balloonsIntensity = "20";
         let confettiVolume = "25";
         let confettiColors = {
             "red": true,
@@ -2285,12 +2321,48 @@
             confettiParty = e.target.value;
             generateLink();
         });
+        $( "#inputConfettiParty" ).on( "input", ( e ) => {
+            confettiParty = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiPartyIntensity" ).on( "change", ( e ) => {
+            confettiIntensity = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiPartyIntensity" ).on( "input", ( e ) => {
+            confettiIntensity = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiBubbles" ).on( "change", ( e ) => {
+            confettiBubbles = e.target.value;
+            generateLink();
+        });
         $( "#inputConfettiBubbles" ).on( "input", ( e ) => {
             confettiBubbles = e.target.value;
             generateLink();
         });
+        $( "#inputConfettiBubblesIntensity" ).on( "change", ( e ) => {
+            bubblesIntensity = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiBubblesIntensity" ).on( "input", ( e ) => {
+            bubblesIntensity = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiBalloons" ).on( "change", ( e ) => {
+            confettiBalloons = e.target.value;
+            generateLink();
+        });
         $( "#inputConfettiBalloons" ).on( "input", ( e ) => {
             confettiBalloons = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiBalloonsIntensity" ).on( "change", ( e ) => {
+            balloonsIntensity = e.target.value;
+            generateLink();
+        });
+        $( "#inputConfettiBalloonsIntensity" ).on( "input", ( e ) => {
+            balloonsIntensity = e.target.value;
             generateLink();
         });
         $( "#inputConfettiVolume" ).on( "change", ( e ) => {
@@ -2897,13 +2969,13 @@
                 break;
             case "confetti":
                 if( confettiParty !== "0" ) {
-                    linkParams.push( `cpConfetti=true&cpConfettiCost=${confettiParty}` );
+                    linkParams.push( `cpConfetti=true&cpConfettiCost=${confettiParty}&cpConfettiIntensity=${confettiIntensity}` );
                 }
                 if( confettiBubbles !== "0" ) {
-                    linkParams.push( `cpBubbles=true&cpBubblesCost=${confettiBubbles}` );
+                    linkParams.push( `cpBubbles=true&cpBubblesCost=${confettiBubbles}&cpBubblesIntensity=${bubblesIntensity}` );
                 }
                 if( confettiBalloons !== "0" ) {
-                    linkParams.push( `cpBalloons=true&cpBalloonsCost=${confettiBalloons}` );
+                    linkParams.push( `cpBalloons=true&cpBalloonsCost=${confettiBalloons}&cpBalloonsIntensity=${balloonsIntensity}` );
                 }
                 if( confettiVolume ) {
                     linkParams.push( `volume=${confettiVolume}` );
