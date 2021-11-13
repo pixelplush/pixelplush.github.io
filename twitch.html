@@ -425,6 +425,7 @@
                                                                                     <th>Score in Chat</th>
                                                                                     <th>Bit Cheers</th>
                                                                                     <th>Enable Drop via Chat</th>
+                                                                                    <th>Group Drop Sound</th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th>Background</th>
@@ -432,6 +433,7 @@
                                                                                     <th>Hide Until Start</th>
                                                                                     <th>Sound Volume</th>
                                                                                     <th>Enable Chat Announcement</th>
+                                                                                    <th>Group Drop Sound</th>
                                                                                 </tr>
                                                                                 <tr class="hillroll-game d-none">
                                                                                     <th>Background</th>
@@ -566,6 +568,11 @@
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteCommand"><label for="inputEnableParachuteCommand"></label>
                                                                                         </div>
                                                                                     </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteGroupSound"><label for="inputEnableParachuteGroupSound"></label>
+                                                                                        </div>
+                                                                                    </td>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <td>
@@ -591,6 +598,11 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoChat" disabled><label for="inputEnablePlinkoChat"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoGroupSound"><label for="inputEnablePlinkoGroupSound"></label>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1939,6 +1951,7 @@
         let isChatEnabled = false;
         let isCommandEnabled = true;
         let isDropletsEnabled = true;
+        let isGroupSFXEnabled = true;
         let hideInstructions = false;
         let hideTimer = false;
         let chatOAuth = "";
@@ -2189,6 +2202,10 @@
             isDropletsEnabled = e.target.checked;
             generateLink();
         });
+        $( "#inputEnableParachuteGroupSound" ).on( "change", ( e ) => {
+            isGroupSFXEnabled = e.target.checked;
+            generateLink();
+        });
         $( "#inputParachuteCPDrop" ).on( "change", ( e ) => {
             parachuteCPDrop = e.target.value;
             generateLink();
@@ -2235,6 +2252,10 @@
         });
         $( "#inputEnablePlinkoChat" ).on( "change", ( e ) => {
             isChatEnabled = e.target.checked;
+            generateLink();
+        });
+        $( "#inputEnablePlinkoGroupSound" ).on( "change", ( e ) => {
+            isGroupSFXEnabled = e.target.checked;
             generateLink();
         });
         $( "#inputPlinkoCPPlink" ).on( "change", ( e ) => {
@@ -2920,6 +2941,7 @@
             $( "#inputEnableParachuteChat" ).prop( "checked", isChatEnabled );
             $( "#inputEnableParachuteCommand" ).prop( "checked", isCommandEnabled );
             $( "#inputEnableParachuteDroplets" ).prop( "checked", isDropletsEnabled );
+            $( "#inputEnableParachuteGroupSound" ).prop( "checked", isGroupSFXEnabled );
             isPlinkoOverlay = themeSettings[ gameTheme ].overlay || false;
             isPlinkoCloudsOn = themeSettings[ gameTheme ].clouds || false;
             isPlinkoHideTilStart = themeSettings[ gameTheme ].hideTilStart || false;
@@ -2928,6 +2950,7 @@
             $( "#inputEnablePlinkoHideTilStart" ).prop( "checked", isPlinkoOverlay );
             $( "#inputEnablePlinkoChat" ).prop( "checked", isChatEnabled );
             $( "#inputEnablePlinkoCommand" ).prop( "checked", isCommandEnabled );
+            $( "#inputEnablePlinkoGroupSound" ).prop( "checked", isGroupSFXEnabled );
             isHillRollOverlay = themeSettings[ gameTheme ].overlay || false;
             isHillRollCloudsOn = themeSettings[ gameTheme ].clouds || false;
             isHillRollHideTilRoll = themeSettings[ gameTheme ].hideTilRoll || false;
@@ -3063,6 +3086,9 @@
                 if( isDropletsEnabled ) {
                     linkParams.push( `droplets=true` );
                 }
+                if( isGroupSFXEnabled ) {
+                    linkParams.push( `queueSound=true` );
+                }
                 linkParams.push( `oauth=${chatOAuth}` );
                 break;
             case "plinko":
@@ -3098,6 +3124,9 @@
                 }
                 if( isCommandEnabled ) {
                     linkParams.push( `commandOn=true` );
+                }
+                if( isGroupSFXEnabled ) {
+                    linkParams.push( `queueSound=true` );
                 }
                 // if( plinkoRefresh ) {
                 //     linkParams.push( `cooldown=${plinkoRefresh}000` );
