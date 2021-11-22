@@ -444,11 +444,8 @@
                                                                                 </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <th>Party Confetti</th>
-                                                                                    <th># of Confetti</th>
                                                                                     <th>Bubbles</th>
-                                                                                    <th># of Bubbles</th>
                                                                                     <th>Balloons</th>
-                                                                                    <th># of Balloons</th>
                                                                                     <th>Sound Volume</th>
                                                                                 </tr>
                                                                                 <tr class="chatflakes-game d-none">
@@ -641,27 +638,12 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
-                                                                                            <input type="number" class="" id="inputConfettiPartyIntensity" value="300" min="50" max="10000" step="50" placeholder="Confetti Intensity">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
                                                                                             <input type="number" class="" id="inputConfettiBubbles" value="100" min="0" max="100000" step="50" placeholder="Bubbles Cost">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
-                                                                                            <input type="number" class="" id="inputConfettiBubblesIntensity" value="300" min="50" max="10000" step="50" placeholder="Bubbles Intensity">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
                                                                                             <input type="number" class="" id="inputConfettiBalloons" value="100" min="0" max="100000" step="50" placeholder="Balloons Cost">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputConfettiBalloonsIntensity" value="20" min="1" max="1000" step="1" placeholder="Balloons Intensity">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
@@ -734,27 +716,17 @@
                                                                                     <th>Refresh Timer (secs)</th>
                                                                                     <th>Time Til Ready (secs)</th>
                                                                                 </tr>
+                                                                                <tr class="confetti-game d-none">
+                                                                                    <th># of Confetti</th>
+                                                                                    <th># of Bubbles</th>
+                                                                                    <th># of Balloons</th>
+                                                                                </tr>
                                                                                 <tr class="hillroll-game d-none">
                                                                                     <th>Hide Instructions</th>
                                                                                     <th>Hide Timer</th>
                                                                                     <th>Default Countdown (secs)</th>
                                                                                     <th>Chat Command</th>
                                                                                     <th>Refresh Timer (secs)</th>
-                                                                                </tr>
-                                                                                <tr class="confetti-game d-none">
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelred.png" alt="Pastel Red"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelorange.png" alt="Pastel Orange"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_yellow.png" alt="Yellow"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_darkyellow.png" alt="Dark Yellow"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelyellow.png" alt="Pastel Yellow"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_lime.png" alt="Lime"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastellime.png" alt="Pastel Lime"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_green.png" alt="Green"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelgreen.png" alt="Pastel Green"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelblue.png" alt="Pastel Blue"/></th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -854,6 +826,23 @@
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
+                                                                                <tr class="confetti-game d-none">
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiPartyIntensity" value="300" min="50" max="10000" step="50" placeholder="Confetti Intensity">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiBubblesIntensity" value="300" min="50" max="10000" step="50" placeholder="Bubbles Intensity">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputConfettiBalloonsIntensity" value="20" min="1" max="1000" step="1" placeholder="Balloons Intensity">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
                                                                                 <tr class="hillroll-game d-none">
                                                                                     <td>
                                                                                         <div class="checkbox">
@@ -878,6 +867,91 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputHillRollRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table mt-1">
+                                                                            <thead>
+                                                                                <tr class="parachute-game-extras d-none">
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_rainbow.png" alt="Color-Changing"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pink.png" alt="Pink"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_yellow.png" alt="Yellow"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_green.png" alt="Green"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
+                                                                                </tr>
+                                                                                <tr class="confetti-game d-none">
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelred.png" alt="Pastel Red"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelorange.png" alt="Pastel Orange"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_yellow.png" alt="Yellow"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_darkyellow.png" alt="Dark Yellow"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelyellow.png" alt="Pastel Yellow"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_lime.png" alt="Lime"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastellime.png" alt="Pastel Lime"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_green.png" alt="Green"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelgreen.png" alt="Pastel Green"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelblue.png" alt="Pastel Blue"/></th>
+                                                                                </tr>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <th>Sunshine</th>
+                                                                                    <th>Lightning</th>
+                                                                                    <th>Rainbow</th>
+                                                                                    <th>Leaf</th>
+                                                                                    <th>Leaf Time</th>
+                                                                                    <th>Volume</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                                <tr class="parachute-game-extras d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-rainbow" checked><label for="inputEnableParachuteColor-rainbow"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-red"><label for="inputEnableParachuteColor-red"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-pink"><label for="inputEnableParachuteColor-pink"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-orange"><label for="inputEnableParachuteColor-orange"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-yellow"><label for="inputEnableParachuteColor-yellow"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-green"><label for="inputEnableParachuteColor-green"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-blue"><label for="inputEnableParachuteColor-blue"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-purple"><label for="inputEnableParachuteColor-purple"></label>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -948,6 +1022,38 @@
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
+                                                                                <tr class="weather-game d-none">
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherSunshine" value="100" min="0" max="100000" step="50" placeholder="Sunshine Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLightning" value="100" min="0" max="100000" step="50" placeholder="Lightning Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLeaf" value="100" min="0" max="100000" step="50" placeholder="Leaf Cost">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputWeatherLeafTime" value="5" min="1" max="1000" step="1" placeholder="Leaf Time">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputWeatherVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
                                                                             </tbody>
                                                                         </table>
                                                                     </div>
@@ -956,16 +1062,6 @@
                                                                     <div class="table-responsive">
                                                                         <table class="table mt-1">
                                                                             <thead>
-                                                                                <tr class="parachute-game-extras d-none">
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_rainbow.png" alt="Color-Changing"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pink.png" alt="Pink"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_yellow.png" alt="Yellow"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_green.png" alt="Green"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
-                                                                                </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_skyblue.png" alt="Sky Blue"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
@@ -981,58 +1077,8 @@
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_rosegold.png" alt="Rose Gold"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_silver.png" alt="Silver"/></th>
                                                                                 </tr>
-                                                                                <tr class="weather-game d-none">
-                                                                                    <th>Sunshine</th>
-                                                                                    <th>Lightning</th>
-                                                                                    <th>Rainbow</th>
-                                                                                    <th>Leaf</th>
-                                                                                    <th>Leaf Time</th>
-                                                                                    <th>Volume</th>
-                                                                                </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr class="parachute-game-extras d-none">
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-rainbow" checked><label for="inputEnableParachuteColor-rainbow"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-red"><label for="inputEnableParachuteColor-red"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-pink"><label for="inputEnableParachuteColor-pink"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-orange"><label for="inputEnableParachuteColor-orange"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-yellow"><label for="inputEnableParachuteColor-yellow"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-green"><label for="inputEnableParachuteColor-green"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-blue"><label for="inputEnableParachuteColor-blue"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-purple"><label for="inputEnableParachuteColor-purple"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <td>
                                                                                         <div class="checkbox">
@@ -1093,38 +1139,6 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSilver" checked><label for="inputEnableConfettiSilver"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr class="weather-game d-none">
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherSunshine" value="100" min="0" max="100000" step="50" placeholder="Sunshine Cost">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherLightning" value="100" min="0" max="100000" step="50" placeholder="Lightning Cost">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherLeaf" value="100" min="0" max="100000" step="50" placeholder="Leaf Cost">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputWeatherLeafTime" value="5" min="1" max="1000" step="1" placeholder="Leaf Time">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputWeatherVolume" value="25" min="0" max="100" placeholder="Sound Volume">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
