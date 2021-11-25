@@ -305,19 +305,19 @@
                                                                     <div class="col-10">
                                                                         <div class="row">
                                                                             <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-dark" type="button" id="buy-btn-10" onclick="showCoinBuy(10, 2)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x10</small><br/><strong>$2</strong></button>
+                                                                                <button class="btn btn-dark" type="button" id="buy-btn-10" onclick="showCoinBuy(10, 2)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x10</small><br/><small class="text-warning">No Bonus</small><br/><strong>$2</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="showCoinBuy(20, 4)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x20</small><br/><strong>$4</strong></button>
+                                                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="showCoinBuy(20, 4)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x22</small><br/><small class="text-secondary">+10%</small><br/><strong>$4</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-danger" type="button" id="buy-btn-60" onclick="showCoinBuy(40, 8)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x40</small><br/><strong>$8</strong></button>
+                                                                                <button class="btn btn-danger" type="button" id="buy-btn-60" onclick="showCoinBuy(40, 8)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x46</small><br/><small class="text-secondary">+15%</small><br/><strong>$8</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-success" type="button" id="buy-btn-100" onclick="showCoinBuy(100, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x100</small><br/><strong>$20</strong></button>
+                                                                                <button class="btn btn-success" type="button" id="buy-btn-100" onclick="showCoinBuy(100, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x120</small><br/><small class="text-secondary">+20%</small><br/><strong>$20</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-info" type="button" id="buy-btn-500" onclick="showCoinBuy(500, 100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x500</small><br/><strong>$100</strong></button>
+                                                                                <button class="btn btn-info" type="button" id="buy-btn-500" onclick="showCoinBuy(500, 100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x625</small><br/><small class="text-secondary">+25%</small><br/><strong>$100</strong></button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -972,8 +972,26 @@
 
         function showCoinBuy( coins, amount ) {
             orderAmount = coins;
+            let bonusCoins = 0;
+            if( coins >= 500 ) {
+                bonusCoins = 125; // 25% more coins
+            }
+            else if( coins >= 100 ) {
+                bonusCoins = 20; // 20% more coins
+            }
+            else if( coins >= 40 ) {
+                bonusCoins = 6; // 15% more coins
+            }
+            else if( coins >= 20 ) {
+                bonusCoins = 2; // 10% more coins
+            }
             $("#coin-buy-amount").text( coins );
-            $("#coin-buy-text").text( `${coins} Plush Coins for $${amount}! Exciting!` );
+            if( bonusCoins > 0 ) {
+                $("#coin-buy-text").text( `${coins} Plush Coins + ${bonusCoins} Bonus Coins for $${amount}! Exciting!` );
+            }
+            else {
+                $("#coin-buy-text").text( `${coins} Plush Coins for $${amount}! Exciting!` );
+            }
             $("#coin-buy").modal();
         }
 
