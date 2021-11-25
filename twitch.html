@@ -451,10 +451,7 @@
                                                                                 <tr class="chatflakes-game d-none">
                                                                                     <th>Message Interval</th>
                                                                                     <th># Particles Per Message</th>
-                                                                                    <th>Leaves</th>
-                                                                                    <th>Snow</th>
-                                                                                    <th>Blossoms</th>
-                                                                                    <th>Raindrops</th>
+                                                                                    <th>Timer Particles (per ms)</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -664,23 +661,8 @@
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesLeaves"><label for="inputEnableFlakesLeaves"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesSnow"><label for="inputEnableFlakesSnow"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesBlossoms"><label for="inputEnableFlakesBlossoms"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesRain" checked><label for="inputEnableFlakesRain"></label>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputFlakesTimer" value="3000" min="0" max="1000000" step="100" placeholder="Timer Particles (per ms)">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -727,6 +709,12 @@
                                                                                     <th>Default Countdown (secs)</th>
                                                                                     <th>Chat Command</th>
                                                                                     <th>Refresh Timer (secs)</th>
+                                                                                </tr>
+                                                                                <tr class="chatflakes-game d-none">
+                                                                                    <th>Leaves</th>
+                                                                                    <th>Snow</th>
+                                                                                    <th>Blossoms</th>
+                                                                                    <th>Raindrops</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -867,6 +855,28 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputHillRollRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="chatflakes-game d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesLeaves"><label for="inputEnableFlakesLeaves"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesSnow"><label for="inputEnableFlakesSnow"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesBlossoms"><label for="inputEnableFlakesBlossoms"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesRain" checked><label for="inputEnableFlakesRain"></label>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1425,6 +1435,11 @@
             min: 1,
             max: 100,
             step: 1,
+        });
+        $( "#inputFlakesTimer" ).TouchSpin({
+            min: 0,
+            max: 1000000,
+            step: 100,
         });
 
         ComfyTwitch.Check()
@@ -2065,6 +2080,7 @@
         };
         let flakesNth = "1";
         let flakesNum = "3";
+        let flakesTimer = "3000";
         let flakesLeaves = false;
         let flakesSnow = false;
         let flakesBlossoms = false;
@@ -2576,8 +2592,24 @@
             flakesNth = e.target.value;
             generateLink();
         });
+        $( "#inputFlakesNth" ).on( "input", ( e ) => {
+            flakesNth = e.target.value;
+            generateLink();
+        });
+        $( "#inputFlakesNum" ).on( "change", ( e ) => {
+            flakesNum = e.target.value;
+            generateLink();
+        });
         $( "#inputFlakesNum" ).on( "input", ( e ) => {
             flakesNum = e.target.value;
+            generateLink();
+        });
+        $( "#inputFlakesTimer" ).on( "change", ( e ) => {
+            flakesTimer = e.target.value;
+            generateLink();
+        });
+        $( "#inputFlakesTimer" ).on( "input", ( e ) => {
+            flakesTimer = e.target.value;
             generateLink();
         });
         $( "#inputEnableFlakesLeaves" ).on( "change", ( e ) => {
@@ -2993,6 +3025,9 @@
                 }
                 if( flakesNum !== "0" ) {
                     linkParams.push( `num=${flakesNum}` );
+                }
+                if( flakesTimer !== "0" ) {
+                    linkParams.push( `timer=${flakesTimer}` );
                 }
                 if( flakesLeaves ) {
                     linkParams.push( `leaves=true` );
