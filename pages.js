@@ -19,7 +19,7 @@ module.exports =
         "menu": "normal"
     },
     "market": {
-        // "name": "Dressing Room",
+        "name": "Goodies Market",
         "link": "Goodies Market",
         "icon": `<img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />`,
         "menu": "normal"

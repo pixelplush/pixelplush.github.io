@@ -1,0 +1,101 @@
+<div class="col-md-9">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                        <!-- users edit media object start -->
+                        <div class="media">
+                            <div class="media-body">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <span>Your Wallet:</span>
+                                        <h2 class="media-heading"><img class="pixelated" src="public/app-assets/images/icon/plush_coin.gif" height="32px" /> <strong><span class="user-coins"></span></strong></h2>
+                                        <!-- <div class="col-12 px-0 d-flex">
+                                            <a id="login" href="login.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
+                                            <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
+                                        </div> -->
+                                    </div>
+                                    <div class="col-10">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-2">
+                                                <button class="btn btn-dark" type="button" id="buy-btn-10" onclick="showCoinBuy(10, 2)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x10</small><br/><small class="text-warning">No Bonus</small><br/><strong>$2</strong></button>
+                                            </div>
+                                            <div class="col-sm-2 col-2">
+                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="showCoinBuy(20, 4)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x22</small><br/><small class="text-secondary">+10%</small><br/><strong>$4</strong></button>
+                                            </div>
+                                            <div class="col-sm-2 col-2">
+                                                <button class="btn btn-danger" type="button" id="buy-btn-60" onclick="showCoinBuy(40, 8)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x46</small><br/><small class="text-secondary">+15%</small><br/><strong>$8</strong></button>
+                                            </div>
+                                            <div class="col-sm-2 col-2">
+                                                <button class="btn btn-success" type="button" id="buy-btn-100" onclick="showCoinBuy(100, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x120</small><br/><small class="text-secondary">+20%</small><br/><strong>$20</strong></button>
+                                            </div>
+                                            <div class="col-sm-2 col-2">
+                                                <button class="btn btn-info" type="button" id="buy-btn-500" onclick="showCoinBuy(500, 100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x625</small><br/><small class="text-secondary">+25%</small><br/><strong>$100</strong></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--info theme Modal -->
+                                    <div class="modal fade text-left show" id="coin-buy" tabindex="-1" role="dialog" aria-labelledby="plushcoin-buy" aria-modal="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header bg-warning">
+                                                    <h5 class="modal-title white" id="plushcoin-buy"><img src="public/app-assets/images/icon/plush_coin.gif" height="40px" class="pixelated" /> x <span id="coin-buy-amount"></span> Plush Coins!</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <i class="bx bx-x"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h4 id="coin-buy-text"></h4>
+                                                    <div class="px-5 py-2">
+                                                        <div id="paypal-button-container"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    Use Plush Coins on special characters and pets!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- users edit media object ends -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input bg-primary" checked="" name="customCheck" id="checkboxChars">
+                            <label class="custom-control-label" for="checkboxChars">Characters</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input bg-danger" checked="" name="customCheck" id="checkboxPets">
+                            <label class="custom-control-label" for="checkboxPets">Pets</label>
+                        </div>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input bg-success" checked="" name="customCheck" id="checkboxAddons">
+                            <label class="custom-control-label" for="checkboxAddons">Add-Ons</label>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="bx bx-search"></i></span>
+                            </div>
+                            <input id="market-search" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="catalog-list" class="row pb-3">
+    </div>
+</div>
