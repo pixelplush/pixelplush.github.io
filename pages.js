@@ -31,7 +31,7 @@ module.exports =
         "menu": "normal"
     },
     "transactions": {
-        // "name": "Dressing Room",
+        "name": "Shopping History",
         "link": "My Shopping History",
         "icon": `<i class="bx bx-check-square"></i>`,
         "menu": "normal"

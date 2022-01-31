@@ -27,7 +27,7 @@
     <meta property="og:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
     <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
     <meta property="og:url" content="https://www.pixelplush.dev">
-    <!-- <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff"> -->
+    <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff">
     <title>Shopping History - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
     <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
     <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
@@ -35,6 +35,10 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/toastr.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/swiper.min.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- END: Vendor CSS-->
 
@@ -50,11 +54,13 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="public/app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/css/pages/dashboard-ecommerce.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/plugins/extensions/toastr.min.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
     <!-- END: Custom CSS-->
+    
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
 </head>
@@ -229,8 +235,7 @@
             <div class="content-header row">
             </div>
             <div class="content-body">
-                <!-- users list start -->
-                <section class="users-list-wrapper">
+                <section class="users-edit">
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
@@ -279,6 +284,7 @@
                                                 <span>Follow Us!</span>
                                             </a>
                                         </li>
+                                        
                                     </ul>
                                 </div>
                                 <!-- right content section -->
@@ -319,7 +325,6 @@
                         </div>
                     </div>
                 </section>
-                <!-- users list ends -->
             </div>
         </div>
     </div>
@@ -348,6 +353,11 @@
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
+    <script src="public/app-assets/vendors/js/charts/apexcharts.min.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
+    <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
     <script src="public/app-assets/vendors/js/ui/jquery.sticky.js"></script>
     <script src="public/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
     <script src="public/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
@@ -362,9 +372,12 @@
     <script src="public/snowstorm.js"></script>
     <!-- END: Theme JS-->
 
+    <script src="public/app-assets/js/scripts/forms/number-input.js"></script>
     <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
     <script src="public/app-assets/js/scripts/pages/page-users.js"></script>
 
+    <script
+    src="https://www.paypal.com/sdk/js?client-id=Ac8ThQDkE1sBoHpJD4cgrd4nEyF0gYuUzQwNzSolvCVjGondlvAYy7mlQdFaV5RpspBzBFjnn9Mt8dep"></script>
     <script src="public/comfytwitch.min.js"></script>
     <script>
         const params = new URLSearchParams( location.search );
@@ -376,11 +389,11 @@
         let catalog = {};
         let items = {};
         let transactions = [];
-
+        
         $( ".not-logged-in" ).show();
         $( ".logged-in" ).hide();
         $( ".additional-permissions" ).hide();
-
+        
         ComfyTwitch.Check()
         .then( async result => {
             // console.log( result );
@@ -391,44 +404,44 @@
                             Twitch: result.token
                         }
                     } ).then( r => r.json() );
-
+        
                     // console.log( account );
-
+        
                     if( account.error ) {
                         throw "Login Error";
                     }
-
+        
                     $( ".not-logged-in" ).hide();
                     $( ".logged-in" ).show();
-
+        
                     $( ".account-image" ).attr( "src", account.profileImage );
                     $( ".user-name" ).text( account.displayName || account.username );
                     $( ".user-coins" ).text( account.coins );
-
+        
                     catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
                     }).then( r => r.json() );
-
+        
                     // console.log( catalog );
-
+        
                     catalog.forEach( x => {
                         items[ x.id ] = x;
                     });
-
+        
                     $( ".logout" ).on( "click", function() {
                         ComfyTwitch.Logout();
                         window.location.reload();
                     });
-
+        
                     let receipts = await fetch( `${plushApiUrl}/transactions/user`, {
                         headers: {
                             Twitch: result.token
                         }
                     } ).then( r => r.json() );
-
+        
                     // console.log( receipts );
-
+        
                     let transactions = [];
-
+        
                     if( receipts.from ) {
                         receipts.from.forEach( x => {
                             transactions.push({
@@ -451,9 +464,9 @@
                             });
                         });
                     }
-
+        
                     // console.log( transactions );
-
+        
                     usersTable = $("#transactions-list-datatable").DataTable({
                         responsive: true,
                         "data": transactions,
@@ -481,7 +494,7 @@
                 $( ".logged-in" ).hide();
             }
         });
-
+        
         $( document ).ready(function() {
         });
     </script>
