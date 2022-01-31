@@ -27,7 +27,7 @@
     <meta property="og:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
     <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
     <meta property="og:url" content="https://www.pixelplush.dev">
-    <!-- <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff"> -->
+    <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff">
     <title>Follow PixelPlush! - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
     <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
     <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
@@ -35,9 +35,11 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/toastr.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/charts/apexcharts.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -52,22 +54,24 @@
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="public/app-assets/css/core/menu/menu-types/vertical-menu.css">
     <link rel="stylesheet" type="text/css" href="public/app-assets/css/pages/dashboard-ecommerce.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/plugins/extensions/toastr.min.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
     <!-- END: Custom CSS-->
+    
     <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
 
     <style>
-    .link-group a {
-        display: inline-flex;
-        align-items: center;
-        color: inherit;
-    }
-    .link-group-item img {
-        padding-right: 7px;
-    }
+        .link-group a {
+            display: inline-flex;
+            align-items: center;
+            color: inherit;
+        }
+        .link-group-item img {
+            padding-right: 7px;
+        }
     </style>
 </head>
 <!-- END: Head-->
@@ -97,7 +101,7 @@
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
                         <li class="nav-item d-lg-block not-logged-in">
                             <div class="not-logged-in">
-                                <a id="login" href="login.html?redirect=twitch.html" class="btn btn-primary mr-25">Log In</a>
+                                <a id="login" href="login.html?redirect=links.html" class="btn btn-primary mr-25">Log In</a>
                             </div>
                         </li>
                         <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
@@ -223,6 +227,7 @@
                                 <a class="dropdown-item" href="transactions.html"><i class="bx bx-check-square mr-50"></i> My Shopping History</a>
                                 <a class="dropdown-item" href="market.html"><i class="bx bx-cart mr-50"></i> Goodies Market</a>
                                 <a class="dropdown-item" href="https://pixelplush.dev/discord"><i class="bx bxl-discord mr-50"></i> PixelPlush Discord</a>
+                                <a class="dropdown-item" href="redeem.html"><i class="bx bx-purchase-tag mr-50"></i> Redeem Code</a>
                                 <div class="dropdown-divider mb-0"></div><a class="dropdown-item logout" href="#"><i class="bx bx-power-off mr-50"></i> Logout</a>
                             </div>
                         </li>
@@ -289,6 +294,7 @@
                                                 <span>Follow Us!</span>
                                             </a>
                                         </li>
+                                        
                                     </ul>
                                 </div>
                                 <!-- right content section -->
@@ -383,6 +389,11 @@
     <script src="public/app-assets/vendors/js/charts/apexcharts.min.js"></script>
     <script src="public/app-assets/vendors/js/extensions/swiper.min.js"></script>
     <script src="public/app-assets/vendors/js/forms/spinner/jquery.bootstrap-touchspin.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/toastr.min.js"></script>
+    <script src="public/app-assets/vendors/js/extensions/sweetalert2.all.min.js"></script>
+    <script src="public/app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <script src="public/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+    <script src="public/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -395,7 +406,11 @@
     <!-- END: Theme JS-->
 
     <script src="public/app-assets/js/scripts/forms/number-input.js"></script>
+    <script src="https://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <script src="public/app-assets/js/scripts/pages/page-users.js"></script>
 
+    <script
+    src="https://www.paypal.com/sdk/js?client-id=Ac8ThQDkE1sBoHpJD4cgrd4nEyF0gYuUzQwNzSolvCVjGondlvAYy7mlQdFaV5RpspBzBFjnn9Mt8dep"></script>
     <script src="public/comfytwitch.min.js"></script>
     <script>
         const params = new URLSearchParams( location.search );
@@ -404,10 +419,10 @@
         const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
         let twitch = {};
         let account = {};
-
+        
         $( ".not-logged-in" ).show();
         $( ".logged-in" ).hide();
-
+        
         ComfyTwitch.Check()
         .then( async result => {
             // console.log( result );
@@ -418,20 +433,20 @@
                             Twitch: result.token
                         }
                     } ).then( r => r.json() );
-
+        
                     // console.log( account );
-
+        
                     if( account.error ) {
                         throw "Login Error";
                     }
-
+        
                     $( ".not-logged-in" ).hide();
                     $( ".logged-in" ).show();
-
+        
                     $( ".account-image" ).attr( "src", account.profileImage );
                     $( ".user-name" ).text( account.displayName || account.username );
                     $( ".user-coins" ).text( account.coins );
-
+        
                     $( ".logout" ).on( "click", function() {
                         ComfyTwitch.Logout();
                         window.location.reload();

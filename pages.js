@@ -37,7 +37,7 @@ module.exports =
         "menu": "normal"
     },
     "links": {
-        // "name": "Dressing Room",
+        "name": "Follow PixelPlush!",
         "link": "Follow Us!",
         "icon": `<i class="bx bx-link"></i>`,
         "menu": "normal"
