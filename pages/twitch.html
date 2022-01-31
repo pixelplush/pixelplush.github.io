@@ -1,0 +1,886 @@
+<div class="col-md-9">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                        <!-- users edit media object start -->
+                        <div class="media mb-2">
+                            <a class="mr-2" href="#">
+                                <img src="public/app-assets/images/icon/icons8-cat-profile-64.png" alt="User Profile Image" class="users-avatar-shadow rounded-circle account-image" height="64" width="64">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading user-name">Not Logged In</h4>
+                                <div class="col-12 px-0 d-flex">
+                                    <!-- <a href="#" class="btn btn-sm btn-danger additional-permissions">Grant Additional Permissions</a> -->
+                                    <a id="login-twitch" href="#" class="btn btn-social btn-twitch btn-sm font-small-3 mr-md-1 mb-md-0 mb-1 additional-permissions">
+                                        <i class="bx bxl-twitch font-medium-3"></i><span class="pl-50 d-block text-center">Grant Twitch Permissions</span>
+                                    </a>
+                                    <a href="login.html?redirect=twitch.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
+                                    <a href="#" class="btn btn-sm btn-light-secondary logged-in logout">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- users edit media object ends -->
+                        <!-- users edit account form start -->
+                        <form novalidate="">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div class="controls">
+                                            <label>Twitch Channel Name</label>
+                                            <input id="inputChannelName" type="text" class="form-control" placeholder="Your Twitch Channel Name" value="" required="" data-validation-required-message="This channel field is required">
+                                        <div class="help-block"></div></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Choose Game</label>
+                                                <select class="form-control" id="inputGameType">
+                                                    <option value="chatflakes">Chat Flakes</option>
+                                                    <option value="confetti">Pixel Confetti</option>
+                                                    <option value="weather">Stream Weather</option>
+                                                    <option value="hillroll">Hill Rolling Race</option>
+                                                    <option value="parachute">Parachute Drop</option>
+                                                    <option value="maze">Pixel Maze</option>
+                                                    <option value="plinko">Plinko Bounce</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="form-group">
+                                                <label>Choose Theme</label>
+                                                <select class="form-control" id="inputGameTheme">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group">
+                                                <label for="termsNotice">Remember to review our <a href="terms.html">Terms of Use</a> before using our games!</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div id="addon-button" class="form-group addon-required">
+                                            </div>
+                                            <div class="form-group">
+                                            <label>Game Instructions</label>
+                                            <p class="text-danger additional-permissions"><strong>Note: Additional Twitch Permissions Are Required</strong></p>
+                                            <p id="instructionsText" class="form-text text-muted"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div class="form-group"> -->
+                                        <!-- <label>Twitch Chat OAuth</label> -->
+                                        <input type="hidden" class="form-control" id="inputChatOAuth" placeholder="Your Twitch Chat OAuth Token">
+                                        <!-- <small id="oauthHelp" class="form-text text-muted">Keep this safe! This token allows sending chat messages as you.<br/>Get a Twitch Chat OAuth Token at <a href="http://twitchapps.com/tmi/" target="_blank">http://twitchapps.com/tmi/</a></small> -->
+                                    <!-- </div> -->
+                                    <div class="form-group parachute-game d-none">
+                                        <p>Sound effects used in Parachute Drop are listed <a href="credits.html">here</a>.</p>
+                                    </div>
+                                    <div class="form-group plinko-game d-none">
+                                        <p>Sound effects used in Plinko Bounce are listed <a href="credits.html">here</a>.</p>
+                                    </div>
+                                    <div class="form-group weather-game d-none">
+                                        <p>Sound effects used in Stream Weather are listed <a href="credits.html">here</a>.</p>
+                                    </div>
+                                    <div class="form-group parachute-game plinko-game d-none">
+                                        <label>Chat Announcement Message Format</label>
+                                        <input type="text" class="form-control" id="inputMessageFormat" value="USERNAME finished with POINTS!" placeholder="e.g. USERNAME finished with POINTS!" disabled>
+                                        <div id="inputMessageFormatDisabled" class="help-block">(Twitch Log In is needed to enable chat announcement)</div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <img id="game-preview" src="" height="220" width="220" class="img-fluid" alt="Game Preview" />
+                                </div>
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table mt-1">
+                                            <thead>
+                                                <tr class="weather-game d-none">
+                                                    <th>Rain (0 to disable)</th>
+                                                    <th>Rain Time</th>
+                                                    <th>Heavy Rain</th>
+                                                    <th>Heavy Rain Time</th>
+                                                    <th>Hail</th>
+                                                    <th>Hail Time</th>
+                                                </tr>
+                                                <tr class="maze-game d-none">
+                                                    <th>Enable Boss</th>
+                                                    <th>Boss Effect</th>
+                                                    <th>Boss Count</th>
+                                                    <th>Trap Effect</th>
+                                                    <th>Prize Count</th>
+                                                    <th>Trap Count</th>
+                                                    <th>Enable Chat Announcement</th>
+                                                </tr>
+                                                <tr class="parachute-game d-none">
+                                                    <th>Background</th>
+                                                    <th>Clouds</th>
+                                                    <th>Hide Until Drop</th>
+                                                    <th>Sound Volume</th>
+                                                    <th>Score in Chat</th>
+                                                    <th>Bit Cheers</th>
+                                                    <th>Enable Drop via Chat</th>
+                                                    <th>Notification Volume</th>
+                                                </tr>
+                                                <tr class="plinko-game d-none">
+                                                    <th>Background</th>
+                                                    <th>Clouds</th>
+                                                    <th>Hide Until Start</th>
+                                                    <th>Sound Volume</th>
+                                                    <th>Enable Chat Announcement</th>
+                                                    <th>Notification Volume</th>
+                                                </tr>
+                                                <tr class="hillroll-game d-none">
+                                                    <th>Background</th>
+                                                    <th>Clouds</th>
+                                                    <th>Hide Until Start</th>
+                                                    <th>Sound Volume</th>
+                                                    <th>Results in Chat</th>
+                                                </tr>
+                                                <tr class="confetti-game d-none">
+                                                    <th>Party Confetti</th>
+                                                    <th>Bubbles</th>
+                                                    <th>Balloons</th>
+                                                    <th>Sound Volume</th>
+                                                </tr>
+                                                <tr class="chatflakes-game d-none">
+                                                    <th>Message Interval</th>
+                                                    <th># Particles Per Message</th>
+                                                    <th>Timer Particles (per ms)</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="maze-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableBoss" checked><label for="inputEnableBoss"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" id="inputBossEffect">
+                                                            <option value="0">Steal Points</option>
+                                                            <option value="1">Return to Spawn</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputBossCount" value="1" min="0" max="100" placeholder="Number of Bosses Spawned">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <select class="form-control" id="inputTrapEffect">
+                                                            <option value="0">Points Penalty</option>
+                                                            <option value="1">Trap Tunnels</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputPrizeCount" value="7" min="1" max="214" placeholder="Number of Prizes Spawned">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputTrapCount" value="5" min="0" max="214" placeholder="Number of Trap Spawned">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableChat" disabled><label for="inputEnableChat"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="weather-game d-none">
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherRain" value="100" min="0" max="100000" step="50" placeholder="Rain Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherRainTime" value="5" min="1" max="1000" step="1" placeholder="Rain Time">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherHeavyRain" value="100" min="0" max="100000" step="50" placeholder="Heavy Rain Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherHeavyRainTime" value="5" min="1" max="1000" step="1" placeholder="Heavy Rain Time">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherHail" value="100" min="0" max="100000" step="50" placeholder="Hail Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherHailTime" value="5" min="1" max="1000" step="1" placeholder="Hail Time">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="parachute-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteOverlay"><label for="inputEnableParachuteOverlay"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteClouds"><label for="inputEnableParachuteClouds"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteHideTilDrop" checked><label for="inputEnableParachuteHideTilDrop"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputParachuteVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteChat" disabled><label for="inputEnableParachuteChat"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteDroplets"><label for="inputEnableParachuteDroplets"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteCommand"><label for="inputEnableParachuteCommand"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputParachuteNotifVolume" value="25" min="0" max="100" placeholder="Notification Volume">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="plinko-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoOverlay"><label for="inputEnablePlinkoOverlay"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoClouds"><label for="inputEnablePlinkoClouds"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoHideTilStart" checked><label for="inputEnablePlinkoHideTilStart"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputPlinkoVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoChat" disabled><label for="inputEnablePlinkoChat"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputPlinkoNotifVolume" value="25" min="0" max="100" placeholder="Notification Volume">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="hillroll-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollOverlay"><label for="inputEnableHillRollOverlay"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollClouds" checked><label for="inputEnableHillRollClouds"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollHideTilRoll"><label for="inputEnableHillRollHideTilRoll"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputHillRollVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollChat" disabled><label for="inputEnableHillRollChat"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="confetti-game d-none">
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputConfettiParty" value="100" min="0" max="100000" step="50" placeholder="Confetti Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputConfettiBubbles" value="100" min="0" max="100000" step="50" placeholder="Bubbles Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputConfettiBalloons" value="100" min="0" max="100000" step="50" placeholder="Balloons Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputConfettiVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="chatflakes-game d-none">
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputFlakesNth" value="1" min="1" max="1000" step="1" placeholder="Message Interval">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputFlakesNum" value="3" min="1" max="100" step="1" placeholder="Particles Per Message">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputFlakesTimer" value="3000" min="0" max="1000000" step="100" placeholder="Timer Particles (per ms)">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table mt-1">
+                                            <thead>
+                                                <tr class="weather-game d-none">
+                                                    <th>Blossoms</th>
+                                                    <th>Blossoms Time</th>
+                                                    <th>Snow</th>
+                                                    <th>Snow Time</th>
+                                                    <th>Blizzard</th>
+                                                    <th>Blizzard Time</th>
+                                                </tr>
+                                                <tr class="parachute-game d-none">
+                                                    <th>Chat Command</th>
+                                                    <th>Channel Point Cost</th>
+                                                    <th>Channel Point Cheers</th>
+                                                    <th>Channel Point Group Drop</th>
+                                                    <th>Refresh Timer (secs)</th>
+                                                    <th>Time Til Ready (secs)</th>
+                                                </tr>
+                                                <tr class="plinko-game d-none">
+                                                    <th>Enable Drop via Chat</th>
+                                                    <th>Chat Command</th>
+                                                    <th>Channel Point Cost</th>
+                                                    <th>Channel Point Group Plinko</th>
+                                                    <th>Refresh Timer (secs)</th>
+                                                    <th>Time Til Ready (secs)</th>
+                                                </tr>
+                                                <tr class="confetti-game d-none">
+                                                    <th># of Confetti</th>
+                                                    <th># of Bubbles</th>
+                                                    <th># of Balloons</th>
+                                                </tr>
+                                                <tr class="hillroll-game d-none">
+                                                    <th>Hide Instructions</th>
+                                                    <th>Hide Timer</th>
+                                                    <th>Default Countdown (secs)</th>
+                                                    <th>Chat Command</th>
+                                                    <th>Refresh Timer (secs)</th>
+                                                </tr>
+                                                <tr class="chatflakes-game d-none">
+                                                    <th>Leaves</th>
+                                                    <th>Snow</th>
+                                                    <th>Blossoms</th>
+                                                    <th>Raindrops</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="weather-game d-none">
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherBlossoms" value="100" min="0" max="100000" step="50" placeholder="Blossoms Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherBlossomsTime" value="5" min="1" max="1000" step="1" placeholder="Blossoms Time">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherSnow" value="100" min="0" max="100000" step="50" placeholder="Snow Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherSnowTime" value="5" min="1" max="1000" step="1" placeholder="Snow Time">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherBlizzard" value="100" min="0" max="100000" step="50" placeholder="Blizzard Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherBlizzardTime" value="5" min="1" max="1000" step="1" placeholder="Blizzard Time">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="parachute-game d-none">
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputParachuteCommand" value="" placeholder="Command (e.g. !drop)">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputParachuteCPDrop" value="0" min="0" max="100000" step="50" placeholder="Channel Points Drop Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputParachuteCPDroplets" value="0" min="0" max="100000" step="50" placeholder="Channel Points Cheer Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputParachuteCPQueue" value="0" min="0" max="100000" step="500" placeholder="Channel Points Group Drop Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputParachuteGameReady" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="plinko-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnablePlinkoCommand"><label for="inputEnablePlinkoCommand"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputPlinkoCommand" value="" placeholder="Command (e.g. !plinko)">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputPlinkoCPPlink" value="0" min="0" max="100000" step="50" placeholder="Channel Points Plinko Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputPlinkoCPQueue" value="0" min="0" max="100000" step="500" placeholder="Channel Points Group Plinko Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputPlinkoRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputPlinkoGameReady" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="confetti-game d-none">
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputConfettiPartyIntensity" value="300" min="50" max="10000" step="50" placeholder="Confetti Intensity">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputConfettiBubblesIntensity" value="300" min="50" max="10000" step="50" placeholder="Bubbles Intensity">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputConfettiBalloonsIntensity" value="20" min="1" max="1000" step="1" placeholder="Balloons Intensity">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="hillroll-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollInstructions" checked><label for="inputEnableHillRollInstructions"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableHillRollTimer" checked><label for="inputEnableHillRollTimer"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputHillRollDefaultCountdown" value="0" min="0" max="3600" step="10" placeholder="# Seconds">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputHillRollCommand" value="" placeholder="Command (e.g. !hill)">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputHillRollRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="chatflakes-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesLeaves"><label for="inputEnableFlakesLeaves"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesSnow"><label for="inputEnableFlakesSnow"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesBlossoms"><label for="inputEnableFlakesBlossoms"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesRain" checked><label for="inputEnableFlakesRain"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table mt-1">
+                                            <thead>
+                                                <tr class="parachute-game-extras d-none">
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_rainbow.png" alt="Color-Changing"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pink.png" alt="Pink"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_yellow.png" alt="Yellow"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_green.png" alt="Green"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
+                                                </tr>
+                                                <tr class="confetti-game d-none">
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelred.png" alt="Pastel Red"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelorange.png" alt="Pastel Orange"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_yellow.png" alt="Yellow"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_darkyellow.png" alt="Dark Yellow"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelyellow.png" alt="Pastel Yellow"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_lime.png" alt="Lime"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastellime.png" alt="Pastel Lime"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_green.png" alt="Green"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelgreen.png" alt="Pastel Green"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelblue.png" alt="Pastel Blue"/></th>
+                                                </tr>
+                                                <tr class="weather-game d-none">
+                                                    <th>Sunshine</th>
+                                                    <th>Lightning</th>
+                                                    <th>Rainbow</th>
+                                                    <th>Leaf</th>
+                                                    <th>Leaf Time</th>
+                                                    <th>Volume</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="parachute-game-extras d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-rainbow" checked><label for="inputEnableParachuteColor-rainbow"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-red"><label for="inputEnableParachuteColor-red"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-pink"><label for="inputEnableParachuteColor-pink"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-orange"><label for="inputEnableParachuteColor-orange"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-yellow"><label for="inputEnableParachuteColor-yellow"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-green"><label for="inputEnableParachuteColor-green"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-blue"><label for="inputEnableParachuteColor-blue"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-purple"><label for="inputEnableParachuteColor-purple"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="confetti-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiRed" checked><label for="inputEnableConfettiRed"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelRed" checked><label for="inputEnableConfettiPastelRed"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiOrange" checked><label for="inputEnableConfettiOrange"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelOrange" checked><label for="inputEnableConfettiPastelOrange"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiYellow" checked><label for="inputEnableConfettiYellow"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiDarkYellow" checked><label for="inputEnableConfettiDarkYellow"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelYellow" checked><label for="inputEnableConfettiPastelYellow"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiLime" checked><label for="inputEnableConfettiLime"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelLime" checked><label for="inputEnableConfettiPastelLime"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiGreen" checked><label for="inputEnableConfettiGreen"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelGreen" checked><label for="inputEnableConfettiPastelGreen"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiBlue" checked><label for="inputEnableConfettiBlue"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelBlue" checked><label for="inputEnableConfettiPastelBlue"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="weather-game d-none">
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherSunshine" value="100" min="0" max="100000" step="50" placeholder="Sunshine Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherLightning" value="100" min="0" max="100000" step="50" placeholder="Lightning Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherLeaf" value="100" min="0" max="100000" step="50" placeholder="Leaf Cost">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="" id="inputWeatherLeafTime" value="5" min="1" max="1000" step="1" placeholder="Leaf Time">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputWeatherVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="table-responsive">
+                                        <table class="table mt-1">
+                                            <thead>
+                                                <tr class="confetti-game d-none">
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_skyblue.png" alt="Sky Blue"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelpurple.png" alt="Pastel Purple"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pinkpurple.png" alt="Pink Purple"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pink.png" alt="Pink"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelpink.png" alt="Pastel Pink"/></th>
+
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_deepred.png" alt="Deep Red"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_deepblue.png" alt="Deep Blue"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_copper.png" alt="Copper"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_gold.png" alt="Gold"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_rosegold.png" alt="Rose Gold"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_silver.png" alt="Silver"/></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr class="confetti-game d-none">
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSkyBlue" checked><label for="inputEnableConfettiSkyBlue"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPurple" checked><label for="inputEnableConfettiPurple"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelPurple" checked><label for="inputEnableConfettiPastelPurple"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPinkPurple" checked><label for="inputEnableConfettiPinkPurple"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPink" checked><label for="inputEnableConfettiPink"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelPink" checked><label for="inputEnableConfettiPastelPink"></label>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiDeepRed" checked><label for="inputEnableConfettiDeepRed"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiDeepBlue" checked><label for="inputEnableConfettiDeepBlue"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiCopper" checked><label for="inputEnableConfettiCopper"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiGold" checked><label for="inputEnableConfettiGold"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiRoseGold" checked><label for="inputEnableConfettiRoseGold"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSilver" checked><label for="inputEnableConfettiSilver"></label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group link-available">
+                                        <p class="text-danger additional-permissions"><strong>Note: Additional Twitch Permissions Are Required for this game. Please Grant Twitch Permissions</strong></p>
+                                        <div class="col-12 px-0 d-flex additional-permissions">
+                                            <!-- <a href="#" class="btn btn-sm btn-danger additional-permissions">Grant Additional Permissions</a> -->
+                                            <a id="login-twitch" href="#" class="btn btn-social btn-twitch btn-sm font-small-3 mr-md-1 mb-md-0 mb-1 additional-permissions">
+                                                <i class="bx bxl-twitch font-medium-3"></i><span class="pl-50 d-block text-center">Grant Twitch Permissions</span>
+                                            </a>
+                                            <a href="login.html?redirect=twitch.html" class="btn btn-sm btn-primary mr-25 not-logged-in">Log In</a>
+                                        </div>
+                                        <label for="outputOverlayLink">Browser Source Link</label>
+                                        <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <button id="link-showhide" class="btn btn-secondary" type="button"><i class="bx bx-show-alt"></i></button>
+                                        </div>
+                                        <input type="password" class="form-control" id="outputOverlayLink" readonly>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-text="">Click to Copy</button>
+                                        </div>
+                                        </div>
+                                        <small id="oauthHelp" class="form-text text-muted">Copy and add this link as a 1920 x 1080 Browser Source!</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- users edit account form ends -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
