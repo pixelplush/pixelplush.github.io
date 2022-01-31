@@ -13,7 +13,7 @@ module.exports =
         "menu": "live"
     },
     "scores": {
-        // "name": "Dressing Room",
+        "name": "Scoreboard",
         "link": "Top Scores",
         "icon": `<i class="bx bx-list-ol"></i>`,
         "menu": "normal"

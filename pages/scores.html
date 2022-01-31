@@ -1,0 +1,91 @@
+<div class="col-md-9">
+    <div class="card">
+        <div class="card-content">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="controls">
+                                <label>Twitch Channel Name</label>
+                                <input id="inputChannelName" type="text" class="form-control" placeholder="Twitch Channel Name" value="" required="">
+                            <div class="help-block"></div></div>
+                        </div>
+                        <div class="form-group">
+                            <label>Timeframe</label>
+                            <select class="form-control" id="inputScoresTime">
+                                <option value="1m">Monthly</option>
+                                <option value="1w">Weekly</option>
+                                <option value="12h">Recent (12 hour)</option>
+                                <!-- <option value="2m">2-Month</option>
+                                <option value="3m">3-Month</option>
+                                <option value="6m">6-Month</option>
+                                <option value="1y">Yearly</option> -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Choose Game</label>
+                            <select class="form-control" id="inputGameType">
+                              <option value="parachute">Pixel Parachute</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Choose Theme</label>
+                            <select class="form-control" id="inputGameTheme">
+                              <option value="pixelparachuteall">All</option>
+                              <option value="pixelparachutespring">Pixel Parachute (Spring Blossoms)</option>
+                              <option value="pixelparachuteeaster">Pixel Parachute (Easter)</option>
+                              <option value="pixelparachuteday">Pixel Parachute (Day)</option>
+                              <option value="pixelparachutenight">Pixel Parachute (Night)</option>
+                              <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
+                              <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
+                              <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
+                              <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
+                              <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
+                              <option value="pixelparachutechristmas">Pixel Parachute (Christmas)</option>
+                              <option value="pixelparachutewinter">Pixel Parachute (Winter)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                          <label for="outputScoresLink">Scoreboard Link</label>
+                          <div class="input-group">
+                            <input type="text" class="form-control" id="outputScoresLink" readonly>
+                            <div class="input-group-append">
+                              <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputScoresLink">Click to Copy</button>
+                            </div>
+                          </div>
+                          <small id="scoreHelp" class="form-text text-muted">Copy to share this scoreboard with friends!</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="users-list-table">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-body">
+                                <!-- datatable start -->
+                                <div class="table-responsive">
+                                    <table id="scores-list-datatable" class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Rank</th>
+                                                <th>Score</th>
+                                                <th>User</th>
+                                                <th>Date</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- datatable ends -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
