@@ -319,6 +319,50 @@ $( "#link-showhide" ).on( "click", function() {
 
 const gameTypes = [ "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
 const themeSettings = {
+    "pixelparachutevalentines" : {
+        game: "parachute",
+        name: "Valentines (Premium)",
+        page: "https://www.pixelplush.dev/parachute/valentines_brown_gold.html",
+        extras: {
+            "brown_gold": {
+                name: "valentines_brown_gold.html",
+                page: "https://www.pixelplush.dev/parachute/valentines_brown_gold.html",
+                preview: "/public/app-assets/images/games/valentines_brown_gold.gif",
+            },
+            "brown_pink": {
+                name: "valentines_brown_pink.html",
+                page: "https://www.pixelplush.dev/parachute/valentines_brown_pink.html",
+                preview: "/public/app-assets/images/games/valentines_brown_pink.gif",
+            },
+            "brown_red": {
+                name: "valentines_brown_red.html",
+                page: "https://www.pixelplush.dev/parachute/valentines_brown_red.html",
+                preview: "/public/app-assets/images/games/valentines_brown_red.gif",
+            },
+            "white_gold": {
+                name: "valentines_white_gold.html",
+                page: "https://www.pixelplush.dev/parachute/valentines_white_gold.html",
+                preview: "/public/app-assets/images/games/valentines_white_gold.gif",
+            },
+            "white_pink": {
+                name: "valentines_white_pink.html",
+                page: "https://www.pixelplush.dev/parachute/valentines_white_pink.html",
+                preview: "/public/app-assets/images/games/valentines_white_pink.gif",
+            },
+            "white_red": {
+                name: "valentines_white_red.html",
+                page: "https://www.pixelplush.dev/parachute/valentines_white_red.html",
+                preview: "/public/app-assets/images/games/valentines_white_red.gif",
+            },
+        },
+        preview: "/public/app-assets/images/games/drop_cauldron_rainbow_website.gif",
+        overlay: true,
+        clouds: false,
+        hideTilDrop: true,
+        messageFormat: "USERNAME landed for POINTS!",
+        command: "",
+        requires: "addon_parachute_valentines",
+    },
     "chatflakes": {
         game: "chatflakes",
         name: "Chat Flakes (Premium)",
@@ -849,6 +893,14 @@ let cauldronColors = {
     "green": false,
     "blue": false,
     "purple": false,
+};
+let valentinesColors = {
+    "brown_gold": true,
+    "brown_pink": false,
+    "brown_red": false,
+    "white_gold": false,
+    "white_pink": false,
+    "white_red": false,
 };
 let flakesNth = "1";
 let flakesNum = "3";
@@ -1409,34 +1461,91 @@ $( "#inputEnableFlakesRain" ).on( "change", ( e ) => {
     generateLink();
 });
 
+$( "#inputEnableParachuteColor-brown-gold" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "brown_gold" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    valentinesColors[ "brown_gold" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-brown-pink" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "brown_pink" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    valentinesColors[ "brown_pink" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-brown-red" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "brown_red" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    valentinesColors[ "brown_red" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-white-gold" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "white_gold" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    valentinesColors[ "white_gold" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-white-pink" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "white_pink" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    valentinesColors[ "white_pink" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-white-red" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "white_red" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    valentinesColors[ "white_red" ] = e.target.checked;
+    generateLink();
+});
 $( "#inputEnableParachuteColor-rainbow" ).on( "change", ( e ) => {
-    // if( e.target.checked ) {
-    //     // Deselect all but rainbow
-    //     Object.keys( cauldronColors ).forEach( x => {
-    //         cauldronColors[ x ] = false;
-    //         $( "#inputEnableParachuteColor-" + x ).prop( "checked", false );
-    //     });
-    //     cauldronColors[ "rainbow" ] = true;
-    //     $( "#inputEnableParachuteColor-rainbow" ).prop( "checked", true );
-    //
-    //     const preview = themeSettings[ gameTheme ].extras[ "rainbow" ].preview;
-    //     $( "#game-preview" ).attr( "src", preview );
-    // }
-    // else {
-    //     // Select all others except rainbow
-    //     Object.keys( cauldronColors ).forEach( x => {
-    //         cauldronColors[ x ] = true;
-    //         $( "#inputEnableParachuteColor-" + x ).prop( "checked", true );
-    //     });
-    //     cauldronColors[ "rainbow" ] = false;
-    //     $( "#inputEnableParachuteColor-rainbow" ).prop( "checked", false );
-    //
-    //     // Select random preview out of the selected
-    //     const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
-    //     const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
-    //     $( "#game-preview" ).attr( "src", preview );
-    // }
-
     if( e.target.checked ) {
         // cauldronColors[ "rainbow" ] = false;
         // $( "#inputEnableParachuteColor-rainbow" ).prop( "checked", false );
@@ -1708,7 +1817,15 @@ function setThemeDefaults() {
     $( `.${ themeSettings[ gameTheme ].game }-game` ).removeClass( "d-none" );
     gameTypes.forEach( g => $( `.${g}-game-extras` ).addClass( "d-none" ) );
     if( themeSettings[ gameTheme ].extras ) {
-        $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
+        if( gameTheme === "pixelparachutecauldron" ) {
+            $( `.parachute-cauldron` ).removeClass( "d-none" );
+        }
+        else if( gameTheme === "pixelparachutevalentines" ) {
+            $( `.parachute-valentines` ).removeClass( "d-none" );
+        }
+        else {
+            $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
+        }
     }
     if( !themeSettings[ gameTheme ].requires ) {
         $( ".addon-required" ).hide();
@@ -1738,10 +1855,20 @@ function setThemeDefaults() {
     }
     $( "#game-preview" ).attr( "src", themeSettings[ gameTheme ].preview );
     if( themeSettings[ gameTheme ].extras ) {
-        // Select random preview out of the selected
-        const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
-        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
-        $( "#game-preview" ).attr( "src", preview );
+        if( gameTheme === "pixelparachutecauldron" ) {
+            // Select random preview out of the selected
+            const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
+            const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+            $( "#game-preview" ).attr( "src", preview );
+        }
+        else if( gameTheme === "pixelparachutevalentines" ) {
+            // Select random preview out of the selected
+            const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+            const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+            $( "#game-preview" ).attr( "src", preview );
+        }
+        else {
+        }
     }
     isBossEnabled = themeSettings[ gameTheme ].bosses > 0;
     $( "#inputEnableBoss" ).prop( "checked", themeSettings[ gameTheme ].bosses > 0 ? true : false );
@@ -1792,9 +1919,18 @@ function generateLink() {
     linkParams.push( `channel=${channelName}` );
     if( themeSettings[ gameTheme ].extras ) {
         // Set baseLink to the first one checked
-        const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
-        baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
-        linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+        if( gameTheme === "pixelparachutecauldron" ) {
+            const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
+            baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
+            linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+        }
+        else if( gameTheme === "pixelparachutevalentines" ) {
+            const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+            baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
+            linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+        }
+        else {
+        }
     }
     switch( themeSettings[ gameTheme ].game ) {
     case "chatflakes":
