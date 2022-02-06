@@ -455,66 +455,6 @@ function populateItemList( searchText = "" ) {
             });
         });
     }
-
-    // Show the non-owned items
-    filteredCatalog.filter( x => !x.subscription && x.theme !== "None" && !x.hidden && !( account && account.owned && account.owned.includes( x.id ) ) ).forEach( ( item, index ) => {
-        let typeBG = "primary";
-        let showSelectionButtons = true;
-        switch( item.type ) {
-            case "character":
-                typeBG = "primary";
-                break;
-            case "pet":
-                typeBG = "danger";
-                break;
-            case "add-on":
-                typeBG = "success";
-                showSelectionButtons = false;
-                break;
-            default:
-                typeBG = "primary";
-                break;
-        }
-        $( "#catalog-list" ).append( `
-            <div class="col-sm-3 col-6">
-                <div id="item_${item.id}" class="card text-center">
-                <div class="card-content">
-                    <div class="card-body py-1">
-                    <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                        <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
-                    </div>
-                    <div class="badge badge-pill badge-${typeBG} d-inline-flex align-items-center">
-                        <span>${item.type}</span>
-                    </div>
-                    <h5 class="mb-0">${item.name}</h5>
-                    <div class="pt-1">
-                        <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.cost === 0 ? "FREE" : item.cost}</strong></button>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-        `);
-
-        $( `#item_${item.id}` ).hover( function() {
-            if( animationTimer ) {
-                clearInterval( animationTimer );
-            }
-            if( item.type === "add-on" ) { return; }
-            animationTimer = setInterval( () => {
-                animationFrame++;
-                let preview = getItemPreview( item.id, animationFrame );
-                if( document.querySelector( `#item_${item.id}_preview` ) ) {
-                    document.querySelector( `#item_${item.id}_preview` ).setAttribute( "src", preview );
-                }
-            }, 100 );
-        }, function() {
-            clearInterval( animationTimer );
-            animationFrame = 0;
-            let preview = getItemPreview( item.id, 0 );
-            document.querySelector( `#item_${item.id}_preview` ).setAttribute( "src", preview );
-        });
-    });
 }
 
 function getItemPreview( itemId, frame ) {
