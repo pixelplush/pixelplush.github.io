@@ -6,6 +6,7 @@ let twitch = {};
 let account = {};
 let catalog = {};
 let items = {};
+let hasRestoredSettings = false;
 
 $( ".not-logged-in" ).show();
 $( ".logged-in" ).hide();
@@ -201,6 +202,42 @@ $( "#inputFlakesTimer" ).TouchSpin({
     step: 100,
 });
 
+function restoreSettings() {
+    // Try restoring the selected game settings
+    const selectedSettings = JSON.parse( localStorage.getItem( "twitchInputSettings" ) || "{}" );
+    Object.keys( selectedSettings ).forEach( elem => {
+        if( ignoreInputs.includes( elem ) ) { return; }
+        // const e = $( "#" + elem );
+        // if( e.disabled ) { console.log( "disabled", e ); }
+        // console.log( elem, selectedSettings[ elem ] );
+        switch( selectedSettings[ elem ].type ) {
+            case "checkbox":
+                $( "#" + elem ).prop( "checked", selectedSettings[ elem ].checked );
+                break;
+            default:
+                $( "#" + elem ).val( selectedSettings[ elem ].value );
+                break;
+        }
+    });
+}
+
+function saveSettings() {
+    // Try saving selected game settings
+    const elems = $( "[id^='input']" ).toArray().filter( e => !ignoreInputs.includes( e.id ) );
+    let savedSettings = {};
+    elems.forEach( e => {
+        if( !e.disabled ) {
+            savedSettings[ e.id ] = {
+                type: e.type,
+                checked: e.checked,
+                value: e.value
+            };
+        }
+    });
+    // console.log( savedSettings );
+    localStorage.setItem( "twitchInputSettings", JSON.stringify( savedSettings ) );
+}
+
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );
@@ -253,6 +290,9 @@ ComfyTwitch.Check()
                 ComfyTwitch.Logout();
                 window.location.reload();
             });
+            
+            restoreSettings();
+            hasRestoredSettings = true;
         }
         catch( error ) {
             // TODO: Auth Failed
@@ -299,6 +339,7 @@ ComfyTwitch.Check()
     featureStream();
 
     setThemeDefaults();
+    restoreSettings();
     generateLink();
 
     $( ".additional-permissions" ).on( "click", function() {
@@ -910,6 +951,8 @@ let flakesSnow = false;
 let flakesBlossoms = false;
 let flakesRain = true;
 
+const ignoreInputs = [ "inputGameType", "inputGameTheme", "inputChannelName", "inputChatOAuth", "inputMessageFormatDisabled" ];
+
 $( "#inputGameType" ).val( gameType );
 $( "#inputGameType" ).on( "change", ( e ) => {
     gameType =  $( "#inputGameType" ).val();
@@ -923,6 +966,7 @@ $( "#inputGameType" ).on( "change", ( e ) => {
             }
         });
     setThemeDefaults();
+    restoreSettings();
     generateLink();
     $( "#instructionsText" ).html( gameInstructions[ gameType ] );
 });
@@ -941,6 +985,7 @@ $( "#inputGameTheme" ).on( "change", ( e ) => {
     // console.log( e, "changed" );
     gameTheme = $( "#inputGameTheme" ).val();
     setThemeDefaults();
+    restoreSettings();
     generateLink();
 });
 $( "#inputEnableBoss" ).on( "change", ( e ) => {
@@ -1785,6 +1830,7 @@ $( "#inputEnableConfettiSilver" ).on( "change", ( e ) => {
     });
 
     setThemeDefaults();
+    restoreSettings();
     generateLink();
 })();
 
@@ -2154,6 +2200,10 @@ function generateLink() {
     }
     $( "#outputOverlayLink" ).val( baseLink + linkParams.join( "&" ) );
     $( "#copy-btn" ).attr( "data-clipboard-text", baseLink + linkParams.join( "&" ) );
+
+    if( hasRestoredSettings ) {
+        saveSettings();
+    }
 }
 
 function getItemPreview( itemId, frame ) {
