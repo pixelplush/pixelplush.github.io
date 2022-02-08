@@ -729,6 +729,7 @@
                                                                                     <th>Snow</th>
                                                                                     <th>Blossoms</th>
                                                                                     <th>Raindrops</th>
+                                                                                    <th>Hearts</th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -891,6 +892,11 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesRain" checked><label for="inputEnableFlakesRain"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableFlakesHearts" checked><label for="inputEnableFlakesHearts"></label>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -2253,6 +2259,7 @@
         let flakesSnow = false;
         let flakesBlossoms = false;
         let flakesRain = true;
+        let flakesHearts = false;
         
         const ignoreInputs = [ "inputGameType", "inputGameTheme", "inputChannelName", "inputChatOAuth", "inputMessageFormatDisabled" ];
         
@@ -2808,6 +2815,10 @@
             flakesRain = e.target.checked;
             generateLink();
         });
+        $( "#inputEnableFlakesHearts" ).on( "change", ( e ) => {
+            flakesHearts = e.target.checked;
+            generateLink();
+        });
         
         $( "#inputEnableParachuteColor-brown-gold" ).on( "change", ( e ) => {
             if( e.target.checked ) {
@@ -3303,6 +3314,9 @@
                 }
                 if( flakesRain ) {
                     linkParams.push( `rain=true` );
+                }
+                if( flakesHearts ) {
+                    linkParams.push( `hearts=true` );
                 }
                 linkParams.push( `oauth=${chatOAuth}` );
                 break;

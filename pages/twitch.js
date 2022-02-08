@@ -950,6 +950,7 @@ let flakesLeaves = false;
 let flakesSnow = false;
 let flakesBlossoms = false;
 let flakesRain = true;
+let flakesHearts = false;
 
 const ignoreInputs = [ "inputGameType", "inputGameTheme", "inputChannelName", "inputChatOAuth", "inputMessageFormatDisabled" ];
 
@@ -1505,6 +1506,10 @@ $( "#inputEnableFlakesRain" ).on( "change", ( e ) => {
     flakesRain = e.target.checked;
     generateLink();
 });
+$( "#inputEnableFlakesHearts" ).on( "change", ( e ) => {
+    flakesHearts = e.target.checked;
+    generateLink();
+});
 
 $( "#inputEnableParachuteColor-brown-gold" ).on( "change", ( e ) => {
     if( e.target.checked ) {
@@ -2000,6 +2005,9 @@ function generateLink() {
         }
         if( flakesRain ) {
             linkParams.push( `rain=true` );
+        }
+        if( flakesHearts ) {
+            linkParams.push( `hearts=true` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
         break;
