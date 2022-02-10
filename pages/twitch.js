@@ -88,6 +88,16 @@ $( "#inputConfettiBalloonsIntensity" ).TouchSpin({
     max: 1000,
     step: 1,
 });
+$( "#inputConfettiHearts" ).TouchSpin({
+    min: 0,
+    max: 100000,
+    step: 10,
+});
+$( "#inputConfettiHeartsIntensity" ).TouchSpin({
+    min: 1,
+    max: 1000,
+    step: 1,
+});
 $( "#inputHillRollDefaultCountdown" ).TouchSpin({
     min: 0,
     max: 600,
@@ -894,9 +904,11 @@ let weatherVolume = "25";
 let confettiParty = "100";
 let confettiIntensity = "300";
 let confettiBubbles = "100";
+let confettiHearts = "100";
 let bubblesIntensity = "300";
 let confettiBalloons = "100";
 let balloonsIntensity = "20";
+let heartsIntensity = "20";
 let confettiVolume = "25";
 let confettiColors = {
     "red": true,
@@ -1456,6 +1468,22 @@ $( "#inputConfettiBalloonsIntensity" ).on( "change", ( e ) => {
 });
 $( "#inputConfettiBalloonsIntensity" ).on( "input", ( e ) => {
     balloonsIntensity = e.target.value;
+    generateLink();
+});
+$( "#inputConfettiHearts" ).on( "change", ( e ) => {
+    confettiHearts = e.target.value;
+    generateLink();
+});
+$( "#inputConfettiHearts" ).on( "input", ( e ) => {
+    confettiHearts = e.target.value;
+    generateLink();
+});
+$( "#inputConfettiHeartsIntensity" ).on( "change", ( e ) => {
+    heartsIntensity = e.target.value;
+    generateLink();
+});
+$( "#inputConfettiHeartsIntensity" ).on( "input", ( e ) => {
+    heartsIntensity = e.target.value;
     generateLink();
 });
 $( "#inputConfettiVolume" ).on( "change", ( e ) => {
@@ -2198,6 +2226,9 @@ function generateLink() {
         }
         if( confettiBalloons !== "0" ) {
             linkParams.push( `cpBalloons=true&cpBalloonsCost=${confettiBalloons}&cpBalloonsIntensity=${balloonsIntensity}` );
+        }
+        if( confettiHearts !== "0" ) {
+            linkParams.push( `cpHearts=true&cpHeartsCost=${confettiHearts}&cpHeartsIntensity=${heartsIntensity}` );
         }
         if( confettiVolume ) {
             linkParams.push( `volume=${confettiVolume}` );
