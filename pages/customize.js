@@ -133,7 +133,7 @@ function populateItemList( searchText = "" ) {
                 </div>
                 <h5 class="mb-0">Deselect</h5>
                 <div class="pt-1">
-                    <button class="btn btn-sm btn-info" type="button" onclick="deactivateItem('coin_remove');deactivateItem('pet_none');"><strong>Deselect All</strong></button>
+                    <button class="btn btn-sm btn-danger" type="button" onclick="deactivateItem('coin_remove');deactivateItem('pet_none');"><strong>Deselect All</strong></button>
                 </div>
                 </div>
             </div>
