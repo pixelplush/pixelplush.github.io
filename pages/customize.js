@@ -108,6 +108,7 @@ $( document ).ready(function() {
 function populateItemList( searchText = "" ) {
     $( "#catalog-list" ).empty();
     let filteredCatalog = catalog.filter( x => x.id.includes( searchText ) || x.theme.toLowerCase().includes( searchText ) );
+    filteredCatalog = filteredCatalog.filter( x => x.id !== "coin_remove" );
     if( !$( "#checkboxChars" ).prop( "checked" ) ) {
         filteredCatalog = filteredCatalog.filter( x => x.type !== "character" );
     }
@@ -523,7 +524,7 @@ async function verifySub( itemId ) {
 
 async function activateItem( itemId ) {
     try {
-        console.log( itemId );
+        // console.log( itemId );
         let result = await fetch( `${plushApiUrl}/accounts/design`, {
             method: "POST",
             headers: {
@@ -589,7 +590,7 @@ async function deactivateItem( itemId ) {
 
 async function queueItem( itemId, queue = true ) {
     try {
-        console.log( itemId, queue );
+        // console.log( itemId, queue );
         let result = await fetch( `${plushApiUrl}/accounts/design/list`, {
             method: "POST",
             headers: {
@@ -602,7 +603,7 @@ async function queueItem( itemId, queue = true ) {
                 remove: true
             })
         } ).then( r => r.json() );
-        console.log( "activating!", result );
+        // console.log( "activating!", result );
         if( result.error ) {
             throw result.error;
         }
