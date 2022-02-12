@@ -141,8 +141,8 @@ function populateItemList( searchText = "" ) {
         // console.log( item );
         if( twitchSubs[ item.subscription.toLowerCase() ] ) {
             $( "#catalog-list" ).append( `
-                <div class="col-sm-3 col-6">
-                    <div id="item_${item.id}" class="card text-center bg-dark bg-light">
+                <div class="col-sm-3 col-6 mb-2">
+                    <div id="item_${item.id}" class="card h-100 text-center bg-dark bg-light">
                     <div class="card-content">
                         <div class="card-body py-1">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
@@ -163,8 +163,8 @@ function populateItemList( searchText = "" ) {
         }
         else {
             $( "#catalog-list" ).append( `
-                <div class="col-sm-3 col-6">
-                    <div id="item_${item.id}" class="card text-center bg-purple">
+                <div class="col-sm-3 col-6 mb-2">
+                    <div id="item_${item.id}" class="card h-100 text-center bg-purple">
                     <div class="card-content">
                         <div class="card-body py-1">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
@@ -204,8 +204,8 @@ function populateItemList( searchText = "" ) {
         if( account && account.owned && account.owned.includes( item.id ) ) {
             if( item.hidden ) {
                 $( "#catalog-list" ).append( `
-                    <div class="col-sm-3 col-6">
-                        <div id="item_${item.id}" class="card text-center bg-dark bg-light">
+                    <div class="col-sm-3 col-6 mb-2">
+                        <div id="item_${item.id}" class="card h-100 text-center bg-dark bg-light">
                         <div class="card-content">
                             <div class="card-body py-1">
                             <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
@@ -226,8 +226,8 @@ function populateItemList( searchText = "" ) {
             }
             else {
                 $( "#catalog-list" ).append( `
-                    <div class="col-sm-3 col-6">
-                        <div id="item_${item.id}" class="card text-center bg-dark bg-light">
+                    <div class="col-sm-3 col-6 mb-2">
+                        <div id="item_${item.id}" class="card h-100 text-center bg-dark bg-light">
                         <div class="card-content">
                             <div class="card-body py-1">
                             <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
@@ -250,8 +250,8 @@ function populateItemList( searchText = "" ) {
         }
         else if( !item.hidden ) {
             $( "#catalog-list" ).append( `
-                <div class="col-sm-3 col-6">
-                    <div id="item_${item.id}" class="card text-center">
+                <div class="col-sm-3 col-6 mb-2">
+                    <div id="item_${item.id}" class="card h-100 text-center">
                     <div class="card-content">
                         <div class="card-body py-1">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">

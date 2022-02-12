@@ -142,8 +142,8 @@ function populateItemList( searchText = "" ) {
                 ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) ) {
             // Selected Skin
             $( "#catalog-list" ).append( `
-                <div class="col-sm-3 col-6">
-                    <div id="item_${item.id}" class="card text-center bg-success bg-light">
+                <div class="col-sm-3 col-6 mb-2">
+                    <div id="item_${item.id}" class="card h-100 text-center bg-success bg-light">
                     <div class="card-content">
                         <div class="card-body py-1">
                         <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -168,8 +168,8 @@ function populateItemList( searchText = "" ) {
                 // Already queued
                 if( showSelectionButtons ) {
                     $( "#catalog-list" ).append( `
-                        <div class="col-sm-3 col-6">
-                            <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                        <div class="col-sm-3 col-6 mb-2">
+                            <div id="item_${item.id}" class="card h-100 text-center bg-secondary bg-light">
                             <div class="card-content">
                                 <div class="card-body py-1">
                                 <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -191,8 +191,8 @@ function populateItemList( searchText = "" ) {
                 }
                 else {
                     $( "#catalog-list" ).append( `
-                        <div class="col-sm-3 col-6">
-                            <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                        <div class="col-sm-3 col-6 mb-2">
+                            <div id="item_${item.id}" class="card h-100 text-center bg-secondary bg-light">
                             <div class="card-content">
                                 <div class="card-body py-1">
                                 <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -213,8 +213,8 @@ function populateItemList( searchText = "" ) {
                 // Not queued
                 if( showSelectionButtons ) {
                     $( "#catalog-list" ).append( `
-                        <div class="col-sm-3 col-6">
-                            <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                        <div class="col-sm-3 col-6 mb-2">
+                            <div id="item_${item.id}" class="card h-100 text-center bg-secondary bg-light">
                             <div class="card-content">
                                 <div class="card-body py-1">
                                 <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -236,8 +236,8 @@ function populateItemList( searchText = "" ) {
                 }
                 else {
                     $( "#catalog-list" ).append( `
-                        <div class="col-sm-3 col-6">
-                            <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                        <div class="col-sm-3 col-6 mb-2">
+                            <div id="item_${item.id}" class="card h-100 text-center bg-secondary bg-light">
                             <div class="card-content">
                                 <div class="card-body py-1">
                                 <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -257,8 +257,8 @@ function populateItemList( searchText = "" ) {
         }
         else {
             $( "#catalog-list" ).append( `
-                <div class="col-sm-3 col-6">
-                    <div id="item_${item.id}" class="card text-center bg-purple">
+                <div class="col-sm-3 col-6 mb-2">
+                    <div id="item_${item.id}" class="card h-100 text-center bg-purple">
                     <div class="card-content">
                         <div class="card-body py-1">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
@@ -323,8 +323,8 @@ function populateItemList( searchText = "" ) {
                     ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) ) {
                 // Selected Skin
                 $( "#catalog-list" ).append( `
-                    <div class="col-sm-3 col-6">
-                        <div id="item_${item.id}" class="card text-center bg-success bg-light">
+                    <div class="col-sm-3 col-6 mb-2">
+                        <div id="item_${item.id}" class="card h-100 text-center bg-success bg-light">
                         <div class="card-content">
                             <div class="card-body py-1">
                             <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -348,8 +348,8 @@ function populateItemList( searchText = "" ) {
                     account.styles[ item.type ] && account.styles[ item.type ].includes( item.id ) ) {
                     if( showSelectionButtons ) {
                         $( "#catalog-list" ).append( `
-                            <div class="col-sm-3 col-6">
-                                <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                            <div class="col-sm-3 col-6 mb-2">
+                                <div id="item_${item.id}" class="card h-100 text-center bg-secondary bg-light">
                                 <div class="card-content">
                                     <div class="card-body py-1">
                                     <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -371,8 +371,8 @@ function populateItemList( searchText = "" ) {
                     }
                     else {
                         $( "#catalog-list" ).append( `
-                            <div class="col-sm-3 col-6">
-                                <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                            <div class="col-sm-3 col-6 mb-2">
+                                <div id="item_${item.id}" class="card h-100 text-center bg-secondary bg-light">
                                 <div class="card-content">
                                     <div class="card-body py-1">
                                     <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -392,8 +392,8 @@ function populateItemList( searchText = "" ) {
                 else {
                     if( showSelectionButtons ) {
                         $( "#catalog-list" ).append( `
-                            <div class="col-sm-3 col-6">
-                                <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                            <div class="col-sm-3 col-6 mb-2">
+                                <div id="item_${item.id}" class="card h-100 text-center bg-secondary bg-light">
                                 <div class="card-content">
                                     <div class="card-body py-1">
                                     <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
@@ -415,8 +415,8 @@ function populateItemList( searchText = "" ) {
                     }
                     else {
                         $( "#catalog-list" ).append( `
-                            <div class="col-sm-3 col-6">
-                                <div id="item_${item.id}" class="card text-center bg-secondary bg-light">
+                            <div class="col-sm-3 col-6 mb-2">
+                                <div id="item_${item.id}" class="card h-100 text-center bg-secondary bg-light">
                                 <div class="card-content">
                                     <div class="card-body py-1">
                                     <div class="badge-circle badge-circle-xlg badge-circle-${typeBG} mx-auto mb-50">
