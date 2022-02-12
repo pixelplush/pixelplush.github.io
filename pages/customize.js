@@ -119,6 +119,28 @@ function populateItemList( searchText = "" ) {
         filteredCatalog = filteredCatalog.filter( x => x.type !== "add-on" );
     }
 
+    // Add Deselect-All Option
+    $( "#catalog-list" ).append( `
+        <div class="col-sm-3 col-6 mb-2">
+            <div id="item_none" class="card h-100 text-center bg-success bg-light">
+            <div class="card-content">
+                <div class="card-body py-1">
+                <div class="badge-circle badge-circle-xlg badge-circle-character mx-auto mb-50">
+                    <img id="item_none_preview" class="pixelated item-scale" src=""/>
+                </div>
+                <div class="badge badge-pill badge-character d-inline-flex align-items-center">
+                    <span>Character/Pet</span>
+                </div>
+                <h5 class="mb-0">Deselect</h5>
+                <div class="pt-1">
+                    <button class="btn btn-sm btn-info" type="button" onclick="deactivateItem('coin_remove');deactivateItem('pet_none');"><strong>Deselect All</strong></button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    `);
+
     // Handle adding subscription items
     filteredCatalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
         let typeBG = "primary";
@@ -139,8 +161,7 @@ function populateItemList( searchText = "" ) {
                 break;
         }
         if( account.style &&
-            ( ( !account.style[ item.type ] && item.theme === "None" ) ||
-                ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) ) {
+            ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) {
             // Selected Skin
             $( "#catalog-list" ).append( `
                 <div class="col-sm-3 col-6 mb-2">
@@ -155,7 +176,7 @@ function populateItemList( searchText = "" ) {
                         </div>
                         <h5 class="mb-0">${item.name}</h5>
                         <div class="pt-1">
-                            <button class="btn btn-sm btn-danger" type="button" onclick="deactivateItem('${item.id}')"><i class="bx bxl-twitch font-medium-3"></i> <strong>Deselect All</strong></button>
+                            <button class="btn btn-sm btn-info" type="button" onclick="queueItem('${item.id}', false)"><i class="bx bxl-twitch font-medium-3"></i> <strong>Unselect</strong></button>
                         </div>
                         </div>
                     </div>
@@ -181,8 +202,7 @@ function populateItemList( searchText = "" ) {
                                 </div>
                                 <h5 class="mb-0">${item.name}</h5>
                                 <div class="pt-1">
-                                    <button class="btn btn-sm btn-twitch" type="button" onclick="activateItem('${item.id}')"><i class="bx bxl-twitch font-medium-3"></i> <strong>Select</strong></button>
-                                    <button class="btn btn-sm btn-danger" type="button" onclick="queueItem('${item.id}', false)"><strong>- Random</strong></button>
+                                    <button class="btn btn-sm btn-info" type="button" onclick="queueItem('${item.id}', false)"><i class="bx bxl-twitch font-medium-3"></i> <strong>Unselect</strong></button>
                                 </div>
                                 </div>
                             </div>
@@ -226,8 +246,7 @@ function populateItemList( searchText = "" ) {
                                 </div>
                                 <h5 class="mb-0">${item.name}</h5>
                                 <div class="pt-1">
-                                    <button class="btn btn-sm btn-twitch" type="button" onclick="activateItem('${item.id}')"><i class="bx bxl-twitch font-medium-3"></i> <strong>Select</strong></button>
-                                    <button class="btn btn-sm btn-secondary" type="button" onclick="queueItem('${item.id}', true)"><strong>+ Random</strong></button>
+                                    <button class="btn btn-sm btn-twitch" type="button" onclick="queueItem('${item.id}', true)"><i class="bx bxl-twitch font-medium-3"></i> <strong>Select</strong></button>
                                 </div>
                                 </div>
                             </div>
@@ -270,7 +289,7 @@ function populateItemList( searchText = "" ) {
                         </div>
                         <h5 class="mb-0">${item.name}</h5>
                         <div class="pt-1">
-                            <button class="btn btn-sm btn-twitch" type="button" onclick="verifySub('${item.id}')"><i class="bx bxl-twitch font-medium-3"></i> <strong>${item.subscription}</strong></button>
+                            <button class="btn btn-sm btn-twitch" type="button" onclick="verifySub('${item.id}')"><i class="bx bxl-twitch font-medium-3"></i> <strong>Verify ${item.subscription} Sub</strong></button>
                         </div>
                         </div>
                     </div>
@@ -301,7 +320,7 @@ function populateItemList( searchText = "" ) {
 
     // Add the owned items first
     if( account && account.owned ) {
-        filteredCatalog.filter( x => account.owned.includes( x.id ) || x.theme === "None" ).forEach( ( item, index ) => {
+        filteredCatalog.filter( x => account.owned.includes( x.id ) ).forEach( ( item, index ) => {
             let typeBG = "primary";
             let showSelectionButtons = true;
             switch( item.type ) {
@@ -320,8 +339,7 @@ function populateItemList( searchText = "" ) {
                     break;
             }
             if( account.style &&
-                ( ( !account.style[ item.type ] && item.theme === "None" ) ||
-                    ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) ) {
+                ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) {
                 // Selected Skin
                 $( "#catalog-list" ).append( `
                     <div class="col-sm-3 col-6 mb-2">
@@ -336,7 +354,7 @@ function populateItemList( searchText = "" ) {
                             </div>
                             <h5 class="mb-0">${item.name}</h5>
                             <div class="pt-1">
-                                <button class="btn btn-sm btn-info" type="button" onclick="deactivateItem('${item.id}')"><strong>Deselect All</strong></button>
+                                <button class="btn btn-sm btn-info" type="button" onclick="queueItem('${item.id}', false)"><strong>Unselect</strong></button>
                             </div>
                             </div>
                         </div>
@@ -361,8 +379,7 @@ function populateItemList( searchText = "" ) {
                                     </div>
                                     <h5 class="mb-0">${item.name}</h5>
                                     <div class="pt-1">
-                                        <button class="btn btn-sm btn-secondary" type="button" onclick="activateItem('${item.id}')"><strong>Select</strong></button>
-                                        <button class="btn btn-sm btn-danger" type="button" onclick="queueItem('${item.id}', false)"><strong>- Random</strong></button>
+                                        <button class="btn btn-sm btn-info" type="button" onclick="queueItem('${item.id}', false)"><strong>Unselect</strong></button>
                                     </div>
                                     </div>
                                 </div>
@@ -405,8 +422,7 @@ function populateItemList( searchText = "" ) {
                                     </div>
                                     <h5 class="mb-0">${item.name}</h5>
                                     <div class="pt-1">
-                                        <button class="btn btn-sm btn-secondary" type="button" onclick="activateItem('${item.id}')"><strong>Select</strong></button>
-                                        <button class="btn btn-sm btn-secondary" type="button" onclick="queueItem('${item.id}', true)"><strong>+ Random</strong></button>
+                                        <button class="btn btn-sm btn-secondary" type="button" onclick="queueItem('${item.id}', true)"><strong>Select</strong></button>
                                     </div>
                                     </div>
                                 </div>
@@ -534,7 +550,7 @@ async function activateItem( itemId ) {
                 item: itemId
             })
         } ).then( r => r.json() );
-        console.log( "activating!", result );
+        // console.log( "activating!", result );
         if( result.error ) {
             throw result.error;
         }
@@ -557,7 +573,7 @@ async function activateItem( itemId ) {
 
 async function deactivateItem( itemId ) {
     try {
-        console.log( itemId );
+        // console.log( itemId );
         let result = await fetch( `${plushApiUrl}/accounts/design/unset`, {
             method: "POST",
             headers: {
@@ -567,7 +583,7 @@ async function deactivateItem( itemId ) {
                 item: itemId
             })
         } ).then( r => r.json() );
-        console.log( "deactivating!", result );
+        // console.log( "deactivating!", result );
         if( result.error ) {
             throw result.error;
         }
@@ -651,7 +667,7 @@ async function buyItem( itemId ) {
                     item: itemId
                 })
             } ).then( r => r.json() );
-            console.log( "done!", result );
+            // console.log( "done!", result );
             if( result.error ) {
                 throw result.error;
             }
