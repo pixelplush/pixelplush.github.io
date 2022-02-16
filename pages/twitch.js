@@ -936,6 +936,10 @@ let confettiColors = {
     "gold": true,
     "rosegold": true,
     "silver": true,
+    "brightred": true,
+    "brown": true,
+    "hotpink": true,
+    "rainbow": true,
 };
 let cauldronColors = {
     "rainbow": true,
@@ -1851,6 +1855,22 @@ $( "#inputEnableConfettiRoseGold" ).on( "change", ( e ) => {
 });
 $( "#inputEnableConfettiSilver" ).on( "change", ( e ) => {
     confettiColors[ "silver" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableConfettiBrightRed" ).on( "change", ( e ) => {
+    confettiColors[ "brightred" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableConfettiBrown" ).on( "change", ( e ) => {
+    confettiColors[ "brown" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableConfettiHotPink" ).on( "change", ( e ) => {
+    confettiColors[ "hotpink" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableConfettiRainbow" ).on( "change", ( e ) => {
+    confettiColors[ "rainbow" ] = e.target.checked;
     generateLink();
 });
 ( async () => {

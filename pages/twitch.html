@@ -621,6 +621,7 @@
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
                                                 </tr>
                                                 <tr class="confetti-game d-none">
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_brightred.png" alt="Bright Red"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelred.png" alt="Pastel Red"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
@@ -634,6 +635,7 @@
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelgreen.png" alt="Pastel Green"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelblue.png" alt="Pastel Blue"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_skyblue.png" alt="Sky Blue"/></th>
                                                 </tr>
                                                 <tr class="weather-game d-none">
                                                     <th>Sunshine</th>
@@ -722,6 +724,11 @@
                                                 <tr class="confetti-game d-none">
                                                     <td>
                                                         <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiBrightRed" checked><label for="inputEnableConfettiBrightRed"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiRed" checked><label for="inputEnableConfettiRed"></label>
                                                         </div>
                                                     </td>
@@ -785,6 +792,11 @@
                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelBlue" checked><label for="inputEnableConfettiPastelBlue"></label>
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSkyBlue" checked><label for="inputEnableConfettiSkyBlue"></label>
+                                                        </div>
+                                                    </td>
                                                 </tr>
                                                 <tr class="weather-game d-none">
                                                     <td>
@@ -827,28 +839,25 @@
                                         <table class="table mt-1">
                                             <thead>
                                                 <tr class="confetti-game d-none">
-                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_skyblue.png" alt="Sky Blue"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelpurple.png" alt="Pastel Purple"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pinkpurple.png" alt="Pink Purple"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pink.png" alt="Pink"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelpink.png" alt="Pastel Pink"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_hotpink.png" alt="Hot Pink"/></th>
 
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_deepred.png" alt="Deep Red"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_brown.png" alt="Brown"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_deepblue.png" alt="Deep Blue"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_copper.png" alt="Copper"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_gold.png" alt="Gold"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_rosegold.png" alt="Rose Gold"/></th>
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_silver.png" alt="Silver"/></th>
+                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_rainbow.png" alt="Rainbow"/></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr class="confetti-game d-none">
-                                                    <td>
-                                                        <div class="checkbox">
-                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSkyBlue" checked><label for="inputEnableConfettiSkyBlue"></label>
-                                                        </div>
-                                                    </td>
                                                     <td>
                                                         <div class="checkbox">
                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPurple" checked><label for="inputEnableConfettiPurple"></label>
@@ -874,10 +883,20 @@
                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiPastelPink" checked><label for="inputEnableConfettiPastelPink"></label>
                                                         </div>
                                                     </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiHotPink" checked><label for="inputEnableConfettiHotPink"></label>
+                                                        </div>
+                                                    </td>
 
                                                     <td>
                                                         <div class="checkbox">
                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiDeepRed" checked><label for="inputEnableConfettiDeepRed"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiBrown" checked><label for="inputEnableConfettiBrown"></label>
                                                         </div>
                                                     </td>
                                                     <td>
@@ -903,6 +922,11 @@
                                                     <td>
                                                         <div class="checkbox">
                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSilver" checked><label for="inputEnableConfettiSilver"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiRainbow" checked><label for="inputEnableConfettiRainbow"></label>
                                                         </div>
                                                     </td>
                                                 </tr>
