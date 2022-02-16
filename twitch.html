@@ -1171,7 +1171,6 @@
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_gold.png" alt="Gold"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_rosegold.png" alt="Rose Gold"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_silver.png" alt="Silver"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_rainbow.png" alt="Rainbow"/></th>
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -1240,11 +1239,6 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSilver" checked><label for="inputEnableConfettiSilver"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiRainbow" checked><label for="inputEnableConfettiRainbow"></label>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -2284,7 +2278,6 @@
             "brightred": true,
             "brown": true,
             "hotpink": true,
-            "rainbow": true,
         };
         let cauldronColors = {
             "rainbow": true,
@@ -3212,10 +3205,6 @@
         });
         $( "#inputEnableConfettiHotPink" ).on( "change", ( e ) => {
             confettiColors[ "hotpink" ] = e.target.checked;
-            generateLink();
-        });
-        $( "#inputEnableConfettiRainbow" ).on( "change", ( e ) => {
-            confettiColors[ "rainbow" ] = e.target.checked;
             generateLink();
         });
         ( async () => {

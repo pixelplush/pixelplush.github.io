@@ -939,7 +939,6 @@ let confettiColors = {
     "brightred": true,
     "brown": true,
     "hotpink": true,
-    "rainbow": true,
 };
 let cauldronColors = {
     "rainbow": true,
@@ -1867,10 +1866,6 @@ $( "#inputEnableConfettiBrown" ).on( "change", ( e ) => {
 });
 $( "#inputEnableConfettiHotPink" ).on( "change", ( e ) => {
     confettiColors[ "hotpink" ] = e.target.checked;
-    generateLink();
-});
-$( "#inputEnableConfettiRainbow" ).on( "change", ( e ) => {
-    confettiColors[ "rainbow" ] = e.target.checked;
     generateLink();
 });
 ( async () => {
