@@ -228,6 +228,19 @@ function restoreSettings() {
                 $( "#" + elem ).val( selectedSettings[ elem ].value );
                 break;
         }
+        // Trigger the change event to set vars
+        try {
+            $( "#" + elem ).trigger( "change" );
+        }
+        catch( err ) {
+            console.warn( err );
+        }
+        // if( elem.startsWith( "inputEnableConfetti" ) ) {
+        //     confettiColors[ elem.replace( "inputEnableConfetti", "" ).toLowerCase() ] = selectedSettings[ elem ].checked;
+        // }
+        // if( elem.startsWith( "inputEnableConfetti" ) ) {
+        //     confettiColors[ elem.replace( "inputEnableConfetti", "" ).toLowerCase() ] = selectedSettings[ elem ].checked;
+        // }
     });
 }
 
