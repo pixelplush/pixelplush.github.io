@@ -233,7 +233,7 @@ function restoreSettings() {
             $( "#" + elem ).trigger( "change" );
         }
         catch( err ) {
-            console.warn( err );
+            // console.warn( err );
         }
         // if( elem.startsWith( "inputEnableConfetti" ) ) {
         //     confettiColors[ elem.replace( "inputEnableConfetti", "" ).toLowerCase() ] = selectedSettings[ elem ].checked;
@@ -297,7 +297,7 @@ ComfyTwitch.Check()
             $( "#inputChatOAuth" ).val( `oauth:${result.token}` );
             channelName = result.login;
             chatOAuth = `oauth:${result.token}`;
-            generateLink();
+            // generateLink();
 
             if( ![ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ].every( v => ComfyTwitch.Scopes.includes( v ) ) ) {
                 console.log( "Need More Permissions" );
@@ -314,7 +314,9 @@ ComfyTwitch.Check()
                 window.location.reload();
             });
             
+            setThemeDefaults();
             restoreSettings();
+            generateLink();
             hasRestoredSettings = true;
         }
         catch( error ) {
@@ -868,6 +870,7 @@ let trapEffect = trapEffects[ 0 ];
 let bossCount = "1";
 let prizeCount = "7";
 let trapCount = "5";
+let isParachuteChatEnabled = false;
 let isParachuteOverlay = true;
 let isParachuteCloudsOn = false;
 let isParachuteHideTilDrop = false;
@@ -879,6 +882,7 @@ let parachuteCPDrop = "0";
 let parachuteCPDroplets = "0";
 let parachuteCPQueue = "0";
 let parachuteNotifVolume = "25";
+let isPlinkoChatEnabled = false;
 let isPlinkoOverlay = true;
 let isPlinkoCloudsOn = false;
 let isPlinkoHideTilStart = false;
@@ -889,6 +893,7 @@ let plinkoCPQueue = "0";
 let plinkoRefresh = "90";
 let plinkoGameReady = "0";
 let plinkoNotifVolume = "25";
+let isHillRollChatEnabled = false;
 let isHillRollOverlay = true;
 let isHillRollCloudsOn = true;
 let isHillRollHideTilRoll = false;
@@ -1123,7 +1128,7 @@ $( "#inputEnableParachuteCommand" ).on( "change", ( e ) => {
     generateLink();
 });
 $( "#inputEnableParachuteChat" ).on( "change", ( e ) => {
-    isChatEnabled = e.target.checked;
+    isParachuteChatEnabled = e.target.checked;
     generateLink();
 });
 $( "#inputEnableParachuteDroplets" ).on( "change", ( e ) => {
@@ -1183,7 +1188,7 @@ $( "#inputPlinkoVolume" ).on( "input", ( e ) => {
     generateLink();
 });
 $( "#inputEnablePlinkoChat" ).on( "change", ( e ) => {
-    isChatEnabled = e.target.checked;
+    isPlinkoChatEnabled = e.target.checked;
     generateLink();
 });
 $( "#inputPlinkoCPPlink" ).on( "change", ( e ) => {
@@ -1291,7 +1296,7 @@ $( "#inputHillRollCommand" ).on( "input", ( e ) => {
     generateLink();
 });
 $( "#inputEnableHillRollChat" ).on( "change", ( e ) => {
-    isChatEnabled = e.target.checked;
+    isHillRollChatEnabled = e.target.checked;
     generateLink();
 });
 $( "#inputWeatherRain" ).on( "change", ( e ) => {
@@ -1998,7 +2003,7 @@ function setThemeDefaults() {
     $( "#inputEnableParachuteOverlay" ).prop( "checked", !isParachuteOverlay );
     $( "#inputEnableParachuteClouds" ).prop( "checked", isParachuteCloudsOn );
     $( "#inputEnableParachuteHideTilDrop" ).prop( "checked", isParachuteOverlay );
-    $( "#inputEnableParachuteChat" ).prop( "checked", isChatEnabled );
+    $( "#inputEnableParachuteChat" ).prop( "checked", isParachuteChatEnabled );
     $( "#inputEnableParachuteCommand" ).prop( "checked", isCommandEnabled );
     $( "#inputEnableParachuteDroplets" ).prop( "checked", isDropletsEnabled );
     isPlinkoOverlay = themeSettings[ gameTheme ].overlay || false;
@@ -2007,7 +2012,7 @@ function setThemeDefaults() {
     $( "#inputEnablePlinkoOverlay" ).prop( "checked", !isPlinkoOverlay );
     $( "#inputEnablePlinkoClouds" ).prop( "checked", isPlinkoCloudsOn );
     $( "#inputEnablePlinkoHideTilStart" ).prop( "checked", isPlinkoOverlay );
-    $( "#inputEnablePlinkoChat" ).prop( "checked", isChatEnabled );
+    $( "#inputEnablePlinkoChat" ).prop( "checked", isPlinkoChatEnabled );
     $( "#inputEnablePlinkoCommand" ).prop( "checked", isCommandEnabled );
     isHillRollOverlay = themeSettings[ gameTheme ].overlay || false;
     isHillRollCloudsOn = themeSettings[ gameTheme ].clouds || false;
@@ -2015,7 +2020,7 @@ function setThemeDefaults() {
     $( "#inputEnableHillRollOverlay" ).prop( "checked", !isHillRollOverlay );
     $( "#inputEnableHillRollClouds" ).prop( "checked", isHillRollCloudsOn );
     $( "#inputEnableHillRollHideTilRoll" ).prop( "checked", isHillRollOverlay );
-    $( "#inputEnableHillRollChat" ).prop( "checked", isChatEnabled );
+    $( "#inputEnableHillRollChat" ).prop( "checked", isHillRollChatEnabled );
     $( "#inputEnableHillRollInstructions" ).prop( "checked", hideInstructions );
     $( "#inputEnableHillRollTimer" ).prop( "checked", hideTimer );
 }
@@ -2141,7 +2146,7 @@ function generateLink() {
         if( parachuteGameReady && parachuteGameReady !== "0" ) {
             linkParams.push( `readyTime=${parachuteGameReady}000` );
         }
-        if( isChatEnabled && chatOAuth ) {
+        if( isParachuteChatEnabled && chatOAuth ) {
             linkParams.push( `messageFormat=${messageFormat}` );
         }
         if( parachuteCPDrop !== "0" ) {
@@ -2204,7 +2209,7 @@ function generateLink() {
         // if( plinkoRefresh ) {
         //     linkParams.push( `cooldown=${plinkoRefresh}000` );
         // }
-        if( isChatEnabled && chatOAuth ) {
+        if( isPlinkoChatEnabled && chatOAuth ) {
             linkParams.push( `messageFormat=${messageFormat}` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
@@ -2234,7 +2239,7 @@ function generateLink() {
         if( hillRollRefresh ) {
             linkParams.push( `cooldown=${hillRollRefresh}000` );
         }
-        if( isChatEnabled && chatOAuth ) {
+        if( isHillRollChatEnabled && chatOAuth ) {
             linkParams.push( `oauth=${chatOAuth}` );
             linkParams.push( `messageFormat=${messageFormat}` );
         }
@@ -2265,6 +2270,7 @@ function generateLink() {
         linkParams.push( `oauth=${chatOAuth}` );
         break;
     }
+    // console.log( linkParams );
     $( "#outputOverlayLink" ).val( baseLink + linkParams.join( "&" ) );
     $( "#copy-btn" ).attr( "data-clipboard-text", baseLink + linkParams.join( "&" ) );
 
