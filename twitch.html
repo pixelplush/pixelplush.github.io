@@ -3372,14 +3372,14 @@
                 if( gameTheme === "pixelparachutecauldron" ) {
                     const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
                     baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
-                    if( colors.length > 0 ) {
+                    if( colors.length > 1 ) {
                         linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
                     }
                 }
                 else if( gameTheme === "pixelparachutevalentines" ) {
                     const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
                     baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
-                    if( colors.length > 0 ) {
+                    if( colors.length > 1 ) {
                         linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
                     }
                 }
