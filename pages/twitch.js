@@ -385,6 +385,50 @@ $( "#link-showhide" ).on( "click", function() {
 
 const gameTypes = [ "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
 const themeSettings = {
+    "pixelparachuteeasterpremium" : {
+        game: "parachute",
+        name: "Easter Extra (Premium)",
+        page: "https://www.pixelplush.dev/parachute/easter_candy.html",
+        extras: {
+            "easter_1": {
+                name: "easter_candy.html",
+                page: "https://www.pixelplush.dev/parachute/easter_candy.html",
+                preview: "/public/app-assets/images/games/easter_candy.gif",
+            },
+            "easter_2": {
+                name: "easter_choco.html",
+                page: "https://www.pixelplush.dev/parachute/easter_choco.html",
+                preview: "/public/app-assets/images/games/easter_choco.gif",
+            },
+            "easter_3": {
+                name: "easter_sweets.html",
+                page: "https://www.pixelplush.dev/parachute/easter_sweets.html",
+                preview: "/public/app-assets/images/games/easter_sweets.gif",
+            },
+            "easter_4": {
+                name: "easter_marshmallow.html",
+                page: "https://www.pixelplush.dev/parachute/easter_marshmallow.html",
+                preview: "/public/app-assets/images/games/easter_marshmallow.gif",
+            },
+            "easter_5": {
+                name: "easter_cotton.html",
+                page: "https://www.pixelplush.dev/parachute/easter_cotton.html",
+                preview: "/public/app-assets/images/games/easter_cotton.gif",
+            },
+            "easter_6": {
+                name: "easter_dots.html",
+                page: "https://www.pixelplush.dev/parachute/easter_dots.html",
+                preview: "/public/app-assets/images/games/easter_dots.gif",
+            },
+        },
+        preview: "/public/app-assets/images/games/easter_candy.gif",
+        overlay: true,
+        clouds: false,
+        hideTilDrop: true,
+        messageFormat: "USERNAME landed for POINTS!",
+        command: "",
+        requires: "addon_parachute_easter",
+    },
     "pixelparachutevalentines" : {
         game: "parachute",
         name: "Valentines (Premium)",
@@ -421,7 +465,7 @@ const themeSettings = {
                 preview: "/public/app-assets/images/games/valentines_white_red.gif",
             },
         },
-        preview: "/public/app-assets/images/games/drop_cauldron_rainbow_website.gif",
+        preview: "/public/app-assets/images/games/valentines_white_red.gif",
         overlay: true,
         clouds: false,
         hideTilDrop: true,
@@ -975,6 +1019,14 @@ let valentinesColors = {
     "white_gold": false,
     "white_pink": false,
     "white_red": false,
+};
+let easterColors = {
+    "easter_1": true,
+    "easter_2": false,
+    "easter_3": false,
+    "easter_4": false,
+    "easter_5": false,
+    "easter_6": false,
 };
 let flakesNth = "1";
 let flakesNum = "3";
@@ -1560,6 +1612,90 @@ $( "#inputEnableFlakesHearts" ).on( "change", ( e ) => {
     generateLink();
 });
 
+$( "#inputEnableParachuteColor-easter-1" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "easter_1" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    easterColors[ "easter_1" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-easter-2" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "easter_2" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    easterColors[ "easter_2" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-easter-3" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "easter_3" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    easterColors[ "easter_3" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-easter-4" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "easter_4" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    easterColors[ "easter_4" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-easter-5" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "easter_5" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    easterColors[ "easter_5" ] = e.target.checked;
+    generateLink();
+});
+$( "#inputEnableParachuteColor-easter-6" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "easter_6" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    easterColors[ "easter_6" ] = e.target.checked;
+    generateLink();
+});
 $( "#inputEnableParachuteColor-brown-gold" ).on( "change", ( e ) => {
     if( e.target.checked ) {
         const preview = themeSettings[ gameTheme ].extras[ "brown_gold" ].preview;
@@ -1935,6 +2071,9 @@ function setThemeDefaults() {
         else if( gameTheme === "pixelparachutevalentines" ) {
             $( `.parachute-valentines` ).removeClass( "d-none" );
         }
+        else if( gameTheme === "pixelparachuteeasterpremium" ) {
+            $( `.parachute-easter` ).removeClass( "d-none" );
+        }
         else {
             $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
         }
@@ -1976,6 +2115,12 @@ function setThemeDefaults() {
         else if( gameTheme === "pixelparachutevalentines" ) {
             // Select random preview out of the selected
             const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+            const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+            $( "#game-preview" ).attr( "src", preview );
+        }
+        else if( gameTheme === "pixelparachuteeasterpremium" ) {
+            // Select random preview out of the selected
+            const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
@@ -2040,6 +2185,13 @@ function generateLink() {
         }
         else if( gameTheme === "pixelparachutevalentines" ) {
             const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+            baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
+            if( colors.length > 1 ) {
+                linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+            }
+        }
+        else if( gameTheme === "pixelparachuteeasterpremium" ) {
+            const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
             baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
             if( colors.length > 1 ) {
                 linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
