@@ -458,16 +458,15 @@
                     $( ".user-name" ).text( account.displayName || account.username );
                     $( ".user-coins" ).text( account.coins );
         
-                    if( ComfyTwitch.Scopes.includes( "user_subscriptions" ) ) {
+                    if( ComfyTwitch.Scopes.includes( "user:read:subscriptions" ) ) {
                         for( let channel in subReference ) {
-                            let subCheck = await fetch( `https://api.twitch.tv/kraken/users/${account.platformId}/subscriptions/${channel}`, {
+                            let subCheck = await fetch( `https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=${channel}&user_id=${account.platformId}`, {
                                 headers: {
-                                    Accept: "application/vnd.twitchtv.v5+json",
                                     "Client-ID": clientId,
-                                    Authorization: `OAuth ${result.token}`
+                                    Authorization: `Bearer ${result.token}`
                                 }
                             } ).then( r => r.json() );
-                            twitchSubs[ subReference[ channel ] ] = !!subCheck.sub_plan;
+                            twitchSubs[ subReference[ channel ] ] = ( subCheck && subCheck.data && subCheck.data.length > 0 && !!subCheck.data[ 0 ].tier );
                         }
                     }
         
@@ -946,7 +945,7 @@
                 if( result.value ) {
                     ComfyTwitch.Logout();
                     localStorage.setItem( "redirectPage", window.location.href );
-                    ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "user_subscriptions" ] );
+                    ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "user:read:subscriptions" ] );
                 }
             }
             catch( err ) {
