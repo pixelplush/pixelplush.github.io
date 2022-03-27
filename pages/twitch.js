@@ -389,20 +389,20 @@ const gameTypes = [ "giveaway", "chatflakes", "confetti", "weather", "hillroll",
 const themeSettings = {
     "giveaway": {
         game: "giveaway",
-        name: "Normal (in Beta)",
+        name: "Default Theme",
         page: "https://www.pixelplush.dev/giveaway/index.html",
         preview: "/public/app-assets/images/games/giveaway.gif",
         messageFormat: " ",
         // requires: "addon_giveaway",
     },
-    "giveawayblossoms": {
-        game: "giveaway",
-        name: "Blossoms Giveaway (Premium in Beta)",
-        page: "https://www.pixelplush.dev/giveaway/blossoms.html",
-        preview: "/public/app-assets/images/games/giveaway_blossoms.gif",
-        messageFormat: " ",
-        // requires: "addon_giveaway",
-    },
+    // "giveawayblossoms": {
+    //     game: "giveaway",
+    //     name: "Blossoms Giveaway (Premium in Beta)",
+    //     page: "https://www.pixelplush.dev/giveaway/blossoms.html",
+    //     preview: "/public/app-assets/images/games/giveaway_blossoms.gif",
+    //     messageFormat: " ",
+    //     // requires: "addon_giveaway",
+    // },
     "pixelparachuteeasterpremium" : {
         game: "parachute",
         name: "Easter Extra (Premium)",
@@ -411,30 +411,30 @@ const themeSettings = {
             "easter_1": {
                 name: "easter_candy.html",
                 page: "https://www.pixelplush.dev/parachute/easter_candy.html",
-                preview: "/public/app-assets/images/games/easter_candy.gif",
+                preview: "/public/app-assets/images/games/drop_easter_1.gif",
             },
             "easter_2": {
                 name: "easter_choco.html",
                 page: "https://www.pixelplush.dev/parachute/easter_choco.html",
-                preview: "/public/app-assets/images/games/easter_choco.gif",
+                preview: "/public/app-assets/images/games/drop_easter_2.gif",
             },
             "easter_3": {
                 name: "easter_sweets.html",
                 page: "https://www.pixelplush.dev/parachute/easter_sweets.html",
-                preview: "/public/app-assets/images/games/easter_sweets.gif",
+                preview: "/public/app-assets/images/games/drop_easter_3.gif",
             },
             "easter_4": {
                 name: "easter_marshmallow.html",
                 page: "https://www.pixelplush.dev/parachute/easter_marshmallow.html",
-                preview: "/public/app-assets/images/games/easter_marshmallow.gif",
+                preview: "/public/app-assets/images/games/drop_easter_4.gif",
             },
             "easter_5": {
                 name: "easter_cotton.html",
                 page: "https://www.pixelplush.dev/parachute/easter_cotton.html",
-                preview: "/public/app-assets/images/games/easter_cotton.gif",
+                preview: "/public/app-assets/images/games/drop_easter_5.gif",
             },
         },
-        preview: "/public/app-assets/images/games/easter_candy.gif",
+        preview: "/public/app-assets/images/games/drop_easter_1.gif",
         overlay: true,
         clouds: false,
         hideTilDrop: true,
@@ -740,7 +740,7 @@ const themeSettings = {
         game: "parachute",
         name: "Easter",
         page: "https://www.pixelplush.dev/parachute/easter.html",
-        preview: "/public/app-assets/images/games/pixelparachuteeaster.gif",
+        preview: "/public/app-assets/images/games/drop_easter_main.gif",
         overlay: true,
         clouds: false,
         hideTilDrop: true,
@@ -921,8 +921,8 @@ const gameInstructions = {
 };
 const bossEffects = [ "steal", "base" ];
 const trapEffects = [ "points", "tunnel" ];
-let gameType = params.get( "type" ) || "giveaway";
-let gameTheme = params.get( "game" ) || "giveaway";
+let gameType = params.get( "type" ) || "parachute";
+let gameTheme = params.get( "game" ) || "parachute";
 let channelName = "";
 let isBossEnabled = true;
 let isChatEnabled = false;
