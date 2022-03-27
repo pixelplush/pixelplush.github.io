@@ -637,6 +637,7 @@ paypal.Buttons({
                         clearInterval( transactionTimer );
                         if( result.status === "complete" ) {
                             // TODO: thank you celebration!
+                            let previousEggs = account.owned.filter( x => x.startsWith( "pet_egg_" ) );
                             let previousGiftboxes = account.owned.filter( x => x.startsWith( "pet_gift" ) );
                             account = await fetch( `${plushApiUrl}/accounts`, {
                                 headers: {
@@ -644,6 +645,8 @@ paypal.Buttons({
                                 }
                             } ).then( r => r.json() );
                             let newGiftboxes = account.owned.filter( x => x.startsWith( "pet_gift" ) && !previousGiftboxes.includes( x ) );
+                            let newEggs = account.owned.filter( x => x.startsWith( "pet_egg_" ) && !previousEggs.includes( x ) );
+
                             $( ".user-coins" ).text( account.coins );
                             toastr.success( `Plush Coins added!`, "Success", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                             Swal.fire({
@@ -653,7 +656,22 @@ paypal.Buttons({
                                 confirmButtonClass: 'btn btn-primary',
                                 buttonsStyling: false,
                             }).then( function() {
-                                if( newGiftboxes.length > 0 ) {
+                                if( newEggs.length > 0 ) {
+                                    setTimeout( () => {
+                                        Swal.fire({
+                                            title: "PixelPlush Easter Egg Bonus!",
+                                            text: `You also unlocked Pet ${newEggs.map( x => items[ x ].name).join( ", " )}!`,
+                                            imageUrl: `${getItemPreview( newEggs[ 0 ], 0 )}`,
+                                            imageWidth: 48,
+                                            imageHeight: 48,
+                                            animation: false,
+                                            customClass: 'animated bounceIn',
+                                            confirmButtonClass: 'btn btn-primary',
+                                            buttonsStyling: false,
+                                        });
+                                    }, 500 );
+                                }
+                                else if( newGiftboxes.length > 0 ) {
                                     setTimeout( () => {
                                         Swal.fire({
                                             title: "PixelPlush Giftbox Bonus!",
