@@ -415,11 +415,6 @@ const themeSettings = {
                 page: "https://www.pixelplush.dev/parachute/easter_cotton.html",
                 preview: "/public/app-assets/images/games/easter_cotton.gif",
             },
-            "easter_6": {
-                name: "easter_dots.html",
-                page: "https://www.pixelplush.dev/parachute/easter_dots.html",
-                preview: "/public/app-assets/images/games/easter_dots.gif",
-            },
         },
         preview: "/public/app-assets/images/games/easter_candy.gif",
         overlay: true,
@@ -1026,7 +1021,6 @@ let easterColors = {
     "easter_3": false,
     "easter_4": false,
     "easter_5": false,
-    "easter_6": false,
 };
 let flakesNth = "1";
 let flakesNum = "3";
@@ -1680,20 +1674,6 @@ $( "#inputEnableParachuteColor-easter-5" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     easterColors[ "easter_5" ] = e.target.checked;
-    generateLink();
-});
-$( "#inputEnableParachuteColor-easter-6" ).on( "change", ( e ) => {
-    if( e.target.checked ) {
-        const preview = themeSettings[ gameTheme ].extras[ "easter_6" ].preview;
-        $( "#game-preview" ).attr( "src", preview );
-    }
-    else {
-        // Select random preview out of the selected
-        const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
-        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
-        $( "#game-preview" ).attr( "src", preview );
-    }
-    easterColors[ "easter_6" ] = e.target.checked;
     generateLink();
 });
 $( "#inputEnableParachuteColor-brown-gold" ).on( "change", ( e ) => {

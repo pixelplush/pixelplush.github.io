@@ -926,7 +926,6 @@
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_3.png" alt="Easter-3"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_4.png" alt="Easter-4"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_5.png" alt="Easter-5"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_6.png" alt="Easter-6"/></th>
                                                                                 </tr>
                                                                                 <tr class="parachute-game-extras parachute-valentines d-none">
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_brown_gold.png" alt="Brown-Gold"/></th>
@@ -997,11 +996,6 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-5"><label for="inputEnableParachuteColor-easter-5"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-6"><label for="inputEnableParachuteColor-easter-6"></label>
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1793,11 +1787,6 @@
                         page: "https://www.pixelplush.dev/parachute/easter_cotton.html",
                         preview: "/public/app-assets/images/games/easter_cotton.gif",
                     },
-                    "easter_6": {
-                        name: "easter_dots.html",
-                        page: "https://www.pixelplush.dev/parachute/easter_dots.html",
-                        preview: "/public/app-assets/images/games/easter_dots.gif",
-                    },
                 },
                 preview: "/public/app-assets/images/games/easter_candy.gif",
                 overlay: true,
@@ -2404,7 +2393,6 @@
             "easter_3": false,
             "easter_4": false,
             "easter_5": false,
-            "easter_6": false,
         };
         let flakesNth = "1";
         let flakesNum = "3";
@@ -3058,20 +3046,6 @@
                 $( "#game-preview" ).attr( "src", preview );
             }
             easterColors[ "easter_5" ] = e.target.checked;
-            generateLink();
-        });
-        $( "#inputEnableParachuteColor-easter-6" ).on( "change", ( e ) => {
-            if( e.target.checked ) {
-                const preview = themeSettings[ gameTheme ].extras[ "easter_6" ].preview;
-                $( "#game-preview" ).attr( "src", preview );
-            }
-            else {
-                // Select random preview out of the selected
-                const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
-                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
-                $( "#game-preview" ).attr( "src", preview );
-            }
-            easterColors[ "easter_6" ] = e.target.checked;
             generateLink();
         });
         $( "#inputEnableParachuteColor-brown-gold" ).on( "change", ( e ) => {
