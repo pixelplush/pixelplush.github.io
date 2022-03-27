@@ -37,6 +37,7 @@
                                             <div class="form-group">
                                                 <label>Choose Game</label>
                                                 <select class="form-control" id="inputGameType">
+                                                    <option value="giveaway">Giveaway Tool (in Beta)</option>
                                                     <option value="chatflakes">Chat Flakes</option>
                                                     <option value="confetti">Pixel Confetti</option>
                                                     <option value="weather">Stream Weather</option>
@@ -149,6 +150,16 @@
                                                     <th>Message Interval</th>
                                                     <th># Particles Per Message</th>
                                                     <th>Timer Particles (per ms, 0 to disable)</th>
+                                                </tr>
+                                                <tr class="giveaway-game d-none">
+                                                    <th>Language</th>
+                                                    <th>Sound Volume</th>
+                                                    <th>Post to Chat</th>
+                                                    <th>Giveaway Command</th>
+                                                    <th>Join Command</th>
+                                                    <th>Unjoin Command</th>
+                                                    <th>Claim Command</th>
+                                                    <th>Skipme Command</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -365,6 +376,48 @@
                                                     <td>
                                                         <div class="input-group">
                                                             <input type="number" class="" id="inputFlakesTimer" value="3000" min="0" max="1000000" step="100" placeholder="Timer Particles (per ms)">
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="giveaway-game d-none">
+                                                    <td>
+                                                        <select class="form-control" id="inputGiveawayLanguage">
+                                                            <option value="en">English</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputGiveawayVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableGiveawayChat" disabled><label for="inputEnableGiveawayChat"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputGiveawayCommand" value="" placeholder="Command (e.g. !giv)">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputGiveawayJoinCommand" value="" placeholder="Command (e.g. !join)">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputGiveawayUnjoinCommand" value="" placeholder="Command (e.g. !unjoin)">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputGiveawayClaimCommand" value="" placeholder="Command (e.g. !win)">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="text" class="form-control" id="inputGiveawaySkipmeCommand" value="" placeholder="Command (e.g. !skip)">
                                                         </div>
                                                     </td>
                                                 </tr>

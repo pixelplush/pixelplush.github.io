@@ -293,6 +293,7 @@ ComfyTwitch.Check()
             $( "#inputEnableHillRollChat" ).prop( "disabled", false );
             $( "#inputEnableHillRollInstructions" ).prop( "disabled", false );
             $( "#inputEnableHillRollTimer" ).prop( "disabled", false );
+            $( "#inputEnableGiveawayChat" ).prop( "disabled", false );
             $( "#inputMessageFormatDisabled" ).hide();
             $( "#inputChatOAuth" ).val( `oauth:${result.token}` );
             channelName = result.login;
@@ -306,6 +307,7 @@ ComfyTwitch.Check()
                 $( "#inputEnableParachuteChat" ).prop( "disabled", true );
                 $( "#inputEnablePlinkoChat" ).prop( "disabled", true );
                 $( "#inputEnableHillRollChat" ).prop( "disabled", true );
+                $( "#inputEnableGiveawayChat" ).prop( "disabled", true );
                 $( "#inputMessageFormatDisabled" ).show();
             }
 
@@ -383,8 +385,24 @@ $( "#link-showhide" ).on( "click", function() {
     }
 });
 
-const gameTypes = [ "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
+const gameTypes = [ "giveaway", "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
 const themeSettings = {
+    "giveaway": {
+        game: "giveaway",
+        name: "Normal (in Beta)",
+        page: "https://www.pixelplush.dev/giveaway/index.html",
+        preview: "/public/app-assets/images/games/giveaway.gif",
+        messageFormat: " ",
+        // requires: "addon_giveaway",
+    },
+    "giveawayblossoms": {
+        game: "giveaway",
+        name: "Blossoms Giveaway (Premium in Beta)",
+        page: "https://www.pixelplush.dev/giveaway/blossoms.html",
+        preview: "/public/app-assets/images/games/giveaway_blossoms.gif",
+        messageFormat: " ",
+        // requires: "addon_giveaway",
+    },
     "pixelparachuteeasterpremium" : {
         game: "parachute",
         name: "Easter Extra (Premium)",
@@ -883,6 +901,16 @@ const themeSettings = {
     },
 };
 const gameInstructions = {
+    "giveaway": `Host a giveaway for your viewers right within your stream!
+<pre>Example Commands:
+- Start a 5-min giveaway: !giv start 5m Super Awesome Prize
+- Start a 30-sec giveaway: !giv start 30s Quick Everyone Enter!
+- Start a No-Time giveaway: !giv start Long Giveaway
+- Viewers can enter with: !join
+- Manually Pick a Winner: !giv pick
+- Change the time limit to 1-min: !giv time 1m
+- Winner can claim the prize with: !win
+- Hide/Reset the giveaway: !giv reset</pre>`,
     "chatflakes": "Bring some subtle chat interaction into your stream! Turn chat messages into stream particles such as leaves, snowflaks, raindrops, and more!",
     "confetti": "One of our <a href='https://devpost.com/software/pixel-confetti' target='_blank'>Twitch Hackathon Entries</a>! Set the channel points cost of the confetti redemption to get a browser source overlay link. Setting the cost to 0 will disable the confetti. Channel rewards will be automatically added for you in your channel. Use <strong>!resetconfetti</strong> to refresh the rewards or <strong>!deleteconfetti</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
     "weather": "Our <a href='https://devpost.com/software/stream-weather' target='_blank'>Prize-Winning Twitch Overlay</a>! Set the channel points cost of each type of weather redemption to get a browser source overlay link. Setting the cost to 0 will disable that weather type. Channel rewards will be automatically added for you in your channel. Use <strong>!resetweather</strong> to refresh the rewards or <strong>!deleteweather</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
@@ -893,8 +921,8 @@ const gameInstructions = {
 };
 const bossEffects = [ "steal", "base" ];
 const trapEffects = [ "points", "tunnel" ];
-let gameType = params.get( "type" ) || "chatflakes";
-let gameTheme = params.get( "game" ) || "chatflakes";
+let gameType = params.get( "type" ) || "giveaway";
+let gameTheme = params.get( "game" ) || "giveaway";
 let channelName = "";
 let isBossEnabled = true;
 let isChatEnabled = false;
@@ -1030,6 +1058,14 @@ let flakesSnow = false;
 let flakesBlossoms = false;
 let flakesRain = true;
 let flakesHearts = false;
+let giveawayLanguage = "en";
+let isGiveawayChatEnabled = false;
+let giveawayVolume = "25";
+let giveawayCommand = "";
+let giveawayJoinCommand = "";
+let giveawayUnjoinCommand = "";
+let giveawayClaimCommand = "";
+let giveawaySkipmeCommand = "";
 
 const ignoreInputs = [ "inputGameType", "inputGameTheme", "inputChannelName", "inputChatOAuth", "inputMessageFormatDisabled" ];
 
@@ -1343,6 +1379,58 @@ $( "#inputHillRollCommand" ).on( "input", ( e ) => {
 });
 $( "#inputEnableHillRollChat" ).on( "change", ( e ) => {
     isHillRollChatEnabled = e.target.checked;
+    generateLink();
+});
+$( "#inputGiveawayVolume" ).on( "change", ( e ) => {
+    giveawayVolume = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawayVolume" ).on( "input", ( e ) => {
+    giveawayVolume = e.target.value;
+    generateLink();
+});
+$( "#inputEnableGiveawayChat" ).on( "change", ( e ) => {
+    isGiveawayChatEnabled = e.target.checked;
+    generateLink();
+});
+$( "#inputGiveawayCommand" ).on( "change", ( e ) => {
+    giveawayCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawayCommand" ).on( "input", ( e ) => {
+    giveawayCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawayJoinCommand" ).on( "change", ( e ) => {
+    giveawayJoinCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawayJoinCommand" ).on( "input", ( e ) => {
+    giveawayJoinCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawayUnjoinCommand" ).on( "change", ( e ) => {
+    giveawayUnjoinCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawayUnjoinCommand" ).on( "input", ( e ) => {
+    giveawayUnjoinCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawayClaimCommand" ).on( "change", ( e ) => {
+    giveawayClaimCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawayClaimCommand" ).on( "input", ( e ) => {
+    giveawayClaimCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawaySkipmeCommand" ).on( "change", ( e ) => {
+    giveawaySkipmeCommand = e.target.value;
+    generateLink();
+});
+$( "#inputGiveawaySkipmeCommand" ).on( "input", ( e ) => {
+    giveawaySkipmeCommand = e.target.value;
     generateLink();
 });
 $( "#inputWeatherRain" ).on( "change", ( e ) => {
@@ -2148,6 +2236,7 @@ function setThemeDefaults() {
     $( "#inputEnableHillRollChat" ).prop( "checked", isHillRollChatEnabled );
     $( "#inputEnableHillRollInstructions" ).prop( "checked", hideInstructions );
     $( "#inputEnableHillRollTimer" ).prop( "checked", hideTimer );
+    $( "#inputEnableGiveawayChat" ).prop( "checked", isGiveawayChatEnabled );
 }
 
 function generateLink() {
@@ -2181,6 +2270,32 @@ function generateLink() {
         }
     }
     switch( themeSettings[ gameTheme ].game ) {
+    case "giveaway":
+        if( giveawayLanguage ) {
+            linkParams.push( `lang=${giveawayLanguage}` );
+        }
+        if( giveawayVolume ) {
+            linkParams.push( `volume=${giveawayVolume}` );
+        }
+        if( giveawayCommand ) {
+            linkParams.push( `command=${giveawayCommand.replace("!", "")}` );
+        }
+        if( giveawayJoinCommand ) {
+            linkParams.push( `join=${giveawayJoinCommand.replace("!", "")}` );
+        }
+        if( giveawayUnjoinCommand ) {
+            linkParams.push( `unjoin=${giveawayUnjoinCommand.replace("!", "")}` );
+        }
+        if( giveawayClaimCommand ) {
+            linkParams.push( `win=${giveawayClaimCommand.replace("!", "")}` );
+        }
+        if( giveawaySkipmeCommand ) {
+            linkParams.push( `skip=${giveawaySkipmeCommand.replace("!", "")}` );
+        }
+        if( isGiveawayChatEnabled && chatOAuth ) {
+            linkParams.push( `oauth=${chatOAuth}` );
+        }
+        break;
     case "chatflakes":
         if( flakesNth !== "0" ) {
             linkParams.push( `nth=${flakesNth}` );
