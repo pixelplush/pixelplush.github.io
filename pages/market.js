@@ -575,6 +575,7 @@ paypal.Buttons({
             })
         } ).then( r => r.json() );
         if( !transaction.success ) {
+            console.log( transaction );
             toastr.error( "Sorry, there seems to be an error...", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
             throw new Error( "Transaction Error" );
         }
@@ -701,14 +702,14 @@ paypal.Buttons({
             });
         }
         catch( e ) {
-            console.error( "Error", e );
-            toastr.error( "Sorry, there seems to be an error...", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+            console.log( "Error", e );
+            toastr.error( "Sorry, there seems to be an error..." + e, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
             throw new Error( "Transaction Error" );
         }
     },
     onError: function(data) {
-        console.error( "Error", data );
-        toastr.error( "Sorry, there seems to be an error...", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+        console.log( "Error", data );
+        toastr.error( "Sorry, there seems to be an error..." + data, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
         throw new Error( "Transaction Error" );
     }
 }).render('#paypal-button-container');
