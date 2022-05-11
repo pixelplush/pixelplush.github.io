@@ -41,5 +41,19 @@ module.exports =
         "link": "Follow Us!",
         "icon": `<i class="bx bx-link"></i>`,
         "menu": "normal"
-    }
+    },
+    "terms": {
+        "name": "Terms of Use",
+        "menu": "normal"
+    },
+    "privacy": {
+        "name": "Privacy Notice",
+        "menu": "normal"
+    },
+    "credits": {
+        "name": "Credits",
+        "link": "Credits",
+        "icon": `<i class="bx bxs-megaphone"></i>`,
+        "menu": "normal"
+    },
 }

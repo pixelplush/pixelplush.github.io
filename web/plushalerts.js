@@ -103,11 +103,11 @@ function Init() {
     //     "type": "pet",
     //     "path": "rainbee",
     //     "cost": 10000,
-    //     "subscription": "MaayaInsane",
+    //     "subscription": "Maaya",
     //     "minIdle": 200,
     //     "maxIdle": 800,
     //     "hidden": true
-    // }, "Maayainsane" );
+    // }, "Maaya" );
     //
     // showItemAlert( {
     //     "id": "rabbit",
@@ -119,7 +119,7 @@ function Init() {
     //     "path": "rabbit",
     //     "cost": 20,
     //     "sale": true
-    // }, "Maayainsane" );
+    // }, "Maaya" );
     //
     // showItemAlert( {
     //     "id": "addon_streamweather",
@@ -131,7 +131,7 @@ function Init() {
     //     "path": "streamweather.png",
     //     "cost": 20,
     //     "sale": true
-    // }, "Maayainsane" );
+    // }, "Maaya" );
 
     // const testObject = {
     //     "type": "message",
@@ -304,7 +304,7 @@ function Init() {
     //     "cost": 10
     // };
     //
-    // showItemAlert( testLongName, "Maayainsane" );
+    // showItemAlert( testLongName, "Maaya" );
 
     // showItemAlert( testObject.data.item, testObject.data.account.displayName );
 }
@@ -532,11 +532,11 @@ async function OnChatCommand( user, command, message, flags, extra ) {
         //     "type": "pet",
         //     "path": "rainbee",
         //     "cost": 10000,
-        //     "subscription": "MaayaInsane",
+        //     "subscription": "Maaya",
         //     "minIdle": 200,
         //     "maxIdle": 800,
         //     "hidden": true
-        // }, "Maayainsane" );
+        // }, "Maaya" );
         //
         showItemAlert( {
             "id": "rabbit",
@@ -560,7 +560,7 @@ async function OnChatCommand( user, command, message, flags, extra ) {
         //     "path": "streamweather.png",
         //     "cost": 20,
         //     "sale": true
-        // }, "Maayainsane" );
+        // }, "Maaya" );
     }
 	if( ( flags.broadcaster || flags.mod ) &&
         ( command === "testcoinalert" ) ) {

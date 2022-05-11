@@ -10,11 +10,13 @@ const menuLiveTemplate = fs.readFileSync( `template_left_live.html` ).toString()
 function generateMenu( page ) {
     let menuItems = "";
     Object.keys( pages ).forEach( p => {
+      if( pages[ p ].link ) {
         menuItems += menuItem
             .replace( /PAGE_FILE/g, p )
             .replace( /PAGE_LINK/g, pages[ p ].link )
             .replace( /PAGE_ICON/g, pages[ p ].icon )
             .replace( /PAGE_ACTIVE/g, page === p ? " active" : "" );
+      }
     });
     return menuItems;
 }
