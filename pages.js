@@ -42,6 +42,10 @@ module.exports =
         "icon": `<i class="bx bx-link"></i>`,
         "menu": "normal"
     },
+    "redeem": {
+        "name": "Redeem Code",
+        "menu": "normal"
+    },
     "terms": {
         "name": "Terms of Use",
         "menu": "normal"
