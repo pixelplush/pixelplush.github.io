@@ -109,7 +109,7 @@ $( document ).ready(function() {
 
 function populateItemList( searchText = "" ) {
     $( "#catalog-list" ).empty();
-    let filteredCatalog = catalog.filter( x => x.id.includes( searchText ) || x.theme.toLowerCase().includes( searchText ) );
+    let filteredCatalog = catalog.filter( x => x.group.toLowerCase().includes( searchText ) || x.name.toLowerCase().includes( searchText ) || x.theme.toLowerCase().includes( searchText ) );
     if( !$( "#checkboxChars" ).prop( "checked" ) ) {
         filteredCatalog = filteredCatalog.filter( x => x.type !== "character" );
     }
