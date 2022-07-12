@@ -99,7 +99,7 @@
     font-family: Arial !important;
     word-break: break-word !important;
             }
-            
+
         .link-group a {
             display: inline-flex;
             align-items: center;
@@ -331,6 +331,7 @@ PAGE_CONTENT
     <script src="public/app-assets/vendors/js/ui/jquery.sticky.js"></script>
     <script src="public/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
     <script src="public/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+    <script src="public/app-assets/vendors/js/forms/validation/jqBootstrapValidation.js"></script>
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
@@ -350,6 +351,11 @@ PAGE_CONTENT
     <script src="public/comfytwitch.min.js"></script>
     <script>
 PAGE_SCRIPT
+    </script>
+    <script>
+    $( function () {
+      $( "[data-toggle='tooltip']" ).tooltip()
+    } );
     </script>
 
 </body>
