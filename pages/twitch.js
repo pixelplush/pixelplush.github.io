@@ -23,6 +23,11 @@ $( "#inputParachuteGameReady" ).TouchSpin({
     max: 3600,
     step: 30,
 });
+$( "#inputParachuteRaidDrop" ).TouchSpin({
+    min: 0,
+    max: 3600,
+    step: 10,
+});
 $( "#inputParachuteCPDrop" ).TouchSpin({
     min: 0,
     max: 100000,
@@ -944,6 +949,7 @@ let isParachuteHideTilDrop = false;
 let parachuteVolume = "25";
 let parachuteRefresh = "90";
 let parachuteGameReady = "0";
+let parachuteRaidDrop = "0";
 let parachuteCommand = "";
 let parachuteCPDrop = "0";
 let parachuteCPDroplets = "0";
@@ -1195,6 +1201,14 @@ $( "#inputParachuteGameReady" ).on( "change", ( e ) => {
 });
 $( "#inputParachuteGameReady" ).on( "input", ( e ) => {
     parachuteGameReady = e.target.value;
+    generateLink();
+});
+$( "#inputParachuteRaidDrop" ).on( "change", ( e ) => {
+    parachuteRaidDrop = e.target.value;
+    generateLink();
+});
+$( "#inputParachuteRaidDrop" ).on( "input", ( e ) => {
+    parachuteRaidDrop = e.target.value;
     generateLink();
 });
 $( "#inputParachuteCommand" ).on( "change", ( e ) => {
@@ -2396,6 +2410,9 @@ function generateLink() {
         }
         if( parachuteGameReady && parachuteGameReady !== "0" ) {
             linkParams.push( `readyTime=${parachuteGameReady}000` );
+        }
+        if( parachuteRaidDrop && parachuteRaidDrop !== "0" ) {
+            linkParams.push( `raidMode=${parachuteRaidDrop}000` );
         }
         if( isParachuteChatEnabled && chatOAuth ) {
             linkParams.push( `messageFormat=${messageFormat}` );

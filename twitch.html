@@ -488,11 +488,9 @@
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Check this option if you want to have a background behind the parachutes. Uncheck this option if you want the background to be transparent">Background</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="When checked, the game will show semi-transparent clouds moving on the screen">Clouds</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="When checked, the target will stay at the bottom of your screen at all times. If you want the target to be hidden unless someone types !drop in chat, uncheck this option">Hide Until Drop</span></th>
-                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Choose how loud you want the sound effects to be. If you don’t want any sound effects, type in 0">Sound Volume</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="If you check this option, you will get announcements in chat whenever someone lands on the target - only available if you granted chat permissions">Score in Chat</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="If you check this option, every bit cheer in your channel will trigger random items called droplets to fall on the screen and interact with the parachutes. Can be used if you want to attempt to change someone’s angle and give them a better chance at landing on the target">Bit Cheers</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="If you check this option, your viewers will be able to drop with a command through chat. If you want your viewers to only be able to drop through a channel point redeem, uncheck this option">Enable Drop via Chat</span></th>
-                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Choose how loud you want the sound effect that notifies you about a group drop. If you don’t want any sound effects, type in 0">Notification Volume</span></th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Check this option if you want to have a background behind the plinko game. Uncheck this option if you want the background to be transparent">Background</span></th>
@@ -621,11 +619,6 @@
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputParachuteVolume" value="25" min="0" max="100" placeholder="Sound Volume">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteChat" disabled><label for="inputEnableParachuteChat"></label>
                                                                                         </div>
@@ -638,11 +631,6 @@
                                                                                     <td>
                                                                                         <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteCommand"><label for="inputEnableParachuteCommand"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="touchspin" id="inputParachuteNotifVolume" value="25" min="0" max="100" placeholder="Notification Volume">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -809,11 +797,11 @@
                                                                                 </tr>
                                                                                 <tr class="parachute-game d-none">
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="If you want a different chat command instead of !drop, type it in here. If you leave it blank, the command will stay as !drop">Chat Command</span></th>
+                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Choose how loud you want the sound effects to be. If you don’t want any sound effects, type in 0">Sound Volume</span></th>
+                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Choose how loud you want the sound effect that notifies you about a group drop. If you don’t want any sound effects, type in 0">Notification Volume</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Choose how many points you want your viewers to spend if they choose to play the game through a channel point redeem. If you don’t want this game available through a channel point redeem, type in 0 - only available if you granted chat permissions">Channel Point Cost</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="This is the same thing as Bit Cheers, but redeemable with channel points - only available if you granted chat permissions">Channel Point Cheers</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Choosing an amount greater than 0 will create a channel point redemption called Group Parachute. When redeemed, all drops will be queued and released at the same time 60 seconds after the redeem was triggered - only available if you granted chat permissions">Channel Point Group Drop</span></th>
-                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Choose how often you want the target to reset">Refresh Timer (secs)</span></th>
-                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Set a starting amount of time before the game will accept players">Time Til Ready (secs)</span></th>
                                                                                 </tr>
                                                                                 <tr class="plinko-game d-none">
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="If you check this option, your viewers will be able to play the game with a !plinko command through chat. If you want your viewers to only be able to play through a channel point redeem, uncheck this option">Enable Drop via Chat</span></th>
@@ -885,6 +873,16 @@
                                                                                     </td>
                                                                                     <td>
                                                                                         <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputParachuteVolume" value="25" min="0" max="100" placeholder="Sound Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="touchspin" id="inputParachuteNotifVolume" value="25" min="0" max="100" placeholder="Notification Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
                                                                                             <input type="number" class="" id="inputParachuteCPDrop" value="0" min="0" max="100000" step="50" placeholder="Channel Points Drop Cost">
                                                                                         </div>
                                                                                     </td>
@@ -896,16 +894,6 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="" id="inputParachuteCPQueue" value="0" min="0" max="100000" step="500" placeholder="Channel Points Group Drop Cost">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="input-group">
-                                                                                            <input type="number" class="" id="inputParachuteGameReady" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1025,30 +1013,10 @@
                                                                     <div class="table-responsive">
                                                                         <table class="table mt-1">
                                                                             <thead>
-                                                                                <tr class="parachute-game-extras parachute-easter d-none">
-                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_1.png" alt="Easter-1"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_2.png" alt="Easter-2"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_3.png" alt="Easter-3"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_4.png" alt="Easter-4"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_5.png" alt="Easter-5"/></th>
-                                                                                </tr>
-                                                                                <tr class="parachute-game-extras parachute-valentines d-none">
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_brown_gold.png" alt="Brown-Gold"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_brown_pink.png" alt="Brown-Pink"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_brown_red.png" alt="Brown-Red"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_white_gold.png" alt="White-Gold"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_white_pink.png" alt="White-Pink"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_white_red.png" alt="White-Red"/></th>
-                                                                                </tr>
-                                                                                <tr class="parachute-game-extras parachute-cauldron d-none">
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_rainbow.png" alt="Color-Changing"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pink.png" alt="Pink"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_yellow.png" alt="Yellow"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_green.png" alt="Green"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
-                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
+                                                                                <tr class="parachute-game d-none">
+                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Choose how often you want the target to reset">Refresh Timer (secs)</span></th>
+                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Set a starting amount of time before the game will accept players">Time Til Ready (secs)</span></th>
+                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="Set the duration of auto drops after a raid or set to 0 to turn off">Raid Drop Timer (secs)</span></th>
                                                                                 </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_brightred.png" alt="Bright Red"/></th>
@@ -1077,104 +1045,20 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
-                                                                                <tr class="parachute-game-extras parachute-easter d-none">
+                                                                                <tr class="parachute-game d-none">
                                                                                     <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-1" checked><label for="inputEnableParachuteColor-easter-1"></label>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-2"><label for="inputEnableParachuteColor-easter-2"></label>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteGameReady" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                     <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-3"><label for="inputEnableParachuteColor-easter-3"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-4"><label for="inputEnableParachuteColor-easter-4"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-5"><label for="inputEnableParachuteColor-easter-5"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr class="parachute-game-extras parachute-valentines d-none">
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-brown-gold" checked><label for="inputEnableParachuteColor-brown-gold"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-brown-pink"><label for="inputEnableParachuteColor-brown-pink"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-brown-red"><label for="inputEnableParachuteColor-brown-red"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-white-gold"><label for="inputEnableParachuteColor-white-gold"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-white-pink"><label for="inputEnableParachuteColor-white-pink"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-white-red"><label for="inputEnableParachuteColor-white-red"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr class="parachute-game-extras parachute-cauldron d-none">
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-rainbow" checked><label for="inputEnableParachuteColor-rainbow"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-red"><label for="inputEnableParachuteColor-red"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-pink"><label for="inputEnableParachuteColor-pink"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-orange"><label for="inputEnableParachuteColor-orange"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-yellow"><label for="inputEnableParachuteColor-yellow"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-green"><label for="inputEnableParachuteColor-green"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-blue"><label for="inputEnableParachuteColor-blue"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <div class="checkbox">
-                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-purple"><label for="inputEnableParachuteColor-purple"></label>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputParachuteRaidDrop" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1295,6 +1179,31 @@
                                                                     <div class="table-responsive">
                                                                         <table class="table mt-1">
                                                                             <thead>
+                                                                                <tr class="parachute-game-extras parachute-easter d-none">
+                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_1.png" alt="Easter-1"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_2.png" alt="Easter-2"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_3.png" alt="Easter-3"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_4.png" alt="Easter-4"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/easter/easter_icon_5.png" alt="Easter-5"/></th>
+                                                                                </tr>
+                                                                                <tr class="parachute-game-extras parachute-valentines d-none">
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_brown_gold.png" alt="Brown-Gold"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_brown_pink.png" alt="Brown-Pink"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_brown_red.png" alt="Brown-Red"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_white_gold.png" alt="White-Gold"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_white_pink.png" alt="White-Pink"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_white_red.png" alt="White-Red"/></th>
+                                                                                </tr>
+                                                                                <tr class="parachute-game-extras parachute-cauldron d-none">
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_rainbow.png" alt="Color-Changing"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_red.png" alt="Red"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_pink.png" alt="Pink"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_orange.png" alt="Orange"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_yellow.png" alt="Yellow"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_green.png" alt="Green"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_blue.png" alt="Blue"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
+                                                                                </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_purple.png" alt="Purple"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelpurple.png" alt="Pastel Purple"/></th>
@@ -1313,6 +1222,107 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
+                                                                                <tr class="parachute-game-extras parachute-easter d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-1" checked><label for="inputEnableParachuteColor-easter-1"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-2"><label for="inputEnableParachuteColor-easter-2"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-3"><label for="inputEnableParachuteColor-easter-3"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-4"><label for="inputEnableParachuteColor-easter-4"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-5"><label for="inputEnableParachuteColor-easter-5"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="parachute-game-extras parachute-valentines d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-brown-gold" checked><label for="inputEnableParachuteColor-brown-gold"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-brown-pink"><label for="inputEnableParachuteColor-brown-pink"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-brown-red"><label for="inputEnableParachuteColor-brown-red"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-white-gold"><label for="inputEnableParachuteColor-white-gold"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-white-pink"><label for="inputEnableParachuteColor-white-pink"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-white-red"><label for="inputEnableParachuteColor-white-red"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr class="parachute-game-extras parachute-cauldron d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-rainbow" checked><label for="inputEnableParachuteColor-rainbow"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-red"><label for="inputEnableParachuteColor-red"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-pink"><label for="inputEnableParachuteColor-pink"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-orange"><label for="inputEnableParachuteColor-orange"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-yellow"><label for="inputEnableParachuteColor-yellow"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-green"><label for="inputEnableParachuteColor-green"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-blue"><label for="inputEnableParachuteColor-blue"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-purple"><label for="inputEnableParachuteColor-purple"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                </tr>
                                                                                 <tr class="confetti-game d-none">
                                                                                     <td>
                                                                                         <div class="checkbox">
@@ -1501,6 +1511,11 @@
             min: 0,
             max: 3600,
             step: 30,
+        });
+        $( "#inputParachuteRaidDrop" ).TouchSpin({
+            min: 0,
+            max: 3600,
+            step: 10,
         });
         $( "#inputParachuteCPDrop" ).TouchSpin({
             min: 0,
@@ -2423,6 +2438,7 @@
         let parachuteVolume = "25";
         let parachuteRefresh = "90";
         let parachuteGameReady = "0";
+        let parachuteRaidDrop = "0";
         let parachuteCommand = "";
         let parachuteCPDrop = "0";
         let parachuteCPDroplets = "0";
@@ -2674,6 +2690,14 @@
         });
         $( "#inputParachuteGameReady" ).on( "input", ( e ) => {
             parachuteGameReady = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteRaidDrop" ).on( "change", ( e ) => {
+            parachuteRaidDrop = e.target.value;
+            generateLink();
+        });
+        $( "#inputParachuteRaidDrop" ).on( "input", ( e ) => {
+            parachuteRaidDrop = e.target.value;
             generateLink();
         });
         $( "#inputParachuteCommand" ).on( "change", ( e ) => {
@@ -3875,6 +3899,9 @@
                 }
                 if( parachuteGameReady && parachuteGameReady !== "0" ) {
                     linkParams.push( `readyTime=${parachuteGameReady}000` );
+                }
+                if( parachuteRaidDrop && parachuteRaidDrop !== "0" ) {
+                    linkParams.push( `raidMode=${parachuteRaidDrop}000` );
                 }
                 if( isParachuteChatEnabled && chatOAuth ) {
                     linkParams.push( `messageFormat=${messageFormat}` );
