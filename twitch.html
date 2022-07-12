@@ -407,7 +407,6 @@
                                                                             <div class="form-group">
                                                                                 <label>Choose Game</label>
                                                                                 <select class="form-control" id="inputGameType">
-                                                                                    <option value="pridemonth">Pride Month Rainbow (Limited-Time)</option>
                                                                                     <option value="giveaway">Giveaway Tool (in Beta)</option>
                                                                                     <option value="chatflakes">Chat Flakes</option>
                                                                                     <option value="confetti">Pixel Confetti</option>
@@ -1068,10 +1067,6 @@
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_pastelblue.png" alt="Pastel Blue"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_skyblue.png" alt="Sky Blue"/></th>
                                                                                 </tr>
-                                                                                <tr class="pridemonth-game d-none">
-                                                                                  <th>Rainbow Cost</th>
-                                                                                  <th>Volume</th>
-                                                                                </tr>
                                                                                 <tr class="weather-game d-none">
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Choose the cost of this channel point redeem. If you type in 0, the redeem will not create">Sunshine</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Choose the cost of this channel point redeem. If you type in 0, the redeem will not create">Lightning</span></th>
@@ -1259,18 +1254,6 @@
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableConfettiSkyBlue" checked><label for="inputEnableConfettiSkyBlue"></label>
                                                                                         </div>
                                                                                     </td>
-                                                                                </tr>
-                                                                                <tr class="pridemonth-game d-none">
-                                                                                  <td>
-                                                                                      <div class="input-group">
-                                                                                          <input type="number" class="" id="inputWeatherRainbow" value="100" min="0" max="100000" step="50" placeholder="Rainbow Cost">
-                                                                                      </div>
-                                                                                  </td>
-                                                                                  <td>
-                                                                                      <div class="input-group">
-                                                                                          <input type="number" class="touchspin" id="inputWeatherVolume" value="25" min="0" max="100" placeholder="Sound Volume">
-                                                                                      </div>
-                                                                                  </td>
                                                                                 </tr>
                                                                                 <tr class="weather-game d-none">
                                                                                     <td>
@@ -1881,15 +1864,8 @@
             }
         });
         
-        const gameTypes = [ "pridemonth", "giveaway", "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
+        const gameTypes = [ "giveaway", "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
         const themeSettings = {
-            "pridemonth": {
-                game: "pridemonth",
-                name: "Pride Rainbow (June)",
-                page: "https://www.pixelplush.dev/weather/rainbow.html",
-                preview: "/public/app-assets/images/games/rainbow300.png",
-                messageFormat: " ",
-            },
             "giveaway": {
                 game: "giveaway",
                 name: "Default Theme",
@@ -2404,7 +2380,6 @@
             },
         };
         const gameInstructions = {
-            "pridemonth": "This month, PixelPlush is celebrating Pride Month and offering a limited-time Rainbow Twitch channel points redemption overlay to use during the month of June! The channel reward will be automatically added for you in your channel. Use <strong>!resetrainbow</strong> to refresh the reward or <strong>!deleterainbow</strong> to delete it. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
             "giveaway": `Host a giveaway for your viewers right within your stream!
         <pre>Example Commands:
         - Start a 5-min giveaway: !giv start 5m Super Awesome Prize
@@ -3824,15 +3799,6 @@
                 }
                 if( flakesHearts ) {
                     linkParams.push( `hearts=true` );
-                }
-                linkParams.push( `oauth=${chatOAuth}` );
-                break;
-            case "pridemonth":
-                if( weatherRainbow !== "0" ) {
-                    linkParams.push( `rainbow=${weatherRainbow}` );
-                }
-                if( weatherVolume ) {
-                    linkParams.push( `volume=${weatherVolume}` );
                 }
                 linkParams.push( `oauth=${chatOAuth}` );
                 break;

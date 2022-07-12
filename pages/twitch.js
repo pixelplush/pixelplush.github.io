@@ -385,15 +385,8 @@ $( "#link-showhide" ).on( "click", function() {
     }
 });
 
-const gameTypes = [ "pridemonth", "giveaway", "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
+const gameTypes = [ "giveaway", "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
 const themeSettings = {
-    "pridemonth": {
-        game: "pridemonth",
-        name: "Pride Rainbow (June)",
-        page: "https://www.pixelplush.dev/weather/rainbow.html",
-        preview: "/public/app-assets/images/games/rainbow300.png",
-        messageFormat: " ",
-    },
     "giveaway": {
         game: "giveaway",
         name: "Default Theme",
@@ -908,7 +901,6 @@ const themeSettings = {
     },
 };
 const gameInstructions = {
-    "pridemonth": "This month, PixelPlush is celebrating Pride Month and offering a limited-time Rainbow Twitch channel points redemption overlay to use during the month of June! The channel reward will be automatically added for you in your channel. Use <strong>!resetrainbow</strong> to refresh the reward or <strong>!deleterainbow</strong> to delete it. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
     "giveaway": `Host a giveaway for your viewers right within your stream!
 <pre>Example Commands:
 - Start a 5-min giveaway: !giv start 5m Super Awesome Prize
@@ -2328,15 +2320,6 @@ function generateLink() {
         }
         if( flakesHearts ) {
             linkParams.push( `hearts=true` );
-        }
-        linkParams.push( `oauth=${chatOAuth}` );
-        break;
-    case "pridemonth":
-        if( weatherRainbow !== "0" ) {
-            linkParams.push( `rainbow=${weatherRainbow}` );
-        }
-        if( weatherVolume ) {
-            linkParams.push( `volume=${weatherVolume}` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
         break;
