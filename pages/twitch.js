@@ -402,7 +402,7 @@ const themeSettings = {
     },
     // "giveawayblossoms": {
     //     game: "giveaway",
-    //     name: "Blossoms Giveaway (Premium in Beta)",
+    //     name: "Blossoms Giveaway (Premium)",
     //     page: "https://www.pixelplush.dev/giveaway/blossoms.html",
     //     preview: "/public/app-assets/images/games/giveaway_blossoms.gif",
     //     messageFormat: " ",
@@ -2162,6 +2162,7 @@ function setThemeDefaults() {
     }
     if( !themeSettings[ gameTheme ].requires ) {
         $( ".addon-required" ).hide();
+        $( ".link-not-available" ).hide();
         $( ".link-available" ).show();
     }
     else {
@@ -2174,6 +2175,7 @@ function setThemeDefaults() {
                     <h3>${item.name}</h3>
                 `);
                 $( ".link-available" ).show();
+                $( ".link-not-available" ).hide();
             }
             else {
                 $( "#addon-button" ).append( `
@@ -2181,6 +2183,7 @@ function setThemeDefaults() {
                     <h3>${item.name}</h3>
                     <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
                 `);
+                $( ".link-not-available" ).show();
                 $( ".link-available" ).hide();
             }
             $( ".addon-required" ).show();
