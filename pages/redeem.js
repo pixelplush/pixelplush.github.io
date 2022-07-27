@@ -80,7 +80,7 @@ $( document ).ready(function() {
     if( params.get( "code" ) ) {
         let foo = params.get( "code" ).split("-").join(""); // remove hyphens
         console.log( foo );
-        if( !foo.startsWith( "PIXELPLUSH" ) ) {
+        if( foo.startsWith( "PIXELPLUSH" ) ) {
             $("#coupon-code-form").val(foo);
         }
         else {
