@@ -1403,6 +1403,10 @@ $( "#inputEnableHillRollChat" ).on( "change", ( e ) => {
     isHillRollChatEnabled = e.target.checked;
     generateLink();
 });
+$( "#inputGiveawayLanguage" ).on( "change", ( e ) => {
+    giveawayLanguage = e.target.value;
+    generateLink();
+});
 $( "#inputGiveawayVolume" ).on( "change", ( e ) => {
     giveawayVolume = e.target.value;
     generateLink();
