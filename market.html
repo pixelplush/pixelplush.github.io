@@ -902,6 +902,19 @@
                     $( ".user-coins" ).text( account.coins );
                     populateItemList();
                     toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
+                    if( itemId.startsWith( "bundle" ) ) {
+                        Swal.fire({
+                            title: "PixelPlush Bundle Set Purchased!",
+                            text: `You unlocked: ${items[ itemId ].items.split( "," ).map( x => items[ x ].name).join( ", " )}!`,
+                            imageUrl: `${getItemPreview( itemId, 0 )}`,
+                            imageWidth: 48,
+                            imageHeight: 48,
+                            animation: false,
+                            customClass: 'animated bounceIn',
+                            confirmButtonClass: 'btn btn-primary',
+                            buttonsStyling: false,
+                        });
+                    }
                     if( !itemId.startsWith( "addon" ) && !itemId.startsWith( "bundle" ) ) {
                         let confirm = await Swal.fire({
                             title: `Use ${items[ itemId ].name}?`,
