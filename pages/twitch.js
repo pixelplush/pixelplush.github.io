@@ -416,6 +416,74 @@ const themeSettings = {
         messageFormat: " ",
         requires: "addon_giveaway_blossoms",
     },
+    "pixelparachutesplashpool" : {
+        game: "parachute",
+        name: "Pool Party Splash (Premium)",
+        page: "https://www.pixelplush.dev/parachute/pool_splash_frog.html",
+        extras: {
+            "frog": {
+                name: "pool_splash_frog.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_frog.html",
+                preview: "/public/app-assets/images/games/drop_pool_frog.gif",
+                requires: "addon_parachute_poolfrog",
+            },
+            "watermelon": {
+                name: "pool_splash_watermelon.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_watermelon.html",
+                preview: "/public/app-assets/images/games/drop_pool_melon.gif",
+                requires: "addon_parachute_poolmelon",
+            },
+            "rainbow": {
+                name: "pool_splash_rainbow.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_rainbow.html",
+                preview: "/public/app-assets/images/games/drop_pool_rainbow.gif",
+                requires: "addon_parachute_poolrainbow",
+            },
+            "dots": {
+                name: "pool_splash_dots.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_dots.html",
+                preview: "/public/app-assets/images/games/drop_pool_rainbowdots.gif",
+                requires: "addon_parachute_pooldots",
+            },
+            "pink": {
+                name: "pool_splash_pink.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_pink.html",
+                preview: "/public/app-assets/images/games/drop_pool_pink.gif",
+                requires: "addon_parachute_poolsparklypink",
+            },
+            "purple": {
+                name: "pool_splash_purple.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_purple.html",
+                preview: "/public/app-assets/images/games/drop_pool_purple.gif",
+                requires: "addon_parachute_poolsparklypurple",
+            },
+            "yellow": {
+                name: "pool_splash_yellow.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_yellow.html",
+                preview: "/public/app-assets/images/games/drop_pool_yellow.gif",
+                requires: "addon_parachute_poolyellow",
+            },
+            "red": {
+                name: "pool_splash_red.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_red.html",
+                preview: "/public/app-assets/images/games/drop_pool_red.gif",
+                requires: "addon_parachute_poolred",
+            },
+            "blue": {
+                name: "pool_splash_blue.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_blue.html",
+                preview: "/public/app-assets/images/games/drop_pool_blue.gif",
+                requires: "addon_parachute_poolblue",
+            },
+        },
+        preview: "/public/app-assets/images/games/drop_pool_frog.gif",
+        overlay: true,
+        clouds: false,
+        hideTilDrop: true,
+        messageFormat: "USERNAME landed for POINTS!",
+        command: "",
+        bundle: "bundle_parachute_pool",
+    },
     "pixelparachuteeasterpremium" : {
         game: "parachute",
         name: "Easter Extra (Premium)",
@@ -1063,6 +1131,17 @@ let easterColors = {
     "easter_3": false,
     "easter_4": false,
     "easter_5": false,
+};
+let splashpoolColors = {
+    "frog": true,
+    "watermelon": false,
+    "rainbow": false,
+    "dots": false,
+    "pink": false,
+    "purple": false,
+    "yellow": false,
+    "red": false,
+    "blue": false,
 };
 let flakesNth = "1";
 let flakesNum = "3";
@@ -2168,11 +2247,42 @@ function setThemeDefaults() {
         else if( gameTheme === "pixelparachuteeasterpremium" ) {
             $( `.parachute-easter` ).removeClass( "d-none" );
         }
+        else if( gameTheme === "pixelparachutesplashpool" ) {
+            $( `.parachute-splashpool` ).removeClass( "d-none" );
+        }
         else {
             $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
         }
     }
-    if( !themeSettings[ gameTheme ].requires ) {
+    console.log( "test", themeSettings[ gameTheme ] );
+    if( themeSettings[ gameTheme ].bundle ) {
+        let item = items[ themeSettings[ gameTheme ].bundle ];
+        console.log( "Bundle", item );
+        if( item ) {
+            $( "#addon-button" ).empty();
+            if( account.owned && account.owned.includes( themeSettings[ gameTheme ].bundle ) ) {
+                $( "#addon-button" ).append( `
+                    <h5 class="text-success"><strong>You Have The Full Bundle:</strong></h5>
+                    <h3>${item.name}</h3>
+                `);
+                $( ".link-available" ).show();
+                $( ".link-not-available" ).hide();
+            }
+            else {
+                // TODO: Show full bundle only if any of the required items are not available
+                // TODO: Show all items within bundle as a purchase and lock the checkboxes that aren't owned
+                $( "#addon-button" ).append( `
+                    <h5 class="text-info"><strong>Full Theme Bundle:</strong></h5>
+                    <h3>${item.name}</h3>
+                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
+                `);
+                $( ".link-not-available" ).show();
+                $( ".link-available" ).hide();
+            }
+            $( ".addon-required" ).show();
+        }
+    }
+    else if( !themeSettings[ gameTheme ].requires ) {
         $( ".addon-required" ).hide();
         $( ".link-not-available" ).hide();
         $( ".link-available" ).show();
@@ -2218,6 +2328,12 @@ function setThemeDefaults() {
         else if( gameTheme === "pixelparachuteeasterpremium" ) {
             // Select random preview out of the selected
             const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+            const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+            $( "#game-preview" ).attr( "src", preview );
+        }
+        else if( gameTheme === "pixelparachutesplashpool" ) {
+            // Select random preview out of the selected
+            const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
@@ -2290,6 +2406,13 @@ function generateLink() {
         }
         else if( gameTheme === "pixelparachuteeasterpremium" ) {
             const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+            baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
+            if( colors.length > 1 ) {
+                linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+            }
+        }
+        else if( gameTheme === "pixelparachutesplashpool" ) {
+            const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
             baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
             if( colors.length > 1 ) {
                 linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
