@@ -105,6 +105,9 @@ $( document ).ready(function() {
         $( "#checkboxAddons" ).on( "change", ( e ) => {
             populateItemList( $( "#market-search" ).val() );
         });
+        $( "#checkboxBundles" ).on( "change", ( e ) => {
+            populateItemList( $( "#market-search" ).val() );
+        });
 });
 
 function populateItemList( searchText = "" ) {
@@ -119,6 +122,9 @@ function populateItemList( searchText = "" ) {
     if( !$( "#checkboxAddons" ).prop( "checked" ) ) {
         filteredCatalog = filteredCatalog.filter( x => x.type !== "add-on" );
     }
+    if( !$( "#checkboxBundles" ).prop( "checked" ) ) {
+        filteredCatalog = filteredCatalog.filter( x => x.type !== "bundle" );
+    }
 
     // Handle adding subscription items
     filteredCatalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
@@ -132,6 +138,9 @@ function populateItemList( searchText = "" ) {
                 break;
             case "add-on":
                 typeBG = "success";
+                break;
+            case "bundle":
+                typeBG = "info";
                 break;
             default:
                 typeBG = "primary";
@@ -195,6 +204,9 @@ function populateItemList( searchText = "" ) {
                 break;
             case "add-on":
                 typeBG = "success";
+                break;
+            case "bundle":
+                typeBG = "info";
                 break;
             default:
                 typeBG = "primary";
@@ -277,6 +289,7 @@ function populateItemList( searchText = "" ) {
                 clearInterval( animationTimer );
             }
             if( item.type === "add-on" ) { return; }
+            if( item.type === "bundle" ) { return; }
             animationTimer = setInterval( () => {
                 animationFrame++;
                 let preview = getItemPreview( item.id, animationFrame );
@@ -297,6 +310,8 @@ function getItemPreview( itemId, frame ) {
     let item = items[ itemId ];
     let dir = "";
     switch( item.type ) {
+        case "bundle":
+            return `https://www.pixelplush.dev/assets/bundles/${item.path}`;
         case "add-on":
             return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
             // return `http://localhost:10000/add-ons/${item.path}`;
@@ -370,7 +385,7 @@ async function buyItem( itemId ) {
             $( ".user-coins" ).text( account.coins );
             populateItemList();
             toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
-            if( !itemId.startsWith( "addon" ) ) {
+            if( !itemId.startsWith( "addon" ) && !itemId.startsWith( "bundle" ) ) {
                 let confirm = await Swal.fire({
                     title: `Use ${items[ itemId ].name}?`,
                     text: `Would you like to set ${items[ itemId ].name} as your active ${items[ itemId ].type}?`,
