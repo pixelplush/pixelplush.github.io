@@ -393,6 +393,10 @@
                                                             <input type="checkbox" class="custom-control-input bg-success" checked="" name="customCheck" id="checkboxAddons">
                                                             <label class="custom-control-label" for="checkboxAddons">Add-Ons</label>
                                                         </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input bg-info" checked="" name="customCheck" id="checkboxBundles">
+                                                            <label class="custom-control-label" for="checkboxBundles">Bundles</label>
+                                                        </div>
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="input-group">
@@ -408,6 +412,7 @@
                                     </div>
                                     <div id="catalog-list" class="row pb-3">
                                     </div>
+                                
         </div>
                             </div>
                         </div>
@@ -587,6 +592,9 @@
             if( !$( "#checkboxAddons" ).prop( "checked" ) ) {
                 filteredCatalog = filteredCatalog.filter( x => x.type !== "add-on" );
             }
+            if( !$( "#checkboxBundles" ).prop( "checked" ) ) {
+                filteredCatalog = filteredCatalog.filter( x => x.type !== "bundle" );
+            }
         
             // Add Deselect-All Option
             $( "#catalog-list" ).append( `
@@ -623,6 +631,10 @@
                         break;
                     case "add-on":
                         typeBG = "success";
+                        showSelectionButtons = false;
+                        break;
+                    case "bundle":
+                        typeBG = "info";
                         showSelectionButtons = false;
                         break;
                     default:
@@ -772,6 +784,7 @@
                         clearInterval( animationTimer );
                     }
                     if( item.type === "add-on" ) { return; }
+                    if( item.type === "bundle" ) { return; }
                     animationTimer = setInterval( () => {
                         animationFrame++;
                         let preview = getItemPreview( item.id, animationFrame );
@@ -801,6 +814,10 @@
                             break;
                         case "add-on":
                             typeBG = "success";
+                            showSelectionButtons = false;
+                            break;
+                        case "bundle":
+                            typeBG = "info";
                             showSelectionButtons = false;
                             break;
                         default:
@@ -926,6 +943,7 @@
                             clearInterval( animationTimer );
                         }
                         if( item.type === "add-on" ) { return; }
+                        if( item.type === "bundle" ) { return; }
                         animationTimer = setInterval( () => {
                             animationFrame++;
                             let preview = getItemPreview( item.id, animationFrame );
@@ -948,6 +966,8 @@
             if( item.theme === "None" ) { return ""; }
             let dir = "";
             switch( item.type ) {
+                case "bundle":
+                    return `https://www.pixelplush.dev/assets/bundles/${item.path}`;
                 case "add-on":
                     return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
                 case "pet":
@@ -1179,6 +1199,7 @@
                 toastr.error( err, "Error", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
             }
         }
+        
     </script>
     <script>
     $( function () {

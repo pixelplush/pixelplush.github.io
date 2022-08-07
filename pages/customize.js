@@ -117,6 +117,9 @@ function populateItemList( searchText = "" ) {
     if( !$( "#checkboxAddons" ).prop( "checked" ) ) {
         filteredCatalog = filteredCatalog.filter( x => x.type !== "add-on" );
     }
+    if( !$( "#checkboxBundles" ).prop( "checked" ) ) {
+        filteredCatalog = filteredCatalog.filter( x => x.type !== "bundle" );
+    }
 
     // Add Deselect-All Option
     $( "#catalog-list" ).append( `
@@ -153,6 +156,10 @@ function populateItemList( searchText = "" ) {
                 break;
             case "add-on":
                 typeBG = "success";
+                showSelectionButtons = false;
+                break;
+            case "bundle":
+                typeBG = "info";
                 showSelectionButtons = false;
                 break;
             default:
@@ -302,6 +309,7 @@ function populateItemList( searchText = "" ) {
                 clearInterval( animationTimer );
             }
             if( item.type === "add-on" ) { return; }
+            if( item.type === "bundle" ) { return; }
             animationTimer = setInterval( () => {
                 animationFrame++;
                 let preview = getItemPreview( item.id, animationFrame );
@@ -331,6 +339,10 @@ function populateItemList( searchText = "" ) {
                     break;
                 case "add-on":
                     typeBG = "success";
+                    showSelectionButtons = false;
+                    break;
+                case "bundle":
+                    typeBG = "info";
                     showSelectionButtons = false;
                     break;
                 default:
@@ -456,6 +468,7 @@ function populateItemList( searchText = "" ) {
                     clearInterval( animationTimer );
                 }
                 if( item.type === "add-on" ) { return; }
+                if( item.type === "bundle" ) { return; }
                 animationTimer = setInterval( () => {
                     animationFrame++;
                     let preview = getItemPreview( item.id, animationFrame );
@@ -478,6 +491,8 @@ function getItemPreview( itemId, frame ) {
     if( item.theme === "None" ) { return ""; }
     let dir = "";
     switch( item.type ) {
+        case "bundle":
+            return `https://www.pixelplush.dev/assets/bundles/${item.path}`;
         case "add-on":
             return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
         case "pet":
