@@ -418,62 +418,60 @@ const themeSettings = {
     },
     "pixelparachutesplashpool" : {
         game: "parachute",
-        name: "Pool Party Splash (Premium)",
+        name: "Pool Party Splash (Free + Premium)",
         page: "https://www.pixelplush.dev/parachute/pool_splash_frog.html",
         extras: {
+            "red": {
+                name: "pool_splash_red.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_red.html",
+                preview: "/public/app-assets/images/games/pool_red.gif",
+            },
+            "blue": {
+                name: "pool_splash_blue.html",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_blue.html",
+                preview: "/public/app-assets/images/games/pool_blue.gif",
+            },
             "frog": {
                 name: "pool_splash_frog.html",
                 page: "https://www.pixelplush.dev/parachute/pool_splash_frog.html",
-                preview: "/public/app-assets/images/games/drop_pool_frog.gif",
+                preview: "/public/app-assets/images/games/pool_frog.gif",
                 requires: "addon_parachute_poolfrog",
             },
             "watermelon": {
                 name: "pool_splash_watermelon.html",
                 page: "https://www.pixelplush.dev/parachute/pool_splash_watermelon.html",
-                preview: "/public/app-assets/images/games/drop_pool_melon.gif",
+                preview: "/public/app-assets/images/games/pool_melon.gif",
                 requires: "addon_parachute_poolmelon",
             },
             "rainbow": {
                 name: "pool_splash_rainbow.html",
                 page: "https://www.pixelplush.dev/parachute/pool_splash_rainbow.html",
-                preview: "/public/app-assets/images/games/drop_pool_rainbow.gif",
+                preview: "/public/app-assets/images/games/pool_rainbow.gif",
                 requires: "addon_parachute_poolrainbow",
             },
             "dots": {
                 name: "pool_splash_dots.html",
                 page: "https://www.pixelplush.dev/parachute/pool_splash_dots.html",
-                preview: "/public/app-assets/images/games/drop_pool_rainbowdots.gif",
+                preview: "/public/app-assets/images/games/pool_dots.gif",
                 requires: "addon_parachute_pooldots",
             },
             "pink": {
                 name: "pool_splash_pink.html",
                 page: "https://www.pixelplush.dev/parachute/pool_splash_pink.html",
-                preview: "/public/app-assets/images/games/drop_pool_pink.gif",
+                preview: "/public/app-assets/images/games/pool_pink.gif",
                 requires: "addon_parachute_poolsparklypink",
             },
             "purple": {
                 name: "pool_splash_purple.html",
                 page: "https://www.pixelplush.dev/parachute/pool_splash_purple.html",
-                preview: "/public/app-assets/images/games/drop_pool_purple.gif",
+                preview: "/public/app-assets/images/games/pool_purple.gif",
                 requires: "addon_parachute_poolsparklypurple",
             },
             "yellow": {
                 name: "pool_splash_yellow.html",
                 page: "https://www.pixelplush.dev/parachute/pool_splash_yellow.html",
-                preview: "/public/app-assets/images/games/drop_pool_yellow.gif",
+                preview: "/public/app-assets/images/games/pool_yellow.gif",
                 requires: "addon_parachute_poolyellow",
-            },
-            "red": {
-                name: "pool_splash_red.html",
-                page: "https://www.pixelplush.dev/parachute/pool_splash_red.html",
-                preview: "/public/app-assets/images/games/drop_pool_red.gif",
-                requires: "addon_parachute_poolred",
-            },
-            "blue": {
-                name: "pool_splash_blue.html",
-                page: "https://www.pixelplush.dev/parachute/pool_splash_blue.html",
-                preview: "/public/app-assets/images/games/drop_pool_blue.gif",
-                requires: "addon_parachute_poolblue",
             },
         },
         preview: "/public/app-assets/images/games/drop_pool_frog.gif",
@@ -872,28 +870,6 @@ const themeSettings = {
         messageFormat: "USERNAME landed for POINTS!",
         command: "",
     },
-    "pixelparachutepoolred": {
-        game: "parachute",
-        name: "Pool Party - Red",
-        page: "https://www.pixelplush.dev/parachute/pool_red.html",
-        preview: "/public/app-assets/images/games/pixelparachutepoolparty.gif",
-        overlay: true,
-        clouds: false,
-        hideTilDrop: true,
-        messageFormat: "USERNAME landed for POINTS!",
-        command: "",
-    },
-    "pixelparachutepoolblue": {
-        game: "parachute",
-        name: "Pool Party - Blue",
-        page: "https://www.pixelplush.dev/parachute/pool_blue.html",
-        preview: "/public/app-assets/images/games/pixelparachutepoolpartyblue.gif",
-        overlay: true,
-        clouds: false,
-        hideTilDrop: true,
-        messageFormat: "USERNAME landed for POINTS!",
-        command: "",
-    },
     "pixelparachuteretro": {
         game: "parachute",
         name: "Retro",
@@ -1133,15 +1109,15 @@ let easterColors = {
     "easter_5": false,
 };
 let splashpoolColors = {
-    "frog": true,
+    "red": true,
+    "blue": false,
+    "frog": false,
     "watermelon": false,
     "rainbow": false,
     "dots": false,
     "pink": false,
     "purple": false,
     "yellow": false,
-    "red": false,
-    "blue": false,
 };
 let flakesNth = "1";
 let flakesNum = "3";
@@ -2394,7 +2370,7 @@ function setThemeDefaults() {
         if( item ) {
             $( "#addon-button" ).empty();
             const bundleKeys = Object.keys( themeSettings[ gameTheme ].extras );
-            const isMissingItems = !account.owned || bundleKeys.some( x => !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) );
+            const isMissingItems = !account.owned || bundleKeys.some( x => themeSettings[ gameTheme ].extras[ x ].requires && !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) );
             if( !isMissingItems ) {
                 $( "#addon-button" ).append( `
                     <h5 class="text-success"><strong>You Have The Full Set:</strong></h5>
@@ -2402,6 +2378,9 @@ function setThemeDefaults() {
                 `);
                 $( ".link-available" ).show();
                 $( ".link-not-available" ).hide();
+                Object.keys( splashpoolColors ).forEach( x => {
+                    $( `#coinParachuteColor-pool${x}` ).hide();
+                });
             }
             else {
                 // Show full bundle only if any of the required items are not available
@@ -2410,7 +2389,11 @@ function setThemeDefaults() {
                 $( ".link-available" ).show();
                 $( ".link-not-available" ).hide();
                 const selectedColors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                let isAddOnSelected = false;
                 selectedColors.forEach( x => {
+                    if( !themeSettings[ gameTheme ].extras[ x ].requires ) {
+                        return;
+                    }
                     if( !account.owned || !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) ) {
                         let bItem = items[ themeSettings[ gameTheme ].extras[ x ].requires ];
                         $( "#addon-button" ).append( `
@@ -2420,13 +2403,26 @@ function setThemeDefaults() {
                         `);
                         $( ".link-not-available" ).show();
                         $( ".link-available" ).hide();
+                        isAddOnSelected = true;
+                    }
+                    else {
+                        $( `#coinParachuteColor-pool${x}` ).hide();
                     }
                 });
-                $( "#addon-button" ).append( `
-                    <h5 class="text-info"><strong>Get The Full Theme Bundle:</strong></h5>
-                    <h3>${item.name}</h3>
-                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
-                `);
+                if( isAddOnSelected ) {
+                    $( "#addon-button" ).append( `
+                        <h5 class="text-info"><strong>Get The Full Theme Bundle:</strong></h5>
+                        <h3>${item.name}</h3>
+                        <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
+                    `);
+                }
+                else {
+                    $( "#addon-button" ).append( `
+                        <h5 class="text-info"><strong>(Optional) Get The Full Theme Bundle:</strong></h5>
+                        <h3>${item.name}</h3>
+                        <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
+                    `);
+                }
             }
             $( ".addon-required" ).show();
         }
