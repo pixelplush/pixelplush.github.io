@@ -2460,25 +2460,37 @@ function setThemeDefaults() {
     if( themeSettings[ gameTheme ].extras ) {
         if( gameTheme === "pixelparachutecauldron" ) {
             // Select random preview out of the selected
-            const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
+            let colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
+            if( colors.length === 0 ) {
+                colors = Object.keys( cauldronColors );
+            }
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
         else if( gameTheme === "pixelparachutevalentines" ) {
             // Select random preview out of the selected
-            const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+            let colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+            if( colors.length === 0 ) {
+                colors = Object.keys( valentinesColors );
+            }
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
         else if( gameTheme === "pixelparachuteeasterpremium" ) {
             // Select random preview out of the selected
-            const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+            let colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+            if( colors.length === 0 ) {
+                colors = Object.keys( easterColors );
+            }
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
         else if( gameTheme === "pixelparachutesplashpool" ) {
             // Select random preview out of the selected
-            const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+            let colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+            if( colors.length === 0 ) {
+                colors = Object.keys( splashpoolColors );
+            }
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
