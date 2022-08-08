@@ -1799,6 +1799,141 @@ $( "#inputEnableFlakesHearts" ).on( "change", ( e ) => {
     generateLink();
 });
 
+$( "#inputEnableParachuteColor-poolfrog" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "frog" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "frog" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-poolwatermelon" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "watermelon" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "watermelon" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-poolrainbow" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "rainbow" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "rainbow" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-pooldots" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "dots" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "dots" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-poolpink" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "pink" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "pink" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-poolpurple" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "purple" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "purple" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-poolyellow" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "yellow" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "yellow" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-poolred" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "red" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "red" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-poolblue" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "blue" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    splashpoolColors[ "blue" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
 $( "#inputEnableParachuteColor-easter-1" ).on( "change", ( e ) => {
     if( e.target.checked ) {
         const preview = themeSettings[ gameTheme ].extras[ "easter_1" ].preview;
@@ -2254,30 +2389,44 @@ function setThemeDefaults() {
             $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
         }
     }
-    console.log( "test", themeSettings[ gameTheme ] );
     if( themeSettings[ gameTheme ].bundle ) {
         let item = items[ themeSettings[ gameTheme ].bundle ];
-        console.log( "Bundle", item );
         if( item ) {
             $( "#addon-button" ).empty();
-            if( account.owned && account.owned.includes( themeSettings[ gameTheme ].bundle ) ) {
+            const bundleKeys = Object.keys( themeSettings[ gameTheme ].extras );
+            const isMissingItems = !account.owned || bundleKeys.some( x => !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) );
+            if( !isMissingItems ) {
                 $( "#addon-button" ).append( `
-                    <h5 class="text-success"><strong>You Have The Full Bundle:</strong></h5>
+                    <h5 class="text-success"><strong>You Have The Full Set:</strong></h5>
                     <h3>${item.name}</h3>
                 `);
                 $( ".link-available" ).show();
                 $( ".link-not-available" ).hide();
             }
             else {
-                // TODO: Show full bundle only if any of the required items are not available
-                // TODO: Show all items within bundle as a purchase and lock the checkboxes that aren't owned
+                // Show full bundle only if any of the required items are not available
+                // Show all unowned items within bundle that's checked
+                // Show link as available and hide if we detect any unowned but checked items
+                $( ".link-available" ).show();
+                $( ".link-not-available" ).hide();
+                const selectedColors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                selectedColors.forEach( x => {
+                    if( !account.owned || !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) ) {
+                        let bItem = items[ themeSettings[ gameTheme ].extras[ x ].requires ];
+                        $( "#addon-button" ).append( `
+                            <h5 class="text-danger"><strong>One of Your Themes Requires The Add-On:</strong></h5>
+                            <h3>${bItem.name}</h3>
+                            <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${bItem.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${bItem.sale ? `<span class="strikeout">${bItem.cost}</span> -> ` : ""}${bItem.cost === 0 ? "FREE" : ( bItem.sale ? `<span class="text-success">${bItem.cost / 2}</span>` : bItem.cost )}</strong></button>
+                        `);
+                        $( ".link-not-available" ).show();
+                        $( ".link-available" ).hide();
+                    }
+                });
                 $( "#addon-button" ).append( `
-                    <h5 class="text-info"><strong>Full Theme Bundle:</strong></h5>
+                    <h5 class="text-info"><strong>Get The Full Theme Bundle:</strong></h5>
                     <h3>${item.name}</h3>
                     <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
                 `);
-                $( ".link-not-available" ).show();
-                $( ".link-available" ).hide();
             }
             $( ".addon-required" ).show();
         }
