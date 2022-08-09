@@ -1183,6 +1183,17 @@
                                                                     <div class="table-responsive">
                                                                         <table class="table mt-1">
                                                                             <thead>
+                                                                                <tr class="parachute-game-extras parachute-splashpool d-none">
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_red.png" alt="Red"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_blue.png" alt="Blue"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_frog.png" alt="Frog"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_melon.png" alt="Watermelon"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_rainbow.png" alt="Rainbow"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_rainbowdots.png" alt="Rainbow Dots"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_pink.png" alt="Pink"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_purple.png" alt="Purple"/></th>
+                                                                                    <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_yellow.png" alt="Yellow"/></th>
+                                                                                </tr>
                                                                                 <tr class="parachute-game-extras parachute-easter d-none">
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_1.png" alt="Easter-1"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_2.png" alt="Easter-2"/></th>
@@ -1226,6 +1237,53 @@
                                                                                 </tr>
                                                                             </thead>
                                                                             <tbody>
+                                                                                <tr class="parachute-game-extras parachute-splashpool d-none">
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-poolred" checked><label for="inputEnableParachuteColor-poolred"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-poolblue"><label for="inputEnableParachuteColor-poolblue"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-poolfrog"><label for="inputEnableParachuteColor-poolfrog"></label>
+                                                                                        </div><img id="coinParachuteColor-poolfrog" src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-poolwatermelon"><label for="inputEnableParachuteColor-poolwatermelon"></label>
+                                                                                        </div><img id="coinParachuteColor-poolwatermelon" src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-poolrainbow"><label for="inputEnableParachuteColor-poolrainbow"></label>
+                                                                                        </div><img id="coinParachuteColor-poolrainbow" src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-pooldots"><label for="inputEnableParachuteColor-pooldots"></label>
+                                                                                        </div><img id="coinParachuteColor-pooldots" src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-poolpink"><label for="inputEnableParachuteColor-poolpink"></label>
+                                                                                        </div><img id="coinParachuteColor-poolpink" src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-poolpurple"><label for="inputEnableParachuteColor-poolpurple"></label>
+                                                                                        </div><img id="coinParachuteColor-poolpurple" src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-poolyellow"><label for="inputEnableParachuteColor-poolyellow"></label>
+                                                                                        </div><img id="coinParachuteColor-poolyellow" src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                                                    </td>
+                                                                                </tr>
                                                                                 <tr class="parachute-game-extras parachute-easter d-none">
                                                                                     <td>
                                                                                         <div class="checkbox">
@@ -1919,6 +1977,72 @@
                 messageFormat: " ",
                 requires: "addon_giveaway_blossoms",
             },
+            "pixelparachutesplashpool" : {
+                game: "parachute",
+                name: "Pool Party Splash (Free + Premium)",
+                page: "https://www.pixelplush.dev/parachute/pool_splash_frog.html",
+                extras: {
+                    "red": {
+                        name: "pool_splash_red.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_red.html",
+                        preview: "/public/app-assets/images/games/pool_red.gif",
+                    },
+                    "blue": {
+                        name: "pool_splash_blue.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_blue.html",
+                        preview: "/public/app-assets/images/games/pool_blue.gif",
+                    },
+                    "frog": {
+                        name: "pool_splash_frog.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_frog.html",
+                        preview: "/public/app-assets/images/games/pool_frog.gif",
+                        requires: "addon_parachute_poolfrog",
+                    },
+                    "watermelon": {
+                        name: "pool_splash_watermelon.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_watermelon.html",
+                        preview: "/public/app-assets/images/games/pool_melon.gif",
+                        requires: "addon_parachute_poolmelon",
+                    },
+                    "rainbow": {
+                        name: "pool_splash_rainbow.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_rainbow.html",
+                        preview: "/public/app-assets/images/games/pool_rainbow.gif",
+                        requires: "addon_parachute_poolrainbow",
+                    },
+                    "dots": {
+                        name: "pool_splash_dots.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_dots.html",
+                        preview: "/public/app-assets/images/games/pool_dots.gif",
+                        requires: "addon_parachute_pooldots",
+                    },
+                    "pink": {
+                        name: "pool_splash_pink.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_pink.html",
+                        preview: "/public/app-assets/images/games/pool_pink.gif",
+                        requires: "addon_parachute_poolsparklypink",
+                    },
+                    "purple": {
+                        name: "pool_splash_purple.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_purple.html",
+                        preview: "/public/app-assets/images/games/pool_purple.gif",
+                        requires: "addon_parachute_poolsparklypurple",
+                    },
+                    "yellow": {
+                        name: "pool_splash_yellow.html",
+                        page: "https://www.pixelplush.dev/parachute/pool_splash_yellow.html",
+                        preview: "/public/app-assets/images/games/pool_yellow.gif",
+                        requires: "addon_parachute_poolyellow",
+                    },
+                },
+                preview: "/public/app-assets/images/games/drop_pool_frog.gif",
+                overlay: true,
+                clouds: false,
+                hideTilDrop: true,
+                messageFormat: "USERNAME landed for POINTS!",
+                command: "",
+                bundle: "bundle_parachute_pool",
+            },
             "pixelparachuteeasterpremium" : {
                 game: "parachute",
                 name: "Easter Extra (Premium)",
@@ -2307,28 +2431,6 @@
                 messageFormat: "USERNAME landed for POINTS!",
                 command: "",
             },
-            "pixelparachutepoolred": {
-                game: "parachute",
-                name: "Pool Party - Red",
-                page: "https://www.pixelplush.dev/parachute/pool_red.html",
-                preview: "/public/app-assets/images/games/pixelparachutepoolparty.gif",
-                overlay: true,
-                clouds: false,
-                hideTilDrop: true,
-                messageFormat: "USERNAME landed for POINTS!",
-                command: "",
-            },
-            "pixelparachutepoolblue": {
-                game: "parachute",
-                name: "Pool Party - Blue",
-                page: "https://www.pixelplush.dev/parachute/pool_blue.html",
-                preview: "/public/app-assets/images/games/pixelparachutepoolpartyblue.gif",
-                overlay: true,
-                clouds: false,
-                hideTilDrop: true,
-                messageFormat: "USERNAME landed for POINTS!",
-                command: "",
-            },
             "pixelparachuteretro": {
                 game: "parachute",
                 name: "Retro",
@@ -2566,6 +2668,17 @@
             "easter_3": false,
             "easter_4": false,
             "easter_5": false,
+        };
+        let splashpoolColors = {
+            "red": true,
+            "blue": false,
+            "frog": false,
+            "watermelon": false,
+            "rainbow": false,
+            "dots": false,
+            "pink": false,
+            "purple": false,
+            "yellow": false,
         };
         let flakesNth = "1";
         let flakesNum = "3";
@@ -3223,6 +3336,141 @@
             generateLink();
         });
         
+        $( "#inputEnableParachuteColor-poolfrog" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "frog" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "frog" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-poolwatermelon" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "watermelon" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "watermelon" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-poolrainbow" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "rainbow" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "rainbow" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-pooldots" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "dots" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "dots" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-poolpink" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "pink" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "pink" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-poolpurple" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "purple" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "purple" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-poolyellow" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "yellow" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "yellow" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-poolred" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "red" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "red" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-poolblue" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "blue" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            splashpoolColors[ "blue" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
         $( "#inputEnableParachuteColor-easter-1" ).on( "change", ( e ) => {
             if( e.target.checked ) {
                 const preview = themeSettings[ gameTheme ].extras[ "easter_1" ].preview;
@@ -3671,11 +3919,76 @@
                 else if( gameTheme === "pixelparachuteeasterpremium" ) {
                     $( `.parachute-easter` ).removeClass( "d-none" );
                 }
+                else if( gameTheme === "pixelparachutesplashpool" ) {
+                    $( `.parachute-splashpool` ).removeClass( "d-none" );
+                }
                 else {
                     $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
                 }
             }
-            if( !themeSettings[ gameTheme ].requires ) {
+            if( themeSettings[ gameTheme ].bundle ) {
+                let item = items[ themeSettings[ gameTheme ].bundle ];
+                if( item ) {
+                    $( "#addon-button" ).empty();
+                    const bundleKeys = Object.keys( themeSettings[ gameTheme ].extras );
+                    const isMissingItems = !account.owned || bundleKeys.some( x => themeSettings[ gameTheme ].extras[ x ].requires && !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) );
+                    if( !isMissingItems ) {
+                        $( "#addon-button" ).append( `
+                            <h5 class="text-success"><strong>You Have The Full Set:</strong></h5>
+                            <h3>${item.name}</h3>
+                        `);
+                        $( ".link-available" ).show();
+                        $( ".link-not-available" ).hide();
+                        Object.keys( splashpoolColors ).forEach( x => {
+                            $( `#coinParachuteColor-pool${x}` ).hide();
+                        });
+                    }
+                    else {
+                        // Show full bundle only if any of the required items are not available
+                        // Show all unowned items within bundle that's checked
+                        // Show link as available and hide if we detect any unowned but checked items
+                        $( ".link-available" ).show();
+                        $( ".link-not-available" ).hide();
+                        const selectedColors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                        let isAddOnSelected = false;
+                        selectedColors.forEach( x => {
+                            if( !themeSettings[ gameTheme ].extras[ x ].requires ) {
+                                return;
+                            }
+                            if( !account.owned || !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) ) {
+                                let bItem = items[ themeSettings[ gameTheme ].extras[ x ].requires ];
+                                $( "#addon-button" ).append( `
+                                    <h5 class="text-danger"><strong>One of Your Themes Requires The Add-On:</strong></h5>
+                                    <h3>${bItem.name}</h3>
+                                    <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${bItem.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${bItem.sale ? `<span class="strikeout">${bItem.cost}</span> -> ` : ""}${bItem.cost === 0 ? "FREE" : ( bItem.sale ? `<span class="text-success">${bItem.cost / 2}</span>` : bItem.cost )}</strong></button>
+                                `);
+                                $( ".link-not-available" ).show();
+                                $( ".link-available" ).hide();
+                                isAddOnSelected = true;
+                            }
+                            else {
+                                $( `#coinParachuteColor-pool${x}` ).hide();
+                            }
+                        });
+                        if( isAddOnSelected ) {
+                            $( "#addon-button" ).append( `
+                                <h5 class="text-info"><strong>Get The Full Theme Bundle:</strong></h5>
+                                <h3>${item.name}</h3>
+                                <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
+                            `);
+                        }
+                        else {
+                            $( "#addon-button" ).append( `
+                                <h5 class="text-info"><strong>(Optional) Get The Full Theme Bundle:</strong></h5>
+                                <h3>${item.name}</h3>
+                                <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
+                            `);
+                        }
+                    }
+                    $( ".addon-required" ).show();
+                }
+            }
+            else if( !themeSettings[ gameTheme ].requires ) {
                 $( ".addon-required" ).hide();
                 $( ".link-not-available" ).hide();
                 $( ".link-available" ).show();
@@ -3708,19 +4021,37 @@
             if( themeSettings[ gameTheme ].extras ) {
                 if( gameTheme === "pixelparachutecauldron" ) {
                     // Select random preview out of the selected
-                    const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
+                    let colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
+                    if( colors.length === 0 ) {
+                        colors = Object.keys( cauldronColors );
+                    }
                     const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
                     $( "#game-preview" ).attr( "src", preview );
                 }
                 else if( gameTheme === "pixelparachutevalentines" ) {
                     // Select random preview out of the selected
-                    const colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+                    let colors = Object.keys( valentinesColors ).filter( x => valentinesColors[ x ] );
+                    if( colors.length === 0 ) {
+                        colors = Object.keys( valentinesColors );
+                    }
                     const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
                     $( "#game-preview" ).attr( "src", preview );
                 }
                 else if( gameTheme === "pixelparachuteeasterpremium" ) {
                     // Select random preview out of the selected
-                    const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+                    let colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+                    if( colors.length === 0 ) {
+                        colors = Object.keys( easterColors );
+                    }
+                    const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                    $( "#game-preview" ).attr( "src", preview );
+                }
+                else if( gameTheme === "pixelparachutesplashpool" ) {
+                    // Select random preview out of the selected
+                    let colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                    if( colors.length === 0 ) {
+                        colors = Object.keys( splashpoolColors );
+                    }
                     const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
                     $( "#game-preview" ).attr( "src", preview );
                 }
@@ -3793,6 +4124,13 @@
                 }
                 else if( gameTheme === "pixelparachuteeasterpremium" ) {
                     const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+                    baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
+                    if( colors.length > 1 ) {
+                        linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+                    }
+                }
+                else if( gameTheme === "pixelparachutesplashpool" ) {
+                    const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
                     baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
                     if( colors.length > 1 ) {
                         linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
