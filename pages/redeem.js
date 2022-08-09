@@ -119,7 +119,7 @@ $( "#redeem-btn" ).on( "click", async ( ev ) => {
             buttonsStyling: false,
         });
 
-        if( !result.coins ) {
+        if( !result.coins && !result.item.startsWith( "addon" ) && !result.item.startsWith( "bundle" ) ) {
             let confirm = await Swal.fire({
                 title: `Use ${items[ result.item ].name}?`,
                 text: `Would you like to set ${items[ result.item ].name} as your active ${items[ result.item ].type}?`,
