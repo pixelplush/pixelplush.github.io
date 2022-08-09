@@ -2405,6 +2405,14 @@ function setThemeDefaults() {
                         $( ".link-available" ).hide();
                         isAddOnSelected = true;
                     }
+                });
+                // Hide the coin for owned items
+                Object.keys( splashpoolColors ).forEach( x => {
+                    if( !themeSettings[ gameTheme ].extras[ x ].requires ) {
+                        return;
+                    }
+                    if( !account.owned || !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) ) {
+                    }
                     else {
                         $( `#coinParachuteColor-pool${x}` ).hide();
                     }
