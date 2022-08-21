@@ -2609,9 +2609,10 @@ function generateLink() {
         if( giveawaySkipmeCommand ) {
             linkParams.push( `skip=${giveawaySkipmeCommand.replace("!", "")}` );
         }
-        if( isGiveawayChatEnabled && chatOAuth ) {
-            linkParams.push( `oauth=${chatOAuth}` );
+        if( isGiveawayChatEnabled ) {
+            linkParams.push( `chat=true` );
         }
+        linkParams.push( `oauth=${chatOAuth}` );
         break;
     case "chatflakes":
         if( flakesNth !== "0" ) {
