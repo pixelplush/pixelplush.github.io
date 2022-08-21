@@ -278,7 +278,7 @@ function populateItemList( searchText = "" ) {
                 `);
             }
         }
-        else if( !item.hidden ) {
+        else if( !item.hidden || account.username === "instafluff" || account.username === "maaya" ) {
             $( "#catalog-list" ).append( `
                 <div class="col-sm-3 col-6 mb-2">
                     <div id="item_${item.id}" class="card h-100 text-center">
