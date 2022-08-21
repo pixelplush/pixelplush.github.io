@@ -429,6 +429,20 @@ function showCoinAlert( coins, name ) {
         isStatic: true
     } );
 
+    let bonusCoins = 0;
+    if( coins >= 500 ) {
+        bonusCoins = 125; // 25% more coins
+    }
+    else if( coins >= 100 ) {
+        bonusCoins = 20; // 20% more coins
+    }
+    else if( coins >= 40 ) {
+        bonusCoins = 6; // 15% more coins
+    }
+    else if( coins >= 20 ) {
+        bonusCoins = 2; // 10% more coins
+    }
+
     let alertName = Unicorn.AddText( "alertname_" + alertId, name, x + 200, y + 40, {
         fontFamily: 'Pixellari',
         fontSize: 42,
@@ -445,7 +459,7 @@ function showCoinAlert( coins, name ) {
         fill: "#663931",
         lineJoin: "round",
     } );
-    let alertItemName = Unicorn.AddText( "alertitemname_" + alertId, `${coins} PLUSHCOINS`, x + 200, y + 100, {
+    let alertItemName = Unicorn.AddText( "alertitemname_" + alertId, `${coins} PLUSHCOINS + ${bonusCoins} BONUS`, x + 200, y + 100, {
         fontFamily: 'Pixellari',
         fontSize: 42,
         // fontWeight: 'bold',
