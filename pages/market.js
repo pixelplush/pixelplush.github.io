@@ -108,6 +108,9 @@ $( document ).ready(function() {
         $( "#checkboxBundles" ).on( "change", ( e ) => {
             populateItemList( $( "#market-search" ).val() );
         });
+        $( "#checkboxOutfits" ).on( "change", ( e ) => {
+            populateItemList( $( "#market-search" ).val() );
+        });
 });
 
 function populateItemList( searchText = "" ) {
@@ -125,6 +128,9 @@ function populateItemList( searchText = "" ) {
     if( !$( "#checkboxBundles" ).prop( "checked" ) ) {
         filteredCatalog = filteredCatalog.filter( x => x.type !== "bundle" );
     }
+    if( !$( "#checkboxOutfits" ).prop( "checked" ) ) {
+        filteredCatalog = filteredCatalog.filter( x => !x.id.startsWith( "outfit" ) );
+    }
 
     // Handle adding subscription items
     filteredCatalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
@@ -141,6 +147,12 @@ function populateItemList( searchText = "" ) {
                 break;
             case "bundle":
                 typeBG = "info";
+                break;
+            case "body":
+            case "equipment":
+            case "accessory":
+            case "outfit":
+                typeBG = "warning";
                 break;
             default:
                 typeBG = "primary";
@@ -207,6 +219,12 @@ function populateItemList( searchText = "" ) {
                 break;
             case "bundle":
                 typeBG = "info";
+                break;
+            case "body":
+            case "equipment":
+            case "accessory":
+            case "outfit":
+                typeBG = "warning";
                 break;
             default:
                 typeBG = "primary";
@@ -275,7 +293,7 @@ function populateItemList( searchText = "" ) {
                         <h5 class="mb-0">${item.name}</h5>
                         <div class="pt-1">
                             <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
-                            <button class="btn btn-sm btn-outline-primary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost )}</strong></button>
+                            ${item.cost === 0 ? "" : `<button class="btn btn-sm btn-outline-primary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost )}</strong></button>`}
                         </div>
                         </div>
                     </div>
@@ -317,6 +335,18 @@ function getItemPreview( itemId, frame ) {
             // return `http://localhost:10000/add-ons/${item.path}`;
         case "pet":
             dir = `pets/${item.path}`;
+            break;
+        case "body":
+            dir = `skins/body/${item.category}/${item.path}`;
+            break;
+        case "equipment":
+            dir = `skins/equipment/${item.category}/${item.path}`;
+            break;
+        case "accessory":
+            dir = `skins/accessories/${item.category}/${item.path}`;
+            break;
+        case "outfit":
+            dir = `skins/outfits/${item.category}/${item.path}`;
             break;
         case "character":
         default:
@@ -416,7 +446,7 @@ async function buyItem( itemId ) {
                     buttonsStyling: false,
                 });
                 if( confirm.value ) {
-                await activateItem( itemId );
+                    await activateItem( itemId );
                     toastr.success( `${items[ itemId ].name} is now selected!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
                 }
             }

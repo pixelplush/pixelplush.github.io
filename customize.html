@@ -398,6 +398,10 @@
                                                             <input type="checkbox" class="custom-control-input bg-info" checked="" name="customCheck" id="checkboxBundles">
                                                             <label class="custom-control-label" for="checkboxBundles">Bundles</label>
                                                         </div>
+                                                        <div class="custom-control custom-checkbox">
+                                                            <input type="checkbox" class="custom-control-input bg-warning" checked="" name="customCheck" id="checkboxOutfits">
+                                                            <label class="custom-control-label" for="checkboxOutfits">Outfits</label>
+                                                        </div>
                                                     </div>
                                                     <div class="col-8">
                                                         <div class="input-group">
@@ -596,6 +600,9 @@
             if( !$( "#checkboxBundles" ).prop( "checked" ) ) {
                 filteredCatalog = filteredCatalog.filter( x => x.type !== "bundle" );
             }
+            if( !$( "#checkboxOutfits" ).prop( "checked" ) ) {
+                filteredCatalog = filteredCatalog.filter( x => !x.id.startsWith( "outfit" ) );
+            }
         
             // Add Deselect-All Option
             $( "#catalog-list" ).append( `
@@ -638,12 +645,18 @@
                         typeBG = "info";
                         showSelectionButtons = false;
                         break;
+                    case "body":
+                    case "equipment":
+                    case "accessory":
+                    case "outfit":
+                        typeBG = "warning";
+                        break;
                     default:
                         typeBG = "primary";
                         break;
                 }
                 if( account.style &&
-                    ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) {
+                    ( account.style[ item.category || item.type ] && account.style[ item.category || item.type ] === item.id ) ) {
                     // Selected Skin
                     $( "#catalog-list" ).append( `
                         <div class="col-sm-3 col-6 mb-2">
@@ -668,7 +681,7 @@
                 }
                 else if( twitchSubs[ item.subscription.toLowerCase() ] ) {
                     if( account.styles &&
-                        account.styles[ item.type ] && account.styles[ item.type ].includes( item.id ) ) {
+                        account.styles[ item.category || item.type ] && account.styles[ item.category || item.type ].includes( item.id ) ) {
                         // Already queued
                         if( showSelectionButtons ) {
                             $( "#catalog-list" ).append( `
@@ -821,12 +834,18 @@
                             typeBG = "info";
                             showSelectionButtons = false;
                             break;
+                        case "body":
+                        case "equipment":
+                        case "accessory":
+                        case "outfit":
+                            typeBG = "warning";
+                            break;
                         default:
                             typeBG = "primary";
                             break;
                     }
                     if( account.style &&
-                        ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) {
+                        ( account.style[ item.category || item.type ] && account.style[ item.category || item.type ] === item.id ) ) {
                         // Selected Skin
                         $( "#catalog-list" ).append( `
                             <div class="col-sm-3 col-6 mb-2">
@@ -851,7 +870,7 @@
                     }
                     else {
                         if( account.styles &&
-                            account.styles[ item.type ] && account.styles[ item.type ].includes( item.id ) ) {
+                            account.styles[ item.category || item.type ] && account.styles[ item.category || item.type ].includes( item.id ) ) {
                             if( showSelectionButtons ) {
                                 $( "#catalog-list" ).append( `
                                     <div class="col-sm-3 col-6 mb-2">
@@ -973,6 +992,18 @@
                     return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
                 case "pet":
                     dir = `pets/${item.path}`;
+                    break;
+                case "body":
+                    dir = `skins/body/${item.category}/${item.path}`;
+                    break;
+                case "equipment":
+                    dir = `skins/equipment/${item.category}/${item.path}`;
+                    break;
+                case "accessory":
+                    dir = `skins/accessories/${item.category}/${item.path}`;
+                    break;
+                case "outfit":
+                    dir = `skins/outfits/${item.category}/${item.path}`;
                     break;
                 case "character":
                 default:

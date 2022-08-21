@@ -120,6 +120,9 @@ function populateItemList( searchText = "" ) {
     if( !$( "#checkboxBundles" ).prop( "checked" ) ) {
         filteredCatalog = filteredCatalog.filter( x => x.type !== "bundle" );
     }
+    if( !$( "#checkboxOutfits" ).prop( "checked" ) ) {
+        filteredCatalog = filteredCatalog.filter( x => !x.id.startsWith( "outfit" ) );
+    }
 
     // Add Deselect-All Option
     $( "#catalog-list" ).append( `
@@ -162,12 +165,18 @@ function populateItemList( searchText = "" ) {
                 typeBG = "info";
                 showSelectionButtons = false;
                 break;
+            case "body":
+            case "equipment":
+            case "accessory":
+            case "outfit":
+                typeBG = "warning";
+                break;
             default:
                 typeBG = "primary";
                 break;
         }
         if( account.style &&
-            ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) {
+            ( account.style[ item.category || item.type ] && account.style[ item.category || item.type ] === item.id ) ) {
             // Selected Skin
             $( "#catalog-list" ).append( `
                 <div class="col-sm-3 col-6 mb-2">
@@ -192,7 +201,7 @@ function populateItemList( searchText = "" ) {
         }
         else if( twitchSubs[ item.subscription.toLowerCase() ] ) {
             if( account.styles &&
-                account.styles[ item.type ] && account.styles[ item.type ].includes( item.id ) ) {
+                account.styles[ item.category || item.type ] && account.styles[ item.category || item.type ].includes( item.id ) ) {
                 // Already queued
                 if( showSelectionButtons ) {
                     $( "#catalog-list" ).append( `
@@ -345,12 +354,18 @@ function populateItemList( searchText = "" ) {
                     typeBG = "info";
                     showSelectionButtons = false;
                     break;
+                case "body":
+                case "equipment":
+                case "accessory":
+                case "outfit":
+                    typeBG = "warning";
+                    break;
                 default:
                     typeBG = "primary";
                     break;
             }
             if( account.style &&
-                ( account.style[ item.type ] && account.style[ item.type ] === item.id ) ) {
+                ( account.style[ item.category || item.type ] && account.style[ item.category || item.type ] === item.id ) ) {
                 // Selected Skin
                 $( "#catalog-list" ).append( `
                     <div class="col-sm-3 col-6 mb-2">
@@ -375,7 +390,7 @@ function populateItemList( searchText = "" ) {
             }
             else {
                 if( account.styles &&
-                    account.styles[ item.type ] && account.styles[ item.type ].includes( item.id ) ) {
+                    account.styles[ item.category || item.type ] && account.styles[ item.category || item.type ].includes( item.id ) ) {
                     if( showSelectionButtons ) {
                         $( "#catalog-list" ).append( `
                             <div class="col-sm-3 col-6 mb-2">
@@ -497,6 +512,18 @@ function getItemPreview( itemId, frame ) {
             return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
         case "pet":
             dir = `pets/${item.path}`;
+            break;
+        case "body":
+            dir = `skins/body/${item.category}/${item.path}`;
+            break;
+        case "equipment":
+            dir = `skins/equipment/${item.category}/${item.path}`;
+            break;
+        case "accessory":
+            dir = `skins/accessories/${item.category}/${item.path}`;
+            break;
+        case "outfit":
+            dir = `skins/outfits/${item.category}/${item.path}`;
             break;
         case "character":
         default:
