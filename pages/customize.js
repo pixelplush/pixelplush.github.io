@@ -102,6 +102,12 @@ $( document ).ready(function() {
         $( "#checkboxAddons" ).on( "change", ( e ) => {
             populateItemList( $( "#market-search" ).val() );
         });
+        $( "#checkboxBundles" ).on( "change", ( e ) => {
+            populateItemList( $( "#market-search" ).val() );
+        });
+        $( "#checkboxOutfits" ).on( "change", ( e ) => {
+            populateItemList( $( "#market-search" ).val() );
+        });
 });
 
 function populateItemList( searchText = "" ) {
