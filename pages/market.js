@@ -231,7 +231,7 @@ function populateItemList( searchText = "" ) {
                 break;
         }
         if( account && account.owned && account.owned.includes( item.id ) ) {
-            if( item.hidden ) {
+            if( item.hidden && !( ( account.username === "instafluff" || account.username === "maaya" ) && item.beta ) ) {
                 // --- Skip the hidden items from the marketplace (2022-03-30) ---
                 // $( "#catalog-list" ).append( `
                 //     <div class="col-sm-3 col-6 mb-2">
@@ -278,7 +278,7 @@ function populateItemList( searchText = "" ) {
                 `);
             }
         }
-        else if( !item.hidden || account.username === "instafluff" || account.username === "maaya" ) {
+        else if( !item.hidden || ( ( account.username === "instafluff" || account.username === "maaya" ) && item.beta ) ) {
             $( "#catalog-list" ).append( `
                 <div class="col-sm-3 col-6 mb-2">
                     <div id="item_${item.id}" class="card h-100 text-center">
