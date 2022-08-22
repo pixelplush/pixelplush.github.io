@@ -325,17 +325,54 @@ function showItemAlert( item, name ) {
 
     if( !itemCache[ item.id ] ) {
         itemCache[ item.id ] = item.path;
-        if( item.type === "add-on" ) {
-            Unicorn.Load( `${item.id}`, `${assetPath}/assets/${item.type}s/${item.path}` );
+        switch( item.type ) {
+            case "bundle":
+            case "add-on":
+                Unicorn.Load( `${item.id}`, `${assetPath}/assets/${item.type}s/${item.path}` );
+                break;
+            case "body":
+                for( let i = 0; i < NumFrames; i++ ) {
+                    Unicorn.Load( `${item.id}_${i}`, `${assetPath}/assets/skins/body/${item.category}/${item.path}/${item.path}_front/${item.path}_front${i+1}.png` );
+                }
+                break;
+            case "equipment":
+                // Load frames
+                for( let i = 0; i < NumFrames; i++ ) {
+                    Unicorn.Load( `${item.id}_${i}`, `${assetPath}/assets/skins/equipment/${item.category}/${item.path}/${item.path}_front/${item.path}_front${i+1}.png` );
+                }
+                break;
+            case "accessory":
+                // Load frames
+                for( let i = 0; i < NumFrames; i++ ) {
+                    Unicorn.Load( `${item.id}_${i}`, `${assetPath}/assets/skins/accessories/${item.category}/${item.path}/${item.path}_front/${item.path}_front${i+1}.png` );
+                }
+                break;
+            case "outfit":
+                // Load frames
+                for( let i = 0; i < NumFrames; i++ ) {
+                    Unicorn.Load( `${item.id}_${i}`, `${assetPath}/assets/skins/outfits/${item.category}/${item.path}/${item.path}_front/${item.path}_front${i+1}.png` );
+                }
+                break;
+            default:
+                // Load frames
+                for( let i = 0; i < NumFrames; i++ ) {
+                    let name = item.path;
+                    let folder = item.id.replace( "pet_", "" );
+                    Unicorn.Load( `${item.id}_${i}`, `${assetPath}/assets/${item.type}s/${folder}/${item.path}_front/${item.path}_front${i+1}.png` );
+                }
+                break;
         }
-        else {
-            // Load frames
-            for( let i = 0; i < NumFrames; i++ ) {
-                let name = item.path;
-                let folder = item.id.replace( "pet_", "" );
-                Unicorn.Load( `${item.id}_${i}`, `${assetPath}/assets/${item.type}s/${folder}/${item.path}_front/${item.path}_front${i+1}.png` );
-            }
-        }
+    }
+
+    let frames = [];
+    switch( item.type ) {
+        case "bundle":
+        case "add-on":
+            frames = [ item.id ];
+            break;
+        default:
+            frames = [ ...Array( NumFrames ).keys() ].map( i => `${item.id}_${i}` );
+            break;
     }
 
     let alertItem = Unicorn.AddObject( "alertitem_" + alertId, {
@@ -344,7 +381,7 @@ function showItemAlert( item, name ) {
         animations: {
             "front": {
                 framerate: framerate,
-                frames: item.type === "add-on" ? [ item.id ] : [ ...Array( NumFrames ).keys() ].map( i => `${item.id}_${i}` ),
+                frames: frames,
                 loop: true
             },
         },
