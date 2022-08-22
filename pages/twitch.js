@@ -416,6 +416,44 @@ const themeSettings = {
         messageFormat: " ",
         requires: "addon_giveaway_blossoms",
     },
+    "pixelparachutescakes" : {
+        game: "parachute",
+        name: "Party Cakes (Premium)",
+        page: "https://www.pixelplush.dev/parachute/cake_rainbow.html",
+        extras: {
+            "cake_rainbow": {
+                name: "cake_rainbow.html",
+                page: "https://www.pixelplush.dev/parachute/cake_rainbow.html",
+                preview: "/public/app-assets/images/games/drop_cake_rainbow_website.gif",
+                requires: "addon_parachute_cakerainbow",
+            },
+            "cake_fruit": {
+                name: "cake_fruit.html",
+                page: "https://www.pixelplush.dev/parachute/cake_fruit.html",
+                preview: "/public/app-assets/images/games/drop_cake_fruit_website.gif",
+                requires: "addon_parachute_cakefruit",
+            },
+            "cake_choco": {
+                name: "cake_choco.html",
+                page: "https://www.pixelplush.dev/parachute/cake_choco.html",
+                preview: "/public/app-assets/images/games/drop_cake_choco_website.gif",
+                requires: "addon_parachute_cakechoco",
+            },
+            "cake_pixelplush": {
+                name: "cake_pixelplush.html",
+                page: "https://www.pixelplush.dev/parachute/cake_pixelplush.html",
+                preview: "/public/app-assets/images/games/drop_cake_pp_website.gif",
+                requires: "addon_parachute_cakeplush",
+            },
+        },
+        preview: "/public/app-assets/images/games/drop_cake_rainbow_website.gif",
+        overlay: true,
+        clouds: false,
+        hideTilDrop: true,
+        messageFormat: "USERNAME landed for POINTS!",
+        command: "",
+        bundle: "bundle_parachute_cake",
+    },
     "pixelparachutesplashpool" : {
         game: "parachute",
         name: "Pool Party Splash (Free + Premium)",
@@ -742,54 +780,6 @@ const themeSettings = {
         messageFormat: "USERNAME landed for POINTS!",
         command: "",
         requires: "addon_parachute_cauldron",
-    },
-    "pixelparachutecakerainbow" : {
-        game: "parachute",
-        name: "Rainbow Cake (Premium)",
-        page: "https://www.pixelplush.dev/parachute/cake_rainbow.html",
-        preview: "/public/app-assets/images/games/drop_cake_rainbow_website.gif",
-        overlay: true,
-        clouds: false,
-        hideTilDrop: true,
-        messageFormat: "USERNAME landed for POINTS!",
-        command: "",
-        requires: "addon_parachute_cakerainbow",
-    },
-    "pixelparachutecakefruit" : {
-        game: "parachute",
-        name: "Fruit Cake (Premium)",
-        page: "https://www.pixelplush.dev/parachute/cake_fruit.html",
-        preview: "/public/app-assets/images/games/drop_cake_fruit_website.gif",
-        overlay: true,
-        clouds: false,
-        hideTilDrop: true,
-        messageFormat: "USERNAME landed for POINTS!",
-        command: "",
-        requires: "addon_parachute_cakefruit",
-    },
-    "pixelparachutecakechoco" : {
-        game: "parachute",
-        name: "Chocolate Cake (Premium)",
-        page: "https://www.pixelplush.dev/parachute/cake_choco.html",
-        preview: "/public/app-assets/images/games/drop_cake_choco_website.gif",
-        overlay: true,
-        clouds: false,
-        hideTilDrop: true,
-        messageFormat: "USERNAME landed for POINTS!",
-        command: "",
-        requires: "addon_parachute_cakechoco",
-    },
-    "pixelparachutecakepixelplush" : {
-        game: "parachute",
-        name: "PixelPlush Cake (Premium)",
-        page: "https://www.pixelplush.dev/parachute/cake_pixelplush.html",
-        preview: "/public/app-assets/images/games/drop_cake_pp_website.gif",
-        overlay: true,
-        clouds: false,
-        hideTilDrop: true,
-        messageFormat: "USERNAME landed for POINTS!",
-        command: "",
-        requires: "addon_parachute_cakeplush",
     },
     "pixelparachuterainbow" : {
         game: "parachute",
@@ -1118,6 +1108,12 @@ let splashpoolColors = {
     "pink": false,
     "purple": false,
     "yellow": false,
+};
+let cakeColors = {
+    "cake_rainbow": true,
+    "cake_fruit": false,
+    "cake_choco": false,
+    "cake_pixelplush": false,
 };
 let flakesNth = "1";
 let flakesNum = "3";
@@ -1775,6 +1771,66 @@ $( "#inputEnableFlakesHearts" ).on( "change", ( e ) => {
     generateLink();
 });
 
+$( "#inputEnableParachuteColor-cake_rainbow" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "cake_rainbow" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( cakeColors ).filter( x => cakeColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    cakeColors[ "cake_rainbow" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-cake_fruit" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "cake_fruit" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( cakeColors ).filter( x => cakeColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    cakeColors[ "cake_fruit" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-cake_choco" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "cake_choco" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( cakeColors ).filter( x => cakeColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    cakeColors[ "cake_choco" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteColor-cake_pixelplush" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "cake_pixelplush" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( cakeColors ).filter( x => cakeColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    cakeColors[ "cake_pixelplush" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
 $( "#inputEnableParachuteColor-poolfrog" ).on( "change", ( e ) => {
     if( e.target.checked ) {
         const preview = themeSettings[ gameTheme ].extras[ "frog" ].preview;
@@ -2361,6 +2417,9 @@ function setThemeDefaults() {
         else if( gameTheme === "pixelparachutesplashpool" ) {
             $( `.parachute-splashpool` ).removeClass( "d-none" );
         }
+        else if( gameTheme === "pixelparachutescakes" ) {
+            $( `.parachute-cakes` ).removeClass( "d-none" );
+        }
         else {
             $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
         }
@@ -2378,8 +2437,17 @@ function setThemeDefaults() {
                 `);
                 $( ".link-available" ).show();
                 $( ".link-not-available" ).hide();
-                Object.keys( splashpoolColors ).forEach( x => {
-                    $( `#coinParachuteColor-pool${x}` ).hide();
+                let themeColors = null;
+                switch( gameTheme ) {
+                    case "pixelparachutesplashpool":
+                        themeColors = splashpoolColors;
+                    break;
+                    case "pixelparachutescakes":
+                        themeColors = cakeColors;
+                    break;
+                }
+                Object.keys( themeColors ).forEach( x => {
+                    $( `#coinParachuteColor-${x}` ).hide();
                 });
             }
             else {
@@ -2388,7 +2456,16 @@ function setThemeDefaults() {
                 // Show link as available and hide if we detect any unowned but checked items
                 $( ".link-available" ).show();
                 $( ".link-not-available" ).hide();
-                const selectedColors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+                let themeColors = null;
+                switch( gameTheme ) {
+                    case "pixelparachutesplashpool":
+                        themeColors = splashpoolColors;
+                    break;
+                    case "pixelparachutescakes":
+                        themeColors = cakeColors;
+                    break;
+                }
+                const selectedColors = Object.keys( themeColors ).filter( x => themeColors[ x ] );
                 let isAddOnSelected = false;
                 selectedColors.forEach( x => {
                     if( !themeSettings[ gameTheme ].extras[ x ].requires ) {
@@ -2407,14 +2484,14 @@ function setThemeDefaults() {
                     }
                 });
                 // Hide the coin for owned items
-                Object.keys( splashpoolColors ).forEach( x => {
+                Object.keys( themeColors ).forEach( x => {
                     if( !themeSettings[ gameTheme ].extras[ x ].requires ) {
                         return;
                     }
                     if( !account.owned || !account.owned.includes( themeSettings[ gameTheme ].extras[ x ].requires ) ) {
                     }
                     else {
-                        $( `#coinParachuteColor-pool${x}` ).hide();
+                        $( `#coinParachuteColor-${x}` ).hide();
                     }
                 });
                 if( isAddOnSelected ) {
@@ -2502,6 +2579,15 @@ function setThemeDefaults() {
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
+        else if( gameTheme === "pixelparachutescakes" ) {
+            // Select random preview out of the selected
+            let colors = Object.keys( cakeColors ).filter( x => cakeColors[ x ] );
+            if( colors.length === 0 ) {
+                colors = Object.keys( cakeColors );
+            }
+            const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+            $( "#game-preview" ).attr( "src", preview );
+        }
         else {
         }
     }
@@ -2578,6 +2664,13 @@ function generateLink() {
         }
         else if( gameTheme === "pixelparachutesplashpool" ) {
             const colors = Object.keys( splashpoolColors ).filter( x => splashpoolColors[ x ] );
+            baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
+            if( colors.length > 1 ) {
+                linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+            }
+        }
+        else if( gameTheme === "pixelparachutescakes" ) {
+            const colors = Object.keys( cakeColors ).filter( x => cakeColors[ x ] );
             baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
             if( colors.length > 1 ) {
                 linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
