@@ -315,6 +315,10 @@ let alertCounter = 0;
 const framerate = 0.5 * 16 / 60;
 const alertTime = 5.0;
 function showItemAlert( item, name ) {
+    if( item.cost === 0 ) { // Skip free items
+        return;
+    }
+
     alertCounter++;
     // catalog[ body.item ].type === "add-on" ? dir : `https://www.pixelplush.dev/assets/${dir}/${catalog[ body.item ].path}_front/${catalog[ body.item ].path}_front1.png`
     const x = 100, y = -400;
