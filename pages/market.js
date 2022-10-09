@@ -167,7 +167,7 @@ function populateItemList( searchText = "" ) {
                     <div class="card-content">
                         <div class="card-body py-1">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                            <img id="item_${item.id}_preview" class="pixelated item-scale" width="26" src="${getItemPreview( item.id, 0 )}"/>
+                            <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                         </div>
                         <div class="badge badge-pill badge-light-${typeBG} d-inline-flex align-items-center">
                             <span>${item.type}</span>
@@ -241,7 +241,7 @@ function populateItemList( searchText = "" ) {
                 //         <div class="card-content">
                 //             <div class="card-body py-1">
                 //             <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                //                 <img id="item_${item.id}_preview" class="pixelated item-scale" width="26" src="${getItemPreview( item.id, 0 )}"/>
+                //                 <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                 //             </div>
                 //             <div class="badge badge-pill badge-secondary d-inline-flex align-items-center">
                 //                 <span>${item.type}</span>
@@ -263,7 +263,7 @@ function populateItemList( searchText = "" ) {
                         <div class="card-content">
                             <div class="card-body py-1">
                             <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                                <img id="item_${item.id}_preview" class="pixelated item-scale" width="26" src="${getItemPreview( item.id, 0 )}"/>
+                                <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                             </div>
                             <div class="badge badge-pill badge-secondary d-inline-flex align-items-center">
                                 <span>${item.type}</span>
@@ -287,7 +287,7 @@ function populateItemList( searchText = "" ) {
                     <div class="card-content">
                         <div class="card-body py-1">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
-                            <img id="item_${item.id}_preview" class="pixelated item-scale" width="26" src="${getItemPreview( item.id, 0 )}"/>
+                            <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                         </div>
                         <div class="badge badge-pill badge-${typeBG} d-inline-flex align-items-center">
                             <span>${item.type}</span>
