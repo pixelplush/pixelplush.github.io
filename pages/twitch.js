@@ -416,6 +416,14 @@ const themeSettings = {
         messageFormat: " ",
         requires: "addon_giveaway_blossoms",
     },
+    "giveawayautumn": {
+        game: "giveaway",
+        name: "Autumn Giveaway (Premium)",
+        page: "https://www.pixelplush.dev/giveaway/autumnn.html",
+        preview: "/public/app-assets/images/games/giveaway_autumn.gif",
+        messageFormat: " ",
+        requires: "addon_giveaway_autumn",
+    },
     "pixelparachutescakes" : {
         game: "parachute",
         name: "Party Cakes (Premium)",
