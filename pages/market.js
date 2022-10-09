@@ -135,6 +135,7 @@ function populateItemList( searchText = "" ) {
     // Handle adding subscription items
     filteredCatalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
         let typeBG = "primary";
+        let itemDescription = item.name;
         switch( item.type ) {
             case "character":
                 typeBG = "primary";
@@ -147,6 +148,7 @@ function populateItemList( searchText = "" ) {
                 break;
             case "bundle":
                 typeBG = "info";
+                itemDescription = "Bundle includes: " + item.items.split( "," ).map( bId => items[ bId ].name ).join( ", " );
                 break;
             case "body":
             case "equipment":
@@ -165,7 +167,7 @@ function populateItemList( searchText = "" ) {
                 <div class="col-sm-3 col-6 mb-2">
                     <div id="item_${item.id}" class="card h-100 text-center bg-dark bg-light">
                     <div class="card-content">
-                        <div class="card-body py-1">
+                        <div class="card-body py-1" data-toggle="tooltip" data-placement="left" title="${itemDescription}">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
                             <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                         </div>
@@ -187,7 +189,7 @@ function populateItemList( searchText = "" ) {
                 <div class="col-sm-3 col-6 mb-2">
                     <div id="item_${item.id}" class="card h-100 text-center bg-purple">
                     <div class="card-content">
-                        <div class="card-body py-1">
+                        <div class="card-body py-1" data-toggle="tooltip" data-placement="left" title="${itemDescription}">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
                             <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                         </div>
@@ -208,6 +210,7 @@ function populateItemList( searchText = "" ) {
 
     filteredCatalog.forEach( ( item, index ) => {
         let typeBG = "primary";
+        let itemDescription = item.name;
         switch( item.type ) {
             case "character":
                 typeBG = "primary";
@@ -220,6 +223,7 @@ function populateItemList( searchText = "" ) {
                 break;
             case "bundle":
                 typeBG = "info";
+                itemDescription = "Bundle includes: " + item.items.split( "," ).map( bId => items[ bId ].name ).join( ", " );
                 break;
             case "body":
             case "equipment":
@@ -239,7 +243,7 @@ function populateItemList( searchText = "" ) {
                 //     <div class="col-sm-3 col-6 mb-2">
                 //         <div id="item_${item.id}" class="card h-100 text-center bg-dark bg-light">
                 //         <div class="card-content">
-                //             <div class="card-body py-1">
+                //             <div class="card-body py-1" data-toggle="tooltip" data-placement="left" title="${itemDescription}">
                 //             <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
                 //                 <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                 //             </div>
@@ -261,7 +265,7 @@ function populateItemList( searchText = "" ) {
                     <div class="col-sm-3 col-6 mb-2">
                         <div id="item_${item.id}" class="card h-100 text-center bg-dark bg-light">
                         <div class="card-content">
-                            <div class="card-body py-1">
+                            <div class="card-body py-1" data-toggle="tooltip" data-placement="left" title="${itemDescription}">
                             <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
                                 <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                             </div>
@@ -285,7 +289,7 @@ function populateItemList( searchText = "" ) {
                 <div class="col-sm-3 col-6 mb-2">
                     <div id="item_${item.id}" class="card h-100 text-center">
                     <div class="card-content">
-                        <div class="card-body py-1">
+                        <div class="card-body py-1" data-toggle="tooltip" data-placement="left" title="${itemDescription}">
                         <div class="badge-circle badge-circle-xlg badge-circle-light-${typeBG} mx-auto mb-50">
                             <img id="item_${item.id}_preview" class="pixelated item-scale" src="${getItemPreview( item.id, 0 )}"/>
                         </div>
