@@ -152,6 +152,7 @@ function populateItemList( searchText = "" ) {
             case "equipment":
             case "accessory":
             case "outfit":
+            case "effect":
                 typeBG = "warning";
                 break;
             default:
@@ -224,6 +225,7 @@ function populateItemList( searchText = "" ) {
             case "equipment":
             case "accessory":
             case "outfit":
+            case "effect":
                 typeBG = "warning";
                 break;
             default:
@@ -347,6 +349,9 @@ function getItemPreview( itemId, frame ) {
             break;
         case "outfit":
             dir = `skins/outfits/${item.category}/${item.path}`;
+            break;
+        case "effect":
+            dir = `skins/effects/${item.path}`;
             break;
         case "character":
         default:
