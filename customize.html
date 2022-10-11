@@ -620,11 +620,11 @@
                             <img id="item_none_preview" class="pixelated item-scale" src=""/>
                         </div>
                         <div class="badge badge-pill badge-character d-inline-flex align-items-center">
-                            <span>Character/Pet</span>
+                            <span>Outfits/Character/Pet</span>
                         </div>
-                        <h5 class="mb-0">Deselect</h5>
+                        <h5 class="mb-0">Deselect All</h5>
                         <div class="pt-1">
-                            <button class="btn btn-sm btn-danger" type="button" onclick="deactivateItem('coin_remove');deactivateItem('pet_none');"><strong>Deselect All</strong></button>
+                            <button class="btn btn-sm btn-danger" type="button" onclick="deactivateItem('coin_remove').then( () => deactivateItem('pet_none') ).then( () => deactivateItem('outfit_skin1') );"><strong>Deselect All</strong></button>
                         </div>
                         </div>
                     </div>
