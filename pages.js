@@ -60,4 +60,8 @@ module.exports =
         "icon": `<i class="bx bxs-megaphone"></i>`,
         "menu": "normal"
     },
+    "status": {
+        "name": "Status",
+        "menu": "normal"
+    },
 }
