@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6EJRXTPH3Z"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-6EJRXTPH3Z');
+    </script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta name="keywords" content="pixelplush, game, development, studio, instafluff, maaya, art, web, dev, fun, relax, play">
+    <meta name="author" content="PixelPlush">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta name="twitter:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
+    <meta name="twitter:creator" content="PixelPlushGames">
+    <meta name="twitter:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="PixelPlush is a Game Studio started by Maaya and Instafluff building feel-good, relaxing and fun games">
+    <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
+    <meta property="og:url" content="https://www.pixelplush.dev">
+    <!-- <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff"> -->
+    <title>Login - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/forms/spinner/jquery.bootstrap-touchspin.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/charts/apexcharts.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/vendors/css/extensions/swiper.min.css">
+    <!-- END: Vendor CSS-->
+
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/components.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/themes/dark-layout.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/themes/semi-dark-layout.css">
+    <!-- END: Theme CSS-->
+
+    <!-- BEGIN: Page CSS-->
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/core/menu/menu-types/horizontal-menu.css">
+    <link rel="stylesheet" type="text/css" href="public/app-assets/css/pages/authentication.css">
+    <!-- END: Page CSS-->
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="public/assets/css/style.css">
+    <!-- END: Custom CSS-->
+
+    <style>
+        .pixelated {
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+    </style>
+
+</head>
+<!-- END: Head-->
+
+<!-- BEGIN: Body-->
+
+<body class="horizontal-layout horizontal-menu 1-column   footer-static  blank-page blank-page" data-open="hover" data-menu="horizontal-menu" data-col="1-column">
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <!-- login page start -->
+                <section id="auth-login" class="row flexbox-container">
+                    <div class="col-xl-8 col-11">
+                        <div class="card bg-authentication mb-0">
+                            <div class="row m-0">
+                                <!-- left section-login -->
+                                <div class="col-md-6 col-12 px-0">
+                                    <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
+                                        <div class="card-header pb-1">
+                                            <div class="card-title">
+                                                <h4 class="text-center mb-2">Log Into My PixelPlush Account</h4>
+                                            </div>
+                                        </div>
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="d-flex flex-md-row flex-column justify-content-around">
+                                                    <a id="login-twitch" href="#" class="btn btn-social btn-twitch btn-block font-small-3 mr-md-1 mb-md-0 mb-1">
+                                                        <i class="bx bxl-twitch font-medium-3"></i><span class="pl-50 d-block text-center">Log in with Twitch</span></a>
+                                                    <!-- <a href="#" class="btn btn-social btn-google btn-block font-small-3 mr-md-1 mb-md-0 mb-1">
+                                                        <i class="bx bxl-google font-medium-3"></i><span class="pl-50 d-block text-center">Google</span></a> -->
+                                                    <!-- <a href="#" class="btn btn-social btn-block mt-0 btn-facebook font-small-3">
+                                                        <i class="bx bxl-facebook-square font-medium-3"></i><span class="pl-50 d-block text-center">Facebook</span></a> -->
+                                                </div>
+                                                <hr>
+                                                <div class="text-center"><small class="mr-25">Hello from Maaya and Instafluff!</small></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- right section image -->
+                                <div class="col-md-6 d-md-block d-none text-center align-self-center p-3 h-100 bg-warning">
+                                    <div class="card-content">
+                                        <img class="img-fluid rounded pixelated" id="game-image" src="public/app-assets/images/games/easteregghunt.gif" alt="PixelPlush Logo">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- login page ends -->
+
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+
+    <!-- BEGIN: Vendor JS-->
+    <script src="../../../app-assets/vendors/js/vendors.min.js"></script>
+    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.tools.js"></script>
+    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.defaults.js"></script>
+    <script src="../../../app-assets/fonts/LivIconsEvo/js/LivIconsEvo.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="../../../app-assets/vendors/js/ui/jquery.sticky.js"></script>
+    <!-- END: Page Vendor JS-->
+
+    <!-- BEGIN: Theme JS-->
+    <script src="../../../app-assets/js/scripts/configs/horizontal-menu.js"></script>
+    <script src="../../../app-assets/js/core/app-menu.js"></script>
+    <script src="../../../app-assets/js/core/app.js"></script>
+    <script src="../../../app-assets/js/scripts/components.js"></script>
+    <script src="../../../app-assets/js/scripts/footer.js"></script>
+    <!-- END: Theme JS-->
+
+    <!-- BEGIN: Page JS-->
+    <script src="public/comfytwitch.min.js"></script>
+    <script>
+        const params = new URLSearchParams( location.search );
+        const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
+        const baseUrl = window.location.origin;
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+
+        const screenshots = [
+            "public/app-assets/images/games/pixelparachuteeaster.gif",
+            "public/app-assets/images/games/hillrollchristmas.gif",
+            "public/app-assets/images/games/pixelplinko.gif",
+            "public/app-assets/images/games/easteregghunt.gif",
+        ];
+        document.getElementById( "game-image" ).src = screenshots[ Math.floor( Math.random() * screenshots.length ) ];
+
+        document.querySelector( "#login-twitch" ).addEventListener( "click", function() {
+            console.log( "Logging in!" );
+            localStorage.setItem( "redirectPage", params.get( "redirect" ) || window.location.href );
+            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [], "code" );
+        });
+
+        ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
+        ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+        ComfyTwitch.Check()
+        .then( async result => {
+            if( result ) {
+                try {
+                    account = await fetch( `${plushApiUrl}/accounts`, {
+                        headers: {
+                            Twitch: result.token
+                        }
+                    } ).then( r => r.json() );
+
+                    console.log( account );
+
+                    if( account.error ) {
+                        throw "Login Error";
+                    }
+
+                    // TODO: Redirect to logged in site!
+                    console.log( "Logged in" );
+                    window.location.href = `${baseUrl}/index.html`;
+                }
+                catch( error ) {
+                    // TODO: Auth Failed
+                    console.log( "Auth Validate Failed", error );
+                }
+            }
+        });
+    </script>
+    <!-- END: Page JS-->
+
+</body>
+<!-- END: Body-->
+
+</html>

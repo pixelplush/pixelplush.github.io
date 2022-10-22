@@ -266,6 +266,8 @@ function saveSettings() {
     localStorage.setItem( "twitchInputSettings", JSON.stringify( savedSettings ) );
 }
 
+ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
+ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );
@@ -377,7 +379,12 @@ ComfyTwitch.Check()
     $( ".additional-permissions" ).on( "click", function() {
         ComfyTwitch.Logout();
         localStorage.setItem( "redirectPage", window.location.href );
-        ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ] );
+        if( ComfyTwitch.RefreshToken ) {
+            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ], "code" );
+        }
+        else {
+            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ] );
+        }
     });
 });
 
@@ -2714,6 +2721,9 @@ function generateLink() {
             linkParams.push( `chat=true` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
+        if( ComfyTwitch.RefreshToken ) {
+            linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+        }
         break;
     case "chatflakes":
         if( flakesNth !== "0" ) {
@@ -2741,6 +2751,9 @@ function generateLink() {
             linkParams.push( `hearts=true` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
+        if( ComfyTwitch.RefreshToken ) {
+            linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+        }
         break;
     case "weather":
         if( weatherRain !== "0" ) {
@@ -2777,6 +2790,9 @@ function generateLink() {
             linkParams.push( `volume=${weatherVolume}` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
+        if( ComfyTwitch.RefreshToken ) {
+            linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+        }
         break;
     case "maze":
         if( !isBossEnabled ) {
@@ -2785,6 +2801,9 @@ function generateLink() {
         if( isChatEnabled && chatOAuth ) {
             linkParams.push( `oauth=${chatOAuth}` );
             linkParams.push( `messageFormat=${messageFormat}` );
+            if( ComfyTwitch.RefreshToken ) {
+                linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+            }
         }
         linkParams.push( `bosses=${bossCount}` );
         linkParams.push( `bossEffect=${bossEffect}` );
@@ -2841,6 +2860,9 @@ function generateLink() {
             linkParams.push( `notifVolume=${parachuteNotifVolume}` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
+        if( ComfyTwitch.RefreshToken ) {
+            linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+        }
         break;
     case "plinko":
         if( isPlinkoOverlay ) {
@@ -2886,6 +2908,9 @@ function generateLink() {
             linkParams.push( `messageFormat=${messageFormat}` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
+        if( ComfyTwitch.RefreshToken ) {
+            linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+        }
         break;
     case "hillroll":
         if( isHillRollOverlay ) {
@@ -2915,6 +2940,9 @@ function generateLink() {
         if( isHillRollChatEnabled && chatOAuth ) {
             linkParams.push( `oauth=${chatOAuth}` );
             linkParams.push( `messageFormat=${messageFormat}` );
+            if( ComfyTwitch.RefreshToken ) {
+                linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+            }
         }
         if( hideInstructions ) {
             linkParams.push( `hideInstructions=true` );
@@ -2941,6 +2969,9 @@ function generateLink() {
         }
         linkParams.push( `colors=${Object.keys( confettiColors ).filter( x => confettiColors[ x ] ).join( "," )}` );
         linkParams.push( `oauth=${chatOAuth}` );
+        if( ComfyTwitch.RefreshToken ) {
+            linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+        }
         break;
     }
     // console.log( linkParams );

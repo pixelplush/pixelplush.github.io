@@ -15,8 +15,11 @@
    <body>
        <script src="public/comfytwitch.min.js"></script>
        <script>
-           ComfyTwitch.Check()
-           .then( async result => {
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+            ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
+            ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+            ComfyTwitch.Check()
+            .then( async result => {
                if( result ) {
                    console.log( result );
                }
