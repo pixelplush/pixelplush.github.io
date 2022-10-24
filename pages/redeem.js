@@ -10,6 +10,9 @@ let items = {};
 $( ".not-logged-in" ).show();
 $( ".logged-in" ).hide();
 
+ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
+ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );

@@ -268,6 +268,7 @@ function saveSettings() {
 
 ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
 ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );
@@ -379,12 +380,7 @@ ComfyTwitch.Check()
     $( ".additional-permissions" ).on( "click", function() {
         ComfyTwitch.Logout();
         localStorage.setItem( "redirectPage", window.location.href );
-        if( ComfyTwitch.RefreshToken ) {
-            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ], "code" );
-        }
-        else {
-            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ] );
-        }
+        ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ], "code" );
     });
 });
 

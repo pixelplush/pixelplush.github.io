@@ -169,6 +169,7 @@
 
         ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
         ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+        
         ComfyTwitch.Check()
         .then( async result => {
             if( result ) {
