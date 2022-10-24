@@ -1970,7 +1970,13 @@
             $( ".additional-permissions" ).on( "click", function() {
                 ComfyTwitch.Logout();
                 localStorage.setItem( "redirectPage", window.location.href );
-                ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ], "code" );
+                // if( ComfyTwitch.RefreshToken ) {
+                if( account.username === "instafluff" || account.username === "maaya" ) {
+                    ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ], "code" );
+                }
+                else {
+                    ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ] );
+                }
             });
         });
         

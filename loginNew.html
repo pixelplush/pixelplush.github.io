@@ -164,12 +164,12 @@
         document.querySelector( "#login-twitch" ).addEventListener( "click", function() {
             console.log( "Logging in!" );
             localStorage.setItem( "redirectPage", params.get( "redirect" ) || window.location.href );
-            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [] );
+            ComfyTwitch.Login( clientId, `${baseUrl}/redirect.html`, [], "code" );
         });
 
         ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
         ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
-
+        
         ComfyTwitch.Check()
         .then( async result => {
             if( result ) {
