@@ -422,7 +422,7 @@ const themeSettings = {
     "giveawayautumn": {
         game: "giveaway",
         name: "Autumn Giveaway (Premium)",
-        page: "https://www.pixelplush.dev/giveaway/autumnn.html",
+        page: "https://www.pixelplush.dev/giveaway/autumn.html",
         preview: "/public/app-assets/images/games/giveaway_autumn.gif",
         messageFormat: " ",
         requires: "addon_giveaway_autumn",
