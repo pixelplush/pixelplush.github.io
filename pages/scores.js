@@ -2,6 +2,7 @@ const params = new URLSearchParams( location.search );
 const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
 const baseUrl = window.location.origin;
 const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+const plushScoreUrl = "https://stats.pixelplush.dev/v1"; //"http://localhost:3000/v1";
 let twitch = {};
 let account = {};
 
@@ -150,7 +151,7 @@ async function getScores() {
     }
     const timestamp = date.toISOString();
     const daystamp = timestamp.split( "T" )[ 0 ];
-    const scoreUrl = gameThemeNames[ gameTheme ] ? `${plushApiUrl}/${highscoreEndpoint}?channel=${channelName}&game=${gameType}&theme=${gameThemeNames[ gameTheme ]}&date=${daystamp}` : `${plushApiUrl}/${highscoreEndpoint}?channel=${channelName}&game=${gameType}&date=${daystamp}`;
+    const scoreUrl = gameThemeNames[ gameTheme ] ? `${plushScoreUrl}/${highscoreEndpoint}?channel=${channelName}&game=${gameType}&theme=${gameThemeNames[ gameTheme ]}&date=${daystamp}` : `${plushScoreUrl}/${highscoreEndpoint}?channel=${channelName}&game=${gameType}&date=${daystamp}`;
     const scores = await fetch( scoreUrl, {
         method: "GET"
     } )
