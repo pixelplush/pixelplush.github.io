@@ -2,6 +2,7 @@ const params = new URLSearchParams( location.search );
 const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
 const baseUrl = window.location.origin;
 const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+const plushScoreUrl = "https://stats.pixelplush.dev/v1"; //"http://localhost:3000/v1";
 let twitch = {};
 let account = {};
 let catalog = {};
@@ -53,7 +54,7 @@ ComfyTwitch.Check()
                 window.location.reload();
             });
 
-            let receipts = await fetch( `${plushApiUrl}/transactions/user`, {
+            let receipts = await fetch( `${plushScoreUrl}/transactions/user`, {
                 headers: {
                     Twitch: result.token
                 }
