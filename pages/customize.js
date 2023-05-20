@@ -2,6 +2,7 @@ const params = new URLSearchParams( location.search );
 const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
 const baseUrl = window.location.origin;
 const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+const plushScoreUrl = "https://stats.pixelplush.dev/v1"; //"http://localhost:3000/v1";
 let twitch = {};
 let account = {};
 let catalog = {};
@@ -596,7 +597,7 @@ async function verifySub( itemId ) {
 async function activateItem( itemId ) {
     try {
         // console.log( itemId );
-        let result = await fetch( `${plushApiUrl}/accounts/design`, {
+        let result = await fetch( `${plushScoreUrl}/accounts/design`, {
             method: "POST",
             headers: {
                 Twitch: ComfyTwitch.Token,
@@ -629,7 +630,7 @@ async function activateItem( itemId ) {
 async function deactivateItem( itemId ) {
     try {
         // console.log( itemId );
-        let result = await fetch( `${plushApiUrl}/accounts/design/unset`, {
+        let result = await fetch( `${plushScoreUrl}/accounts/design/unset`, {
             method: "POST",
             headers: {
                 Twitch: ComfyTwitch.Token,
@@ -662,7 +663,7 @@ async function deactivateItem( itemId ) {
 async function queueItem( itemId, queue = true ) {
     try {
         // console.log( itemId, queue );
-        let result = await fetch( `${plushApiUrl}/accounts/design/list`, {
+        let result = await fetch( `${plushScoreUrl}/accounts/design/list`, {
             method: "POST",
             headers: {
                 Twitch: ComfyTwitch.Token,
