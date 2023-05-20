@@ -2,6 +2,7 @@ const params = new URLSearchParams( location.search );
 const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
 const baseUrl = window.location.origin;
 const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+const plushScoreUrl = "https://stats.pixelplush.dev/v1"; //"http://localhost:3000/v1";
 let twitch = {};
 let account = {};
 let catalog = {};
@@ -17,15 +18,15 @@ let twitchSubs = {};
 $( ".not-logged-in" ).show();
 $( ".logged-in" ).hide();
 
-ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
-ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+ComfyTwitch.SetAuthEndpoint( `${plushScoreUrl}/auth/code` );
+ComfyTwitch.SetRefreshEndpoint( `${plushScoreUrl}/auth/refresh` );
 
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );
     if( result ) {
         try {
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: result.token
                 }
@@ -419,7 +420,7 @@ async function buyItem( itemId ) {
             }
             // window.location.reload();
 
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: ComfyTwitch.Token
                 }
@@ -501,7 +502,7 @@ async function verifySub( itemId ) {
 async function activateItem( itemId ) {
     try {
         console.log( itemId );
-        let result = await fetch( `${plushApiUrl}/accounts/design`, {
+        let result = await fetch( `${plushScoreUrl}/accounts/design`, {
             method: "POST",
             headers: {
                 Twitch: ComfyTwitch.Token,
@@ -516,7 +517,7 @@ async function activateItem( itemId ) {
         }
         // window.location.reload();
 
-        account = await fetch( `${plushApiUrl}/accounts`, {
+        account = await fetch( `${plushScoreUrl}/accounts`, {
             headers: {
                 Twitch: ComfyTwitch.Token
             }
@@ -565,7 +566,7 @@ async function giftItem( itemId ) {
             }
             // window.location.reload();
 
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: ComfyTwitch.Token
                 }
@@ -704,14 +705,14 @@ paypal.Buttons({
                     console.log( "Status:", itemStatus.status );
                 }
                 let transactionTimer = setInterval( async () => {
-                    let result = await fetch( `${plushApiUrl}/transactions/status?id=${item.transactionId}` ).then( r => r.json() );
+                    let result = await fetch( `${plushScoreUrl}/transactions/status?id=${item.transactionId}` ).then( r => r.json() );
                     if( result && result.status !== "pending" ) {
                         clearInterval( transactionTimer );
                         if( result.status === "complete" ) {
                             // TODO: thank you celebration!
                             let previousEggs = account.owned.filter( x => x.startsWith( "pet_egg_" ) );
                             let previousGiftboxes = account.owned.filter( x => x.startsWith( "pet_gift" ) );
-                            account = await fetch( `${plushApiUrl}/accounts`, {
+                            account = await fetch( `${plushScoreUrl}/accounts`, {
                                 headers: {
                                     Twitch: ComfyTwitch.Token
                                 }

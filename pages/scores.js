@@ -10,15 +10,15 @@ $( ".not-logged-in" ).show();
 $( ".logged-in" ).hide();
 $( ".additional-permissions" ).hide();
 
-ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
-ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+ComfyTwitch.SetAuthEndpoint( `${plushScoreUrl}/auth/code` );
+ComfyTwitch.SetRefreshEndpoint( `${plushScoreUrl}/auth/refresh` );
 
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );
     if( result ) {
         try {
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: result.token
                 }

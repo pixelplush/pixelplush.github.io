@@ -18,15 +18,15 @@ let twitchSubs = {};
 $( ".not-logged-in" ).show();
 $( ".logged-in" ).hide();
 
-ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
-ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+ComfyTwitch.SetAuthEndpoint( `${plushScoreUrl}/auth/code` );
+ComfyTwitch.SetRefreshEndpoint( `${plushScoreUrl}/auth/refresh` );
 
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );
     if( result ) {
         try {
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: result.token
                 }
@@ -612,7 +612,7 @@ async function activateItem( itemId ) {
         }
         // window.location.reload();
 
-        account = await fetch( `${plushApiUrl}/accounts`, {
+        account = await fetch( `${plushScoreUrl}/accounts`, {
             headers: {
                 Twitch: ComfyTwitch.Token
             }
@@ -645,7 +645,7 @@ async function deactivateItem( itemId ) {
         }
         // window.location.reload();
 
-        account = await fetch( `${plushApiUrl}/accounts`, {
+        account = await fetch( `${plushScoreUrl}/accounts`, {
             headers: {
                 Twitch: ComfyTwitch.Token
             }
@@ -681,7 +681,7 @@ async function queueItem( itemId, queue = true ) {
         }
         // window.location.reload();
 
-        account = await fetch( `${plushApiUrl}/accounts`, {
+        account = await fetch( `${plushScoreUrl}/accounts`, {
             headers: {
                 Twitch: ComfyTwitch.Token
             }
@@ -729,7 +729,7 @@ async function buyItem( itemId ) {
             }
             // window.location.reload();
 
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: ComfyTwitch.Token
                 }

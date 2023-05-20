@@ -2,6 +2,7 @@ const params = new URLSearchParams( location.search );
 const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
 const baseUrl = window.location.origin;
 const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+const plushScoreUrl = "https://stats.pixelplush.dev/v1"; //"http://localhost:3000/v1";
 let twitch = {};
 let account = {};
 let catalog = {};
@@ -10,15 +11,15 @@ let items = {};
 $( ".not-logged-in" ).show();
 $( ".logged-in" ).hide();
 
-ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
-ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+ComfyTwitch.SetAuthEndpoint( `${plushScoreUrl}/auth/code` );
+ComfyTwitch.SetRefreshEndpoint( `${plushScoreUrl}/auth/refresh` );
 
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );
     if( result ) {
         try {
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: result.token
                 }
@@ -107,7 +108,7 @@ $( "#redeem-btn" ).on( "click", async ( ev ) => {
         toastr.error( "There was an error: " + result.error, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
     }
     else {
-        account = await fetch( `${plushApiUrl}/accounts`, {
+        account = await fetch( `${plushScoreUrl}/accounts`, {
             headers: {
                 Twitch: ComfyTwitch.Token
             }
@@ -150,7 +151,7 @@ $( "#redeem-btn" ).on( "click", async ( ev ) => {
 async function activateItem( itemId ) {
     try {
         console.log( itemId );
-        let result = await fetch( `${plushApiUrl}/accounts/design`, {
+        let result = await fetch( `${plushScoreUrl}/accounts/design`, {
             method: "POST",
             headers: {
                 Twitch: ComfyTwitch.Token,
@@ -165,7 +166,7 @@ async function activateItem( itemId ) {
         }
         // window.location.reload();
 
-        account = await fetch( `${plushApiUrl}/accounts`, {
+        account = await fetch( `${plushScoreUrl}/accounts`, {
             headers: {
                 Twitch: ComfyTwitch.Token
             }

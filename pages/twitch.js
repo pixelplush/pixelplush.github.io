@@ -2,6 +2,7 @@ const params = new URLSearchParams( location.search );
 const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
 const baseUrl = window.location.origin;
 const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+const plushScoreUrl = "https://stats.pixelplush.dev/v1"; //"http://localhost:3000/v1";
 let twitch = {};
 let account = {};
 let catalog = {};
@@ -266,15 +267,15 @@ function saveSettings() {
     localStorage.setItem( "twitchInputSettings", JSON.stringify( savedSettings ) );
 }
 
-ComfyTwitch.SetAuthEndpoint( `${plushApiUrl}/auth/code` );
-ComfyTwitch.SetRefreshEndpoint( `${plushApiUrl}/auth/refresh` );
+ComfyTwitch.SetAuthEndpoint( `${plushScoreUrl}/auth/code` );
+ComfyTwitch.SetRefreshEndpoint( `${plushScoreUrl}/auth/refresh` );
 
 ComfyTwitch.Check()
 .then( async result => {
     // console.log( result );
     if( result ) {
         try {
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: result.token
                 }
@@ -3049,7 +3050,7 @@ async function buyItem( itemId ) {
             }
             // window.location.reload();
 
-            account = await fetch( `${plushApiUrl}/accounts`, {
+            account = await fetch( `${plushScoreUrl}/accounts`, {
                 headers: {
                     Twitch: ComfyTwitch.Token
                 }
