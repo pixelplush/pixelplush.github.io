@@ -285,6 +285,8 @@ ComfyTwitch.Check()
                 throw "Login Error";
             }
 
+            console.log( "account:", account );
+
             $( ".not-logged-in" ).hide();
             $( ".logged-in" ).show();
 
@@ -309,7 +311,7 @@ ComfyTwitch.Check()
             chatOAuth = `oauth:${result.token}`;
             // generateLink();
 
-            if( ![ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ].every( v => ComfyTwitch.Scopes.includes( v ) ) ) {
+            if( !ComfyTwitch.Scopes || ![ "user:read:email", "chat:read", "chat:edit", "channel:manage:redemptions", "channel:read:redemptions" ].every( v => ComfyTwitch.Scopes.includes( v ) ) ) {
                 console.log( "Need More Permissions" );
                 $( ".additional-permissions" ).show();
                 $( "#inputEnableChat" ).prop( "disabled", true );
