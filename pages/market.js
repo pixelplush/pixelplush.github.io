@@ -45,7 +45,7 @@ ComfyTwitch.Check()
             $( ".user-name" ).text( account.displayName || account.username );
             $( ".user-coins" ).text( account.coins );
 
-            if( ComfyTwitch.Scopes.includes( "user:read:subscriptions" ) ) {
+            if( !ComfyTwitch.Scopes || ComfyTwitch.Scopes.includes( "user:read:subscriptions" ) ) {
                 for( let channel in subReference ) {
                     let subCheck = await fetch( `https://api.twitch.tv/helix/subscriptions/user?broadcaster_id=${channel}&user_id=${account.platformId}`, {
                         headers: {
