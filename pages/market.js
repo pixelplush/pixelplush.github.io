@@ -712,6 +712,7 @@ paypal.Buttons({
                             // TODO: thank you celebration!
                             let previousEggs = account.owned.filter( x => x.startsWith( "pet_egg_" ) );
                             let previousGiftboxes = account.owned.filter( x => x.startsWith( "pet_gift" ) );
+                            let previousBalloons = account.owned.filter( x => x.startsWith( "pet_balloon" ) );
                             account = await fetch( `${plushScoreUrl}/accounts`, {
                                 headers: {
                                     Twitch: ComfyTwitch.Token
@@ -719,6 +720,7 @@ paypal.Buttons({
                             } ).then( r => r.json() );
                             let newGiftboxes = account.owned.filter( x => x.startsWith( "pet_gift" ) && !previousGiftboxes.includes( x ) );
                             let newEggs = account.owned.filter( x => x.startsWith( "pet_egg_" ) && !previousEggs.includes( x ) );
+                            let newBalloons = account.owned.filter( x => x.startsWith( "pet_balloon" ) && !previousBalloons.includes( x ) );
 
                             $( ".user-coins" ).text( account.coins );
                             toastr.success( `Plush Coins added!`, "Success", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
@@ -750,6 +752,21 @@ paypal.Buttons({
                                             title: "PixelPlush Giftbox Bonus!",
                                             text: `You also unlocked Pet ${newGiftboxes.map( x => items[ x ].name).join( ", " )}!`,
                                             imageUrl: `${getItemPreview( newGiftboxes[ 0 ], 0 )}`,
+                                            imageWidth: 48,
+                                            imageHeight: 48,
+                                            animation: false,
+                                            customClass: 'animated bounceIn',
+                                            confirmButtonClass: 'btn btn-primary',
+                                            buttonsStyling: false,
+                                        });
+                                    }, 500 );
+                                }
+                                else if( newBalloons.length > 0 ) {
+                                    setTimeout( () => {
+                                        Swal.fire({
+                                            title: "PixelPlush Balloon Bonus!",
+                                            text: `You also unlocked Pet ${newBalloons.map( x => items[ x ].name).join( ", " )}!`,
+                                            imageUrl: `${getItemPreview( newBalloons[ 0 ], 0 )}`,
                                             imageWidth: 48,
                                             imageHeight: 48,
                                             animation: false,
