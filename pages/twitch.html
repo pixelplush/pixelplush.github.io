@@ -650,6 +650,7 @@
                                                     <th><span data-toggle="tooltip" data-placement="left" title="Choose how often you want the target to reset">Refresh Timer (secs)</span></th>
                                                     <th><span data-toggle="tooltip" data-placement="left" title="Set a starting amount of time before the game will accept players">Time Til Ready (secs)</span></th>
                                                     <th><span data-toggle="tooltip" data-placement="left" title="Set the duration of auto drops after a raid or set to 0 to turn off">Raid Drop Timer (secs)</span></th>
+                                                    <th class="parachute-game-beta d-none"><span data-toggle="tooltip" data-placement="left" title="If you check this option, it will use the new Beta update version of the game">Enable Beta</span></th>
                                                 </tr>
                                                 <tr class="confetti-game d-none">
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_brightred.png" alt="Bright Red"/></th>
@@ -678,7 +679,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr class="parachute-game d-none">
+                                                <tr class="parachute-game-beta d-none">
                                                     <td>
                                                         <div class="input-group">
                                                             <input type="number" class="" id="inputParachuteRefresh" value="90" min="0" max="3600" step="30" placeholder="# Seconds">
@@ -692,6 +693,11 @@
                                                     <td>
                                                         <div class="input-group">
                                                             <input type="number" class="" id="inputParachuteRaidDrop" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                        </div>
+                                                    </td>
+                                                    <td class="parachute-game-beta d-none">
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteUseBeta"><label for="inputEnableParachuteUseBeta"></label>
                                                         </div>
                                                     </td>
                                                 </tr>
