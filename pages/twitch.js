@@ -2422,6 +2422,7 @@ function setThemeDefaults() {
     gameTypes.forEach( g => $( `.${g}-game` ).addClass( "d-none" ) );
     $( `.${ themeSettings[ gameTheme ].game }-game` ).removeClass( "d-none" );
     gameTypes.forEach( g => $( `.${g}-game-extras` ).addClass( "d-none" ) );
+    $( `.parachute-game-beta` ).addClass( "d-none" );
     if( themeSettings[ gameTheme ].extras ) {
         if( gameTheme === "pixelparachutecauldron" ) {
             $( `.parachute-cauldron` ).removeClass( "d-none" );
