@@ -457,7 +457,12 @@
                                                                     </div>
                                                                     <div class="form-group parachute-game plinko-game d-none">
                                                                         <label>Chat Announcement Message Format</label>
-                                                                        <input type="text" class="form-control" id="inputMessageFormat" value="USERNAME finished with POINTS!" placeholder="e.g. USERNAME finished with POINTS!" disabled>
+                                                                        <input type="text" class="form-control" id="inputMessageFormat" value="" placeholder="e.g. USERNAME finished with POINTS!" disabled>
+                                                                        <div id="inputMessageFormatDisabled" class="help-block">(Twitch Log In is needed to enable chat announcement)</div>
+                                                                    </div>
+                                                                    <div class="form-group giveaway-game d-none">
+                                                                        <label>Chat Announcement Message Format</label>
+                                                                        <input type="text" class="form-control" id="inputMessageFormatGiveaway" value="" placeholder="e.g. /me Congratulations @USERNAME!" disabled>
                                                                         <div id="inputMessageFormatDisabled" class="help-block">(Twitch Log In is needed to enable chat announcement)</div>
                                                                     </div>
                                                                 </div>
@@ -1915,6 +1920,7 @@
                     $( "#inputChannelName" ).val( result.login );
                     $( "#inputChannelName" ).prop( "readonly", true );
                     $( "#inputMessageFormat" ).prop( "disabled", false );
+                    $( "#inputMessageFormatGiveaway" ).prop( "disabled", false );
                     $( "#inputEnableChat" ).prop( "disabled", false );
                     $( "#inputEnableParachuteChat" ).prop( "disabled", false );
                     $( "#inputEnableParachuteDroplets" ).prop( "disabled", false );
@@ -2021,7 +2027,7 @@
                 name: "Default Theme",
                 page: "https://www.pixelplush.dev/giveaway/index.html",
                 preview: "/public/app-assets/images/games/giveaway_basic.gif",
-                messageFormat: " ",
+                messageFormat: "",
                 // requires: "addon_giveaway",
             },
             // "giveawayhue": {
@@ -2029,7 +2035,7 @@
             //     name: "Custom Color Giveaway (Premium)",
             //     page: "https://www.pixelplush.dev/giveaway/index.html",
             //     preview: "/public/app-assets/images/games/giveaway_basic.gif",
-            //     messageFormat: " ",
+            //     messageFormat: "",
             //     // requires: "addon_giveaway_hue",
             // },
             "giveawayblossoms": {
@@ -2037,7 +2043,7 @@
                 name: "Blossoms Giveaway (Premium)",
                 page: "https://www.pixelplush.dev/giveaway/blossoms.html",
                 preview: "/public/app-assets/images/games/giveaway_blossoms.gif",
-                messageFormat: " ",
+                messageFormat: "",
                 requires: "addon_giveaway_blossoms",
             },
             "giveawayautumn": {
@@ -2045,7 +2051,7 @@
                 name: "Autumn Giveaway (Premium)",
                 page: "https://www.pixelplush.dev/giveaway/autumn.html",
                 preview: "/public/app-assets/images/games/giveaway_autumn.gif",
-                messageFormat: " ",
+                messageFormat: "",
                 requires: "addon_giveaway_autumn",
             },
             "pixelparachutescakes" : {
@@ -2831,6 +2837,10 @@
             generateLink();
         });
         $( "#inputMessageFormat" ).on( "input", ( e ) => {
+            messageFormat = e.target.value;
+            generateLink();
+        });
+        $( "#inputMessageFormatGiveaway" ).on( "input", ( e ) => {
             messageFormat = e.target.value;
             generateLink();
         });
@@ -4294,6 +4304,10 @@
             trapCount = themeSettings[ gameTheme ].traps;
             $( "#inputMessageFormat" ).val( themeSettings[ gameTheme ].messageFormat );
             messageFormat = themeSettings[ gameTheme ].messageFormat;
+            if( gameType === "giveaway" ) {
+                $( "#inputMessageFormatGiveaway" ).val( themeSettings[ gameTheme ].messageFormatGiveaway );
+                messageFormat = themeSettings[ gameTheme ].messageFormat;
+            }
             $( "#inputBossEffect" ).val( themeSettings[ gameTheme ].effect || 0 );
             $( "#inputTrapEffect" ).val( themeSettings[ gameTheme ].trapEffect || 0 );
             $( "#inputBossCount" ).val( bossCount );
@@ -4411,6 +4425,7 @@
                 }
                 if( isGiveawayChatEnabled ) {
                     linkParams.push( `chat=true` );
+                    linkParams.push( `messageFormat=${messageFormat}` );
                 }
                 linkParams.push( `oauth=${chatOAuth}` );
                 if( ComfyTwitch.RefreshToken ) {

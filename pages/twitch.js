@@ -297,6 +297,7 @@ ComfyTwitch.Check()
             $( "#inputChannelName" ).val( result.login );
             $( "#inputChannelName" ).prop( "readonly", true );
             $( "#inputMessageFormat" ).prop( "disabled", false );
+            $( "#inputMessageFormatGiveaway" ).prop( "disabled", false );
             $( "#inputEnableChat" ).prop( "disabled", false );
             $( "#inputEnableParachuteChat" ).prop( "disabled", false );
             $( "#inputEnableParachuteDroplets" ).prop( "disabled", false );
@@ -403,7 +404,7 @@ const themeSettings = {
         name: "Default Theme",
         page: "https://www.pixelplush.dev/giveaway/index.html",
         preview: "/public/app-assets/images/games/giveaway_basic.gif",
-        messageFormat: " ",
+        messageFormat: "",
         // requires: "addon_giveaway",
     },
     // "giveawayhue": {
@@ -411,7 +412,7 @@ const themeSettings = {
     //     name: "Custom Color Giveaway (Premium)",
     //     page: "https://www.pixelplush.dev/giveaway/index.html",
     //     preview: "/public/app-assets/images/games/giveaway_basic.gif",
-    //     messageFormat: " ",
+    //     messageFormat: "",
     //     // requires: "addon_giveaway_hue",
     // },
     "giveawayblossoms": {
@@ -419,7 +420,7 @@ const themeSettings = {
         name: "Blossoms Giveaway (Premium)",
         page: "https://www.pixelplush.dev/giveaway/blossoms.html",
         preview: "/public/app-assets/images/games/giveaway_blossoms.gif",
-        messageFormat: " ",
+        messageFormat: "",
         requires: "addon_giveaway_blossoms",
     },
     "giveawayautumn": {
@@ -427,7 +428,7 @@ const themeSettings = {
         name: "Autumn Giveaway (Premium)",
         page: "https://www.pixelplush.dev/giveaway/autumn.html",
         preview: "/public/app-assets/images/games/giveaway_autumn.gif",
-        messageFormat: " ",
+        messageFormat: "",
         requires: "addon_giveaway_autumn",
     },
     "pixelparachutescakes" : {
@@ -1213,6 +1214,10 @@ $( "#inputChatOAuth" ).on( "input", ( e ) => {
     generateLink();
 });
 $( "#inputMessageFormat" ).on( "input", ( e ) => {
+    messageFormat = e.target.value;
+    generateLink();
+});
+$( "#inputMessageFormatGiveaway" ).on( "input", ( e ) => {
     messageFormat = e.target.value;
     generateLink();
 });
@@ -2676,6 +2681,10 @@ function setThemeDefaults() {
     trapCount = themeSettings[ gameTheme ].traps;
     $( "#inputMessageFormat" ).val( themeSettings[ gameTheme ].messageFormat );
     messageFormat = themeSettings[ gameTheme ].messageFormat;
+    if( gameType === "giveaway" ) {
+        $( "#inputMessageFormatGiveaway" ).val( themeSettings[ gameTheme ].messageFormatGiveaway );
+        messageFormat = themeSettings[ gameTheme ].messageFormat;
+    }
     $( "#inputBossEffect" ).val( themeSettings[ gameTheme ].effect || 0 );
     $( "#inputTrapEffect" ).val( themeSettings[ gameTheme ].trapEffect || 0 );
     $( "#inputBossCount" ).val( bossCount );
@@ -2793,6 +2802,7 @@ function generateLink() {
         }
         if( isGiveawayChatEnabled ) {
             linkParams.push( `chat=true` );
+            linkParams.push( `messageFormat=${messageFormat}` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
         if( ComfyTwitch.RefreshToken ) {
