@@ -874,33 +874,28 @@ const themeSettings = {
         messageFormat: "USERNAME landed for POINTS!",
         command: "",
     },
-    "pixelparachuteretro": {
+    "pixelparachutes" : {
         game: "parachute",
-        name: "Retro",
-        page: "https://www.pixelplush.dev/parachute/retro.html",
-        preview: "/public/app-assets/images/games/pixelparachuteretro.gif",
-        overlay: true,
-        clouds: false,
-        hideTilDrop: true,
-        messageFormat: "USERNAME landed for POINTS!",
-        command: "",
-    },
-    "pixelparachuteday": {
-        game: "parachute",
-        name: "Day",
-        page: "https://www.pixelplush.dev/parachute/",
+        name: "Classic",
+        page: "https://www.pixelplush.dev/parachute/index.html",
+        extras: {
+            "day": {
+                name: "index.html",
+                page: "https://www.pixelplush.dev/parachute/index.html",
+                preview: "/public/app-assets/images/games/pixelparachuteday.gif",
+            },
+            "night": {
+                name: "night.html",
+                page: "https://www.pixelplush.dev/parachute/night.html",
+                preview: "/public/app-assets/images/games/pixelparachutenight.gif",
+            },
+            "retro": {
+                name: "retro.html",
+                page: "https://www.pixelplush.dev/parachute/retro.html",
+                preview: "/public/app-assets/images/games/pixelparachuteretro.gif",
+            },
+        },
         preview: "/public/app-assets/images/games/pixelparachuteday.gif",
-        overlay: true,
-        clouds: false,
-        hideTilDrop: true,
-        messageFormat: "USERNAME landed for POINTS!",
-        command: "",
-    },
-    "pixelparachutenight": {
-        game: "parachute",
-        name: "Night",
-        page: "https://www.pixelplush.dev/parachute/night.html",
-        preview: "/public/app-assets/images/games/pixelparachutenight.gif",
         overlay: true,
         clouds: false,
         hideTilDrop: true,
@@ -1128,6 +1123,11 @@ let cakeColors = {
     "cake_fruit": false,
     "cake_choco": false,
     "cake_pixelplush": false,
+};
+let classicColors = {
+    "day": true,
+    "night": false,
+    "retro": false,
 };
 let flakesNth = "1";
 let flakesNum = "3";
@@ -2266,6 +2266,51 @@ $( "#inputEnableParachuteColor-purple" ).on( "change", ( e ) => {
     cauldronColors[ "purple" ] = e.target.checked;
     generateLink();
 });
+$( "#inputEnableParachuteClassic-day" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "day" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( classicColors ).filter( x => classicColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    classicColors[ "day" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteClassic-night" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "night" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( classicColors ).filter( x => classicColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    classicColors[ "night" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableParachuteClassic-retro" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "retro" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( classicColors ).filter( x => classicColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    classicColors[ "retro" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
 
 $( "#inputEnableConfettiRed" ).on( "change", ( e ) => {
     confettiColors[ "red" ] = e.target.checked;
@@ -2440,6 +2485,9 @@ function setThemeDefaults() {
         else if( gameTheme === "pixelparachutescakes" ) {
             $( `.parachute-cakes` ).removeClass( "d-none" );
         }
+        else if( gameTheme === "pixelparachutes" ) {
+            $( `.parachute-classic` ).removeClass( "d-none" );
+        }
         else {
             $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
         }
@@ -2608,6 +2656,15 @@ function setThemeDefaults() {
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
+        else if( gameTheme === "pixelparachutes" ) {
+            // Select random preview out of the selected
+            let colors = Object.keys( classicColors ).filter( x => classicColors[ x ] );
+            if( colors.length === 0 ) {
+                colors = Object.keys( classicColors );
+            }
+            const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+            $( "#game-preview" ).attr( "src", preview );
+        }
         else {
         }
     }
@@ -2696,6 +2753,13 @@ function generateLink() {
         }
         else if( gameTheme === "pixelparachutescakes" ) {
             const colors = Object.keys( cakeColors ).filter( x => cakeColors[ x ] );
+            baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
+            if( colors.length > 1 ) {
+                linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+            }
+        }
+        else if( gameTheme === "pixelparachutes" ) {
+            const colors = Object.keys( classicColors ).filter( x => classicColors[ x ] );
             baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
             if( colors.length > 1 ) {
                 linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
