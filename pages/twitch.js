@@ -64,6 +64,11 @@ $( "#inputPlinkoGameReady" ).TouchSpin({
     max: 3600,
     step: 30,
 });
+$( "#inputPlinkoPegOpacity" ).TouchSpin({
+    min: 0,
+    max: 100,
+    step: 5,
+});
 $( "#inputConfettiParty" ).TouchSpin({
     min: 0,
     max: 100000,
@@ -1018,6 +1023,7 @@ let plinkoCPQueue = "0";
 let plinkoRefresh = "90";
 let plinkoGameReady = "0";
 let plinkoNotifVolume = "25";
+let plinkoPegOpacity = "15";
 let isHillRollChatEnabled = false;
 let isHillRollOverlay = true;
 let isHillRollCloudsOn = true;
@@ -1415,6 +1421,14 @@ $( "#inputPlinkoNotifVolume" ).on( "change", ( e ) => {
 });
 $( "#inputPlinkoNotifVolume" ).on( "input", ( e ) => {
     plinkoNotifVolume = e.target.value;
+    generateLink();
+});
+$( "#inputPlinkoPegOpacity" ).on( "change", ( e ) => {
+    plinkoPegOpacity = e.target.value;
+    generateLink();
+});
+$( "#inputPlinkoPegOpacity" ).on( "input", ( e ) => {
+    plinkoPegOpacity = e.target.value;
     generateLink();
 });
 $( "#inputEnablePlinkoCommand" ).on( "change", ( e ) => {
@@ -2951,6 +2965,7 @@ function generateLink() {
     case "plinko":
         if( isPlinkoOverlay ) {
             linkParams.push( "overlay=true" );
+            linkParams.push( `pegOpacity=${plinkoPegOpacity/100}` );
         }
         if( isPlinkoCloudsOn ) {
             linkParams.push( "clouds=true" );

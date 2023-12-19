@@ -505,6 +505,7 @@
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Choose how loud you want the sound effects. If you don’t want any sound effects, type in 0">Sound Volume</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="If you check this option, you will get announcements in chat whenever someone lands in the middle - only available if you granted chat permissions">Enable Chat Announcement</span></th>
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Choose how loud you want the sound effect that notifies you about a group plinko. If you don’t want any sound effects, type in 0">Notification Volume</span></th>
+                                                                                    <th><span data-toggle="tooltip" data-placement="left" title="How translucent the pegs should be when backgrounds are disabled">Peg Opacity</span></th>
                                                                                 </tr>
                                                                                 <tr class="hillroll-game d-none">
                                                                                     <th><span data-toggle="tooltip" data-placement="left" title="Check this option if you want to have a background behind the game. Uncheck this option if you want the background to be transparent">Background</span></th>
@@ -669,6 +670,11 @@
                                                                                     <td>
                                                                                         <div class="input-group">
                                                                                             <input type="number" class="touchspin" id="inputPlinkoNotifVolume" value="25" min="0" max="100" placeholder="Notification Volume">
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="input-group">
+                                                                                            <input type="number" class="" id="inputPlinkoPegOpacity" value="15" min="0" max="100" step="5" placeholder="Peg Opacity">
                                                                                         </div>
                                                                                     </td>
                                                                                 </tr>
@@ -1687,6 +1693,11 @@
             max: 3600,
             step: 30,
         });
+        $( "#inputPlinkoPegOpacity" ).TouchSpin({
+            min: 0,
+            max: 100,
+            step: 5,
+        });
         $( "#inputConfettiParty" ).TouchSpin({
             min: 0,
             max: 100000,
@@ -2641,6 +2652,7 @@
         let plinkoRefresh = "90";
         let plinkoGameReady = "0";
         let plinkoNotifVolume = "25";
+        let plinkoPegOpacity = "15";
         let isHillRollChatEnabled = false;
         let isHillRollOverlay = true;
         let isHillRollCloudsOn = true;
@@ -3038,6 +3050,14 @@
         });
         $( "#inputPlinkoNotifVolume" ).on( "input", ( e ) => {
             plinkoNotifVolume = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoPegOpacity" ).on( "change", ( e ) => {
+            plinkoPegOpacity = e.target.value;
+            generateLink();
+        });
+        $( "#inputPlinkoPegOpacity" ).on( "input", ( e ) => {
+            plinkoPegOpacity = e.target.value;
             generateLink();
         });
         $( "#inputEnablePlinkoCommand" ).on( "change", ( e ) => {
@@ -4574,6 +4594,7 @@
             case "plinko":
                 if( isPlinkoOverlay ) {
                     linkParams.push( "overlay=true" );
+                    linkParams.push( `pegOpacity=${plinkoPegOpacity/100}` );
                 }
                 if( isPlinkoCloudsOn ) {
                     linkParams.push( "clouds=true" );
