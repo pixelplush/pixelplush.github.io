@@ -876,7 +876,7 @@ const themeSettings = {
     },
     "pixelparachutes" : {
         game: "parachute",
-        name: "Classic",
+        name: "Classic Themes",
         page: "https://www.pixelplush.dev/parachute/index.html",
         extras: {
             "day": {
