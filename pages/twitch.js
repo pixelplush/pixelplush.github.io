@@ -3190,6 +3190,8 @@ async function buyItem( itemId ) {
             } ).then( r => r.json() );
             $( ".user-coins" ).text( account.coins );
             // populateItemList();
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
             toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
         }
     }
