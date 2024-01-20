@@ -588,31 +588,37 @@ const themeSettings = {
                 name: "valentines_brown_gold.html",
                 page: "https://www.pixelplush.dev/parachute/valentines_brown_gold.html",
                 preview: "/public/app-assets/images/games/valentines_brown_gold.gif",
+                requires: "addon_parachute_valentines_brown_gold",
             },
             "brown_pink": {
                 name: "valentines_brown_pink.html",
                 page: "https://www.pixelplush.dev/parachute/valentines_brown_pink.html",
                 preview: "/public/app-assets/images/games/valentines_brown_pink.gif",
+                requires: "addon_parachute_valentines_brown_pink",
             },
             "brown_red": {
                 name: "valentines_brown_red.html",
                 page: "https://www.pixelplush.dev/parachute/valentines_brown_red.html",
                 preview: "/public/app-assets/images/games/valentines_brown_red.gif",
+                requires: "addon_parachute_valentines_brown_red",
             },
             "white_gold": {
                 name: "valentines_white_gold.html",
                 page: "https://www.pixelplush.dev/parachute/valentines_white_gold.html",
                 preview: "/public/app-assets/images/games/valentines_white_gold.gif",
+                requires: "addon_parachute_valentines_white_gold",
             },
             "white_pink": {
                 name: "valentines_white_pink.html",
                 page: "https://www.pixelplush.dev/parachute/valentines_white_pink.html",
                 preview: "/public/app-assets/images/games/valentines_white_pink.gif",
+                requires: "addon_parachute_valentines_white_pink",
             },
             "white_red": {
                 name: "valentines_white_red.html",
                 page: "https://www.pixelplush.dev/parachute/valentines_white_red.html",
                 preview: "/public/app-assets/images/games/valentines_white_red.gif",
+                requires: "addon_parachute_valentines_white_red",
             },
         },
         preview: "/public/app-assets/images/games/valentines_white_red.gif",
@@ -621,7 +627,7 @@ const themeSettings = {
         hideTilDrop: true,
         messageFormat: "USERNAME landed for POINTS!",
         command: "",
-        requires: "addon_parachute_valentines",
+        bundle: "bundle_parachute_valentines",
     },
     "chatflakes": {
         game: "chatflakes",
@@ -2015,6 +2021,7 @@ $( "#inputEnableParachuteColor-easter-1" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     easterColors[ "easter_1" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-easter-2" ).on( "change", ( e ) => {
@@ -2029,6 +2036,7 @@ $( "#inputEnableParachuteColor-easter-2" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     easterColors[ "easter_2" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-easter-3" ).on( "change", ( e ) => {
@@ -2043,6 +2051,7 @@ $( "#inputEnableParachuteColor-easter-3" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     easterColors[ "easter_3" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-easter-4" ).on( "change", ( e ) => {
@@ -2057,6 +2066,7 @@ $( "#inputEnableParachuteColor-easter-4" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     easterColors[ "easter_4" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-easter-5" ).on( "change", ( e ) => {
@@ -2071,6 +2081,7 @@ $( "#inputEnableParachuteColor-easter-5" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     easterColors[ "easter_5" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-brown-gold" ).on( "change", ( e ) => {
@@ -2085,6 +2096,7 @@ $( "#inputEnableParachuteColor-brown-gold" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     valentinesColors[ "brown_gold" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-brown-pink" ).on( "change", ( e ) => {
@@ -2099,6 +2111,7 @@ $( "#inputEnableParachuteColor-brown-pink" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     valentinesColors[ "brown_pink" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-brown-red" ).on( "change", ( e ) => {
@@ -2113,6 +2126,7 @@ $( "#inputEnableParachuteColor-brown-red" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     valentinesColors[ "brown_red" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-white-gold" ).on( "change", ( e ) => {
@@ -2127,6 +2141,7 @@ $( "#inputEnableParachuteColor-white-gold" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     valentinesColors[ "white_gold" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-white-pink" ).on( "change", ( e ) => {
@@ -2141,6 +2156,7 @@ $( "#inputEnableParachuteColor-white-pink" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     valentinesColors[ "white_pink" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-white-red" ).on( "change", ( e ) => {
@@ -2155,6 +2171,7 @@ $( "#inputEnableParachuteColor-white-red" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     valentinesColors[ "white_red" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-rainbow" ).on( "change", ( e ) => {
@@ -2171,6 +2188,7 @@ $( "#inputEnableParachuteColor-rainbow" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     cauldronColors[ "rainbow" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-red" ).on( "change", ( e ) => {
@@ -2187,6 +2205,7 @@ $( "#inputEnableParachuteColor-red" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     cauldronColors[ "red" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-pink" ).on( "change", ( e ) => {
@@ -2203,6 +2222,7 @@ $( "#inputEnableParachuteColor-pink" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     cauldronColors[ "pink" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-orange" ).on( "change", ( e ) => {
@@ -2219,6 +2239,7 @@ $( "#inputEnableParachuteColor-orange" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     cauldronColors[ "orange" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-yellow" ).on( "change", ( e ) => {
@@ -2235,6 +2256,7 @@ $( "#inputEnableParachuteColor-yellow" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     cauldronColors[ "yellow" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-green" ).on( "change", ( e ) => {
@@ -2251,6 +2273,7 @@ $( "#inputEnableParachuteColor-green" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     cauldronColors[ "green" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-blue" ).on( "change", ( e ) => {
@@ -2267,6 +2290,7 @@ $( "#inputEnableParachuteColor-blue" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     cauldronColors[ "blue" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteColor-purple" ).on( "change", ( e ) => {
@@ -2283,6 +2307,7 @@ $( "#inputEnableParachuteColor-purple" ).on( "change", ( e ) => {
         $( "#game-preview" ).attr( "src", preview );
     }
     cauldronColors[ "purple" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
     generateLink();
 });
 $( "#inputEnableParachuteClassic-day" ).on( "change", ( e ) => {
@@ -2532,6 +2557,9 @@ function setThemeDefaults() {
                     case "pixelparachutescakes":
                         themeColors = cakeColors;
                     break;
+                    case "pixelparachutevalentines":
+                        themeColors = valentinesColors;
+                    break;
                 }
                 Object.keys( themeColors ).forEach( x => {
                     $( `#coinParachuteColor-${x}` ).hide();
@@ -2550,6 +2578,9 @@ function setThemeDefaults() {
                     break;
                     case "pixelparachutescakes":
                         themeColors = cakeColors;
+                    break;
+                    case "pixelparachutevalentines":
+                        themeColors = valentinesColors;
                     break;
                 }
                 const selectedColors = Object.keys( themeColors ).filter( x => themeColors[ x ] );
