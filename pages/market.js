@@ -88,7 +88,7 @@ ComfyTwitch.Check()
     // $( "#inputItemList" ).empty();
 
     // inputItemList
-    populateItemList();
+    populateItemList( $( "#market-search" ).val() );
 
     $( ".logout" ).on( "click", function() {
         ComfyTwitch.Logout();
@@ -426,7 +426,7 @@ async function buyItem( itemId ) {
                 }
             } ).then( r => r.json() );
             $( ".user-coins" ).text( account.coins );
-            populateItemList();
+            populateItemList( $( "#market-search" ).val() );
             toastr.success( `You got ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
             if( itemId.startsWith( "bundle" ) ) {
                 Swal.fire({
@@ -523,7 +523,7 @@ async function activateItem( itemId ) {
             }
         } ).then( r => r.json() );
         $( ".user-coins" ).text( account.coins );
-        populateItemList();
+        populateItemList( $( "#market-search" ).val() );
         // toastr.success( `Set to ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
     }
     catch( err ) {
@@ -572,7 +572,7 @@ async function giftItem( itemId ) {
                 }
             } ).then( r => r.json() );
             $( ".user-coins" ).text( account.coins );
-            populateItemList();
+            populateItemList( $( "#market-search" ).val() );
             toastr.success( `You got a code for ${items[ itemId ].name}!`, "Success", { positionClass:"toast-bottom-right", containerId:"toast-bottom-right" } );
             Swal.fire( {
                 title: result.code,
