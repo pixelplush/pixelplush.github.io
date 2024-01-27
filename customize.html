@@ -636,6 +636,38 @@
                 </div>
             `);
         
+            // Sort by selected
+            filteredCatalog.sort( ( a, b ) => {
+                let isASelected = false;
+                let isBSelected = false;
+                if( account.style &&
+                    ( account.style[ a.category || a.type ] && account.style[ a.category || a.type ] === a.id ) ) {
+                    isASelected = true;
+                }
+                else if( account.styles &&
+                    account.styles[ a.category || a.type ] && account.styles[ a.category || a.type ].includes( a.id ) ) {
+                    isASelected = true;
+                }
+                if( account.style &&
+                    ( account.style[ b.category || b.type ] && account.style[ b.category || b.type ] === b.id ) ) {
+                    isBSelected = true;
+                }
+                else if( account.styles &&
+                    account.styles[ b.category || b.type ] && account.styles[ b.category || b.type ].includes( b.id ) ) {
+                    isBSelected = true;
+                }
+                
+                if( isASelected && !isBSelected ) {
+                    return -1;
+                }
+                else if( !isASelected && isBSelected ) {
+                    return 1;
+                }
+                else {
+                    return 0;
+                }
+            } );
+        
             // Handle adding subscription items
             filteredCatalog.filter( x => !!x.subscription ).forEach( ( item, index ) => {
                 let typeBG = "primary";
