@@ -1260,10 +1260,6 @@ $( "#inputEnableParachuteHideTilDrop" ).on( "change", ( e ) => {
     isParachuteHideTilDrop = e.target.checked;
     generateLink();
 });
-$( "#inputEnableParachuteUseBeta" ).on( "change", ( e ) => {
-    isParachuteBeta = e.target.checked;
-    generateLink();
-});
 $( "#inputParachuteVolume" ).on( "change", ( e ) => {
     parachuteVolume = e.target.value;
     generateLink();
@@ -2502,11 +2498,9 @@ function setThemeDefaults() {
     gameTypes.forEach( g => $( `.${g}-game` ).addClass( "d-none" ) );
     $( `.${ themeSettings[ gameTheme ].game }-game` ).removeClass( "d-none" );
     gameTypes.forEach( g => $( `.${g}-game-extras` ).addClass( "d-none" ) );
-    $( `.parachute-game-beta` ).addClass( "d-none" );
     if( themeSettings[ gameTheme ].extras ) {
         if( gameTheme === "pixelparachutecauldron" ) {
             $( `.parachute-cauldron` ).removeClass( "d-none" );
-            $( `.parachute-game-beta` ).removeClass( "d-none" );
         }
         else if( gameTheme === "pixelparachutevalentines" ) {
             $( `.parachute-valentines` ).removeClass( "d-none" );
@@ -2731,14 +2725,12 @@ function setThemeDefaults() {
     isParachuteOverlay = themeSettings[ gameTheme ].overlay || false;
     isParachuteCloudsOn = themeSettings[ gameTheme ].clouds || false;
     isParachuteHideTilDrop = themeSettings[ gameTheme ].hideTilDrop || false;
-    isParachuteBeta = themeSettings[ gameTheme ].beta || false;
     $( "#inputEnableParachuteOverlay" ).prop( "checked", !isParachuteOverlay );
     $( "#inputEnableParachuteClouds" ).prop( "checked", isParachuteCloudsOn );
     $( "#inputEnableParachuteHideTilDrop" ).prop( "checked", isParachuteOverlay );
     $( "#inputEnableParachuteChat" ).prop( "checked", isParachuteChatEnabled );
     $( "#inputEnableParachuteCommand" ).prop( "checked", isCommandEnabled );
     $( "#inputEnableParachuteDroplets" ).prop( "checked", isDropletsEnabled );
-    $( "#inputEnableParachuteUseBeta" ).prop( "checked", isParachuteBeta );
     isPlinkoOverlay = themeSettings[ gameTheme ].overlay || false;
     isPlinkoCloudsOn = themeSettings[ gameTheme ].clouds || false;
     isPlinkoHideTilStart = themeSettings[ gameTheme ].hideTilStart || false;
@@ -2769,9 +2761,6 @@ function generateLink() {
         if( gameTheme === "pixelparachutecauldron" ) {
             const colors = Object.keys( cauldronColors ).filter( x => cauldronColors[ x ] );
             baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
-            if( isParachuteBeta ) {
-                baseLink = baseLink.replace( "/parachute", "/parachute/beta" );
-            }
             if( colors.length > 1 ) {
                 linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
             }
