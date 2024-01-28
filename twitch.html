@@ -4398,6 +4398,7 @@
         }
         
         function generateLink() {
+            if( !channelName ) { return; } // Skip link generation while channel is undefined
             let baseLink = `${themeSettings[ gameTheme ].page}?`;
             let linkParams = [];
             linkParams.push( `channel=${channelName}` );
@@ -4733,9 +4734,23 @@
                 }
                 break;
             }
+            linkParams.sort();
             // console.log( linkParams );
-            $( "#outputOverlayLink" ).val( baseLink + linkParams.join( "&" ) );
-            $( "#copy-btn" ).attr( "data-clipboard-text", baseLink + linkParams.join( "&" ) );
+            const oldLink = $( "#outputOverlayLink" ).val();
+            const newLink = baseLink + linkParams.join( "&" );
+            const hasLinkChanged = ( newLink !== oldLink );
+            if( hasLinkChanged ) {
+                $( "#outputOverlayLink" ).val( newLink );
+                $( "#copy-btn" ).attr( "data-clipboard-text", newLink );
+                if( oldLink ) {
+                    $( "#copy-btn" ).popover( {
+                        content: "Browser Source Link has changed! Click here to copy the updated link.",
+                        placement: "top",
+                        trigger: "hover focus",
+                    } );
+                    $( "#copy-btn" ).popover( "show" );
+                }
+            }
         
             if( hasRestoredSettings ) {
                 saveSettings();
