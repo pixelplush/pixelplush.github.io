@@ -969,16 +969,7 @@ const themeSettings = {
     },
 };
 const gameInstructions = {
-    "giveaway": `Host a giveaway for your viewers right within your stream!
-<pre>Example Commands:
-- Start a 5-min giveaway: !giv start 5m Super Awesome Prize
-- Start a 30-sec giveaway: !giv start 30s Quick Everyone Enter!
-- Start a No-Time giveaway: !giv start Long Giveaway
-- Viewers can enter with: !join
-- Manually Pick a Winner: !giv pick
-- Change the time limit to 1-min: !giv time 1m
-- Winner can claim the prize with: !win
-- Hide/Reset the giveaway: !giv reset</pre>`,
+    "giveaway": `Host a giveaway for your viewers right within your stream!`,
     "chatflakes": "Bring some subtle chat interaction into your stream! Turn chat messages into stream particles such as leaves, snowflaks, raindrops, and more!",
     "confetti": "One of our <a href='https://devpost.com/software/pixel-confetti' target='_blank'>Twitch Hackathon Entries</a>! Set the channel points cost of the confetti redemption to get a browser source overlay link. Setting the cost to 0 will disable the confetti. Channel rewards will be automatically added for you in your channel. Use <strong>!resetconfetti</strong> to refresh the rewards or <strong>!deleteconfetti</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
     "weather": "Our <a href='https://devpost.com/software/stream-weather' target='_blank'>Prize-Winning Twitch Overlay</a>! Set the channel points cost of each type of weather redemption to get a browser source overlay link. Setting the cost to 0 will disable that weather type. Channel rewards will be automatically added for you in your channel. Use <strong>!resetweather</strong> to refresh the rewards or <strong>!deleteweather</strong> to delete them. You can update the cost and cooldown of the redemptions on Twitch after they have been created.",
