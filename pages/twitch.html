@@ -716,6 +716,8 @@
                                                     <th><span data-toggle="tooltip" data-placement="left" title="Choose how often you want the target to reset">Refresh Timer (secs)</span></th>
                                                     <th><span data-toggle="tooltip" data-placement="left" title="Set a starting amount of time before the game will accept players">Time Til Ready (secs)</span></th>
                                                     <th><span data-toggle="tooltip" data-placement="left" title="Set the duration of auto drops after a raid or set to 0 to turn off">Raid Drop Timer (secs)</span></th>
+                                                    <th><span data-toggle="tooltip" data-placement="left" title="Check this option to only allow play when a Group Drop is active">Group Drop Only</span></th>
+                                                    <th><span data-toggle="tooltip" data-placement="left" title="Always spawn target at the horizontal % location or leave empty for random spawn">Set Target Pos (screen %)</span></th>
                                                 </tr>
                                                 <tr class="confetti-game d-none">
                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_brightred.png" alt="Bright Red"/></th>
@@ -758,6 +760,16 @@
                                                     <td>
                                                         <div class="input-group">
                                                             <input type="number" class="" id="inputParachuteRaidDrop" value="0" min="0" max="3600" step="30" placeholder="# Seconds">
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="checkbox">
+                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteQueueOnly"><label for="inputEnableParachuteQueueOnly"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="input-group">
+                                                            <input type="number" class="touchspin" id="inputParachuteTargetPos" value="" min="0" max="100" placeholder="% of Screen Width">
                                                         </div>
                                                     </td>
                                                 </tr>

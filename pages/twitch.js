@@ -1009,6 +1009,8 @@ let parachuteCPDrop = "0";
 let parachuteCPDroplets = "0";
 let parachuteCPQueue = "0";
 let parachuteNotifVolume = "25";
+let isParachuteQueueOnly = false;
+let parachuteTargetPos = "-1";
 let isPlinkoChatEnabled = false;
 let isPlinkoOverlay = true;
 let isPlinkoCloudsOn = false;
@@ -1342,6 +1344,18 @@ $( "#inputParachuteCPQueue" ).on( "change", ( e ) => {
 });
 $( "#inputParachuteCPQueue" ).on( "input", ( e ) => {
     parachuteCPQueue = e.target.value;
+    generateLink();
+});
+$( "#inputEnableParachuteQueueOnly" ).on( "change", ( e ) => {
+    isParachuteQueueOnly = e.target.checked;
+    generateLink();
+});
+$( "#inputParachuteTargetPos" ).on( "change", ( e ) => {
+    parachuteTargetPos = e.target.value;
+    generateLink();
+});
+$( "#inputParachuteTargetPos" ).on( "input", ( e ) => {
+    parachuteTargetPos = e.target.value;
     generateLink();
 });
 $( "#inputEnablePlinkoOverlay" ).on( "change", ( e ) => {
@@ -2731,6 +2745,7 @@ function setThemeDefaults() {
     $( "#inputEnableParachuteChat" ).prop( "checked", isParachuteChatEnabled );
     $( "#inputEnableParachuteCommand" ).prop( "checked", isCommandEnabled );
     $( "#inputEnableParachuteDroplets" ).prop( "checked", isDropletsEnabled );
+    $( "#inputEnableParachuteQueueOnly" ).prop( "checked", isParachuteQueueOnly );
     isPlinkoOverlay = themeSettings[ gameTheme ].overlay || false;
     isPlinkoCloudsOn = themeSettings[ gameTheme ].clouds || false;
     isPlinkoHideTilStart = themeSettings[ gameTheme ].hideTilStart || false;
@@ -2968,6 +2983,12 @@ function generateLink() {
         }
         if( parachuteNotifVolume ) {
             linkParams.push( `notifVolume=${parachuteNotifVolume}` );
+        }
+        if( isParachuteQueueOnly ) {
+            linkParams.push( `queueOnly=true` );
+        }
+        if( parachuteTargetPos && parachuteTargetPos != "-1" ) {
+            linkParams.push( `targetPos=${parachuteTargetPos}` );
         }
         linkParams.push( `oauth=${chatOAuth}` );
         if( ComfyTwitch.RefreshToken ) {
