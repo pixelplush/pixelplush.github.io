@@ -580,12 +580,12 @@ const themeSettings = {
                 preview: "/public/app-assets/images/games/drop_easter_5.gif",
                 requires: "addon_parachute_eastercotton",
             },
-            // "easter_6": {
-            //     name: "easter_cotton.html",
-            //     page: "https://www.pixelplush.dev/parachute/easter_dots.html",
-            //     preview: "/public/app-assets/images/games/drop_easter_6.gif",
-            //     requires: "addon_parachute_easterdots",
-            // },
+            "easter_6": {
+                name: "easter_dots.html",
+                page: "https://www.pixelplush.dev/parachute/easter_dots.html",
+                preview: "/public/app-assets/images/games/drop_easter_5.gif", // TODO: Replace this with actual gif
+                requires: "addon_parachute_easterdots",
+            },
         },
         preview: "/public/app-assets/images/games/drop_easter_1.gif",
         overlay: true,
