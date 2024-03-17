@@ -1280,11 +1280,13 @@
                                                                                     <th><img src="/public/app-assets/images/icon/splashpool/pool_icon_market_yellow.png" alt="Yellow"/></th>
                                                                                 </tr>
                                                                                 <tr class="parachute-game-extras parachute-easter d-none">
+                                                                                    <th>Basic</th>
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_1.png" alt="Easter-1"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_2.png" alt="Easter-2"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_3.png" alt="Easter-3"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_4.png" alt="Easter-4"/></th>
                                                                                     <th><img src="/public/app-assets/images/icon/easter/easter_icon_5.png" alt="Easter-5"/></th>
+                                                                                    <!-- <th><img src="/public/app-assets/images/icon/easter/easter_icon_6.png" alt="Easter-6"/></th> -->
                                                                                 </tr>
                                                                                 <tr class="parachute-game-extras parachute-valentines d-none">
                                                                                     <th><img src="/public/app-assets/images/icon/bunny/bunny_brown_gold.png" alt="Brown-Gold"/></th>
@@ -1399,6 +1401,11 @@
                                                                                 <tr class="parachute-game-extras parachute-easter d-none">
                                                                                     <td>
                                                                                         <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-free" checked><label for="inputEnableParachuteColor-easter-free"></label>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td>
+                                                                                        <div class="checkbox">
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-1" checked><label for="inputEnableParachuteColor-easter-1"></label>
                                                                                         </div>
                                                                                     </td>
@@ -1422,6 +1429,11 @@
                                                                                             <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-5"><label for="inputEnableParachuteColor-easter-5"></label>
                                                                                         </div>
                                                                                     </td>
+                                                                                    <!-- <td>
+                                                                                        <div class="checkbox">
+                                                                                            <input class="checkbox-input" type="checkbox" value="" id="inputEnableParachuteColor-easter-6"><label for="inputEnableParachuteColor-easter-6"></label>
+                                                                                        </div>
+                                                                                    </td> -->
                                                                                 </tr>
                                                                                 <tr class="parachute-game-extras parachute-valentines d-none">
                                                                                     <td>
@@ -2230,36 +2242,52 @@
                 command: "",
                 bundle: "bundle_parachute_pool",
             },
-            "pixelparachuteeasterpremium" : {
+            "pixelparachuteeaster" : {
                 game: "parachute",
-                name: "Easter Extra (Premium)",
+                name: "Easter (Free + Premium)",
                 page: "https://www.pixelplush.dev/parachute/easter_candy.html",
                 extras: {
+                    "easter_free" : {
+                        name: "easter.html",
+                        page: "https://www.pixelplush.dev/parachute/easter.html",
+                        preview: "/public/app-assets/images/games/drop_easter_main.gif",
+                    },
                     "easter_1": {
                         name: "easter_candy.html",
                         page: "https://www.pixelplush.dev/parachute/easter_candy.html",
                         preview: "/public/app-assets/images/games/drop_easter_1.gif",
+                        requires: "addon_parachute_eastercandy",
                     },
                     "easter_2": {
                         name: "easter_choco.html",
                         page: "https://www.pixelplush.dev/parachute/easter_choco.html",
                         preview: "/public/app-assets/images/games/drop_easter_2.gif",
+                        requires: "addon_parachute_easterchoco",
                     },
                     "easter_3": {
                         name: "easter_sweets.html",
                         page: "https://www.pixelplush.dev/parachute/easter_sweets.html",
                         preview: "/public/app-assets/images/games/drop_easter_3.gif",
+                        requires: "addon_parachute_eastersweets",
                     },
                     "easter_4": {
                         name: "easter_marshmallow.html",
                         page: "https://www.pixelplush.dev/parachute/easter_marshmallow.html",
                         preview: "/public/app-assets/images/games/drop_easter_4.gif",
+                        requires: "addon_parachute_eastermarshmallow",
                     },
                     "easter_5": {
                         name: "easter_cotton.html",
                         page: "https://www.pixelplush.dev/parachute/easter_cotton.html",
                         preview: "/public/app-assets/images/games/drop_easter_5.gif",
+                        requires: "addon_parachute_eastercotton",
                     },
+                    // "easter_6": {
+                    //     name: "easter_cotton.html",
+                    //     page: "https://www.pixelplush.dev/parachute/easter_dots.html",
+                    //     preview: "/public/app-assets/images/games/drop_easter_6.gif",
+                    //     requires: "addon_parachute_easterdots",
+                    // },
                 },
                 preview: "/public/app-assets/images/games/drop_easter_1.gif",
                 overlay: true,
@@ -2267,7 +2295,7 @@
                 hideTilDrop: true,
                 messageFormat: "USERNAME landed for POINTS!",
                 command: "",
-                requires: "addon_parachute_easter",
+                bundle: "bundle_parachute_easter",
             },
             "pixelparachutevalentines" : {
                 game: "parachute",
@@ -2520,17 +2548,6 @@
                 messageFormat: "USERNAME landed for POINTS!",
                 command: "",
                 requires: "addon_parachute_blossoms",
-            },
-            "pixelparachuteeaster" : {
-                game: "parachute",
-                name: "Easter",
-                page: "https://www.pixelplush.dev/parachute/easter.html",
-                preview: "/public/app-assets/images/games/drop_easter_main.gif",
-                overlay: true,
-                clouds: false,
-                hideTilDrop: true,
-                messageFormat: "USERNAME landed for POINTS!",
-                command: "",
             },
             "pixelparachutewinter" : {
                 game: "parachute",
@@ -2797,7 +2814,8 @@
             "white_red": false,
         };
         let easterColors = {
-            "easter_1": true,
+            "easter_free": true,
+            "easter_1": false,
             "easter_2": false,
             "easter_3": false,
             "easter_4": false,
@@ -3700,6 +3718,21 @@
             setThemeDefaults(); // Do this to reset bundle item requires
             generateLink();
         });
+        $( "#inputEnableParachuteColor-easter-free" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "easter_free" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            easterColors[ "easter_free" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
         $( "#inputEnableParachuteColor-easter-1" ).on( "change", ( e ) => {
             if( e.target.checked ) {
                 const preview = themeSettings[ gameTheme ].extras[ "easter_1" ].preview;
@@ -3772,6 +3805,21 @@
                 $( "#game-preview" ).attr( "src", preview );
             }
             easterColors[ "easter_5" ] = e.target.checked;
+            setThemeDefaults(); // Do this to reset bundle item requires
+            generateLink();
+        });
+        $( "#inputEnableParachuteColor-easter-6" ).on( "change", ( e ) => {
+            if( e.target.checked ) {
+                const preview = themeSettings[ gameTheme ].extras[ "easter_5" ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            else {
+                // Select random preview out of the selected
+                const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
+                const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+                $( "#game-preview" ).attr( "src", preview );
+            }
+            easterColors[ "easter_6" ] = e.target.checked;
             setThemeDefaults(); // Do this to reset bundle item requires
             generateLink();
         });
@@ -4209,7 +4257,7 @@
                 else if( gameTheme === "pixelparachutevalentines" ) {
                     $( `.parachute-valentines` ).removeClass( "d-none" );
                 }
-                else if( gameTheme === "pixelparachuteeasterpremium" ) {
+                else if( gameTheme === "pixelparachuteeaster" ) {
                     $( `.parachute-easter` ).removeClass( "d-none" );
                 }
                 else if( gameTheme === "pixelparachutesplashpool" ) {
@@ -4243,6 +4291,9 @@
                             case "pixelparachutesplashpool":
                                 themeColors = splashpoolColors;
                             break;
+                            case "pixelparachuteeaster":
+                                themeColors = easterColors;
+                            break;
                             case "pixelparachutescakes":
                                 themeColors = cakeColors;
                             break;
@@ -4264,6 +4315,9 @@
                         switch( gameTheme ) {
                             case "pixelparachutesplashpool":
                                 themeColors = splashpoolColors;
+                            break;
+                            case "pixelparachuteeaster":
+                                themeColors = easterColors;
                             break;
                             case "pixelparachutescakes":
                                 themeColors = cakeColors;
@@ -4368,7 +4422,7 @@
                     const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
                     $( "#game-preview" ).attr( "src", preview );
                 }
-                else if( gameTheme === "pixelparachuteeasterpremium" ) {
+                else if( gameTheme === "pixelparachuteeaster" ) {
                     // Select random preview out of the selected
                     let colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
                     if( colors.length === 0 ) {
@@ -4477,7 +4531,7 @@
                         linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
                     }
                 }
-                else if( gameTheme === "pixelparachuteeasterpremium" ) {
+                else if( gameTheme === "pixelparachuteeaster" ) {
                     const colors = Object.keys( easterColors ).filter( x => easterColors[ x ] );
                     baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
                     if( colors.length > 1 ) {
