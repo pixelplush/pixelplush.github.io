@@ -404,14 +404,6 @@ $( "#link-showhide" ).on( "click", function() {
 
 const gameTypes = [ "giveaway", "chatflakes", "confetti", "weather", "hillroll", "maze", "parachute", "plinko" ];
 const themeSettings = {
-    "giveaway": {
-        game: "giveaway",
-        name: "Default Theme",
-        page: "https://www.pixelplush.dev/giveaway/index.html",
-        preview: "/public/app-assets/images/games/giveaway_basic.gif",
-        messageFormat: "",
-        // requires: "addon_giveaway",
-    },
     // "giveawayhue": {
     //     game: "giveaway",
     //     name: "Custom Color Giveaway (Premium)",
@@ -420,6 +412,64 @@ const themeSettings = {
     //     messageFormat: "",
     //     // requires: "addon_giveaway_hue",
     // },
+    "giveawaycolors" : {
+        game: "giveaway",
+        name: "Colorful Giveaway (Premium)",
+        page: "https://www.pixelplush.dev/giveaway/blue.html",
+        extras: {
+            "blue" : {
+                name: "blue.html",
+                page: "https://www.pixelplush.dev/giveaway/blue.html",
+                preview: "/public/app-assets/images/games/giveaway_basic.gif",
+                requires: "addon_giveaway_blue",
+            },
+            "bw" : {
+                name: "bw.html",
+                page: "https://www.pixelplush.dev/giveaway/bw.html",
+                preview: "/public/app-assets/images/games/giveaway_basic.gif",
+                requires: "addon_giveaway_bw",
+            },
+            "green" : {
+                name: "green.html",
+                page: "https://www.pixelplush.dev/giveaway/green.html",
+                preview: "/public/app-assets/images/games/giveaway_basic.gif",
+                requires: "addon_giveaway_green",
+            },
+            "orange" : {
+                name: "orange.html",
+                page: "https://www.pixelplush.dev/giveaway/orange.html",
+                preview: "/public/app-assets/images/games/giveaway_basic.gif",
+                requires: "addon_giveaway_orange",
+            },
+            "pink" : {
+                name: "pink.html",
+                page: "https://www.pixelplush.dev/giveaway/pink.html",
+                preview: "/public/app-assets/images/games/giveaway_basic.gif",
+                requires: "addon_giveaway_pink",
+            },
+            "purple" : {
+                name: "purple.html",
+                page: "https://www.pixelplush.dev/giveaway/purple.html",
+                preview: "/public/app-assets/images/games/giveaway_basic.gif",
+                requires: "addon_giveaway_purple",
+            },
+            "red" : {
+                name: "red.html",
+                page: "https://www.pixelplush.dev/giveaway/red.html",
+                preview: "/public/app-assets/images/games/giveaway_basic.gif",
+                requires: "addon_giveaway_red",
+            },
+            "yellow" : {
+                name: "yellow.html",
+                page: "https://www.pixelplush.dev/giveaway/yellow.html",
+                preview: "/public/app-assets/images/games/giveaway_basic.gif",
+                requires: "addon_giveaway_yellow",
+            },
+        },
+        preview: "/public/app-assets/images/games/giveaway_basic.gif",
+        messageFormat: "",
+        bundle: "bundle_giveaway_colors",
+    },
     "giveawayblossoms": {
         game: "giveaway",
         name: "Blossoms Giveaway (Premium)",
@@ -435,6 +485,14 @@ const themeSettings = {
         preview: "/public/app-assets/images/games/giveaway_autumn.gif",
         messageFormat: "",
         requires: "addon_giveaway_autumn",
+    },
+    "giveaway": {
+        game: "giveaway",
+        name: "PixelPlush Theme (Free)",
+        page: "https://www.pixelplush.dev/giveaway/index.html",
+        preview: "/public/app-assets/images/games/giveaway_basic.gif",
+        messageFormat: "",
+        // requires: "addon_giveaway",
     },
     "pixelparachutescakes" : {
         game: "parachute",
@@ -1140,6 +1198,16 @@ let classicColors = {
     "day": true,
     "night": false,
     "retro": false,
+};
+let giveawayColors = {
+    "blue": true,
+    "bw": false,
+    "green": false,
+    "orange": false,
+    "pink": false,
+    "purple": false,
+    "red": false,
+    "yellow": false,
 };
 let flakesNth = "1";
 let flakesNum = "3";
@@ -2393,6 +2461,143 @@ $( "#inputEnableParachuteClassic-retro" ).on( "change", ( e ) => {
     generateLink();
 });
 
+$( "#inputEnableGiveawayColor-blue" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "blue" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    // uncheck other giveaway colors for now because it's a radio button
+    Object.keys( giveawayColors ).forEach( x => giveawayColors[ x ] = false );
+    giveawayColors[ "blue" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableGiveawayColor-bw" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "bw" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    // uncheck other giveaway colors for now because it's a radio button
+    Object.keys( giveawayColors ).forEach( x => giveawayColors[ x ] = false );
+    giveawayColors[ "bw" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableGiveawayColor-green" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "green" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    // uncheck other giveaway colors for now because it's a radio button
+    Object.keys( giveawayColors ).forEach( x => giveawayColors[ x ] = false );
+    giveawayColors[ "green" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableGiveawayColor-orange" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "orange" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    // uncheck other giveaway colors for now because it's a radio button
+    Object.keys( giveawayColors ).forEach( x => giveawayColors[ x ] = false );
+    giveawayColors[ "orange" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableGiveawayColor-pink" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "pink" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    // uncheck other giveaway colors for now because it's a radio button
+    Object.keys( giveawayColors ).forEach( x => giveawayColors[ x ] = false );
+    giveawayColors[ "pink" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableGiveawayColor-purple" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "purple" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    // uncheck other giveaway colors for now because it's a radio button
+    Object.keys( giveawayColors ).forEach( x => giveawayColors[ x ] = false );
+    giveawayColors[ "purple" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableGiveawayColor-red" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "red" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    // uncheck other giveaway colors for now because it's a radio button
+    Object.keys( giveawayColors ).forEach( x => giveawayColors[ x ] = false );
+    giveawayColors[ "red" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+$( "#inputEnableGiveawayColor-yellow" ).on( "change", ( e ) => {
+    if( e.target.checked ) {
+        const preview = themeSettings[ gameTheme ].extras[ "yellow" ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    else {
+        // Select random preview out of the selected
+        const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+        const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+        $( "#game-preview" ).attr( "src", preview );
+    }
+    // uncheck other giveaway colors for now because it's a radio button
+    Object.keys( giveawayColors ).forEach( x => giveawayColors[ x ] = false );
+    giveawayColors[ "yellow" ] = e.target.checked;
+    setThemeDefaults(); // Do this to reset bundle item requires
+    generateLink();
+});
+
 $( "#inputEnableConfettiRed" ).on( "change", ( e ) => {
     confettiColors[ "red" ] = e.target.checked;
     generateLink();
@@ -2567,6 +2772,9 @@ function setThemeDefaults() {
         else if( gameTheme === "pixelparachutes" ) {
             $( `.parachute-classic` ).removeClass( "d-none" );
         }
+        else if( gameTheme === "giveawaycolors" ) {
+            $( `.giveaway-colors` ).removeClass( "d-none" );
+        }
         else {
             $( `.${ themeSettings[ gameTheme ].game }-game-extras` ).removeClass( "d-none" );
         }
@@ -2598,6 +2806,9 @@ function setThemeDefaults() {
                     case "pixelparachutevalentines":
                         themeColors = valentinesColors;
                     break;
+                    case "giveawaycolors":
+                        themeColors = giveawayColors;
+                    break;
                 }
                 Object.keys( themeColors ).forEach( x => {
                     $( `#coinParachuteColor-${x}` ).hide();
@@ -2622,6 +2833,9 @@ function setThemeDefaults() {
                     break;
                     case "pixelparachutevalentines":
                         themeColors = valentinesColors;
+                    break;
+                    case "giveawaycolors":
+                        themeColors = giveawayColors;
                     break;
                 }
                 const selectedColors = Object.keys( themeColors ).filter( x => themeColors[ x ] );
@@ -2756,6 +2970,15 @@ function setThemeDefaults() {
             const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
             $( "#game-preview" ).attr( "src", preview );
         }
+        else if( gameTheme === "giveawaycolors" ) {
+            // Select random preview out of the selected
+            let colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+            if( colors.length === 0 ) {
+                colors = Object.keys( giveawayColors );
+            }
+            const preview = themeSettings[ gameTheme ].extras[ colors[ Math.floor( Math.random() * colors.length ) ] ].preview;
+            $( "#game-preview" ).attr( "src", preview );
+        }
         else {
         }
     }
@@ -2856,6 +3079,13 @@ function generateLink() {
             if( colors.length > 1 ) {
                 linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
             }
+        }
+        else if( gameTheme === "giveawaycolors" ) {
+            const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+            baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
+            // if( colors.length > 1 ) {
+            //     linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
+            // }
         }
         else {
         }
