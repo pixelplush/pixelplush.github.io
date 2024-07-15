@@ -3081,7 +3081,11 @@ function generateLink() {
             }
         }
         else if( gameTheme === "giveawaycolors" ) {
-            const colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+            let colors = Object.keys( giveawayColors ).filter( x => giveawayColors[ x ] );
+            if( colors.length === 0 ) {
+                colors = Object.keys( giveawayColors );
+            }
+            // console.log( "COLORS", giveawayColors, colors, gameTheme, themeSettings[ gameTheme ] );
             baseLink = `${themeSettings[ gameTheme ].extras[ colors[ 0 ] ].page}?`;
             // if( colors.length > 1 ) {
             //     linkParams.push( `variations=${colors.map( x => themeSettings[ gameTheme ].extras[ x ].name )}` );
