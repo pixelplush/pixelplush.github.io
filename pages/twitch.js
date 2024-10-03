@@ -15,9 +15,9 @@ $( ".additional-permissions" ).hide();
 $( ".addon-required" ).hide();
 
 $( "#inputParachuteRefresh" ).TouchSpin({
-    min: 60,
+    min: 1,
     max: 3600,
-    step: 30,
+    step: 5,
 });
 $( "#inputParachuteGameReady" ).TouchSpin({
     min: 0,
@@ -1064,7 +1064,7 @@ let isParachuteOverlay = true;
 let isParachuteCloudsOn = false;
 let isParachuteHideTilDrop = false;
 let parachuteVolume = "25";
-let parachuteRefresh = "90";
+let parachuteRefresh = "30";
 let parachuteGameReady = "0";
 let parachuteRaidDrop = "0";
 let parachuteCommand = "";
