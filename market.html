@@ -536,6 +536,7 @@
             "29788274": "maaya",
         };
         let twitchSubs = {};
+        let twitchToken = null;
         
         $( ".not-logged-in" ).show();
         $( ".logged-in" ).hide();
@@ -559,6 +560,8 @@
                     if( account.error ) {
                         throw "Login Error";
                     }
+        
+                    twitchToken = result.token; // Store this token for paypal requests
         
                     $( ".not-logged-in" ).hide();
                     $( ".logged-in" ).show();
@@ -930,7 +933,7 @@
                     let result = await fetch( `${plushApiUrl}/shop/buy`, {
                         method: "POST",
                         headers: {
-                            Twitch: ComfyTwitch.Token,
+                            Twitch: twitchToken || ComfyTwitch.Token,
                         },
                         body: JSON.stringify( {
                             item: itemId
@@ -944,7 +947,7 @@
         
                     account = await fetch( `${plushScoreUrl}/accounts`, {
                         headers: {
-                            Twitch: ComfyTwitch.Token
+                            Twitch: twitchToken || ComfyTwitch.Token
                         }
                     } ).then( r => r.json() );
                     $( ".user-coins" ).text( account.coins );
@@ -1027,7 +1030,7 @@
                 let result = await fetch( `${plushScoreUrl}/accounts/design`, {
                     method: "POST",
                     headers: {
-                        Twitch: ComfyTwitch.Token,
+                        Twitch: twitchToken || ComfyTwitch.Token,
                     },
                     body: JSON.stringify( {
                         item: itemId
@@ -1041,7 +1044,7 @@
         
                 account = await fetch( `${plushScoreUrl}/accounts`, {
                     headers: {
-                        Twitch: ComfyTwitch.Token
+                        Twitch: twitchToken || ComfyTwitch.Token
                     }
                 } ).then( r => r.json() );
                 $( ".user-coins" ).text( account.coins );
@@ -1075,7 +1078,7 @@
                     let result = await fetch( `${plushApiUrl}/shop/buy`, {
                         method: "POST",
                         headers: {
-                            Twitch: ComfyTwitch.Token,
+                            Twitch: twitchToken || ComfyTwitch.Token,
                         },
                         body: JSON.stringify( {
                             item: itemId,
@@ -1090,7 +1093,7 @@
         
                     account = await fetch( `${plushScoreUrl}/accounts`, {
                         headers: {
-                            Twitch: ComfyTwitch.Token
+                            Twitch: twitchToken || ComfyTwitch.Token
                         }
                     } ).then( r => r.json() );
                     $( ".user-coins" ).text( account.coins );
@@ -1161,7 +1164,7 @@
                 transaction = await fetch( `${plushApiUrl}/paypal/request`, {
                     method: "POST",
                     headers: {
-                        Twitch: ComfyTwitch.Token
+                        Twitch: twitchToken || ComfyTwitch.Token
                     },
                     body: JSON.stringify( {
                         coins: orderAmount
@@ -1169,7 +1172,7 @@
                 } ).then( r => r.json() );
                 if( !transaction.success ) {
                     console.log( transaction );
-                    toastr.error( "Sorry, there seems to be an error...", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                    toastr.error( "Sorry, error starting the PayPal request...", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                     throw new Error( "Transaction Error" );
                 }
                 $("#coin-buy").modal("hide");
@@ -1216,7 +1219,7 @@
                         let itemStatus = await fetch( `${plushApiUrl}/paypal/waiting`, {
                             method: "POST",
                             headers: {
-                                Twitch: ComfyTwitch.Token
+                                Twitch: twitchToken || ComfyTwitch.Token
                             },
                             body: JSON.stringify( {
                                 coins: orderAmount,
@@ -1313,7 +1316,7 @@
                 }
                 catch( e ) {
                     console.log( "Error", e );
-                    toastr.error( "Sorry, there seems to be an error..." + e, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                    toastr.error( "Sorry, there was an error approving the request" + e.message, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                     throw new Error( "Transaction Error" );
                 }
             },
