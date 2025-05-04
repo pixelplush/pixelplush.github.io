@@ -1173,7 +1173,7 @@
                 if( !transaction.success ) {
                     console.log( transaction );
                     toastr.error( "Sorry, error starting the PayPal request...", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
-                    throw new Error( "Transaction Error" );
+                    throw new Error( "Transaction Create Failed" );
                 }
                 $("#coin-buy").modal("hide");
                 return actions.order.create({
@@ -1317,12 +1317,12 @@
                 catch( e ) {
                     console.log( "Error", e );
                     toastr.error( "Sorry, there was an error approving the request" + e.message, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
-                    throw new Error( "Transaction Error" );
+                    throw new Error( "Transaction Approval Failed" );
                 }
             },
             onError: function(data) {
                 console.log( "Error", data );
-                toastr.error( "Sorry, there seems to be an error..." + data, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                toastr.error( "ERROR:" + data, "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                 throw new Error( "Transaction Error" );
             }
         }).render('#paypal-button-container');
