@@ -4954,16 +4954,16 @@
                     linkParams.push( "noBoss=true" );
                 }
                 if( isChatEnabled && chatOAuth ) {
-                    linkParams.push( `oauth=${chatOAuth}` );
                     linkParams.push( `messageFormat=${messageFormat}` );
-                    if( ComfyTwitch.RefreshToken ) {
-                        linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
-                    }
                 }
                 linkParams.push( `bosses=${bossCount}` );
                 linkParams.push( `bossEffect=${bossEffect}` );
                 linkParams.push( `prizes=${prizeCount}` );
                 linkParams.push( `traps=${trapCount}` );
+                linkParams.push( `oauth=${chatOAuth}` );
+                if( ComfyTwitch.RefreshToken ) {
+                    linkParams.push( `refreshToken=${ComfyTwitch.RefreshToken}` );
+                }
                 break;
             case "parachute":
                 if( isParachuteOverlay ) {
