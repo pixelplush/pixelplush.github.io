@@ -54,56 +54,75 @@ ComfyTwitch.Check()
                 window.location.reload();
             });
 
-            let receipts = await fetch( `${plushScoreUrl}/transactions/user`, {
-                headers: {
-                    Twitch: result.token
-                }
-            } ).then( r => r.json() );
-
-            // console.log( receipts );
-
+            // Use shared.js for common functionality
             let transactions = [];
 
-            if( receipts.from ) {
-                receipts.from.forEach( x => {
-                    transactions.push({
-                        date: x.createdAt,
-                        note: `Item Redeem`,
-                        description: `${items[ x.info.item ].name}`,
-                        amount: `${-( x.amount || 0)}`,
-                        status: x.status
-                    });
-                });
-            }
-            if( receipts.to ) {
-                receipts.to.forEach( x => {
-                    transactions.push({
-                        date: x.createdAt,
-                        note: `Coin Purchase`,
-                        description: `${x.info.coins} Coins`,
-                        amount: `+${x.amount || 0}`,
-                        status: x.status
-                    });
-                });
-            }
+            PlushAuth.init()
+            .then(async authResult => {
+                if(authResult.authenticated) {
+                    try {
+                        // Get catalog and items
+                        const catalogData = await PlushAuth.fetchCatalog();
+                        items = catalogData.items;
 
-            // console.log( transactions );
+                        // Get transaction data
+                        let receipts = await PlushAuth.fetchTransactions();
 
-            usersTable = $("#transactions-list-datatable").DataTable({
-                responsive: true,
-                "data": transactions,
-                "columns": [
-                    { "data": "date", render: function( data, type ) { return type === "sort" ? data : moment( data ).format( "llll" ); } },
-                    { "data": "note" },
-                    { "data": "description" },
-                    { "data": "amount" },
-                    { "data": "status", render: function( data, type ) {
-                        return `<span class="badge badge-light-${data === "complete" ? "success" : "warning"}">${data}</span>`;
-                    } },
-                ],
-                "order": [
-                    [ 0, "desc" ]
-                ],
+                        // console.log(receipts);
+
+                        let transactions = [];
+
+                        if(receipts.from) {
+                            receipts.from.forEach(x => {
+                                transactions.push({
+                                    date: x.createdAt,
+                                    note: `Item Redeem`,
+                                    description: `${items[x.info.item].name}`,
+                                    amount: `${-(x.amount || 0)}`,
+                                    status: x.status
+                                });
+                            });
+                        }
+                        if(receipts.to) {
+                            receipts.to.forEach(x => {
+                                transactions.push({
+                                    date: x.createdAt,
+                                    note: `Coin Purchase`,
+                                    description: `${x.info.coins} Coins`,
+                                    amount: `+${x.amount || 0}`,
+                                    status: x.status
+                                });
+                            });
+                        }
+
+                        // console.log(transactions);
+
+                        usersTable = $("#transactions-list-datatable").DataTable({
+                            responsive: true,
+                            "data": transactions,
+                            "columns": [
+                                { "data": "date", render: function(data, type) { return type === "sort" ? data : PlushHelpers.formatDate(data); } },
+                                { "data": "note" },
+                                { "data": "description" },
+                                { "data": "amount" },
+                                { "data": "status", render: function(data, type) {
+                                    return `<span class="badge badge-light-${data === "complete" ? "success" : "warning"}">${data}</span>`;
+                                } },
+                            ],
+                            "order": [
+                                [ 0, "desc" ]
+                            ],
+                        });
+                    }
+                    catch(error) {
+                        // TODO: Auth Failed
+                        console.log( "Auth Validate Failed", error );
+                    }
+                }
+                else {
+                    $( ".not-logged-in" ).show();
+                    $( ".logged-in" ).hide();
+                }
             });
         }
         catch( error ) {

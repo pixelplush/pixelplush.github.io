@@ -1,0 +1,66 @@
+<!-- HTML Template with shared.js include -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelPlush - Example</title>
+    
+    <!-- Include jQuery and other common libraries -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    
+    <!-- Include ComfyTwitch -->
+    <script src="/public/comfytwitch.min.js"></script>
+    
+    <!-- Include shared PixelPlush code -->
+    <script src="/js/shared.js"></script>
+</head>
+<body>
+    <!-- Login/Logout UI -->
+    <div class="not-logged-in">
+        <!-- Login Button -->
+        <button onclick="ComfyTwitch.Login(['user:read:email'])">Login with Twitch</button>
+    </div>
+    
+    <div class="logged-in">
+        <!-- Account Info -->
+        <div class="user-info">
+            <img class="account-image" src="" alt="Profile">
+            <span class="user-name"></span>
+            <span class="user-coins"></span>
+            <button class="logout">Logout</button>
+        </div>
+        
+        <!-- Page-specific content goes here -->
+        <div id="page-content">
+            <!-- Your page content -->
+        </div>
+    </div>
+    
+    <!-- Page-specific JavaScript -->
+    <script>
+        // Use PlushAuth to handle authentication
+        PlushAuth.init()
+        .then(async authResult => {
+            if(authResult.authenticated) {
+                try {
+                    // Your page-specific code here
+                    console.log("Authenticated as:", authResult.account.username);
+                    
+                    // Example: get parameters
+                    const channelName = PlushHelpers.getParam("channel");
+                    if(channelName) {
+                        console.log("Channel name:", channelName);
+                    }
+                    
+                    // Additional functionality for this specific page
+                } 
+                catch(error) {
+                    console.log("Error:", error);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
