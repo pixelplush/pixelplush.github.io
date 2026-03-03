@@ -1,27 +1,33 @@
 {
-  "name": "pixelplushwebsite",
-  "version": "1.0.0",
-  "description": "PixelPlush Website",
-  "main": "index.js",
-  "dependencies": {
-    "webwebweb": "^1.1.10"
-  },
-  "devDependencies": {},
+  "name": "pixelplush-website",
+  "version": "2.0.0",
+  "private": true,
+  "description": "PixelPlush Website - Twitch Stream Overlay Games",
   "scripts": {
-    "build": "node generatePages.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build:legacy": "node generatePages.js"
+  },
+  "dependencies": {
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/instafluff/PixelPlushWebsite.git"
+    "url": "git+https://github.com/pixelplush/pixelplush.github.io.git"
   },
-  "keywords": [
-    "PixelPlush"
-  ],
   "author": "Instafluff",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/instafluff/PixelPlushWebsite/issues"
-  },
-  "homepage": "https://github.com/instafluff/PixelPlushWebsite#readme"
+  "license": "MIT"
 }

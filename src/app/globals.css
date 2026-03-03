@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+:root {
+  --color-pp-purple: #7c3aed;
+  --color-pp-pink: #ec4899;
+  --color-pp-yellow: #facc15;
+  --color-pp-blue: #3b82f6;
+  --color-pp-dark: #1a1a2e;
+  --color-pp-darker: #0f0f1a;
+  --color-pp-card: #16213e;
+  --color-pp-text: #e2e8f0;
+}
+
+/* Pixel art rendering */
+.pixelated {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
