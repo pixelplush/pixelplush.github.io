@@ -64,4 +64,10 @@ module.exports =
         "name": "Status",
         "menu": "normal"
     },
+    "troubleshoot": {
+        "name": "Troubleshoot",
+        "link": "Troubleshoot",
+        "icon": `<i class="bx bx-wrench"></i>`,
+        "menu": "normal"
+    },
 }
