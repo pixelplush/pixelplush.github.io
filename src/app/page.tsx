@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { GameCard } from "@/components/GameCard";
+import { assetPath } from "@/lib/assetPath";
 
 const games = [
   {
@@ -203,7 +204,7 @@ export default function HomePage() {
           <div key={game.id} className="pp-card overflow-hidden flex flex-col">
             <div className="aspect-video relative">
               <Image
-                src={game.image}
+                src={assetPath(game.image)}
                 alt={game.name}
                 fill
                 className="object-cover"

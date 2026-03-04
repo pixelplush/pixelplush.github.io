@@ -3,6 +3,7 @@
 import { useAuth } from '@/lib/auth';
 import Image from 'next/image';
 import { useEffect, useState, useMemo } from 'react';
+import { assetPath } from '@/lib/assetPath';
 
 const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
 
@@ -116,7 +117,7 @@ export default function MarketPage() {
         <p className="text-slate-400">Browse characters, pets, outfits, and more for your PixelPlush games.</p>
         {isLoggedIn && account && (
           <p className="mt-2 text-sm text-yellow-400">
-            <Image src="/app-assets/images/icon/plush_coin.gif" alt="coins" width={20} height={20} className="pixelated mr-1 inline" unoptimized />
+            <Image src={assetPath("/app-assets/images/icon/plush_coin.gif")} alt="coins" width={20} height={20} className="pixelated mr-1 inline" unoptimized />
             {account.coins} coins
           </p>
         )}
@@ -160,7 +161,7 @@ export default function MarketPage() {
                   </span>
                 )}
                 <div className="mb-2 text-3xl font-bold text-white">
-                  <Image src="/app-assets/images/icon/plush_coin.gif" alt="coins" width={28} height={28} className="pixelated mr-2 inline" unoptimized />
+                  <Image src={assetPath("/app-assets/images/icon/plush_coin.gif")} alt="coins" width={28} height={28} className="pixelated mr-2 inline" unoptimized />
                   {pkg.coins.toLocaleString()}
                 </div>
                 <div className="mb-4 text-lg text-slate-400">{pkg.price}</div>
@@ -243,7 +244,7 @@ export default function MarketPage() {
                         <span className="text-xs text-green-400">Owned</span>
                       ) : (
                         <span className="text-xs text-slate-400">
-                          <Image src="/app-assets/images/icon/plush_coin.gif" alt="" width={14} height={14} className="pixelated mr-0.5 inline" unoptimized />
+                          <Image src={assetPath("/app-assets/images/icon/plush_coin.gif")} alt="" width={14} height={14} className="pixelated mr-0.5 inline" unoptimized />
                           {item.sale ? (
                             <>
                               <span className="line-through">{item.cost}</span>{' '}

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import { assetPath } from '@/lib/assetPath';
 
 export const metadata: Metadata = {
   title: 'Links',
@@ -81,7 +82,7 @@ export default function LinksPage() {
           {banners.map((banner) => (
             <div key={banner.src} className="overflow-hidden rounded-lg border border-white/5">
               <Image
-                src={banner.src}
+                src={assetPath(banner.src)}
                 alt={banner.alt}
                 width={800}
                 height={200}

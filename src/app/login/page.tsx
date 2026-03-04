@@ -4,6 +4,7 @@ import { useAuth } from '@/lib/auth';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import { assetPath } from '@/lib/assetPath';
 
 const screenshots = [
   '/app-assets/images/games/pixelparachuteeaster.gif',
@@ -15,7 +16,7 @@ const screenshots = [
 export default function LoginPage() {
   const { isLoggedIn, isLoading, login } = useAuth();
   const router = useRouter();
-  const [randomImage] = useState(() => screenshots[Math.floor(Math.random() * screenshots.length)]);
+  const [randomImage] = useState(() => assetPath(screenshots[Math.floor(Math.random() * screenshots.length)]));
 
   useEffect(() => {
     if (!isLoading && isLoggedIn) {
@@ -29,7 +30,7 @@ export default function LoginPage() {
         <div className="grid md:grid-cols-2">
           {/* Left — Login */}
           <div className="flex flex-col items-center justify-center p-8 md:p-12">
-            <Image src="/app-assets/images/logo/logo.png" alt="PixelPlush" width={64} height={64} className="pixelated mb-6" />
+            <Image src={assetPath("/app-assets/images/logo/logo.png")} alt="PixelPlush" width={64} height={64} className="pixelated mb-6" />
             <h1 className="mb-2 text-2xl font-bold text-white text-center">Log Into PixelPlush</h1>
             <p className="mb-8 text-sm text-slate-400 text-center">Sign in with your Twitch account to customize your games, buy items, and track your scores.</p>
 

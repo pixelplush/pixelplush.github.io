@@ -137,7 +137,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   return (
     <AuthContext.Provider value={{ isLoading, isLoggedIn, token, account, login, logout }}>
       <Script
-        src="/comfytwitch.min.js"
+        src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/comfytwitch.min.js`}
         strategy="afterInteractive"
         onLoad={() => setScriptLoaded(true)}
         onReady={() => setScriptLoaded(true)}

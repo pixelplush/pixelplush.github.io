@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "@/lib/auth";
+import { assetPath } from "@/lib/assetPath";
 
 export function Header() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
@@ -27,18 +28,20 @@ export function Header() {
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-2">
             <Image
-              src="/app-assets/images/logo/logo.png"
+              src={assetPath("/app-assets/images/logo/logo.png")}
               alt="PixelPlush"
               width={36}
               height={36}
               className="pixelated"
+              unoptimized
             />
             <Image
-              src="/app-assets/images/logo/text.png"
+              src={assetPath("/app-assets/images/logo/text.png")}
               alt="PixelPlush"
               width={120}
               height={24}
               className="hidden sm:block"
+              unoptimized
             />
           </Link>
           <span className="hidden lg:inline-flex items-center gap-1 text-xs text-[var(--color-pp-text)]">

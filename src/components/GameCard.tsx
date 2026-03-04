@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { assetPath } from "@/lib/assetPath";
 
 interface GameCardProps {
   game: {
@@ -36,7 +37,7 @@ export function GameCard({ game }: GameCardProps) {
       {/* Carousel image */}
       <div className="relative aspect-video overflow-hidden bg-black/30">
         <Image
-          src={game.images[currentImage]}
+          src={assetPath(game.images[currentImage])}
           alt={game.name}
           fill
           className="object-cover"

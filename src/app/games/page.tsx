@@ -4,6 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import { Suspense } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { assetPath } from '@/lib/assetPath';
 
 const games = [
   {
@@ -112,7 +113,7 @@ function GamesContent() {
           {/* Hero image */}
           <div className="relative h-64 bg-gradient-to-br from-purple-900/40 to-blue-900/40 flex items-center justify-center">
             <Image
-              src={selectedGame.images[0]}
+              src={assetPath(selectedGame.images[0])}
               alt={selectedGame.name}
               width={400}
               height={250}
@@ -136,7 +137,7 @@ function GamesContent() {
                 <div className="flex flex-wrap gap-3">
                   {selectedGame.images.map((img, i) => (
                     <div key={i} className="h-20 w-20 overflow-hidden rounded-lg border border-[var(--color-pp-border)]">
-                      <Image src={img} alt={`Theme ${i + 1}`} width={80} height={80} className="pixelated h-full w-full object-cover" unoptimized />
+                      <Image src={assetPath(img)} alt={`Theme ${i + 1}`} width={80} height={80} className="pixelated h-full w-full object-cover" unoptimized />
                     </div>
                   ))}
                 </div>
@@ -181,7 +182,7 @@ function GamesContent() {
           >
             <div className="mb-4 flex h-40 items-center justify-center overflow-hidden rounded-lg bg-black/20">
               <Image
-                src={game.images[0]}
+                src={assetPath(game.images[0])}
                 alt={game.name}
                 width={200}
                 height={150}
