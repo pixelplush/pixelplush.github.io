@@ -114,14 +114,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setTimeout(() => {
         if (window.ComfyTwitch) {
           localStorage.setItem('redirectPage', window.location.href);
-          const baseUrl = window.location.origin;
+          const baseUrl = `${window.location.origin}${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}`;
           window.ComfyTwitch.Login(TWITCH_CLIENT_ID, `${baseUrl}/redirect/`, [], 'code');
         }
       }, 500);
       return;
     }
     localStorage.setItem('redirectPage', window.location.href);
-    const baseUrl = window.location.origin;
+    const baseUrl = `${window.location.origin}${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}`;
     window.ComfyTwitch.Login(TWITCH_CLIENT_ID, `${baseUrl}/redirect/`, [], 'code');
   }, []);
 
