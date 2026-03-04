@@ -16,7 +16,12 @@ export default function RedirectPage() {
         // Convert absolute URL to relative path for Next.js router
         try {
           const url = new URL(redirect);
-          router.push(url.pathname);
+          const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? '';
+          // Strip basePath prefix since router.push() adds it automatically
+          const path = basePath && url.pathname.startsWith(basePath)
+            ? url.pathname.slice(basePath.length) || '/'
+            : url.pathname;
+          router.push(path);
         } catch {
           router.push('/');
         }
