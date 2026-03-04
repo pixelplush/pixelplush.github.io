@@ -120,7 +120,7 @@ export function Header() {
           ) : (
             <button
               onClick={login}
-              className="btn-primary rounded px-4 py-2 text-sm font-semibold text-white"
+              className="btn btn-primary rounded px-4 py-2 text-sm font-semibold"
             >
               Log in with Twitch
             </button>

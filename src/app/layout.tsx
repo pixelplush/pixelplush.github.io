@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Rubik, IBM_Plex_Sans } from "next/font/google";
+import { Fredoka, IBM_Plex_Sans } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -7,7 +7,7 @@ import { Sidebar } from "@/components/Sidebar";
 import { Analytics } from "@/components/Analytics";
 import { AuthProvider } from "@/lib/auth";
 
-const rubik = Rubik({ subsets: ["latin"], variable: "--font-rubik" });
+const fredoka = Fredoka({ subsets: ["latin"], variable: "--font-fredoka" });
 const ibm = IBM_Plex_Sans({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
@@ -57,7 +57,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${rubik.variable} ${ibm.variable} font-sans antialiased text-[var(--color-pp-text)] bg-[var(--color-pp-bg)] min-h-screen`}>
+      <body className={`${fredoka.variable} ${ibm.variable} font-sans antialiased text-[var(--color-pp-text)] bg-[var(--color-pp-bg)] min-h-screen`}>
         <AuthProvider>
           <Analytics />
           <div className="flex bg-[var(--color-pp-bg)] min-h-screen relative">

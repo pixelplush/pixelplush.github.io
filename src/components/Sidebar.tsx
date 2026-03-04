@@ -98,7 +98,7 @@ export function Sidebar() {
   return (
     <>
       {/* Sidebar navigation — hidden on mobile (uses Header hamburger via layout) */}
-      <aside className="hidden md:flex flex-col w-[250px] shrink-0 bg-[var(--color-pp-bg)] border-r border-[var(--color-pp-border)] sticky top-0 h-screen overflow-y-auto">
+      <aside className="hidden md:flex flex-col w-[250px] shrink-0 bg-[var(--color-pp-card)] border-r border-[var(--color-pp-border)] sticky top-0 h-screen overflow-y-auto">
         <nav className="flex-1 px-3 py-4 space-y-0.5">
           {navItems.map((item) => {
             const isActive = item.path === "/" ? pathname === "/" : pathname.startsWith(item.path);
@@ -108,8 +108,8 @@ export function Sidebar() {
                 href={item.path}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded text-sm transition-colors ${
                   isActive
-                    ? "bg-[var(--color-pp-accent)]/15 text-[var(--color-pp-accent)] font-medium"
-                    : "text-[var(--color-pp-nav-text)] hover:text-[var(--color-pp-accent)] hover:bg-[var(--color-pp-card)]"
+                    ? "bg-[var(--color-pp-active-bg)] text-[var(--color-pp-accent)] font-medium"
+                    : "text-[var(--color-pp-nav-text)] hover:text-[var(--color-pp-accent)] hover:bg-[var(--color-pp-card-hover)]"
                 }`}
               >
                 <span className={isActive ? "text-[var(--color-pp-accent)]" : ""}>{item.icon}</span>

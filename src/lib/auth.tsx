@@ -52,7 +52,7 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [token, setToken] = useState<string | null>(null);
   const [account, setAccount] = useState<Account | null>(null);
@@ -92,8 +92,34 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }, [scriptLoaded, checkAuth]);
 
+  useEffect(() => {
+    if (scriptLoaded) return;
+    const interval = setInterval(() => {
+      if (window.ComfyTwitch) {
+        setScriptLoaded(true);
+        clearInterval(interval);
+      }
+    }, 200);
+    const timeout = setTimeout(() => {
+      clearInterval(interval);
+    }, 5000);
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [scriptLoaded]);
+
   const login = useCallback(() => {
-    if (!window.ComfyTwitch) return;
+    if (!window.ComfyTwitch) {
+      setTimeout(() => {
+        if (window.ComfyTwitch) {
+          localStorage.setItem('redirectPage', window.location.href);
+          const baseUrl = window.location.origin;
+          window.ComfyTwitch.Login(TWITCH_CLIENT_ID, `${baseUrl}/redirect/`, [], 'code');
+        }
+      }, 500);
+      return;
+    }
     localStorage.setItem('redirectPage', window.location.href);
     const baseUrl = window.location.origin;
     window.ComfyTwitch.Login(TWITCH_CLIENT_ID, `${baseUrl}/redirect/`, [], 'code');
@@ -112,7 +138,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     <AuthContext.Provider value={{ isLoading, isLoggedIn, token, account, login, logout }}>
       <Script
         src="/comfytwitch.min.js"
-        strategy="beforeInteractive"
+        strategy="afterInteractive"
         onLoad={() => setScriptLoaded(true)}
         onReady={() => setScriptLoaded(true)}
       />

@@ -30,9 +30,9 @@ export default function RedirectPage() {
   return (
     <div className="flex min-h-[80vh] items-center justify-center">
       <div className="text-center">
-        <div className="mx-auto mb-6 h-12 w-12 animate-spin rounded-full border-4 border-purple-600 border-t-transparent" />
-        <h1 className="text-xl font-bold text-white">Logging you in...</h1>
-        <p className="mt-2 text-sm text-slate-400">Please wait while we verify your Twitch account.</p>
+        <div className="mx-auto mb-6 h-12 w-12 animate-spin rounded-full border-4 border-[var(--color-pp-accent)] border-t-transparent" />
+        <h1 className="text-xl font-bold text-[var(--color-pp-headings)]">Logging you in...</h1>
+        <p className="mt-2 text-sm text-[var(--color-pp-text)]">Please wait while we verify your Twitch account.</p>
       </div>
     </div>
   );

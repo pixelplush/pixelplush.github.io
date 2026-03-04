@@ -8,7 +8,7 @@
   --color-pp-headings: #475F7B;
   --color-pp-text: #475F7B;
   --color-pp-text-muted: #727E8C;
-  --color-pp-nav-text: #EC7358;
+  --color-pp-nav-text: #6B3A2A;
   --color-pp-accent: #5A8DEE;
   --color-pp-border: #DFE3E7;
   --color-pp-info: #00CFDD;
@@ -26,12 +26,14 @@ body {
   background-color: var(--color-pp-bg);
   color: var(--color-pp-text);
   min-height: 100vh;
-  font-family: "IBM Plex Sans", sans-serif;
+  font-family: var(--font-ibm), "IBM Plex Sans", sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-pp-headings);
-  font-family: "Rubik", sans-serif;
+  font-family: var(--font-fredoka), "Fredoka", "Rubik", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
 }
 
 a {
@@ -97,6 +99,7 @@ a:hover {
 .btn-primary {
   background-color: var(--color-pp-accent);
   box-shadow: 0 4px 10px 0 rgba(90, 141, 238, 0.2);
+  color: #fff !important;
 }
 .btn-primary:hover {
   background-color: #4a7de0;
