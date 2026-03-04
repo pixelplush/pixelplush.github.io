@@ -25,7 +25,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-[80vh] items-center justify-center px-4 py-12">
-      <div className="w-full max-w-4xl overflow-hidden rounded-2xl border border-white/10 bg-[var(--color-pp-card)] shadow-2xl">
+      <div className="w-full max-w-4xl overflow-hidden rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] shadow-2xl">
         <div className="grid md:grid-cols-2">
           {/* Left — Login */}
           <div className="flex flex-col items-center justify-center p-8 md:p-12">
@@ -44,7 +44,7 @@ export default function LoginPage() {
             </button>
 
             <p className="mt-6 text-xs text-slate-500 text-center">
-              Hello from <span className="text-pink-400">Maaya</span> and <span className="text-purple-400">Instafluff</span>!
+              Hello from <span className="text-pink-400">Maaya</span> and <span className="text-[var(--color-pp-accent)]">Instafluff</span>!
             </p>
           </div>
 

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-8 md:p-12">
+      <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8 md:p-12">
         <h1 className="mb-2 text-3xl font-bold text-white">Terms of Use</h1>
         <p className="mb-8 text-sm text-slate-400">Last updated: July 19, 2020</p>
 
@@ -19,7 +19,7 @@ export default function TermsPage() {
               These Terms of Use constitute a legally binding agreement made between you, whether personally or on behalf of an entity
               (&ldquo;you&rdquo;) and Munomic, LLC., doing business as PixelPlush Games (&ldquo;PixelPlush Games&rdquo;, &ldquo;we&rdquo;,
               &ldquo;us&rdquo;, or &ldquo;our&rdquo;), concerning your access to and use of the{' '}
-              <a href="https://www.pixelplush.dev" className="text-purple-400 hover:underline">https://www.pixelplush.dev</a>{' '}
+              <a href="https://www.pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">https://www.pixelplush.dev</a>{' '}
               website as well as any other media form, media channel, mobile website or mobile application related, linked, or otherwise
               connected thereto (collectively, the &ldquo;Site&rdquo;). You agree that by accessing the Site, you have read, understood, and
               agreed to be bound by all of these Terms of Use. IF YOU DO NOT AGREE WITH ALL OF THESE TERMS OF USE, THEN YOU ARE EXPRESSLY
@@ -144,7 +144,7 @@ export default function TermsPage() {
             <h2 className="mb-3 text-lg font-semibold text-white">Contact Us</h2>
             <p>
               For questions about these Terms of Use, contact us at{' '}
-              <a href="mailto:support@pixelplush.dev" className="text-purple-400 hover:underline">support@pixelplush.dev</a>.
+              <a href="mailto:support@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">support@pixelplush.dev</a>.
             </p>
             <p className="mt-2">
               Munomic, LLC.<br />

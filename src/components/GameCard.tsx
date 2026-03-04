@@ -12,7 +12,7 @@ interface GameCardProps {
     description: string;
     images: string[];
     href: string;
-    color: "blue" | "green";
+    color: "info" | "success";
     hasThemes: boolean;
   };
 }
@@ -28,26 +28,22 @@ export function GameCard({ game }: GameCardProps) {
     return () => clearInterval(interval);
   }, [game.images.length]);
 
-  const buttonColor =
-    game.color === "blue"
-      ? "bg-blue-600 hover:bg-blue-500"
-      : "bg-emerald-600 hover:bg-emerald-500";
-
+  const buttonClass = game.color === "info" ? "btn-info" : "btn-success";
   const buttonText = game.hasThemes ? "View All Themes" : "Add To Stream";
 
   return (
-    <div className="group flex flex-col overflow-hidden rounded-xl border border-white/10 bg-[var(--color-pp-card)] transition-all hover:border-purple-500/50 hover:shadow-lg hover:shadow-purple-500/10">
+    <div className="pp-card overflow-hidden flex flex-col">
       {/* Carousel image */}
-      <div className="relative aspect-square overflow-hidden bg-black/20">
+      <div className="relative aspect-video overflow-hidden bg-black/30">
         <Image
           src={game.images[currentImage]}
           alt={game.name}
           fill
-          className="object-cover transition-opacity duration-500"
+          className="object-cover"
           unoptimized
         />
         {game.images.length > 1 && (
-          <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5">
+          <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1.5 z-10">
             {game.images.map((_, i) => (
               <button
                 key={i}
@@ -63,14 +59,14 @@ export function GameCard({ game }: GameCardProps) {
 
       {/* Card body */}
       <div className="flex flex-1 flex-col p-4">
-        <h3 className="mb-1 text-lg font-bold text-white">{game.name}</h3>
-        <p className="mb-1 text-sm text-slate-400">{game.tagline}</p>
-        <p className="mb-4 flex-1 text-xs text-slate-500">
+        <h3 className="mb-1 text-base font-semibold">{game.name}</h3>
+        <p className="mb-1 text-sm text-[var(--color-pp-text)]">{game.tagline}</p>
+        <p className="mb-4 flex-1 text-xs text-[var(--color-pp-text)]">
           {game.description}
         </p>
         <Link
           href={game.href}
-          className={`block rounded-lg ${buttonColor} px-4 py-2 text-center text-sm font-semibold text-white transition-colors`}
+          className={`btn ${buttonClass} w-full block text-center`}
         >
           {buttonText}
         </Link>

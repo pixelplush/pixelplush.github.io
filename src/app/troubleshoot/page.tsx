@@ -111,7 +111,7 @@ export default function TroubleshootPage() {
         Having issues with your PixelPlush game? Run diagnostics to check your setup.
       </p>
 
-      <div className="mb-6 rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-6">
+      <div className="mb-6 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
         <label className="mb-2 block text-sm font-medium text-slate-400">Your Twitch Channel Name</label>
         <div className="flex gap-3">
           <input
@@ -119,12 +119,12 @@ export default function TroubleshootPage() {
             value={channel}
             onChange={(e) => setChannel(e.target.value.toLowerCase())}
             placeholder="e.g. instafluff"
-            className="flex-1 rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-slate-500 focus:border-purple-500 focus:outline-none"
+            className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-3 text-white placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
           <button
             onClick={runDiagnostics}
             disabled={!channel.trim() || running}
-            className="rounded-lg bg-purple-600 px-6 py-3 font-medium text-white transition hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded-lg bg-[var(--color-pp-accent)] px-6 py-3 font-medium text-white transition hover:bg-[#4a7de0] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {running ? (
               <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
@@ -153,14 +153,14 @@ export default function TroubleshootPage() {
       )}
 
       {/* Common Issues */}
-      <div className="mt-10 rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-6">
+      <div className="mt-10 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
         <h2 className="mb-4 text-lg font-semibold text-white">Common Issues</h2>
         <div className="space-y-4 text-sm text-slate-300">
           <div>
             <h3 className="font-medium text-white">Game not showing in OBS</h3>
             <p className="mt-1 text-slate-400">
               Make sure you added the browser source URL from the{' '}
-              <a href="/customize" className="text-purple-400 hover:underline">customize page</a>.
+              <a href="/customize" className="text-[var(--color-pp-accent)] hover:underline">customize page</a>.
               Set the resolution to 1920×1080 and check that it&apos;s visible in your scene.
             </p>
           </div>
@@ -182,11 +182,11 @@ export default function TroubleshootPage() {
             <h3 className="font-medium text-white">Need more help?</h3>
             <p className="mt-1 text-slate-400">
               Join the{' '}
-              <a href="https://discord.gg/pixelplush" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">
+              <a href="https://discord.gg/pixelplush" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-accent)] hover:underline">
                 PixelPlush Discord
               </a>{' '}
               for community support, or email{' '}
-              <a href="mailto:support@pixelplush.dev" className="text-purple-400 hover:underline">
+              <a href="mailto:support@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">
                 support@pixelplush.dev
               </a>.
             </p>

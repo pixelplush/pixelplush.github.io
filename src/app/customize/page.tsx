@@ -9,7 +9,7 @@ export default function CustomizePage() {
   if (isLoading) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
       </div>
     );
   }
@@ -17,7 +17,7 @@ export default function CustomizePage() {
   if (!isLoggedIn) {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
-        <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-8">
+        <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
           <h1 className="mb-3 text-2xl font-bold text-white">Dressing Room</h1>
           <p className="mb-6 text-slate-400">Log in with Twitch to customize your character, equip outfits, and manage your pet.</p>
           <button
@@ -51,7 +51,7 @@ export default function CustomizePage() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Character Preview */}
-        <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-6">
+        <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
           <h2 className="mb-4 text-lg font-semibold text-white">Preview</h2>
           <div className="flex h-64 items-center justify-center rounded-lg bg-black/20">
             <div className="text-center text-slate-500">
@@ -64,7 +64,7 @@ export default function CustomizePage() {
 
         {/* Category Tabs + Items */}
         <div className="lg:col-span-2">
-          <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-6">
+          <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
             <h2 className="mb-4 text-lg font-semibold text-white">Your Items</h2>
 
             {/* Category Tabs */}
@@ -72,7 +72,7 @@ export default function CustomizePage() {
               {['Characters', 'Pets', 'Body', 'Equipment', 'Accessories', 'Outfits', 'Effects'].map((cat) => (
                 <button
                   key={cat}
-                  className="rounded-lg bg-white/5 px-3 py-1.5 text-sm text-slate-300 transition hover:bg-white/10"
+                  className="rounded-lg bg-[var(--color-pp-card)] px-3 py-1.5 text-sm text-slate-300 transition hover:bg-[var(--color-pp-card-hover)]"
                 >
                   {cat}
                 </button>
@@ -80,13 +80,13 @@ export default function CustomizePage() {
             </div>
 
             {/* Items Grid */}
-            <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-white/10 text-center">
+            <div className="flex h-48 items-center justify-center rounded-lg border border-dashed border-[var(--color-pp-border)] text-center">
               <div className="text-slate-500">
                 <p className="text-sm">Item selection grid</p>
                 <p className="mt-1 text-xs text-slate-600">
                   Full dressing room functionality is being ported from the legacy site.
                   <br />
-                  Visit the <Link href="/market" className="text-purple-400 hover:underline">marketplace</Link> to browse available items.
+                  Visit the <Link href="/market" className="text-[var(--color-pp-accent)] hover:underline">marketplace</Link> to browse available items.
                 </p>
               </div>
             </div>

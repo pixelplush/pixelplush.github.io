@@ -1,19 +1,112 @@
 @import "tailwindcss";
 
-:root {
-  --color-pp-purple: #7c3aed;
-  --color-pp-pink: #ec4899;
-  --color-pp-yellow: #facc15;
-  --color-pp-blue: #3b82f6;
-  --color-pp-dark: #1a1a2e;
-  --color-pp-darker: #0f0f1a;
-  --color-pp-card: #16213e;
-  --color-pp-text: #e2e8f0;
+@theme {
+  --color-pp-bg: #F2C079;
+  --color-pp-card: #FAEDCA;
+  --color-pp-card-hover: #f5e6b8;
+  --color-pp-surface: #fafbfb;
+  --color-pp-headings: #475F7B;
+  --color-pp-text: #475F7B;
+  --color-pp-text-muted: #727E8C;
+  --color-pp-nav-text: #EC7358;
+  --color-pp-accent: #5A8DEE;
+  --color-pp-border: #DFE3E7;
+  --color-pp-info: #00CFDD;
+  --color-pp-success: #39DA8A;
+  --color-pp-warning: #FDAC41;
+  --color-pp-danger: #FF5B5C;
+  --color-pp-active-bg: #e2ecff;
+  --color-pp-footer: #FAEDCA;
 }
 
-/* Pixel art rendering */
+:root {
+}
+
+body {
+  background-color: var(--color-pp-bg);
+  color: var(--color-pp-text);
+  min-height: 100vh;
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-pp-headings);
+  font-family: "Rubik", sans-serif;
+}
+
+a {
+  color: var(--color-pp-accent);
+  text-decoration: none;
+}
+a:hover {
+  color: #7ba5f0;
+}
+
 .pixelated {
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
+  image-rendering: auto;
   image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+/* Dashboard card */
+.pp-card {
+  background-color: var(--color-pp-card);
+  box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+  border-radius: 0.5rem;
+}
+
+.pp-card-header,
+.pp-card-footer {
+  background-color: var(--color-pp-card);
+  border-color: var(--color-pp-border);
+}
+
+/* Frest-style buttons */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  color: #fff;
+}
+.btn-info {
+  background-color: var(--color-pp-info);
+  box-shadow: 0 4px 10px 0 rgba(0, 207, 232, 0.2);
+}
+.btn-info:hover {
+  background-color: #00b8d4;
+  box-shadow: 0 6px 14px 0 rgba(0, 207, 232, 0.35);
+}
+.btn-success {
+  background-color: var(--color-pp-success);
+  box-shadow: 0 4px 10px 0 rgba(40, 199, 111, 0.2);
+}
+.btn-success:hover {
+  background-color: #1ea85e;
+  box-shadow: 0 6px 14px 0 rgba(40, 199, 111, 0.35);
+}
+.btn-primary {
+  background-color: var(--color-pp-accent);
+  box-shadow: 0 4px 10px 0 rgba(90, 141, 238, 0.2);
+}
+.btn-primary:hover {
+  background-color: #4a7de0;
+  box-shadow: 0 6px 14px 0 rgba(90, 141, 238, 0.35);
+}
+.btn-warning {
+  background-color: var(--color-pp-warning);
+  box-shadow: 0 4px 10px 0 rgba(255, 159, 67, 0.2);
+}
+.btn-warning:hover {
+  background-color: #e68e3a;
+  box-shadow: 0 6px 14px 0 rgba(255, 159, 67, 0.35);
 }

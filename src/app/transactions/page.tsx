@@ -8,7 +8,7 @@ export default function TransactionsPage() {
   if (isLoading) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
       </div>
     );
   }
@@ -16,7 +16,7 @@ export default function TransactionsPage() {
   if (!isLoggedIn) {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
-        <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-8">
+        <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
           <h1 className="mb-3 text-2xl font-bold text-white">Transactions</h1>
           <p className="mb-6 text-slate-400">Log in to view your transaction history.</p>
           <button
@@ -38,7 +38,7 @@ export default function TransactionsPage() {
       <h1 className="mb-2 text-3xl font-bold text-white">Transactions</h1>
       <p className="mb-8 text-slate-400">Your purchase and coin transaction history.</p>
 
-      <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-6">
+      <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
         <div className="flex h-48 items-center justify-center text-center">
           <div className="text-slate-500">
             <svg className="mx-auto mb-3 h-12 w-12 text-slate-600" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">

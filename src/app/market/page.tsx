@@ -127,7 +127,7 @@ export default function MarketPage() {
         <button
           onClick={() => setTab('catalog')}
           className={`rounded-lg px-5 py-2 font-medium transition ${
-            tab === 'catalog' ? 'bg-purple-600 text-white' : 'bg-white/5 text-slate-400 hover:bg-white/10'
+            tab === 'catalog' ? 'bg-[var(--color-pp-accent)] text-white' : 'bg-[var(--color-pp-card)] text-slate-400 hover:bg-[var(--color-pp-card-hover)]'
           }`}
         >
           Item Catalog
@@ -135,7 +135,7 @@ export default function MarketPage() {
         <button
           onClick={() => setTab('coins')}
           className={`rounded-lg px-5 py-2 font-medium transition ${
-            tab === 'coins' ? 'bg-purple-600 text-white' : 'bg-white/5 text-slate-400 hover:bg-white/10'
+            tab === 'coins' ? 'bg-[var(--color-pp-accent)] text-white' : 'bg-[var(--color-pp-card)] text-slate-400 hover:bg-[var(--color-pp-card-hover)]'
           }`}
         >
           Buy Coins
@@ -151,7 +151,7 @@ export default function MarketPage() {
                 className={`relative rounded-2xl border p-6 text-center transition ${
                   pkg.value === 'Best Value'
                     ? 'border-yellow-500/50 bg-yellow-500/5'
-                    : 'border-white/10 bg-[var(--color-pp-card)]'
+                    : 'border-[var(--color-pp-border)] bg-[var(--color-pp-card)]'
                 }`}
               >
                 {pkg.value && (
@@ -165,7 +165,7 @@ export default function MarketPage() {
                 </div>
                 <div className="mb-4 text-lg text-slate-400">{pkg.price}</div>
                 {isLoggedIn ? (
-                  <button className="w-full rounded-lg bg-purple-600 py-2.5 font-medium text-white transition hover:bg-purple-700">
+                  <button className="w-full rounded-lg bg-[var(--color-pp-accent)] py-2.5 font-medium text-white transition hover:bg-[#4a7de0]">
                     Purchase
                   </button>
                 ) : (
@@ -187,7 +187,7 @@ export default function MarketPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search items..."
-              className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder-slate-500 focus:border-purple-500 focus:outline-none sm:w-64"
+              className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-white placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none sm:w-64"
             />
             <div className="flex flex-wrap gap-2">
               {(Object.keys(filters) as FilterType[]).map((key) => (
@@ -196,8 +196,8 @@ export default function MarketPage() {
                   onClick={() => setFilters((f) => ({ ...f, [key]: !f[key] }))}
                   className={`rounded-full px-3 py-1 text-sm font-medium capitalize transition ${
                     filters[key]
-                      ? typeColors[key] || 'bg-purple-500/20 text-purple-400'
-                      : 'bg-white/5 text-slate-500 line-through'
+                      ? typeColors[key] || 'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]'
+                      : 'bg-[var(--color-pp-card)] text-slate-500 line-through'
                   }`}
                 >
                   {key}
@@ -209,7 +209,7 @@ export default function MarketPage() {
           {/* Catalog Grid */}
           {loading ? (
             <div className="flex h-48 items-center justify-center">
-              <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
+              <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
             </div>
           ) : filteredItems.length === 0 ? (
             <div className="flex h-48 items-center justify-center text-slate-500">No items found</div>
@@ -221,7 +221,7 @@ export default function MarketPage() {
                   <div
                     key={item.id}
                     className={`group relative rounded-xl border p-3 text-center transition ${
-                      isOwned ? 'border-green-500/30 bg-green-500/5' : 'border-white/10 bg-[var(--color-pp-card)] hover:border-purple-500/30'
+                      isOwned ? 'border-green-500/30 bg-green-500/5' : 'border-[var(--color-pp-border)] bg-[var(--color-pp-card)] hover:border-[var(--color-pp-accent)]/30'
                     }`}
                   >
                     <div className="mb-2 flex h-20 items-center justify-center">

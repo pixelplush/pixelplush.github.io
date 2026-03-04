@@ -62,7 +62,7 @@ export default function LinksPage() {
             href={link.url}
             target="_blank"
             rel="noopener noreferrer"
-            className={`flex flex-col items-center gap-3 rounded-2xl border border-white/10 p-6 text-center transition ${link.color}`}
+            className={`flex flex-col items-center gap-3 rounded-2xl border border-[var(--color-pp-border)] p-6 text-center transition ${link.color}`}
           >
             {link.icon}
             <span className="text-lg font-semibold text-white">{link.name}</span>
@@ -72,7 +72,7 @@ export default function LinksPage() {
       </div>
 
       {/* Banners */}
-      <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-6">
+      <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
         <h2 className="mb-2 text-xl font-semibold text-white">Stream Banners</h2>
         <p className="mb-6 text-sm text-slate-400">
           Want to show your support? Use these banners in your panels or overlays!

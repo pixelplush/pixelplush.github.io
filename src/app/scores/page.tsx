@@ -98,7 +98,7 @@ function ScoresContent() {
             value={channel}
             onChange={(e) => setChannel(e.target.value.toLowerCase())}
             placeholder="Enter channel name..."
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white placeholder-slate-500 focus:border-purple-500 focus:outline-none"
+            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-white placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
         </div>
         <div>
@@ -106,7 +106,7 @@ function ScoresContent() {
           <select
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white focus:border-purple-500 focus:outline-none"
+            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-white focus:border-[var(--color-pp-accent)] focus:outline-none"
           >
             <option value="12h">Last 12 Hours</option>
             <option value="1w">This Week</option>
@@ -118,7 +118,7 @@ function ScoresContent() {
           <select
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
-            className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-2.5 text-white focus:border-purple-500 focus:outline-none"
+            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-white focus:border-[var(--color-pp-accent)] focus:outline-none"
           >
             {Object.entries(gameThemeNames).map(([key, name]) => (
               <option key={key} value={key}>
@@ -138,11 +138,11 @@ function ScoresContent() {
               type="text"
               readOnly
               value={shareUrl}
-              className="flex-1 rounded-lg border border-white/10 bg-white/5 px-4 py-2 text-sm text-slate-300"
+              className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2 text-sm text-slate-300"
             />
             <button
               onClick={() => navigator.clipboard.writeText(shareUrl)}
-              className="rounded-lg border border-white/10 px-4 py-2 text-sm text-slate-300 transition hover:bg-white/5"
+              className="rounded-lg border border-[var(--color-pp-border)] px-4 py-2 text-sm text-slate-300 transition hover:bg-[var(--color-pp-card)]"
             >
               Copy
             </button>
@@ -151,10 +151,10 @@ function ScoresContent() {
       )}
 
       {/* Scores Table */}
-      <div className="overflow-hidden rounded-2xl border border-white/10 bg-[var(--color-pp-card)]">
+      <div className="overflow-hidden rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)]">
         {loading ? (
           <div className="flex h-48 items-center justify-center">
-            <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
           </div>
         ) : !channel ? (
           <div className="flex h-48 items-center justify-center text-slate-500">
@@ -167,7 +167,7 @@ function ScoresContent() {
         ) : (
           <table className="w-full text-left">
             <thead>
-              <tr className="border-b border-white/10 bg-white/5 text-sm text-slate-400">
+              <tr className="border-b border-[var(--color-pp-border)] bg-[var(--color-pp-card)] text-sm text-slate-400">
                 <th className="px-4 py-3 font-medium">#</th>
                 <th className="px-4 py-3 font-medium">Player</th>
                 <th className="px-4 py-3 font-medium text-right">Score</th>
@@ -176,10 +176,10 @@ function ScoresContent() {
             </thead>
             <tbody className="divide-y divide-white/5">
               {scores.slice(0, 100).map((score, i) => (
-                <tr key={`${score.userId}-${i}`} className="transition hover:bg-white/5">
+                <tr key={`${score.userId}-${i}`} className="transition hover:bg-[var(--color-pp-card)]">
                   <td className="px-4 py-3 text-slate-400">{i + 1}</td>
                   <td className="px-4 py-3 font-medium text-white">{score.user}</td>
-                  <td className="px-4 py-3 text-right font-mono text-purple-400">{score.score.toLocaleString()}</td>
+                  <td className="px-4 py-3 text-right font-mono text-[var(--color-pp-accent)]">{score.score.toLocaleString()}</td>
                   <td className="hidden px-4 py-3 text-right text-sm text-slate-400 sm:table-cell">
                     {new Date(score.created).toLocaleDateString(undefined, {
                       month: 'short',
@@ -200,7 +200,7 @@ function ScoresContent() {
 
 export default function ScoresPage() {
   return (
-    <Suspense fallback={<div className="flex h-64 items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" /></div>}>
+    <Suspense fallback={<div className="flex h-64 items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" /></div>}>
       <ScoresContent />
     </Suspense>
   );

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-8 md:p-12">
+      <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8 md:p-12">
         <h1 className="mb-2 text-3xl font-bold text-white">Privacy Notice</h1>
         <p className="mb-8 text-sm text-slate-400">Last updated: July 19, 2020</p>
 
@@ -17,12 +17,12 @@ export default function PrivacyPage() {
             Thank you for choosing to be part of our community at Munomic, LLC., doing business as PixelPlush Games
             (&ldquo;PixelPlush Games&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;). We are committed to protecting
             your personal information and your right to privacy. If you have any questions or concerns, please contact us at{' '}
-            <a href="mailto:support@pixelplush.dev" className="text-purple-400 hover:underline">support@pixelplush.dev</a>.
+            <a href="mailto:support@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">support@pixelplush.dev</a>.
           </p>
 
           <nav>
             <h2 className="mb-3 text-lg font-semibold text-white">Table of Contents</h2>
-            <ol className="grid grid-cols-1 gap-1 list-decimal ml-5 text-purple-400">
+            <ol className="grid grid-cols-1 gap-1 list-decimal ml-5 text-[var(--color-pp-accent)]">
               {[
                 'What Information Do We Collect?',
                 'How Do We Use Your Information?',
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
             <h2 className="mb-3 text-lg font-semibold text-white">1. What Information Do We Collect?</h2>
             <p><strong className="text-white">Personal Information Provided by You.</strong> We collect usernames, email addresses, and other similar information when you register on our Services.</p>
             <p className="mt-2"><strong className="text-white">Payment Data.</strong> We may collect data necessary to process your payment if you make purchases. All payment data is stored by PayPal. You may find their privacy notice at{' '}
-              <a href="https://www.paypal.com/va/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">paypal.com/privacy</a>.
+              <a href="https://www.paypal.com/va/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-accent)] hover:underline">paypal.com/privacy</a>.
             </p>
             <p className="mt-2"><strong className="text-white">Social Media Login Data.</strong> We may provide you with the option to register using your existing Twitch account details.</p>
             <p className="mt-2"><strong className="text-white">Automatically Collected Information.</strong> We automatically collect certain information when you visit our Services, including IP address, browser type, device information, and usage data. This information is needed to maintain security and for analytics.</p>
@@ -112,7 +112,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="mb-3 text-lg font-semibold text-white">10. What Are Your Privacy Rights?</h2>
             <p>In some regions (like the European Economic Area), you have certain rights under applicable data protection laws, including the right to request access, rectification, or erasure of your personal information. If you have questions, email us at{' '}
-              <a href="mailto:support@pixelplush.dev" className="text-purple-400 hover:underline">support@pixelplush.dev</a>.
+              <a href="mailto:support@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">support@pixelplush.dev</a>.
             </p>
           </section>
 
@@ -135,7 +135,7 @@ export default function PrivacyPage() {
             <h2 className="mb-3 text-lg font-semibold text-white">14. How Can You Contact Us About This Notice?</h2>
             <p>
               If you have questions or comments about this notice, you may email us at{' '}
-              <a href="mailto:privacy@pixelplush.dev" className="text-purple-400 hover:underline">privacy@pixelplush.dev</a> or by post to:
+              <a href="mailto:privacy@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">privacy@pixelplush.dev</a> or by post to:
             </p>
             <p className="mt-2">
               Munomic, LLC.<br />

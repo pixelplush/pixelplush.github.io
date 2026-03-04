@@ -41,7 +41,7 @@ export default function RedeemPage() {
   if (isLoading) {
     return (
       <div className="flex h-96 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
       </div>
     );
   }
@@ -49,7 +49,7 @@ export default function RedeemPage() {
   if (!isLoggedIn) {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
-        <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-8">
+        <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
           <h1 className="mb-3 text-2xl font-bold text-white">Redeem Code</h1>
           <p className="mb-6 text-slate-400">Log in to redeem a PixelPlush code.</p>
           <button
@@ -71,7 +71,7 @@ export default function RedeemPage() {
       <h1 className="mb-2 text-3xl font-bold text-white">Redeem Code</h1>
       <p className="mb-8 text-slate-400">Enter a PixelPlush code to redeem coins, items, or other rewards.</p>
 
-      <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-6">
+      <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
         <div className="flex gap-3">
           <input
             type="text"
@@ -81,12 +81,12 @@ export default function RedeemPage() {
               setStatus('idle');
             }}
             placeholder="ENTER-CODE-HERE"
-            className="flex-1 rounded-lg border border-white/10 bg-white/5 px-4 py-3 font-mono text-lg tracking-wider text-white placeholder-slate-500 focus:border-purple-500 focus:outline-none"
+            className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-3 font-mono text-lg tracking-wider text-white placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
           <button
             onClick={handleRedeem}
             disabled={!code.trim() || status === 'loading'}
-            className="rounded-lg bg-purple-600 px-6 py-3 font-medium text-white transition hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded-lg bg-[var(--color-pp-accent)] px-6 py-3 font-medium text-white transition hover:bg-[#4a7de0] disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {status === 'loading' ? (
               <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />

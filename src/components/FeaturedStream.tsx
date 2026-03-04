@@ -44,21 +44,21 @@ export function FeaturedStream() {
   if (!channel) return null;
 
   return (
-    <section className="mb-12">
-      <h2 className="mb-4 text-xl font-bold text-white">
-        <span className="mr-2 inline-block h-3 w-3 animate-pulse rounded-full bg-red-500" />
-        Live Now
-      </h2>
-      <div className="overflow-hidden rounded-xl border border-white/10">
+    <div>
+      <h3 className="mb-2 text-sm font-semibold text-[var(--color-pp-headings)] flex items-center gap-2">
+        <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-red-500" />
+        Live Stream
+      </h3>
+      <div className="overflow-hidden rounded border border-[var(--color-pp-border)]">
         <div className="aspect-video">
           <iframe
-            src={`https://player.twitch.tv/?channel=${channel}&parent=www.pixelplush.dev`}
+            src={`https://player.twitch.tv/?channel=${channel}&parent=www.pixelplush.dev&parent=localhost`}
             className="h-full w-full"
             allowFullScreen
             title={`${channel} - Twitch Stream`}
           />
         </div>
       </div>
-    </section>
+    </div>
   );
 }

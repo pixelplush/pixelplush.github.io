@@ -25,7 +25,7 @@ const games = [
     images: ['/app-assets/images/games/streamweather_square.gif'],
     color: 'border-green-500/30 bg-green-500/5',
     badge: 'Channel Points',
-    badgeColor: 'bg-purple-500/20 text-purple-400',
+    badgeColor: 'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]',
     hasThemes: false,
   },
   {
@@ -36,7 +36,7 @@ const games = [
     images: ['/app-assets/images/games/pixelconfetti_square.gif'],
     color: 'border-green-500/30 bg-green-500/5',
     badge: 'Channel Points',
-    badgeColor: 'bg-purple-500/20 text-purple-400',
+    badgeColor: 'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]',
     hasThemes: false,
   },
   {
@@ -104,11 +104,11 @@ function GamesContent() {
   if (selectedGame) {
     return (
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <Link href="/games" className="mb-6 inline-flex items-center gap-2 text-sm text-purple-400 hover:underline">
+        <Link href="/games" className="mb-6 inline-flex items-center gap-2 text-sm text-[var(--color-pp-accent)] hover:underline">
           &larr; All Games
         </Link>
 
-        <div className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] overflow-hidden">
+        <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] overflow-hidden">
           {/* Hero image */}
           <div className="relative h-64 bg-gradient-to-br from-purple-900/40 to-blue-900/40 flex items-center justify-center">
             <Image
@@ -135,7 +135,7 @@ function GamesContent() {
                 <h3 className="mb-3 text-sm font-medium text-slate-400">Available Themes</h3>
                 <div className="flex flex-wrap gap-3">
                   {selectedGame.images.map((img, i) => (
-                    <div key={i} className="h-20 w-20 overflow-hidden rounded-lg border border-white/10">
+                    <div key={i} className="h-20 w-20 overflow-hidden rounded-lg border border-[var(--color-pp-border)]">
                       <Image src={img} alt={`Theme ${i + 1}`} width={80} height={80} className="pixelated h-full w-full object-cover" unoptimized />
                     </div>
                   ))}
@@ -146,7 +146,7 @@ function GamesContent() {
             <div className="flex flex-wrap gap-3">
               <Link
                 href="/customize"
-                className="rounded-lg bg-purple-600 px-6 py-2.5 font-medium text-white transition hover:bg-purple-700"
+                className="rounded-lg bg-[var(--color-pp-accent)] px-6 py-2.5 font-medium text-white transition hover:bg-[#4a7de0]"
               >
                 Set Up This Game
               </Link>
@@ -207,7 +207,7 @@ function GamesContent() {
 
 export default function GamesPage() {
   return (
-    <Suspense fallback={<div className="flex h-64 items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" /></div>}>
+    <Suspense fallback={<div className="flex h-64 items-center justify-center"><div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" /></div>}>
       <GamesContent />
     </Suspense>
   );

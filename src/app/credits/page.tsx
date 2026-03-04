@@ -46,7 +46,7 @@ export default function CreditsPage() {
         {credits.map((section) => (
           <div
             key={section.game}
-            className="rounded-2xl border border-white/10 bg-[var(--color-pp-card)] p-6"
+            className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6"
           >
             <h2 className="mb-4 text-xl font-semibold text-white">{section.game}</h2>
             <div className="divide-y divide-white/5">
@@ -60,7 +60,7 @@ export default function CreditsPage() {
                     href={sound.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-purple-400 hover:underline"
+                    className="text-sm text-[var(--color-pp-accent)] hover:underline"
                   >
                     freesound.org &rarr;
                   </a>
@@ -73,7 +73,7 @@ export default function CreditsPage() {
 
       <p className="mt-8 text-center text-sm text-slate-500">
         All sound effects sourced from{' '}
-        <a href="https://freesound.org" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">
+        <a href="https://freesound.org" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-accent)] hover:underline">
           freesound.org
         </a>{' '}
         under Creative Commons licenses.
