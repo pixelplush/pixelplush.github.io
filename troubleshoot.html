@@ -405,6 +405,9 @@
                                                         <button class="btn btn-outline-primary text-left mb-1" onclick="showTip('flicker')">
                                                             <i class="bx bx-loader-circle"></i> Screen flickers or flashes
                                                         </button>
+                                                        <button class="btn btn-outline-primary text-left mb-1" onclick="showTip('no_overlay')">
+                                                            <i class="bx bx-palette"></i> Confetti/overlay doesn't appear or trigger
+                                                        </button>
                                                     </div>
                                                     <div id="tip_result" class="mt-2" style="display:none;"></div>
                                                 </div>
@@ -622,6 +625,19 @@
                         </ol>
                     </div>`;
                     break;
+                case "no_overlay":
+                    tip = `<div class="alert alert-info">
+                        <h5><i class="bx bx-palette"></i> Confetti/Overlay Troubleshooting</h5>
+                        <ol>
+                            <li><strong>Confetti is passive</strong> — it shows a blank/transparent screen until triggered. This is normal!</li>
+                            <li><strong>To test it:</strong> use <code>!confetti 10</code> in your Twitch chat as the broadcaster or a mod.</li>
+                            <li><strong>For channel point triggers:</strong> OAuth token is required, you must be Affiliate/Partner.</li>
+                            <li><strong>Check the URL:</strong> ensure it contains the right channel point params (e.g., <code>cpConfetti=true</code>).</li>
+                            <li><strong>Missing rewards:</strong> If channel point rewards don't appear on your channel after loading the overlay, try <code>!resetconfetti</code> in chat.</li>
+                            <li><strong>Disable "Shutdown source when not visible"</strong> — in OBS right-click the source → Properties → uncheck this.</li>
+                        </ol>
+                    </div>`;
+                    break;
                 case "no_chat":
                     tip = `<div class="alert alert-info">
                         <h5><i class="bx bx-message-x"></i> Game Doesn't Respond to Chat</h5>
@@ -735,6 +751,11 @@
             if(theme) {
                 resultsHtml += `<li class="list-group-item list-group-item-info"><i class="bx bx-info-circle"></i> Theme: ${theme}</li>`;
             }
+
+            let isOverlay = urlObj.hostname.includes("confetti") || urlObj.pathname.includes("confetti") || params.has("cpConfetti") || params.has("cpBubbles") || params.has("cpBalloons") || params.has("cpHearts");
+            if(isOverlay) {
+                resultsHtml += `<li class="list-group-item list-group-item-info"><i class="bx bx-info-circle"></i> This looks like a <strong>Confetti/Overlay</strong> URL. Remember: the overlay is transparent until triggered by a channel point redeem or mod command (!confetti). <a href="#" onclick="showTip('no_overlay'); return false;">See Confetti troubleshooting tips</a>.</li>`;
+            }
             
             resultsHtml += `</ul>`;
             $("#url_results").html(resultsHtml);
@@ -827,11 +848,33 @@
                 
                 let data = await res.json();
                 if(res.ok && data.client_id) {
+                    let expiresStr = "Unknown";
+                    if (data.expires_in) {
+                        if (data.expires_in < 3600) {
+                            expiresStr = `${Math.round(data.expires_in / 60)} minutes`;
+                        } else if (data.expires_in < 86400) {
+                            expiresStr = `${Math.round(data.expires_in / 3600)} hours`;
+                        } else {
+                            expiresStr = `${Math.round(data.expires_in / 86400)} days`;
+                        }
+                    }
+
                     let isExpiringSoon = data.expires_in && data.expires_in < (7 * 86400);
-                    let expiresStr = data.expires_in ? `${Math.round(data.expires_in / 86400)} days` : "Unknown";
-                    let tokenStatusClass = isExpiringSoon ? "list-group-item-warning" : "list-group-item-success";
-                    let tokenStatusIcon = isExpiringSoon ? "bx-error" : "bx-check";
-                    let tokenStatusText = isExpiringSoon ? `Token Valid (Expires in ${expiresStr})` : "Token Valid";
+                    let isExpiringVerySoon = data.expires_in && data.expires_in < 86400;
+
+                    let tokenStatusClass = "list-group-item-success";
+                    let tokenStatusIcon = "bx-check";
+                    let tokenStatusText = "Token Valid";
+
+                    if (isExpiringVerySoon) {
+                        tokenStatusClass = "list-group-item-warning";
+                        tokenStatusIcon = "bx-error";
+                        tokenStatusText = `Token Valid (Expiring soon: ${expiresStr} — will auto-refresh)`;
+                    } else if (isExpiringSoon) {
+                        tokenStatusClass = "list-group-item-warning";
+                        tokenStatusIcon = "bx-error";
+                        tokenStatusText = `Token Valid (Expires in ${expiresStr})`;
+                    }
                     
                     let resultsHtml = `<ul class="list-group">
                         <li class="list-group-item ${tokenStatusClass}"><i class="bx ${tokenStatusIcon}"></i> ${tokenStatusText}</li>
