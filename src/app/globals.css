@@ -5,14 +5,15 @@
   --color-pp-card: #FAEDCA;
   --color-pp-card-hover: #f5e6b8;
   --color-pp-surface: #fafbfb;
-  --color-pp-headings: #475F7B;
-  --color-pp-text: #475F7B;
+  --color-pp-headings: #384751;
+  --color-pp-text: #384751;
   --color-pp-text-muted: #727E8C;
-  --color-pp-nav-text: #6B3A2A;
+  --color-pp-nav-text: #D8714F;
   --color-pp-accent: #5A8DEE;
+  --color-pp-link: #E08C35;
   --color-pp-border: #DFE3E7;
-  --color-pp-info: #00CFDD;
-  --color-pp-success: #39DA8A;
+  --color-pp-info: #6EB8A8;
+  --color-pp-success: #74A33F;
   --color-pp-warning: #FDAC41;
   --color-pp-danger: #FF5B5C;
   --color-pp-active-bg: #e2ecff;
@@ -37,11 +38,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a {
-  color: var(--color-pp-accent);
+  color: var(--color-pp-link);
   text-decoration: none;
 }
 a:hover {
-  color: #7ba5f0;
+  color: #c97a2a;
 }
 
 .pixelated {
@@ -82,19 +83,19 @@ a:hover {
 }
 .btn-info {
   background-color: var(--color-pp-info);
-  box-shadow: 0 4px 10px 0 rgba(0, 207, 232, 0.2);
+  box-shadow: 0 4px 10px 0 rgba(110, 184, 168, 0.25);
 }
 .btn-info:hover {
-  background-color: #00b8d4;
-  box-shadow: 0 6px 14px 0 rgba(0, 207, 232, 0.35);
+  background-color: #5DA99A;
+  box-shadow: 0 6px 14px 0 rgba(110, 184, 168, 0.4);
 }
 .btn-success {
   background-color: var(--color-pp-success);
-  box-shadow: 0 4px 10px 0 rgba(40, 199, 111, 0.2);
+  box-shadow: 0 4px 10px 0 rgba(116, 163, 63, 0.25);
 }
 .btn-success:hover {
-  background-color: #1ea85e;
-  box-shadow: 0 6px 14px 0 rgba(40, 199, 111, 0.35);
+  background-color: #638E35;
+  box-shadow: 0 6px 14px 0 rgba(116, 163, 63, 0.4);
 }
 .btn-primary {
   background-color: var(--color-pp-accent);

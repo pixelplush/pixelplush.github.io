@@ -50,7 +50,7 @@ export function Header() {
               href="https://twitch.tv/maaya"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold hover:text-[var(--color-pp-accent)] transition-colors"
+              className="font-semibold text-[var(--color-pp-link)] hover:text-[#c97a2a] transition-colors"
             >
               Maaya
             </a>{" "}
@@ -59,7 +59,7 @@ export function Header() {
               href="https://twitch.tv/instafluff"
               target="_blank"
               rel="noopener noreferrer"
-              className="font-semibold hover:text-[var(--color-pp-accent)] transition-colors"
+              className="font-semibold text-[var(--color-pp-link)] hover:text-[#c97a2a] transition-colors"
             >
               Instafluff
             </a>
@@ -85,8 +85,16 @@ export function Header() {
                 )}
                 <span className="hidden sm:inline max-w-[120px] truncate">{account.displayName || account.username}</span>
                 {account.coins !== undefined && (
-                  <span className="hidden sm:inline text-xs text-[var(--color-pp-warning)]">
-                    {account.coins} coins
+                  <span className="hidden sm:inline-flex items-center gap-1 text-xs text-[var(--color-pp-warning)]">
+                    <Image
+                      src={assetPath("/app-assets/images/icon/plush_coin.gif")}
+                      alt="coins"
+                      width={18}
+                      height={18}
+                      className="pixelated"
+                      unoptimized
+                    />
+                    <strong>{account.coins}</strong>
                   </span>
                 )}
                 <svg className="h-4 w-4 text-[var(--color-pp-text)]" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">

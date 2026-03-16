@@ -102,17 +102,20 @@ export function Sidebar() {
         <nav className="flex-1 px-3 py-4 space-y-0.5">
           {navItems.map((item) => {
             const isActive = item.path === "/" ? pathname === "/" : pathname.startsWith(item.path);
+            const isHome = item.path === "/";
             return (
               <Link
                 key={item.path}
                 href={item.path}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded text-sm transition-colors ${
-                  isActive
-                    ? "bg-[var(--color-pp-active-bg)] text-[var(--color-pp-accent)] font-medium"
-                    : "text-[var(--color-pp-nav-text)] hover:text-[var(--color-pp-accent)] hover:bg-[var(--color-pp-card-hover)]"
+                  isHome
+                    ? "bg-[#F5D5A1] text-[#4F2727] font-medium"
+                    : isActive
+                      ? "bg-[var(--color-pp-active-bg)] text-[var(--color-pp-accent)] font-medium"
+                      : "text-[var(--color-pp-nav-text)] hover:text-[var(--color-pp-accent)] hover:bg-[var(--color-pp-card-hover)]"
                 }`}
               >
-                <span className={isActive ? "text-[var(--color-pp-accent)]" : ""}>{item.icon}</span>
+                <span className={isHome ? "text-[#4F2727]" : isActive ? "text-[var(--color-pp-accent)]" : ""}>{item.icon}</span>
                 <span>{item.name}</span>
               </Link>
             );
