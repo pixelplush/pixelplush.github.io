@@ -17,8 +17,8 @@ export default function TransactionsPage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
-          <h1 className="mb-3 text-2xl font-bold text-white">Transactions</h1>
-          <p className="mb-6 text-slate-400">Log in to view your transaction history.</p>
+          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">Transactions</h1>
+          <p className="mb-6 text-[var(--color-pp-text-muted)]">Log in to view your transaction history.</p>
           <button
             onClick={login}
             className="inline-flex items-center gap-2 rounded-lg bg-[#9146FF] px-6 py-3 font-medium text-white transition hover:bg-[#7c3aed]"
@@ -35,8 +35,8 @@ export default function TransactionsPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-white">Transactions</h1>
-      <p className="mb-8 text-slate-400">Your purchase and coin transaction history.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Transactions</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">Your purchase and coin transaction history.</p>
 
       <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
         <div className="flex h-48 items-center justify-center text-center">

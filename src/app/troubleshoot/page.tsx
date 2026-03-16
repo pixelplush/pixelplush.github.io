@@ -106,20 +106,20 @@ export default function TroubleshootPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-white">Troubleshoot</h1>
-      <p className="mb-8 text-slate-400">
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Troubleshoot</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">
         Having issues with your PixelPlush game? Run diagnostics to check your setup.
       </p>
 
       <div className="mb-6 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-        <label className="mb-2 block text-sm font-medium text-slate-400">Your Twitch Channel Name</label>
+        <label className="mb-2 block text-sm font-medium text-[var(--color-pp-text-muted)]">Your Twitch Channel Name</label>
         <div className="flex gap-3">
           <input
             type="text"
             value={channel}
             onChange={(e) => setChannel(e.target.value.toLowerCase())}
             placeholder="e.g. instafluff"
-            className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-3 text-white placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
+            className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-3 text-[var(--color-pp-text)] placeholder-[var(--color-pp-text-muted)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
           <button
             onClick={runDiagnostics}
@@ -143,7 +143,7 @@ export default function TroubleshootPage() {
               <div className="flex items-start gap-3">
                 <span className="mt-0.5 text-lg font-bold">{statusIcons[r.status]}</span>
                 <div>
-                  <h3 className="font-semibold text-white">{r.label}</h3>
+                  <h3 className="font-semibold text-[var(--color-pp-headings)]">{r.label}</h3>
                   <p className="mt-0.5 text-sm opacity-90">{r.detail}</p>
                 </div>
               </div>
@@ -154,33 +154,33 @@ export default function TroubleshootPage() {
 
       {/* Common Issues */}
       <div className="mt-10 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-        <h2 className="mb-4 text-lg font-semibold text-white">Common Issues</h2>
-        <div className="space-y-4 text-sm text-slate-300">
+        <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">Common Issues</h2>
+        <div className="space-y-4 text-sm text-[var(--color-pp-text)]">
           <div>
-            <h3 className="font-medium text-white">Game not showing in OBS</h3>
-            <p className="mt-1 text-slate-400">
+            <h3 className="font-medium text-[var(--color-pp-headings)]">Game not showing in OBS</h3>
+            <p className="mt-1 text-[var(--color-pp-text-muted)]">
               Make sure you added the browser source URL from the{' '}
               <a href="/customize" className="text-[var(--color-pp-accent)] hover:underline">customize page</a>.
               Set the resolution to 1920×1080 and check that it&apos;s visible in your scene.
             </p>
           </div>
           <div>
-            <h3 className="font-medium text-white">Chat commands not working</h3>
-            <p className="mt-1 text-slate-400">
+            <h3 className="font-medium text-[var(--color-pp-headings)]">Chat commands not working</h3>
+            <p className="mt-1 text-[var(--color-pp-text-muted)]">
               Verify the overlay URL includes your channel name. Refresh the browser source in OBS.
               Make sure the game is the right one for the commands you&apos;re trying.
             </p>
           </div>
           <div>
-            <h3 className="font-medium text-white">Channel Points rewards not triggering</h3>
-            <p className="mt-1 text-slate-400">
+            <h3 className="font-medium text-[var(--color-pp-headings)]">Channel Points rewards not triggering</h3>
+            <p className="mt-1 text-[var(--color-pp-text-muted)]">
               Channel Point integration requires the overlay to be loaded and connected. Check the
               Rooms server status above. Ensure you&apos;ve set up the custom rewards in your Twitch dashboard.
             </p>
           </div>
           <div>
-            <h3 className="font-medium text-white">Need more help?</h3>
-            <p className="mt-1 text-slate-400">
+            <h3 className="font-medium text-[var(--color-pp-headings)]">Need more help?</h3>
+            <p className="mt-1 text-[var(--color-pp-text-muted)]">
               Join the{' '}
               <a href="https://discord.gg/pixelplush" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-accent)] hover:underline">
                 PixelPlush Discord

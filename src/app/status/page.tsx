@@ -32,14 +32,14 @@ export default function StatusPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-white">System Status</h1>
-      <p className="mb-8 text-slate-400">Current status of PixelPlush services.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">System Status</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">Current status of PixelPlush services.</p>
 
       <div className="grid gap-4 sm:grid-cols-3">
         {/* Overall status */}
         <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-6 text-center">
           <div className="mb-2 inline-block h-4 w-4 rounded-full bg-green-500" />
-          <h2 className="text-lg font-semibold text-white">All Systems</h2>
+          <h2 className="text-lg font-semibold text-[var(--color-pp-headings)]">All Systems</h2>
           <p className="text-sm text-green-400">Operational</p>
         </div>
 
@@ -48,20 +48,20 @@ export default function StatusPage() {
           <div className="mb-2 text-3xl font-bold text-[var(--color-pp-accent)]">
             {loading ? '...' : liveCount ?? '—'}
           </div>
-          <h2 className="text-sm font-medium text-slate-400">Live Streams</h2>
+          <h2 className="text-sm font-medium text-[var(--color-pp-text-muted)]">Live Streams</h2>
         </div>
 
         {/* API */}
         <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-6 text-center">
           <div className="mb-2 inline-block h-4 w-4 rounded-full bg-green-500" />
-          <h2 className="text-lg font-semibold text-white">API</h2>
+          <h2 className="text-lg font-semibold text-[var(--color-pp-headings)]">API</h2>
           <p className="text-sm text-green-400">Responding</p>
         </div>
       </div>
 
       {/* Service Details */}
       <div className="mt-8 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-        <h2 className="mb-4 text-lg font-semibold text-white">Services</h2>
+        <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">Services</h2>
         <div className="divide-y divide-white/5">
           {[
             { name: 'Game Server (Rooms)', status: 'Operational' },
@@ -71,7 +71,7 @@ export default function StatusPage() {
             { name: 'Website', status: 'Operational' },
           ].map((service) => (
             <div key={service.name} className="flex items-center justify-between py-3">
-              <span className="text-slate-300">{service.name}</span>
+              <span className="text-[var(--color-pp-text)]">{service.name}</span>
               <span className="flex items-center gap-2 text-sm text-green-400">
                 <span className="h-2 w-2 rounded-full bg-green-500" />
                 {service.status}
@@ -84,7 +84,7 @@ export default function StatusPage() {
       {/* Live Channels */}
       {liveChannels.length > 0 && (
         <div className="mt-8 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-          <h2 className="mb-4 text-lg font-semibold text-white">Currently Live</h2>
+          <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">Currently Live</h2>
           <div className="flex flex-wrap gap-2">
             {liveChannels.map((channel) => (
               <a

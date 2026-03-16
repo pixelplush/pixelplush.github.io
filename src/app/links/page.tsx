@@ -53,8 +53,8 @@ const banners = [
 export default function LinksPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-white">Links &amp; Community</h1>
-      <p className="mb-8 text-slate-400">Find us on social media and get banners for your stream.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Links &amp; Community</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">Find us on social media and get banners for your stream.</p>
 
       {/* Social Links */}
       <div className="mb-12 grid gap-4 sm:grid-cols-3">
@@ -67,16 +67,16 @@ export default function LinksPage() {
             className={`flex flex-col items-center gap-3 rounded-2xl border border-[var(--color-pp-border)] p-6 text-center transition ${link.color}`}
           >
             {link.icon}
-            <span className="text-lg font-semibold text-white">{link.name}</span>
-            <span className="text-sm text-slate-400">{link.description}</span>
+            <span className="text-lg font-semibold text-[var(--color-pp-headings)]">{link.name}</span>
+            <span className="text-sm text-[var(--color-pp-text-muted)]">{link.description}</span>
           </a>
         ))}
       </div>
 
       {/* Banners */}
       <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-        <h2 className="mb-2 text-xl font-semibold text-white">Stream Banners</h2>
-        <p className="mb-6 text-sm text-slate-400">
+        <h2 className="mb-2 text-xl font-semibold text-[var(--color-pp-headings)]">Stream Banners</h2>
+        <p className="mb-6 text-sm text-[var(--color-pp-text-muted)]">
           Want to show your support? Use these banners in your panels or overlays!
         </p>
         <div className="space-y-4">

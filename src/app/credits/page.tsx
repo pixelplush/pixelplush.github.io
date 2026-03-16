@@ -40,8 +40,8 @@ const credits = [
 export default function CreditsPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-white">Credits</h1>
-      <p className="mb-8 text-slate-400">Sound effects and assets used in PixelPlush games.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Credits</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">Sound effects and assets used in PixelPlush games.</p>
 
       <div className="space-y-8">
         {credits.map((section) => (
@@ -49,13 +49,13 @@ export default function CreditsPage() {
             key={section.game}
             className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6"
           >
-            <h2 className="mb-4 text-xl font-semibold text-white">{section.game}</h2>
+            <h2 className="mb-4 text-xl font-semibold text-[var(--color-pp-headings)]">{section.game}</h2>
             <div className="divide-y divide-white/5">
               {section.sounds.map((sound) => (
                 <div key={sound.url} className="flex items-center justify-between py-3 first:pt-0 last:pb-0">
                   <div>
-                    <span className="font-medium text-slate-200">{sound.name}</span>
-                    <span className="ml-2 text-sm text-slate-400">by {sound.author}</span>
+                    <span className="font-medium text-[var(--color-pp-text)]">{sound.name}</span>
+                    <span className="ml-2 text-sm text-[var(--color-pp-text-muted)]">by {sound.author}</span>
                   </div>
                   <a
                     href={sound.url}

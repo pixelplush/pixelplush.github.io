@@ -86,27 +86,27 @@ function ScoresContent() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-white">Leaderboard</h1>
-      <p className="mb-8 text-slate-400">View high scores for Parachute Drop across all channels.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Leaderboard</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">View high scores for Parachute Drop across all channels.</p>
 
       {/* Filters */}
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         <div>
-          <label className="mb-1 block text-sm font-medium text-slate-400">Channel</label>
+          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">Channel</label>
           <input
             type="text"
             value={channel}
             onChange={(e) => setChannel(e.target.value.toLowerCase())}
             placeholder="Enter channel name..."
-            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-white placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
+            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-[var(--color-pp-headings)] placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-slate-400">Time Range</label>
+          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">Time Range</label>
           <select
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
-            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-white focus:border-[var(--color-pp-accent)] focus:outline-none"
+            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-[var(--color-pp-headings)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           >
             <option value="12h">Last 12 Hours</option>
             <option value="1w">This Week</option>
@@ -114,11 +114,11 @@ function ScoresContent() {
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-slate-400">Theme</label>
+          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">Theme</label>
           <select
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
-            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-white focus:border-[var(--color-pp-accent)] focus:outline-none"
+            className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-[var(--color-pp-headings)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           >
             {Object.entries(gameThemeNames).map(([key, name]) => (
               <option key={key} value={key}>
@@ -132,17 +132,17 @@ function ScoresContent() {
       {/* Share Link */}
       {channel && (
         <div className="mb-6">
-          <label className="mb-1 block text-sm font-medium text-slate-400">Share Link</label>
+          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">Share Link</label>
           <div className="flex gap-2">
             <input
               type="text"
               readOnly
               value={shareUrl}
-              className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2 text-sm text-slate-300"
+              className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2 text-sm text-[var(--color-pp-text)]"
             />
             <button
               onClick={() => navigator.clipboard.writeText(shareUrl)}
-              className="rounded-lg border border-[var(--color-pp-border)] px-4 py-2 text-sm text-slate-300 transition hover:bg-[var(--color-pp-card)]"
+              className="rounded-lg border border-[var(--color-pp-border)] px-4 py-2 text-sm text-[var(--color-pp-text)] transition hover:bg-[var(--color-pp-card)]"
             >
               Copy
             </button>
@@ -167,7 +167,7 @@ function ScoresContent() {
         ) : (
           <table className="w-full text-left">
             <thead>
-              <tr className="border-b border-[var(--color-pp-border)] bg-[var(--color-pp-card)] text-sm text-slate-400">
+              <tr className="border-b border-[var(--color-pp-border)] bg-[var(--color-pp-card)] text-sm text-[var(--color-pp-text-muted)]">
                 <th className="px-4 py-3 font-medium">#</th>
                 <th className="px-4 py-3 font-medium">Player</th>
                 <th className="px-4 py-3 font-medium text-right">Score</th>
@@ -177,10 +177,10 @@ function ScoresContent() {
             <tbody className="divide-y divide-white/5">
               {scores.slice(0, 100).map((score, i) => (
                 <tr key={`${score.userId}-${i}`} className="transition hover:bg-[var(--color-pp-card)]">
-                  <td className="px-4 py-3 text-slate-400">{i + 1}</td>
-                  <td className="px-4 py-3 font-medium text-white">{score.user}</td>
+                  <td className="px-4 py-3 text-[var(--color-pp-text-muted)]">{i + 1}</td>
+                  <td className="px-4 py-3 font-medium text-[var(--color-pp-headings)]">{score.user}</td>
                   <td className="px-4 py-3 text-right font-mono text-[var(--color-pp-accent)]">{score.score.toLocaleString()}</td>
-                  <td className="hidden px-4 py-3 text-right text-sm text-slate-400 sm:table-cell">
+                  <td className="hidden px-4 py-3 text-right text-sm text-[var(--color-pp-text-muted)] sm:table-cell">
                     {new Date(score.created).toLocaleDateString(undefined, {
                       month: 'short',
                       day: 'numeric',

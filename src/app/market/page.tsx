@@ -113,8 +113,8 @@ export default function MarketPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 text-center">
-        <h1 className="mb-2 text-3xl font-bold text-white">Marketplace</h1>
-        <p className="text-slate-400">Browse characters, pets, outfits, and more for your PixelPlush games.</p>
+        <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Marketplace</h1>
+        <p className="text-[var(--color-pp-text-muted)]">Browse characters, pets, outfits, and more for your PixelPlush games.</p>
         {isLoggedIn && account && (
           <p className="mt-2 text-sm text-yellow-400">
             <Image src={assetPath("/app-assets/images/icon/plush_coin.gif")} alt="coins" width={20} height={20} className="pixelated mr-1 inline" unoptimized />
@@ -128,7 +128,7 @@ export default function MarketPage() {
         <button
           onClick={() => setTab('catalog')}
           className={`rounded-lg px-5 py-2 font-medium transition ${
-            tab === 'catalog' ? 'bg-[var(--color-pp-accent)] text-white' : 'bg-[var(--color-pp-card)] text-slate-400 hover:bg-[var(--color-pp-card-hover)]'
+            tab === 'catalog' ? 'bg-[var(--color-pp-accent)] text-white' : 'bg-[var(--color-pp-card)] text-[var(--color-pp-text)] hover:bg-[var(--color-pp-card-hover)]'
           }`}
         >
           Item Catalog
@@ -136,7 +136,7 @@ export default function MarketPage() {
         <button
           onClick={() => setTab('coins')}
           className={`rounded-lg px-5 py-2 font-medium transition ${
-            tab === 'coins' ? 'bg-[var(--color-pp-accent)] text-white' : 'bg-[var(--color-pp-card)] text-slate-400 hover:bg-[var(--color-pp-card-hover)]'
+            tab === 'coins' ? 'bg-[var(--color-pp-accent)] text-white' : 'bg-[var(--color-pp-card)] text-[var(--color-pp-text)] hover:bg-[var(--color-pp-card-hover)]'
           }`}
         >
           Buy Coins
@@ -160,11 +160,11 @@ export default function MarketPage() {
                     {pkg.value}
                   </span>
                 )}
-                <div className="mb-2 text-3xl font-bold text-white">
+                <div className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">
                   <Image src={assetPath("/app-assets/images/icon/plush_coin.gif")} alt="coins" width={28} height={28} className="pixelated mr-2 inline" unoptimized />
                   {pkg.coins.toLocaleString()}
                 </div>
-                <div className="mb-4 text-lg text-slate-400">{pkg.price}</div>
+                <div className="mb-4 text-lg text-[var(--color-pp-text-muted)]">{pkg.price}</div>
                 {isLoggedIn ? (
                   <button className="w-full rounded-lg bg-[var(--color-pp-accent)] py-2.5 font-medium text-white transition hover:bg-[#4a7de0]">
                     Purchase
@@ -188,7 +188,7 @@ export default function MarketPage() {
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search items..."
-              className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-white placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none sm:w-64"
+              className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-[var(--color-pp-text)] placeholder-[var(--color-pp-text-muted)] focus:border-[var(--color-pp-accent)] focus:outline-none sm:w-64"
             />
             <div className="flex flex-wrap gap-2">
               {(Object.keys(filters) as FilterType[]).map((key) => (
@@ -238,7 +238,7 @@ export default function MarketPage() {
                     <span className={`mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-medium capitalize ${typeColors[item.type] || 'bg-white/10 text-slate-400'}`}>
                       {item.type}
                     </span>
-                    <h3 className="text-xs font-medium text-white truncate">{item.name}</h3>
+                    <h3 className="text-xs font-medium text-[var(--color-pp-headings)] truncate">{item.name}</h3>
                     <div className="mt-1.5">
                       {isOwned ? (
                         <span className="text-xs text-green-400">Owned</span>

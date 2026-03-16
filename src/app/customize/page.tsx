@@ -18,8 +18,8 @@ export default function CustomizePage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
-          <h1 className="mb-3 text-2xl font-bold text-white">Dressing Room</h1>
-          <p className="mb-6 text-slate-400">Log in with Twitch to customize your character, equip outfits, and manage your pet.</p>
+          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">Dressing Room</h1>
+          <p className="mb-6 text-[var(--color-pp-text-muted)]">Log in with Twitch to customize your character, equip outfits, and manage your pet.</p>
           <button
             onClick={login}
             className="inline-flex items-center gap-2 rounded-lg bg-[#9146FF] px-6 py-3 font-medium text-white transition hover:bg-[#7c3aed]"
@@ -38,12 +38,12 @@ export default function CustomizePage() {
     <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-white">Dressing Room</h1>
-          <p className="mt-1 text-slate-400">Customize your character, outfit, and pet.</p>
+          <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">Dressing Room</h1>
+          <p className="mt-1 text-[var(--color-pp-text-muted)]">Customize your character, outfit, and pet.</p>
         </div>
         <Link
           href="/market"
-          className="rounded-lg border border-white/20 px-4 py-2 text-sm font-medium text-slate-200 transition hover:border-white/40"
+          className="rounded-lg border border-[var(--color-pp-border)] px-4 py-2 text-sm font-medium text-[var(--color-pp-text-muted)] transition hover:border-[var(--color-pp-text)]"
         >
           Visit Market &rarr;
         </Link>
@@ -52,7 +52,7 @@ export default function CustomizePage() {
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Character Preview */}
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-          <h2 className="mb-4 text-lg font-semibold text-white">Preview</h2>
+          <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">Preview</h2>
           <div className="flex h-64 items-center justify-center rounded-lg bg-black/20">
             <div className="text-center text-slate-500">
               <div className="mx-auto mb-3 h-24 w-24 rounded-full bg-white/10" />
@@ -65,14 +65,14 @@ export default function CustomizePage() {
         {/* Category Tabs + Items */}
         <div className="lg:col-span-2">
           <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-            <h2 className="mb-4 text-lg font-semibold text-white">Your Items</h2>
+            <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">Your Items</h2>
 
             {/* Category Tabs */}
             <div className="mb-4 flex flex-wrap gap-2">
               {['Characters', 'Pets', 'Body', 'Equipment', 'Accessories', 'Outfits', 'Effects'].map((cat) => (
                 <button
                   key={cat}
-                  className="rounded-lg bg-[var(--color-pp-card)] px-3 py-1.5 text-sm text-slate-300 transition hover:bg-[var(--color-pp-card-hover)]"
+                  className="rounded-lg bg-[var(--color-pp-card)] px-3 py-1.5 text-sm text-[var(--color-pp-text)] transition hover:bg-[var(--color-pp-card-hover)]"
                 >
                   {cat}
                 </button>

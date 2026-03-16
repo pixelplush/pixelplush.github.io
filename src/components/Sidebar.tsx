@@ -102,11 +102,11 @@ export function Sidebar() {
                   isHome
                     ? "bg-[#F5D5A1] text-[#4F2727] font-medium"
                     : isActive
-                      ? "bg-[var(--color-pp-active-bg)] text-[var(--color-pp-accent)] font-medium"
-                      : "text-[var(--color-pp-nav-text)] hover:text-[var(--color-pp-accent)] hover:bg-[var(--color-pp-card-hover)]"
+                      ? "bg-[var(--color-pp-active-bg)] text-[#4F2727] font-medium"
+                      : "text-[var(--color-pp-nav-text)] hover:text-[#4F2727] hover:bg-[var(--color-pp-card-hover)]"
                 }`}
               >
-                <span className={isHome ? "text-[#4F2727]" : isActive ? "text-[var(--color-pp-accent)]" : "text-[#4F2727]"}>{item.icon}</span>
+                <span className={isActive ? "text-[#4F2727]" : "text-[#4F2727]"}>{item.icon}</span>
                 <span>{item.name}</span>
               </Link>
             );

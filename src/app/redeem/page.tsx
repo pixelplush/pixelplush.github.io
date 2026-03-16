@@ -50,8 +50,8 @@ export default function RedeemPage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
-          <h1 className="mb-3 text-2xl font-bold text-white">Redeem Code</h1>
-          <p className="mb-6 text-slate-400">Log in to redeem a PixelPlush code.</p>
+          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">Redeem Code</h1>
+          <p className="mb-6 text-[var(--color-pp-text-muted)]">Log in to redeem a PixelPlush code.</p>
           <button
             onClick={login}
             className="inline-flex items-center gap-2 rounded-lg bg-[#9146FF] px-6 py-3 font-medium text-white transition hover:bg-[#7c3aed]"
@@ -68,8 +68,8 @@ export default function RedeemPage() {
 
   return (
     <div className="mx-auto max-w-lg px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-white">Redeem Code</h1>
-      <p className="mb-8 text-slate-400">Enter a PixelPlush code to redeem coins, items, or other rewards.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Redeem Code</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">Enter a PixelPlush code to redeem coins, items, or other rewards.</p>
 
       <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
         <div className="flex gap-3">
@@ -81,7 +81,7 @@ export default function RedeemPage() {
               setStatus('idle');
             }}
             placeholder="ENTER-CODE-HERE"
-            className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-3 font-mono text-lg tracking-wider text-white placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
+            className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-3 font-mono text-lg tracking-wider text-[var(--color-pp-text)] placeholder-[var(--color-pp-text-muted)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
           <button
             onClick={handleRedeem}

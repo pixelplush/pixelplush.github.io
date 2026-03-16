@@ -124,16 +124,16 @@ function GamesContent() {
 
           <div className="p-8">
             <div className="mb-4 flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-white">{selectedGame.name}</h1>
+              <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">{selectedGame.name}</h1>
               <span className={`rounded-full px-3 py-1 text-xs font-medium ${selectedGame.badgeColor}`}>
                 {selectedGame.badge}
               </span>
             </div>
-            <p className="mb-6 text-lg text-slate-300">{selectedGame.description}</p>
+            <p className="mb-6 text-lg text-[var(--color-pp-text-muted)]">{selectedGame.description}</p>
 
             {selectedGame.hasThemes && selectedGame.images.length > 1 && (
               <div className="mb-6">
-                <h3 className="mb-3 text-sm font-medium text-slate-400">Available Themes</h3>
+                <h3 className="mb-3 text-sm font-medium text-[var(--color-pp-text-muted)]">Available Themes</h3>
                 <div className="flex flex-wrap gap-3">
                   {selectedGame.images.map((img, i) => (
                     <div key={i} className="h-20 w-20 overflow-hidden rounded-lg border border-[var(--color-pp-border)]">
@@ -153,7 +153,7 @@ function GamesContent() {
               </Link>
               <Link
                 href={`/scores?game=${selectedGame.id === 'parachute' ? 'parachute' : selectedGame.id}`}
-                className="rounded-lg border border-white/20 px-6 py-2.5 font-medium text-slate-200 transition hover:border-white/40"
+                className="rounded-lg border border-[var(--color-pp-border)] px-6 py-2.5 font-medium text-[var(--color-pp-text-muted)] transition hover:border-[var(--color-pp-text)]"
               >
                 View Leaderboard
               </Link>
@@ -167,8 +167,8 @@ function GamesContent() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 text-center">
-        <h1 className="mb-2 text-3xl font-bold text-white">Games &amp; Overlays</h1>
-        <p className="text-slate-400">
+        <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Games &amp; Overlays</h1>
+        <p className="text-[var(--color-pp-text-muted)]">
           Free Twitch chat-integrated games and overlays. Add them to OBS as browser sources.
         </p>
       </div>
@@ -192,8 +192,8 @@ function GamesContent() {
             </div>
             <div className="flex items-start justify-between gap-2">
               <div>
-                <h2 className="font-semibold text-white group-hover:text-purple-300">{game.name}</h2>
-                <p className="mt-1 text-sm text-slate-400">{game.tagline}</p>
+                <h2 className="font-semibold text-[var(--color-pp-headings)] group-hover:text-[var(--color-pp-accent)]">{game.name}</h2>
+                <p className="mt-1 text-sm text-[var(--color-pp-text-muted)]">{game.tagline}</p>
               </div>
               <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${game.badgeColor}`}>
                 {game.badge}
