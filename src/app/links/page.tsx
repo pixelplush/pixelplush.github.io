@@ -5,6 +5,7 @@ import { assetPath } from '@/lib/assetPath';
 export const metadata: Metadata = {
   title: 'Links',
   description: 'PixelPlush social media links, banners, and community resources.',
+  alternates: { canonical: '/links' },
 };
 
 const socialLinks = [

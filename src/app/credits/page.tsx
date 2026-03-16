@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Credits',
   description: 'Sound effects and asset credits for PixelPlush games.',
+  alternates: { canonical: '/credits' },
 };
 
 const credits = [

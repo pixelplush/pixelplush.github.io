@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Privacy Notice',
   description: 'PixelPlush Games Privacy Notice — Munomic, LLC.',
+  alternates: { canonical: '/privacy' },
 };
 
 export default function PrivacyPage() {

@@ -32,6 +32,9 @@ export const metadata: Metadata = {
     "maaya",
   ],
   metadataBase: new URL("https://www.pixelplush.dev"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

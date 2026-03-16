@@ -3,6 +3,7 @@ import type { Metadata } from 'next';
 export const metadata: Metadata = {
   title: 'Terms of Use',
   description: 'PixelPlush Games Terms of Use — Munomic, LLC.',
+  alternates: { canonical: '/terms' },
 };
 
 export default function TermsPage() {
