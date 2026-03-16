@@ -106,7 +106,7 @@ export function Sidebar() {
                       : "text-[var(--color-pp-nav-text)] hover:text-[var(--color-pp-accent)] hover:bg-[var(--color-pp-card-hover)]"
                 }`}
               >
-                <span className={isHome ? "text-[#4F2727]" : isActive ? "text-[var(--color-pp-accent)]" : ""}>{item.icon}</span>
+                <span className={isHome ? "text-[#4F2727]" : isActive ? "text-[var(--color-pp-accent)]" : "text-[#4F2727]"}>{item.icon}</span>
                 <span>{item.name}</span>
               </Link>
             );
