@@ -45,9 +45,9 @@ const socialLinks = [
 ];
 
 const banners = [
-  { src: '/images/pixelplush_banner1.png', alt: 'PixelPlush Banner 1' },
-  { src: '/images/pixelplush_banner2.png', alt: 'PixelPlush Banner 2' },
-  { src: '/images/pixelplush_banner3.png', alt: 'PixelPlush Banner 3' },
+  { src: '/app-assets/images/pages/banner1.png', alt: 'PixelPlush Banner 1' },
+  { src: '/app-assets/images/pages/banner2.png', alt: 'PixelPlush Banner 2' },
+  { src: '/app-assets/images/pages/banner3.png', alt: 'PixelPlush Banner 3' },
 ];
 
 export default function LinksPage() {

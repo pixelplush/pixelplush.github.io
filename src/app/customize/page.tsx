@@ -25,15 +25,15 @@ interface CatalogItem {
 }
 
 const typeColors: Record<string, string> = {
-  character: 'bg-blue-500/20 text-blue-400',
-  pet: 'bg-red-500/20 text-red-400',
-  'add-on': 'bg-green-500/20 text-green-400',
-  bundle: 'bg-cyan-500/20 text-cyan-400',
-  body: 'bg-yellow-500/20 text-yellow-400',
-  equipment: 'bg-yellow-500/20 text-yellow-400',
-  accessory: 'bg-yellow-500/20 text-yellow-400',
-  outfit: 'bg-yellow-500/20 text-yellow-400',
-  effect: 'bg-yellow-500/20 text-yellow-400',
+  character: 'bg-blue-600/15 text-blue-800',
+  pet: 'bg-red-600/15 text-red-800',
+  'add-on': 'bg-green-600/15 text-green-800',
+  bundle: 'bg-cyan-600/15 text-cyan-800',
+  body: 'bg-amber-600/15 text-amber-800',
+  equipment: 'bg-orange-600/15 text-orange-800',
+  accessory: 'bg-purple-600/15 text-purple-800',
+  outfit: 'bg-pink-600/15 text-pink-800',
+  effect: 'bg-teal-600/15 text-teal-800',
 };
 
 const categories = [
@@ -138,11 +138,7 @@ export default function CustomizePage() {
   const ownedItems = useMemo(() => {
     return catalog
       .filter((item) => !item.hidden && owned.has(item.id))
-      .filter((item) => {
-        const cat = item.category || item.type;
-        if (activeCategory === 'outfit') return item.id.startsWith('outfit');
-        return cat === activeCategory;
-      })
+      .filter((item) => item.type === activeCategory)
       .filter((item) => {
         if (!search) return true;
         const q = search.toLowerCase();

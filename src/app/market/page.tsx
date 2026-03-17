@@ -24,15 +24,15 @@ interface CatalogItem {
 }
 
 const typeColors: Record<string, string> = {
-  character: 'bg-blue-500/20 text-blue-400',
-  pet: 'bg-red-500/20 text-red-400',
-  'add-on': 'bg-green-500/20 text-green-400',
-  bundle: 'bg-cyan-500/20 text-cyan-400',
-  body: 'bg-yellow-500/20 text-yellow-400',
-  equipment: 'bg-yellow-500/20 text-yellow-400',
-  accessory: 'bg-yellow-500/20 text-yellow-400',
-  outfit: 'bg-yellow-500/20 text-yellow-400',
-  effect: 'bg-yellow-500/20 text-yellow-400',
+  character: 'bg-blue-600/15 text-blue-800',
+  pet: 'bg-red-600/15 text-red-800',
+  'add-on': 'bg-green-600/15 text-green-800',
+  bundle: 'bg-cyan-600/15 text-cyan-800',
+  body: 'bg-amber-600/15 text-amber-800',
+  equipment: 'bg-orange-600/15 text-orange-800',
+  accessory: 'bg-purple-600/15 text-purple-800',
+  outfit: 'bg-pink-600/15 text-pink-800',
+  effect: 'bg-teal-600/15 text-teal-800',
 };
 
 const coinPackages = [
@@ -116,7 +116,7 @@ export default function MarketPage() {
         <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Marketplace</h1>
         <p className="text-[var(--color-pp-text-muted)]">Browse characters, pets, outfits, and more for your PixelPlush games.</p>
         {isLoggedIn && account && (
-          <p className="mt-2 text-sm text-yellow-400">
+          <p className="mt-2 text-sm text-[var(--color-pp-text)]">
             <Image src={assetPath("/app-assets/images/icon/plush_coin.gif")} alt="coins" width={20} height={20} className="pixelated mr-1 inline" unoptimized />
             {account.coins} coins
           </p>
@@ -170,12 +170,12 @@ export default function MarketPage() {
                     Purchase
                   </button>
                 ) : (
-                  <p className="text-sm text-slate-500">Log in to purchase</p>
+                  <p className="text-sm text-[var(--color-pp-text-muted)]">Log in to purchase</p>
                 )}
               </div>
             ))}
           </div>
-          <p className="mt-6 text-center text-sm text-slate-500">
+          <p className="mt-6 text-center text-sm text-[var(--color-pp-text-muted)]">
             Payments processed securely via PayPal. Coins are non-refundable.
           </p>
         </div>
@@ -213,7 +213,7 @@ export default function MarketPage() {
               <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
             </div>
           ) : filteredItems.length === 0 ? (
-            <div className="flex h-48 items-center justify-center text-slate-500">No items found</div>
+            <div className="flex h-48 items-center justify-center text-[var(--color-pp-text-muted)]">No items found</div>
           ) : (
             <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
               {filteredItems.map((item) => {
@@ -235,23 +235,23 @@ export default function MarketPage() {
                         unoptimized
                       />
                     </div>
-                    <span className={`mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-medium capitalize ${typeColors[item.type] || 'bg-white/10 text-slate-400'}`}>
+                    <span className={`mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-medium capitalize ${typeColors[item.type] || 'bg-[var(--color-pp-bg)]/50 text-[var(--color-pp-text-muted)]'}`}>
                       {item.type}
                     </span>
                     <h3 className="text-xs font-medium text-[var(--color-pp-headings)] truncate">{item.name}</h3>
                     <div className="mt-1.5">
                       {isOwned ? (
-                        <span className="text-xs text-green-400">Owned</span>
+                        <span className="text-xs font-medium text-[var(--color-pp-success)]">Owned</span>
                       ) : (
-                        <span className="text-xs text-slate-400">
+                        <span className="text-xs text-[var(--color-pp-text-muted)]">
                           <Image src={assetPath("/app-assets/images/icon/plush_coin.gif")} alt="" width={14} height={14} className="pixelated mr-0.5 inline" unoptimized />
                           {item.sale ? (
                             <>
                               <span className="line-through">{item.cost}</span>{' '}
-                              <span className="text-green-400">{Math.floor(item.cost / 2)}</span>
+                              <span className="font-medium text-[var(--color-pp-success)]">{Math.floor(item.cost / 2)}</span>
                             </>
                           ) : item.cost === 0 ? (
-                            <span className="text-green-400">FREE</span>
+                            <span className="font-medium text-[var(--color-pp-success)]">FREE</span>
                           ) : (
                             item.cost
                           )}
