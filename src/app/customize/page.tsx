@@ -7,6 +7,7 @@ import { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 
 const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
+const ASSETS_BASE = 'https://www.pixelplush.dev/assets';
 
 interface CatalogItem {
   id: string;
@@ -46,40 +47,302 @@ const categories = [
   { key: 'effect', label: 'Effects' },
 ] as const;
 
-function getItemPreview(item: CatalogItem, frame = 0): string {
+// Layer compositing order matching in-game PIXI z-ordering
+const LAYER_ORDER: { type: string; categories: string[] }[] = [
+  { type: 'body', categories: ['skintones'] },           // z+0: skin base
+  { type: 'body', categories: ['expressions'] },          // z+1: face
+  { type: 'accessory', categories: ['hair'] },            // z+2: hair (hidden by onesies)
+  { type: 'outfit', categories: ['pants'] },              // z+3: pants
+  { type: 'outfit', categories: ['shirts'] },             // z+4: shirts
+  { type: 'outfit', categories: ['dresses', 'onesies'] }, // z+5: dresses/onesies
+  { type: 'effect', categories: ['effects'] },            // z+5: effects
+  { type: 'accessory', categories: ['glasses', 'masks', 'hats', 'wands'] }, // z+10: accessories
+  { type: 'equipment', categories: ['wheelchairs'] },     // z+10: equipment
+];
+
+function getItemFrameUrl(item: CatalogItem, direction: string, frame: number): string {
   if (item.theme === 'None') return '';
-  let dir = '';
+  const f = (frame % 10) + 1;
   switch (item.type) {
     case 'bundle':
-      return `https://www.pixelplush.dev/assets/bundles/${item.path}`;
+      return `${ASSETS_BASE}/bundles/${item.path}`;
     case 'add-on':
-      return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
+      return `${ASSETS_BASE}/add-ons/${item.path}`;
     case 'pet':
-      dir = `pets/${item.path}`;
-      break;
+      return `${ASSETS_BASE}/pets/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'body':
-      dir = `skins/body/${item.category}/${item.path}`;
-      break;
+      return `${ASSETS_BASE}/skins/body/${item.category}/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'equipment':
-      dir = `skins/equipment/${item.category}/${item.path}`;
-      break;
+      return `${ASSETS_BASE}/skins/equipment/${item.category}/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'accessory':
-      dir = `skins/accessories/${item.category}/${item.path}`;
-      break;
+      return `${ASSETS_BASE}/skins/accessories/${item.category}/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'outfit':
-      dir = `skins/outfits/${item.category}/${item.path}`;
-      break;
+      return `${ASSETS_BASE}/skins/outfits/${item.category}/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'effect':
-      dir = `skins/effects/${item.path}`;
-      break;
+      return `${ASSETS_BASE}/skins/effects/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     default:
-      dir = `${item.type}s/${item.id}`;
-      break;
+      return `${ASSETS_BASE}/${item.type}s/${item.id}/${item.id}_${direction}/${item.id}_${direction}${f}.png`;
   }
-  const animFrame = (frame % 10) + 1;
+}
+
+function getItemPreview(item: CatalogItem, frame = 0): string {
   const directions = ['front', 'left', 'back', 'right'];
   const direction = directions[Math.floor((frame % 80) / 20)];
-  return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame}.png`;
+  return getItemFrameUrl(item, direction, frame);
+}
+
+// ---- Layered Canvas Character Preview ----
+function CharacterPreview({
+  style,
+  styles,
+  catalogMap,
+}: {
+  style?: Record<string, string>;
+  styles?: Record<string, string[]>;
+  catalogMap: Record<string, CatalogItem>;
+}) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [direction, setDirection] = useState<'front' | 'left' | 'back' | 'right'>('front');
+  const [frame, setFrame] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  const [queueIndex, setQueueIndex] = useState(0);
+  const animTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const imgCacheRef = useRef<Map<string, HTMLImageElement>>(new Map());
+
+  // Resolve which items to show — combine style (primary) with queue cycling
+  const resolvedItems = useMemo(() => {
+    const items: { layer: number; item: CatalogItem }[] = [];
+    if (!style && !styles) return items;
+
+    // Gather all categories from style + styles
+    const allCats = new Set<string>();
+    if (style) Object.keys(style).forEach((c) => allCats.add(c));
+    if (styles) Object.keys(styles).forEach((c) => allCats.add(c));
+
+    allCats.forEach((cat) => {
+      let itemId: string | undefined;
+      // Check queue first (cycles with queueIndex)
+      if (styles?.[cat]?.length) {
+        const q = styles[cat];
+        itemId = q[queueIndex % q.length];
+      }
+      // Primary style overrides if no queue
+      if (!itemId && style?.[cat]) {
+        itemId = style[cat];
+      }
+      if (!itemId) return;
+
+      const item = catalogMap[itemId];
+      if (!item) return;
+
+      // Find the layer z-order for this item
+      const layerIdx = LAYER_ORDER.findIndex(
+        (l) => l.categories.includes(cat) || (l.type === item.type && l.categories.includes(item.category || ''))
+      );
+
+      items.push({ layer: layerIdx >= 0 ? layerIdx : 50, item });
+    });
+
+    // Also handle "character" type — resolves to a base character when no body parts
+    if (style?.character || styles?.character?.length) {
+      let charId = style?.character;
+      if (styles?.character?.length) {
+        charId = styles.character[queueIndex % styles.character.length];
+      }
+      if (charId) {
+        const charItem = catalogMap[charId];
+        if (charItem && !items.some((i) => i.item.id === charId)) {
+          // Character at the base layer (below everything)
+          items.push({ layer: -1, item: charItem });
+        }
+      }
+    }
+
+    // Pet goes separately but let's include it at the end for preview
+    if (style?.pet || styles?.pet?.length) {
+      let petId = style?.pet;
+      if (styles?.pet?.length) {
+        petId = styles.pet[queueIndex % styles.pet.length];
+      }
+      if (petId) {
+        const petItem = catalogMap[petId];
+        if (petItem && !items.some((i) => i.item.id === petId)) {
+          items.push({ layer: 100, item: petItem });
+        }
+      }
+    }
+
+    return items.sort((a, b) => a.layer - b.layer);
+  }, [style, styles, catalogMap, queueIndex]);
+
+  // Check if there are any queued items to cycle through
+  const hasQueue = useMemo(() => {
+    if (!styles) return false;
+    return Object.values(styles).some((arr) => arr.length > 1);
+  }, [styles]);
+
+  const totalQueueSize = useMemo(() => {
+    if (!styles) return 0;
+    return Math.max(...Object.values(styles).map((arr) => arr.length), 0);
+  }, [styles]);
+
+  // Load image with caching
+  const loadImage = useCallback((url: string): Promise<HTMLImageElement> => {
+    const cached = imgCacheRef.current.get(url);
+    if (cached?.complete && cached?.naturalWidth > 0) return Promise.resolve(cached);
+    return new Promise((resolve) => {
+      const img = new window.Image();
+      img.crossOrigin = 'anonymous';
+      img.onload = () => {
+        imgCacheRef.current.set(url, img);
+        resolve(img);
+      };
+      img.onerror = () => resolve(img); // resolve anyway, just won't draw
+      img.src = url;
+    });
+  }, []);
+
+  // Draw composite character on canvas
+  const drawFrame = useCallback(async () => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.imageSmoothingEnabled = false; // pixel art!
+
+    const characterLayers = resolvedItems.filter((i) => i.layer < 100);
+    const petLayers = resolvedItems.filter((i) => i.layer >= 100);
+
+    // Draw character layers composited
+    const charSize = 96;
+    const charX = (canvas.width - charSize) / 2;
+    const charY = petLayers.length > 0 ? 12 : (canvas.height - charSize) / 2;
+
+    for (const { item } of characterLayers) {
+      const url = getItemFrameUrl(item, direction, frame);
+      if (!url) continue;
+      try {
+        const img = await loadImage(url);
+        if (img.naturalWidth > 0) {
+          ctx.drawImage(img, charX, charY, charSize, charSize);
+        }
+      } catch { /* skip broken images */ }
+    }
+
+    // Draw pet beside/below
+    if (petLayers.length > 0) {
+      const petSize = 56;
+      const petX = charX + charSize + 4;
+      const petY = charY + charSize - petSize;
+      for (const { item } of petLayers) {
+        const url = getItemFrameUrl(item, direction, frame);
+        if (!url) continue;
+        try {
+          const img = await loadImage(url);
+          if (img.naturalWidth > 0) {
+            ctx.drawImage(img, petX, petY, petSize, petSize);
+          }
+        } catch { /* skip */ }
+      }
+    }
+  }, [resolvedItems, direction, frame, loadImage]);
+
+  // Animation loop
+  useEffect(() => {
+    if (playing) {
+      animTimerRef.current = setInterval(() => setFrame((f) => f + 1), 120);
+    } else {
+      if (animTimerRef.current) clearInterval(animTimerRef.current);
+    }
+    return () => { if (animTimerRef.current) clearInterval(animTimerRef.current); };
+  }, [playing]);
+
+  // Draw on every frame/direction change
+  useEffect(() => {
+    drawFrame();
+  }, [drawFrame]);
+
+  // Queue cycling (auto-advance every 4 seconds when there are queued items)
+  useEffect(() => {
+    if (!hasQueue) return;
+    const timer = setInterval(() => setQueueIndex((i) => i + 1), 4000);
+    return () => clearInterval(timer);
+  }, [hasQueue]);
+
+  const isEmpty = resolvedItems.length === 0;
+
+  return (
+    <div>
+      <div className="relative rounded-lg bg-[var(--color-pp-bg)]/50 p-2">
+        {/* Canvas */}
+        <canvas
+          ref={canvasRef}
+          width={200}
+          height={160}
+          className="mx-auto block"
+          style={{ imageRendering: 'pixelated' }}
+        />
+
+        {isEmpty && (
+          <div className="absolute inset-0 flex items-center justify-center text-center text-[var(--color-pp-text-muted)]">
+            <div>
+              <div className="mx-auto mb-2 h-12 w-12 rounded-full bg-[var(--color-pp-border)]" />
+              <p className="text-xs">No items equipped</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* Controls */}
+      {!isEmpty && (
+        <div className="mt-3 space-y-2">
+          {/* Direction buttons */}
+          <div className="flex items-center justify-center gap-1">
+            {(['left', 'front', 'back', 'right'] as const).map((dir) => (
+              <button
+                key={dir}
+                onClick={() => { setDirection(dir); setFrame(0); }}
+                className={`rounded px-2 py-1 text-[10px] font-medium capitalize transition ${
+                  direction === dir
+                    ? 'bg-[var(--color-pp-accent)] text-white'
+                    : 'bg-[var(--color-pp-bg)]/50 text-[var(--color-pp-text-muted)] hover:bg-[var(--color-pp-card-hover)]'
+                }`}
+              >
+                {dir === 'front' ? '▼' : dir === 'back' ? '▲' : dir === 'left' ? '◄' : '►'}
+              </button>
+            ))}
+            <button
+              onClick={() => setPlaying(!playing)}
+              className={`ml-2 rounded px-2 py-1 text-[10px] font-medium transition ${
+                playing
+                  ? 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]'
+                  : 'bg-[var(--color-pp-bg)]/50 text-[var(--color-pp-text-muted)]'
+              }`}
+            >
+              {playing ? '⏸' : '▶'}
+            </button>
+          </div>
+
+          {/* Queue indicator */}
+          {hasQueue && totalQueueSize > 1 && (
+            <div className="text-center">
+              <p className="text-[10px] text-[var(--color-pp-text-muted)]">
+                Queue {(queueIndex % totalQueueSize) + 1}/{totalQueueSize}
+                <button
+                  onClick={() => setQueueIndex((i) => i + 1)}
+                  className="ml-2 rounded bg-[var(--color-pp-bg)]/50 px-1.5 py-0.5 text-[9px] hover:bg-[var(--color-pp-card-hover)]"
+                >
+                  Next →
+                </button>
+              </p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function CustomizePage() {
@@ -232,12 +495,6 @@ export default function CustomizePage() {
     );
   }
 
-  // Get currently selected items for preview
-  const selectedCharId = style?.character;
-  const selectedPetId = style?.pet;
-  const selectedChar = selectedCharId ? catalogMap[selectedCharId] : null;
-  const selectedPet = selectedPetId ? catalogMap[selectedPetId] : null;
-
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
@@ -265,52 +522,26 @@ export default function CustomizePage() {
       <div className="grid gap-6 lg:grid-cols-4">
         {/* Character Preview */}
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-5">
-          <h2 className="mb-3 text-sm font-semibold text-[var(--color-pp-headings)]">Current Look</h2>
-          <div className="flex flex-col items-center gap-4 rounded-lg bg-[var(--color-pp-bg)]/50 p-4">
-            {selectedChar ? (
-              <div className="text-center">
-                <Image
-                  src={getItemPreview(selectedChar)}
-                  alt={selectedChar.name}
-                  width={64}
-                  height={64}
-                  className="pixelated mx-auto"
-                  unoptimized
-                />
-                <p className="mt-2 text-xs font-medium text-[var(--color-pp-text)]">{selectedChar.name}</p>
-              </div>
-            ) : (
-              <div className="text-center text-[var(--color-pp-text-muted)]">
-                <div className="mx-auto mb-2 h-16 w-16 rounded-full bg-[var(--color-pp-border)]" />
-                <p className="text-xs">No character selected</p>
-              </div>
-            )}
-            {selectedPet ? (
-              <div className="text-center">
-                <Image
-                  src={getItemPreview(selectedPet)}
-                  alt={selectedPet.name}
-                  width={40}
-                  height={40}
-                  className="pixelated mx-auto"
-                  unoptimized
-                />
-                <p className="mt-1 text-xs text-[var(--color-pp-text-muted)]">{selectedPet.name}</p>
-              </div>
-            ) : null}
-          </div>
+          <h2 className="mb-3 text-sm font-semibold text-[var(--color-pp-headings)]">Preview</h2>
+          <CharacterPreview style={style} styles={styles} catalogMap={catalogMap} />
 
-          {/* Quick summary of active items */}
+          {/* Equipped items summary */}
           {style && Object.keys(style).length > 0 && (
             <div className="mt-4 space-y-1">
               <h3 className="text-xs font-medium text-[var(--color-pp-text-muted)]">Equipped</h3>
               {Object.entries(style).map(([cat, itemId]) => {
                 const item = catalogMap[itemId as string];
                 if (!item) return null;
+                const queueCount = styles?.[cat]?.length || 0;
                 return (
                   <div key={cat} className="flex items-center justify-between text-xs">
                     <span className="capitalize text-[var(--color-pp-text-muted)]">{cat}</span>
-                    <span className="font-medium text-[var(--color-pp-text)]">{item.name}</span>
+                    <span className="font-medium text-[var(--color-pp-text)]">
+                      {item.name}
+                      {queueCount > 1 && (
+                        <span className="ml-1 text-[9px] text-[var(--color-pp-accent)]">+{queueCount - 1}</span>
+                      )}
+                    </span>
                   </div>
                 );
               })}
