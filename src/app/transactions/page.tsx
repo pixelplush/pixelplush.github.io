@@ -1,9 +1,108 @@
 'use client';
 
 import { useAuth } from '@/lib/auth';
+import { useEffect, useState, useMemo } from 'react';
+
+const STATS_URL = 'https://stats.pixelplush.dev/v1';
+const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
+
+interface CatalogItem {
+  id: string;
+  name: string;
+  type: string;
+  cost: number;
+}
+
+interface TransactionEntry {
+  date: string;
+  type: 'redeem' | 'purchase';
+  description: string;
+  amount: number;
+  item?: string;
+}
+
+function formatDate(dateStr: string): string {
+  try {
+    const d = new Date(dateStr);
+    return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+  } catch {
+    return dateStr;
+  }
+}
 
 export default function TransactionsPage() {
-  const { isLoggedIn, isLoading, account, login } = useAuth();
+  const { isLoggedIn, isLoading, token, login } = useAuth();
+  const [transactions, setTransactions] = useState<TransactionEntry[]>([]);
+  const [txLoading, setTxLoading] = useState(true);
+  const [catalogMap, setCatalogMap] = useState<Record<string, CatalogItem>>({});
+  const [filter, setFilter] = useState<'all' | 'redeem' | 'purchase'>('all');
+
+  useEffect(() => {
+    fetch(CATALOG_URL)
+      .then((r) => r.json())
+      .then((data: CatalogItem[]) => {
+        const map: Record<string, CatalogItem> = {};
+        data.forEach((item) => { map[item.id] = item; });
+        setCatalogMap(map);
+      })
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    if (!token) return;
+    setTxLoading(true);
+    fetch(`${STATS_URL}/transactions/user`, {
+      headers: { Twitch: token },
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        const entries: TransactionEntry[] = [];
+        const receipts = data?.receipts || data;
+
+        // Process "from" entries (item redemptions — coins spent)
+        if (receipts?.from && Array.isArray(receipts.from)) {
+          receipts.from.forEach((tx: Record<string, unknown>) => {
+            entries.push({
+              date: (tx.date || tx.timestamp || '') as string,
+              type: 'redeem',
+              description: (tx.item || tx.name || 'Item Redeemed') as string,
+              amount: typeof tx.amount === 'number' ? tx.amount : (typeof tx.cost === 'number' ? -tx.cost : 0),
+              item: (tx.item || tx.id || '') as string,
+            });
+          });
+        }
+
+        // Process "to" entries (coin purchases — coins gained)
+        if (receipts?.to && Array.isArray(receipts.to)) {
+          receipts.to.forEach((tx: Record<string, unknown>) => {
+            entries.push({
+              date: (tx.date || tx.timestamp || '') as string,
+              type: 'purchase',
+              description: (tx.item || tx.name || 'Coin Purchase') as string,
+              amount: typeof tx.amount === 'number' ? tx.amount : 0,
+              item: (tx.item || tx.id || '') as string,
+            });
+          });
+        }
+
+        // Sort by date descending
+        entries.sort((a, b) => {
+          if (!a.date && !b.date) return 0;
+          if (!a.date) return 1;
+          if (!b.date) return -1;
+          return new Date(b.date).getTime() - new Date(a.date).getTime();
+        });
+
+        setTransactions(entries);
+        setTxLoading(false);
+      })
+      .catch(() => setTxLoading(false));
+  }, [token]);
+
+  const filtered = useMemo(() => {
+    if (filter === 'all') return transactions;
+    return transactions.filter((tx) => tx.type === filter);
+  }, [transactions, filter]);
 
   if (isLoading) {
     return (
@@ -33,21 +132,92 @@ export default function TransactionsPage() {
     );
   }
 
-  return (
-    <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Transactions</h1>
-      <p className="mb-8 text-[var(--color-pp-text-muted)]">Your purchase and coin transaction history.</p>
+  const redeemCount = transactions.filter((t) => t.type === 'redeem').length;
+  const purchaseCount = transactions.filter((t) => t.type === 'purchase').length;
 
-      <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-        <div className="flex h-48 items-center justify-center text-center">
-          <div className="text-slate-500">
-            <svg className="mx-auto mb-3 h-12 w-12 text-slate-600" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-            </svg>
-            <p className="text-sm">Transaction history will appear here.</p>
-            <p className="mt-1 text-xs text-slate-600">Full transaction log is being ported from the legacy site.</p>
+  return (
+    <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">Transactions</h1>
+        <p className="mt-1 text-[var(--color-pp-text-muted)]">Your purchase and redemption history.</p>
+      </div>
+
+      {/* Filter Tabs */}
+      <div className="mb-4 flex gap-2">
+        {[
+          { key: 'all' as const, label: 'All', count: transactions.length },
+          { key: 'redeem' as const, label: 'Redemptions', count: redeemCount },
+          { key: 'purchase' as const, label: 'Purchases', count: purchaseCount },
+        ].map((tab) => (
+          <button
+            key={tab.key}
+            onClick={() => setFilter(tab.key)}
+            className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
+              filter === tab.key
+                ? 'bg-[var(--color-pp-accent)] text-white'
+                : 'bg-[var(--color-pp-card)] text-[var(--color-pp-text)] hover:bg-[var(--color-pp-card-hover)]'
+            }`}
+          >
+            {tab.label}
+            <span className={`ml-1.5 text-xs ${filter === tab.key ? 'text-white/70' : 'text-[var(--color-pp-text-muted)]'}`}>
+              ({tab.count})
+            </span>
+          </button>
+        ))}
+      </div>
+
+      <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] overflow-hidden">
+        {txLoading ? (
+          <div className="flex h-48 items-center justify-center">
+            <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
           </div>
-        </div>
+        ) : filtered.length === 0 ? (
+          <div className="flex h-48 items-center justify-center text-center">
+            <div className="text-[var(--color-pp-text-muted)]">
+              <svg className="mx-auto mb-3 h-12 w-12" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+              </svg>
+              <p className="text-sm">No transactions found.</p>
+            </div>
+          </div>
+        ) : (
+          <div className="divide-y divide-[var(--color-pp-border)]">
+            {/* Table Header */}
+            <div className="hidden sm:grid sm:grid-cols-12 gap-4 px-5 py-3 text-xs font-medium text-[var(--color-pp-text-muted)] uppercase tracking-wider">
+              <div className="col-span-3">Date</div>
+              <div className="col-span-2">Type</div>
+              <div className="col-span-5">Description</div>
+              <div className="col-span-2 text-right">Amount</div>
+            </div>
+            {filtered.map((tx, i) => {
+              const itemName = tx.item && catalogMap[tx.item] ? catalogMap[tx.item].name : tx.description;
+              return (
+                <div key={i} className="grid grid-cols-1 sm:grid-cols-12 gap-1 sm:gap-4 px-5 py-3 text-sm hover:bg-[var(--color-pp-card-hover)] transition">
+                  <div className="sm:col-span-3 text-[var(--color-pp-text-muted)] text-xs sm:text-sm">
+                    {tx.date ? formatDate(tx.date) : '—'}
+                  </div>
+                  <div className="sm:col-span-2">
+                    <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                      tx.type === 'redeem'
+                        ? 'bg-blue-500/15 text-blue-500'
+                        : 'bg-green-500/15 text-green-500'
+                    }`}>
+                      {tx.type === 'redeem' ? 'Redeemed' : 'Purchased'}
+                    </span>
+                  </div>
+                  <div className="sm:col-span-5 text-[var(--color-pp-text)] truncate">
+                    {itemName}
+                  </div>
+                  <div className={`sm:col-span-2 text-right font-medium ${
+                    tx.amount >= 0 ? 'text-green-500' : 'text-[var(--color-pp-danger)]'
+                  }`}>
+                    {tx.amount >= 0 ? '+' : ''}{tx.amount}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );

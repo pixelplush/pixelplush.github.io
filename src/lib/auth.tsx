@@ -25,6 +25,8 @@ interface Account {
   profileImage?: string;
   coins?: number;
   owned?: string[];
+  style?: Record<string, string>;
+  styles?: Record<string, string[]>;
   error?: string;
   [key: string]: unknown;
 }
@@ -36,6 +38,7 @@ interface AuthState {
   account: Account | null;
   login: () => void;
   logout: () => void;
+  refreshAccount: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthState>({
@@ -45,6 +48,7 @@ const AuthContext = createContext<AuthState>({
   account: null,
   login: () => {},
   logout: () => {},
+  refreshAccount: async () => {},
 });
 
 export function useAuth() {
@@ -134,8 +138,22 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setAccount(null);
   }, []);
 
+  const refreshAccount = useCallback(async () => {
+    if (!token) return;
+    try {
+      const acct = await fetch(`${API_URL}/accounts`, {
+        headers: { Twitch: token },
+      }).then((r) => r.json());
+      if (!acct.error) {
+        setAccount(acct);
+      }
+    } catch {
+      // refresh failed
+    }
+  }, [token]);
+
   return (
-    <AuthContext.Provider value={{ isLoading, isLoggedIn, token, account, login, logout }}>
+    <AuthContext.Provider value={{ isLoading, isLoggedIn, token, account, login, logout, refreshAccount }}>
       <Script
         src={`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/comfytwitch.min.js`}
         strategy="afterInteractive"
