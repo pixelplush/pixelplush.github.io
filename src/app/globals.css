@@ -10,7 +10,7 @@
   --color-pp-text-muted: #727E8C;
   --color-pp-nav-text: #D8714F;
   --color-pp-accent: #5A8DEE;
-  --color-pp-link: #E08C35;
+  --color-pp-link: #B5651D;
   --color-pp-border: #DFE3E7;
   --color-pp-info: #6EB8A8;
   --color-pp-success: #74A33F;
@@ -42,7 +42,7 @@ a {
   text-decoration: none;
 }
 a:hover {
-  color: #c97a2a;
+  color: #8B4513;
 }
 
 .pixelated {

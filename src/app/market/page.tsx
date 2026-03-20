@@ -36,11 +36,10 @@ const typeColors: Record<string, string> = {
 };
 
 const coinPackages = [
-  { coins: 50, price: '$1.99', value: '' },
-  { coins: 150, price: '$3.99', value: '' },
-  { coins: 400, price: '$7.99', value: 'Popular' },
-  { coins: 1100, price: '$19.99', value: 'Best Value' },
-  { coins: 6000, price: '$99.99', value: 'Mega Pack' },
+  { coins: 22, price: '$4', bonus: '+10%' },
+  { coins: 46, price: '$8', bonus: '+15%' },
+  { coins: 120, price: '$20', bonus: '+20%' },
+  { coins: 625, price: '$100', bonus: '+25%' },
 ];
 
 function getItemPreview(item: CatalogItem): string {
@@ -81,6 +80,7 @@ export default function MarketPage() {
     outfit: true,
   });
   const [tab, setTab] = useState<'catalog' | 'coins'>('catalog');
+  const [hideOwned, setHideOwned] = useState(false);
 
   useEffect(() => {
     fetch(CATALOG_URL)
@@ -105,10 +105,14 @@ export default function MarketPage() {
     if (!filters['add-on']) items = items.filter((x) => x.type !== 'add-on');
     if (!filters.bundle) items = items.filter((x) => x.type !== 'bundle');
     if (!filters.outfit) items = items.filter((x) => !x.id.startsWith('outfit'));
+    if (hideOwned && account?.styles) {
+      const ownedIds = new Set(Object.values(account.styles).flat());
+      items = items.filter((x) => !ownedIds.has(x.id));
+    }
     return items;
-  }, [catalog, search, filters]);
+  }, [catalog, search, filters, hideOwned, account]);
 
-  const owned: string[] = (account?.owned as string[]) || [];
+  const owned: string[] = account?.styles ? Object.values(account.styles).flat() : [];
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
@@ -149,15 +153,11 @@ export default function MarketPage() {
             {coinPackages.map((pkg) => (
               <div
                 key={pkg.coins}
-                className={`relative rounded-2xl border p-6 text-center transition ${
-                  pkg.value === 'Best Value'
-                    ? 'border-yellow-500/50 bg-yellow-500/5'
-                    : 'border-[var(--color-pp-border)] bg-[var(--color-pp-card)]'
-                }`}
+                className="relative rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6 text-center transition"
               >
-                {pkg.value && (
+                {pkg.bonus && (
                   <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-yellow-500 px-3 py-0.5 text-xs font-bold text-black">
-                    {pkg.value}
+                    {pkg.bonus}
                   </span>
                 )}
                 <div className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">
@@ -205,6 +205,15 @@ export default function MarketPage() {
                 </button>
               ))}
             </div>
+            <label className="flex items-center gap-2 text-sm text-[var(--color-pp-text)] cursor-pointer">
+              <input
+                type="checkbox"
+                checked={hideOwned}
+                onChange={(e) => setHideOwned(e.target.checked)}
+                className="rounded"
+              />
+              Hide owned items
+            </label>
           </div>
 
           {/* Catalog Grid */}
@@ -215,7 +224,7 @@ export default function MarketPage() {
           ) : filteredItems.length === 0 ? (
             <div className="flex h-48 items-center justify-center text-[var(--color-pp-text-muted)]">No items found</div>
           ) : (
-            <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+            <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
               {filteredItems.map((item) => {
                 const isOwned = owned.includes(item.id);
                 return (

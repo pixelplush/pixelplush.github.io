@@ -353,7 +353,7 @@ function GamesContent() {
           <Link
             key={game.id}
             href={`/games?type=${game.id}`}
-            className={`group rounded-2xl border p-5 transition hover:scale-[1.02] hover:shadow-lg ${game.color}`}
+            className={`group rounded-2xl border p-5 transition hover:scale-[1.02] hover:shadow-lg ${game.color} bg-[#FFFDF8]`}
           >
             <div className="mb-4 flex h-40 items-center justify-center overflow-hidden rounded-lg bg-black/20">
               <Image

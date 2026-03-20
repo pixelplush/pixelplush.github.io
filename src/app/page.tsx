@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import { GameCard } from "@/components/GameCard";
-import { assetPath } from "@/lib/assetPath";
 
 const games = [
   {
@@ -105,33 +104,6 @@ const games = [
   },
 ];
 
-const legacyGames = [
-  {
-    id: "galaxybumper",
-    name: "Galaxy Bumper (Azure LuxJam 2021)",
-    tagline: "Theme: Chain Reaction",
-    description: "Launch a rocket to bump the space egg!",
-    image: "/app-assets/images/games/galaxy_bumper3_small.gif",
-    href: "https://www.pixelplush.dev/galaxybumper",
-  },
-  {
-    id: "chronocipher",
-    name: "Chronocipher (Ludum Dare 46)",
-    tagline: "Twitch-Integrated Detective Game!",
-    description: "Music by Patrik Herman, Voice by ElysiaGriffin!",
-    image: "/app-assets/images/games/chronocipher.gif",
-    href: "https://www.pixelplush.dev/LudumDare46",
-  },
-  {
-    id: "pawsome",
-    name: "Detective Pawsome (Ludum Dare 45)",
-    tagline: "Twitch-Integrated Password-Hacking Game!",
-    description: "Play solo or with your viewers! Music by Patrik Herman!",
-    image: "/app-assets/images/games/detectivepawsome.gif",
-    href: "https://www.instafluff.tv/DetectivePawsome/",
-  },
-];
-
 export default function HomePage() {
   return (
     <div>
@@ -198,34 +170,6 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-
-        {/* Legacy Games */}
-        {legacyGames.map((game) => (
-          <div key={game.id} className="pp-card overflow-hidden flex flex-col">
-            <div className="aspect-video relative">
-              <Image
-                src={assetPath(game.image)}
-                alt={game.name}
-                fill
-                className="object-cover"
-                unoptimized
-              />
-            </div>
-            <div className="p-4 flex-1 flex flex-col">
-              <h3 className="text-base font-semibold mb-1">{game.name}</h3>
-              <p className="text-sm text-[var(--color-pp-text)] mb-1">{game.tagline}</p>
-              <p className="text-xs text-[var(--color-pp-text)] mb-4 flex-1">{game.description}</p>
-              <a
-                href={game.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-success w-full block text-center"
-              >
-                Click to Play
-              </a>
-            </div>
-          </div>
-        ))}
       </div>
     </div>
   );

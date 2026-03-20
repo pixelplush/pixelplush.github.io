@@ -66,7 +66,7 @@ export default function TransactionsPage() {
               date: (tx.date || tx.timestamp || '') as string,
               type: 'redeem',
               description: (tx.item || tx.name || 'Item Redeemed') as string,
-              amount: typeof tx.amount === 'number' ? tx.amount : (typeof tx.cost === 'number' ? -tx.cost : 0),
+              amount: typeof tx.amount === 'number' ? -Math.abs(tx.amount) : (typeof tx.cost === 'number' ? -Math.abs(tx.cost) : 0),
               item: (tx.item || tx.id || '') as string,
             });
           });
@@ -154,7 +154,7 @@ export default function TransactionsPage() {
             onClick={() => setFilter(tab.key)}
             className={`rounded-lg px-4 py-2 text-sm font-medium transition ${
               filter === tab.key
-                ? 'bg-[var(--color-pp-accent)] text-white'
+                ? 'bg-[#6eb8a8] text-white'
                 : 'bg-[var(--color-pp-card)] text-[var(--color-pp-text)] hover:bg-[var(--color-pp-card-hover)]'
             }`}
           >
@@ -209,7 +209,7 @@ export default function TransactionsPage() {
                     {itemName}
                   </div>
                   <div className={`sm:col-span-2 text-right font-medium ${
-                    tx.amount >= 0 ? 'text-green-500' : 'text-[var(--color-pp-danger)]'
+                    tx.amount < 0 ? 'text-[var(--color-pp-danger)]' : 'text-green-500'
                   }`}>
                     {tx.amount >= 0 ? '+' : ''}{tx.amount}
                   </div>

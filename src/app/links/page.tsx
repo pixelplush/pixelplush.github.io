@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { assetPath } from '@/lib/assetPath';
 
 export const metadata: Metadata = {
-  title: 'Links',
-  description: 'PixelPlush social media links, banners, and community resources.',
+  title: 'About Us',
+  description: 'PixelPlush social media links, banners, game jam games, and community resources.',
   alternates: { canonical: '/links' },
 };
 
@@ -18,7 +18,7 @@ const socialLinks = [
         <path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z" />
       </svg>
     ),
-    color: 'bg-indigo-500/20 text-indigo-400 hover:bg-indigo-500/30',
+    color: 'bg-[#5865f2]/20 text-[#5865f2] hover:bg-[#5865f2]/30',
   },
   {
     name: 'Twitter / X',
@@ -40,7 +40,7 @@ const socialLinks = [
         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
       </svg>
     ),
-    color: 'bg-pink-500/20 text-pink-400 hover:bg-pink-500/30',
+    color: 'bg-[#E1306C]/20 text-[#E1306C] hover:bg-[#E1306C]/30',
   },
 ];
 
@@ -50,10 +50,37 @@ const banners = [
   { src: '/app-assets/images/pages/banner3.png', alt: 'PixelPlush Banner 3' },
 ];
 
+const legacyGames = [
+  {
+    id: 'galaxybumper',
+    name: 'Galaxy Bumper (Azure LuxJam 2021)',
+    tagline: 'Theme: Chain Reaction',
+    description: 'Launch a rocket to bump the space egg!',
+    image: '/app-assets/images/games/galaxy_bumper3_small.gif',
+    href: 'https://www.pixelplush.dev/galaxybumper',
+  },
+  {
+    id: 'chronocipher',
+    name: 'Chronocipher (Ludum Dare 46)',
+    tagline: 'Twitch-Integrated Detective Game!',
+    description: 'Music by Patrik Herman, Voice by ElysiaGriffin!',
+    image: '/app-assets/images/games/chronocipher.gif',
+    href: 'https://www.pixelplush.dev/LudumDare46',
+  },
+  {
+    id: 'pawsome',
+    name: 'Detective Pawsome (Ludum Dare 45)',
+    tagline: 'Twitch-Integrated Password-Hacking Game!',
+    description: 'Play solo or with your viewers! Music by Patrik Herman!',
+    image: '/app-assets/images/games/detectivepawsome.gif',
+    href: 'https://www.instafluff.tv/DetectivePawsome/',
+  },
+];
+
 export default function LinksPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Links &amp; Community</h1>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">About Us</h1>
       <p className="mb-8 text-[var(--color-pp-text-muted)]">Find us on social media and get banners for your stream.</p>
 
       {/* Social Links */}
@@ -87,10 +114,42 @@ export default function LinksPage() {
                 alt={banner.alt}
                 width={800}
                 height={200}
-                className="w-full object-contain"
+                className="mx-auto max-w-full object-contain"
                 unoptimized
               />
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Game Jam Games */}
+      <div className="mt-12">
+        <h2 className="mb-2 text-xl font-semibold text-[var(--color-pp-headings)]">Game Jam Games</h2>
+        <p className="mb-6 text-sm text-[var(--color-pp-text-muted)]">Games we made during game jams — play them for free!</p>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {legacyGames.map((game) => (
+            <a
+              key={game.id}
+              href={game.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] overflow-hidden transition hover:shadow-lg hover:scale-[1.02]"
+            >
+              <div className="aspect-video relative">
+                <Image
+                  src={assetPath(game.image)}
+                  alt={game.name}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+              <div className="p-4">
+                <h3 className="text-sm font-semibold text-[var(--color-pp-headings)]">{game.name}</h3>
+                <p className="text-xs text-[var(--color-pp-text-muted)] mt-1">{game.tagline}</p>
+                <p className="text-xs text-[var(--color-pp-text)] mt-1">{game.description}</p>
+              </div>
+            </a>
           ))}
         </div>
       </div>

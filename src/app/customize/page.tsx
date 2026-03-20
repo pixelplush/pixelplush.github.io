@@ -506,13 +506,13 @@ export default function CustomizePage() {
           <button
             onClick={deselectAll}
             disabled={!!busy}
-            className="rounded-lg border border-[var(--color-pp-danger)]/30 px-4 py-2 text-sm font-medium text-[var(--color-pp-danger)] transition hover:bg-[var(--color-pp-danger)]/10 disabled:opacity-50"
+            className="rounded-lg bg-[var(--color-pp-danger)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90 disabled:opacity-50"
           >
             Deselect All
           </button>
           <Link
             href="/market"
-            className="rounded-lg border border-[var(--color-pp-border)] px-4 py-2 text-sm font-medium text-[var(--color-pp-text-muted)] transition hover:border-[var(--color-pp-text)]"
+            className="rounded-lg bg-[var(--color-pp-accent)] px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
           >
             Visit Market &rarr;
           </Link>
