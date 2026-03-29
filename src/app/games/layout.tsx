@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Games for Twitch',
+  title: 'Games for Streams',
   description: 'Browse all PixelPlush stream overlay games for Twitch — Parachute, Plinko, Maze, Giveaway Tool, Confetti, and more.',
   alternates: { canonical: '/games' },
 };

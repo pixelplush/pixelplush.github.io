@@ -1,7 +1,7 @@
 'use client';
 
 import { useSearchParams } from 'next/navigation';
-import { Suspense, useState, useCallback } from 'react';
+import { Suspense, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { assetPath } from '@/lib/assetPath';
@@ -12,6 +12,7 @@ interface GameTheme {
   name: string;
   page: string;
   premium?: boolean;
+  preview: string;
 }
 
 interface GameDef {
@@ -37,18 +38,18 @@ const games: GameDef[] = [
     badge: 'Free',
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
-      { key: 'giveaway', name: 'PixelPlush (Free)', page: '/giveaway/index.html' },
-      { key: 'giveawaycolors', name: 'Colorful (Premium)', page: '/giveaway/blue.html', premium: true },
-      { key: 'giveawayblue', name: 'Blue', page: '/giveaway/blue.html', premium: true },
-      { key: 'giveawaybw', name: 'Black & White', page: '/giveaway/bw.html', premium: true },
-      { key: 'giveawaygreen', name: 'Green', page: '/giveaway/green.html', premium: true },
-      { key: 'giveawayorange', name: 'Orange', page: '/giveaway/orange.html', premium: true },
-      { key: 'giveawaypink', name: 'Pink', page: '/giveaway/pink.html', premium: true },
-      { key: 'giveawaypurple', name: 'Purple', page: '/giveaway/purple.html', premium: true },
-      { key: 'giveawayred', name: 'Red', page: '/giveaway/red.html', premium: true },
-      { key: 'giveawayyellow', name: 'Yellow', page: '/giveaway/yellow.html', premium: true },
-      { key: 'giveawayblossoms', name: 'Blossoms (Premium)', page: '/giveaway/blossoms.html', premium: true },
-      { key: 'giveawayautumn', name: 'Autumn (Premium)', page: '/giveaway/autumn.html', premium: true },
+      { key: 'giveaway', name: 'PixelPlush (Free)', page: '/giveaway/index.html', preview: '/app-assets/images/games/giveaway_basic.gif' },
+      { key: 'giveawaycolors', name: 'Colorful (Premium)', page: '/giveaway/blue.html', premium: true, preview: '/app-assets/images/games/pp_pink.gif' },
+      { key: 'giveawayblue', name: 'Blue', page: '/giveaway/blue.html', premium: true, preview: '/app-assets/images/games/pp_blue.gif' },
+      { key: 'giveawaybw', name: 'Black & White', page: '/giveaway/bw.html', premium: true, preview: '/app-assets/images/games/pp_bw.gif' },
+      { key: 'giveawaygreen', name: 'Green', page: '/giveaway/green.html', premium: true, preview: '/app-assets/images/games/giveaway_pp_green.gif' },
+      { key: 'giveawayorange', name: 'Orange', page: '/giveaway/orange.html', premium: true, preview: '/app-assets/images/games/giveaway_pp_orange.gif' },
+      { key: 'giveawaypink', name: 'Pink', page: '/giveaway/pink.html', premium: true, preview: '/app-assets/images/games/pp_pink.gif' },
+      { key: 'giveawaypurple', name: 'Purple', page: '/giveaway/purple.html', premium: true, preview: '/app-assets/images/games/giveaway_pp_purple.gif' },
+      { key: 'giveawayred', name: 'Red', page: '/giveaway/red.html', premium: true, preview: '/app-assets/images/games/giveaway_pp_red.gif' },
+      { key: 'giveawayyellow', name: 'Yellow', page: '/giveaway/yellow.html', premium: true, preview: '/app-assets/images/games/giveaway_pp_yellow.gif' },
+      { key: 'giveawayblossoms', name: 'Blossoms (Premium)', page: '/giveaway/blossoms.html', premium: true, preview: '/app-assets/images/games/giveaway_blossoms.gif' },
+      { key: 'giveawayautumn', name: 'Autumn (Premium)', page: '/giveaway/autumn.html', premium: true, preview: '/app-assets/images/games/giveaway_autumn.gif' },
     ],
   },
   {
@@ -61,7 +62,7 @@ const games: GameDef[] = [
     badge: 'Channel Points',
     badgeColor: 'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]',
     themes: [
-      { key: 'weather', name: 'Stream Weather', page: '/weather/index.html', premium: true },
+      { key: 'weather', name: 'Stream Weather', page: '/weather/index.html', premium: true, preview: '/app-assets/images/games/streamweather_square.gif' },
     ],
   },
   {
@@ -74,7 +75,7 @@ const games: GameDef[] = [
     badge: 'Channel Points',
     badgeColor: 'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]',
     themes: [
-      { key: 'confetti', name: 'Pixel Confetti', page: '/confetti/index.html', premium: true },
+      { key: 'confetti', name: 'Pixel Confetti', page: '/confetti/index.html', premium: true, preview: '/app-assets/images/games/pixelconfetti_square.gif' },
     ],
   },
   {
@@ -87,9 +88,9 @@ const games: GameDef[] = [
     badge: 'Free',
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
-      { key: 'pixelplinko', name: 'Day (Free)', page: '/plinko/index.html' },
-      { key: 'pixelplinkochristmas', name: 'Christmas (Free)', page: '/plinko/christmas.html' },
-      { key: 'pixelplinkohalloween', name: 'Halloween (Premium)', page: '/plinko/halloween.html', premium: true },
+      { key: 'pixelplinko', name: 'Day (Free)', page: '/plinko/index.html', preview: '/app-assets/images/games/plinko_day_website.gif' },
+      { key: 'pixelplinkochristmas', name: 'Christmas (Free)', page: '/plinko/christmas.html', preview: '/app-assets/images/games/plinko_christmas_website.gif' },
+      { key: 'pixelplinkohalloween', name: 'Halloween (Premium)', page: '/plinko/halloween.html', premium: true, preview: '/app-assets/images/games/pixelplinkohalloween.gif' },
     ],
   },
   {
@@ -102,23 +103,23 @@ const games: GameDef[] = [
     badge: 'Free',
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
-      { key: 'pixelparachutes', name: 'Day (Free)', page: '/parachute/index.html' },
-      { key: 'pixelparachutesday', name: 'Day Alt', page: '/parachute/day.html' },
-      { key: 'pixelparachutesnight', name: 'Night', page: '/parachute/night.html' },
-      { key: 'pixelparachutesretro', name: 'Retro', page: '/parachute/retro.html' },
-      { key: 'pixelparachuteautumn', name: 'Autumn (Free)', page: '/parachute/autumn.html' },
-      { key: 'pixelparachutehalloween', name: 'Halloween (Free)', page: '/parachute/halloween.html' },
-      { key: 'pixelparachutechristmas', name: 'Christmas (Free)', page: '/parachute/christmas.html' },
-      { key: 'pixelparachutewinter', name: 'Winter (Free)', page: '/parachute/winter.html' },
-      { key: 'pixelparachutespring', name: 'Spring Blossoms (Premium)', page: '/parachute/spring.html', premium: true },
-      { key: 'pixelparachuterainbow', name: 'Rainbow (Premium)', page: '/parachute/pride.html', premium: true },
-      { key: 'pixelparachutecauldron', name: 'Cauldron (Premium)', page: '/parachute/cauldron_colors.html', premium: true },
-      { key: 'pixelparachutechristmaseve', name: 'Christmas Eve (Premium)', page: '/parachute/christmas_eve.html', premium: true },
-      { key: 'pixelparachutevalentines', name: 'Valentines (Premium)', page: '/parachute/valentines_brown_gold.html', premium: true },
-      { key: 'pixelparachuteeaster', name: 'Easter (Free)', page: '/parachute/easter_free.html' },
-      { key: 'pixelparachutesplashpool', name: 'Pool Party Red (Free)', page: '/parachute/pool_splash_red.html' },
-      { key: 'pixelparachutesplashpoolblue', name: 'Pool Party Blue (Free)', page: '/parachute/pool_splash_blue.html' },
-      { key: 'pixelparachutescakes', name: 'Party Cakes (Premium)', page: '/parachute/cake_rainbow.html', premium: true },
+      { key: 'pixelparachutes', name: 'Day (Free)', page: '/parachute/index.html', preview: '/app-assets/images/games/pixelparachuteday.gif' },
+      { key: 'pixelparachutesday', name: 'Day Alt', page: '/parachute/day.html', preview: '/app-assets/images/games/pixelparachuteday.gif' },
+      { key: 'pixelparachutesnight', name: 'Night', page: '/parachute/night.html', preview: '/app-assets/images/games/pixelparachutenight.gif' },
+      { key: 'pixelparachutesretro', name: 'Retro', page: '/parachute/retro.html', preview: '/app-assets/images/games/pixelparachuteretro.gif' },
+      { key: 'pixelparachuteautumn', name: 'Autumn (Free)', page: '/parachute/autumn.html', preview: '/app-assets/images/games/drop_autumn_website.gif' },
+      { key: 'pixelparachutehalloween', name: 'Halloween (Free)', page: '/parachute/halloween.html', preview: '/app-assets/images/games/pixelparachutehalloween.gif' },
+      { key: 'pixelparachutechristmas', name: 'Christmas (Free)', page: '/parachute/christmas.html', preview: '/app-assets/images/games/pixelparachutechristmas.gif' },
+      { key: 'pixelparachutewinter', name: 'Winter (Free)', page: '/parachute/winter.html', preview: '/app-assets/images/games/pixelparachutewinter.gif' },
+      { key: 'pixelparachutespring', name: 'Spring Blossoms (Premium)', page: '/parachute/spring.html', premium: true, preview: '/app-assets/images/games/pixelparachutespring.gif' },
+      { key: 'pixelparachuterainbow', name: 'Rainbow (Premium)', page: '/parachute/pride.html', premium: true, preview: '/app-assets/images/games/pixelparachuterainbow.gif' },
+      { key: 'pixelparachutecauldron', name: 'Cauldron (Premium)', page: '/parachute/cauldron_colors.html', premium: true, preview: '/app-assets/images/games/drop_cauldron_rainbow_website.gif' },
+      { key: 'pixelparachutechristmaseve', name: 'Christmas Eve (Premium)', page: '/parachute/christmas_eve.html', premium: true, preview: '/app-assets/images/games/drop_christmas_eve.gif' },
+      { key: 'pixelparachutevalentines', name: 'Valentines (Premium)', page: '/parachute/valentines_brown_gold.html', premium: true, preview: '/app-assets/images/games/valentines_brown_gold.gif' },
+      { key: 'pixelparachuteeaster', name: 'Easter (Free)', page: '/parachute/easter_free.html', preview: '/app-assets/images/games/drop_easter_main.gif' },
+      { key: 'pixelparachutesplashpool', name: 'Pool Party Red (Free)', page: '/parachute/pool_splash_red.html', preview: '/app-assets/images/games/pool_red.gif' },
+      { key: 'pixelparachutesplashpoolblue', name: 'Pool Party Blue (Free)', page: '/parachute/pool_splash_blue.html', preview: '/app-assets/images/games/pool_blue.gif' },
+      { key: 'pixelparachutescakes', name: 'Party Cakes (Premium)', page: '/parachute/cake_rainbow.html', premium: true, preview: '/app-assets/images/games/drop_cake_rainbow_website.gif' },
     ],
   },
   {
@@ -131,7 +132,7 @@ const games: GameDef[] = [
     badge: 'Free',
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
-      { key: 'chatflakes', name: 'Chat Flakes', page: '/flakes/index.html', premium: true },
+      { key: 'chatflakes', name: 'Chat Flakes', page: '/flakes/index.html', premium: true, preview: '/app-assets/images/games/chatflakes.gif' },
     ],
   },
   {
@@ -144,7 +145,7 @@ const games: GameDef[] = [
     badge: 'Free',
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
-      { key: 'pixelhillrollchristmas', name: 'Christmas (Free)', page: '/hillroll/christmas.html' },
+      { key: 'pixelhillrollchristmas', name: 'Christmas (Free)', page: '/hillroll/christmas.html', preview: '/app-assets/images/games/hill_christmas_gif.gif' },
     ],
   },
   {
@@ -157,23 +158,22 @@ const games: GameDef[] = [
     badge: 'Free',
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
-      { key: 'wanderingwizards', name: 'Wandering Wizards (Free)', page: '/maze/index.html' },
-      { key: 'autumnadventure', name: 'Autumn Adventure (Free)', page: '/maze/autumn.html' },
-      { key: 'trickortreat', name: 'Trick or Treat (Free)', page: '/maze/ghost.html' },
-      { key: 'santasecretservice', name: 'Santa\'s Secret Service (Free)', page: '/maze/christmas.html' },
-      { key: 'frozenfrenzy', name: 'Frozen Frenzy (Free)', page: '/maze/frozen.html' },
-      { key: 'cupidheartcollection', name: 'Cupid Heart Collection (Free)', page: '/maze/cupid.html' },
-      { key: 'easteregghunt', name: 'Easter Egg Hunt (Free)', page: '/maze/easter.html' },
-      { key: 'springspree', name: 'Spring Spree (Free)', page: '/maze/spring.html' },
-      { key: 'fairyforest', name: 'Fairy Forest (Free)', page: '/maze/fairy.html' },
+      { key: 'wanderingwizards', name: 'Wandering Wizards (Free)', page: '/maze/index.html', preview: '/app-assets/images/games/wanderingwizards.gif' },
+      { key: 'autumnadventure', name: 'Autumn Adventure (Free)', page: '/maze/autumn.html', preview: '/app-assets/images/games/maze_autumn_gif.gif' },
+      { key: 'trickortreat', name: 'Trick or Treat (Free)', page: '/maze/ghost.html', preview: '/app-assets/images/games/trickortreat.gif' },
+      { key: 'santasecretservice', name: 'Santa\'s Secret Service (Free)', page: '/maze/christmas.html', preview: '/app-assets/images/games/maze_christmas_gif.gif' },
+      { key: 'frozenfrenzy', name: 'Frozen Frenzy (Free)', page: '/maze/frozen.html', preview: '/app-assets/images/games/maze_winter_gif.gif' },
+      { key: 'cupidheartcollection', name: 'Cupid Heart Collection (Free)', page: '/maze/cupid.html', preview: '/app-assets/images/games/cupidheartcollection.gif' },
+      { key: 'easteregghunt', name: 'Easter Egg Hunt (Free)', page: '/maze/easter.html', preview: '/app-assets/images/games/easteregghunt.gif' },
+      { key: 'springspree', name: 'Spring Spree (Free)', page: '/maze/spring.html', preview: '/app-assets/images/games/springspree.gif' },
+      { key: 'fairyforest', name: 'Fairy Forest (Free)', page: '/maze/fairy.html', preview: '/app-assets/images/games/fairyforest.gif' },
     ],
   },
 ];
 
-function LinkGenerator({ game }: { game: GameDef }) {
+function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; selectedTheme: string; onThemeChange: (key: string) => void }) {
   const { isLoggedIn, account, token } = useAuth();
   const [channelName, setChannelName] = useState(account?.username || '');
-  const [selectedTheme, setSelectedTheme] = useState(game.themes[0]?.key || '');
   const [copied, setCopied] = useState(false);
 
   const theme = game.themes.find((t) => t.key === selectedTheme) || game.themes[0];
@@ -226,7 +226,7 @@ function LinkGenerator({ game }: { game: GameDef }) {
             <label className="mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]">Theme</label>
             <select
               value={selectedTheme}
-              onChange={(e) => setSelectedTheme(e.target.value)}
+              onChange={(e) => onThemeChange(e.target.value)}
               className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-3 py-2 text-sm text-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
             >
               {game.themes.map((t) => (
@@ -278,6 +278,14 @@ function GamesContent() {
   const searchParams = useSearchParams();
   const selectedType = searchParams.get('type');
   const selectedGame = selectedType ? games.find((g) => g.id === selectedType) : null;
+  const [selectedTheme, setSelectedTheme] = useState(selectedGame?.themes[0]?.key || '');
+  const currentTheme = selectedGame?.themes.find((t) => t.key === selectedTheme);
+
+  useEffect(() => {
+    if (selectedGame) {
+      setSelectedTheme(selectedGame.themes[0]?.key || '');
+    }
+  }, [selectedGame]);
 
   if (selectedGame) {
     return (
@@ -290,8 +298,9 @@ function GamesContent() {
           {/* Hero image */}
           <div className="relative h-64 bg-gradient-to-br from-purple-900/40 to-blue-900/40 flex items-center justify-center">
             <Image
-              src={assetPath(selectedGame.images[0])}
-              alt={selectedGame.name}
+              key={currentTheme?.key}
+              src={assetPath(currentTheme?.preview || selectedGame.images[0])}
+              alt={`${selectedGame.name} - ${currentTheme?.name || ''}`}
               width={400}
               height={250}
               className="pixelated max-h-56 w-auto object-contain"
@@ -316,23 +325,26 @@ function GamesContent() {
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedGame.themes.map((t) => (
-                    <span
+                    <button
                       key={t.key}
-                      className={`rounded-full px-3 py-1 text-xs font-medium ${
-                        t.premium
-                          ? 'bg-amber-600/15 text-amber-800'
-                          : 'bg-[var(--color-pp-success)]/15 text-[var(--color-pp-success)]'
+                      onClick={() => setSelectedTheme(t.key)}
+                      className={`rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+                        t.key === selectedTheme
+                          ? 'ring-2 ring-[var(--color-pp-accent)] bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]'
+                          : t.premium
+                            ? 'bg-amber-600/15 text-amber-800 hover:bg-amber-600/25'
+                            : 'bg-[var(--color-pp-success)]/15 text-[var(--color-pp-success)] hover:bg-[var(--color-pp-success)]/25'
                       }`}
                     >
                       {t.name}
-                    </span>
+                    </button>
                   ))}
                 </div>
               </div>
             )}
 
             {/* Link Generator */}
-            <LinkGenerator game={selectedGame} />
+            <LinkGenerator game={selectedGame} selectedTheme={selectedTheme} onThemeChange={setSelectedTheme} />
           </div>
         </div>
       </div>

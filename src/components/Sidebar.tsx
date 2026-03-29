@@ -15,7 +15,7 @@ const navItems = [
     ),
   },
   {
-    name: "Games for Twitch",
+    name: "Games for Streams",
     path: "/games",
     icon: (
       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">

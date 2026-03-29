@@ -234,10 +234,10 @@ function CharacterPreview({
     const characterLayers = resolvedItems.filter((i) => i.layer < 100);
     const petLayers = resolvedItems.filter((i) => i.layer >= 100);
 
-    // Draw character layers composited
-    const charSize = 96;
-    const charX = (canvas.width - charSize) / 2;
-    const charY = petLayers.length > 0 ? 12 : (canvas.height - charSize) / 2;
+    // Draw character layers at natural dimensions × scale, bottom-anchored
+    // Matches game engine: sprites rendered at natural pixel size × 3, anchor.set(0.5, 1)
+    const scale = 3;
+    const charBottom = petLayers.length > 0 ? canvas.height - 50 : canvas.height - 20;
 
     for (const { item } of characterLayers) {
       const url = getItemFrameUrl(item, direction, frame);
@@ -245,23 +245,28 @@ function CharacterPreview({
       try {
         const img = await loadImage(url);
         if (img.naturalWidth > 0) {
-          ctx.drawImage(img, charX, charY, charSize, charSize);
+          const drawW = img.naturalWidth * scale;
+          const drawH = img.naturalHeight * scale;
+          const drawX = (canvas.width - drawW) / 2;
+          const drawY = charBottom - drawH;
+          ctx.drawImage(img, drawX, drawY, drawW, drawH);
         }
       } catch { /* skip broken images */ }
     }
 
-    // Draw pet beside/below
+    // Draw pet to the right, also at natural dimensions × scale, bottom-anchored
     if (petLayers.length > 0) {
-      const petSize = 56;
-      const petX = charX + charSize + 4;
-      const petY = charY + charSize - petSize;
       for (const { item } of petLayers) {
         const url = getItemFrameUrl(item, direction, frame);
         if (!url) continue;
         try {
           const img = await loadImage(url);
           if (img.naturalWidth > 0) {
-            ctx.drawImage(img, petX, petY, petSize, petSize);
+            const drawW = img.naturalWidth * scale;
+            const drawH = img.naturalHeight * scale;
+            const drawX = canvas.width / 2 + 10;
+            const drawY = charBottom - drawH;
+            ctx.drawImage(img, drawX, drawY, drawW, drawH);
           }
         } catch { /* skip */ }
       }
