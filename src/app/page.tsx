@@ -171,6 +171,52 @@ export default function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* What's New */}
+      <div className="pp-card p-5">
+        <h3 className="text-lg font-semibold mb-4">{"What's New"}</h3>
+        <div className="flex flex-col gap-4">
+          {[
+            {
+              date: '2026-03-29',
+              title: 'New Website Design',
+              body: "We've launched a brand new website! Browse games, customize your character, and shop goodies all in one place.",
+              badge: 'Update',
+              badgeColor: 'bg-[var(--color-pp-accent)] text-white',
+            },
+            {
+              date: '2026-03-15',
+              title: 'Easter Event Coming Soon',
+              body: 'Get ready for our Easter event with special themed games and new items!',
+              badge: 'Event',
+              badgeColor: 'bg-[var(--color-pp-warning)] text-white',
+            },
+            {
+              date: '2026-02-01',
+              title: 'New Parachute Themes',
+              body: 'Check out the new Valentines and Pool Party themes for Parachute Drop!',
+              badge: 'New Content',
+              badgeColor: 'bg-[var(--color-pp-success)] text-white',
+            },
+          ].map((item) => (
+            <div
+              key={item.date + item.title}
+              className="flex gap-4 items-start border-l-3 border-[var(--color-pp-warning)] pl-4 py-1"
+            >
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1 flex-wrap">
+                  <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${item.badgeColor}`}>
+                    {item.badge}
+                  </span>
+                  <span className="text-xs text-[var(--color-pp-text-muted)]">{item.date}</span>
+                </div>
+                <h4 className="text-sm font-semibold mb-0.5">{item.title}</h4>
+                <p className="text-sm text-[var(--color-pp-text-muted)] leading-snug">{item.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
