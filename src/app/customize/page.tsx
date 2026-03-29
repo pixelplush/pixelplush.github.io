@@ -109,67 +109,86 @@ function CharacterPreview({
   const animTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const imgCacheRef = useRef<Map<string, HTMLImageElement>>(new Map());
 
-  // Resolve which items to show — combine style (primary) with queue cycling
+  // Resolve which items to show — matching the game engine's rendering logic:
+  // 1. If skintones exist → body parts path (skip full character)
+  // 2. If full character exists (no skintones) → character path (skip body parts)
+  // 3. Accessories (hats/glasses/masks/wands) + effects always render on top
+  // 4. Hair is hidden by onesies
   const resolvedItems = useMemo(() => {
     const items: { layer: number; item: CatalogItem }[] = [];
     if (!style && !styles) return items;
 
-    // Gather all categories from style + styles
-    const allCats = new Set<string>();
-    if (style) Object.keys(style).forEach((c) => allCats.add(c));
-    if (styles) Object.keys(styles).forEach((c) => allCats.add(c));
-
-    allCats.forEach((cat) => {
+    // Helper: resolve one item per category from styles (queue cycling) or style (primary)
+    function resolve(cat: string): CatalogItem | undefined {
       let itemId: string | undefined;
-      // Check queue first (cycles with queueIndex)
       if (styles?.[cat]?.length) {
         const q = styles[cat];
         itemId = q[queueIndex % q.length];
       }
-      // Primary style overrides if no queue
       if (!itemId && style?.[cat]) {
         itemId = style[cat];
       }
-      if (!itemId) return;
-
-      const item = catalogMap[itemId];
-      if (!item) return;
-
-      // Find the layer z-order for this item
-      const layerIdx = LAYER_ORDER.findIndex(
-        (l) => l.categories.includes(cat) || (l.type === item.type && l.categories.includes(item.category || ''))
-      );
-
-      items.push({ layer: layerIdx >= 0 ? layerIdx : 50, item });
-    });
-
-    // Also handle "character" type — resolves to a base character when no body parts
-    if (style?.character || styles?.character?.length) {
-      let charId = style?.character;
-      if (styles?.character?.length) {
-        charId = styles.character[queueIndex % styles.character.length];
-      }
-      if (charId) {
-        const charItem = catalogMap[charId];
-        if (charItem && !items.some((i) => i.item.id === charId)) {
-          // Character at the base layer (below everything)
-          items.push({ layer: -1, item: charItem });
-        }
-      }
+      return itemId ? catalogMap[itemId] : undefined;
     }
 
-    // Pet goes separately but let's include it at the end for preview
-    if (style?.pet || styles?.pet?.length) {
-      let petId = style?.pet;
-      if (styles?.pet?.length) {
-        petId = styles.pet[queueIndex % styles.pet.length];
+    // Resolve key categories
+    const character = resolve('character');
+    const skintones = resolve('skintones');
+    const hasOnesies = !!resolve('onesies');
+
+    // Body part categories (only rendered when using individual parts, not full character)
+    const bodyPartCats = ['skintones', 'expressions', 'hair', 'pants', 'shirts', 'dresses', 'onesies'];
+    // Accessory categories (always rendered on top)
+    const accessoryCats = ['glasses', 'hats', 'masks', 'wands'];
+    // Effect categories (always rendered)
+    const effectCats = ['effects'];
+
+    if (skintones) {
+      // === BODY PARTS PATH: render layered body parts, skip full character ===
+      const bodyLayers: [string, number][] = [
+        ['skintones', 0],
+        ['expressions', 1],
+        ['hair', 2],
+        ['pants', 3],
+        ['shirts', 4],
+        ['dresses', 5],
+        ['onesies', 5],
+      ];
+      for (const [cat, z] of bodyLayers) {
+        if (cat === 'hair' && hasOnesies) continue; // Hair hidden by onesies
+        const item = resolve(cat);
+        if (item) items.push({ layer: z, item });
       }
-      if (petId) {
-        const petItem = catalogMap[petId];
-        if (petItem && !items.some((i) => i.item.id === petId)) {
-          items.push({ layer: 100, item: petItem });
-        }
-      }
+    } else if (character) {
+      // === FULL CHARACTER PATH: render only the character sprite ===
+      items.push({ layer: 0, item: character });
+    }
+
+    // Accessories always render (z+10)
+    for (const cat of accessoryCats) {
+      const item = resolve(cat);
+      if (item) items.push({ layer: 10, item });
+    }
+
+    // Effects always render (z+5)
+    for (const cat of effectCats) {
+      const item = resolve(cat);
+      if (item) items.push({ layer: 5, item });
+    }
+
+    // Equipment (wheelchairs etc.)
+    const equipment = resolve('wheelchairs');
+    if (equipment) items.push({ layer: 10, item: equipment });
+
+    // Pet — rendered beside the character
+    let petId: string | undefined;
+    if (styles?.pet?.length) {
+      petId = styles.pet[queueIndex % styles.pet.length];
+    }
+    if (!petId && style?.pet) petId = style.pet;
+    if (petId) {
+      const petItem = catalogMap[petId];
+      if (petItem) items.push({ layer: 100, item: petItem });
     }
 
     return items.sort((a, b) => a.layer - b.layer);

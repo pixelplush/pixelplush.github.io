@@ -1,0 +1,50 @@
+/*================================================================================
+	Item Name: Frest HTML Admin Template
+	Version: 1.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.strikeout {
+  /* font-size: 4em;
+  line-height: 1em; */
+  position: relative;
+}
+.strikeout::after {
+  border-bottom: 0.125em solid red;
+  content: "";
+  left: 0;
+  margin-top: calc(0.125em / 2 * -1);
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.swal2-image {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+}
+
+.item-scale {
+-webkit-transform: scale(2); /* Saf3.1+, Chrome */
+   -moz-transform: scale(2); /* FF3.5+ */
+    -ms-transform: scale(2); /* IE9 */
+     -o-transform: scale(2); /* Opera 10.5+ */
+        transform: scale(2);
+}
+
+.logged-in {
+    display: none;
+}
