@@ -37,11 +37,13 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.01em;
 }
 
-a {
+a:not([class*="text-"]) {
   color: var(--color-pp-link);
+}
+a {
   text-decoration: none;
 }
-a:hover {
+a:not([class*="text-"]):hover {
   color: #8B4513;
 }
 
