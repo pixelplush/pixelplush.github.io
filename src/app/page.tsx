@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { GameCard } from "@/components/GameCard";
+import { useTranslation } from "@/i18n";
 
 const games = [
   {
@@ -105,13 +108,15 @@ const games = [
 ];
 
 export default function HomePage() {
+  const { t } = useTranslation();
+
   return (
     <div>
       {/* Welcome card */}
       <div className="pp-card p-5 mb-6">
-        <h4 className="text-lg font-semibold mb-2">Hello everyone!</h4>
+        <h4 className="text-lg font-semibold mb-2">{t('home.hello')}</h4>
         <p className="text-[var(--color-pp-text)]">
-          Welcome to PixelPlush, our 2-person game studio with{" "}
+          {t('home.welcomeText')}{" "}
           <a
             href="https://twitch.tv/maaya"
             target="_blank"
@@ -136,13 +141,18 @@ export default function HomePage() {
       {/* Games Grid */}
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mb-6">
         {games.map((game) => (
-          <GameCard key={game.id} game={game} />
+          <GameCard key={game.id} game={{
+            ...game,
+            name: t(`gameData.${game.id}.name`),
+            tagline: t(`gameData.${game.id}.tagline`),
+            description: t(`gameData.${game.id}.description`),
+          }} />
         ))}
 
         {/* Market Promo Card */}
         <div className="pp-card overflow-hidden" style={{ backgroundColor: "var(--color-pp-warning)" }}>
           <div className="p-5 text-center text-white">
-            <h3 className="text-xl font-bold mb-3 !text-white">Get Characters &amp; Pets!</h3>
+            <h3 className="text-xl font-bold mb-3 !text-white">{t('home.getCharacters')}</h3>
             <div className="flex justify-center gap-3 py-3 mb-3">
               {[
                 { src: "https://www.pixelplush.dev/assets/characters/yeti_blue/yeti_blue_front/yeti_blue_front1.png", alt: "Yeti Blue" },
@@ -163,10 +173,10 @@ export default function HomePage() {
               ))}
             </div>
             <p className="text-sm mb-4 text-white/90">
-              Get special characters and pets to use in PixelPlush games!
+              {t('home.getCharactersDesc')}
             </p>
             <Link href="/market" className="btn btn-primary w-full block">
-              Visit the Goodies Market
+              {t('home.visitMarket')}
             </Link>
           </div>
         </div>
@@ -174,7 +184,7 @@ export default function HomePage() {
 
       {/* What's New */}
       <div className="pp-card p-5">
-        <h3 className="text-lg font-semibold mb-4">{"What's New"}</h3>
+        <h3 className="text-lg font-semibold mb-4">{t('home.whatsNew')}</h3>
         <div className="flex flex-col gap-4">
           {[
             {

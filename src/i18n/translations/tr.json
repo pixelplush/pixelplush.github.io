@@ -26,21 +26,29 @@
   },
   "home": {
     "heroTitle": "Twitch İçin Eğlenceli Yayın Overlay Oyunları",
-    "heroSubtitle": "Ücretsiz, etkileşimli ve dünya çapında yayıncılar tarafından seviliyor"
+    "heroSubtitle": "Ücretsiz, etkileşimli ve dünya çapında yayıncılar tarafından seviliyor",
+    "hello": "Herkese merhaba!",
+    "welcomeText": "PixelPlush'a hoş geldiniz, 2 kişilik oyun stüdyomuz",
+    "artLabel": "(Sanat)",
+    "codeLabel": "(Kod)",
+    "getCharacters": "Karakter ve Evcil Hayvan Al!",
+    "getCharactersDesc": "PixelPlush oyunlarında kullanmak için özel karakterler ve evcil hayvanlar al!",
+    "visitMarket": "Hediye Marketini Ziyaret Et",
+    "whatsNew": "Yenilikler"
   },
   "games": {
     "title": "Oyunlar ve Overlay'ler",
-    "subtitle": "Ücretsiz Twitch sohbet entegreli oyunlar ve overlay'ler. OBS'ye tarayıcı kaynağı olarak ekleyin.",
+    "subtitle": "Ücretsiz Twitch sohbet entegreli oyunlar ve overlay'ler. OBS'ye tarayıcı kaynağı olarak ekle.",
     "setupGuide": "Kurulum Rehberi",
     "howToSetup": "Nasıl Kurulur",
     "step1Title": "Twitch ile Giriş Yap",
-    "step1Desc": "Başlamak için Twitch hesabınızı bağlayın",
-    "step2Title": "Bir Oyun Seçin",
-    "step2Desc": "Yayın oyunları koleksiyonumuzdan seçin",
+    "step1Desc": "Başlamak için Twitch hesabını bağla",
+    "step2Title": "Bir Oyun Seç",
+    "step2Desc": "Yayın oyunları koleksiyonumuzdan seç",
     "step3Title": "OBS'ye Ekleyin",
-    "step3Desc": "URL'yi kopyalayın ve OBS'de Tarayıcı Kaynağı olarak ekleyin",
-    "step4Title": "Oynayın!",
-    "step4Desc": "İzleyicileriniz sohbette komut yazarak oynar",
+    "step3Desc": "URL'yi kopyala ve OBS'de Tarayıcı Kaynağı olarak ekle",
+    "step4Title": "Oyna!",
+    "step4Desc": "İzleyicilerin sohbette komut yazarak oynar",
     "learnMore": "Daha Fazla",
     "themes": "Temalar",
     "channelLabel": "Twitch Kanal Adı",
@@ -50,11 +58,25 @@
     "premiumTheme": "Bu premium tema bir eklenti gerektirir.",
     "getInMarket": "Marketten Al →",
     "loginToCheckPremium": "Bu premium temaya sahip olup olmadığını kontrol etmek için giriş yap.",
-    "requiresLogin": "(Giriş gerekli)"
+    "requiresLogin": "(Giriş gerekli)",
+    "generateLink": "Tarayıcı Kaynağı Linki Oluştur",
+    "loginToAutoFill": "kanalınızı otomatik doldurmak ve token tabanlı özellikleri etkinleştirmek için.",
+    "allGames": "Tüm Oyunlar",
+    "availableThemes": "Mevcut Temalar",
+    "unlockTheme": "Tarayıcı kaynağı URL'nizi almak için bu temayı açın.",
+    "browserSourceUrl": "Tarayıcı Kaynağı URL'si",
+    "copied": "Kopyalandı!",
+    "copy": "Kopyala",
+    "tokenWarning": "Bu URL kimlik doğrulama tokeninizi içerir. Herkese açık paylaşmayın.",
+    "obsInstructions": "OBS'ye nasıl eklenir:",
+    "obsStep1": "Yukarıdaki URL'yi kopyala",
+    "obsStep2": "OBS'de yeni bir Tarayıcı Kaynağı ekle",
+    "obsStep3": "URL'yi yapıştır ve boyutu 1920×1080 olarak ayarla",
+    "obsStep4": "\"Sahne aktif olduğunda tarayıcıyı yenile\" seçeneğini işaretle"
   },
   "market": {
     "title": "Pazar Yeri",
-    "subtitle": "PixelPlush oyunlarınız için karakterlere, evcil hayvanlara, kıyafetlere ve daha fazlasına göz atın.",
+    "subtitle": "PixelPlush oyunların için karakterlere, evcil hayvanlara, kıyafetlere ve daha fazlasına göz at.",
     "coins": "Jeton",
     "buyCoins": "Jeton Satın Al",
     "noBonus": "Bonus yok",
@@ -64,36 +86,56 @@
     "premium": "Premium",
     "itemsIncluded": "öğe dahil",
     "savings": "Tasarruf",
-    "loginToBuy": "Öğe satın almak için Twitch ile giriş yapın",
+    "loginToBuy": "Öğe satın almak için Twitch ile giriş yap",
     "search": "Öğe ara...",
     "allItems": "Tüm Öğeler",
     "categories": "Kategoriler",
     "plushCoins": "Plush Jetonları",
     "yourBalance": "Bakiyeniz",
     "logIn": "Giriş Yap",
-    "loginToPurchase": "Jeton satın almak için giriş yapın",
-    "notEnoughCoins": "Yeterli jeton yok! Daha fazlası için yukarıdaki jeton mağazasını ziyaret edin.",
+    "loginToPurchase": "Jeton satın almak için giriş yap",
+    "notEnoughCoins": "Yeterli jeton yok! Daha fazlası için yukarıdaki jeton mağazasını ziyaret et.",
     "purchaseSuccess": "Satın alma başarılı!",
     "coinsPurchased": "Plush jetonları başarıyla satın alındı!",
     "purchaseFailed": "İşlem başarısız oldu",
-    "purchaseTimeout": "İşlem zaman aşımına uğradı. Ödeme alındıysa destekle iletişime geçin.",
+    "purchaseTimeout": "İşlem zaman aşımına uğradı. Ödeme alındıysa destekle iletişime geç.",
     "paymentCancelled": "Ödeme iptal edildi",
     "coinPurchaseFailed": "Jeton satın alma başarısız",
-    "paypalError": "PayPal hatası oluştu"
+    "paypalError": "PayPal hatası oluştu",
+    "mostPopular": "En Popüler",
+    "bonus": "bonus",
+    "paymentDisclaimer": "Stripe veya PayPal ile güvenli ödeme · Jetonlar iade edilemez",
+    "processingPurchase": "Satın almanız işleniyor...",
+    "payWithCard": "Kart ile Öde",
+    "searchItems": "Öğe ara...",
+    "hideOwnedItems": "Sahip olunan öğeleri gizle",
+    "noItemsFound": "Öğe bulunamadı",
+    "free": "ÜCRETSİZ",
+    "thisWillUse": "Bunun için",
+    "coinsUnit": "jeton",
+    "youGot": "Elde ettin"
   },
   "customize": {
     "title": "Soyunma Odası",
-    "subtitle": "Karakterinizi özelleştirmek, kıyafet giymek ve evcil hayvanınızı yönetmek için Twitch ile giriş yapın.",
-    "equipped": "Kuşanılmış",
-    "equip": "Kuşan",
+    "subtitle": "Karakterini özelleştirmek, kıyafet giymek ve evcil hayvanını yönetmek için Twitch ile giriş yap.",
+    "equipped": "Takılı",
+    "equip": "Tak",
     "unequip": "Çıkar",
     "locked": "Kilitli",
-    "loginRequired": "Karakterinizi özelleştirmek için Twitch ile giriş yapın",
-    "searchOwned": "Sahip olunan öğeleri ara..."
+    "loginRequired": "Karakterini özelleştirmek için Twitch ile giriş yap",
+    "searchOwned": "Sahip olunan öğeleri ara...",
+    "noItemsEquipped": "Takılı öğe yok",
+    "preview": "Önizleme",
+    "active": "AKTİF",
+    "queued": "SIRADA",
+    "noItemsInCategory": "Bu kategoride öğe yok.",
+    "visitMarketHelp": "Ziyaret et",
+    "marketplace": "market",
+    "toGetSome": "biraz almak için!"
   },
   "scores": {
     "title": "Sıralama",
-    "subtitle": "Tüm kanallarda Parachute Drop yüksek skorlarını görüntüleyin.",
+    "subtitle": "Tüm kanallarda Parachute Drop yüksek skorlarını görüntüle.",
     "channel": "Kanal",
     "timeRange": "Zaman Aralığı",
     "theme": "Tema",
@@ -101,10 +143,10 @@
     "last12h": "Son 12 Saat",
     "thisWeek": "Bu Hafta",
     "thisMonth": "Bu Ay",
-    "channelPlaceholder": "Kanal adı girin...",
+    "channelPlaceholder": "Kanal adı gir...",
     "shareLink": "Bağlantı Paylaş",
     "copy": "Kopyala",
-    "enterChannel": "Skorları görmek için bir kanal adı girin",
+    "enterChannel": "Skorları görmek için bir kanal adı gir",
     "noScores": "Bu kanal ve dönem için skor bulunamadı",
     "player": "Oyuncu",
     "score": "Skor",
@@ -127,8 +169,8 @@
   },
   "transactions": {
     "title": "İşlemler",
-    "subtitle": "Satın alma ve kullanma geçmişiniz.",
-    "loginPrompt": "İşlem geçmişinizi görmek için giriş yapın.",
+    "subtitle": "Satın alma ve kullanma geçmişin.",
+    "loginPrompt": "İşlem geçmişini görmek için giriş yap.",
     "all": "Tümü",
     "redemptions": "Kullanımlar",
     "purchases": "Satın Almalar",
@@ -142,16 +184,16 @@
   },
   "redeem": {
     "title": "Kod Kullan",
-    "subtitle": "Bir PixelPlush kodu kullanmak için giriş yapın.",
+    "subtitle": "Bir PixelPlush kodu kullanmak için giriş yap.",
     "placeholder": "KODU-BURAYA-GİRİN",
     "submit": "Kullan",
-    "pageSubtitle": "Jeton, öğe veya diğer ödülleri almak için bir PixelPlush kodu girin.",
+    "pageSubtitle": "Jeton, öğe veya diğer ödülleri almak için bir PixelPlush kodu gir.",
     "success": "Kod başarıyla kullanıldı!",
-    "errorGeneric": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin."
+    "errorGeneric": "Bir şeyler yanlış gitti. Lütfen tekrar dene."
   },
   "login": {
     "title": "PixelPlush'a Giriş Yap",
-    "subtitle": "Oyunlarınızı özelleştirmek, öğe satın almak ve skorlarınızı takip etmek için Twitch hesabınızla giriş yapın.",
+    "subtitle": "Oyunlarını özelleştirmek, öğe satın almak ve skorlarını takip etmek için Twitch hesabınla giriş yap.",
     "twitchButton": "Twitch ile Giriş Yap",
     "helloFrom": "Merhaba"
   },
@@ -168,31 +210,199 @@
     "viewAll": "Tümünü Gör",
     "loginWithTwitch": "Twitch ile Giriş Yap",
     "goHome": "Ana Sayfaya Dön",
-    "accessDenied": "Erişim Reddedildi"
+    "accessDenied": "Erişim Reddedildi",
+    "or": "veya"
   },
   "troubleshoot": {
     "title": "Sorun Giderme",
-    "subtitle": "PixelPlush oyununuzla ilgili sorunlarınız mı var? Aşağıdaki araçları kullanın.",
+    "subtitle": "PixelPlush oyununla ilgili sorunların mı var? Aşağıdaki araçları kullan.",
     "checkUrl": "1. URL'yi Kontrol Et",
-    "checkUrlDesc": "Yaygın sorunları kontrol etmek için OBS tarayıcı kaynağı URL'sini yapıştırın.",
+    "checkUrlDesc": "Yaygın sorunları kontrol etmek için OBS tarayıcı kaynağı URL'sini yapıştır.",
     "urlPlaceholder": "OBS tarayıcı kaynağı URL'sini buraya yapıştırın...",
     "testConnection": "2. Bağlantıyı Test Et",
-    "testConnectionDesc": "PixelPlush sunucularına bağlantıyı test edin.",
+    "testConnectionDesc": "PixelPlush sunucularına bağlantıyı test et.",
     "testServers": "Sunucuları Test Et",
     "testing": "Test ediliyor...",
     "checkToken": "Token Durumunu Kontrol Et",
     "checking": "Kontrol ediliyor...",
     "commonIssues": "4. Yaygın Sorunlar",
-    "commonIssuesDesc": "Çözüm önerilerini görmek için bir soruna tıklayın.",
+    "commonIssuesDesc": "Çözüm önerilerini görmek için bir soruna tıkla.",
     "generateReport": "5. Destek Raporu Oluştur",
-    "generateReportDesc": "Discord'da paylaşmak için tanılama özetini kopyalayın.",
+    "generateReportDesc": "Discord'da paylaşmak için tanılama özetini kopyala.",
     "copyReport": "Destek Raporunu Kopyala",
     "copied": "Panoya kopyalandı!",
-    "stillStuck": "Hâlâ sorun mu yaşıyorsunuz? Discord'umuza katılın veya support@pixelplush.dev adresine yazın"
+    "stillStuck": "Hâlâ sorun mu yaşıyorsun? Discord'umuza katıl veya support@pixelplush.dev adresine yaz",
+    "setupChecklist": "3. Kurulum Kontrol Listesi",
+    "setupChecklistDesc": "İlk 3 madde URL doğruladığında otomatik kontrol edilir. Geri kalanları manuel onaylamak için tıkla.",
+    "auto": "(otomatik)"
   },
   "admin": {
     "title": "Yönetim Paneli",
     "subtitle": "PixelPlush yönetim araçları",
     "adminOnly": "Bu sayfa yalnızca PixelPlush yöneticileri içindir."
+  },
+  "gameData": {
+    "viewAllThemes": "Tüm Temaları Gör",
+    "addToStream": "Yayına Ekle",
+    "freeBadge": "Ücretsiz",
+    "channelPointsBadge": "Kanal Puanları",
+    "freeTag": "(Ücretsiz)",
+    "premiumTag": "(Premium)",
+    "giveaway": {
+      "name": "Giveaway Tool",
+      "tagline": "Twitch'te eğlenceli çekilişler",
+      "description": "İzleyicilerin için kolay ve eğlenceli çekilişler düzenle! İzleyiciler katılmak için sohbete bir komut yazar ve rastgele bir kazanan eğlenceli bir animasyonla seçilir."
+    },
+    "weather": {
+      "name": "Stream Weather",
+      "tagline": "Kanal Puanlarıyla hava durumu overlay'i",
+      "description": "İzleyicilerin Kanal Puanlarıyla kontrol edebildiği bir hava durumu overlay'i. Yağmur, kar, fırtına — izleyicilerin karar verir!"
+    },
+    "confetti": {
+      "name": "Pixel Confetti",
+      "tagline": "Kanal Puanlarıyla konfeti overlay'i",
+      "description": "İzleyiciler Kanal Puanlarıyla yayınına konfeti gönderir! Sub'lar, raid'ler veya herhangi bir hype anı için harika bir görsel kutlama."
+    },
+    "plinko": {
+      "name": "Plinko Bounce",
+      "tagline": "Twitch için Plinko yayın overlay oyunu",
+      "description": "Bir top at ve çivilerden sekerken puan topla! İzleyiciler sıralama tablosunda en yüksek skor için yarışır."
+    },
+    "parachute": {
+      "name": "Parachute Drop",
+      "tagline": "Twitch için paraşüt yayın overlay oyunu",
+      "description": "Uçaktan atla, paraşütünü aç ve hedefe inmeye çalış! İzleyiciler sohbette komut yazarak yarışır."
+    },
+    "chatflakes": {
+      "name": "Chat Flakes",
+      "tagline": "Sohbet mesajları yayın parçacıklarına dönüşür",
+      "description": "İzleyiciler sadece sohbete yazarak ekranına hafif parçacık efektleri ekler. Güzel bir pasif overlay!"
+    },
+    "hillroll": {
+      "name": "Hill Rolling Race",
+      "tagline": "Twitch için yarış yayın overlay oyunu",
+      "description": "Tepeden aşağı yuvarlan ve diğer izleyicilere karşı yarış! Engellerden kaç ve bitiş çizgisine ilk ulaşmaya çalış."
+    },
+    "maze": {
+      "name": "Pixel Maze",
+      "tagline": "Twitch için labirent yayın oyunu",
+      "description": "Sohbet komutlarıyla labirentte yolunu bul! BRB ekranları için harika — molalarda izleyicilerini eğlendirir."
+    },
+    "settings": {
+      "giveaway": {
+        "lang": "Dil",
+        "volume": "Ses",
+        "command": "Başlatma Komutu",
+        "join": "Katılma Komutu",
+        "unjoin": "Ayrılma Komutu",
+        "win": "Ödül Komutu",
+        "skip": "Atlama Komutu",
+        "chat": "Sonuçları Sohbete Gönder"
+      },
+      "weather": {
+        "volume": "Ses",
+        "rain": "Yağmur KP Maliyeti",
+        "rainTime": "Yağmur Süresi",
+        "heavyrain": "Şiddetli Yağmur KP Maliyeti",
+        "heavyrainTime": "Şiddetli Yağmur Süresi",
+        "snow": "Kar KP Maliyeti",
+        "snowTime": "Kar Süresi",
+        "blizzard": "Tipi KP Maliyeti",
+        "blizzardTime": "Tipi Süresi",
+        "hail": "Dolu KP Maliyeti",
+        "hailTime": "Dolu Süresi",
+        "blossoms": "Çiçekler KP Maliyeti",
+        "blossomsTime": "Çiçekler Süresi"
+      },
+      "confetti": {
+        "volume": "Ses",
+        "cpConfettiCost": "Konfeti KP Maliyeti",
+        "cpConfettiIntensity": "Konfeti Yoğunluğu",
+        "cpBubblesCost": "Baloncuklar KP Maliyeti",
+        "cpBubblesIntensity": "Baloncuk Yoğunluğu",
+        "cpBalloonsCost": "Balonlar KP Maliyeti",
+        "cpBalloonsIntensity": "Balon Yoğunluğu",
+        "cpHeartsCost": "Kalpler KP Maliyeti",
+        "cpHeartsIntensity": "Kalp Yoğunluğu"
+      },
+      "plinko": {
+        "overlay": "Arka Plan",
+        "clouds": "Bulutlar",
+        "hideTilStart": "Başlayana Kadar Gizle",
+        "pegOpacity": "Çivi Opaklığı",
+        "volume": "Ses",
+        "notifVolume": "Bildirim Sesi",
+        "commandOn": "Sohbet Komutunu Etkinleştir",
+        "command": "Komut",
+        "cooldown": "Yenileme Zamanlayıcısı",
+        "chat": "Sohbette Duyur"
+      },
+      "parachute": {
+        "overlay": "Arka Plan",
+        "clouds": "Bulutlar",
+        "hideTilDrop": "Atlayışa Kadar Gizle",
+        "volume": "Ses",
+        "notifVolume": "Bildirim Sesi",
+        "commandOn": "Sohbet Komutunu Etkinleştir",
+        "command": "Atlama Komutu",
+        "cooldown": "Yenileme Zamanlayıcısı",
+        "droplets": "Bit Cheers",
+        "chat": "Skoru Sohbete Gönder"
+      },
+      "chatflakes": {
+        "nth": "Mesaj Aralığı",
+        "num": "Mesaj Başına Parçacık",
+        "timer": "Zamanlayıcı Parçacıkları",
+        "rain": "Yağmur Parçacıkları",
+        "leaves": "Yaprak Parçacıkları",
+        "snow": "Kar Parçacıkları",
+        "blossoms": "Çiçek Parçacıkları",
+        "hearts": "Kalp Parçacıkları"
+      },
+      "hillroll": {
+        "overlay": "Arka Plan",
+        "clouds": "Bulutlar",
+        "volume": "Ses",
+        "command": "Komut",
+        "cooldown": "Yenileme Zamanlayıcısı",
+        "defaultCountdown": "Varsayılan Geri Sayım",
+        "hideInstructions": "Talimatları Gizle",
+        "hideTime": "Zamanlayıcıyı Gizle",
+        "chat": "Sonuçları Sohbete Gönder"
+      },
+      "maze": {
+        "bosses": "Boss Sayısı",
+        "bossEffect": "Boss Efekti",
+        "prizes": "Ödül Sayısı",
+        "traps": "Tuzak Sayısı",
+        "trapEffect": "Tuzak Efekti",
+        "chat": "Sonuçları Sohbete Gönder"
+      }
+    },
+    "settingsOptions": {
+      "lang": {
+        "en": "İngilizce",
+        "fr": "Fransızca",
+        "de": "Almanca",
+        "es": "İspanyolca",
+        "cs": "Çekçe"
+      },
+      "bossEffect": {
+        "steal": "Puan Çal",
+        "base": "Başlangıca Dön"
+      },
+      "trapEffect": {
+        "0": "Puan Cezası",
+        "1": "Tuzak Tünelleri"
+      }
+    },
+    "seasonal": {
+      "christmas": "Tatil",
+      "halloween": "Ürkütücü",
+      "easter": "Bahar",
+      "valentines": "Aşk",
+      "spring": "Bahar",
+      "autumn": "Sonbahar"
+    }
   }
 }

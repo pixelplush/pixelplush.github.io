@@ -105,6 +105,7 @@ function CharacterPreview({
   styles?: Record<string, string[]>;
   catalogMap: Record<string, CatalogItem>;
 }) {
+  const { t } = useTranslation();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [direction, setDirection] = useState<'front' | 'left' | 'back' | 'right'>('front');
   const [frame, setFrame] = useState(0);
@@ -317,7 +318,7 @@ function CharacterPreview({
           <div className="absolute inset-0 flex items-center justify-center text-center text-[var(--color-pp-text-muted)]">
             <div>
               <div className="mx-auto mb-2 h-12 w-12 rounded-full bg-[var(--color-pp-border)]" />
-              <p className="text-xs">No items equipped</p>
+              <p className="text-xs">{t('customize.noItemsEquipped')}</p>
             </div>
           </div>
         )}
@@ -551,13 +552,13 @@ export default function CustomizePage() {
       <div className="grid gap-6 lg:grid-cols-4">
         {/* Character Preview */}
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-5">
-          <h2 className="mb-3 text-sm font-semibold text-[var(--color-pp-headings)]">Preview</h2>
+          <h2 className="mb-3 text-sm font-semibold text-[var(--color-pp-headings)]">{t('customize.preview')}</h2>
           <CharacterPreview style={style} styles={styles} catalogMap={catalogMap} />
 
           {/* Equipped items summary */}
           {style && Object.keys(style).length > 0 && (
             <div className="mt-4 space-y-1">
-              <h3 className="text-xs font-medium text-[var(--color-pp-text-muted)]">Equipped</h3>
+              <h3 className="text-xs font-medium text-[var(--color-pp-text-muted)]">{t('customize.equipped')}</h3>
               {Object.entries(style).map(([cat, itemId]) => {
                 const item = catalogMap[itemId as string];
                 if (!item) return null;
@@ -615,9 +616,9 @@ export default function CustomizePage() {
             ) : ownedItems.length === 0 ? (
               <div className="flex h-48 items-center justify-center text-center">
                 <div className="text-[var(--color-pp-text-muted)]">
-                  <p className="text-sm">No items in this category.</p>
+                  <p className="text-sm">{t('customize.noItemsInCategory')}</p>
                   <p className="mt-1 text-xs">
-                    Visit the <Link href="/market" className="text-[var(--color-pp-link)] hover:underline">marketplace</Link> to get some!
+                    {t('customize.visitMarketHelp')} <Link href="/market" className="text-[var(--color-pp-link)] hover:underline">{t('customize.marketplace')}</Link> {t('customize.toGetSome')}
                   </p>
                 </div>
               </div>
@@ -644,12 +645,12 @@ export default function CustomizePage() {
                     >
                       {status === 'selected' && (
                         <span className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-green-500 px-2 py-0.5 text-[9px] font-bold text-white">
-                          ACTIVE
+                          {t('customize.active')}
                         </span>
                       )}
                       {status === 'queued' && (
                         <span className="absolute -top-2 left-1/2 -translate-x-1/2 rounded-full bg-[var(--color-pp-accent)] px-2 py-0.5 text-[9px] font-bold text-white">
-                          QUEUED
+                          {t('customize.queued')}
                         </span>
                       )}
 

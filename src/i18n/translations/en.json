@@ -26,7 +26,15 @@
   },
   "home": {
     "heroTitle": "Fun Stream Overlay Games for Twitch",
-    "heroSubtitle": "Free, interactive, and loved by streamers worldwide"
+    "heroSubtitle": "Free, interactive, and loved by streamers worldwide",
+    "hello": "Hello everyone!",
+    "welcomeText": "Welcome to PixelPlush, our 2-person game studio with",
+    "artLabel": "(Art)",
+    "codeLabel": "(Code)",
+    "getCharacters": "Get Characters & Pets!",
+    "getCharactersDesc": "Get special characters and pets to use in PixelPlush games!",
+    "visitMarket": "Visit the Goodies Market",
+    "whatsNew": "What's New"
   },
   "games": {
     "title": "Games & Overlays",
@@ -50,7 +58,21 @@
     "premiumTheme": "This premium theme requires an add-on.",
     "getInMarket": "Get it in the Market →",
     "loginToCheckPremium": "Log in to check if you own this premium theme.",
-    "requiresLogin": "(requires login)"
+    "requiresLogin": "(requires login)",
+    "generateLink": "Generate Browser Source Link",
+    "loginToAutoFill": "to auto-fill your channel and enable token-based features.",
+    "allGames": "All Games",
+    "availableThemes": "Available Themes",
+    "unlockTheme": "Unlock this theme to get your browser source URL.",
+    "browserSourceUrl": "Browser Source URL",
+    "copied": "Copied!",
+    "copy": "Copy",
+    "tokenWarning": "This URL contains your auth token. Don't share it publicly.",
+    "obsInstructions": "How to add to OBS:",
+    "obsStep1": "Copy the URL above",
+    "obsStep2": "In OBS, add a new Browser Source",
+    "obsStep3": "Paste the URL and set size to 1920×1080",
+    "obsStep4": "Check \"Refresh browser when scene becomes active\""
   },
   "market": {
     "title": "Marketplace",
@@ -79,7 +101,19 @@
     "purchaseTimeout": "Transaction timed out. Contact support if charged.",
     "paymentCancelled": "Payment was cancelled",
     "coinPurchaseFailed": "Coin purchase failed",
-    "paypalError": "PayPal error occurred"
+    "paypalError": "PayPal error occurred",
+    "mostPopular": "Most Popular",
+    "bonus": "bonus",
+    "paymentDisclaimer": "Secure checkout via Stripe or PayPal · Coins are non-refundable",
+    "processingPurchase": "Processing your purchase...",
+    "payWithCard": "Pay with Card",
+    "searchItems": "Search items...",
+    "hideOwnedItems": "Hide owned items",
+    "noItemsFound": "No items found",
+    "free": "FREE",
+    "thisWillUse": "This will use",
+    "coinsUnit": "coins",
+    "youGot": "You got"
   },
   "customize": {
     "title": "Dressing Room",
@@ -89,7 +123,15 @@
     "unequip": "Unequip",
     "locked": "Locked",
     "loginRequired": "Log in with Twitch to customize your character",
-    "searchOwned": "Search owned items..."
+    "searchOwned": "Search owned items...",
+    "noItemsEquipped": "No items equipped",
+    "preview": "Preview",
+    "active": "ACTIVE",
+    "queued": "QUEUED",
+    "noItemsInCategory": "No items in this category.",
+    "visitMarketHelp": "Visit the",
+    "marketplace": "marketplace",
+    "toGetSome": "to get some!"
   },
   "scores": {
     "title": "Leaderboard",
@@ -168,7 +210,8 @@
     "viewAll": "View All",
     "loginWithTwitch": "Log in with Twitch",
     "goHome": "Go Home",
-    "accessDenied": "Access Denied"
+    "accessDenied": "Access Denied",
+    "or": "or"
   },
   "troubleshoot": {
     "title": "Troubleshoot",
@@ -188,11 +231,178 @@
     "generateReportDesc": "Copy a summary of your diagnostics to share with us on Discord.",
     "copyReport": "Copy Support Report",
     "copied": "Copied to Clipboard!",
-    "stillStuck": "Still stuck? Join our Discord or email us at support@pixelplush.dev"
+    "stillStuck": "Still stuck? Join our Discord or email us at support@pixelplush.dev",
+    "setupChecklist": "3. Setup Checklist",
+    "setupChecklistDesc": "First 3 items auto-check when you validate a URL. Click the rest to confirm manually.",
+    "auto": "(auto)"
   },
   "admin": {
     "title": "Admin Panel",
     "subtitle": "PixelPlush administration tools",
     "adminOnly": "This page is only available to PixelPlush administrators."
+  },
+  "gameData": {
+    "viewAllThemes": "View All Themes",
+    "addToStream": "Add To Stream",
+    "freeBadge": "Free",
+    "channelPointsBadge": "Channel Points",
+    "freeTag": "(Free)",
+    "premiumTag": "(Premium)",
+    "giveaway": {
+      "name": "Giveaway Tool",
+      "tagline": "Fun way to do giveaways on Twitch",
+      "description": "Run giveaways in an easy and fun way for your viewers! Viewers type a command in chat to enter, and a random winner is picked with a fun animation."
+    },
+    "weather": {
+      "name": "Stream Weather",
+      "tagline": "Weather overlay using Channel Points",
+      "description": "A weather-changing stream overlay that viewers can control using Channel Points. Rain, snow, thunderstorms — your viewers decide!"
+    },
+    "confetti": {
+      "name": "Pixel Confetti",
+      "tagline": "Stream confetti overlay using Channel Points",
+      "description": "Viewers send confetti across your stream using Channel Points! A fun visual celebration for subs, raids, or any hype moment."
+    },
+    "plinko": {
+      "name": "Plinko Bounce",
+      "tagline": "Plinko stream overlay game for Twitch",
+      "description": "Drop a ball and watch it bounce through pegs to score points! Viewers compete for the highest score on the leaderboard."
+    },
+    "parachute": {
+      "name": "Parachute Drop",
+      "tagline": "Parachute stream overlay game for Twitch",
+      "description": "Jump out of a plane, open your parachute, and try to land on the target! Viewers compete by typing commands in chat."
+    },
+    "chatflakes": {
+      "name": "Chat Flakes",
+      "tagline": "Chat messages turned into stream particles",
+      "description": "Viewers add subtle particle effects across your screen just by typing in chat. A beautiful passive overlay!"
+    },
+    "hillroll": {
+      "name": "Hill Rolling Race",
+      "tagline": "Racing stream overlay game for Twitch",
+      "description": "Roll down a hill and race against other viewers! Dodge obstacles and try to reach the finish line first."
+    },
+    "maze": {
+      "name": "Pixel Maze",
+      "tagline": "Stream maze game for Twitch",
+      "description": "Navigate through a maze using chat commands! Great for BRB screens — keeps your viewers entertained during breaks."
+    },
+    "settings": {
+      "giveaway": {
+        "lang": "Language",
+        "volume": "Volume",
+        "command": "Start Command",
+        "join": "Join Command",
+        "unjoin": "Unjoin Command",
+        "win": "Claim Command",
+        "skip": "Skip Command",
+        "chat": "Send Results in Chat"
+      },
+      "weather": {
+        "volume": "Volume",
+        "rain": "Rain CP Cost",
+        "rainTime": "Rain Duration",
+        "heavyrain": "Heavy Rain CP Cost",
+        "heavyrainTime": "Heavy Rain Duration",
+        "snow": "Snow CP Cost",
+        "snowTime": "Snow Duration",
+        "blizzard": "Blizzard CP Cost",
+        "blizzardTime": "Blizzard Duration",
+        "hail": "Hail CP Cost",
+        "hailTime": "Hail Duration",
+        "blossoms": "Blossoms CP Cost",
+        "blossomsTime": "Blossoms Duration"
+      },
+      "confetti": {
+        "volume": "Volume",
+        "cpConfettiCost": "Confetti CP Cost",
+        "cpConfettiIntensity": "Confetti Intensity",
+        "cpBubblesCost": "Bubbles CP Cost",
+        "cpBubblesIntensity": "Bubbles Intensity",
+        "cpBalloonsCost": "Balloons CP Cost",
+        "cpBalloonsIntensity": "Balloons Intensity",
+        "cpHeartsCost": "Hearts CP Cost",
+        "cpHeartsIntensity": "Hearts Intensity"
+      },
+      "plinko": {
+        "overlay": "Background",
+        "clouds": "Clouds",
+        "hideTilStart": "Hide Until Start",
+        "pegOpacity": "Peg Opacity",
+        "volume": "Volume",
+        "notifVolume": "Notification Volume",
+        "commandOn": "Enable Chat Command",
+        "command": "Command",
+        "cooldown": "Refresh Timer",
+        "chat": "Announce in Chat"
+      },
+      "parachute": {
+        "overlay": "Background",
+        "clouds": "Clouds",
+        "hideTilDrop": "Hide Until Drop",
+        "volume": "Volume",
+        "notifVolume": "Notification Volume",
+        "commandOn": "Enable Chat Command",
+        "command": "Drop Command",
+        "cooldown": "Refresh Timer",
+        "droplets": "Bit Cheers",
+        "chat": "Score in Chat"
+      },
+      "chatflakes": {
+        "nth": "Message Interval",
+        "num": "Particles per Message",
+        "timer": "Timer Particles",
+        "rain": "Rain Particles",
+        "leaves": "Leaf Particles",
+        "snow": "Snow Particles",
+        "blossoms": "Blossom Particles",
+        "hearts": "Heart Particles"
+      },
+      "hillroll": {
+        "overlay": "Background",
+        "clouds": "Clouds",
+        "volume": "Volume",
+        "command": "Command",
+        "cooldown": "Refresh Timer",
+        "defaultCountdown": "Default Countdown",
+        "hideInstructions": "Hide Instructions",
+        "hideTime": "Hide Timer",
+        "chat": "Results in Chat"
+      },
+      "maze": {
+        "bosses": "Boss Count",
+        "bossEffect": "Boss Effect",
+        "prizes": "Prize Count",
+        "traps": "Trap Count",
+        "trapEffect": "Trap Effect",
+        "chat": "Results in Chat"
+      }
+    },
+    "settingsOptions": {
+      "lang": {
+        "en": "English",
+        "fr": "French",
+        "de": "German",
+        "es": "Spanish",
+        "cs": "Czech"
+      },
+      "bossEffect": {
+        "steal": "Steal Points",
+        "base": "Return to Spawn"
+      },
+      "trapEffect": {
+        "0": "Points Penalty",
+        "1": "Trap Tunnels"
+      }
+    },
+    "seasonal": {
+      "christmas": "Holiday",
+      "halloween": "Spooky",
+      "easter": "Spring",
+      "valentines": "Love",
+      "spring": "Spring",
+      "autumn": "Fall"
+    }
   }
 }

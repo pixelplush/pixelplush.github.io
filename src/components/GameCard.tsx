@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { assetPath } from "@/lib/assetPath";
+import { useTranslation } from "@/i18n";
 
 interface GameCardProps {
   game: {
@@ -19,6 +20,7 @@ interface GameCardProps {
 }
 
 export function GameCard({ game }: GameCardProps) {
+  const { t } = useTranslation();
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
@@ -30,7 +32,7 @@ export function GameCard({ game }: GameCardProps) {
   }, [game.images.length]);
 
   const buttonClass = game.color === "info" ? "btn-info" : "btn-success";
-  const buttonText = game.hasThemes ? "View All Themes" : "Add To Stream";
+  const buttonText = game.hasThemes ? t("gameData.viewAllThemes") : t("gameData.addToStream");
 
   return (
     <div className="pp-card overflow-hidden flex flex-col">

@@ -28,6 +28,10 @@ const seasonalBadges: Record<string, { emoji: string; label: string; color: stri
   autumn: { emoji: '🍂', label: 'Fall', color: 'bg-amber-100 text-amber-700' },
 };
 
+function translateThemeName(name: string, t: (key: string) => string): string {
+  return name.replace('(Free)', t('gameData.freeTag')).replace('(Premium)', t('gameData.premiumTag'));
+}
+
 interface GameSetting {
   id: string;
   label: string;
@@ -351,7 +355,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
 
   return (
     <div className="rounded-xl border border-[var(--color-pp-border)] bg-[var(--color-pp-bg)]/50 p-5">
-      <h3 className="mb-4 text-sm font-semibold text-[var(--color-pp-headings)]">Generate Browser Source Link</h3>
+      <h3 className="mb-4 text-sm font-semibold text-[var(--color-pp-headings)]">{t('games.generateLink')}</h3>
 
       <div className="space-y-4">
         {/* Channel name */}
@@ -366,7 +370,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
           />
           {!isLoggedIn && (
             <p className="mt-1 text-[10px] text-[var(--color-pp-text-muted)]">
-              <Link href="/login" className="text-[var(--color-pp-link)] hover:underline">Log in</Link> to auto-fill your channel and enable token-based features.
+              <Link href="/login" className="text-[var(--color-pp-link)] hover:underline">{t('market.logIn')}</Link> {t('games.loginToAutoFill')}
             </p>
           )}
         </div>
@@ -380,9 +384,9 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
               onChange={(e) => onThemeChange(e.target.value)}
               className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-3 py-2 text-sm text-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
             >
-              {game.themes.map((t) => (
-                <option key={t.key} value={t.key}>
-                  {t.premium && t.requires && !account?.owned?.includes(t.requires) ? '🔒 ' : t.premium && account?.owned?.includes(t.requires || '') ? '✓ ' : ''}{t.name}{t.premium ? ' 💎' : ''}
+              {game.themes.map((thm) => (
+                <option key={thm.key} value={thm.key}>
+                  {thm.premium && thm.requires && !account?.owned?.includes(thm.requires) ? '🔒 ' : thm.premium && account?.owned?.includes(thm.requires || '') ? '✓ ' : ''}{translateThemeName(thm.name, t)}{thm.premium ? ' 💎' : ''}
                 </option>
               ))}
             </select>
@@ -430,7 +434,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
                 {visibleSettings.map((s) => (
                   <div key={s.id} className="flex flex-col gap-1">
                     <label className="text-xs font-medium text-[var(--color-pp-text-muted)]">
-                      {s.label}
+                      {t(`gameData.settings.${game.id}.${s.id}`)}
                       {s.suffix && <span className="ml-1 text-[10px] text-[var(--color-pp-text-muted)]">({s.suffix})</span>}
                       {s.requiresAuth && !isLoggedIn && <span className="ml-1 text-[10px] text-amber-600">{t('games.requiresLogin')}</span>}
                     </label>
@@ -476,7 +480,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
                         className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-3 py-1.5 text-xs text-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
                       >
                         {s.options?.map((o) => (
-                          <option key={o.value} value={o.value}>{o.label}</option>
+                          <option key={o.value} value={o.value}>{t(`gameData.settingsOptions.${s.id}.${o.value}`)}</option>
                         ))}
                       </select>
                     )}
@@ -490,12 +494,12 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
         {/* Generated URL */}
         {channelName.trim() && isThemeLocked && (
           <div className="rounded-lg border border-amber-300/50 bg-amber-50/50 p-3 text-center text-sm text-amber-800">
-            🔒 Unlock this theme to get your browser source URL.
+            🔒 {t('games.unlockTheme')}
           </div>
         )}
         {channelName.trim() && !isThemeLocked && (
           <div>
-            <label className="mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]">Browser Source URL</label>
+            <label className="mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]">{t('games.browserSourceUrl')}</label>
             <div className="flex gap-2">
               <input
                 type="text"
@@ -507,21 +511,21 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
                 onClick={copyUrl}
                 className="shrink-0 rounded-lg bg-[var(--color-pp-accent)] px-4 py-2 text-xs font-medium text-white transition hover:bg-[#4a7de0]"
               >
-                {copied ? 'Copied!' : 'Copy'}
+                {copied ? t('games.copied') : t('games.copy')}
               </button>
             </div>
-            <p className="mt-1.5 text-[11px] text-[var(--color-pp-text-muted)]">⚠️ This URL contains your auth token. Don&apos;t share it publicly.</p>
+            <p className="mt-1.5 text-[11px] text-[var(--color-pp-text-muted)]">⚠️ {t('games.tokenWarning')}</p>
           </div>
         )}
 
         {/* Instructions */}
         <div className="rounded-lg bg-[var(--color-pp-card)] p-3 text-[11px] text-[var(--color-pp-text-muted)]">
-          <p className="font-medium text-[var(--color-pp-text)]">How to add to OBS:</p>
+          <p className="font-medium text-[var(--color-pp-text)]">{t('games.obsInstructions')}</p>
           <ol className="mt-1 list-inside list-decimal space-y-0.5">
-            <li>Copy the URL above</li>
-            <li>In OBS, add a new <strong>Browser Source</strong></li>
-            <li>Paste the URL and set size to <strong>1920×1080</strong></li>
-            <li>Check &quot;Refresh browser when scene becomes active&quot;</li>
+            <li>{t('games.obsStep1')}</li>
+            <li>{t('games.obsStep2')}</li>
+            <li>{t('games.obsStep3')}</li>
+            <li>{t('games.obsStep4')}</li>
           </ol>
         </div>
       </div>
@@ -548,7 +552,7 @@ function GamesContent() {
     return (
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <Link href="/games" className="mb-6 inline-flex items-center gap-2 text-sm text-[var(--color-pp-accent)] hover:underline">
-          &larr; All Games
+          &larr; {t('games.allGames')}
         </Link>
 
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] overflow-hidden">
@@ -567,38 +571,38 @@ function GamesContent() {
 
           <div className="p-8">
             <div className="mb-4 flex items-center gap-3">
-              <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">{selectedGame.name}</h1>
+              <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">{t(`gameData.${selectedGame.id}.name`)}</h1>
               <span className={`rounded-full px-3 py-1 text-xs font-medium ${selectedGame.badgeColor}`}>
-                {selectedGame.badge}
+                {selectedGame.badge === 'Free' ? t('gameData.freeBadge') : t('gameData.channelPointsBadge')}
               </span>
             </div>
-            <p className="mb-6 text-lg text-[var(--color-pp-text-muted)]">{selectedGame.description}</p>
+            <p className="mb-6 text-lg text-[var(--color-pp-text-muted)]">{t(`gameData.${selectedGame.id}.description`)}</p>
 
             {/* Theme list */}
             {selectedGame.themes.length > 1 && (
               <div className="mb-6">
                 <h3 className="mb-3 text-sm font-medium text-[var(--color-pp-text-muted)]">
-                  Available Themes ({selectedGame.themes.length})
+                  {t('games.availableThemes')} ({selectedGame.themes.length})
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {selectedGame.themes.map((t) => (
+                  {selectedGame.themes.map((thm) => (
                     <button
-                      key={t.key}
-                      onClick={() => setSelectedTheme(t.key)}
+                      key={thm.key}
+                      onClick={() => setSelectedTheme(thm.key)}
                       className={`rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
-                        t.key === selectedTheme
+                        thm.key === selectedTheme
                           ? 'ring-2 ring-[var(--color-pp-accent)] bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]'
-                          : t.premium
+                          : thm.premium
                             ? 'bg-amber-600/15 text-amber-800 hover:bg-amber-600/25'
                             : 'bg-[var(--color-pp-success)]/15 text-[var(--color-pp-success)] hover:bg-[var(--color-pp-success)]/25'
                       }`}
                     >
-                      {t.premium && t.requires && !account?.owned?.includes(t.requires) ? '🔒 ' : ''}
-                      {t.premium && t.requires && account?.owned?.includes(t.requires) ? '✓ ' : ''}
-                      {t.name}
-                      {t.seasonal && seasonalBadges[t.seasonal] && (
-                        <span className={`ml-1 text-[10px] ${seasonalBadges[t.seasonal].color} rounded px-1`}>
-                          {seasonalBadges[t.seasonal].emoji}
+                      {thm.premium && thm.requires && !account?.owned?.includes(thm.requires) ? '🔒 ' : ''}
+                      {thm.premium && thm.requires && account?.owned?.includes(thm.requires) ? '✓ ' : ''}
+                      {translateThemeName(thm.name, t)}
+                      {thm.seasonal && seasonalBadges[thm.seasonal] && (
+                        <span className={`ml-1 text-[10px] ${seasonalBadges[thm.seasonal].color} rounded px-1`}>
+                          {seasonalBadges[thm.seasonal].emoji}
                         </span>
                       )}
                     </button>
@@ -643,11 +647,11 @@ function GamesContent() {
             </div>
             <div className="flex items-start justify-between gap-2">
               <div>
-                <h2 className="font-semibold text-[var(--color-pp-headings)] group-hover:text-[var(--color-pp-accent)]">{game.name}</h2>
-                <p className="mt-1 text-sm text-[var(--color-pp-text-muted)]">{game.tagline}</p>
+                <h2 className="font-semibold text-[var(--color-pp-headings)] group-hover:text-[var(--color-pp-accent)]">{t(`gameData.${game.id}.name`)}</h2>
+                <p className="mt-1 text-sm text-[var(--color-pp-text-muted)]">{t(`gameData.${game.id}.tagline`)}</p>
               </div>
               <span className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${game.badgeColor}`}>
-                {game.badge}
+                {game.badge === 'Free' ? t('gameData.freeBadge') : t('gameData.channelPointsBadge')}
               </span>
             </div>
           </Link>

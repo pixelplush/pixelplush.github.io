@@ -197,7 +197,7 @@ export default function MarketPage() {
         }).then((r) => r.json());
         if (result.error) throw new Error(result.error);
         await refreshAccount();
-        showNotification('success', `You got ${item.name}!`);
+        showNotification('success', `${t('market.youGot')} ${item.name}!`);
         const expectedRemaining = (account?.coins ?? 0) - cost;
         if (expectedRemaining < cheapestUnownedCost && expectedRemaining >= 0) {
           setTimeout(() => {
@@ -346,7 +346,7 @@ export default function MarketPage() {
           pollingRef.current = null;
           await refreshAccount();
           setSelectedCoinPkg(null);
-          showNotification('success', `You got ${selectedCoinPkg.coins} Plush Coins!`);
+          showNotification('success', `${t('market.youGot')} ${selectedCoinPkg.coins} ${t('market.plushCoins')}!`);
         } catch (err: unknown) {
           const message = err instanceof Error ? err.message : t('market.coinPurchaseFailed');
           showNotification('error', message);
@@ -385,7 +385,7 @@ export default function MarketPage() {
           {isLoggedIn && account ? (
             <div className="flex items-center gap-2 text-base font-semibold text-amber-900">
               <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="coins" width={24} height={24} className="pixelated" unoptimized />
-              Your Balance: {account.coins} {t('market.coins').toLowerCase()}
+              {t('market.yourBalance')}: {account.coins} {t('market.coins').toLowerCase()}
             </div>
           ) : (
             <div className="flex items-center gap-3">
@@ -411,7 +411,7 @@ export default function MarketPage() {
             >
               {pkg.popular && (
                 <span className="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-amber-500 px-2.5 py-0.5 text-[11px] font-bold text-white">
-                  ⭐ Most Popular
+                  ⭐ {t('market.mostPopular')}
                 </span>
               )}
               <div className="text-sm text-amber-700">{pkg.price}</div>
@@ -420,23 +420,23 @@ export default function MarketPage() {
                 {pkg.coins}
               </div>
               {pkg.bonus ? (
-                <div className="mb-2 text-xs font-medium text-amber-600">{pkg.bonus} bonus</div>
+                <div className="mb-2 text-xs font-medium text-amber-600">{pkg.bonus} {t('market.bonus')}</div>
               ) : (
-                <div className="mb-2 text-xs text-amber-600/60">No bonus</div>
+                <div className="mb-2 text-xs text-amber-600/60">{t('market.noBonus')}</div>
               )}
               {isLoggedIn ? (
                 <button
                   onClick={() => setSelectedCoinPkg(pkg)}
                   className="w-full rounded-lg bg-amber-500 py-1.5 text-sm font-semibold text-white transition hover:bg-amber-600"
                 >
-                  Buy
+                  {t('market.buy')}
                 </button>
               ) : null}
             </div>
           ))}
         </div>
         <p className="mt-3 text-center text-xs text-amber-700/70">
-          Secure checkout via Stripe or PayPal · Coins are non-refundable
+          {t('market.paymentDisclaimer')}
         </p>
       </div>
 
@@ -447,16 +447,16 @@ export default function MarketPage() {
             <div className="mb-4 text-center">
               <div className="mb-2 flex items-center justify-center gap-2 text-2xl font-bold text-[var(--color-pp-headings)]">
                 <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="" width={28} height={28} className="pixelated" unoptimized />
-                {selectedCoinPkg.coins} Plush Coins
+                {selectedCoinPkg.coins} {t('market.plushCoins')}
               </div>
               <p className="text-[var(--color-pp-text-muted)]">
-                {selectedCoinPkg.coins} coins{selectedCoinPkg.bonus ? ` (${selectedCoinPkg.bonus} bonus)` : ''} for {selectedCoinPkg.price}
+                {selectedCoinPkg.coins} {t('market.coinsUnit')}{selectedCoinPkg.bonus ? ` (${selectedCoinPkg.bonus} ${t('market.bonus')})` : ''} — {selectedCoinPkg.price}
               </p>
             </div>
             {coinProcessing ? (
               <div className="flex flex-col items-center gap-3 py-4">
                 <div className="h-8 w-8 animate-spin rounded-full border-2 border-amber-500 border-t-transparent" />
-                <p className="text-sm text-[var(--color-pp-text-muted)]">Processing your purchase...</p>
+                <p className="text-sm text-[var(--color-pp-text-muted)]">{t('market.processingPurchase')}</p>
               </div>
             ) : (
               <div className="space-y-4">
@@ -464,11 +464,11 @@ export default function MarketPage() {
                   onClick={handleStripeCheckout}
                   className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#635BFF] py-3 text-sm font-semibold text-white transition hover:bg-[#5347E5]"
                 >
-                  💳 Pay with Card
+                  💳 {t('market.payWithCard')}
                 </button>
                 <div className="flex items-center gap-3">
                   <div className="h-px flex-1 bg-[var(--color-pp-border)]" />
-                  <span className="text-xs text-[var(--color-pp-text-muted)]">or</span>
+                  <span className="text-xs text-[var(--color-pp-text-muted)]">{t('common.or')}</span>
                   <div className="h-px flex-1 bg-[var(--color-pp-border)]" />
                 </div>
                 <div ref={paypalRef} className="min-h-[50px]" />
@@ -479,7 +479,7 @@ export default function MarketPage() {
                 onClick={() => setSelectedCoinPkg(null)}
                 className="mt-4 w-full rounded-lg border border-[var(--color-pp-border)] py-2 text-sm text-[var(--color-pp-text-muted)] transition hover:bg-[var(--color-pp-card-hover)]"
               >
-                Cancel
+                {t('common.cancel')}
               </button>
             )}
           </div>
@@ -494,11 +494,11 @@ export default function MarketPage() {
               <Image src={getItemPreview(confirmItem)} alt={confirmItem.name} width={64} height={64} className="pixelated" unoptimized />
               <h3 className="text-lg font-bold text-[var(--color-pp-headings)]">{confirmItem.name}</h3>
               <p className="text-sm text-[var(--color-pp-text-muted)]">
-                This will use{' '}
+                {t('market.thisWillUse')}{' '}
                 <span className="font-semibold text-[var(--color-pp-text)]">
                   {confirmItem.sale ? Math.floor(confirmItem.cost / 2) : confirmItem.cost}
                 </span>{' '}
-                coins
+                {t('market.coinsUnit')}
               </p>
             </div>
             <div className="flex gap-3">
@@ -506,13 +506,13 @@ export default function MarketPage() {
                 onClick={() => setConfirmItem(null)}
                 className="flex-1 rounded-lg border border-[var(--color-pp-border)] py-2.5 text-sm font-medium text-[var(--color-pp-text-muted)] transition hover:bg-[var(--color-pp-card-hover)]"
               >
-                Cancel
+                {t('common.cancel')}
               </button>
               <button
                 onClick={() => buyItem(confirmItem)}
                 className="flex-1 rounded-lg bg-[var(--color-pp-accent)] py-2.5 text-sm font-medium text-white transition hover:bg-[#4a7de0]"
               >
-                Buy
+                {t('market.buy')}
               </button>
             </div>
           </div>
@@ -545,7 +545,7 @@ export default function MarketPage() {
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search items..."
+          placeholder={t('market.searchItems')}
           className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-[var(--color-pp-text)] placeholder-[var(--color-pp-text-muted)] focus:border-[var(--color-pp-accent)] focus:outline-none sm:w-64"
         />
         <div className="flex flex-wrap gap-2">
@@ -565,7 +565,7 @@ export default function MarketPage() {
         </div>
         <label className="flex cursor-pointer items-center gap-2 text-sm text-[var(--color-pp-text)]">
           <input type="checkbox" checked={hideOwned} onChange={(e) => setHideOwned(e.target.checked)} className="rounded" />
-          Hide owned items
+          {t('market.hideOwnedItems')}
         </label>
       </div>
 
@@ -575,7 +575,7 @@ export default function MarketPage() {
           <div className="h-8 w-8 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
         </div>
       ) : filteredItems.length === 0 ? (
-        <div className="flex h-48 items-center justify-center text-[var(--color-pp-text-muted)]">No items found</div>
+        <div className="flex h-48 items-center justify-center text-[var(--color-pp-text-muted)]">{t('market.noItemsFound')}</div>
       ) : (
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
           {filteredItems.map((item) => {
@@ -604,11 +604,11 @@ export default function MarketPage() {
                 </span>
                 <h3 className="truncate text-xs font-medium text-[var(--color-pp-headings)]">{item.name}</h3>
                 {isBundle && bundleItemIds.length > 0 && !isOwned && (
-                  <p className="mt-0.5 text-[10px] text-[var(--color-pp-text-muted)]">{bundleItemIds.length} items included</p>
+                  <p className="mt-0.5 text-[10px] text-[var(--color-pp-text-muted)]">{bundleItemIds.length} {t('market.itemsIncluded')}</p>
                 )}
                 <div className="mt-1.5">
                   {isOwned ? (
-                    <span className="text-xs font-medium text-[var(--color-pp-success)]">Owned</span>
+                    <span className="text-xs font-medium text-[var(--color-pp-success)]">{t('market.owned')}</span>
                   ) : (
                     <>
                       <span className="text-xs text-[var(--color-pp-text-muted)]">
@@ -626,13 +626,13 @@ export default function MarketPage() {
                             <span className="font-medium text-[var(--color-pp-success)]">{Math.floor(item.cost / 2)}</span>
                           </>
                         ) : item.cost === 0 ? (
-                          <span className="font-medium text-[var(--color-pp-success)]">FREE</span>
+                          <span className="font-medium text-[var(--color-pp-success)]">{t('market.free')}</span>
                         ) : (
                           item.cost
                         )}
                         {isBundle && savings > 0 && (
                           <span className="ml-1 rounded-full bg-green-500/15 px-1.5 py-0.5 text-[10px] font-bold text-green-700">
-                            Save {savings}%
+                            {t('market.savings')} {savings}%
                           </span>
                         )}
                       </span>
@@ -646,7 +646,7 @@ export default function MarketPage() {
                               : 'bg-[var(--color-pp-accent)] hover:bg-[#4a7de0]'
                           }`}
                         >
-                          {buyingItem === item.id ? '...' : isBundle ? 'Buy Bundle' : 'Buy'}
+                          {buyingItem === item.id ? '...' : isBundle ? t('market.buyBundle') : t('market.buy')}
                         </button>
                       )}
                     </>

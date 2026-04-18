@@ -26,11 +26,19 @@
   },
   "home": {
     "heroTitle": "Zábavné overlay hry pro Twitch streamy",
-    "heroSubtitle": "Zdarma, interaktivní a oblíbené streamery po celém světě"
+    "heroSubtitle": "Zdarma, interaktivní a oblíbené streamery po celém světě",
+    "hello": "Ahoj všichni!",
+    "welcomeText": "Vítejte u PixelPlush, našeho 2členného herního studia s",
+    "artLabel": "(Grafika)",
+    "codeLabel": "(Kód)",
+    "getCharacters": "Získej postavy a mazlíčky!",
+    "getCharactersDesc": "Získej speciální postavy a mazlíčky pro PixelPlush hry!",
+    "visitMarket": "Navštiv obchod s doplňky",
+    "whatsNew": "Co je nového"
   },
   "games": {
     "title": "Hry a Overlaye",
-    "subtitle": "Bezplatné hry a overlaye integrovány s Twitch chatem. Přidej je do OBS jako Browser Source.",
+    "subtitle": "Bezplatné hry a overlaye integrované s Twitch chatem. Přidej je do OBS jako Browser Source.",
     "setupGuide": "Průvodce nastavením",
     "howToSetup": "Jak nastavit",
     "step1Title": "Přihlásit se přes Twitch",
@@ -50,11 +58,25 @@
     "premiumTheme": "Tento prémiový motiv vyžaduje doplněk.",
     "getInMarket": "Získat v obchodě →",
     "loginToCheckPremium": "Přihlas se, abys zjistil/a, zda vlastníš tento prémiový motiv.",
-    "requiresLogin": "(Vyžaduje přihlášení)"
+    "requiresLogin": "(Vyžaduje přihlášení)",
+    "generateLink": "Vygenerovat odkaz Browser Source",
+    "loginToAutoFill": "pro automatické doplnění kanálu a aktivaci funkcí založených na tokenu.",
+    "allGames": "Všechny hry",
+    "availableThemes": "Dostupné motivy",
+    "unlockTheme": "Odemkni tento motiv pro získání URL Browser Source.",
+    "browserSourceUrl": "URL Browser Source",
+    "copied": "Zkopírováno!",
+    "copy": "Kopírovat",
+    "tokenWarning": "Tato URL obsahuje tvůj auth token. Nesdílej ji veřejně.",
+    "obsInstructions": "Jak přidat do OBS:",
+    "obsStep1": "Zkopíruj URL výše",
+    "obsStep2": "V OBS přidej novou Browser Source",
+    "obsStep3": "Vlož URL a nastav velikost na 1920×1080",
+    "obsStep4": "Zaškrtni \"Obnovit prohlížeč při aktivaci scény\""
   },
   "market": {
     "title": "Obchod",
-    "subtitle": "Prohlídni si postavy, mazlíčky, oblečení a další pro PixelPlush hry.",
+    "subtitle": "Prohlédni si postavy, mazlíčky, oblečení a další pro PixelPlush hry.",
     "coins": "Mince",
     "buyCoins": "Koupit mince",
     "noBonus": "Žádný bonus",
@@ -79,7 +101,19 @@
     "purchaseTimeout": "Transakce vypršela. Kontaktuj podporu, pokud byly strženy prostředky.",
     "paymentCancelled": "Platba byla zrušena",
     "coinPurchaseFailed": "Nákup mincí se nezdařil",
-    "paypalError": "Chyba PayPal"
+    "paypalError": "Chyba PayPal",
+    "mostPopular": "Nejpopulárnější",
+    "bonus": "bonus",
+    "paymentDisclaimer": "Bezpečná platba přes Stripe nebo PayPal · Mince jsou nevratné",
+    "processingPurchase": "Zpracováváme tvůj nákup...",
+    "payWithCard": "Zaplatit kartou",
+    "searchItems": "Hledat předměty...",
+    "hideOwnedItems": "Skrýt vlastněné předměty",
+    "noItemsFound": "Žádné předměty nenalezeny",
+    "free": "ZDARMA",
+    "thisWillUse": "To bude stát",
+    "coinsUnit": "mincí",
+    "youGot": "Získal/a jsi"
   },
   "customize": {
     "title": "Šatna",
@@ -89,7 +123,15 @@
     "unequip": "Sundat",
     "locked": "Zamčeno",
     "loginRequired": "Pro přizpůsobení postavy se přihlas přes Twitch",
-    "searchOwned": "Hledat vlastněné předměty..."
+    "searchOwned": "Hledat vlastněné předměty...",
+    "noItemsEquipped": "Žádné předměty nasazeny",
+    "preview": "Náhled",
+    "active": "AKTIVNÍ",
+    "queued": "VE FRONTĚ",
+    "noItemsInCategory": "Žádné předměty v této kategorii.",
+    "visitMarketHelp": "Navštiv",
+    "marketplace": "obchod",
+    "toGetSome": "a pořiď si nějaké!"
   },
   "scores": {
     "title": "Žebříček",
@@ -168,7 +210,8 @@
     "viewAll": "Zobrazit vše",
     "loginWithTwitch": "Přihlásit se přes Twitch",
     "goHome": "Domů",
-    "accessDenied": "Přístup odepřen"
+    "accessDenied": "Přístup odepřen",
+    "or": "nebo"
   },
   "troubleshoot": {
     "title": "Řešení problémů",
@@ -188,11 +231,178 @@
     "generateReportDesc": "Zkopíruj souhrn diagnostiky a sdílej ho na Discordu.",
     "copyReport": "Zkopírovat report",
     "copied": "Zkopírováno do schránky!",
-    "stillStuck": "Stále problémy? Přidej se na Discord nebo napiš na support@pixelplush.dev"
+    "stillStuck": "Stále problémy? Přidej se na Discord nebo napiš na support@pixelplush.dev",
+    "setupChecklist": "3. Kontrolní seznam nastavení",
+    "setupChecklistDesc": "První 3 položky se automaticky zkontrolují při validaci URL. Klikni na ostatní pro manuální potvrzení.",
+    "auto": "(auto)"
   },
   "admin": {
     "title": "Administrace",
     "subtitle": "Nástroje pro správu PixelPlush",
     "adminOnly": "Tato stránka je dostupná pouze pro administrátory PixelPlush."
+  },
+  "gameData": {
+    "viewAllThemes": "Zobrazit všechny motivy",
+    "addToStream": "Přidat do streamu",
+    "freeBadge": "Zdarma",
+    "channelPointsBadge": "Kanálové body",
+    "freeTag": "(Zdarma)",
+    "premiumTag": "(Premium)",
+    "giveaway": {
+      "name": "Giveaway Tool",
+      "tagline": "Zábavný způsob, jak dělat giveawaye na Twitchi",
+      "description": "Pořádej giveawaye jednoduše a zábavně pro své diváky! Diváci napíšou příkaz do chatu, aby se zapojili, a náhodný víhertní je vybrán s veselou animací."
+    },
+    "weather": {
+      "name": "Stream Weather",
+      "tagline": "Meteorologický overlay pomocí kanálových bodů",
+      "description": "Overlay měnící počasí, který diváci ovládají pomocí kanálových bodů. Déšť, sníh, bouřky — tvoji diváci rozhodují!"
+    },
+    "confetti": {
+      "name": "Pixel Confetti",
+      "tagline": "Stream konfetti overlay pomocí kanálových bodů",
+      "description": "Diváci posílají konfetti přes tvůj stream pomocí kanálových bodů! Skvělý vizuální efekt pro suby, raidy nebo jakýkoliv hype moment."
+    },
+    "plinko": {
+      "name": "Plinko Bounce",
+      "tagline": "Plinko stream overlay hra pro Twitch",
+      "description": "Hoď míček a sleduj, jak odskákuje přes kolíky a sbírá body! Diváci soutěží o nejvyšší skóre na žebříčku."
+    },
+    "parachute": {
+      "name": "Parachute Drop",
+      "tagline": "Padáková stream overlay hra pro Twitch",
+      "description": "Vyskoč z letadla, otevři padák a zkus přistát na cíli! Diváci soutěží psaním příkazů v chatu."
+    },
+    "chatflakes": {
+      "name": "Chat Flakes",
+      "tagline": "Chatové zprávy přeměněné na stream částice",
+      "description": "Diváci přidávají jemné částicové efekty na tvou obrazovku prostě tím, že píšou do chatu. Krásný pasivní overlay!"
+    },
+    "hillroll": {
+      "name": "Hill Rolling Race",
+      "tagline": "Závodní stream overlay hra pro Twitch",
+      "description": "Kutálej se z kopce a závoď proti ostatním divákům! Vyhýbej se překážkám a zkus dojet do cíle jako první."
+    },
+    "maze": {
+      "name": "Pixel Maze",
+      "tagline": "Stream bludiště hra pro Twitch",
+      "description": "Naviguj bludištěm pomocí chatových příkazů! Skvělé pro BRB obrazovky — zabaví tvé diváky během přestávek."
+    },
+    "settings": {
+      "giveaway": {
+        "lang": "Jazyk",
+        "volume": "Hlasitost",
+        "command": "Příkaz pro start",
+        "join": "Příkaz pro vstup",
+        "unjoin": "Příkaz pro odchod",
+        "win": "Příkaz pro výhru",
+        "skip": "Příkaz pro přeskočení",
+        "chat": "Odeslat výsledky do chatu"
+      },
+      "weather": {
+        "volume": "Hlasitost",
+        "rain": "Cena deště v KB",
+        "rainTime": "Délka deště",
+        "heavyrain": "Cena silného deště v KB",
+        "heavyrainTime": "Délka silného deště",
+        "snow": "Cena sněhu v KB",
+        "snowTime": "Délka sněhu",
+        "blizzard": "Cena blizzardu v KB",
+        "blizzardTime": "Délka blizzardu",
+        "hail": "Cena krupobití v KB",
+        "hailTime": "Délka krupobití",
+        "blossoms": "Cena květů v KB",
+        "blossomsTime": "Délka květů"
+      },
+      "confetti": {
+        "volume": "Hlasitost",
+        "cpConfettiCost": "Cena konfetti v KB",
+        "cpConfettiIntensity": "Intenzita konfetti",
+        "cpBubblesCost": "Cena bublin v KB",
+        "cpBubblesIntensity": "Intenzita bublin",
+        "cpBalloonsCost": "Cena balónků v KB",
+        "cpBalloonsIntensity": "Intenzita balónků",
+        "cpHeartsCost": "Cena srdíček v KB",
+        "cpHeartsIntensity": "Intenzita srdíček"
+      },
+      "plinko": {
+        "overlay": "Pozadí",
+        "clouds": "Mraky",
+        "hideTilStart": "Skrýt do startu",
+        "pegOpacity": "Průhlednost kolíků",
+        "volume": "Hlasitost",
+        "notifVolume": "Hlasitost upozornění",
+        "commandOn": "Povolit chatový příkaz",
+        "command": "Příkaz",
+        "cooldown": "Obnovovací časovač",
+        "chat": "Oznámit v chatu"
+      },
+      "parachute": {
+        "overlay": "Pozadí",
+        "clouds": "Mraky",
+        "hideTilDrop": "Skrýt do seskoku",
+        "volume": "Hlasitost",
+        "notifVolume": "Hlasitost upozornění",
+        "commandOn": "Povolit chatový příkaz",
+        "command": "Příkaz pro seskok",
+        "cooldown": "Obnovovací časovač",
+        "droplets": "Bit Cheers",
+        "chat": "Skóre v chatu"
+      },
+      "chatflakes": {
+        "nth": "Interval zpráv",
+        "num": "Částice na zprávu",
+        "timer": "Částice časovače",
+        "rain": "Dešťové částice",
+        "leaves": "Listové částice",
+        "snow": "Sněhové částice",
+        "blossoms": "Květové částice",
+        "hearts": "Srdíčkové částice"
+      },
+      "hillroll": {
+        "overlay": "Pozadí",
+        "clouds": "Mraky",
+        "volume": "Hlasitost",
+        "command": "Příkaz",
+        "cooldown": "Obnovovací časovač",
+        "defaultCountdown": "Výchozí odpočet",
+        "hideInstructions": "Skrýt instrukce",
+        "hideTime": "Skrýt časovač",
+        "chat": "Výsledky v chatu"
+      },
+      "maze": {
+        "bosses": "Počet bossů",
+        "bossEffect": "Efekt bosse",
+        "prizes": "Počet cen",
+        "traps": "Počet pastí",
+        "trapEffect": "Efekt pasti",
+        "chat": "Výsledky v chatu"
+      }
+    },
+    "settingsOptions": {
+      "lang": {
+        "en": "Angličtina",
+        "fr": "Francouzština",
+        "de": "Němčina",
+        "es": "Španělština",
+        "cs": "Čeština"
+      },
+      "bossEffect": {
+        "steal": "Ukrást body",
+        "base": "Návrat na start"
+      },
+      "trapEffect": {
+        "0": "Bodová srážka",
+        "1": "Pastičkové tunely"
+      }
+    },
+    "seasonal": {
+      "christmas": "Vánoce",
+      "halloween": "Strašidelný",
+      "easter": "Jaro",
+      "valentines": "Láska",
+      "spring": "Jaro",
+      "autumn": "Podzim"
+    }
   }
 }

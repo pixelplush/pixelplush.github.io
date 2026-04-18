@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, useCallback, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
 import { type Locale, defaultLocale, languages } from "./languages";
 
 import en from "./translations/en.json";
@@ -11,7 +11,7 @@ import es from "./translations/es.json";
 
 type TranslationDict = typeof en;
 
-const dictionaries: Record<Locale, TranslationDict> = { en, de, cs, tr, es };
+const dictionaries = { en, de, cs, tr, es } as Record<Locale, TranslationDict>;
 
 const STORAGE_KEY = "pp_locale";
 
@@ -38,19 +38,17 @@ interface I18nContextValue {
 const I18nContext = createContext<I18nContextValue | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocaleState] = useState<Locale>(defaultLocale);
-
-  // Load saved locale from localStorage on mount
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved && dictionaries[saved as Locale]) {
-        setLocaleState(saved as Locale);
-      }
-    } catch {
-      // localStorage unavailable (OBS browser source, etc.)
+  const [locale, setLocaleState] = useState<Locale>(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved && dictionaries[saved as Locale]) {
+          return saved as Locale;
+        }
+      } catch { /* OBS browser source */ }
     }
-  }, []);
+    return defaultLocale;
+  });
 
   const setLocale = useCallback((newLocale: Locale) => {
     setLocaleState(newLocale);

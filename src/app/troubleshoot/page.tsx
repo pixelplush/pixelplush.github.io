@@ -372,9 +372,9 @@ export default function TroubleshootPage() {
 
       {/* Section 3: Checklist */}
       <div className="mb-6 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-5">
-        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">3. Setup Checklist</h2>
+        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">{t('troubleshoot.setupChecklist')}</h2>
         <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">
-          First 3 items auto-check when you validate a URL. Click the rest to confirm manually.
+          {t('troubleshoot.setupChecklistDesc')}
         </p>
         <div className="space-y-2">
           {checklist.map((item) => (
@@ -394,7 +394,7 @@ export default function TroubleshootPage() {
               </span>
               <span className={`${item.checked ? 'text-[var(--color-pp-text)]' : 'text-[var(--color-pp-text-muted)]'}`}>
                 {item.label}
-                {item.auto && <span className="ml-1 text-[10px] text-[var(--color-pp-text-muted)]">(auto)</span>}
+                {item.auto && <span className="ml-1 text-[10px] text-[var(--color-pp-text-muted)]">{t('troubleshoot.auto')}</span>}
               </span>
             </button>
           ))}
@@ -449,14 +449,7 @@ export default function TroubleshootPage() {
       {/* Need more help */}
       <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-5 text-center">
         <p className="text-sm text-[var(--color-pp-text-muted)]">
-          Still stuck? Join the{' '}
-          <a href="https://discord.gg/pixelplush" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-link)] hover:underline">
-            PixelPlush Discord
-          </a>{' '}
-          or email{' '}
-          <a href="mailto:support@pixelplush.dev" className="text-[var(--color-pp-link)] hover:underline">
-            support@pixelplush.dev
-          </a>
+          {t('troubleshoot.stillStuck')}
         </p>
       </div>
     </div>
