@@ -15,7 +15,17 @@ interface GameTheme {
   preview: string;
   requires?: string;
   bundle?: string;
+  seasonal?: string;
 }
+
+const seasonalBadges: Record<string, { emoji: string; label: string; color: string }> = {
+  christmas: { emoji: '🎄', label: 'Holiday', color: 'bg-red-100 text-red-700' },
+  halloween: { emoji: '🎃', label: 'Spooky', color: 'bg-orange-100 text-orange-700' },
+  easter: { emoji: '🐣', label: 'Spring', color: 'bg-pink-100 text-pink-700' },
+  valentines: { emoji: '❤️', label: 'Love', color: 'bg-rose-100 text-rose-700' },
+  spring: { emoji: '🌸', label: 'Spring', color: 'bg-pink-100 text-pink-700' },
+  autumn: { emoji: '🍂', label: 'Fall', color: 'bg-amber-100 text-amber-700' },
+};
 
 interface GameSetting {
   id: string;
@@ -65,8 +75,8 @@ const games: GameDef[] = [
       { key: 'giveawaypurple', name: 'Purple', page: '/giveaway/purple.html', premium: true, preview: '/app-assets/images/games/giveaway_pp_purple.gif', requires: 'addon_giveaway_blue', bundle: 'bundle_giveaway_colors' },
       { key: 'giveawayred', name: 'Red', page: '/giveaway/red.html', premium: true, preview: '/app-assets/images/games/giveaway_pp_red.gif', requires: 'addon_giveaway_blue', bundle: 'bundle_giveaway_colors' },
       { key: 'giveawayyellow', name: 'Yellow', page: '/giveaway/yellow.html', premium: true, preview: '/app-assets/images/games/giveaway_pp_yellow.gif', requires: 'addon_giveaway_blue', bundle: 'bundle_giveaway_colors' },
-      { key: 'giveawayblossoms', name: 'Blossoms (Premium)', page: '/giveaway/blossoms.html', premium: true, preview: '/app-assets/images/games/giveaway_blossoms.gif', requires: 'addon_giveaway_blossoms' },
-      { key: 'giveawayautumn', name: 'Autumn (Premium)', page: '/giveaway/autumn.html', premium: true, preview: '/app-assets/images/games/giveaway_autumn.gif', requires: 'addon_giveaway_autumn' },
+      { key: 'giveawayblossoms', name: 'Blossoms (Premium)', page: '/giveaway/blossoms.html', premium: true, preview: '/app-assets/images/games/giveaway_blossoms.gif', requires: 'addon_giveaway_blossoms', seasonal: 'spring' },
+      { key: 'giveawayautumn', name: 'Autumn (Premium)', page: '/giveaway/autumn.html', premium: true, preview: '/app-assets/images/games/giveaway_autumn.gif', requires: 'addon_giveaway_autumn', seasonal: 'autumn' },
     ],
     settings: [
       { id: 'lang', label: 'Language', type: 'select', param: 'lang', default: 'en', options: [
@@ -144,8 +154,8 @@ const games: GameDef[] = [
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
       { key: 'pixelplinko', name: 'Day (Free)', page: '/plinko/index.html', preview: '/app-assets/images/games/plinko_day_website.gif' },
-      { key: 'pixelplinkochristmas', name: 'Christmas (Free)', page: '/plinko/christmas.html', preview: '/app-assets/images/games/plinko_christmas_website.gif' },
-      { key: 'pixelplinkohalloween', name: 'Halloween (Premium)', page: '/plinko/halloween.html', premium: true, preview: '/app-assets/images/games/pixelplinkohalloween.gif', requires: 'addon_plinko_halloween' },
+      { key: 'pixelplinkochristmas', name: 'Christmas (Free)', page: '/plinko/christmas.html', preview: '/app-assets/images/games/plinko_christmas_website.gif', seasonal: 'christmas' },
+      { key: 'pixelplinkohalloween', name: 'Halloween (Premium)', page: '/plinko/halloween.html', premium: true, preview: '/app-assets/images/games/pixelplinkohalloween.gif', requires: 'addon_plinko_halloween', seasonal: 'halloween' },
     ],
     settings: [
       { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true },
@@ -174,16 +184,16 @@ const games: GameDef[] = [
       { key: 'pixelparachutesday', name: 'Day Alt', page: '/parachute/day.html', preview: '/app-assets/images/games/pixelparachuteday.gif' },
       { key: 'pixelparachutesnight', name: 'Night', page: '/parachute/night.html', preview: '/app-assets/images/games/pixelparachutenight.gif' },
       { key: 'pixelparachutesretro', name: 'Retro', page: '/parachute/retro.html', preview: '/app-assets/images/games/pixelparachuteretro.gif' },
-      { key: 'pixelparachuteautumn', name: 'Autumn (Free)', page: '/parachute/autumn.html', preview: '/app-assets/images/games/drop_autumn_website.gif' },
-      { key: 'pixelparachutehalloween', name: 'Halloween (Free)', page: '/parachute/halloween.html', preview: '/app-assets/images/games/pixelparachutehalloween.gif' },
-      { key: 'pixelparachutechristmas', name: 'Christmas (Free)', page: '/parachute/christmas.html', preview: '/app-assets/images/games/pixelparachutechristmas.gif' },
-      { key: 'pixelparachutewinter', name: 'Winter (Free)', page: '/parachute/winter.html', preview: '/app-assets/images/games/pixelparachutewinter.gif' },
-      { key: 'pixelparachutespring', name: 'Spring Blossoms (Premium)', page: '/parachute/spring.html', premium: true, preview: '/app-assets/images/games/pixelparachutespring.gif', requires: 'addon_parachute_blossoms' },
+      { key: 'pixelparachuteautumn', name: 'Autumn (Free)', page: '/parachute/autumn.html', preview: '/app-assets/images/games/drop_autumn_website.gif', seasonal: 'autumn' },
+      { key: 'pixelparachutehalloween', name: 'Halloween (Free)', page: '/parachute/halloween.html', preview: '/app-assets/images/games/pixelparachutehalloween.gif', seasonal: 'halloween' },
+      { key: 'pixelparachutechristmas', name: 'Christmas (Free)', page: '/parachute/christmas.html', preview: '/app-assets/images/games/pixelparachutechristmas.gif', seasonal: 'christmas' },
+      { key: 'pixelparachutewinter', name: 'Winter (Free)', page: '/parachute/winter.html', preview: '/app-assets/images/games/pixelparachutewinter.gif', seasonal: 'christmas' },
+      { key: 'pixelparachutespring', name: 'Spring Blossoms (Premium)', page: '/parachute/spring.html', premium: true, preview: '/app-assets/images/games/pixelparachutespring.gif', requires: 'addon_parachute_blossoms', seasonal: 'spring' },
       { key: 'pixelparachuterainbow', name: 'Rainbow (Premium)', page: '/parachute/pride.html', premium: true, preview: '/app-assets/images/games/pixelparachuterainbow.gif', requires: 'addon_parachute_rainbow' },
-      { key: 'pixelparachutecauldron', name: 'Cauldron (Premium)', page: '/parachute/cauldron_colors.html', premium: true, preview: '/app-assets/images/games/drop_cauldron_rainbow_website.gif', requires: 'addon_parachute_cauldron' },
-      { key: 'pixelparachutechristmaseve', name: 'Christmas Eve (Premium)', page: '/parachute/christmas_eve.html', premium: true, preview: '/app-assets/images/games/drop_christmas_eve.gif', requires: 'addon_parachute_christmaseve' },
-      { key: 'pixelparachutevalentines', name: 'Valentines (Premium)', page: '/parachute/valentines_brown_gold.html', premium: true, preview: '/app-assets/images/games/valentines_brown_gold.gif', requires: 'addon_parachute_valentines_brown_gold', bundle: 'bundle_parachute_valentines' },
-      { key: 'pixelparachuteeaster', name: 'Easter (Free)', page: '/parachute/easter_free.html', preview: '/app-assets/images/games/drop_easter_main.gif' },
+      { key: 'pixelparachutecauldron', name: 'Cauldron (Premium)', page: '/parachute/cauldron_colors.html', premium: true, preview: '/app-assets/images/games/drop_cauldron_rainbow_website.gif', requires: 'addon_parachute_cauldron', seasonal: 'halloween' },
+      { key: 'pixelparachutechristmaseve', name: 'Christmas Eve (Premium)', page: '/parachute/christmas_eve.html', premium: true, preview: '/app-assets/images/games/drop_christmas_eve.gif', requires: 'addon_parachute_christmaseve', seasonal: 'christmas' },
+      { key: 'pixelparachutevalentines', name: 'Valentines (Premium)', page: '/parachute/valentines_brown_gold.html', premium: true, preview: '/app-assets/images/games/valentines_brown_gold.gif', requires: 'addon_parachute_valentines_brown_gold', bundle: 'bundle_parachute_valentines', seasonal: 'valentines' },
+      { key: 'pixelparachuteeaster', name: 'Easter (Free)', page: '/parachute/easter_free.html', preview: '/app-assets/images/games/drop_easter_main.gif', seasonal: 'easter' },
       { key: 'pixelparachutesplashpool', name: 'Pool Party Red (Free)', page: '/parachute/pool_splash_red.html', preview: '/app-assets/images/games/pool_red.gif' },
       { key: 'pixelparachutesplashpoolblue', name: 'Pool Party Blue (Free)', page: '/parachute/pool_splash_blue.html', preview: '/app-assets/images/games/pool_blue.gif' },
       { key: 'pixelparachutescakes', name: 'Party Cakes (Premium)', page: '/parachute/cake_rainbow.html', premium: true, preview: '/app-assets/images/games/drop_cake_rainbow_website.gif', requires: 'addon_parachute_cakerainbow', bundle: 'bundle_parachute_cake' },
@@ -234,7 +244,7 @@ const games: GameDef[] = [
     badge: 'Free',
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
-      { key: 'pixelhillrollchristmas', name: 'Christmas (Free)', page: '/hillroll/christmas.html', preview: '/app-assets/images/games/hill_christmas_gif.gif' },
+      { key: 'pixelhillrollchristmas', name: 'Christmas (Free)', page: '/hillroll/christmas.html', preview: '/app-assets/images/games/hill_christmas_gif.gif', seasonal: 'christmas' },
     ],
     settings: [
       { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true },
@@ -259,13 +269,13 @@ const games: GameDef[] = [
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
       { key: 'wanderingwizards', name: 'Wandering Wizards (Free)', page: '/maze/index.html', preview: '/app-assets/images/games/wanderingwizards.gif' },
-      { key: 'autumnadventure', name: 'Autumn Adventure (Free)', page: '/maze/autumn.html', preview: '/app-assets/images/games/maze_autumn_gif.gif' },
-      { key: 'trickortreat', name: 'Trick or Treat (Free)', page: '/maze/ghost.html', preview: '/app-assets/images/games/trickortreat.gif' },
-      { key: 'santasecretservice', name: "Santa's Secret Service (Free)", page: '/maze/christmas.html', preview: '/app-assets/images/games/maze_christmas_gif.gif' },
-      { key: 'frozenfrenzy', name: 'Frozen Frenzy (Free)', page: '/maze/frozen.html', preview: '/app-assets/images/games/maze_winter_gif.gif' },
-      { key: 'cupidheartcollection', name: 'Cupid Heart Collection (Free)', page: '/maze/cupid.html', preview: '/app-assets/images/games/cupidheartcollection.gif' },
-      { key: 'easteregghunt', name: 'Easter Egg Hunt (Free)', page: '/maze/easter.html', preview: '/app-assets/images/games/easteregghunt.gif' },
-      { key: 'springspree', name: 'Spring Spree (Free)', page: '/maze/spring.html', preview: '/app-assets/images/games/springspree.gif' },
+      { key: 'autumnadventure', name: 'Autumn Adventure (Free)', page: '/maze/autumn.html', preview: '/app-assets/images/games/maze_autumn_gif.gif', seasonal: 'autumn' },
+      { key: 'trickortreat', name: 'Trick or Treat (Free)', page: '/maze/ghost.html', preview: '/app-assets/images/games/trickortreat.gif', seasonal: 'halloween' },
+      { key: 'santasecretservice', name: "Santa's Secret Service (Free)", page: '/maze/christmas.html', preview: '/app-assets/images/games/maze_christmas_gif.gif', seasonal: 'christmas' },
+      { key: 'frozenfrenzy', name: 'Frozen Frenzy (Free)', page: '/maze/frozen.html', preview: '/app-assets/images/games/maze_winter_gif.gif', seasonal: 'christmas' },
+      { key: 'cupidheartcollection', name: 'Cupid Heart Collection (Free)', page: '/maze/cupid.html', preview: '/app-assets/images/games/cupidheartcollection.gif', seasonal: 'valentines' },
+      { key: 'easteregghunt', name: 'Easter Egg Hunt (Free)', page: '/maze/easter.html', preview: '/app-assets/images/games/easteregghunt.gif', seasonal: 'easter' },
+      { key: 'springspree', name: 'Spring Spree (Free)', page: '/maze/spring.html', preview: '/app-assets/images/games/springspree.gif', seasonal: 'spring' },
       { key: 'fairyforest', name: 'Fairy Forest (Free)', page: '/maze/fairy.html', preview: '/app-assets/images/games/fairyforest.gif' },
     ],
     settings: [
@@ -575,6 +585,11 @@ function GamesContent() {
                       {t.premium && t.requires && !account?.owned?.includes(t.requires) ? '🔒 ' : ''}
                       {t.premium && t.requires && account?.owned?.includes(t.requires) ? '✓ ' : ''}
                       {t.name}
+                      {t.seasonal && seasonalBadges[t.seasonal] && (
+                        <span className={`ml-1 text-[10px] ${seasonalBadges[t.seasonal].color} rounded px-1`}>
+                          {seasonalBadges[t.seasonal].emoji}
+                        </span>
+                      )}
                     </button>
                   ))}
                 </div>

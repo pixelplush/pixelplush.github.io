@@ -1,7 +1,6 @@
 'use client';
 
 import { useAuth } from '@/lib/auth';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 
@@ -71,12 +70,16 @@ function getItemFrameUrl(item: CatalogItem, direction: string, frame: number): s
     case 'pet':
       return `${ASSETS_BASE}/pets/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'body':
+      if (!item.category) return '';
       return `${ASSETS_BASE}/skins/body/${item.category}/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'equipment':
+      if (!item.category) return '';
       return `${ASSETS_BASE}/skins/equipment/${item.category}/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'accessory':
+      if (!item.category) return '';
       return `${ASSETS_BASE}/skins/accessories/${item.category}/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'outfit':
+      if (!item.category) return '';
       return `${ASSETS_BASE}/skins/outfits/${item.category}/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
     case 'effect':
       return `${ASSETS_BASE}/skins/effects/${item.path}/${item.path}_${direction}/${item.path}_${direction}${f}.png`;
@@ -649,14 +652,30 @@ export default function CustomizePage() {
                       )}
 
                       <div className="mb-2 flex h-16 items-center justify-center">
-                        <Image
-                          src={getItemPreview(item, isHovered ? animFrame : 0)}
-                          alt={item.name}
-                          width={48}
-                          height={48}
-                          className="pixelated"
-                          unoptimized
-                        />
+                        {getItemPreview(item, isHovered ? animFrame : 0) ? (
+                          <img
+                            src={getItemPreview(item, isHovered ? animFrame : 0)}
+                            alt={item.name}
+                            width={48}
+                            height={48}
+                            className="pixelated"
+                            onError={(e) => {
+                              const target = e.currentTarget;
+                              target.style.display = 'none';
+                              const parent = target.parentElement;
+                              if (parent && !parent.querySelector('.item-placeholder')) {
+                                const ph = document.createElement('div');
+                                ph.className = 'item-placeholder flex items-center justify-center w-12 h-12 rounded-lg bg-[var(--color-pp-border)] text-[var(--color-pp-text-muted)] text-xs font-bold';
+                                ph.textContent = item.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+                                parent.appendChild(ph);
+                              }
+                            }}
+                          />
+                        ) : (
+                          <div className="flex items-center justify-center w-12 h-12 rounded-lg bg-[var(--color-pp-border)] text-[var(--color-pp-text-muted)] text-xs font-bold">
+                            {item.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}
+                          </div>
+                        )}
                       </div>
 
                       <span className={`mb-1 inline-block rounded-full px-2 py-0.5 text-[9px] font-medium capitalize ${typeColors[item.type] || 'bg-white/10 text-[var(--color-pp-text-muted)]'}`}>
