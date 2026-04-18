@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "PixelPlush Home",
+    "games": "Games for Streams",
+    "market": "Goodies Market",
+    "customize": "My Dressing Room",
+    "about": "About Us",
+    "credits": "Credits",
+    "troubleshoot": "Troubleshoot"
+  },
+  "header": {
+    "by": "By",
+    "login": "Log in with Twitch",
+    "myDressingRoom": "My Dressing Room",
+    "shoppingHistory": "My Shopping History",
+    "goodiesMarket": "Goodies Market",
+    "discord": "PixelPlush Discord",
+    "redeemCode": "Redeem Code",
+    "logOut": "Log Out"
+  },
+  "footer": {
+    "discordInvite": "Join our Discord and hang out with us!",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy"
+  },
+  "home": {
+    "heroTitle": "Fun Stream Overlay Games for Twitch",
+    "heroSubtitle": "Free, interactive, and loved by streamers worldwide"
+  },
+  "games": {
+    "title": "Games for Streams",
+    "subtitle": "Free interactive overlay games for your Twitch stream",
+    "setupGuide": "Setup Guide",
+    "howToSetup": "How to Setup",
+    "step1Title": "Login with Twitch",
+    "step1Desc": "Connect your Twitch account to get started",
+    "step2Title": "Pick a Game",
+    "step2Desc": "Choose from our collection of stream games",
+    "step3Title": "Add to OBS",
+    "step3Desc": "Copy the URL and add as a Browser Source in OBS",
+    "step4Title": "Play!",
+    "step4Desc": "Your viewers play by typing commands in chat",
+    "learnMore": "Learn More",
+    "themes": "Themes"
+  },
+  "market": {
+    "title": "Goodies Market",
+    "subtitle": "Customize your games with unique items",
+    "coins": "Coins",
+    "buyCoins": "Buy Coins",
+    "noBonus": "No bonus",
+    "buy": "Buy",
+    "buyBundle": "Buy Bundle",
+    "owned": "Owned",
+    "premium": "Premium",
+    "itemsIncluded": "items included",
+    "savings": "Save",
+    "loginToBuy": "Log in with Twitch to buy items",
+    "search": "Search items...",
+    "allItems": "All Items",
+    "categories": "Categories"
+  },
+  "customize": {
+    "title": "My Dressing Room",
+    "subtitle": "Customize your character across all PixelPlush games",
+    "equipped": "Equipped",
+    "equip": "Equip",
+    "unequip": "Unequip",
+    "locked": "Locked",
+    "loginRequired": "Log in with Twitch to customize your character"
+  },
+  "scores": {
+    "title": "Leaderboards",
+    "subtitle": "Top players across all PixelPlush games"
+  },
+  "status": {
+    "title": "System Status",
+    "subtitle": "Current status of PixelPlush services"
+  },
+  "transactions": {
+    "title": "Shopping History",
+    "subtitle": "Your purchase history"
+  },
+  "redeem": {
+    "title": "Redeem Code",
+    "subtitle": "Enter a code to unlock items",
+    "placeholder": "Enter your code",
+    "submit": "Redeem"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "viewAll": "View All"
+  }
+}

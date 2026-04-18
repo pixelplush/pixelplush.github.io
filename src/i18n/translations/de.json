@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "PixelPlush Startseite",
+    "games": "Spiele für Streams",
+    "market": "Goodies-Markt",
+    "customize": "Meine Umkleide",
+    "about": "Über uns",
+    "credits": "Mitwirkende",
+    "troubleshoot": "Fehlerbehebung"
+  },
+  "header": {
+    "by": "Von",
+    "login": "Mit Twitch anmelden",
+    "myDressingRoom": "Meine Umkleide",
+    "shoppingHistory": "Meine Einkäufe",
+    "goodiesMarket": "Goodies-Markt",
+    "discord": "PixelPlush Discord",
+    "redeemCode": "Code einlösen",
+    "logOut": "Abmelden"
+  },
+  "footer": {
+    "discordInvite": "Tritt unserem Discord bei und chatte mit uns!",
+    "terms": "Nutzungsbedingungen",
+    "privacy": "Datenschutz"
+  },
+  "home": {
+    "heroTitle": "Lustige Stream-Overlay-Spiele für Twitch",
+    "heroSubtitle": "Kostenlos, interaktiv und bei Streamern weltweit beliebt"
+  },
+  "games": {
+    "title": "Spiele für Streams",
+    "subtitle": "Kostenlose interaktive Overlay-Spiele für deinen Twitch-Stream",
+    "setupGuide": "Einrichtungsanleitung",
+    "howToSetup": "So richtest du es ein",
+    "step1Title": "Mit Twitch anmelden",
+    "step1Desc": "Verknüpfe dein Twitch-Konto, um loszulegen",
+    "step2Title": "Wähle ein Spiel",
+    "step2Desc": "Wähle aus unserer Sammlung von Stream-Spielen",
+    "step3Title": "Zu OBS hinzufügen",
+    "step3Desc": "Kopiere die URL und füge sie als Browserquelle in OBS hinzu",
+    "step4Title": "Spielen!",
+    "step4Desc": "Deine Zuschauer spielen, indem sie Befehle im Chat eingeben",
+    "learnMore": "Mehr erfahren",
+    "themes": "Designs"
+  },
+  "market": {
+    "title": "Goodies-Markt",
+    "subtitle": "Passe deine Spiele mit einzigartigen Items an",
+    "coins": "Münzen",
+    "buyCoins": "Münzen kaufen",
+    "noBonus": "Kein Bonus",
+    "buy": "Kaufen",
+    "buyBundle": "Bundle kaufen",
+    "owned": "Im Besitz",
+    "premium": "Premium",
+    "itemsIncluded": "Items enthalten",
+    "savings": "Spare",
+    "loginToBuy": "Mit Twitch anmelden, um Items zu kaufen",
+    "search": "Items suchen...",
+    "allItems": "Alle Items",
+    "categories": "Kategorien"
+  },
+  "customize": {
+    "title": "Meine Umkleide",
+    "subtitle": "Passe deinen Charakter in allen PixelPlush-Spielen an",
+    "equipped": "Ausgerüstet",
+    "equip": "Ausrüsten",
+    "unequip": "Ablegen",
+    "locked": "Gesperrt",
+    "loginRequired": "Mit Twitch anmelden, um deinen Charakter anzupassen"
+  },
+  "scores": {
+    "title": "Bestenlisten",
+    "subtitle": "Top-Spieler in allen PixelPlush-Spielen"
+  },
+  "status": {
+    "title": "Systemstatus",
+    "subtitle": "Aktueller Status der PixelPlush-Dienste"
+  },
+  "transactions": {
+    "title": "Einkaufshistorie",
+    "subtitle": "Deine Kaufhistorie"
+  },
+  "redeem": {
+    "title": "Code einlösen",
+    "subtitle": "Gib einen Code ein, um Items freizuschalten",
+    "placeholder": "Gib deinen Code ein",
+    "submit": "Einlösen"
+  },
+  "common": {
+    "loading": "Laden...",
+    "error": "Etwas ist schiefgelaufen",
+    "retry": "Erneut versuchen",
+    "close": "Schließen",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "confirm": "Bestätigen",
+    "back": "Zurück",
+    "next": "Weiter",
+    "viewAll": "Alle ansehen"
+  }
+}

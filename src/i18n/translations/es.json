@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "PixelPlush Inicio",
+    "games": "Juegos para Streams",
+    "market": "Tienda de Regalos",
+    "customize": "Mi Vestidor",
+    "about": "Sobre Nosotros",
+    "credits": "Créditos",
+    "troubleshoot": "Solución de Problemas"
+  },
+  "header": {
+    "by": "Por",
+    "login": "Iniciar sesión con Twitch",
+    "myDressingRoom": "Mi Vestidor",
+    "shoppingHistory": "Mi Historial de Compras",
+    "goodiesMarket": "Tienda de Regalos",
+    "discord": "PixelPlush Discord",
+    "redeemCode": "Canjear Código",
+    "logOut": "Cerrar Sesión"
+  },
+  "footer": {
+    "discordInvite": "¡Únete a nuestro Discord y pasa el rato con nosotros!",
+    "terms": "Términos de Servicio",
+    "privacy": "Política de Privacidad"
+  },
+  "home": {
+    "heroTitle": "Juegos Divertidos de Overlay para Twitch",
+    "heroSubtitle": "Gratis, interactivos y queridos por streamers de todo el mundo"
+  },
+  "games": {
+    "title": "Juegos para Streams",
+    "subtitle": "Juegos de overlay interactivos y gratuitos para tu stream de Twitch",
+    "setupGuide": "Guía de Configuración",
+    "howToSetup": "Cómo Configurar",
+    "step1Title": "Iniciar sesión con Twitch",
+    "step1Desc": "Conecta tu cuenta de Twitch para comenzar",
+    "step2Title": "Elige un Juego",
+    "step2Desc": "Elige de nuestra colección de juegos para streams",
+    "step3Title": "Agregar a OBS",
+    "step3Desc": "Copia la URL y agrégala como fuente de navegador en OBS",
+    "step4Title": "¡A Jugar!",
+    "step4Desc": "Tus espectadores juegan escribiendo comandos en el chat",
+    "learnMore": "Más Información",
+    "themes": "Temas"
+  },
+  "market": {
+    "title": "Tienda de Regalos",
+    "subtitle": "Personaliza tus juegos con artículos únicos",
+    "coins": "Monedas",
+    "buyCoins": "Comprar Monedas",
+    "noBonus": "Sin bono",
+    "buy": "Comprar",
+    "buyBundle": "Comprar Paquete",
+    "owned": "Adquirido",
+    "premium": "Premium",
+    "itemsIncluded": "artículos incluidos",
+    "savings": "Ahorra",
+    "loginToBuy": "Inicia sesión con Twitch para comprar artículos",
+    "search": "Buscar artículos...",
+    "allItems": "Todos los Artículos",
+    "categories": "Categorías"
+  },
+  "customize": {
+    "title": "Mi Vestidor",
+    "subtitle": "Personaliza tu personaje en todos los juegos de PixelPlush",
+    "equipped": "Equipado",
+    "equip": "Equipar",
+    "unequip": "Desequipar",
+    "locked": "Bloqueado",
+    "loginRequired": "Inicia sesión con Twitch para personalizar tu personaje"
+  },
+  "scores": {
+    "title": "Clasificaciones",
+    "subtitle": "Mejores jugadores en todos los juegos de PixelPlush"
+  },
+  "status": {
+    "title": "Estado del Sistema",
+    "subtitle": "Estado actual de los servicios de PixelPlush"
+  },
+  "transactions": {
+    "title": "Historial de Compras",
+    "subtitle": "Tu historial de compras"
+  },
+  "redeem": {
+    "title": "Canjear Código",
+    "subtitle": "Ingresa un código para desbloquear artículos",
+    "placeholder": "Ingresa tu código",
+    "submit": "Canjear"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Algo salió mal",
+    "retry": "Intentar de nuevo",
+    "close": "Cerrar",
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "viewAll": "Ver Todo"
+  }
+}

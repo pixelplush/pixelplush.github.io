@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "PixelPlush Ana Sayfa",
+    "games": "Yayın Oyunları",
+    "market": "Hediye Marketi",
+    "customize": "Soyunma Odam",
+    "about": "Hakkımızda",
+    "credits": "Katkıda Bulunanlar",
+    "troubleshoot": "Sorun Giderme"
+  },
+  "header": {
+    "by": "Yapımcılar",
+    "login": "Twitch ile Giriş Yap",
+    "myDressingRoom": "Soyunma Odam",
+    "shoppingHistory": "Alışveriş Geçmişim",
+    "goodiesMarket": "Hediye Marketi",
+    "discord": "PixelPlush Discord",
+    "redeemCode": "Kod Kullan",
+    "logOut": "Çıkış Yap"
+  },
+  "footer": {
+    "discordInvite": "Discord'umuza katıl ve bizimle takıl!",
+    "terms": "Kullanım Şartları",
+    "privacy": "Gizlilik Politikası"
+  },
+  "home": {
+    "heroTitle": "Twitch İçin Eğlenceli Yayın Overlay Oyunları",
+    "heroSubtitle": "Ücretsiz, etkileşimli ve dünya çapında yayıncılar tarafından seviliyor"
+  },
+  "games": {
+    "title": "Yayın Oyunları",
+    "subtitle": "Twitch yayınınız için ücretsiz etkileşimli overlay oyunları",
+    "setupGuide": "Kurulum Rehberi",
+    "howToSetup": "Nasıl Kurulur",
+    "step1Title": "Twitch ile Giriş Yap",
+    "step1Desc": "Başlamak için Twitch hesabınızı bağlayın",
+    "step2Title": "Bir Oyun Seçin",
+    "step2Desc": "Yayın oyunları koleksiyonumuzdan seçin",
+    "step3Title": "OBS'ye Ekleyin",
+    "step3Desc": "URL'yi kopyalayın ve OBS'de Tarayıcı Kaynağı olarak ekleyin",
+    "step4Title": "Oynayın!",
+    "step4Desc": "İzleyicileriniz sohbette komut yazarak oynar",
+    "learnMore": "Daha Fazla",
+    "themes": "Temalar"
+  },
+  "market": {
+    "title": "Hediye Marketi",
+    "subtitle": "Oyunlarınızı benzersiz öğelerle özelleştirin",
+    "coins": "Jeton",
+    "buyCoins": "Jeton Satın Al",
+    "noBonus": "Bonus yok",
+    "buy": "Satın Al",
+    "buyBundle": "Paket Satın Al",
+    "owned": "Sahip",
+    "premium": "Premium",
+    "itemsIncluded": "öğe dahil",
+    "savings": "Tasarruf",
+    "loginToBuy": "Öğe satın almak için Twitch ile giriş yapın",
+    "search": "Öğe ara...",
+    "allItems": "Tüm Öğeler",
+    "categories": "Kategoriler"
+  },
+  "customize": {
+    "title": "Soyunma Odam",
+    "subtitle": "Tüm PixelPlush oyunlarında karakterinizi özelleştirin",
+    "equipped": "Kuşanılmış",
+    "equip": "Kuşan",
+    "unequip": "Çıkar",
+    "locked": "Kilitli",
+    "loginRequired": "Karakterinizi özelleştirmek için Twitch ile giriş yapın"
+  },
+  "scores": {
+    "title": "Skor Tablosu",
+    "subtitle": "Tüm PixelPlush oyunlarındaki en iyi oyuncular"
+  },
+  "status": {
+    "title": "Sistem Durumu",
+    "subtitle": "PixelPlush hizmetlerinin mevcut durumu"
+  },
+  "transactions": {
+    "title": "Alışveriş Geçmişi",
+    "subtitle": "Satın alma geçmişiniz"
+  },
+  "redeem": {
+    "title": "Kod Kullan",
+    "subtitle": "Öğelerin kilidini açmak için bir kod girin",
+    "placeholder": "Kodunuzu girin",
+    "submit": "Kullan"
+  },
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Bir şeyler yanlış gitti",
+    "retry": "Tekrar dene",
+    "close": "Kapat",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "confirm": "Onayla",
+    "back": "Geri",
+    "next": "İleri",
+    "viewAll": "Tümünü Gör"
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "nav": {
+    "home": "PixelPlush Domů",
+    "games": "Hry pro streamy",
+    "market": "Obchod s doplňky",
+    "customize": "Moje šatna",
+    "about": "O nás",
+    "credits": "Přispěvatelé",
+    "troubleshoot": "Řešení problémů"
+  },
+  "header": {
+    "by": "Od",
+    "login": "Přihlásit se přes Twitch",
+    "myDressingRoom": "Moje šatna",
+    "shoppingHistory": "Moje nákupy",
+    "goodiesMarket": "Obchod s doplňky",
+    "discord": "PixelPlush Discord",
+    "redeemCode": "Uplatnit kód",
+    "logOut": "Odhlásit se"
+  },
+  "footer": {
+    "discordInvite": "Přidej se k nám na Discordu!",
+    "terms": "Podmínky užití",
+    "privacy": "Ochrana soukromí"
+  },
+  "home": {
+    "heroTitle": "Zábavné overlay hry pro Twitch streamy",
+    "heroSubtitle": "Zdarma, interaktivní a oblíbené streamery po celém světě"
+  },
+  "games": {
+    "title": "Hry pro streamy",
+    "subtitle": "Bezplatné interaktivní overlay hry pro tvůj Twitch stream",
+    "setupGuide": "Průvodce nastavením",
+    "howToSetup": "Jak nastavit",
+    "step1Title": "Přihlásit se přes Twitch",
+    "step1Desc": "Propoj svůj Twitch účet a začni",
+    "step2Title": "Vyber si hru",
+    "step2Desc": "Vyber si z naší kolekce streamových her",
+    "step3Title": "Přidej do OBS",
+    "step3Desc": "Zkopíruj URL a přidej jako Browser Source v OBS",
+    "step4Title": "Hraj!",
+    "step4Desc": "Tvoji diváci hrají psaním příkazů v chatu",
+    "learnMore": "Zjistit více",
+    "themes": "Motivy"
+  },
+  "market": {
+    "title": "Obchod s doplňky",
+    "subtitle": "Přizpůsob si hry unikátními předměty",
+    "coins": "Mince",
+    "buyCoins": "Koupit mince",
+    "noBonus": "Žádný bonus",
+    "buy": "Koupit",
+    "buyBundle": "Koupit balíček",
+    "owned": "Vlastněno",
+    "premium": "Premium",
+    "itemsIncluded": "předmětů v balíčku",
+    "savings": "Ušetři",
+    "loginToBuy": "Pro nákup se přihlas přes Twitch",
+    "search": "Hledat předměty...",
+    "allItems": "Všechny předměty",
+    "categories": "Kategorie"
+  },
+  "customize": {
+    "title": "Moje šatna",
+    "subtitle": "Přizpůsob si postavu ve všech PixelPlush hrách",
+    "equipped": "Nasazeno",
+    "equip": "Nasadit",
+    "unequip": "Sundat",
+    "locked": "Zamčeno",
+    "loginRequired": "Pro přizpůsobení postavy se přihlas přes Twitch"
+  },
+  "scores": {
+    "title": "Žebříčky",
+    "subtitle": "Nejlepší hráči ve všech PixelPlush hrách"
+  },
+  "status": {
+    "title": "Stav systému",
+    "subtitle": "Aktuální stav služeb PixelPlush"
+  },
+  "transactions": {
+    "title": "Historie nákupů",
+    "subtitle": "Tvoje historie nákupů"
+  },
+  "redeem": {
+    "title": "Uplatnit kód",
+    "subtitle": "Zadej kód pro odemknutí předmětů",
+    "placeholder": "Zadej svůj kód",
+    "submit": "Uplatnit"
+  },
+  "common": {
+    "loading": "Načítání...",
+    "error": "Něco se pokazilo",
+    "retry": "Zkusit znovu",
+    "close": "Zavřít",
+    "save": "Uložit",
+    "cancel": "Zrušit",
+    "confirm": "Potvrdit",
+    "back": "Zpět",
+    "next": "Další",
+    "viewAll": "Zobrazit vše"
+  }
+}

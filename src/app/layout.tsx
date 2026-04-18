@@ -7,6 +7,7 @@ import { Sidebar } from "@/components/Sidebar";
 import { Analytics } from "@/components/Analytics";
 import Script from "next/script";
 import { AuthProvider } from "@/lib/auth";
+import { I18nProvider } from "@/i18n";
 import { SiteNotices } from "@/components/SiteNotices";
 
 const fredoka = Fredoka({ subsets: ["latin"], variable: "--font-fredoka" });
@@ -69,6 +70,7 @@ export default function RootLayout({
       </head>
       <body className={`${fredoka.variable} ${ibm.variable} font-sans antialiased text-[var(--color-pp-text)] bg-[var(--color-pp-bg)] min-h-screen`}>
         <AuthProvider>
+          <I18nProvider>
           <Analytics />
           <div className="flex bg-[var(--color-pp-bg)] min-h-screen relative">
             <Sidebar />
@@ -79,6 +81,7 @@ export default function RootLayout({
               <Footer />
             </div>
           </div>
+          </I18nProvider>
         </AuthProvider>
       </body>
     </html>

@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FeaturedStream } from "@/components/FeaturedStream";
+import { useTranslation } from "@/i18n";
 
 const navItems = [
   {
-    name: "PixelPlush Home",
+    nameKey: "nav.home",
     path: "/",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -15,7 +16,7 @@ const navItems = [
     ),
   },
   {
-    name: "Games for Streams",
+    nameKey: "nav.games",
     path: "/games",
     icon: (
       <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -24,7 +25,7 @@ const navItems = [
     ),
   },
   {
-    name: "Goodies Market",
+    nameKey: "nav.market",
     path: "/market",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -33,7 +34,7 @@ const navItems = [
     ),
   },
   {
-    name: "My Dressing Room",
+    nameKey: "nav.customize",
     path: "/customize",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -42,7 +43,7 @@ const navItems = [
     ),
   },
   {
-    name: "About Us",
+    nameKey: "nav.about",
     path: "/links",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -51,7 +52,7 @@ const navItems = [
     ),
   },
   {
-    name: "Credits",
+    nameKey: "nav.credits",
     path: "/credits",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -60,7 +61,7 @@ const navItems = [
     ),
   },
   {
-    name: "Troubleshoot",
+    nameKey: "nav.troubleshoot",
     path: "/troubleshoot",
     icon: (
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
@@ -75,6 +76,7 @@ const livePages = ["/", "/games"];
 
 export function Sidebar() {
   const pathname = usePathname();
+  const { t } = useTranslation();
   const showLiveStream = livePages.includes(pathname);
 
   return (
@@ -98,7 +100,7 @@ export function Sidebar() {
                 }`}
               >
                 <span className={isActive ? "text-[#4F2727]" : "text-[#4F2727]"}>{item.icon}</span>
-                <span>{item.name}</span>
+                <span>{t(item.nameKey)}</span>
               </Link>
             );
           })}
