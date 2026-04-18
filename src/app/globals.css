@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Force light mode only — disable Tailwind's dark: variant so system dark mode doesn't affect our brand colors */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-pp-bg: #F2C079;
   --color-pp-card: #FAEDCA;

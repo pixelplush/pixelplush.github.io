@@ -487,7 +487,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
 
         {/* Generated URL */}
         {channelName.trim() && isThemeLocked && (
-          <div className="rounded-lg border border-amber-300/50 bg-amber-50/50 p-3 text-center text-sm text-amber-800 dark:border-amber-700/30 dark:bg-amber-950/20 dark:text-amber-300">
+          <div className="rounded-lg border border-amber-300/50 bg-amber-50/50 p-3 text-center text-sm text-amber-800">
             🔒 Unlock this theme to get your browser source URL.
           </div>
         )}

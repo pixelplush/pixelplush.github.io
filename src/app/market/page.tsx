@@ -317,16 +317,16 @@ export default function MarketPage() {
       </div>
 
       {/* Coin Strip */}
-      <div className="mb-8 rounded-2xl border border-amber-300/50 bg-gradient-to-r from-amber-50 to-yellow-50 p-5 dark:border-amber-700/30 dark:from-amber-950/30 dark:to-yellow-950/20">
+      <div className="mb-8 rounded-2xl border border-amber-300/60 bg-gradient-to-r from-amber-100/80 to-yellow-100/70 p-5">
         <div className="mb-4 flex items-center justify-between">
           {isLoggedIn && account ? (
-            <div className="flex items-center gap-2 text-base font-semibold text-amber-900 dark:text-amber-200">
+            <div className="flex items-center gap-2 text-base font-semibold text-amber-900">
               <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="coins" width={24} height={24} className="pixelated" unoptimized />
               Your Balance: {account.coins} coins
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <span className="text-amber-800 dark:text-amber-300">Log in to purchase coins</span>
+              <span className="text-amber-800">Log in to purchase coins</span>
               <button
                 onClick={login}
                 className="rounded-lg bg-[var(--color-pp-accent)] px-4 py-1.5 text-sm font-medium text-white transition hover:bg-[#4a7de0]"
@@ -342,8 +342,8 @@ export default function MarketPage() {
               key={pkg.coins}
               className={`relative rounded-xl border p-4 text-center transition ${
                 pkg.popular
-                  ? 'border-amber-400 bg-white ring-2 ring-amber-400/50 dark:border-amber-500 dark:bg-amber-900/20'
-                  : 'border-amber-200/60 bg-white/70 dark:border-amber-700/30 dark:bg-amber-950/10'
+                  ? 'border-amber-400 bg-white ring-2 ring-amber-400/50'
+                  : 'border-amber-200/60 bg-white/70'
               }`}
             >
               {pkg.popular && (
@@ -351,12 +351,12 @@ export default function MarketPage() {
                   ⭐ Most Popular
                 </span>
               )}
-              <div className="text-sm text-amber-700 dark:text-amber-400">{pkg.price}</div>
-              <div className="my-1 flex items-center justify-center gap-1 text-xl font-bold text-amber-900 dark:text-amber-100">
+              <div className="text-sm text-amber-700">{pkg.price}</div>
+              <div className="my-1 flex items-center justify-center gap-1 text-xl font-bold text-amber-900">
                 <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="" width={20} height={20} className="pixelated" unoptimized />
                 {pkg.coins}
               </div>
-              <div className="mb-2 text-xs font-medium text-amber-600 dark:text-amber-400">{pkg.bonus} bonus</div>
+              <div className="mb-2 text-xs font-medium text-amber-600">{pkg.bonus} bonus</div>
               {isLoggedIn ? (
                 <button
                   onClick={() => setSelectedCoinPkg(pkg)}
@@ -368,7 +368,7 @@ export default function MarketPage() {
             </div>
           ))}
         </div>
-        <p className="mt-3 text-center text-xs text-amber-700/70 dark:text-amber-400/60">
+        <p className="mt-3 text-center text-xs text-amber-700/70">
           Powered by PayPal · Secure checkout · Coins are non-refundable
         </p>
       </div>
@@ -376,7 +376,7 @@ export default function MarketPage() {
       {/* PayPal Modal */}
       {selectedCoinPkg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => !coinProcessing && setSelectedCoinPkg(null)}>
-          <div className="mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl dark:bg-slate-800" onClick={(e) => e.stopPropagation()}>
+          <div className="mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
             <div className="mb-4 text-center">
               <div className="mb-2 flex items-center justify-center gap-2 text-2xl font-bold text-[var(--color-pp-headings)]">
                 <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="" width={28} height={28} className="pixelated" unoptimized />
@@ -409,7 +409,7 @@ export default function MarketPage() {
       {/* Item Confirm Modal */}
       {confirmItem && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setConfirmItem(null)}>
-          <div className="mx-4 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl dark:bg-slate-800" onClick={(e) => e.stopPropagation()}>
+          <div className="mx-4 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
             <div className="mb-4 flex flex-col items-center gap-3">
               <Image src={getItemPreview(confirmItem)} alt={confirmItem.name} width={64} height={64} className="pixelated" unoptimized />
               <h3 className="text-lg font-bold text-[var(--color-pp-headings)]">{confirmItem.name}</h3>
@@ -471,7 +471,7 @@ export default function MarketPage() {
               return (
                 <div
                   key={bundle.id}
-                  className="relative rounded-xl border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-50 to-blue-50 p-4 dark:border-cyan-700/30 dark:from-cyan-950/20 dark:to-blue-950/10"
+                  className="relative rounded-xl border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-50 to-blue-50 p-4"
                 >
                   <div className="mb-3 flex h-24 items-center justify-center">
                     <Image src={getItemPreview(bundle)} alt={bundle.name} width={64} height={64} className="pixelated" unoptimized />
@@ -488,7 +488,7 @@ export default function MarketPage() {
                       {bundle.cost}
                     </span>
                     {savings > 0 && (
-                      <span className="rounded-full bg-green-500/15 px-2 py-0.5 text-[11px] font-bold text-green-700 dark:text-green-400">
+                      <span className="rounded-full bg-green-500/15 px-2 py-0.5 text-[11px] font-bold text-green-700">
                         Save {savings}%
                       </span>
                     )}
