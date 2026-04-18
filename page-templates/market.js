@@ -41,6 +41,49 @@ ComfyTwitch.Check()
 
             twitchToken = result.token; // Store this token for paypal requests
 
+            // Handle Stripe checkout return
+            if( params.get( "stripe" ) === "success" && params.get( "txn" ) ) {
+                let txnId = params.get( "txn" );
+                toastr.info( "One moment while we get your Plush Coins...", "Processing...", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                let stripeTimer = setInterval( async () => {
+                    let result = await fetch( `${plushScoreUrl}/transactions/status?id=${txnId}` ).then( r => r.json() );
+                    if( result && result.status !== "pending" ) {
+                        clearInterval( stripeTimer );
+                        clearTimeout( stripeTimeout );
+                        if( result.status === "complete" ) {
+                            account = await fetch( `${plushScoreUrl}/accounts`, {
+                                headers: { Twitch: twitchToken }
+                            } ).then( r => r.json() );
+                            $( ".user-coins" ).text( account.coins );
+                            toastr.success( "Plush Coins added!", "Success", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                            Swal.fire({
+                                title: "Thank you for the purchase!",
+                                text: `You now have ${account.coins} Plush Coins!`,
+                                type: "success",
+                                confirmButtonClass: "btn btn-primary",
+                                buttonsStyling: false,
+                            });
+                        }
+                        else {
+                            toastr.error( "There was an error: " + ( result.error || "Transaction failed" ), "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                        }
+                        window.history.replaceState( {}, "", window.location.pathname );
+                    }
+                    else {
+                        toastr.warning( "Waiting for confirmation...", "Processing...", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                    }
+                }, 5000 );
+                let stripeTimeout = setTimeout( () => {
+                    clearInterval( stripeTimer );
+                    toastr.error( "Transaction timed out. Contact support if charged.", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                    window.history.replaceState( {}, "", window.location.pathname );
+                }, 120000 );
+            }
+            else if( params.get( "stripe" ) === "cancel" ) {
+                toastr.warning( "Payment was cancelled", "Cancelled", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                window.history.replaceState( {}, "", window.location.pathname );
+            }
+
             $( ".not-logged-in" ).hide();
             $( ".logged-in" ).show();
 
@@ -624,6 +667,31 @@ function showCoinBuy( coins, amount ) {
         $("#coin-buy-text").text( `${coins} Plush Coins for $${amount}! Exciting!` );
     }
     $("#coin-buy").modal();
+}
+
+async function handleStripeCheckout() {
+    try {
+        $("#stripe-checkout-btn").prop( "disabled", true ).text( "Redirecting..." );
+        let result = await fetch( `${plushApiUrl}/stripe/checkout`, {
+            method: "POST",
+            headers: {
+                Twitch: twitchToken || ComfyTwitch.Token,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify( {
+                coins: orderAmount,
+                returnUrl: window.location.origin + "/market.html"
+            })
+        } ).then( r => r.json() );
+        if( !result.success ) {
+            throw new Error( result.error || "Failed to start Stripe checkout" );
+        }
+        window.location.href = result.url;
+    }
+    catch( err ) {
+        $("#stripe-checkout-btn").prop( "disabled", false ).text( "\ud83d\udcb3 Pay with Card" );
+        toastr.error( err.message || "Stripe checkout failed", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+    }
 }
 
 let transaction = {};
