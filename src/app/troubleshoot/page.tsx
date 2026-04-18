@@ -308,13 +308,13 @@ export default function TroubleshootPage() {
 
       {/* Section 1: URL Validator */}
       <div className="mb-6 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-5">
-        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">1. Check Your URL</h2>
-        <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">Paste the browser source URL from OBS to check for common issues.</p>
+        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">{t("troubleshoot.checkUrl")}</h2>
+        <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">{t("troubleshoot.checkUrlDesc")}</p>
         <input
           type="text"
           value={urlInput}
           onChange={(e) => { setUrlInput(e.target.value); validateUrl(e.target.value); }}
-          placeholder="Paste your OBS browser source URL here..."
+          placeholder={t("troubleshoot.urlPlaceholder")}
           className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-3 text-sm text-[var(--color-pp-text)] placeholder-[var(--color-pp-text-muted)] focus:border-[var(--color-pp-accent)] focus:outline-none"
         />
         {urlResults.length > 0 && (
@@ -332,22 +332,22 @@ export default function TroubleshootPage() {
 
       {/* Section 2: Connection Test */}
       <div className="mb-6 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-5">
-        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">2. Test Connection</h2>
-        <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">Test connectivity to PixelPlush servers.</p>
+        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">{t("troubleshoot.testConnection")}</h2>
+        <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">{t("troubleshoot.testConnectionDesc")}</p>
         <div className="flex flex-wrap gap-2">
           <button
             onClick={testConnection}
             disabled={connRunning}
             className="rounded-lg bg-[var(--color-pp-accent)] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#4a7de0] disabled:opacity-50"
           >
-            {connRunning ? 'Testing...' : 'Test Servers'}
+            {connRunning ? t('troubleshoot.testing') : t('troubleshoot.testServers')}
           </button>
           <button
             onClick={validateToken}
             disabled={tokenRunning}
             className="rounded-lg border border-[var(--color-pp-border)] px-5 py-2.5 text-sm font-medium text-[var(--color-pp-text)] transition hover:bg-[var(--color-pp-card-hover)] disabled:opacity-50"
           >
-            {tokenRunning ? 'Checking...' : 'Check Token Health'}
+            {tokenRunning ? t('troubleshoot.checking') : t('troubleshoot.checkToken')}
           </button>
         </div>
         {connResults.length > 0 && (
@@ -403,8 +403,8 @@ export default function TroubleshootPage() {
 
       {/* Section 4: Quick Troubleshooter */}
       <div className="mb-6 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-5">
-        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">4. Common Issues</h2>
-        <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">Click an issue to see troubleshooting tips.</p>
+        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">{t("troubleshoot.commonIssues")}</h2>
+        <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">{t("troubleshoot.commonIssuesDesc")}</p>
         <div className="space-y-2">
           {quickIssues.map((issue) => (
             <div key={issue.id}>
@@ -434,16 +434,15 @@ export default function TroubleshootPage() {
 
       {/* Section 5: Generate Report */}
       <div className="mb-6 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-5">
-        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">5. Generate Support Report</h2>
+        <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">{t("troubleshoot.generateReport")}</h2>
         <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">
-          Copy a summary of your diagnostics to share with us on{' '}
-          <a href="https://discord.gg/pixelplush" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-link)] hover:underline">Discord</a>.
+          {t("troubleshoot.generateReportDesc")}
         </p>
         <button
           onClick={generateReport}
           className="rounded-lg bg-[var(--color-pp-accent)] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-[#4a7de0]"
         >
-          {reportCopied ? 'Copied to Clipboard!' : 'Copy Support Report'}
+          {reportCopied ? t('troubleshoot.copied') : t('troubleshoot.copyReport')}
         </button>
       </div>
 

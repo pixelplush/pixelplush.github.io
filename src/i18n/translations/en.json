@@ -42,7 +42,15 @@
     "step4Title": "Play!",
     "step4Desc": "Your viewers play by typing commands in chat",
     "learnMore": "Learn More",
-    "themes": "Themes"
+    "themes": "Themes",
+    "channelLabel": "Twitch Channel Name",
+    "channelPlaceholder": "e.g. instafluff",
+    "themeLabel": "Theme",
+    "settingsLabel": "Game Settings",
+    "premiumTheme": "This premium theme requires an add-on.",
+    "getInMarket": "Get it in the Market →",
+    "loginToCheckPremium": "Log in to check if you own this premium theme.",
+    "requiresLogin": "(requires login)"
   },
   "market": {
     "title": "Marketplace",
@@ -59,7 +67,19 @@
     "loginToBuy": "Log in with Twitch to buy items",
     "search": "Search items...",
     "allItems": "All Items",
-    "categories": "Categories"
+    "categories": "Categories",
+    "plushCoins": "Plush Coins",
+    "yourBalance": "Your Balance",
+    "logIn": "Log In",
+    "loginToPurchase": "Log in to purchase coins",
+    "notEnoughCoins": "Not enough coins! Visit the coin shop above to get more.",
+    "purchaseSuccess": "Purchase successful!",
+    "coinsPurchased": "Plush Coins purchased successfully!",
+    "purchaseFailed": "Transaction failed",
+    "purchaseTimeout": "Transaction timed out. Contact support if charged.",
+    "paymentCancelled": "Payment was cancelled",
+    "coinPurchaseFailed": "Coin purchase failed",
+    "paypalError": "PayPal error occurred"
   },
   "customize": {
     "title": "Dressing Room",
@@ -68,25 +88,72 @@
     "equip": "Equip",
     "unequip": "Unequip",
     "locked": "Locked",
-    "loginRequired": "Log in with Twitch to customize your character"
+    "loginRequired": "Log in with Twitch to customize your character",
+    "searchOwned": "Search owned items..."
   },
   "scores": {
     "title": "Leaderboard",
-    "subtitle": "View high scores for Parachute Drop across all channels."
+    "subtitle": "View high scores for Parachute Drop across all channels.",
+    "channel": "Channel",
+    "timeRange": "Time Range",
+    "theme": "Theme",
+    "allThemes": "All Themes",
+    "last12h": "Last 12 Hours",
+    "thisWeek": "This Week",
+    "thisMonth": "This Month",
+    "channelPlaceholder": "Enter channel name...",
+    "shareLink": "Share Link",
+    "copy": "Copy",
+    "enterChannel": "Enter a channel name to view scores",
+    "noScores": "No scores found for this channel and time range",
+    "player": "Player",
+    "score": "Score",
+    "date": "Date"
   },
   "status": {
     "title": "System Status",
-    "subtitle": "Current status of PixelPlush services."
+    "subtitle": "Current status of PixelPlush services.",
+    "allSystems": "All Systems",
+    "operational": "Operational",
+    "responding": "Responding",
+    "liveStreams": "Live Streams",
+    "services": "Services",
+    "currentlyLive": "Currently Live",
+    "gameServer": "Game Server (Rooms)",
+    "apiServer": "API (Accounts, Scores)",
+    "auth": "Authentication (Twitch OAuth)",
+    "marketplace": "Marketplace",
+    "website": "Website"
   },
   "transactions": {
     "title": "Transactions",
-    "subtitle": "Your purchase and redemption history."
+    "subtitle": "Your purchase and redemption history.",
+    "loginPrompt": "Log in to view your transaction history.",
+    "all": "All",
+    "redemptions": "Redemptions",
+    "purchases": "Purchases",
+    "noFound": "No transactions found.",
+    "redeemed": "Redeemed",
+    "purchased": "Purchased",
+    "dateCol": "Date",
+    "typeCol": "Type",
+    "descCol": "Description",
+    "amountCol": "Amount"
   },
   "redeem": {
     "title": "Redeem Code",
     "subtitle": "Log in to redeem a PixelPlush code.",
-    "placeholder": "Enter your code",
-    "submit": "Redeem"
+    "placeholder": "ENTER-CODE-HERE",
+    "submit": "Redeem",
+    "pageSubtitle": "Enter a PixelPlush code to redeem coins, items, or other rewards.",
+    "success": "Code redeemed successfully!",
+    "errorGeneric": "Something went wrong. Please try again."
+  },
+  "login": {
+    "title": "Log Into PixelPlush",
+    "subtitle": "Sign in with your Twitch account to customize your games, buy items, and track your scores.",
+    "twitchButton": "Log in with Twitch",
+    "helloFrom": "Hello from"
   },
   "common": {
     "loading": "Loading...",
@@ -98,14 +165,34 @@
     "confirm": "Confirm",
     "back": "Back",
     "next": "Next",
-    "viewAll": "View All"
+    "viewAll": "View All",
+    "loginWithTwitch": "Log in with Twitch",
+    "goHome": "Go Home",
+    "accessDenied": "Access Denied"
   },
   "troubleshoot": {
     "title": "Troubleshoot",
-    "subtitle": "Having issues with your PixelPlush game? Use the tools below to diagnose problems."
+    "subtitle": "Having issues with your PixelPlush game? Use the tools below to diagnose problems.",
+    "checkUrl": "1. Check Your URL",
+    "checkUrlDesc": "Paste the browser source URL from OBS to check for common issues.",
+    "urlPlaceholder": "Paste your OBS browser source URL here...",
+    "testConnection": "2. Test Connection",
+    "testConnectionDesc": "Test connectivity to PixelPlush servers.",
+    "testServers": "Test Servers",
+    "testing": "Testing...",
+    "checkToken": "Check Token Health",
+    "checking": "Checking...",
+    "commonIssues": "4. Common Issues",
+    "commonIssuesDesc": "Click an issue to see troubleshooting tips.",
+    "generateReport": "5. Generate Support Report",
+    "generateReportDesc": "Copy a summary of your diagnostics to share with us on Discord.",
+    "copyReport": "Copy Support Report",
+    "copied": "Copied to Clipboard!",
+    "stillStuck": "Still stuck? Join our Discord or email us at support@pixelplush.dev"
   },
   "admin": {
     "title": "Admin Panel",
-    "subtitle": "PixelPlush administration tools"
+    "subtitle": "PixelPlush administration tools",
+    "adminOnly": "This page is only available to PixelPlush administrators."
   }
 }

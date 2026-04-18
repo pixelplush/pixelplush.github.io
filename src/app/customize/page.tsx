@@ -587,7 +587,7 @@ export default function CustomizePage() {
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search owned items..."
+                placeholder={t('customize.searchOwned')}
                 className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-3 py-2 text-sm text-[var(--color-pp-text)] placeholder-[var(--color-pp-text-muted)] focus:border-[var(--color-pp-accent)] focus:outline-none sm:w-48"
               />
               <div className="flex flex-wrap gap-1.5">

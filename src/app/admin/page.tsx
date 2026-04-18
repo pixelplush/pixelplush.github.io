@@ -105,13 +105,13 @@ export default function AdminPage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
-          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">Access Denied</h1>
-          <p className="mb-6 text-[var(--color-pp-text-muted)]">This page is only available to PixelPlush administrators.</p>
+          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">{t("common.accessDenied")}</h1>
+          <p className="mb-6 text-[var(--color-pp-text-muted)]">{t("admin.adminOnly")}</p>
           <Link
             href="/"
             className="inline-flex items-center gap-2 rounded-lg bg-[var(--color-pp-accent)] px-6 py-3 font-medium text-white transition hover:opacity-90"
           >
-            Go Home
+            {t("common.goHome")}
           </Link>
         </div>
       </div>

@@ -42,7 +42,15 @@
     "step4Title": "Oynayın!",
     "step4Desc": "İzleyicileriniz sohbette komut yazarak oynar",
     "learnMore": "Daha Fazla",
-    "themes": "Temalar"
+    "themes": "Temalar",
+    "channelLabel": "Twitch Kanal Adı",
+    "channelPlaceholder": "örn. instafluff",
+    "themeLabel": "Tema",
+    "settingsLabel": "Oyun Ayarları",
+    "premiumTheme": "Bu premium tema bir eklenti gerektirir.",
+    "getInMarket": "Marketten Al →",
+    "loginToCheckPremium": "Bu premium temaya sahip olup olmadığını kontrol etmek için giriş yap.",
+    "requiresLogin": "(Giriş gerekli)"
   },
   "market": {
     "title": "Pazar Yeri",
@@ -59,7 +67,19 @@
     "loginToBuy": "Öğe satın almak için Twitch ile giriş yapın",
     "search": "Öğe ara...",
     "allItems": "Tüm Öğeler",
-    "categories": "Kategoriler"
+    "categories": "Kategoriler",
+    "plushCoins": "Plush Jetonları",
+    "yourBalance": "Bakiyeniz",
+    "logIn": "Giriş Yap",
+    "loginToPurchase": "Jeton satın almak için giriş yapın",
+    "notEnoughCoins": "Yeterli jeton yok! Daha fazlası için yukarıdaki jeton mağazasını ziyaret edin.",
+    "purchaseSuccess": "Satın alma başarılı!",
+    "coinsPurchased": "Plush jetonları başarıyla satın alındı!",
+    "purchaseFailed": "İşlem başarısız oldu",
+    "purchaseTimeout": "İşlem zaman aşımına uğradı. Ödeme alındıysa destekle iletişime geçin.",
+    "paymentCancelled": "Ödeme iptal edildi",
+    "coinPurchaseFailed": "Jeton satın alma başarısız",
+    "paypalError": "PayPal hatası oluştu"
   },
   "customize": {
     "title": "Soyunma Odası",
@@ -68,25 +88,72 @@
     "equip": "Kuşan",
     "unequip": "Çıkar",
     "locked": "Kilitli",
-    "loginRequired": "Karakterinizi özelleştirmek için Twitch ile giriş yapın"
+    "loginRequired": "Karakterinizi özelleştirmek için Twitch ile giriş yapın",
+    "searchOwned": "Sahip olunan öğeleri ara..."
   },
   "scores": {
     "title": "Sıralama",
-    "subtitle": "Tüm kanallarda Parachute Drop yüksek skorlarını görüntüleyin."
+    "subtitle": "Tüm kanallarda Parachute Drop yüksek skorlarını görüntüleyin.",
+    "channel": "Kanal",
+    "timeRange": "Zaman Aralığı",
+    "theme": "Tema",
+    "allThemes": "Tüm Temalar",
+    "last12h": "Son 12 Saat",
+    "thisWeek": "Bu Hafta",
+    "thisMonth": "Bu Ay",
+    "channelPlaceholder": "Kanal adı girin...",
+    "shareLink": "Bağlantı Paylaş",
+    "copy": "Kopyala",
+    "enterChannel": "Skorları görmek için bir kanal adı girin",
+    "noScores": "Bu kanal ve dönem için skor bulunamadı",
+    "player": "Oyuncu",
+    "score": "Skor",
+    "date": "Tarih"
   },
   "status": {
     "title": "Sistem Durumu",
-    "subtitle": "PixelPlush hizmetlerinin mevcut durumu"
+    "subtitle": "PixelPlush hizmetlerinin mevcut durumu.",
+    "allSystems": "Tüm Sistemler",
+    "operational": "Çalışıyor",
+    "responding": "Yanıt Veriyor",
+    "liveStreams": "Canlı Yayınlar",
+    "services": "Hizmetler",
+    "currentlyLive": "Şu An Canlı",
+    "gameServer": "Oyun Sunucusu (Rooms)",
+    "apiServer": "API (Hesaplar, Skorlar)",
+    "auth": "Kimlik Doğrulama (Twitch OAuth)",
+    "marketplace": "Pazar Yeri",
+    "website": "Web Sitesi"
   },
   "transactions": {
     "title": "İşlemler",
-    "subtitle": "Satın alma ve kullanma geçmişiniz."
+    "subtitle": "Satın alma ve kullanma geçmişiniz.",
+    "loginPrompt": "İşlem geçmişinizi görmek için giriş yapın.",
+    "all": "Tümü",
+    "redemptions": "Kullanımlar",
+    "purchases": "Satın Almalar",
+    "noFound": "İşlem bulunamadı.",
+    "redeemed": "Kullanıldı",
+    "purchased": "Satın Alındı",
+    "dateCol": "Tarih",
+    "typeCol": "Tür",
+    "descCol": "Açıklama",
+    "amountCol": "Tutar"
   },
   "redeem": {
     "title": "Kod Kullan",
     "subtitle": "Bir PixelPlush kodu kullanmak için giriş yapın.",
-    "placeholder": "Kodunuzu girin",
-    "submit": "Kullan"
+    "placeholder": "KODU-BURAYA-GİRİN",
+    "submit": "Kullan",
+    "pageSubtitle": "Jeton, öğe veya diğer ödülleri almak için bir PixelPlush kodu girin.",
+    "success": "Kod başarıyla kullanıldı!",
+    "errorGeneric": "Bir şeyler yanlış gitti. Lütfen tekrar deneyin."
+  },
+  "login": {
+    "title": "PixelPlush'a Giriş Yap",
+    "subtitle": "Oyunlarınızı özelleştirmek, öğe satın almak ve skorlarınızı takip etmek için Twitch hesabınızla giriş yapın.",
+    "twitchButton": "Twitch ile Giriş Yap",
+    "helloFrom": "Merhaba"
   },
   "common": {
     "loading": "Yükleniyor...",
@@ -98,14 +165,34 @@
     "confirm": "Onayla",
     "back": "Geri",
     "next": "İleri",
-    "viewAll": "Tümünü Gör"
+    "viewAll": "Tümünü Gör",
+    "loginWithTwitch": "Twitch ile Giriş Yap",
+    "goHome": "Ana Sayfaya Dön",
+    "accessDenied": "Erişim Reddedildi"
   },
   "troubleshoot": {
     "title": "Sorun Giderme",
-    "subtitle": "PixelPlush oyununuzla ilgili sorunlarınız mı var? Aşağıdaki araçları kullanın."
+    "subtitle": "PixelPlush oyununuzla ilgili sorunlarınız mı var? Aşağıdaki araçları kullanın.",
+    "checkUrl": "1. URL'yi Kontrol Et",
+    "checkUrlDesc": "Yaygın sorunları kontrol etmek için OBS tarayıcı kaynağı URL'sini yapıştırın.",
+    "urlPlaceholder": "OBS tarayıcı kaynağı URL'sini buraya yapıştırın...",
+    "testConnection": "2. Bağlantıyı Test Et",
+    "testConnectionDesc": "PixelPlush sunucularına bağlantıyı test edin.",
+    "testServers": "Sunucuları Test Et",
+    "testing": "Test ediliyor...",
+    "checkToken": "Token Durumunu Kontrol Et",
+    "checking": "Kontrol ediliyor...",
+    "commonIssues": "4. Yaygın Sorunlar",
+    "commonIssuesDesc": "Çözüm önerilerini görmek için bir soruna tıklayın.",
+    "generateReport": "5. Destek Raporu Oluştur",
+    "generateReportDesc": "Discord'da paylaşmak için tanılama özetini kopyalayın.",
+    "copyReport": "Destek Raporunu Kopyala",
+    "copied": "Panoya kopyalandı!",
+    "stillStuck": "Hâlâ sorun mu yaşıyorsunuz? Discord'umuza katılın veya support@pixelplush.dev adresine yazın"
   },
   "admin": {
     "title": "Yönetim Paneli",
-    "subtitle": "PixelPlush yönetim araçları"
+    "subtitle": "PixelPlush yönetim araçları",
+    "adminOnly": "Bu sayfa yalnızca PixelPlush yöneticileri içindir."
   }
 }

@@ -9,7 +9,7 @@ export function Footer() {
   const { t } = useTranslation();
 
   return (
-    <footer className="border-t border-[var(--color-pp-border)] bg-[var(--color-pp-footer)] px-4 py-4 sm:px-6">
+    <footer className="sticky bottom-0 z-20 border-t border-[var(--color-pp-border)] bg-[var(--color-pp-footer)] px-4 py-4 sm:px-6">
       <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-[var(--color-pp-text)]">
         <div className="flex items-center gap-2">
           <Image

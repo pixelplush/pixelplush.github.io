@@ -42,7 +42,15 @@
     "step4Title": "Spielen!",
     "step4Desc": "Deine Zuschauer spielen, indem sie Befehle im Chat eingeben",
     "learnMore": "Mehr erfahren",
-    "themes": "Designs"
+    "themes": "Designs",
+    "channelLabel": "Twitch-Kanalname",
+    "channelPlaceholder": "z.B. instafluff",
+    "themeLabel": "Design",
+    "settingsLabel": "Spieleinstellungen",
+    "premiumTheme": "Dieses Premium-Design erfordert ein Add-on.",
+    "getInMarket": "Im Markt holen →",
+    "loginToCheckPremium": "Anmelden, um zu prüfen, ob du dieses Premium-Design besitzt.",
+    "requiresLogin": "(Anmeldung erforderlich)"
   },
   "market": {
     "title": "Marktplatz",
@@ -59,7 +67,19 @@
     "loginToBuy": "Mit Twitch anmelden, um Items zu kaufen",
     "search": "Items suchen...",
     "allItems": "Alle Items",
-    "categories": "Kategorien"
+    "categories": "Kategorien",
+    "plushCoins": "Plush-Münzen",
+    "yourBalance": "Dein Guthaben",
+    "logIn": "Anmelden",
+    "loginToPurchase": "Anmelden, um Münzen zu kaufen",
+    "notEnoughCoins": "Nicht genug Münzen! Besuche den Münzshop oben, um mehr zu bekommen.",
+    "purchaseSuccess": "Kauf erfolgreich!",
+    "coinsPurchased": "Plush-Münzen erfolgreich gekauft!",
+    "purchaseFailed": "Transaktion fehlgeschlagen",
+    "purchaseTimeout": "Transaktion abgelaufen. Kontaktiere den Support, wenn belastet.",
+    "paymentCancelled": "Zahlung wurde abgebrochen",
+    "coinPurchaseFailed": "Münzkauf fehlgeschlagen",
+    "paypalError": "PayPal-Fehler aufgetreten"
   },
   "customize": {
     "title": "Umkleide",
@@ -68,25 +88,72 @@
     "equip": "Ausrüsten",
     "unequip": "Ablegen",
     "locked": "Gesperrt",
-    "loginRequired": "Mit Twitch anmelden, um deinen Charakter anzupassen"
+    "loginRequired": "Mit Twitch anmelden, um deinen Charakter anzupassen",
+    "searchOwned": "Eigene Items suchen..."
   },
   "scores": {
     "title": "Bestenliste",
-    "subtitle": "Highscores für Parachute Drop auf allen Kanälen."
+    "subtitle": "Highscores für Parachute Drop auf allen Kanälen.",
+    "channel": "Kanal",
+    "timeRange": "Zeitraum",
+    "theme": "Design",
+    "allThemes": "Alle Designs",
+    "last12h": "Letzte 12 Stunden",
+    "thisWeek": "Diese Woche",
+    "thisMonth": "Dieser Monat",
+    "channelPlaceholder": "Kanalname eingeben...",
+    "shareLink": "Link teilen",
+    "copy": "Kopieren",
+    "enterChannel": "Gib einen Kanalnamen ein, um Punkte zu sehen",
+    "noScores": "Keine Punkte für diesen Kanal und Zeitraum gefunden",
+    "player": "Spieler",
+    "score": "Punkte",
+    "date": "Datum"
   },
   "status": {
     "title": "Systemstatus",
-    "subtitle": "Aktueller Status der PixelPlush-Dienste"
+    "subtitle": "Aktueller Status der PixelPlush-Dienste.",
+    "allSystems": "Alle Systeme",
+    "operational": "Betriebsbereit",
+    "responding": "Antwortet",
+    "liveStreams": "Live-Streams",
+    "services": "Dienste",
+    "currentlyLive": "Jetzt live",
+    "gameServer": "Spielserver (Rooms)",
+    "apiServer": "API (Konten, Punkte)",
+    "auth": "Authentifizierung (Twitch OAuth)",
+    "marketplace": "Marktplatz",
+    "website": "Webseite"
   },
   "transactions": {
     "title": "Transaktionen",
-    "subtitle": "Deine Kauf- und Einlösungshistorie."
+    "subtitle": "Deine Kauf- und Einlösungshistorie.",
+    "loginPrompt": "Melde dich an, um deine Transaktionshistorie zu sehen.",
+    "all": "Alle",
+    "redemptions": "Einlösungen",
+    "purchases": "Käufe",
+    "noFound": "Keine Transaktionen gefunden.",
+    "redeemed": "Eingelöst",
+    "purchased": "Gekauft",
+    "dateCol": "Datum",
+    "typeCol": "Typ",
+    "descCol": "Beschreibung",
+    "amountCol": "Betrag"
   },
   "redeem": {
     "title": "Code einlösen",
     "subtitle": "Melde dich an, um einen PixelPlush-Code einzulösen.",
-    "placeholder": "Gib deinen Code ein",
-    "submit": "Einlösen"
+    "placeholder": "CODE-HIER-EINGEBEN",
+    "submit": "Einlösen",
+    "pageSubtitle": "Gib einen PixelPlush-Code ein, um Münzen, Items oder andere Belohnungen zu erhalten.",
+    "success": "Code erfolgreich eingelöst!",
+    "errorGeneric": "Etwas ist schiefgelaufen. Bitte versuche es erneut."
+  },
+  "login": {
+    "title": "Bei PixelPlush anmelden",
+    "subtitle": "Melde dich mit deinem Twitch-Konto an, um deine Spiele anzupassen, Items zu kaufen und deine Punkte zu verfolgen.",
+    "twitchButton": "Mit Twitch anmelden",
+    "helloFrom": "Hallo von"
   },
   "common": {
     "loading": "Laden...",
@@ -98,14 +165,34 @@
     "confirm": "Bestätigen",
     "back": "Zurück",
     "next": "Weiter",
-    "viewAll": "Alle ansehen"
+    "viewAll": "Alle ansehen",
+    "loginWithTwitch": "Mit Twitch anmelden",
+    "goHome": "Zur Startseite",
+    "accessDenied": "Zugriff verweigert"
   },
   "troubleshoot": {
     "title": "Fehlerbehebung",
-    "subtitle": "Probleme mit deinem PixelPlush-Spiel? Nutze die Tools unten zur Diagnose."
+    "subtitle": "Probleme mit deinem PixelPlush-Spiel? Nutze die Tools unten zur Diagnose.",
+    "checkUrl": "1. URL prüfen",
+    "checkUrlDesc": "Füge die Browserquellen-URL aus OBS ein, um häufige Probleme zu prüfen.",
+    "urlPlaceholder": "OBS-Browserquellen-URL hier einfügen...",
+    "testConnection": "2. Verbindung testen",
+    "testConnectionDesc": "Teste die Verbindung zu PixelPlush-Servern.",
+    "testServers": "Server testen",
+    "testing": "Teste...",
+    "checkToken": "Token-Zustand prüfen",
+    "checking": "Prüfe...",
+    "commonIssues": "4. Häufige Probleme",
+    "commonIssuesDesc": "Klicke auf ein Problem, um Lösungsvorschläge zu sehen.",
+    "generateReport": "5. Support-Bericht erstellen",
+    "generateReportDesc": "Kopiere eine Zusammenfassung deiner Diagnose, um sie in Discord zu teilen.",
+    "copyReport": "Support-Bericht kopieren",
+    "copied": "In die Zwischenablage kopiert!",
+    "stillStuck": "Immer noch Probleme? Tritt unserem Discord bei oder schreibe uns an support@pixelplush.dev"
   },
   "admin": {
     "title": "Admin-Bereich",
-    "subtitle": "PixelPlush-Verwaltungstools"
+    "subtitle": "PixelPlush-Verwaltungstools",
+    "adminOnly": "Diese Seite ist nur für PixelPlush-Administratoren verfügbar."
   }
 }

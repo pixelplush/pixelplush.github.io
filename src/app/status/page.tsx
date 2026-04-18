@@ -41,8 +41,8 @@ export default function StatusPage() {
         {/* Overall status */}
         <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-6 text-center">
           <div className="mb-2 inline-block h-4 w-4 rounded-full bg-green-500" />
-          <h2 className="text-lg font-semibold text-[var(--color-pp-headings)]">All Systems</h2>
-          <p className="text-sm text-green-400">Operational</p>
+          <h2 className="text-lg font-semibold text-[var(--color-pp-headings)]">{t("status.allSystems")}</h2>
+          <p className="text-sm text-green-400">{t("status.operational")}</p>
         </div>
 
         {/* Live streams */}
@@ -50,27 +50,27 @@ export default function StatusPage() {
           <div className="mb-2 text-3xl font-bold text-[var(--color-pp-accent)]">
             {loading ? '...' : liveCount ?? '—'}
           </div>
-          <h2 className="text-sm font-medium text-[var(--color-pp-text-muted)]">Live Streams</h2>
+          <h2 className="text-sm font-medium text-[var(--color-pp-text-muted)]">{t("status.liveStreams")}</h2>
         </div>
 
         {/* API */}
         <div className="rounded-2xl border border-green-500/30 bg-green-500/5 p-6 text-center">
           <div className="mb-2 inline-block h-4 w-4 rounded-full bg-green-500" />
           <h2 className="text-lg font-semibold text-[var(--color-pp-headings)]">API</h2>
-          <p className="text-sm text-green-400">Responding</p>
+          <p className="text-sm text-green-400">{t("status.responding")}</p>
         </div>
       </div>
 
       {/* Service Details */}
       <div className="mt-8 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-        <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">Services</h2>
+        <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">{t("status.services")}</h2>
         <div className="divide-y divide-white/5">
           {[
-            { name: 'Game Server (Rooms)', status: 'Operational' },
-            { name: 'API (Accounts, Scores)', status: 'Operational' },
-            { name: 'Authentication (Twitch OAuth)', status: 'Operational' },
-            { name: 'Marketplace', status: 'Operational' },
-            { name: 'Website', status: 'Operational' },
+            { name: t('status.gameServer'), status: t('status.operational') },
+            { name: t('status.apiServer'), status: t('status.operational') },
+            { name: t('status.auth'), status: t('status.operational') },
+            { name: t('status.marketplace'), status: t('status.operational') },
+            { name: t('status.website'), status: t('status.operational') },
           ].map((service) => (
             <div key={service.name} className="flex items-center justify-between py-3">
               <span className="text-[var(--color-pp-text)]">{service.name}</span>
@@ -86,7 +86,7 @@ export default function StatusPage() {
       {/* Live Channels */}
       {liveChannels.length > 0 && (
         <div className="mt-8 rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
-          <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">Currently Live</h2>
+          <h2 className="mb-4 text-lg font-semibold text-[var(--color-pp-headings)]">{t("status.currentlyLive")}</h2>
           <div className="flex flex-wrap gap-2">
             {liveChannels.map((channel) => (
               <a

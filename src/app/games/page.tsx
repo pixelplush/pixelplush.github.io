@@ -296,6 +296,7 @@ const games: GameDef[] = [
 
 function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; selectedTheme: string; onThemeChange: (key: string) => void }) {
   const { isLoggedIn, account, token } = useAuth();
+  const { t } = useTranslation();
   const [channelName, setChannelName] = useState(account?.username || '');
   const [copied, setCopied] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
@@ -355,12 +356,12 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
       <div className="space-y-4">
         {/* Channel name */}
         <div>
-          <label className="mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]">Twitch Channel Name</label>
+          <label className="mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]">{t('games.channelLabel')}</label>
           <input
             type="text"
             value={channelName}
             onChange={(e) => setChannelName(e.target.value.toLowerCase())}
-            placeholder="e.g. instafluff"
+            placeholder={t('games.channelPlaceholder')}
             className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-3 py-2 text-sm text-[var(--color-pp-text)] placeholder-[var(--color-pp-text-muted)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
           {!isLoggedIn && (
@@ -373,7 +374,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
         {/* Theme selector */}
         {game.themes.length > 1 && (
           <div>
-            <label className="mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]">Theme</label>
+            <label className="mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]">{t('games.themeLabel')}</label>
             <select
               value={selectedTheme}
               onChange={(e) => onThemeChange(e.target.value)}
@@ -395,8 +396,8 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
             <div className="flex-1">
               <p className="text-sm font-semibold text-amber-900">{theme.name}</p>
               <p className="text-xs text-amber-700">
-                This premium theme requires an add-on.
-                <Link href="/market" className="font-semibold underline ml-1">Get it in the Market →</Link>
+                {t('games.premiumTheme')}
+                <Link href="/market" className="font-semibold underline ml-1">{t('games.getInMarket')}</Link>
               </p>
             </div>
           </div>
@@ -407,7 +408,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
             <div className="flex-1">
               <p className="text-sm font-semibold text-blue-900">{theme.name}</p>
               <p className="text-xs text-blue-700">
-                <Link href="/login" className="font-semibold underline">Log in</Link> to check if you own this premium theme.
+                <Link href="/login" className="font-semibold underline">{t('common.loginWithTwitch')}</Link> {t('games.loginToCheckPremium')}
               </p>
             </div>
           </div>
@@ -421,7 +422,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
               onClick={() => setShowSettings(!showSettings)}
               className="flex w-full items-center justify-between rounded-lg bg-[var(--color-pp-card)] px-3 py-2 text-xs font-medium text-[var(--color-pp-text)] hover:bg-[var(--color-pp-border)]/50 transition cursor-pointer"
             >
-              <span>Game Settings</span>
+              <span>{t('games.settingsLabel')}</span>
               <span className="text-[var(--color-pp-text-muted)]">{showSettings ? '▲' : '▼'}</span>
             </button>
             {showSettings && (
@@ -431,7 +432,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
                     <label className="text-xs font-medium text-[var(--color-pp-text-muted)]">
                       {s.label}
                       {s.suffix && <span className="ml-1 text-[10px] text-[var(--color-pp-text-muted)]">({s.suffix})</span>}
-                      {s.requiresAuth && !isLoggedIn && <span className="ml-1 text-[10px] text-amber-600">(requires login)</span>}
+                      {s.requiresAuth && !isLoggedIn && <span className="ml-1 text-[10px] text-amber-600">{t('games.requiresLogin')}</span>}
                     </label>
                     {s.type === 'toggle' && (
                       <button

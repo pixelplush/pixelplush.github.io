@@ -42,7 +42,15 @@
     "step4Title": "Hraj!",
     "step4Desc": "Tvoji diváci hrají psaním příkazů v chatu",
     "learnMore": "Zjistit více",
-    "themes": "Motivy"
+    "themes": "Motivy",
+    "channelLabel": "Název Twitch kanálu",
+    "channelPlaceholder": "např. instafluff",
+    "themeLabel": "Motiv",
+    "settingsLabel": "Nastavení hry",
+    "premiumTheme": "Tento prémiový motiv vyžaduje doplněk.",
+    "getInMarket": "Získat v obchodě →",
+    "loginToCheckPremium": "Přihlas se, abys zjistil/a, zda vlastníš tento prémiový motiv.",
+    "requiresLogin": "(Vyžaduje přihlášení)"
   },
   "market": {
     "title": "Obchod",
@@ -59,7 +67,19 @@
     "loginToBuy": "Pro nákup se přihlas přes Twitch",
     "search": "Hledat předměty...",
     "allItems": "Všechny předměty",
-    "categories": "Kategorie"
+    "categories": "Kategorie",
+    "plushCoins": "Plush mince",
+    "yourBalance": "Tvůj zůstatek",
+    "logIn": "Přihlásit se",
+    "loginToPurchase": "Přihlas se pro nákup mincí",
+    "notEnoughCoins": "Nedostatek mincí! Navštiv obchod s mincemi výše.",
+    "purchaseSuccess": "Nákup úspěšný!",
+    "coinsPurchased": "Plush mince úspěšně zakoupeny!",
+    "purchaseFailed": "Transakce se nezdařila",
+    "purchaseTimeout": "Transakce vypršela. Kontaktuj podporu, pokud byly strženy prostředky.",
+    "paymentCancelled": "Platba byla zrušena",
+    "coinPurchaseFailed": "Nákup mincí se nezdařil",
+    "paypalError": "Chyba PayPal"
   },
   "customize": {
     "title": "Šatna",
@@ -68,25 +88,72 @@
     "equip": "Nasadit",
     "unequip": "Sundat",
     "locked": "Zamčeno",
-    "loginRequired": "Pro přizpůsobení postavy se přihlas přes Twitch"
+    "loginRequired": "Pro přizpůsobení postavy se přihlas přes Twitch",
+    "searchOwned": "Hledat vlastněné předměty..."
   },
   "scores": {
     "title": "Žebříček",
-    "subtitle": "Nejlepší skóre v Parachute Drop na všech kanálech."
+    "subtitle": "Nejlepší skóre v Parachute Drop na všech kanálech.",
+    "channel": "Kanál",
+    "timeRange": "Období",
+    "theme": "Motiv",
+    "allThemes": "Všechny motivy",
+    "last12h": "Posledních 12 hodin",
+    "thisWeek": "Tento týden",
+    "thisMonth": "Tento měsíc",
+    "channelPlaceholder": "Zadej název kanálu...",
+    "shareLink": "Sdílet odkaz",
+    "copy": "Kopírovat",
+    "enterChannel": "Zadej název kanálu pro zobrazení skóre",
+    "noScores": "Žádné skóre pro tento kanál a období",
+    "player": "Hráč",
+    "score": "Skóre",
+    "date": "Datum"
   },
   "status": {
     "title": "Stav systému",
-    "subtitle": "Aktuální stav služeb PixelPlush"
+    "subtitle": "Aktuální stav služeb PixelPlush.",
+    "allSystems": "Všechny systémy",
+    "operational": "V provozu",
+    "responding": "Odpovídá",
+    "liveStreams": "Živé streamy",
+    "services": "Služby",
+    "currentlyLive": "Právě živě",
+    "gameServer": "Herní server (Rooms)",
+    "apiServer": "API (Účty, Skóre)",
+    "auth": "Autentizace (Twitch OAuth)",
+    "marketplace": "Obchod",
+    "website": "Webová stránka"
   },
   "transactions": {
     "title": "Transakce",
-    "subtitle": "Tvoje historie nákupů a uplatnění."
+    "subtitle": "Tvoje historie nákupů a uplatnění.",
+    "loginPrompt": "Přihlaš se pro zobrazení historie transakcí.",
+    "all": "Vše",
+    "redemptions": "Uplatnění",
+    "purchases": "Nákupy",
+    "noFound": "Žádné transakce nenalezeny.",
+    "redeemed": "Uplatněno",
+    "purchased": "Zakoupeno",
+    "dateCol": "Datum",
+    "typeCol": "Typ",
+    "descCol": "Popis",
+    "amountCol": "Částka"
   },
   "redeem": {
     "title": "Uplatnit kód",
     "subtitle": "Přihlaš se pro uplatnění PixelPlush kódu.",
-    "placeholder": "Zadej svůj kód",
-    "submit": "Uplatnit"
+    "placeholder": "ZADEJ-KÓD-ZDE",
+    "submit": "Uplatnit",
+    "pageSubtitle": "Zadej PixelPlush kód pro získání mincí, předmětů nebo jiných odměn.",
+    "success": "Kód úspěšně uplatněn!",
+    "errorGeneric": "Něco se pokazilo. Zkus to prosím znovu."
+  },
+  "login": {
+    "title": "Přihlásit se do PixelPlush",
+    "subtitle": "Přihlaš se svým Twitch účtem pro přizpůsobení her, nákup předmětů a sledování skóre.",
+    "twitchButton": "Přihlásit se přes Twitch",
+    "helloFrom": "Ahoj od"
   },
   "common": {
     "loading": "Načítání...",
@@ -98,14 +165,34 @@
     "confirm": "Potvrdit",
     "back": "Zpět",
     "next": "Další",
-    "viewAll": "Zobrazit vše"
+    "viewAll": "Zobrazit vše",
+    "loginWithTwitch": "Přihlásit se přes Twitch",
+    "goHome": "Domů",
+    "accessDenied": "Přístup odepřen"
   },
   "troubleshoot": {
     "title": "Řešení problémů",
-    "subtitle": "Máš problémy s PixelPlush hrou? Použij nástroje níže k diagnostice."
+    "subtitle": "Máš problémy s PixelPlush hrou? Použij nástroje níže k diagnostice.",
+    "checkUrl": "1. Zkontroluj URL",
+    "checkUrlDesc": "Vlož URL Browser Source z OBS a zkontroluj běžné problémy.",
+    "urlPlaceholder": "Vlož sem URL Browser Source z OBS...",
+    "testConnection": "2. Otestuj připojení",
+    "testConnectionDesc": "Otestuj připojení k serverům PixelPlush.",
+    "testServers": "Otestovat servery",
+    "testing": "Testování...",
+    "checkToken": "Zkontrolovat stav tokenu",
+    "checking": "Kontrola...",
+    "commonIssues": "4. Časté problémy",
+    "commonIssuesDesc": "Klikni na problém pro zobrazení řešení.",
+    "generateReport": "5. Vygenerovat report pro podporu",
+    "generateReportDesc": "Zkopíruj souhrn diagnostiky a sdílej ho na Discordu.",
+    "copyReport": "Zkopírovat report",
+    "copied": "Zkopírováno do schránky!",
+    "stillStuck": "Stále problémy? Přidej se na Discord nebo napiš na support@pixelplush.dev"
   },
   "admin": {
     "title": "Administrace",
-    "subtitle": "Nástroje pro správu PixelPlush"
+    "subtitle": "Nástroje pro správu PixelPlush",
+    "adminOnly": "Tato stránka je dostupná pouze pro administrátory PixelPlush."
   }
 }

@@ -185,7 +185,7 @@ export default function MarketPage() {
       setBuyingItem(item.id);
       const cost = item.sale ? Math.floor(item.cost / 2) : item.cost;
       if ((account?.coins ?? 0) < cost) {
-        showNotification('error', 'Not enough coins! Visit the coin shop above to get more.');
+        showNotification('error', t('market.notEnoughCoins'));
         setBuyingItem(null);
         return;
       }
@@ -248,7 +248,7 @@ export default function MarketPage() {
             setCoinProcessing(false);
             if (r.status === 'complete') {
               refreshAccount();
-              showNotification('success', 'Plush Coins purchased successfully!');
+              showNotification('success', t('market.coinsPurchased'));
             } else {
               showNotification('error', r.error || 'Transaction failed');
             }
@@ -269,7 +269,7 @@ export default function MarketPage() {
         clearTimeout(timeout);
       };
     } else if (stripeResult === 'cancel') {
-      showNotification('error', 'Payment was cancelled');
+      showNotification('error', t('market.paymentCancelled'));
       window.history.replaceState({}, '', window.location.pathname);
     }
   }, [token, refreshAccount, showNotification]);
@@ -348,13 +348,13 @@ export default function MarketPage() {
           setSelectedCoinPkg(null);
           showNotification('success', `You got ${selectedCoinPkg.coins} Plush Coins!`);
         } catch (err: unknown) {
-          const message = err instanceof Error ? err.message : 'Coin purchase failed';
+          const message = err instanceof Error ? err.message : t('market.coinPurchaseFailed');
           showNotification('error', message);
         }
         setCoinProcessing(false);
       },
       onError: () => {
-        showNotification('error', 'PayPal error occurred');
+        showNotification('error', t('market.paypalError'));
         setSelectedCoinPkg(null);
         setCoinProcessing(false);
       },
@@ -385,16 +385,16 @@ export default function MarketPage() {
           {isLoggedIn && account ? (
             <div className="flex items-center gap-2 text-base font-semibold text-amber-900">
               <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="coins" width={24} height={24} className="pixelated" unoptimized />
-              Your Balance: {account.coins} coins
+              Your Balance: {account.coins} {t('market.coins').toLowerCase()}
             </div>
           ) : (
             <div className="flex items-center gap-3">
-              <span className="text-amber-800">Log in to purchase coins</span>
+              <span className="text-amber-800">{t('market.loginToPurchase')}</span>
               <button
                 onClick={login}
                 className="rounded-lg bg-[var(--color-pp-accent)] px-4 py-1.5 text-sm font-medium text-white transition hover:bg-[#4a7de0]"
               >
-                Log In
+                {t('market.logIn')}
               </button>
             </div>
           )}

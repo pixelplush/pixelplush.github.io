@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { assetPath } from '@/lib/assetPath';
+import { useTranslation } from '@/i18n';
 
 const screenshots = [
   '/app-assets/images/games/pixelparachuteeaster.gif',
@@ -14,6 +15,7 @@ const screenshots = [
 ];
 
 export default function LoginPage() {
+  const { t } = useTranslation();
   const { isLoggedIn, isLoading, login } = useAuth();
   const router = useRouter();
   const [randomImage] = useState(() => assetPath(screenshots[Math.floor(Math.random() * screenshots.length)]));
@@ -31,8 +33,8 @@ export default function LoginPage() {
           {/* Left — Login */}
           <div className="flex flex-col items-center justify-center p-8 md:p-12">
             <Image src={assetPath("/app-assets/images/logo/logo.png")} alt="PixelPlush" width={64} height={64} className="pixelated mb-6" />
-            <h1 className="mb-2 text-2xl font-bold text-[var(--color-pp-headings)] text-center">Log Into PixelPlush</h1>
-            <p className="mb-8 text-sm text-[var(--color-pp-text-muted)] text-center">Sign in with your Twitch account to customize your games, buy items, and track your scores.</p>
+            <h1 className="mb-2 text-2xl font-bold text-[var(--color-pp-headings)] text-center">{t("login.title")}</h1>
+            <p className="mb-8 text-sm text-[var(--color-pp-text-muted)] text-center">{t("login.subtitle")}</p>
 
             <button
               onClick={login}
@@ -41,11 +43,11 @@ export default function LoginPage() {
               <svg className="h-5 w-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714Z" />
               </svg>
-              Log in with Twitch
+              {t("login.twitchButton")}
             </button>
 
             <p className="mt-6 text-xs text-slate-500 text-center">
-              Hello from <span className="text-pink-400">Maaya</span> and <span className="text-[var(--color-pp-accent)]">Instafluff</span>!
+              {t("login.helloFrom")} <span className="text-pink-400">Maaya</span> &amp; <span className="text-[var(--color-pp-accent)]">Instafluff</span>!
             </p>
           </div>
 

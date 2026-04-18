@@ -42,7 +42,15 @@
     "step4Title": "¡A Jugar!",
     "step4Desc": "Tus espectadores juegan escribiendo comandos en el chat",
     "learnMore": "Más Información",
-    "themes": "Temas"
+    "themes": "Temas",
+    "channelLabel": "Nombre del Canal de Twitch",
+    "channelPlaceholder": "ej. instafluff",
+    "themeLabel": "Tema",
+    "settingsLabel": "Configuración del Juego",
+    "premiumTheme": "Este tema premium requiere un complemento.",
+    "getInMarket": "Obtener en la Tienda →",
+    "loginToCheckPremium": "Inicia sesión para verificar si posees este tema premium.",
+    "requiresLogin": "(Requiere inicio de sesión)"
   },
   "market": {
     "title": "Tienda",
@@ -59,7 +67,19 @@
     "loginToBuy": "Inicia sesión con Twitch para comprar artículos",
     "search": "Buscar artículos...",
     "allItems": "Todos los Artículos",
-    "categories": "Categorías"
+    "categories": "Categorías",
+    "plushCoins": "Monedas Plush",
+    "yourBalance": "Tu Saldo",
+    "logIn": "Iniciar Sesión",
+    "loginToPurchase": "Inicia sesión para comprar monedas",
+    "notEnoughCoins": "¡No tienes suficientes monedas! Visita la tienda de monedas arriba para obtener más.",
+    "purchaseSuccess": "¡Compra exitosa!",
+    "coinsPurchased": "¡Monedas Plush compradas exitosamente!",
+    "purchaseFailed": "La transacción falló",
+    "purchaseTimeout": "La transacción expiró. Contacta soporte si se realizó el cobro.",
+    "paymentCancelled": "El pago fue cancelado",
+    "coinPurchaseFailed": "La compra de monedas falló",
+    "paypalError": "Error de PayPal"
   },
   "customize": {
     "title": "Vestidor",
@@ -68,25 +88,72 @@
     "equip": "Equipar",
     "unequip": "Desequipar",
     "locked": "Bloqueado",
-    "loginRequired": "Inicia sesión con Twitch para personalizar tu personaje"
+    "loginRequired": "Inicia sesión con Twitch para personalizar tu personaje",
+    "searchOwned": "Buscar artículos propios..."
   },
   "scores": {
     "title": "Clasificación",
-    "subtitle": "Ver las mejores puntuaciones de Parachute Drop en todos los canales."
+    "subtitle": "Ver las mejores puntuaciones de Parachute Drop en todos los canales.",
+    "channel": "Canal",
+    "timeRange": "Periodo",
+    "theme": "Tema",
+    "allThemes": "Todos los Temas",
+    "last12h": "Últimas 12 Horas",
+    "thisWeek": "Esta Semana",
+    "thisMonth": "Este Mes",
+    "channelPlaceholder": "Ingresa el nombre del canal...",
+    "shareLink": "Compartir Enlace",
+    "copy": "Copiar",
+    "enterChannel": "Ingresa un nombre de canal para ver las puntuaciones",
+    "noScores": "No se encontraron puntuaciones para este canal y periodo",
+    "player": "Jugador",
+    "score": "Puntuación",
+    "date": "Fecha"
   },
   "status": {
     "title": "Estado del Sistema",
-    "subtitle": "Estado actual de los servicios de PixelPlush"
+    "subtitle": "Estado actual de los servicios de PixelPlush.",
+    "allSystems": "Todos los Sistemas",
+    "operational": "Operacional",
+    "responding": "Respondiendo",
+    "liveStreams": "Streams en Vivo",
+    "services": "Servicios",
+    "currentlyLive": "En Vivo Ahora",
+    "gameServer": "Servidor de Juegos (Rooms)",
+    "apiServer": "API (Cuentas, Puntuaciones)",
+    "auth": "Autenticación (Twitch OAuth)",
+    "marketplace": "Tienda",
+    "website": "Sitio Web"
   },
   "transactions": {
     "title": "Transacciones",
-    "subtitle": "Tu historial de compras y canjes."
+    "subtitle": "Tu historial de compras y canjes.",
+    "loginPrompt": "Inicia sesión para ver tu historial de transacciones.",
+    "all": "Todas",
+    "redemptions": "Canjes",
+    "purchases": "Compras",
+    "noFound": "No se encontraron transacciones.",
+    "redeemed": "Canjeado",
+    "purchased": "Comprado",
+    "dateCol": "Fecha",
+    "typeCol": "Tipo",
+    "descCol": "Descripción",
+    "amountCol": "Monto"
   },
   "redeem": {
     "title": "Canjear Código",
     "subtitle": "Inicia sesión para canjear un código de PixelPlush.",
-    "placeholder": "Ingresa tu código",
-    "submit": "Canjear"
+    "placeholder": "INGRESA-TU-CÓDIGO",
+    "submit": "Canjear",
+    "pageSubtitle": "Ingresa un código de PixelPlush para obtener monedas, artículos u otras recompensas.",
+    "success": "¡Código canjeado exitosamente!",
+    "errorGeneric": "Algo salió mal. Por favor, inténtalo de nuevo."
+  },
+  "login": {
+    "title": "Iniciar Sesión en PixelPlush",
+    "subtitle": "Inicia sesión con tu cuenta de Twitch para personalizar tus juegos, comprar artículos y seguir tus puntuaciones.",
+    "twitchButton": "Iniciar sesión con Twitch",
+    "helloFrom": "Hola desde"
   },
   "common": {
     "loading": "Cargando...",
@@ -98,14 +165,34 @@
     "confirm": "Confirmar",
     "back": "Atrás",
     "next": "Siguiente",
-    "viewAll": "Ver Todo"
+    "viewAll": "Ver Todo",
+    "loginWithTwitch": "Iniciar sesión con Twitch",
+    "goHome": "Ir al Inicio",
+    "accessDenied": "Acceso Denegado"
   },
   "troubleshoot": {
     "title": "Solución de Problemas",
-    "subtitle": "¿Tienes problemas con tu juego PixelPlush? Usa las herramientas de abajo para diagnosticar."
+    "subtitle": "¿Tienes problemas con tu juego PixelPlush? Usa las herramientas de abajo para diagnosticar.",
+    "checkUrl": "1. Verificar URL",
+    "checkUrlDesc": "Pega la URL de la fuente del navegador de OBS para verificar problemas comunes.",
+    "urlPlaceholder": "Pega aquí la URL de la fuente del navegador de OBS...",
+    "testConnection": "2. Probar Conexión",
+    "testConnectionDesc": "Prueba la conexión a los servidores de PixelPlush.",
+    "testServers": "Probar Servidores",
+    "testing": "Probando...",
+    "checkToken": "Verificar Estado del Token",
+    "checking": "Verificando...",
+    "commonIssues": "4. Problemas Comunes",
+    "commonIssuesDesc": "Haz clic en un problema para ver sugerencias de solución.",
+    "generateReport": "5. Generar Reporte de Soporte",
+    "generateReportDesc": "Copia un resumen de diagnóstico para compartir en Discord.",
+    "copyReport": "Copiar Reporte de Soporte",
+    "copied": "¡Copiado al portapapeles!",
+    "stillStuck": "¿Aún con problemas? Únete a nuestro Discord o escríbenos a support@pixelplush.dev"
   },
   "admin": {
     "title": "Panel de Administración",
-    "subtitle": "Herramientas de administración de PixelPlush"
+    "subtitle": "Herramientas de administración de PixelPlush",
+    "adminOnly": "Esta página solo está disponible para administradores de PixelPlush."
   }
 }

@@ -94,29 +94,29 @@ function ScoresContent() {
       {/* Filters */}
       <div className="mb-6 grid gap-4 sm:grid-cols-3">
         <div>
-          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">Channel</label>
+          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">{t("scores.channel")}</label>
           <input
             type="text"
             value={channel}
             onChange={(e) => setChannel(e.target.value.toLowerCase())}
-            placeholder="Enter channel name..."
+            placeholder={t("scores.channelPlaceholder")}
             className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-[var(--color-pp-headings)] placeholder-[var(--color-pp-text)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">Time Range</label>
+          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">{t("scores.timeRange")}</label>
           <select
             value={timeRange}
             onChange={(e) => setTimeRange(e.target.value)}
             className="w-full rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-2.5 text-[var(--color-pp-headings)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           >
-            <option value="12h">Last 12 Hours</option>
-            <option value="1w">This Week</option>
-            <option value="1m">This Month</option>
+            <option value="12h">{t("scores.last12h")}</option>
+            <option value="1w">{t("scores.thisWeek")}</option>
+            <option value="1m">{t("scores.thisMonth")}</option>
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">Theme</label>
+          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">{t("scores.theme")}</label>
           <select
             value={theme}
             onChange={(e) => setTheme(e.target.value)}
@@ -124,7 +124,7 @@ function ScoresContent() {
           >
             {Object.entries(gameThemeNames).map(([key, name]) => (
               <option key={key} value={key}>
-                {name || 'All Themes'}
+                {name || t('scores.allThemes')}
               </option>
             ))}
           </select>
@@ -134,7 +134,7 @@ function ScoresContent() {
       {/* Share Link */}
       {channel && (
         <div className="mb-6">
-          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">Share Link</label>
+          <label className="mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]">{t("scores.shareLink")}</label>
           <div className="flex gap-2">
             <input
               type="text"
@@ -146,7 +146,7 @@ function ScoresContent() {
               onClick={() => navigator.clipboard.writeText(shareUrl)}
               className="rounded-lg border border-[var(--color-pp-border)] px-4 py-2 text-sm text-[var(--color-pp-text)] transition hover:bg-[var(--color-pp-card)]"
             >
-              Copy
+              {t("scores.copy")}
             </button>
           </div>
         </div>
@@ -160,20 +160,20 @@ function ScoresContent() {
           </div>
         ) : !channel ? (
           <div className="flex h-48 items-center justify-center text-slate-500">
-            Enter a channel name to view scores
+            {t("scores.enterChannel")}
           </div>
         ) : scores.length === 0 ? (
           <div className="flex h-48 items-center justify-center text-slate-500">
-            No scores found for this channel and time range
+            {t("scores.noScores")}
           </div>
         ) : (
           <table className="w-full text-left">
             <thead>
               <tr className="border-b border-[var(--color-pp-border)] bg-[var(--color-pp-card)] text-sm text-[var(--color-pp-text-muted)]">
                 <th className="px-4 py-3 font-medium">#</th>
-                <th className="px-4 py-3 font-medium">Player</th>
-                <th className="px-4 py-3 font-medium text-right">Score</th>
-                <th className="hidden px-4 py-3 font-medium text-right sm:table-cell">Date</th>
+                <th className="px-4 py-3 font-medium">{t("scores.player")}</th>
+                <th className="px-4 py-3 font-medium text-right">{t("scores.score")}</th>
+                <th className="hidden px-4 py-3 font-medium text-right sm:table-cell">{t("scores.date")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">

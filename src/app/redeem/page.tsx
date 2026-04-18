@@ -31,12 +31,12 @@ export default function RedeemPage() {
         setMessage(data.error);
       } else {
         setStatus('success');
-        setMessage(data.message || 'Code redeemed successfully!');
+        setMessage(data.message || t('redeem.success'));
         setCode('');
       }
     } catch {
       setStatus('error');
-      setMessage('Something went wrong. Please try again.');
+      setMessage(t('redeem.errorGeneric'));
     }
   }
 
@@ -61,7 +61,7 @@ export default function RedeemPage() {
             <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z" />
             </svg>
-            Log in with Twitch
+            {t("common.loginWithTwitch")}
           </button>
         </div>
       </div>
@@ -70,8 +70,8 @@ export default function RedeemPage() {
 
   return (
     <div className="mx-auto max-w-lg px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Redeem Code</h1>
-      <p className="mb-8 text-[var(--color-pp-text-muted)]">Enter a PixelPlush code to redeem coins, items, or other rewards.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">{t("redeem.title")}</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">{t("redeem.pageSubtitle")}</p>
 
       <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-6">
         <div className="flex gap-3">
@@ -82,7 +82,7 @@ export default function RedeemPage() {
               setCode(e.target.value.toUpperCase());
               setStatus('idle');
             }}
-            placeholder="ENTER-CODE-HERE"
+            placeholder={t("redeem.placeholder")}
             className="flex-1 rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] px-4 py-3 font-mono text-lg tracking-wider text-[var(--color-pp-text)] placeholder-[var(--color-pp-text-muted)] focus:border-[var(--color-pp-accent)] focus:outline-none"
           />
           <button
@@ -93,7 +93,7 @@ export default function RedeemPage() {
             {status === 'loading' ? (
               <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
             ) : (
-              'Redeem'
+              t('redeem.submit')
             )}
           </button>
         </div>
