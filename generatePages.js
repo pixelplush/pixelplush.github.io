@@ -26,8 +26,8 @@ Object.keys( pages ).forEach( p => {
     // Generate Test Theme
     let menuItems = generateMenu( p ).replace( /^/gm, "        " );
     let pageMenu = pages[ p ].menu === "live" ? menuLiveTemplate : menuTemplate;
-    const pageContent = fs.readFileSync( `pages/${p}.html` ).toString().replace( /\r\n/g, "\n" ).replace( /^/gm, "                                " );
-    const pageScript = fs.readFileSync( `pages/${p}.js` ).toString().replace( /\r\n/g, "\n" ).replace( /^/gm, "        " );
+    const pageContent = fs.readFileSync( `page-templates/${p}.html` ).toString().replace( /\r\n/g, "\n" ).replace( /^/gm, "                                " );
+    const pageScript = fs.readFileSync( `page-templates/${p}.js` ).toString().replace( /\r\n/g, "\n" ).replace( /^/gm, "        " );
     const output = template
         .replace( /PAGE_NAME/g, pages[ p ].name )
         .replace( /PAGE_FILE/g, p )

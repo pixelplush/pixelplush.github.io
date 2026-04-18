@@ -12,6 +12,9 @@
 
       gtag('config', 'G-6EJRXTPH3Z');
     </script>
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","wdlmotp71n");
+    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -377,20 +380,17 @@
                                                                     </div>
                                                                     <div class="col-10">
                                                                         <div class="row">
-                                                                            <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-dark" type="button" id="buy-btn-10" onclick="showCoinBuy(10, 2)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x10</small><br/><small class="text-warning">No Bonus</small><br/><strong>$2</strong></button>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <button class="btn btn-warning" type="button" id="buy-btn-25" onclick="showCoinBuy(25, 5)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x25</small><br/><small class="text-warning">No Bonus</small><br/><strong>$5</strong></button>
                                                                             </div>
-                                                                            <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-warning" type="button" id="buy-btn-30" onclick="showCoinBuy(20, 4)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x22</small><br/><small class="text-secondary">+10%</small><br/><strong>$4</strong></button>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <button class="btn btn-danger" type="button" id="buy-btn-55" onclick="showCoinBuy(55, 10)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x55</small><br/><small class="text-secondary">+10%</small><br/><strong>$10</strong></button>
                                                                             </div>
-                                                                            <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-danger" type="button" id="buy-btn-60" onclick="showCoinBuy(40, 8)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x46</small><br/><small class="text-secondary">+15%</small><br/><strong>$8</strong></button>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <button class="btn btn-success" type="button" id="buy-btn-120" onclick="showCoinBuy(120, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x120</small><br/><small class="text-secondary">+20%</small><br/><strong>$20</strong></button>
                                                                             </div>
-                                                                            <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-success" type="button" id="buy-btn-100" onclick="showCoinBuy(100, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x120</small><br/><small class="text-secondary">+20%</small><br/><strong>$20</strong></button>
-                                                                            </div>
-                                                                            <div class="col-sm-2 col-2">
-                                                                                <button class="btn btn-info" type="button" id="buy-btn-500" onclick="showCoinBuy(500, 100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x625</small><br/><small class="text-secondary">+25%</small><br/><strong>$100</strong></button>
+                                                                            <div class="col-sm-3 col-3">
+                                                                                <button class="btn btn-info" type="button" id="buy-btn-625" onclick="showCoinBuy(625, 100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x625</small><br/><small class="text-secondary">+25%</small><br/><strong>$100</strong></button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -407,6 +407,8 @@
                                                                                 <div class="modal-body">
                                                                                     <h4 id="coin-buy-text"></h4>
                                                                                     <div class="px-5 py-2">
+                                                                                        <button id="stripe-checkout-btn" class="btn btn-primary btn-block mb-2" onclick="handleStripeCheckout()" style="background-color:#635BFF;border-color:#635BFF;">💳 Pay with Card</button>
+                                                                                        <div class="text-center text-muted mb-2"><small>or</small></div>
                                                                                         <div id="paypal-button-container"></div>
                                                                                     </div>
                                                                                 </div>
@@ -568,6 +570,49 @@
                     }
         
                     twitchToken = result.token; // Store this token for paypal requests
+        
+                    // Handle Stripe checkout return
+                    if( params.get( "stripe" ) === "success" && params.get( "txn" ) ) {
+                        let txnId = params.get( "txn" );
+                        toastr.info( "One moment while we get your Plush Coins...", "Processing...", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                        let stripeTimer = setInterval( async () => {
+                            let result = await fetch( `${plushScoreUrl}/transactions/status?id=${txnId}` ).then( r => r.json() );
+                            if( result && result.status !== "pending" ) {
+                                clearInterval( stripeTimer );
+                                clearTimeout( stripeTimeout );
+                                if( result.status === "complete" ) {
+                                    account = await fetch( `${plushScoreUrl}/accounts`, {
+                                        headers: { Twitch: twitchToken }
+                                    } ).then( r => r.json() );
+                                    $( ".user-coins" ).text( account.coins );
+                                    toastr.success( "Plush Coins added!", "Success", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                                    Swal.fire({
+                                        title: "Thank you for the purchase!",
+                                        text: `You now have ${account.coins} Plush Coins!`,
+                                        type: "success",
+                                        confirmButtonClass: "btn btn-primary",
+                                        buttonsStyling: false,
+                                    });
+                                }
+                                else {
+                                    toastr.error( "There was an error: " + ( result.error || "Transaction failed" ), "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                                }
+                                window.history.replaceState( {}, "", window.location.pathname );
+                            }
+                            else {
+                                toastr.warning( "Waiting for confirmation...", "Processing...", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                            }
+                        }, 5000 );
+                        let stripeTimeout = setTimeout( () => {
+                            clearInterval( stripeTimer );
+                            toastr.error( "Transaction timed out. Contact support if charged.", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                            window.history.replaceState( {}, "", window.location.pathname );
+                        }, 120000 );
+                    }
+                    else if( params.get( "stripe" ) === "cancel" ) {
+                        toastr.warning( "Payment was cancelled", "Cancelled", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+                        window.history.replaceState( {}, "", window.location.pathname );
+                    }
         
                     $( ".not-logged-in" ).hide();
                     $( ".logged-in" ).show();
@@ -1141,11 +1186,8 @@
             else if( coins >= 100 ) {
                 bonusCoins = 20; // 20% more coins
             }
-            else if( coins >= 40 ) {
-                bonusCoins = 6; // 15% more coins
-            }
-            else if( coins >= 20 ) {
-                bonusCoins = 2; // 10% more coins
+            else if( coins >= 50 ) {
+                bonusCoins = 5; // 10% more coins
             }
             $("#coin-buy-amount").text( coins );
             if( bonusCoins > 0 ) {
@@ -1155,6 +1197,31 @@
                 $("#coin-buy-text").text( `${coins} Plush Coins for ${amount}! Exciting!` );
             }
             $("#coin-buy").modal();
+        }
+        
+        async function handleStripeCheckout() {
+            try {
+                $("#stripe-checkout-btn").prop( "disabled", true ).text( "Redirecting..." );
+                let result = await fetch( `${plushApiUrl}/stripe/checkout`, {
+                    method: "POST",
+                    headers: {
+                        Twitch: twitchToken || ComfyTwitch.Token,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify( {
+                        coins: orderAmount,
+                        returnUrl: window.location.origin + "/market.html"
+                    })
+                } ).then( r => r.json() );
+                if( !result.success ) {
+                    throw new Error( result.error || "Failed to start Stripe checkout" );
+                }
+                window.location.href = result.url;
+            }
+            catch( err ) {
+                $("#stripe-checkout-btn").prop( "disabled", false ).text( "\ud83d\udcb3 Pay with Card" );
+                toastr.error( err.message || "Stripe checkout failed", "Error", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
+            }
         }
         
         let transaction = {};
