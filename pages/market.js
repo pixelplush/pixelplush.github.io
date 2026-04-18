@@ -613,11 +613,8 @@ function showCoinBuy( coins, amount ) {
     else if( coins >= 100 ) {
         bonusCoins = 20; // 20% more coins
     }
-    else if( coins >= 40 ) {
-        bonusCoins = 6; // 15% more coins
-    }
-    else if( coins >= 20 ) {
-        bonusCoins = 2; // 10% more coins
+    else if( coins >= 50 ) {
+        bonusCoins = 5; // 10% more coins
     }
     $("#coin-buy-amount").text( coins );
     if( bonusCoins > 0 ) {
