@@ -2,6 +2,7 @@
 
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState, useCallback } from 'react';
+import { useTranslation } from '@/i18n';
 
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
 
@@ -29,6 +30,7 @@ interface Score {
 }
 
 function ScoresContent() {
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
   const [channel, setChannel] = useState(searchParams.get('channel') || '');
   const [timeRange, setTimeRange] = useState(searchParams.get('time') || '1m');
@@ -86,8 +88,8 @@ function ScoresContent() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Leaderboard</h1>
-      <p className="mb-8 text-[var(--color-pp-text-muted)]">View high scores for Parachute Drop across all channels.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">{t("scores.title")}</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">{t("scores.subtitle")}</p>
 
       {/* Filters */}
       <div className="mb-6 grid gap-4 sm:grid-cols-3">

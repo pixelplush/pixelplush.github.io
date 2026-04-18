@@ -2,6 +2,7 @@
 
 import { useAuth } from '@/lib/auth';
 import { useEffect, useState, useMemo } from 'react';
+import { useTranslation } from '@/i18n';
 
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
 const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
@@ -31,6 +32,7 @@ function formatDate(dateStr: string): string {
 }
 
 export default function TransactionsPage() {
+  const { t } = useTranslation();
   const { isLoggedIn, isLoading, token, login } = useAuth();
   const [transactions, setTransactions] = useState<TransactionEntry[]>([]);
   const [txLoading, setTxLoading] = useState(true);
@@ -138,8 +140,8 @@ export default function TransactionsPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-6">
-        <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">Transactions</h1>
-        <p className="mt-1 text-[var(--color-pp-text-muted)]">Your purchase and redemption history.</p>
+        <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">{t("transactions.title")}</h1>
+        <p className="mt-1 text-[var(--color-pp-text-muted)]">{t("transactions.subtitle")}</p>
       </div>
 
       {/* Filter Tabs */}

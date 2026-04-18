@@ -3,6 +3,7 @@
 import { useAuth } from '@/lib/auth';
 import Image from 'next/image';
 import Script from 'next/script';
+import { useTranslation } from '@/i18n';
 import { useEffect, useState, useMemo, useRef, useCallback } from 'react';
 import { assetPath } from '@/lib/assetPath';
 
@@ -72,6 +73,7 @@ function getItemPreview(item: CatalogItem): string {
 type FilterType = 'character' | 'pet' | 'add-on' | 'bundle' | 'outfit';
 
 export default function MarketPage() {
+  const { t } = useTranslation();
   const { isLoggedIn, account, token, login, refreshAccount } = useAuth();
   const [catalog, setCatalog] = useState<CatalogItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -312,8 +314,8 @@ export default function MarketPage() {
 
       {/* Page Header */}
       <div className="mb-8 text-center">
-        <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Marketplace</h1>
-        <p className="text-[var(--color-pp-text-muted)]">Browse characters, pets, outfits, and more for your PixelPlush games.</p>
+        <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">{t("market.title")}</h1>
+        <p className="text-[var(--color-pp-text-muted)]">{t("market.subtitle")}</p>
       </div>
 
       {/* Coin Strip */}

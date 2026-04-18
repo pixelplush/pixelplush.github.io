@@ -6,7 +6,8 @@
     "customize": "My Dressing Room",
     "about": "About Us",
     "credits": "Credits",
-    "troubleshoot": "Troubleshoot"
+    "troubleshoot": "Troubleshoot",
+    "admin": "Admin"
   },
   "header": {
     "by": "By",
@@ -28,8 +29,8 @@
     "heroSubtitle": "Free, interactive, and loved by streamers worldwide"
   },
   "games": {
-    "title": "Games for Streams",
-    "subtitle": "Free interactive overlay games for your Twitch stream",
+    "title": "Games & Overlays",
+    "subtitle": "Free Twitch chat-integrated games and overlays. Add them to OBS as browser sources.",
     "setupGuide": "Setup Guide",
     "howToSetup": "How to Setup",
     "step1Title": "Login with Twitch",
@@ -44,8 +45,8 @@
     "themes": "Themes"
   },
   "market": {
-    "title": "Goodies Market",
-    "subtitle": "Customize your games with unique items",
+    "title": "Marketplace",
+    "subtitle": "Browse characters, pets, outfits, and more for your PixelPlush games.",
     "coins": "Coins",
     "buyCoins": "Buy Coins",
     "noBonus": "No bonus",
@@ -61,8 +62,8 @@
     "categories": "Categories"
   },
   "customize": {
-    "title": "My Dressing Room",
-    "subtitle": "Customize your character across all PixelPlush games",
+    "title": "Dressing Room",
+    "subtitle": "Log in with Twitch to customize your character, equip outfits, and manage your pet.",
     "equipped": "Equipped",
     "equip": "Equip",
     "unequip": "Unequip",
@@ -70,20 +71,20 @@
     "loginRequired": "Log in with Twitch to customize your character"
   },
   "scores": {
-    "title": "Leaderboards",
-    "subtitle": "Top players across all PixelPlush games"
+    "title": "Leaderboard",
+    "subtitle": "View high scores for Parachute Drop across all channels."
   },
   "status": {
     "title": "System Status",
-    "subtitle": "Current status of PixelPlush services"
+    "subtitle": "Current status of PixelPlush services."
   },
   "transactions": {
-    "title": "Shopping History",
-    "subtitle": "Your purchase history"
+    "title": "Transactions",
+    "subtitle": "Your purchase and redemption history."
   },
   "redeem": {
     "title": "Redeem Code",
-    "subtitle": "Enter a code to unlock items",
+    "subtitle": "Log in to redeem a PixelPlush code.",
     "placeholder": "Enter your code",
     "submit": "Redeem"
   },
@@ -98,5 +99,13 @@
     "back": "Back",
     "next": "Next",
     "viewAll": "View All"
+  },
+  "troubleshoot": {
+    "title": "Troubleshoot",
+    "subtitle": "Having issues with your PixelPlush game? Use the tools below to diagnose problems."
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "subtitle": "PixelPlush administration tools"
   }
 }

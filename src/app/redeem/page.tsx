@@ -2,10 +2,12 @@
 
 import { useAuth } from '@/lib/auth';
 import { useState } from 'react';
+import { useTranslation } from '@/i18n';
 
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
 
 export default function RedeemPage() {
+  const { t } = useTranslation();
   const { isLoggedIn, isLoading, token, login } = useAuth();
   const [code, setCode] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
@@ -50,8 +52,8 @@ export default function RedeemPage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
-          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">Redeem Code</h1>
-          <p className="mb-6 text-[var(--color-pp-text-muted)]">Log in to redeem a PixelPlush code.</p>
+          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">{t("redeem.title")}</h1>
+          <p className="mb-6 text-[var(--color-pp-text-muted)]">{t("redeem.subtitle")}</p>
           <button
             onClick={login}
             className="inline-flex items-center gap-2 rounded-lg bg-[#9146FF] px-6 py-3 font-medium text-white transition hover:bg-[#7c3aed]"

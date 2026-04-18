@@ -6,7 +6,8 @@
     "customize": "Soyunma Odam",
     "about": "Hakkımızda",
     "credits": "Katkıda Bulunanlar",
-    "troubleshoot": "Sorun Giderme"
+    "troubleshoot": "Sorun Giderme",
+    "admin": "Yönetim"
   },
   "header": {
     "by": "Yapımcılar",
@@ -28,8 +29,8 @@
     "heroSubtitle": "Ücretsiz, etkileşimli ve dünya çapında yayıncılar tarafından seviliyor"
   },
   "games": {
-    "title": "Yayın Oyunları",
-    "subtitle": "Twitch yayınınız için ücretsiz etkileşimli overlay oyunları",
+    "title": "Oyunlar ve Overlay'ler",
+    "subtitle": "Ücretsiz Twitch sohbet entegreli oyunlar ve overlay'ler. OBS'ye tarayıcı kaynağı olarak ekleyin.",
     "setupGuide": "Kurulum Rehberi",
     "howToSetup": "Nasıl Kurulur",
     "step1Title": "Twitch ile Giriş Yap",
@@ -44,8 +45,8 @@
     "themes": "Temalar"
   },
   "market": {
-    "title": "Hediye Marketi",
-    "subtitle": "Oyunlarınızı benzersiz öğelerle özelleştirin",
+    "title": "Pazar Yeri",
+    "subtitle": "PixelPlush oyunlarınız için karakterlere, evcil hayvanlara, kıyafetlere ve daha fazlasına göz atın.",
     "coins": "Jeton",
     "buyCoins": "Jeton Satın Al",
     "noBonus": "Bonus yok",
@@ -61,8 +62,8 @@
     "categories": "Kategoriler"
   },
   "customize": {
-    "title": "Soyunma Odam",
-    "subtitle": "Tüm PixelPlush oyunlarında karakterinizi özelleştirin",
+    "title": "Soyunma Odası",
+    "subtitle": "Karakterinizi özelleştirmek, kıyafet giymek ve evcil hayvanınızı yönetmek için Twitch ile giriş yapın.",
     "equipped": "Kuşanılmış",
     "equip": "Kuşan",
     "unequip": "Çıkar",
@@ -70,20 +71,20 @@
     "loginRequired": "Karakterinizi özelleştirmek için Twitch ile giriş yapın"
   },
   "scores": {
-    "title": "Skor Tablosu",
-    "subtitle": "Tüm PixelPlush oyunlarındaki en iyi oyuncular"
+    "title": "Sıralama",
+    "subtitle": "Tüm kanallarda Parachute Drop yüksek skorlarını görüntüleyin."
   },
   "status": {
     "title": "Sistem Durumu",
     "subtitle": "PixelPlush hizmetlerinin mevcut durumu"
   },
   "transactions": {
-    "title": "Alışveriş Geçmişi",
-    "subtitle": "Satın alma geçmişiniz"
+    "title": "İşlemler",
+    "subtitle": "Satın alma ve kullanma geçmişiniz."
   },
   "redeem": {
     "title": "Kod Kullan",
-    "subtitle": "Öğelerin kilidini açmak için bir kod girin",
+    "subtitle": "Bir PixelPlush kodu kullanmak için giriş yapın.",
     "placeholder": "Kodunuzu girin",
     "submit": "Kullan"
   },
@@ -98,5 +99,13 @@
     "back": "Geri",
     "next": "İleri",
     "viewAll": "Tümünü Gör"
+  },
+  "troubleshoot": {
+    "title": "Sorun Giderme",
+    "subtitle": "PixelPlush oyununuzla ilgili sorunlarınız mı var? Aşağıdaki araçları kullanın."
+  },
+  "admin": {
+    "title": "Yönetim Paneli",
+    "subtitle": "PixelPlush yönetim araçları"
   }
 }

@@ -3,6 +3,7 @@
 import { useAuth } from '@/lib/auth';
 import Link from 'next/link';
 import { useEffect, useState, useMemo, useCallback, useRef } from 'react';
+import { useTranslation } from '@/i18n';
 
 const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
@@ -373,6 +374,7 @@ function CharacterPreview({
 }
 
 export default function CustomizePage() {
+  const { t } = useTranslation();
   const { isLoggedIn, isLoading, token, account, login, refreshAccount } = useAuth();
   const [catalog, setCatalog] = useState<CatalogItem[]>([]);
   const [catalogLoading, setCatalogLoading] = useState(true);
@@ -506,8 +508,8 @@ export default function CustomizePage() {
     return (
       <div className="mx-auto max-w-lg px-4 py-24 text-center sm:px-6">
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8">
-          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">Dressing Room</h1>
-          <p className="mb-6 text-[var(--color-pp-text-muted)]">Log in with Twitch to customize your character, equip outfits, and manage your pet.</p>
+          <h1 className="mb-3 text-2xl font-bold text-[var(--color-pp-headings)]">{t("customize.title")}</h1>
+          <p className="mb-6 text-[var(--color-pp-text-muted)]">{t("customize.subtitle")}</p>
           <button
             onClick={login}
             className="inline-flex items-center gap-2 rounded-lg bg-[#9146FF] px-6 py-3 font-medium text-white transition hover:bg-[#7c3aed]"
@@ -526,7 +528,7 @@ export default function CustomizePage() {
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">Dressing Room</h1>
+          <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">{t("customize.title")}</h1>
           <p className="mt-1 text-[var(--color-pp-text-muted)]">Select items to use in PixelPlush games.</p>
         </div>
         <div className="flex gap-2">

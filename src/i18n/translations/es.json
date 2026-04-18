@@ -6,7 +6,8 @@
     "customize": "Mi Vestidor",
     "about": "Sobre Nosotros",
     "credits": "Créditos",
-    "troubleshoot": "Solución de Problemas"
+    "troubleshoot": "Solución de Problemas",
+    "admin": "Admin"
   },
   "header": {
     "by": "Por",
@@ -28,8 +29,8 @@
     "heroSubtitle": "Gratis, interactivos y queridos por streamers de todo el mundo"
   },
   "games": {
-    "title": "Juegos para Streams",
-    "subtitle": "Juegos de overlay interactivos y gratuitos para tu stream de Twitch",
+    "title": "Juegos y Overlays",
+    "subtitle": "Juegos y overlays gratuitos integrados con el chat de Twitch. Añádelos a OBS como fuente de navegador.",
     "setupGuide": "Guía de Configuración",
     "howToSetup": "Cómo Configurar",
     "step1Title": "Iniciar sesión con Twitch",
@@ -44,8 +45,8 @@
     "themes": "Temas"
   },
   "market": {
-    "title": "Tienda de Regalos",
-    "subtitle": "Personaliza tus juegos con artículos únicos",
+    "title": "Tienda",
+    "subtitle": "Explora personajes, mascotas, atuendos y más para tus juegos de PixelPlush.",
     "coins": "Monedas",
     "buyCoins": "Comprar Monedas",
     "noBonus": "Sin bono",
@@ -61,8 +62,8 @@
     "categories": "Categorías"
   },
   "customize": {
-    "title": "Mi Vestidor",
-    "subtitle": "Personaliza tu personaje en todos los juegos de PixelPlush",
+    "title": "Vestidor",
+    "subtitle": "Inicia sesión con Twitch para personalizar tu personaje, equipar atuendos y gestionar tu mascota.",
     "equipped": "Equipado",
     "equip": "Equipar",
     "unequip": "Desequipar",
@@ -70,20 +71,20 @@
     "loginRequired": "Inicia sesión con Twitch para personalizar tu personaje"
   },
   "scores": {
-    "title": "Clasificaciones",
-    "subtitle": "Mejores jugadores en todos los juegos de PixelPlush"
+    "title": "Clasificación",
+    "subtitle": "Ver las mejores puntuaciones de Parachute Drop en todos los canales."
   },
   "status": {
     "title": "Estado del Sistema",
     "subtitle": "Estado actual de los servicios de PixelPlush"
   },
   "transactions": {
-    "title": "Historial de Compras",
-    "subtitle": "Tu historial de compras"
+    "title": "Transacciones",
+    "subtitle": "Tu historial de compras y canjes."
   },
   "redeem": {
     "title": "Canjear Código",
-    "subtitle": "Ingresa un código para desbloquear artículos",
+    "subtitle": "Inicia sesión para canjear un código de PixelPlush.",
     "placeholder": "Ingresa tu código",
     "submit": "Canjear"
   },
@@ -98,5 +99,13 @@
     "back": "Atrás",
     "next": "Siguiente",
     "viewAll": "Ver Todo"
+  },
+  "troubleshoot": {
+    "title": "Solución de Problemas",
+    "subtitle": "¿Tienes problemas con tu juego PixelPlush? Usa las herramientas de abajo para diagnosticar."
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "subtitle": "Herramientas de administración de PixelPlush"
   }
 }

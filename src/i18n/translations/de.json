@@ -6,7 +6,8 @@
     "customize": "Meine Umkleide",
     "about": "Über uns",
     "credits": "Mitwirkende",
-    "troubleshoot": "Fehlerbehebung"
+    "troubleshoot": "Fehlerbehebung",
+    "admin": "Admin"
   },
   "header": {
     "by": "Von",
@@ -28,8 +29,8 @@
     "heroSubtitle": "Kostenlos, interaktiv und bei Streamern weltweit beliebt"
   },
   "games": {
-    "title": "Spiele für Streams",
-    "subtitle": "Kostenlose interaktive Overlay-Spiele für deinen Twitch-Stream",
+    "title": "Spiele & Overlays",
+    "subtitle": "Kostenlose Twitch-Chat-integrierte Spiele und Overlays. Füge sie als Browserquellen in OBS hinzu.",
     "setupGuide": "Einrichtungsanleitung",
     "howToSetup": "So richtest du es ein",
     "step1Title": "Mit Twitch anmelden",
@@ -44,8 +45,8 @@
     "themes": "Designs"
   },
   "market": {
-    "title": "Goodies-Markt",
-    "subtitle": "Passe deine Spiele mit einzigartigen Items an",
+    "title": "Marktplatz",
+    "subtitle": "Stöbere nach Charakteren, Haustieren, Outfits und mehr für deine PixelPlush-Spiele.",
     "coins": "Münzen",
     "buyCoins": "Münzen kaufen",
     "noBonus": "Kein Bonus",
@@ -61,8 +62,8 @@
     "categories": "Kategorien"
   },
   "customize": {
-    "title": "Meine Umkleide",
-    "subtitle": "Passe deinen Charakter in allen PixelPlush-Spielen an",
+    "title": "Umkleide",
+    "subtitle": "Melde dich mit Twitch an, um deinen Charakter anzupassen, Outfits auszurüsten und dein Haustier zu verwalten.",
     "equipped": "Ausgerüstet",
     "equip": "Ausrüsten",
     "unequip": "Ablegen",
@@ -70,20 +71,20 @@
     "loginRequired": "Mit Twitch anmelden, um deinen Charakter anzupassen"
   },
   "scores": {
-    "title": "Bestenlisten",
-    "subtitle": "Top-Spieler in allen PixelPlush-Spielen"
+    "title": "Bestenliste",
+    "subtitle": "Highscores für Parachute Drop auf allen Kanälen."
   },
   "status": {
     "title": "Systemstatus",
     "subtitle": "Aktueller Status der PixelPlush-Dienste"
   },
   "transactions": {
-    "title": "Einkaufshistorie",
-    "subtitle": "Deine Kaufhistorie"
+    "title": "Transaktionen",
+    "subtitle": "Deine Kauf- und Einlösungshistorie."
   },
   "redeem": {
     "title": "Code einlösen",
-    "subtitle": "Gib einen Code ein, um Items freizuschalten",
+    "subtitle": "Melde dich an, um einen PixelPlush-Code einzulösen.",
     "placeholder": "Gib deinen Code ein",
     "submit": "Einlösen"
   },
@@ -98,5 +99,13 @@
     "back": "Zurück",
     "next": "Weiter",
     "viewAll": "Alle ansehen"
+  },
+  "troubleshoot": {
+    "title": "Fehlerbehebung",
+    "subtitle": "Probleme mit deinem PixelPlush-Spiel? Nutze die Tools unten zur Diagnose."
+  },
+  "admin": {
+    "title": "Admin-Bereich",
+    "subtitle": "PixelPlush-Verwaltungstools"
   }
 }

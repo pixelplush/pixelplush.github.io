@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
+import { useTranslation } from '@/i18n';
 
 interface DiagResult {
   label: string;
@@ -87,6 +88,7 @@ function validDomain(url: URL): boolean {
 }
 
 export default function TroubleshootPage() {
+  const { t } = useTranslation();
   const [urlInput, setUrlInput] = useState('');
   const [urlResults, setUrlResults] = useState<DiagResult[]>([]);
   const [connResults, setConnResults] = useState<DiagResult[]>([]);
@@ -299,9 +301,9 @@ export default function TroubleshootPage() {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Troubleshoot</h1>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">{t("troubleshoot.title")}</h1>
       <p className="mb-6 text-[var(--color-pp-text-muted)]">
-        Having issues with your PixelPlush game? Use the tools below to diagnose problems.
+        {t("troubleshoot.subtitle")}
       </p>
 
       {/* Section 1: URL Validator */}

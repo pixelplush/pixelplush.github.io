@@ -6,7 +6,8 @@
     "customize": "Moje šatna",
     "about": "O nás",
     "credits": "Přispěvatelé",
-    "troubleshoot": "Řešení problémů"
+    "troubleshoot": "Řešení problémů",
+    "admin": "Admin"
   },
   "header": {
     "by": "Od",
@@ -28,8 +29,8 @@
     "heroSubtitle": "Zdarma, interaktivní a oblíbené streamery po celém světě"
   },
   "games": {
-    "title": "Hry pro streamy",
-    "subtitle": "Bezplatné interaktivní overlay hry pro tvůj Twitch stream",
+    "title": "Hry a Overlaye",
+    "subtitle": "Bezplatné hry a overlaye integrovány s Twitch chatem. Přidej je do OBS jako Browser Source.",
     "setupGuide": "Průvodce nastavením",
     "howToSetup": "Jak nastavit",
     "step1Title": "Přihlásit se přes Twitch",
@@ -44,8 +45,8 @@
     "themes": "Motivy"
   },
   "market": {
-    "title": "Obchod s doplňky",
-    "subtitle": "Přizpůsob si hry unikátními předměty",
+    "title": "Obchod",
+    "subtitle": "Prohlídni si postavy, mazlíčky, oblečení a další pro PixelPlush hry.",
     "coins": "Mince",
     "buyCoins": "Koupit mince",
     "noBonus": "Žádný bonus",
@@ -61,8 +62,8 @@
     "categories": "Kategorie"
   },
   "customize": {
-    "title": "Moje šatna",
-    "subtitle": "Přizpůsob si postavu ve všech PixelPlush hrách",
+    "title": "Šatna",
+    "subtitle": "Přihlaš se přes Twitch, abys mohl/a upravit postavu, nasadit oblečení a spravovat mazlíčka.",
     "equipped": "Nasazeno",
     "equip": "Nasadit",
     "unequip": "Sundat",
@@ -70,20 +71,20 @@
     "loginRequired": "Pro přizpůsobení postavy se přihlas přes Twitch"
   },
   "scores": {
-    "title": "Žebříčky",
-    "subtitle": "Nejlepší hráči ve všech PixelPlush hrách"
+    "title": "Žebříček",
+    "subtitle": "Nejlepší skóre v Parachute Drop na všech kanálech."
   },
   "status": {
     "title": "Stav systému",
     "subtitle": "Aktuální stav služeb PixelPlush"
   },
   "transactions": {
-    "title": "Historie nákupů",
-    "subtitle": "Tvoje historie nákupů"
+    "title": "Transakce",
+    "subtitle": "Tvoje historie nákupů a uplatnění."
   },
   "redeem": {
     "title": "Uplatnit kód",
-    "subtitle": "Zadej kód pro odemknutí předmětů",
+    "subtitle": "Přihlaš se pro uplatnění PixelPlush kódu.",
     "placeholder": "Zadej svůj kód",
     "submit": "Uplatnit"
   },
@@ -98,5 +99,13 @@
     "back": "Zpět",
     "next": "Další",
     "viewAll": "Zobrazit vše"
+  },
+  "troubleshoot": {
+    "title": "Řešení problémů",
+    "subtitle": "Máš problémy s PixelPlush hrou? Použij nástroje níže k diagnostice."
+  },
+  "admin": {
+    "title": "Administrace",
+    "subtitle": "Nástroje pro správu PixelPlush"
   }
 }

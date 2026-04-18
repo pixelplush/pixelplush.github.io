@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslation } from '@/i18n';
 
 const API_URL = 'https://api.pixelplush.dev/v1';
 
@@ -9,6 +10,7 @@ interface LiveSession {
 }
 
 export default function StatusPage() {
+  const { t } = useTranslation();
   const [liveCount, setLiveCount] = useState<number | null>(null);
   const [liveChannels, setLiveChannels] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,8 +34,8 @@ export default function StatusPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">System Status</h1>
-      <p className="mb-8 text-[var(--color-pp-text-muted)]">Current status of PixelPlush services.</p>
+      <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">{t("status.title")}</h1>
+      <p className="mb-8 text-[var(--color-pp-text-muted)]">{t("status.subtitle")}</p>
 
       <div className="grid gap-4 sm:grid-cols-3">
         {/* Overall status */}

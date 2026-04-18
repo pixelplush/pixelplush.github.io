@@ -3,6 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useState, useCallback, useEffect } from 'react';
 import Image from 'next/image';
+import { useTranslation } from '@/i18n';
 import Link from 'next/link';
 import { assetPath } from '@/lib/assetPath';
 import { useAuth } from '@/lib/auth';
@@ -528,6 +529,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
 }
 
 function GamesContent() {
+  const { t } = useTranslation();
   const searchParams = useSearchParams();
   const { account } = useAuth();
   const selectedType = searchParams.get('type');
@@ -615,9 +617,9 @@ function GamesContent() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="mb-8 text-center">
-        <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Games &amp; Overlays</h1>
+        <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">{t("games.title")}</h1>
         <p className="text-[var(--color-pp-text-muted)]">
-          Free Twitch chat-integrated games and overlays. Add them to OBS as browser sources.
+          {t("games.subtitle")}
         </p>
       </div>
 
