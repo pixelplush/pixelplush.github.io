@@ -5,7 +5,7 @@ import { useTranslation } from '@/i18n';
 import Link from 'next/link';
 import { useEffect, useState, useCallback } from 'react';
 
-const ADMIN_USERS = ['instafluff', 'maayainsane'];
+const ADMIN_USERS = ['instafluff', 'maaya'];
 const API_URL = 'https://api.pixelplush.dev/v1';
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
 

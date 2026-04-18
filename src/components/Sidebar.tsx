@@ -6,7 +6,7 @@ import { FeaturedStream } from "@/components/FeaturedStream";
 import { useTranslation } from "@/i18n";
 import { useAuth } from "@/lib/auth";
 
-const ADMIN_USERS = ["instafluff", "maayainsane"];
+const ADMIN_USERS = ["instafluff", "maaya"];
 
 const navItems = [
   {
