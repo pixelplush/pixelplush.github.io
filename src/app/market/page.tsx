@@ -40,8 +40,8 @@ const typeColors: Record<string, string> = {
 };
 
 const coinPackages = [
-  { coins: 22, baseCoins: 20, price: '$4', bonus: '+10%', popular: false },
-  { coins: 46, baseCoins: 40, price: '$8', bonus: '+15%', popular: true },
+  { coins: 25, baseCoins: 25, price: '$5', bonus: '', popular: false },
+  { coins: 55, baseCoins: 50, price: '$10', bonus: '+10%', popular: true },
   { coins: 120, baseCoins: 100, price: '$20', bonus: '+20%', popular: false },
   { coins: 625, baseCoins: 500, price: '$100', bonus: '+25%', popular: false },
 ];
@@ -356,7 +356,11 @@ export default function MarketPage() {
                 <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="" width={20} height={20} className="pixelated" unoptimized />
                 {pkg.coins}
               </div>
-              <div className="mb-2 text-xs font-medium text-amber-600">{pkg.bonus} bonus</div>
+              {pkg.bonus ? (
+                <div className="mb-2 text-xs font-medium text-amber-600">{pkg.bonus} bonus</div>
+              ) : (
+                <div className="mb-2 text-xs text-amber-600/60">No bonus</div>
+              )}
               {isLoggedIn ? (
                 <button
                   onClick={() => setSelectedCoinPkg(pkg)}
@@ -459,56 +463,6 @@ export default function MarketPage() {
         </div>
       )}
 
-      {/* Featured Bundles */}
-      {bundles.length > 0 && (
-        <div className="mb-8">
-          <h2 className="mb-4 text-xl font-bold text-[var(--color-pp-headings)]">Featured Bundles</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {bundles.map((bundle) => {
-              const savings = getBundleSavings(bundle);
-              const itemIds = bundle.items ? bundle.items.split(',').map((id) => id.trim()) : [];
-              const itemNames = itemIds.map((id) => catalogMap.get(id)?.name ?? id).join(', ');
-              return (
-                <div
-                  key={bundle.id}
-                  className="relative rounded-xl border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-50 to-blue-50 p-4"
-                >
-                  <div className="mb-3 flex h-24 items-center justify-center">
-                    <Image src={getItemPreview(bundle)} alt={bundle.name} width={64} height={64} className="pixelated" unoptimized />
-                  </div>
-                  <h3 className="mb-1 text-sm font-bold text-[var(--color-pp-headings)]">{bundle.name}</h3>
-                  {itemIds.length > 0 && (
-                    <p className="mb-2 line-clamp-2 text-xs text-[var(--color-pp-text-muted)]" title={itemNames}>
-                      {itemIds.length} items included
-                    </p>
-                  )}
-                  <div className="flex items-center gap-2">
-                    <span className="flex items-center gap-1 text-sm font-semibold text-[var(--color-pp-headings)]">
-                      <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="" width={16} height={16} className="pixelated" unoptimized />
-                      {bundle.cost}
-                    </span>
-                    {savings > 0 && (
-                      <span className="rounded-full bg-green-500/15 px-2 py-0.5 text-[11px] font-bold text-green-700">
-                        Save {savings}%
-                      </span>
-                    )}
-                  </div>
-                  {isLoggedIn && (
-                    <button
-                      onClick={() => setConfirmItem(bundle)}
-                      disabled={!!buyingItem}
-                      className="mt-3 w-full rounded-lg bg-cyan-600 py-2 text-sm font-semibold text-white transition hover:bg-cyan-700 disabled:opacity-50"
-                    >
-                      {buyingItem === bundle.id ? 'Buying...' : 'Buy Bundle'}
-                    </button>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-
       {/* Search & Filters */}
       <div className="mb-6 flex flex-wrap items-center gap-4">
         <input
@@ -550,13 +504,18 @@ export default function MarketPage() {
         <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5">
           {filteredItems.map((item) => {
             const isOwned = owned.has(item.id);
+            const isBundle = item.type === 'bundle';
+            const savings = isBundle ? getBundleSavings(item) : 0;
+            const bundleItemIds = isBundle && item.items ? item.items.split(',').map((id) => id.trim()) : [];
             return (
               <div
                 key={item.id}
                 className={`group relative rounded-xl border p-3 text-center transition ${
                   isOwned
                     ? 'border-green-500/30 bg-green-500/5'
-                    : 'border-[var(--color-pp-border)] bg-[var(--color-pp-card)] hover:border-[var(--color-pp-accent)]/30'
+                    : isBundle
+                      ? 'border-2 border-cyan-500/30 bg-gradient-to-br from-cyan-50 to-blue-50 hover:border-cyan-500/50'
+                      : 'border-[var(--color-pp-border)] bg-[var(--color-pp-card)] hover:border-[var(--color-pp-accent)]/30'
                 }`}
               >
                 <div className="mb-2 flex h-20 items-center justify-center">
@@ -568,6 +527,9 @@ export default function MarketPage() {
                   {item.type}
                 </span>
                 <h3 className="truncate text-xs font-medium text-[var(--color-pp-headings)]">{item.name}</h3>
+                {isBundle && bundleItemIds.length > 0 && !isOwned && (
+                  <p className="mt-0.5 text-[10px] text-[var(--color-pp-text-muted)]">{bundleItemIds.length} items included</p>
+                )}
                 <div className="mt-1.5">
                   {isOwned ? (
                     <span className="text-xs font-medium text-[var(--color-pp-success)]">Owned</span>
@@ -592,14 +554,23 @@ export default function MarketPage() {
                         ) : (
                           item.cost
                         )}
+                        {isBundle && savings > 0 && (
+                          <span className="ml-1 rounded-full bg-green-500/15 px-1.5 py-0.5 text-[10px] font-bold text-green-700">
+                            Save {savings}%
+                          </span>
+                        )}
                       </span>
                       {isLoggedIn && (
                         <button
                           onClick={() => setConfirmItem(item)}
                           disabled={!!buyingItem}
-                          className="mt-1.5 w-full cursor-pointer rounded-md bg-[var(--color-pp-accent)] py-1 text-[11px] font-medium text-white transition hover:bg-[#4a7de0] disabled:opacity-50"
+                          className={`mt-1.5 w-full cursor-pointer rounded-md py-1 text-[11px] font-medium text-white transition disabled:opacity-50 ${
+                            isBundle
+                              ? 'bg-cyan-600 hover:bg-cyan-700'
+                              : 'bg-[var(--color-pp-accent)] hover:bg-[#4a7de0]'
+                          }`}
                         >
-                          {buyingItem === item.id ? '...' : 'Buy'}
+                          {buyingItem === item.id ? '...' : isBundle ? 'Buy Bundle' : 'Buy'}
                         </button>
                       )}
                     </>
