@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Diagnostics & Troubleshooting</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <p>Paste your OBS Browser Source URL below to check for common issues. Never share your actual URL or OAuth token publicly.</p>
+                    <div class="form-group">
+                        <label>OBS Browser Source URL:</label>
+                        <input type="text" id="url_input" class="form-control" placeholder="https://pixelplush.dev/...&channel=YOUR_CHANNEL&oauth=oauth:..." />
+                    </div>
+                    <button id="btn_verify_url" class="btn btn-primary mt-1"><i class="bx bx-check-shield"></i> Validate URL</button>
+                    <button id="btn_test_connection" class="btn btn-info mt-1"><i class="bx bx-wifi"></i> Test Connection</button>
+                    <button id="btn_generate_report" class="btn btn-secondary mt-1"><i class="bx bx-copy"></i> Generate Support Report</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">1. URL Status</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body" id="url_results">
+                    <p class="text-muted">No URL tested yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">2. Connection Status</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body" id="connection_results">
+                    <p class="text-muted">No connection test run yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">3. Token Health</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body" id="token_results">
+                    <p class="text-muted">No token tested yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">4. Common Issues Checklist</h4>
+            </div>
+            <div class="card-content">
+                <div class="card-body">
+                    <ul class="list-group" id="checklist">
+                        <li class="list-group-item">
+                            <i id="chk_https" class="bx bx-square text-muted"></i> URL is using HTTPS
+                        </li>
+                        <li class="list-group-item">
+                            <i id="chk_channel" class="bx bx-square text-muted"></i> Channel name is in URL
+                        </li>
+                        <li class="list-group-item">
+                            <i id="chk_token" class="bx bx-square text-muted"></i> OAuth token is in URL
+                        </li>
+                        <li class="list-group-item" style="cursor: pointer" onclick="toggleCheck('chk_obs')">
+                            <i id="chk_obs" class="bx bx-square text-muted"></i> OBS is up-to-date (Click to check)
+                        </li>
+                        <li class="list-group-item" style="cursor: pointer" onclick="toggleCheck('chk_dimensions')">
+                            <i id="chk_dimensions" class="bx bx-square text-muted"></i> Source dimensions are at least 800x600 (Click to check)
+                        </li>
+                        <li class="list-group-item" style="cursor: pointer" onclick="toggleCheck('chk_shutdown')">
+                            <i id="chk_shutdown" class="bx bx-square text-muted"></i> "Shutdown source when not visible" is disabled (Click to check)
+                        </li>
+                        <li class="list-group-item" style="cursor: pointer" onclick="toggleCheck('chk_refresh')">
+                            <i id="chk_refresh" class="bx bx-square text-muted"></i> "Refresh browser when scene becomes active" is enabled (Click to check)
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function toggleCheck(id) {
+        const el = document.getElementById(id);
+        if (el.classList.contains("bx-square")) {
+            el.classList.replace("bx-square", "bx-check-square");
+            el.classList.replace("text-muted", "text-success");
+        } else {
+            el.classList.replace("bx-check-square", "bx-square");
+            el.classList.replace("text-success", "text-muted");
+        }
+    }
+</script>
