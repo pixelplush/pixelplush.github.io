@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Sidebar } from "@/components/Sidebar";
 import { Analytics } from "@/components/Analytics";
+import Script from "next/script";
 import { AuthProvider } from "@/lib/auth";
 import { SiteNotices } from "@/components/SiteNotices";
 
@@ -61,6 +62,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <Script id="clarity" strategy="afterInteractive">
+          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","wdlmotp71n");`}
+        </Script>
+      </head>
       <body className={`${fredoka.variable} ${ibm.variable} font-sans antialiased text-[var(--color-pp-text)] bg-[var(--color-pp-bg)] min-h-screen`}>
         <AuthProvider>
           <Analytics />

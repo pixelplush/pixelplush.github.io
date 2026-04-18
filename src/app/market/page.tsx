@@ -597,7 +597,7 @@ export default function MarketPage() {
                         <button
                           onClick={() => setConfirmItem(item)}
                           disabled={!!buyingItem}
-                          className="mt-1.5 w-full rounded-md bg-[var(--color-pp-accent)] py-1 text-[11px] font-medium text-white opacity-0 transition group-hover:opacity-100 disabled:opacity-50"
+                          className="mt-1.5 w-full cursor-pointer rounded-md bg-[var(--color-pp-accent)] py-1 text-[11px] font-medium text-white transition hover:bg-[#4a7de0] disabled:opacity-50"
                         >
                           {buyingItem === item.id ? '...' : 'Buy'}
                         </button>
