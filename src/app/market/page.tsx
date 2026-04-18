@@ -91,6 +91,16 @@ export default function MarketPage() {
   const [notification, setNotification] = useState<{ type: string; message: string } | null>(null);
   const [paypalReady, setPaypalReady] = useState(false);
   const paypalRef = useRef<HTMLDivElement>(null);
+  const pollingRef = useRef<{ timer: ReturnType<typeof setInterval>; timeout: ReturnType<typeof setTimeout> } | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (pollingRef.current) {
+        clearInterval(pollingRef.current.timer);
+        clearTimeout(pollingRef.current.timeout);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     fetch(CATALOG_URL)
@@ -172,10 +182,15 @@ export default function MarketPage() {
       setConfirmItem(null);
       setBuyingItem(item.id);
       const cost = item.sale ? Math.floor(item.cost / 2) : item.cost;
+      if ((account?.coins ?? 0) < cost) {
+        showNotification('error', 'Not enough coins! Visit the coin shop above to get more.');
+        setBuyingItem(null);
+        return;
+      }
       try {
         const result = await fetch(`${API_URL}/shop/buy`, {
           method: 'POST',
-          headers: { Twitch: token },
+          headers: { Twitch: token, 'Content-Type': 'application/json' },
           body: JSON.stringify({ item: item.id }),
         }).then((r) => r.json());
         if (result.error) throw new Error(result.error);
@@ -212,7 +227,7 @@ export default function MarketPage() {
       createOrder: async (_data: any, actions: any) => {
         const res = await fetch(`${API_URL}/paypal/request`, {
           method: 'POST',
-          headers: { Twitch: token },
+          headers: { Twitch: token, 'Content-Type': 'application/json' },
           body: JSON.stringify({ coins: selectedCoinPkg.baseCoins }),
         }).then((r) => r.json());
         if (!res.success) throw new Error('Failed to start PayPal request');
@@ -242,7 +257,7 @@ export default function MarketPage() {
           await actions.order.capture();
           await fetch(`${API_URL}/paypal/waiting`, {
             method: 'POST',
-            headers: { Twitch: token },
+            headers: { Twitch: token, 'Content-Type': 'application/json' },
             body: JSON.stringify({ coins: selectedCoinPkg.baseCoins, transaction: txn.transactionId }),
           });
           // Poll for completion
@@ -252,17 +267,20 @@ export default function MarketPage() {
                 const r = await fetch(`${STATS_URL}/transactions/status?id=${txn.transactionId}`).then((x) => x.json());
                 if (r && r.status !== 'pending') {
                   clearInterval(timer);
+                  clearTimeout(timeout);
                   r.status === 'complete' ? resolve() : reject(new Error(r.error || 'Transaction failed'));
                 }
               } catch {
                 /* keep polling */
               }
             }, 5000);
-            setTimeout(() => {
+            const timeout = setTimeout(() => {
               clearInterval(timer);
               reject(new Error('Transaction timed out'));
             }, 120000);
+            pollingRef.current = { timer, timeout };
           });
+          pollingRef.current = null;
           await refreshAccount();
           setSelectedCoinPkg(null);
           showNotification('success', `You got ${selectedCoinPkg.coins} Plush Coins!`);

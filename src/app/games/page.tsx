@@ -314,8 +314,10 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
     setSettingsState((prev) => ({ ...prev, [id]: value }));
   };
 
+  const isThemeLocked = theme?.premium && theme.requires && (!isLoggedIn || !account?.owned?.includes(theme.requires));
+
   const generateUrl = useCallback(() => {
-    if (!channelName.trim() || !theme) return '';
+    if (!channelName.trim() || !theme || isThemeLocked) return '';
     const base = `https://www.pixelplush.dev${theme.page}`;
     const params = new URLSearchParams();
     params.set('channel', channelName.trim().toLowerCase());
@@ -334,7 +336,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
       }
     }
     return `${base}?${params.toString()}`;
-  }, [channelName, theme, token, game.settings, settingsState, selectedTheme]);
+  }, [channelName, theme, isThemeLocked, token, game.settings, settingsState, selectedTheme]);
 
   const url = generateUrl();
 
@@ -484,7 +486,12 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
         )}
 
         {/* Generated URL */}
-        {channelName.trim() && (
+        {channelName.trim() && isThemeLocked && (
+          <div className="rounded-lg border border-amber-300/50 bg-amber-50/50 p-3 text-center text-sm text-amber-800 dark:border-amber-700/30 dark:bg-amber-950/20 dark:text-amber-300">
+            🔒 Unlock this theme to get your browser source URL.
+          </div>
+        )}
+        {channelName.trim() && !isThemeLocked && (
           <div>
             <label className="mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]">Browser Source URL</label>
             <div className="flex gap-2">
@@ -501,6 +508,7 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
                 {copied ? 'Copied!' : 'Copy'}
               </button>
             </div>
+            <p className="mt-1.5 text-[11px] text-[var(--color-pp-text-muted)]">⚠️ This URL contains your auth token. Don&apos;t share it publicly.</p>
           </div>
         )}
 
