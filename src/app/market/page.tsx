@@ -213,6 +213,67 @@ export default function MarketPage() {
     [token, buyingItem, account, cheapestUnownedCost, refreshAccount, showNotification]
   );
 
+  // Handle Stripe Checkout
+  const handleStripeCheckout = useCallback(async () => {
+    if (!selectedCoinPkg || !token) return;
+    setCoinProcessing(true);
+    try {
+      const res = await fetch(`${API_URL}/stripe/checkout`, {
+        method: 'POST',
+        headers: { Twitch: token, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ coins: selectedCoinPkg.baseCoins, returnUrl: window.location.origin + '/v2/market/' }),
+      }).then((r) => r.json());
+      if (!res.success) throw new Error(res.error || 'Failed to start Stripe checkout');
+      window.location.href = res.url;
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Stripe checkout failed';
+      showNotification('error', message);
+      setCoinProcessing(false);
+    }
+  }, [selectedCoinPkg, token, showNotification]);
+
+  // Handle Stripe redirect return
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const stripeResult = params.get('stripe');
+    const txnId = params.get('txn');
+    if (stripeResult === 'success' && txnId && token) {
+      setCoinProcessing(true);
+      const timer = setInterval(async () => {
+        try {
+          const r = await fetch(`${STATS_URL}/transactions/status?id=${txnId}`).then((x) => x.json());
+          if (r && r.status !== 'pending') {
+            clearInterval(timer);
+            clearTimeout(timeout);
+            setCoinProcessing(false);
+            if (r.status === 'complete') {
+              refreshAccount();
+              showNotification('success', 'Plush Coins purchased successfully!');
+            } else {
+              showNotification('error', r.error || 'Transaction failed');
+            }
+            window.history.replaceState({}, '', window.location.pathname);
+          }
+        } catch {
+          /* keep polling */
+        }
+      }, 5000);
+      const timeout = setTimeout(() => {
+        clearInterval(timer);
+        setCoinProcessing(false);
+        showNotification('error', 'Transaction timed out. Contact support if charged.');
+        window.history.replaceState({}, '', window.location.pathname);
+      }, 120000);
+      return () => {
+        clearInterval(timer);
+        clearTimeout(timeout);
+      };
+    } else if (stripeResult === 'cancel') {
+      showNotification('error', 'Payment was cancelled');
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+  }, [token, refreshAccount, showNotification]);
+
   // Render PayPal buttons when the coin purchase modal opens
   useEffect(() => {
     if (!selectedCoinPkg || !paypalRef.current || !paypalReady || !token) return;
@@ -375,11 +436,11 @@ export default function MarketPage() {
           ))}
         </div>
         <p className="mt-3 text-center text-xs text-amber-700/70">
-          Powered by PayPal · Secure checkout · Coins are non-refundable
+          Secure checkout via Stripe or PayPal · Coins are non-refundable
         </p>
       </div>
 
-      {/* PayPal Modal */}
+      {/* Coin Purchase Modal */}
       {selectedCoinPkg && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => !coinProcessing && setSelectedCoinPkg(null)}>
           <div className="mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
@@ -389,7 +450,7 @@ export default function MarketPage() {
                 {selectedCoinPkg.coins} Plush Coins
               </div>
               <p className="text-[var(--color-pp-text-muted)]">
-                {selectedCoinPkg.coins} coins ({selectedCoinPkg.bonus} bonus) for {selectedCoinPkg.price}
+                {selectedCoinPkg.coins} coins{selectedCoinPkg.bonus ? ` (${selectedCoinPkg.bonus} bonus)` : ''} for {selectedCoinPkg.price}
               </p>
             </div>
             {coinProcessing ? (
@@ -398,7 +459,20 @@ export default function MarketPage() {
                 <p className="text-sm text-[var(--color-pp-text-muted)]">Processing your purchase...</p>
               </div>
             ) : (
-              <div ref={paypalRef} className="min-h-[50px]" />
+              <div className="space-y-4">
+                <button
+                  onClick={handleStripeCheckout}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-[#635BFF] py-3 text-sm font-semibold text-white transition hover:bg-[#5347E5]"
+                >
+                  💳 Pay with Card
+                </button>
+                <div className="flex items-center gap-3">
+                  <div className="h-px flex-1 bg-[var(--color-pp-border)]" />
+                  <span className="text-xs text-[var(--color-pp-text-muted)]">or</span>
+                  <div className="h-px flex-1 bg-[var(--color-pp-border)]" />
+                </div>
+                <div ref={paypalRef} className="min-h-[50px]" />
+              </div>
             )}
             {!coinProcessing && (
               <button
