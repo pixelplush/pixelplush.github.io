@@ -387,39 +387,6 @@
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4 class="card-title"><i class="bx bx-help-circle"></i> Quick Troubleshooter — What's Wrong?</h4>
-                                            </div>
-                                            <div class="card-content">
-                                                <div class="card-body">
-                                                    <p>Select the issue you're experiencing:</p>
-                                                    <div class="btn-group-vertical w-100" id="quick_troubleshoot">
-                                                        <button class="btn btn-outline-primary text-left mb-1" onclick="showTip('nothing')">
-                                                            <i class="bx bx-x-circle"></i> Nothing shows up at all in OBS
-                                                        </button>
-                                                        <button class="btn btn-outline-primary text-left mb-1" onclick="showTip('no_chat')">
-                                                            <i class="bx bx-message-x"></i> Game shows but doesn't respond to chat
-                                                        </button>
-                                                        <button class="btn btn-outline-primary text-left mb-1" onclick="showTip('no_points')">
-                                                            <i class="bx bx-coin"></i> Channel point rewards don't work
-                                                        </button>
-                                                        <button class="btn btn-outline-primary text-left mb-1" onclick="showTip('frozen')">
-                                                            <i class="bx bx-pause-circle"></i> Game freezes or stops working after a while
-                                                        </button>
-                                                        <button class="btn btn-outline-primary text-left mb-1" onclick="showTip('flicker')">
-                                                            <i class="bx bx-loader-circle"></i> Screen flickers or flashes
-                                                        </button>
-                                                    </div>
-                                                    <div id="tip_result" class="mt-2" style="display:none;"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-header">
                                                 <h4 class="card-title">1. URL Status</h4>
                                             </div>
                                             <div class="card-content">
@@ -450,11 +417,10 @@
                                     <div class="col-12">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h4 class="card-title">3. Token Health (URL Token Only)</h4>
+                                                <h4 class="card-title">3. Token Health</h4>
                                             </div>
                                             <div class="card-content">
                                                 <div class="card-body" id="token_results">
-                                                    <p class="text-muted font-small-3"><i class="bx bx-info-circle"></i> This checks the token in your pasted URL. Your OBS browser source may have a newer auto-refreshed token that's working fine.</p>
                                                     <p class="text-muted">No token tested yet.</p>
                                                 </div>
                                             </div>
@@ -608,72 +574,6 @@
             } else {
                 el.classList.add("bx-x-circle", "text-danger");
             }
-        }
-        
-        function showTip(issue) {
-            let tip = "";
-            switch(issue) {
-                case "nothing":
-                    tip = `<div class="alert alert-info">
-                        <h5><i class="bx bx-wrench"></i> Nothing Shows Up</h5>
-                        <ol>
-                            <li><strong>Check the URL</strong> — paste it below and click "Validate URL" to make sure it's correct.</li>
-                            <li><strong>Check OBS source dimensions</strong> — set Width to at least 800 and Height to at least 600.</li>
-                            <li><strong>Disable "Shutdown source when not visible"</strong> — right-click the source → Properties → uncheck this option.</li>
-                            <li><strong>Try refreshing</strong> — right-click the source → Refresh.</li>
-                            <li><strong>Check your internet connection</strong> — the game needs to reach pixelplush.dev. Click "Test Connection" below.</li>
-                        </ol>
-                    </div>`;
-                    break;
-                case "no_chat":
-                    tip = `<div class="alert alert-info">
-                        <h5><i class="bx bx-message-x"></i> Game Doesn't Respond to Chat</h5>
-                        <ol>
-                            <li><strong>Check the channel name</strong> — make sure your Twitch channel name is correct in the URL (the &channel= parameter).</li>
-                            <li><strong>Wait 10-15 seconds</strong> — it takes a moment for the game to connect to Twitch chat after loading.</li>
-                            <li><strong>Try the !play command</strong> — most games start with !play, !join, or typing in chat.</li>
-                            <li><strong>Don't worry about "token expired" below</strong> — the game auto-refreshes tokens. Chat commands work even without a token. Tokens are only needed for channel point rewards.</li>
-                            <li><strong>Right-click source → Refresh</strong> in OBS to force reconnect.</li>
-                        </ol>
-                    </div>`;
-                    break;
-                case "no_points":
-                    tip = `<div class="alert alert-info">
-                        <h5><i class="bx bx-coin"></i> Channel Point Rewards Don't Work</h5>
-                        <ol>
-                            <li><strong>Token IS needed for this</strong> — unlike chat commands, channel point rewards require a valid OAuth token.</li>
-                            <li><strong>Check if the game auto-refreshed the token</strong> — if the game loads and chat works, the token likely refreshed automatically. Try redeeming a reward to test.</li>
-                            <li><strong>If rewards still don't work</strong>, generate a fresh link at <a href="https://pixelplush.dev/customize" target="_blank">pixelplush.dev/customize</a>.</li>
-                            <li><strong>Make sure you have Affiliate/Partner status</strong> — channel points are only available for Twitch Affiliates and Partners.</li>
-                            <li><strong>Check for duplicate rewards</strong> — if you see duplicate reward names on your channel, delete the old ones from your Twitch dashboard.</li>
-                        </ol>
-                    </div>`;
-                    break;
-                case "frozen":
-                    tip = `<div class="alert alert-info">
-                        <h5><i class="bx bx-pause-circle"></i> Game Freezes or Stops</h5>
-                        <ol>
-                            <li><strong>Enable "Refresh browser when scene becomes active"</strong> — right-click the source → Properties → check this option.</li>
-                            <li><strong>Disable "Shutdown source when not visible"</strong> — this can cause the game to stop when you switch scenes.</li>
-                            <li><strong>Check OBS resource usage</strong> — if your CPU/GPU is maxed, the browser source may lag or freeze.</li>
-                            <li><strong>Right-click source → Refresh</strong> to restart the game.</li>
-                            <li><strong>Try restarting OBS</strong> — sometimes the browser source cache gets stuck.</li>
-                        </ol>
-                    </div>`;
-                    break;
-                case "flicker":
-                    tip = `<div class="alert alert-info">
-                        <h5><i class="bx bx-loader-circle"></i> Screen Flickers</h5>
-                        <ol>
-                            <li><strong>Update OBS</strong> — older versions had a known <a href="https://github.com/obsproject/obs-studio/issues/6010" target="_blank">browser source flicker bug</a>.</li>
-                            <li><strong>Use a single theme</strong> — multi-theme rotation can sometimes cause flickers on older OBS versions.</li>
-                            <li><strong>Try hardware acceleration</strong> — in OBS Settings → Advanced → check/uncheck "Enable Browser Source Hardware Acceleration" and restart OBS.</li>
-                        </ol>
-                    </div>`;
-                    break;
-            }
-            document.getElementById("tip_result").innerHTML = tip;
-            document.getElementById("tip_result").style.display = "block";
         }
         
         async function validateUrl(urlStr) {
@@ -830,14 +730,9 @@
                 
                 let data = await res.json();
                 if(res.ok && data.client_id) {
-                    let isExpiringSoon = data.expires_in && data.expires_in < (7 * 86400);
                     let expiresStr = data.expires_in ? `${Math.round(data.expires_in / 86400)} days` : "Unknown";
-                    let tokenStatusClass = isExpiringSoon ? "list-group-item-warning" : "list-group-item-success";
-                    let tokenStatusIcon = isExpiringSoon ? "bx-error" : "bx-check";
-                    let tokenStatusText = isExpiringSoon ? `Token Valid (Expires in ${expiresStr})` : "Token Valid";
-                    
                     let resultsHtml = `<ul class="list-group">
-                        <li class="list-group-item ${tokenStatusClass}"><i class="bx ${tokenStatusIcon}"></i> ${tokenStatusText}</li>
+                        <li class="list-group-item list-group-item-success"><i class="bx bx-check"></i> Token Valid</li>
                         <li class="list-group-item list-group-item-info"><i class="bx bx-user"></i> Associated User: ${data.login}</li>
                         <li class="list-group-item list-group-item-info"><i class="bx bx-time"></i> Expires In: ${expiresStr}</li>
                         <li class="list-group-item list-group-item-info"><i class="bx bx-list-ul"></i> Scopes: ${(data.scopes || []).join(", ") || "None"}</li>
@@ -845,14 +740,9 @@
                     $("#token_results").html(resultsHtml);
                     reportData.tokenHealth = "Valid";
                 } else {
-                    $("#token_results").html(`<div class="alert alert-warning text-dark">
-                        <h5 class="alert-heading"><i class="bx bx-info-circle"></i> URL Token Needs Refresh (Usually OK)</h5>
-                        <p>This is normal! PixelPlush games automatically refresh tokens in the background. The token in your URL may be old, but OBS likely has a newer working token stored locally.</p>
-                        <hr>
-                        <p class="mb-0"><strong>Advice:</strong> If your game IS responding to chat commands, the token is fine — no action needed. If it's NOT responding, try generating a new link from <a href="https://pixelplush.dev/customize" target="_blank" class="text-primary font-weight-bold">pixelplush.dev/customize</a>.</p>
-                    </div>`);
+                    $("#token_results").html(`<div class="alert alert-danger bg-danger text-white"><i class="bx bx-x"></i> Token is Invalid or Expired</div>`);
                     reportData.tokenHealth = "Invalid";
-                    reportData.issues.push("URL token expired (game may have auto-refreshed — likely OK)");
+                    reportData.issues.push("OAuth token is invalid or expired");
                 }
             } catch(e) {
                 $("#token_results").html(`<div class="alert alert-danger bg-danger text-white"><i class="bx bx-x"></i> Failed to validate token</div>`);

@@ -384,13 +384,13 @@
                                                                                 <button class="btn btn-warning" type="button" id="buy-btn-25" onclick="showCoinBuy(25, 5)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x25</small><br/><small class="text-warning">No Bonus</small><br/><strong>$5</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-3">
-                                                                                <button class="btn btn-danger" type="button" id="buy-btn-55" onclick="showCoinBuy(55, 10)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x55</small><br/><small class="text-secondary">+10%</small><br/><strong>$10</strong></button>
+                                                                                <button class="btn btn-danger" type="button" id="buy-btn-55" onclick="showCoinBuy(50, 10)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x50</small><br/><small class="text-secondary">+5 Bonus</small><br/><strong>$10</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-3">
-                                                                                <button class="btn btn-success" type="button" id="buy-btn-120" onclick="showCoinBuy(120, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x120</small><br/><small class="text-secondary">+20%</small><br/><strong>$20</strong></button>
+                                                                                <button class="btn btn-success" type="button" id="buy-btn-120" onclick="showCoinBuy(100, 20)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x100</small><br/><small class="text-secondary">+20 Bonus</small><br/><strong>$20</strong></button>
                                                                             </div>
                                                                             <div class="col-sm-3 col-3">
-                                                                                <button class="btn btn-info" type="button" id="buy-btn-625" onclick="showCoinBuy(625, 100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x625</small><br/><small class="text-secondary">+25%</small><br/><strong>$100</strong></button>
+                                                                                <button class="btn btn-info" type="button" id="buy-btn-625" onclick="showCoinBuy(500, 100)"><small><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> x500</small><br/><small class="text-secondary">+125 Bonus</small><br/><strong>$100</strong></button>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -1181,17 +1181,17 @@
             orderAmount = coins;
             let bonusCoins = 0;
             if( coins >= 500 ) {
-                bonusCoins = 125; // 25% more coins
+                bonusCoins = 125;
             }
             else if( coins >= 100 ) {
-                bonusCoins = 20; // 20% more coins
+                bonusCoins = 20;
             }
             else if( coins >= 50 ) {
-                bonusCoins = 5; // 10% more coins
+                bonusCoins = 5;
             }
-            $("#coin-buy-amount").text( coins );
+            $("#coin-buy-amount").text( coins + bonusCoins );
             if( bonusCoins > 0 ) {
-                $("#coin-buy-text").text( `${coins} Plush Coins + ${bonusCoins} Bonus Coins for ${amount}! Exciting!` );
+                $("#coin-buy-text").text( `${coins} + ${bonusCoins} Bonus Plush Coins for ${amount}! Exciting!` );
             }
             else {
                 $("#coin-buy-text").text( `${coins} Plush Coins for ${amount}! Exciting!` );

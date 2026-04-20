@@ -651,17 +651,17 @@ function showCoinBuy( coins, amount ) {
     orderAmount = coins;
     let bonusCoins = 0;
     if( coins >= 500 ) {
-        bonusCoins = 125; // 25% more coins
+        bonusCoins = 125;
     }
     else if( coins >= 100 ) {
-        bonusCoins = 20; // 20% more coins
+        bonusCoins = 20;
     }
     else if( coins >= 50 ) {
-        bonusCoins = 5; // 10% more coins
+        bonusCoins = 5;
     }
-    $("#coin-buy-amount").text( coins );
+    $("#coin-buy-amount").text( coins + bonusCoins );
     if( bonusCoins > 0 ) {
-        $("#coin-buy-text").text( `${coins} Plush Coins + ${bonusCoins} Bonus Coins for $${amount}! Exciting!` );
+        $("#coin-buy-text").text( `${coins} + ${bonusCoins} Bonus Plush Coins for $${amount}! Exciting!` );
     }
     else {
         $("#coin-buy-text").text( `${coins} Plush Coins for $${amount}! Exciting!` );

@@ -41,10 +41,10 @@ const typeColors: Record<string, string> = {
 };
 
 const coinPackages = [
-  { coins: 25, baseCoins: 25, price: '$5', bonus: '', popular: false },
-  { coins: 55, baseCoins: 50, price: '$10', bonus: '+10%', popular: true },
-  { coins: 120, baseCoins: 100, price: '$20', bonus: '+20%', popular: false },
-  { coins: 625, baseCoins: 500, price: '$100', bonus: '+25%', popular: false },
+  { coins: 25, baseCoins: 25, price: '$5', bonus: '', bonusCoins: 0, popular: false },
+  { coins: 55, baseCoins: 50, price: '$10', bonus: '+5 Bonus', bonusCoins: 5, popular: true },
+  { coins: 120, baseCoins: 100, price: '$20', bonus: '+20 Bonus', bonusCoins: 20, popular: false },
+  { coins: 625, baseCoins: 500, price: '$100', bonus: '+125 Bonus', bonusCoins: 125, popular: false },
 ];
 
 function getItemPreview(item: CatalogItem): string {
@@ -417,10 +417,10 @@ export default function MarketPage() {
               <div className="text-sm text-amber-700">{pkg.price}</div>
               <div className="my-1 flex items-center justify-center gap-1 text-xl font-bold text-amber-900">
                 <Image src={assetPath('/app-assets/images/icon/plush_coin.gif')} alt="" width={20} height={20} className="pixelated" unoptimized />
-                {pkg.coins}
+                {pkg.baseCoins}
               </div>
-              {pkg.bonus ? (
-                <div className="mb-2 text-xs font-medium text-amber-600">{pkg.bonus} {t('market.bonus')}</div>
+              {pkg.bonusCoins > 0 ? (
+                <div className="mb-2 text-xs font-medium text-amber-600">+{pkg.bonusCoins} {t('market.bonus')}</div>
               ) : (
                 <div className="mb-2 text-xs text-amber-600/60">{t('market.noBonus')}</div>
               )}
@@ -450,7 +450,9 @@ export default function MarketPage() {
                 {selectedCoinPkg.coins} {t('market.plushCoins')}
               </div>
               <p className="text-[var(--color-pp-text-muted)]">
-                {selectedCoinPkg.coins} {t('market.coinsUnit')}{selectedCoinPkg.bonus ? ` (${selectedCoinPkg.bonus} ${t('market.bonus')})` : ''} — {selectedCoinPkg.price}
+                {selectedCoinPkg.bonusCoins > 0
+                  ? `${selectedCoinPkg.baseCoins} + ${selectedCoinPkg.bonusCoins} ${t('market.bonus')} ${t('market.coinsUnit')}`
+                  : `${selectedCoinPkg.coins} ${t('market.coinsUnit')}`} — {selectedCoinPkg.price}
               </p>
             </div>
             {coinProcessing ? (
