@@ -34,7 +34,26 @@
     "getCharacters": "Hol dir Charaktere & Haustiere!",
     "getCharactersDesc": "Hol dir besondere Charaktere und Haustiere für PixelPlush-Spiele!",
     "visitMarket": "Zum Goodies-Markt",
-    "whatsNew": "Was gibt's Neues"
+    "whatsNew": "Was gibt's Neues",
+    "news": {
+      "badges": {
+        "update": "Update",
+        "event": "Event",
+        "newContent": "Neuer Inhalt"
+      },
+      "newWebsite": {
+        "title": "Neues Website-Design",
+        "body": "Wir haben eine brandneue Website gelauncht! Stöbere nach Spielen, passe deinen Charakter an und shoppe Goodies — alles an einem Ort."
+      },
+      "easterEvent": {
+        "title": "Oster-Event kommt bald",
+        "body": "Mach dich bereit für unser Oster-Event mit speziellen Spieldesigns und neuen Items!"
+      },
+      "parachuteThemes": {
+        "title": "Neue Parachute-Designs",
+        "body": "Schau dir die neuen Valentinstag- und Poolparty-Designs für Parachute Drop an!"
+      }
+    }
   },
   "games": {
     "title": "Spiele & Overlays",
@@ -129,6 +148,15 @@
     "active": "AKTIV",
     "queued": "WARTET",
     "noItemsInCategory": "Keine Items in dieser Kategorie.",
+    "categories": {
+      "character": "Charaktere",
+      "pet": "Haustiere",
+      "body": "Körper",
+      "equipment": "Ausrüstung",
+      "accessory": "Zubehör",
+      "outfit": "Outfits",
+      "effect": "Effekte"
+    },
     "visitMarketHelp": "Besuche den",
     "marketplace": "Marktplatz",
     "toGetSome": "um welche zu bekommen!"
@@ -150,7 +178,20 @@
     "noScores": "Keine Punkte für diesen Kanal und Zeitraum gefunden",
     "player": "Spieler",
     "score": "Punkte",
-    "date": "Datum"
+    "date": "Datum",
+    "themeNames": {
+      "pixelparachutespring": "Pixel Parachute (Frühlingsblüten)",
+      "pixelparachuteeaster": "Pixel Parachute (Ostern)",
+      "pixelparachuteday": "Pixel Parachute (Tag)",
+      "pixelparachutenight": "Pixel Parachute (Nacht)",
+      "pixelparachuteretro": "Pixel Parachute (Retro)",
+      "pixelparachutepoolred": "Pixel Parachute (Poolparty, Rot)",
+      "pixelparachutepoolblue": "Pixel Parachute (Poolparty, Blau)",
+      "pixelparachuteautumn": "Pixel Parachute (Herbst)",
+      "pixelparachutehalloween": "Pixel Parachute (Halloween)",
+      "pixelparachutechristmas": "Pixel Parachute (Weihnachten)",
+      "pixelparachutewinter": "Pixel Parachute (Winter)"
+    }
   },
   "status": {
     "title": "Systemstatus",
@@ -180,7 +221,9 @@
     "dateCol": "Datum",
     "typeCol": "Typ",
     "descCol": "Beschreibung",
-    "amountCol": "Betrag"
+    "amountCol": "Betrag",
+    "coinPurchaseFallback": "Münzkauf",
+    "itemRedeemedFallback": "Item eingelöst"
   },
   "redeem": {
     "title": "Code einlösen",
@@ -197,6 +240,20 @@
     "twitchButton": "Mit Twitch anmelden",
     "helloFrom": "Hallo von"
   },
+  "redirect": {
+    "loggingIn": "Du wirst angemeldet...",
+    "pleaseWait": "Bitte warte, während wir dein Twitch-Konto verifizieren."
+  },
+  "sidebar": {
+    "liveStream": "Live-Stream"
+  },
+  "notices": {
+    "dismiss": "Hinweis schließen",
+    "new-website-2026": {
+      "message": "Willkommen auf der neuen PixelPlush-Website! Wir arbeiten noch an einigen Funktionen.",
+      "linkText": "Mehr erfahren"
+    }
+  },
   "common": {
     "loading": "Laden...",
     "error": "Etwas ist schiefgelaufen",
@@ -211,7 +268,8 @@
     "loginWithTwitch": "Mit Twitch anmelden",
     "goHome": "Zur Startseite",
     "accessDenied": "Zugriff verweigert",
-    "or": "oder"
+    "or": "oder",
+    "and": "und"
   },
   "troubleshoot": {
     "title": "Fehlerbehebung",
@@ -234,7 +292,82 @@
     "stillStuck": "Immer noch Probleme? Tritt unserem Discord bei oder schreibe uns an support@pixelplush.dev",
     "setupChecklist": "3. Einrichtungs-Checkliste",
     "setupChecklistDesc": "Die ersten 3 Punkte werden automatisch geprüft, wenn du eine URL validierst. Klicke die restlichen, um sie manuell zu bestätigen.",
-    "auto": "(auto)"
+    "auto": "(auto)",
+    "issues": {
+      "nothing": {
+        "title": "Es wird nichts angezeigt",
+        "tip1": "Stelle sicher, dass die URL korrekt ist — kopiere sie frisch von der Spiele-Seite.",
+        "tip2": "Setze die OBS-Browserquellen-Abmessungen auf mindestens 1920×1080.",
+        "tip3": "Deaktiviere \"Quelle herunterfahren, wenn nicht sichtbar\" in OBS.",
+        "tip4": "Rechtsklick auf die Quelle → Aktualisieren, oder Sichtbarkeit aus-/einschalten.",
+        "tip5": "Probiere den Verbindungstest oben, um sicherzustellen, dass die Server erreichbar sind."
+      },
+      "chat": {
+        "title": "Spiel reagiert nicht auf Chat",
+        "tip1": "Stelle sicher, dass die URL deinen Kanalnamen enthält (z.B. ?channel=deinkanal).",
+        "tip2": "Warte 10–15 Sekunden nach dem Laden — das Spiel braucht einen Moment, um sich zu verbinden.",
+        "tip3": "Versuche !play oder !join in deinem Chat einzugeben.",
+        "tip4": "Tokens werden automatisch erneuert — wenn der Chat nach einer Minute immer noch nicht funktioniert, generiere den Link neu."
+      },
+      "channelpoints": {
+        "title": "Kanalpunkte-Belohnungen funktionieren nicht",
+        "tip1": "Für Kanalpunkte wird ein OAuth-Token benötigt — stelle sicher, dass die URL einen enthält.",
+        "tip2": "Tokens erneuern sich automatisch — falls veraltet, generiere den Link auf der Spiele-Seite neu.",
+        "tip3": "Du musst Twitch-Affiliate oder -Partner sein, um Kanalpunkte-Belohnungen zu nutzen.",
+        "tip4": "Prüfe, ob du doppelte Belohnungen mit dem gleichen Namen erstellt hast.",
+        "tip5": "Stelle sicher, dass das Spiel-Overlay in OBS geladen ist, wenn du testest."
+      },
+      "freeze": {
+        "title": "Spiel friert ein oder stoppt",
+        "tip1": "Aktiviere \"Browser aktualisieren, wenn Szene aktiv wird\" in den OBS-Browserquellen-Einstellungen.",
+        "tip2": "Deaktiviere \"Quelle herunterfahren, wenn nicht sichtbar\" — das beendet das Spiel beim Szenenwechsel.",
+        "tip3": "Prüfe die CPU/GPU-Auslastung — wenn OBS überlastet ist, kann die Browserquelle laggen.",
+        "tip4": "Rechtsklick auf die Quelle → Aktualisieren, um sie neu zu starten."
+      },
+      "flicker": {
+        "title": "Bildschirm flackert",
+        "tip1": "Aktualisiere OBS auf die neueste Version.",
+        "tip2": "Verwende ein einzelnes Design (wechsle nicht schnell zwischen Designs).",
+        "tip3": "Deaktiviere \"Benutzerdefinierte Bildrate verwenden\" in den Browserquellen-Einstellungen.",
+        "tip4": "Versuche, die Hardwarebeschleunigung in OBS zu deaktivieren: Einstellungen → Erweitert → \"Browser-Source-Hardwarebeschleunigung aktivieren\" deaktivieren."
+      },
+      "confetti": {
+        "title": "Konfetti/Overlay erscheint nicht",
+        "tip1": "Konfetti ist passiv — es wird erst durch eine Kanalpunkte-Einlösung ausgelöst.",
+        "tip2": "Teste es, indem du !confetti 10 im Chat eingibst (wenn Chat-Befehle aktiviert sind).",
+        "tip3": "Für Kanalpunkte-Auslöser wird ein OAuth-Token benötigt — prüfe die URL.",
+        "tip4": "Stelle sicher, dass cpConfetti=true in der URL steht.",
+        "tip5": "Versuche !resetconfetti, um hängende Effekte zu löschen."
+      }
+    },
+    "checklist": {
+      "https": "URL verwendet HTTPS",
+      "channel": "Kanalname ist in der URL",
+      "oauth": "OAuth-Token ist in der URL",
+      "obsUpdate": "OBS ist auf dem neuesten Stand",
+      "dimensions": "Browserquelle ist mindestens 800×600",
+      "shutdown": "\"Quelle herunterfahren, wenn nicht sichtbar\" ist deaktiviert",
+      "refresh": "\"Browser aktualisieren, wenn Szene aktiv wird\" ist aktiviert"
+    },
+    "diag": {
+      "domain": "Domain",
+      "domainPass": "Gültige PixelPlush-Domain: {0}",
+      "domainFail": "Unbekannte Domain \"{0}\". Erwartet: pixelplush.dev.",
+      "https": "HTTPS",
+      "httpsPass": "Sichere HTTPS-Verbindung wird verwendet.",
+      "httpsFail": "Kein HTTPS. Einige Funktionen funktionieren möglicherweise nicht.",
+      "channel": "Kanal",
+      "channelPass": "Kanal: {0}",
+      "channelFail": "Kein \"channel\"-Parameter gefunden. Das Spiel weiß nicht, mit welchem Chat es sich verbinden soll.",
+      "oauthToken": "OAuth-Token",
+      "oauthPass": "Token gefunden ({0}...).",
+      "oauthFail": "Kein OAuth-Token. Channel Points und einige Funktionen erfordern einen Token. Spiele erneuern Tokens automatisch, wenn möglich.",
+      "gameTheme": "Spiel/Design",
+      "gameThemeInfo": "Pfad: /{0}",
+      "confettiDetected": "Konfetti erkannt",
+      "confettiInfo": "Das sieht nach einer Konfetti-/Overlay-URL aus. Hinweis: Es wird nichts angezeigt, bis es ausgelöst wird.",
+      "urlFormatFail": "Ungültige URL. Stelle sicher, dass du die vollständige URL inklusive https:// kopiert hast."
+    }
   },
   "admin": {
     "title": "Admin-Bereich",

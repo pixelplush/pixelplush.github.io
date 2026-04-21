@@ -125,7 +125,7 @@ export default function HomePage() {
           >
             Maaya
           </a>{" "}
-          (Art) and{" "}
+          {t('home.artLabel')} {t('common.and')}{" "}
           <a
             href="https://twitch.tv/instafluff"
             target="_blank"
@@ -134,7 +134,7 @@ export default function HomePage() {
           >
             Instafluff
           </a>{" "}
-          (Code)
+          {t('home.codeLabel')}
         </p>
       </div>
 
@@ -189,39 +189,39 @@ export default function HomePage() {
           {[
             {
               date: '2026-03-29',
-              title: 'New Website Design',
-              body: "We've launched a brand new website! Browse games, customize your character, and shop goodies all in one place.",
-              badge: 'Update',
+              titleKey: 'home.news.newWebsite.title',
+              bodyKey: 'home.news.newWebsite.body',
+              badgeKey: 'home.news.badges.update',
               badgeColor: 'bg-[var(--color-pp-accent)] text-white',
             },
             {
               date: '2026-03-15',
-              title: 'Easter Event Coming Soon',
-              body: 'Get ready for our Easter event with special themed games and new items!',
-              badge: 'Event',
+              titleKey: 'home.news.easterEvent.title',
+              bodyKey: 'home.news.easterEvent.body',
+              badgeKey: 'home.news.badges.event',
               badgeColor: 'bg-[var(--color-pp-warning)] text-white',
             },
             {
               date: '2026-02-01',
-              title: 'New Parachute Themes',
-              body: 'Check out the new Valentines and Pool Party themes for Parachute Drop!',
-              badge: 'New Content',
+              titleKey: 'home.news.parachuteThemes.title',
+              bodyKey: 'home.news.parachuteThemes.body',
+              badgeKey: 'home.news.badges.newContent',
               badgeColor: 'bg-[var(--color-pp-success)] text-white',
             },
           ].map((item) => (
             <div
-              key={item.date + item.title}
+              key={item.date + item.titleKey}
               className="flex gap-4 items-start border-l-3 border-[var(--color-pp-warning)] pl-4 py-1"
             >
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 mb-1 flex-wrap">
                   <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${item.badgeColor}`}>
-                    {item.badge}
+                    {t(item.badgeKey)}
                   </span>
                   <span className="text-xs text-[var(--color-pp-text-muted)]">{item.date}</span>
                 </div>
-                <h4 className="text-sm font-semibold mb-0.5">{item.title}</h4>
-                <p className="text-sm text-[var(--color-pp-text-muted)] leading-snug">{item.body}</p>
+                <h4 className="text-sm font-semibold mb-0.5">{t(item.titleKey)}</h4>
+                <p className="text-sm text-[var(--color-pp-text-muted)] leading-snug">{t(item.bodyKey)}</p>
               </div>
             </div>
           ))}

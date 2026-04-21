@@ -16,71 +16,8 @@ interface ChecklistItem {
   checked: boolean;
 }
 
-const quickIssues: { id: string; title: string; tips: string[] }[] = [
-  {
-    id: 'nothing',
-    title: 'Nothing shows up',
-    tips: [
-      'Make sure the URL is correct — copy it fresh from the Games page.',
-      'Set OBS browser source dimensions to at least 1920×1080.',
-      'Disable "Shutdown source when not visible" in OBS.',
-      'Right-click the source → Refresh, or toggle visibility off/on.',
-      'Try the connection tester above to make sure servers are reachable.',
-    ],
-  },
-  {
-    id: 'chat',
-    title: "Game doesn't respond to chat",
-    tips: [
-      'Make sure the URL includes your channel name (e.g., ?channel=yourchannel).',
-      'Wait 10–15 seconds after loading — the game needs a moment to connect.',
-      'Try typing !play or !join in your chat.',
-      'Tokens auto-refresh — if chat still doesn\'t work after a minute, regenerate the link.',
-    ],
-  },
-  {
-    id: 'channelpoints',
-    title: "Channel point rewards don't work",
-    tips: [
-      'An OAuth token IS needed for channel points — make sure the URL has one.',
-      'Tokens auto-refresh — but if stale, regenerate the link from the Games page.',
-      'You must be a Twitch Affiliate or Partner for channel point rewards.',
-      'Check that you haven\'t created duplicate rewards with the same name.',
-      'Make sure the game overlay is loaded in OBS when testing.',
-    ],
-  },
-  {
-    id: 'freeze',
-    title: 'Game freezes or stops',
-    tips: [
-      'Enable "Refresh browser when scene becomes active" in OBS browser source settings.',
-      'Disable "Shutdown source when not visible" — this kills the game when switching scenes.',
-      'Check CPU/GPU usage — if OBS is struggling, the browser source may lag.',
-      'Right-click the source → Refresh to restart it.',
-    ],
-  },
-  {
-    id: 'flicker',
-    title: 'Screen flickers',
-    tips: [
-      'Update OBS to the latest version.',
-      'Use a single theme (don\'t rotate themes rapidly).',
-      'Toggle "Use custom frame rate" off in browser source settings.',
-      'Try disabling hardware acceleration in OBS: Settings → Advanced → uncheck "Enable Browser Source Hardware Acceleration".',
-    ],
-  },
-  {
-    id: 'confetti',
-    title: "Confetti/overlay doesn't appear",
-    tips: [
-      'Confetti is passive — it doesn\'t show until triggered by a channel point redemption.',
-      'Test it by typing !confetti 10 in chat (if chat commands are enabled).',
-      'OAuth token is needed for channel point triggers — check the URL.',
-      'Make sure cpConfetti=true is in the URL for confetti functionality.',
-      'Try !resetconfetti to clear stuck effects.',
-    ],
-  },
-];
+const quickIssueIds = ['nothing', 'chat', 'channelpoints', 'freeze', 'flicker', 'confetti'] as const;
+const tipCounts: Record<string, number> = { nothing: 5, chat: 4, channelpoints: 5, freeze: 4, flicker: 4, confetti: 5 };
 
 function validDomain(url: URL): boolean {
   const host = url.hostname.toLowerCase();
@@ -97,13 +34,13 @@ export default function TroubleshootPage() {
   const [tokenRunning, setTokenRunning] = useState(false);
   const [expandedIssue, setExpandedIssue] = useState<string | null>(null);
   const [checklist, setChecklist] = useState<ChecklistItem[]>([
-    { id: 'https', label: 'URL is using HTTPS', auto: true, checked: false },
-    { id: 'channel', label: 'Channel name is in URL', auto: true, checked: false },
-    { id: 'oauth', label: 'OAuth token is in URL', auto: true, checked: false },
-    { id: 'obs-update', label: 'OBS is up-to-date', checked: false },
-    { id: 'dimensions', label: 'Browser source is at least 800×600', checked: false },
-    { id: 'shutdown', label: '"Shutdown source when not visible" is disabled', checked: false },
-    { id: 'refresh', label: '"Refresh browser when scene becomes active" is enabled', checked: false },
+    { id: 'https', label: 'checklist.https', auto: true, checked: false },
+    { id: 'channel', label: 'checklist.channel', auto: true, checked: false },
+    { id: 'oauth', label: 'checklist.oauth', auto: true, checked: false },
+    { id: 'obs-update', label: 'checklist.obsUpdate', checked: false },
+    { id: 'dimensions', label: 'checklist.dimensions', checked: false },
+    { id: 'shutdown', label: 'checklist.shutdown', checked: false },
+    { id: 'refresh', label: 'checklist.refresh', checked: false },
   ]);
   const [reportCopied, setReportCopied] = useState(false);
 
@@ -119,44 +56,44 @@ export default function TroubleshootPage() {
 
       // Domain check
       if (validDomain(url)) {
-        diag.push({ label: 'Domain', status: 'pass', detail: `Valid PixelPlush domain: ${url.hostname}` });
+        diag.push({ label: t('troubleshoot.diag.domain'), status: 'pass', detail: t('troubleshoot.diag.domainPass').replace('{0}', url.hostname) });
       } else {
-        diag.push({ label: 'Domain', status: 'fail', detail: `Unknown domain "${url.hostname}". Expected pixelplush.dev.` });
+        diag.push({ label: t('troubleshoot.diag.domain'), status: 'fail', detail: t('troubleshoot.diag.domainFail').replace('{0}', url.hostname) });
       }
 
       // HTTPS
       if (url.protocol === 'https:') {
-        diag.push({ label: 'HTTPS', status: 'pass', detail: 'Using secure HTTPS connection.' });
+        diag.push({ label: t('troubleshoot.diag.https'), status: 'pass', detail: t('troubleshoot.diag.httpsPass') });
         updateCheck('https', true);
       } else {
-        diag.push({ label: 'HTTPS', status: 'warn', detail: 'Not using HTTPS. Some features may not work.' });
+        diag.push({ label: t('troubleshoot.diag.https'), status: 'warn', detail: t('troubleshoot.diag.httpsFail') });
         updateCheck('https', false);
       }
 
       // Channel param
       const channel = url.searchParams.get('channel');
       if (channel) {
-        diag.push({ label: 'Channel', status: 'pass', detail: `Channel: ${channel}` });
+        diag.push({ label: t('troubleshoot.diag.channel'), status: 'pass', detail: t('troubleshoot.diag.channelPass').replace('{0}', channel) });
         updateCheck('channel', true);
       } else {
-        diag.push({ label: 'Channel', status: 'fail', detail: 'No "channel" parameter found. The game won\'t know which chat to connect to.' });
+        diag.push({ label: t('troubleshoot.diag.channel'), status: 'fail', detail: t('troubleshoot.diag.channelFail') });
         updateCheck('channel', false);
       }
 
       // OAuth / token
       const oauth = url.searchParams.get('oauth') || url.searchParams.get('token') || url.searchParams.get('twitch');
       if (oauth) {
-        diag.push({ label: 'OAuth Token', status: 'pass', detail: `Token found (${oauth.slice(0, 8)}...).` });
+        diag.push({ label: t('troubleshoot.diag.oauthToken'), status: 'pass', detail: t('troubleshoot.diag.oauthPass').replace('{0}', oauth.slice(0, 8)) });
         updateCheck('oauth', true);
       } else {
-        diag.push({ label: 'OAuth Token', status: 'warn', detail: 'No OAuth token. Channel Points and some features require a token. Games will auto-refresh tokens when possible.' });
+        diag.push({ label: t('troubleshoot.diag.oauthToken'), status: 'warn', detail: t('troubleshoot.diag.oauthFail') });
         updateCheck('oauth', false);
       }
 
       // Theme info
       const pathParts = url.pathname.split('/').filter(Boolean);
       if (pathParts.length >= 2) {
-        diag.push({ label: 'Game/Theme', status: 'info', detail: `Path: /${pathParts.join('/')}` });
+        diag.push({ label: t('troubleshoot.diag.gameTheme'), status: 'info', detail: t('troubleshoot.diag.gameThemeInfo').replace('{0}', pathParts.join('/')) });
       }
 
       // Detect confetti-specific
@@ -164,10 +101,10 @@ export default function TroubleshootPage() {
         url.searchParams.has('cpConfetti') || url.searchParams.has('cpBubbles') ||
         url.searchParams.has('cpBalloons') || url.searchParams.has('cpHearts');
       if (isConfetti) {
-        diag.push({ label: 'Confetti Detected', status: 'info', detail: 'This looks like a Confetti/overlay URL. Remember: it won\'t show anything until triggered.' });
+        diag.push({ label: t('troubleshoot.diag.confettiDetected'), status: 'info', detail: t('troubleshoot.diag.confettiInfo') });
       }
     } catch {
-      diag.push({ label: 'URL Format', status: 'fail', detail: 'Invalid URL. Make sure you copied the full URL including https://' });
+      diag.push({ label: 'URL Format', status: 'fail', detail: t('troubleshoot.diag.urlFormatFail') });
     }
 
     setUrlResults(diag);
@@ -393,7 +330,7 @@ export default function TroubleshootPage() {
                 ✓
               </span>
               <span className={`${item.checked ? 'text-[var(--color-pp-text)]' : 'text-[var(--color-pp-text-muted)]'}`}>
-                {item.label}
+                {t(`troubleshoot.${item.label}`)}
                 {item.auto && <span className="ml-1 text-[10px] text-[var(--color-pp-text-muted)]">{t('troubleshoot.auto')}</span>}
               </span>
             </button>
@@ -406,22 +343,22 @@ export default function TroubleshootPage() {
         <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">{t("troubleshoot.commonIssues")}</h2>
         <p className="mb-3 text-sm text-[var(--color-pp-text-muted)]">{t("troubleshoot.commonIssuesDesc")}</p>
         <div className="space-y-2">
-          {quickIssues.map((issue) => (
-            <div key={issue.id}>
+          {quickIssueIds.map((id) => (
+            <div key={id}>
               <button
-                onClick={() => setExpandedIssue(expandedIssue === issue.id ? null : issue.id)}
+                onClick={() => setExpandedIssue(expandedIssue === id ? null : id)}
                 className="flex w-full items-center justify-between rounded-lg bg-[var(--color-pp-bg)]/50 px-4 py-3 text-left text-sm font-medium text-[var(--color-pp-text)] transition hover:bg-[var(--color-pp-card-hover)]"
               >
-                {issue.title}
-                <span className="text-[var(--color-pp-text-muted)]">{expandedIssue === issue.id ? '−' : '+'}</span>
+                {t(`troubleshoot.issues.${id}.title`)}
+                <span className="text-[var(--color-pp-text-muted)]">{expandedIssue === id ? '−' : '+'}</span>
               </button>
-              {expandedIssue === issue.id && (
+              {expandedIssue === id && (
                 <div className="mt-1 rounded-lg bg-[var(--color-pp-bg)]/30 px-4 py-3">
                   <ul className="space-y-1.5 text-sm text-[var(--color-pp-text-muted)]">
-                    {issue.tips.map((tip, i) => (
+                    {Array.from({ length: tipCounts[id] }).map((_, i) => (
                       <li key={i} className="flex gap-2">
                         <span className="mt-1 shrink-0 text-[var(--color-pp-accent)]">•</span>
-                        {tip}
+                        {t(`troubleshoot.issues.${id}.tip${i + 1}`)}
                       </li>
                     ))}
                   </ul>

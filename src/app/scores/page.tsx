@@ -124,7 +124,7 @@ function ScoresContent() {
           >
             {Object.entries(gameThemeNames).map(([key, name]) => (
               <option key={key} value={key}>
-                {name || t('scores.allThemes')}
+                {name ? t(`scores.themeNames.${key}`) : t('scores.allThemes')}
               </option>
             ))}
           </select>

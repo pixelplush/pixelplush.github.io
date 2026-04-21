@@ -34,7 +34,26 @@
     "getCharacters": "Get Characters & Pets!",
     "getCharactersDesc": "Get special characters and pets to use in PixelPlush games!",
     "visitMarket": "Visit the Goodies Market",
-    "whatsNew": "What's New"
+    "whatsNew": "What's New",
+    "news": {
+      "badges": {
+        "update": "Update",
+        "event": "Event",
+        "newContent": "New Content"
+      },
+      "newWebsite": {
+        "title": "New Website Design",
+        "body": "We've launched a brand new website! Browse games, customize your character, and shop goodies all in one place."
+      },
+      "easterEvent": {
+        "title": "Easter Event Coming Soon",
+        "body": "Get ready for our Easter event with special themed games and new items!"
+      },
+      "parachuteThemes": {
+        "title": "New Parachute Themes",
+        "body": "Check out the new Valentines and Pool Party themes for Parachute Drop!"
+      }
+    }
   },
   "games": {
     "title": "Games & Overlays",
@@ -129,6 +148,15 @@
     "active": "ACTIVE",
     "queued": "QUEUED",
     "noItemsInCategory": "No items in this category.",
+    "categories": {
+      "character": "Characters",
+      "pet": "Pets",
+      "body": "Body",
+      "equipment": "Equipment",
+      "accessory": "Accessories",
+      "outfit": "Outfits",
+      "effect": "Effects"
+    },
     "visitMarketHelp": "Visit the",
     "marketplace": "marketplace",
     "toGetSome": "to get some!"
@@ -150,7 +178,20 @@
     "noScores": "No scores found for this channel and time range",
     "player": "Player",
     "score": "Score",
-    "date": "Date"
+    "date": "Date",
+    "themeNames": {
+      "pixelparachutespring": "Pixel Parachute (Spring Blossoms)",
+      "pixelparachuteeaster": "Pixel Parachute (Easter)",
+      "pixelparachuteday": "Pixel Parachute (Day)",
+      "pixelparachutenight": "Pixel Parachute (Night)",
+      "pixelparachuteretro": "Pixel Parachute (Retro)",
+      "pixelparachutepoolred": "Pixel Parachute (Pool Party, Red)",
+      "pixelparachutepoolblue": "Pixel Parachute (Pool Party, Blue)",
+      "pixelparachuteautumn": "Pixel Parachute (Autumn)",
+      "pixelparachutehalloween": "Pixel Parachute (Halloween)",
+      "pixelparachutechristmas": "Pixel Parachute (Christmas)",
+      "pixelparachutewinter": "Pixel Parachute (Winter)"
+    }
   },
   "status": {
     "title": "System Status",
@@ -180,7 +221,9 @@
     "dateCol": "Date",
     "typeCol": "Type",
     "descCol": "Description",
-    "amountCol": "Amount"
+    "amountCol": "Amount",
+    "coinPurchaseFallback": "Coin Purchase",
+    "itemRedeemedFallback": "Item Redeemed"
   },
   "redeem": {
     "title": "Redeem Code",
@@ -197,6 +240,20 @@
     "twitchButton": "Log in with Twitch",
     "helloFrom": "Hello from"
   },
+  "redirect": {
+    "loggingIn": "Logging you in...",
+    "pleaseWait": "Please wait while we verify your Twitch account."
+  },
+  "sidebar": {
+    "liveStream": "Live Stream"
+  },
+  "notices": {
+    "dismiss": "Dismiss notice",
+    "new-website-2026": {
+      "message": "Welcome to the new PixelPlush website! We're still working on some features.",
+      "linkText": "Learn more"
+    }
+  },
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",
@@ -211,7 +268,8 @@
     "loginWithTwitch": "Log in with Twitch",
     "goHome": "Go Home",
     "accessDenied": "Access Denied",
-    "or": "or"
+    "or": "or",
+    "and": "and"
   },
   "troubleshoot": {
     "title": "Troubleshoot",
@@ -234,7 +292,82 @@
     "stillStuck": "Still stuck? Join our Discord or email us at support@pixelplush.dev",
     "setupChecklist": "3. Setup Checklist",
     "setupChecklistDesc": "First 3 items auto-check when you validate a URL. Click the rest to confirm manually.",
-    "auto": "(auto)"
+    "auto": "(auto)",
+    "issues": {
+      "nothing": {
+        "title": "Nothing shows up",
+        "tip1": "Make sure the URL is correct — copy it fresh from the Games page.",
+        "tip2": "Set OBS browser source dimensions to at least 1920×1080.",
+        "tip3": "Disable \"Shutdown source when not visible\" in OBS.",
+        "tip4": "Right-click the source → Refresh, or toggle visibility off/on.",
+        "tip5": "Try the connection tester above to make sure servers are reachable."
+      },
+      "chat": {
+        "title": "Game doesn't respond to chat",
+        "tip1": "Make sure the URL includes your channel name (e.g., ?channel=yourchannel).",
+        "tip2": "Wait 10–15 seconds after loading — the game needs a moment to connect.",
+        "tip3": "Try typing !play or !join in your chat.",
+        "tip4": "Tokens auto-refresh — if chat still doesn't work after a minute, regenerate the link."
+      },
+      "channelpoints": {
+        "title": "Channel point rewards don't work",
+        "tip1": "An OAuth token IS needed for channel points — make sure the URL has one.",
+        "tip2": "Tokens auto-refresh — but if stale, regenerate the link from the Games page.",
+        "tip3": "You must be a Twitch Affiliate or Partner for channel point rewards.",
+        "tip4": "Check that you haven't created duplicate rewards with the same name.",
+        "tip5": "Make sure the game overlay is loaded in OBS when testing."
+      },
+      "freeze": {
+        "title": "Game freezes or stops",
+        "tip1": "Enable \"Refresh browser when scene becomes active\" in OBS browser source settings.",
+        "tip2": "Disable \"Shutdown source when not visible\" — this kills the game when switching scenes.",
+        "tip3": "Check CPU/GPU usage — if OBS is struggling, the browser source may lag.",
+        "tip4": "Right-click the source → Refresh to restart it."
+      },
+      "flicker": {
+        "title": "Screen flickers",
+        "tip1": "Update OBS to the latest version.",
+        "tip2": "Use a single theme (don't rotate themes rapidly).",
+        "tip3": "Toggle \"Use custom frame rate\" off in browser source settings.",
+        "tip4": "Try disabling hardware acceleration in OBS: Settings → Advanced → uncheck \"Enable Browser Source Hardware Acceleration\"."
+      },
+      "confetti": {
+        "title": "Confetti/overlay doesn't appear",
+        "tip1": "Confetti is passive — it doesn't show until triggered by a channel point redemption.",
+        "tip2": "Test it by typing !confetti 10 in chat (if chat commands are enabled).",
+        "tip3": "OAuth token is needed for channel point triggers — check the URL.",
+        "tip4": "Make sure cpConfetti=true is in the URL for confetti functionality.",
+        "tip5": "Try !resetconfetti to clear stuck effects."
+      }
+    },
+    "checklist": {
+      "https": "URL is using HTTPS",
+      "channel": "Channel name is in URL",
+      "oauth": "OAuth token is in URL",
+      "obsUpdate": "OBS is up-to-date",
+      "dimensions": "Browser source is at least 800×600",
+      "shutdown": "\"Shutdown source when not visible\" is disabled",
+      "refresh": "\"Refresh browser when scene becomes active\" is enabled"
+    },
+    "diag": {
+      "domain": "Domain",
+      "domainPass": "Valid PixelPlush domain: {0}",
+      "domainFail": "Unknown domain \"{0}\". Expected pixelplush.dev.",
+      "https": "HTTPS",
+      "httpsPass": "Using secure HTTPS connection.",
+      "httpsFail": "Not using HTTPS. Some features may not work.",
+      "channel": "Channel",
+      "channelPass": "Channel: {0}",
+      "channelFail": "No \"channel\" parameter found. The game won't know which chat to connect to.",
+      "oauthToken": "OAuth Token",
+      "oauthPass": "Token found ({0}...).",
+      "oauthFail": "No OAuth token. Channel Points and some features require a token. Games will auto-refresh tokens when possible.",
+      "gameTheme": "Game/Theme",
+      "gameThemeInfo": "Path: /{0}",
+      "confettiDetected": "Confetti Detected",
+      "confettiInfo": "This looks like a Confetti/overlay URL. Remember: it won't show anything until triggered.",
+      "urlFormatFail": "Invalid URL. Make sure you copied the full URL including https://"
+    }
   },
   "admin": {
     "title": "Admin Panel",

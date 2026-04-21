@@ -38,13 +38,13 @@ const typeColors: Record<string, string> = {
 };
 
 const categories = [
-  { key: 'character', label: 'Characters' },
-  { key: 'pet', label: 'Pets' },
-  { key: 'body', label: 'Body' },
-  { key: 'equipment', label: 'Equipment' },
-  { key: 'accessory', label: 'Accessories' },
-  { key: 'outfit', label: 'Outfits' },
-  { key: 'effect', label: 'Effects' },
+  { key: 'character' },
+  { key: 'pet' },
+  { key: 'body' },
+  { key: 'equipment' },
+  { key: 'accessory' },
+  { key: 'outfit' },
+  { key: 'effect' },
 ] as const;
 
 // Layer compositing order matching in-game PIXI z-ordering
@@ -602,7 +602,7 @@ export default function CustomizePage() {
                         : 'bg-[var(--color-pp-bg)]/50 text-[var(--color-pp-text)] hover:bg-[var(--color-pp-card-hover)]'
                     }`}
                   >
-                    {cat.label}
+                    {t(`customize.categories.${cat.key}`)}
                   </button>
                 ))}
               </div>

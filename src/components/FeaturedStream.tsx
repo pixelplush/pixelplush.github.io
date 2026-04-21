@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslation } from "@/i18n";
 
 export function FeaturedStream() {
   const [channel, setChannel] = useState<string | null>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     async function fetchLiveStreams() {
@@ -47,7 +49,7 @@ export function FeaturedStream() {
     <div>
       <h3 className="mb-2 text-sm font-semibold text-[var(--color-pp-headings)] flex items-center gap-2">
         <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-red-500" />
-        Live Stream
+        {t('sidebar.liveStream')}
       </h3>
       <div className="overflow-hidden rounded border border-[var(--color-pp-border)]">
         <div className="aspect-video">

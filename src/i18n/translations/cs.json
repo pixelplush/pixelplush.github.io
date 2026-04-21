@@ -34,7 +34,26 @@
     "getCharacters": "Získej postavy a mazlíčky!",
     "getCharactersDesc": "Získej speciální postavy a mazlíčky pro PixelPlush hry!",
     "visitMarket": "Navštiv obchod s doplňky",
-    "whatsNew": "Co je nového"
+    "whatsNew": "Co je nového",
+    "news": {
+      "badges": {
+        "update": "Aktualizace",
+        "event": "Událost",
+        "newContent": "Nový obsah"
+      },
+      "newWebsite": {
+        "title": "Nový design webu",
+        "body": "Spustili jsme úplně nový web! Prohlédni si hry, uprav si postavu a nakupuj doplňky — vše na jednom místě."
+      },
+      "easterEvent": {
+        "title": "Velikonoční event se blíží",
+        "body": "Připrav se na náš velikonoční event se speciálními motivy her a novými předměty!"
+      },
+      "parachuteThemes": {
+        "title": "Nové motivy Parachute",
+        "body": "Koukni na nové valentýnské a bazénové motivy pro Parachute Drop!"
+      }
+    }
   },
   "games": {
     "title": "Hry a Overlaye",
@@ -129,6 +148,15 @@
     "active": "AKTIVNÍ",
     "queued": "VE FRONTĚ",
     "noItemsInCategory": "Žádné předměty v této kategorii.",
+    "categories": {
+      "character": "Postavy",
+      "pet": "Mazlíčci",
+      "body": "Tělo",
+      "equipment": "Vybavení",
+      "accessory": "Doplňky",
+      "outfit": "Oblečení",
+      "effect": "Efekty"
+    },
     "visitMarketHelp": "Navštiv",
     "marketplace": "obchod",
     "toGetSome": "a pořiď si nějaké!"
@@ -150,7 +178,20 @@
     "noScores": "Žádné skóre pro tento kanál a období",
     "player": "Hráč",
     "score": "Skóre",
-    "date": "Datum"
+    "date": "Datum",
+    "themeNames": {
+      "pixelparachutespring": "Pixel Parachute (Jarní květy)",
+      "pixelparachuteeaster": "Pixel Parachute (Velikonoce)",
+      "pixelparachuteday": "Pixel Parachute (Den)",
+      "pixelparachutenight": "Pixel Parachute (Noc)",
+      "pixelparachuteretro": "Pixel Parachute (Retro)",
+      "pixelparachutepoolred": "Pixel Parachute (Bazénová párty, červená)",
+      "pixelparachutepoolblue": "Pixel Parachute (Bazénová párty, modrá)",
+      "pixelparachuteautumn": "Pixel Parachute (Podzim)",
+      "pixelparachutehalloween": "Pixel Parachute (Halloween)",
+      "pixelparachutechristmas": "Pixel Parachute (Vánoce)",
+      "pixelparachutewinter": "Pixel Parachute (Zima)"
+    }
   },
   "status": {
     "title": "Stav systému",
@@ -180,7 +221,9 @@
     "dateCol": "Datum",
     "typeCol": "Typ",
     "descCol": "Popis",
-    "amountCol": "Částka"
+    "amountCol": "Částka",
+    "coinPurchaseFallback": "Nákup mincí",
+    "itemRedeemedFallback": "Předmět uplatněn"
   },
   "redeem": {
     "title": "Uplatnit kód",
@@ -197,6 +240,20 @@
     "twitchButton": "Přihlásit se přes Twitch",
     "helloFrom": "Ahoj od"
   },
+  "redirect": {
+    "loggingIn": "Přihlašujeme tě...",
+    "pleaseWait": "Počkej prosím, než ověříme tvůj Twitch účet."
+  },
+  "sidebar": {
+    "liveStream": "Živý přenos"
+  },
+  "notices": {
+    "dismiss": "Zavřít oznámení",
+    "new-website-2026": {
+      "message": "Vítej na nové stránce PixelPlush! Stále pracujeme na některých funkcích.",
+      "linkText": "Zjistit více"
+    }
+  },
   "common": {
     "loading": "Načítání...",
     "error": "Něco se pokazilo",
@@ -211,7 +268,8 @@
     "loginWithTwitch": "Přihlásit se přes Twitch",
     "goHome": "Domů",
     "accessDenied": "Přístup odepřen",
-    "or": "nebo"
+    "or": "nebo",
+    "and": "a"
   },
   "troubleshoot": {
     "title": "Řešení problémů",
@@ -234,7 +292,82 @@
     "stillStuck": "Stále problémy? Přidej se na Discord nebo napiš na support@pixelplush.dev",
     "setupChecklist": "3. Kontrolní seznam nastavení",
     "setupChecklistDesc": "První 3 položky se automaticky zkontrolují při validaci URL. Klikni na ostatní pro manuální potvrzení.",
-    "auto": "(auto)"
+    "auto": "(auto)",
+    "issues": {
+      "nothing": {
+        "title": "Nic se nezobrazuje",
+        "tip1": "Zkontroluj, zda je URL správná — zkopíruj ji znovu ze stránky Her.",
+        "tip2": "Nastav rozměry Browser Source v OBS na minimálně 1920×1080.",
+        "tip3": "Vypni \"Vypnout zdroj, když není viditelný\" v OBS.",
+        "tip4": "Klikni pravým na zdroj → Obnovit, nebo přepni viditelnost.",
+        "tip5": "Vyzkoušej test připojení výše a ověř, že jsou servery dostupné."
+      },
+      "chat": {
+        "title": "Hra nereaguje na chat",
+        "tip1": "Zkontroluj, zda URL obsahuje název kanálu (např. ?channel=tvujkanal).",
+        "tip2": "Počkej 10–15 sekund po načtení — hra potřebuje chvíli na připojení.",
+        "tip3": "Zkus napsat !play nebo !join do chatu.",
+        "tip4": "Tokeny se automaticky obnovují — pokud chat stále nefunguje po minutě, vygeneruj odkaz znovu."
+      },
+      "channelpoints": {
+        "title": "Odměny za kanálové body nefungují",
+        "tip1": "Pro kanálové body je potřeba OAuth token — zkontroluj, zda ho URL obsahuje.",
+        "tip2": "Tokeny se obnovují automaticky — pokud jsou zastaralé, vygeneruj odkaz na stránce Her znovu.",
+        "tip3": "Pro odměny za kanálové body musíš být Twitch Affiliate nebo Partner.",
+        "tip4": "Zkontroluj, zda jsi nevytvořil/a duplicitní odměny se stejným názvem.",
+        "tip5": "Ujisti se, že overlay hry je načtený v OBS, když testuješ."
+      },
+      "freeze": {
+        "title": "Hra zamrzne nebo se zastaví",
+        "tip1": "Zapni \"Obnovit prohlížeč při aktivaci scény\" v nastavení Browser Source v OBS.",
+        "tip2": "Vypni \"Vypnout zdroj, když není viditelný\" — to ukončí hru při přepínání scén.",
+        "tip3": "Zkontroluj vytížení CPU/GPU — pokud je OBS přetížený, Browser Source může lagovat.",
+        "tip4": "Klikni pravým na zdroj → Obnovit pro restart."
+      },
+      "flicker": {
+        "title": "Obrazovka bliká",
+        "tip1": "Aktualizuj OBS na nejnovější verzi.",
+        "tip2": "Používej jeden motiv (nepřepínej motivy rychle).",
+        "tip3": "Vypni \"Použít vlastní snímkovou frekvenci\" v nastavení Browser Source.",
+        "tip4": "Zkus vypnout hardwarovou akceleraci v OBS: Nastavení → Pokročilé → odškrtni \"Povolit hardwarovou akceleraci Browser Source\"."
+      },
+      "confetti": {
+        "title": "Konfetti/overlay se nezobrazuje",
+        "tip1": "Konfetti je pasivní — zobrazí se až po uplatnění kanálových bodů.",
+        "tip2": "Otestuj to napsáním !confetti 10 do chatu (pokud jsou chatové příkazy povoleny).",
+        "tip3": "Pro spouštění přes kanálové body je potřeba OAuth token — zkontroluj URL.",
+        "tip4": "Ujisti se, že cpConfetti=true je v URL pro funkci konfetti.",
+        "tip5": "Zkus !resetconfetti pro vyčištění zaseknutých efektů."
+      }
+    },
+    "checklist": {
+      "https": "URL používá HTTPS",
+      "channel": "Název kanálu je v URL",
+      "oauth": "OAuth token je v URL",
+      "obsUpdate": "OBS je aktuální",
+      "dimensions": "Browser Source má alespoň 800×600",
+      "shutdown": "\"Vypnout zdroj, když není viditelný\" je vypnuto",
+      "refresh": "\"Obnovit prohlížeč při aktivaci scény\" je zapnuto"
+    },
+    "diag": {
+      "domain": "Doména",
+      "domainPass": "Platná PixelPlush doména: {0}",
+      "domainFail": "Neznámá doména \"{0}\". Očekáváno: pixelplush.dev.",
+      "https": "HTTPS",
+      "httpsPass": "Používá se zabezpečené HTTPS připojení.",
+      "httpsFail": "Nepoužívá se HTTPS. Některé funkce nemusí fungovat.",
+      "channel": "Kanál",
+      "channelPass": "Kanál: {0}",
+      "channelFail": "Parametr \"channel\" nebyl nalezen. Hra nebude vědět, ke kterému chatu se připojit.",
+      "oauthToken": "OAuth Token",
+      "oauthPass": "Token nalezen ({0}...).",
+      "oauthFail": "Žádný OAuth token. Channel Points a některé funkce vyžadují token. Hry automaticky obnovují tokeny, když je to možné.",
+      "gameTheme": "Hra/Motiv",
+      "gameThemeInfo": "Cesta: /{0}",
+      "confettiDetected": "Konfetti detekováno",
+      "confettiInfo": "Vypadá to jako URL pro konfetti/overlay. Pamatuj: nic se nezobrazí, dokud to nebude spuštěno.",
+      "urlFormatFail": "Neplatná URL. Ujisti se, že jsi zkopíroval/a celou URL včetně https://"
+    }
   },
   "admin": {
     "title": "Administrace",

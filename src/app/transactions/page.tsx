@@ -67,7 +67,7 @@ export default function TransactionsPage() {
             entries.push({
               date: (tx.date || tx.timestamp || '') as string,
               type: 'redeem',
-              description: (tx.item || tx.name || 'Item Redeemed') as string,
+              description: (tx.item || tx.name || '') as string,
               amount: typeof tx.amount === 'number' ? -Math.abs(tx.amount) : (typeof tx.cost === 'number' ? -Math.abs(tx.cost) : 0),
               item: (tx.item || tx.id || '') as string,
             });
@@ -80,7 +80,7 @@ export default function TransactionsPage() {
             entries.push({
               date: (tx.date || tx.timestamp || '') as string,
               type: 'purchase',
-              description: (tx.item || tx.name || 'Coin Purchase') as string,
+              description: (tx.item || tx.name || '') as string,
               amount: typeof tx.amount === 'number' ? tx.amount : 0,
               item: (tx.item || tx.id || '') as string,
             });
@@ -192,7 +192,7 @@ export default function TransactionsPage() {
               <div className="col-span-2 text-right">{t("transactions.amountCol")}</div>
             </div>
             {filtered.map((tx, i) => {
-              const itemName = tx.item && catalogMap[tx.item] ? catalogMap[tx.item].name : tx.description;
+              const itemName = tx.item && catalogMap[tx.item] ? catalogMap[tx.item].name : (tx.description || (tx.type === 'purchase' ? t('transactions.coinPurchaseFallback') : t('transactions.itemRedeemedFallback')));
               return (
                 <div key={i} className="grid grid-cols-1 sm:grid-cols-12 gap-1 sm:gap-4 px-5 py-3 text-sm hover:bg-[var(--color-pp-card-hover)] transition">
                   <div className="sm:col-span-3 text-[var(--color-pp-text-muted)] text-xs sm:text-sm">

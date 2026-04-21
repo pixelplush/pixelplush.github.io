@@ -34,7 +34,26 @@
     "getCharacters": "Karakter ve Evcil Hayvan Al!",
     "getCharactersDesc": "PixelPlush oyunlarında kullanmak için özel karakterler ve evcil hayvanlar al!",
     "visitMarket": "Hediye Marketini Ziyaret Et",
-    "whatsNew": "Yenilikler"
+    "whatsNew": "Yenilikler",
+    "news": {
+      "badges": {
+        "update": "Güncelleme",
+        "event": "Etkinlik",
+        "newContent": "Yeni İçerik"
+      },
+      "newWebsite": {
+        "title": "Yeni Web Sitesi Tasarımı",
+        "body": "Yepyeni bir web sitesi yayınladık! Oyunlara göz at, karakterini özelleştir ve hediyelik eşyaları al — hepsi tek bir yerde."
+      },
+      "easterEvent": {
+        "title": "Paskalya Etkinliği Yaklaşıyor",
+        "body": "Özel temalı oyunlar ve yeni öğeler ile Paskalya etkinliğimize hazır ol!"
+      },
+      "parachuteThemes": {
+        "title": "Yeni Paraşüt Temaları",
+        "body": "Parachute Drop için yeni Sevgililer Günü ve Havuz Partisi temalarına göz at!"
+      }
+    }
   },
   "games": {
     "title": "Oyunlar ve Overlay'ler",
@@ -129,6 +148,15 @@
     "active": "AKTİF",
     "queued": "SIRADA",
     "noItemsInCategory": "Bu kategoride öğe yok.",
+    "categories": {
+      "character": "Karakterler",
+      "pet": "Evcil Hayvanlar",
+      "body": "Vücut",
+      "equipment": "Ekipman",
+      "accessory": "Aksesuarlar",
+      "outfit": "Kıyafetler",
+      "effect": "Efektler"
+    },
     "visitMarketHelp": "Ziyaret et",
     "marketplace": "market",
     "toGetSome": "biraz almak için!"
@@ -150,7 +178,20 @@
     "noScores": "Bu kanal ve dönem için skor bulunamadı",
     "player": "Oyuncu",
     "score": "Skor",
-    "date": "Tarih"
+    "date": "Tarih",
+    "themeNames": {
+      "pixelparachutespring": "Pixel Parachute (Bahar Çiçekleri)",
+      "pixelparachuteeaster": "Pixel Parachute (Paskalya)",
+      "pixelparachuteday": "Pixel Parachute (Gündüz)",
+      "pixelparachutenight": "Pixel Parachute (Gece)",
+      "pixelparachuteretro": "Pixel Parachute (Retro)",
+      "pixelparachutepoolred": "Pixel Parachute (Havuz Partisi, Kırmızı)",
+      "pixelparachutepoolblue": "Pixel Parachute (Havuz Partisi, Mavi)",
+      "pixelparachuteautumn": "Pixel Parachute (Sonbahar)",
+      "pixelparachutehalloween": "Pixel Parachute (Cadılar Bayramı)",
+      "pixelparachutechristmas": "Pixel Parachute (Noel)",
+      "pixelparachutewinter": "Pixel Parachute (Kış)"
+    }
   },
   "status": {
     "title": "Sistem Durumu",
@@ -180,7 +221,9 @@
     "dateCol": "Tarih",
     "typeCol": "Tür",
     "descCol": "Açıklama",
-    "amountCol": "Tutar"
+    "amountCol": "Tutar",
+    "coinPurchaseFallback": "Jeton Satın Alma",
+    "itemRedeemedFallback": "Öğe Kullanıldı"
   },
   "redeem": {
     "title": "Kod Kullan",
@@ -197,6 +240,20 @@
     "twitchButton": "Twitch ile Giriş Yap",
     "helloFrom": "Merhaba"
   },
+  "redirect": {
+    "loggingIn": "Giriş yapılıyor...",
+    "pleaseWait": "Twitch hesabın doğrulanırken lütfen bekle."
+  },
+  "sidebar": {
+    "liveStream": "Canlı Yayın"
+  },
+  "notices": {
+    "dismiss": "Bildirimi kapat",
+    "new-website-2026": {
+      "message": "Yeni PixelPlush web sitesine hoş geldin! Hâlâ bazı özellikler üzerinde çalışıyoruz.",
+      "linkText": "Daha fazla bilgi"
+    }
+  },
   "common": {
     "loading": "Yükleniyor...",
     "error": "Bir şeyler yanlış gitti",
@@ -211,7 +268,8 @@
     "loginWithTwitch": "Twitch ile Giriş Yap",
     "goHome": "Ana Sayfaya Dön",
     "accessDenied": "Erişim Reddedildi",
-    "or": "veya"
+    "or": "veya",
+    "and": "ve"
   },
   "troubleshoot": {
     "title": "Sorun Giderme",
@@ -234,7 +292,82 @@
     "stillStuck": "Hâlâ sorun mu yaşıyorsun? Discord'umuza katıl veya support@pixelplush.dev adresine yaz",
     "setupChecklist": "3. Kurulum Kontrol Listesi",
     "setupChecklistDesc": "İlk 3 madde URL doğruladığında otomatik kontrol edilir. Geri kalanları manuel onaylamak için tıkla.",
-    "auto": "(otomatik)"
+    "auto": "(otomatik)",
+    "issues": {
+      "nothing": {
+        "title": "Hiçbir şey görünmüyor",
+        "tip1": "URL'nin doğru olduğundan emin ol — Oyunlar sayfasından yeni kopyala.",
+        "tip2": "OBS tarayıcı kaynağı boyutlarını en az 1920×1080 olarak ayarla.",
+        "tip3": "OBS'de \"Görünür olmadığında kaynağı kapat\" seçeneğini devre dışı bırak.",
+        "tip4": "Kaynağa sağ tıkla → Yenile veya görünürlüğü aç/kapat.",
+        "tip5": "Sunucuların erişilebilir olduğundan emin olmak için yukarıdaki bağlantı testini dene."
+      },
+      "chat": {
+        "title": "Oyun sohbete yanıt vermiyor",
+        "tip1": "URL'nin kanal adını içerdiğinden emin ol (örn. ?channel=seninkanalin).",
+        "tip2": "Yüklendikten sonra 10–15 saniye bekle — oyunun bağlanması biraz zaman alır.",
+        "tip3": "Sohbette !play veya !join yazmayı dene.",
+        "tip4": "Tokenlar otomatik yenilenir — bir dakika sonra hâlâ çalışmıyorsa linki yeniden oluştur."
+      },
+      "channelpoints": {
+        "title": "Kanal puanı ödülleri çalışmıyor",
+        "tip1": "Kanal puanları için bir OAuth token gerekli — URL'nin bir tane içerdiğinden emin ol.",
+        "tip2": "Tokenlar otomatik yenilenir — ama eskimişse Oyunlar sayfasından linki yeniden oluştur.",
+        "tip3": "Kanal puanı ödülleri için Twitch Affiliate veya Partner olmalısın.",
+        "tip4": "Aynı isimle birden fazla ödül oluşturmadığını kontrol et.",
+        "tip5": "Test ederken oyun overlay'inin OBS'de yüklü olduğundan emin ol."
+      },
+      "freeze": {
+        "title": "Oyun donuyor veya duruyor",
+        "tip1": "OBS tarayıcı kaynağı ayarlarında \"Sahne aktif olduğunda tarayıcıyı yenile\" seçeneğini etkinleştir.",
+        "tip2": "\"Görünür olmadığında kaynağı kapat\" seçeneğini devre dışı bırak — bu sahne değiştirirken oyunu sonlandırır.",
+        "tip3": "CPU/GPU kullanımını kontrol et — OBS zorlanıyorsa tarayıcı kaynağı gecikebilir.",
+        "tip4": "Kaynağa sağ tıkla → Yenile ile yeniden başlat."
+      },
+      "flicker": {
+        "title": "Ekran titriyor",
+        "tip1": "OBS'yi en son sürüme güncelle.",
+        "tip2": "Tek bir tema kullan (temalar arasında hızlıca geçiş yapma).",
+        "tip3": "Tarayıcı kaynağı ayarlarında \"Özel kare hızı kullan\" seçeneğini kapat.",
+        "tip4": "OBS'de donanım hızlandırmasını devre dışı bırakmayı dene: Ayarlar → Gelişmiş → \"Tarayıcı Kaynağı Donanım Hızlandırmasını Etkinleştir\" seçeneğini kaldır."
+      },
+      "confetti": {
+        "title": "Konfeti/overlay görünmüyor",
+        "tip1": "Konfeti pasiftir — bir kanal puanı kullanımıyla tetiklenene kadar görünmez.",
+        "tip2": "Sohbette !confetti 10 yazarak dene (sohbet komutları etkinse).",
+        "tip3": "Kanal puanı tetikleyicileri için OAuth token gerekli — URL'yi kontrol et.",
+        "tip4": "Konfeti işlevselliği için URL'de cpConfetti=true olduğundan emin ol.",
+        "tip5": "Takılı efektleri temizlemek için !resetconfetti dene."
+      }
+    },
+    "checklist": {
+      "https": "URL HTTPS kullanıyor",
+      "channel": "Kanal adı URL'de mevcut",
+      "oauth": "OAuth token URL'de mevcut",
+      "obsUpdate": "OBS güncel",
+      "dimensions": "Tarayıcı kaynağı en az 800×600",
+      "shutdown": "\"Görünür olmadığında kaynağı kapat\" devre dışı",
+      "refresh": "\"Sahne aktif olduğunda tarayıcıyı yenile\" etkin"
+    },
+    "diag": {
+      "domain": "Alan Adı",
+      "domainPass": "Geçerli PixelPlush alan adı: {0}",
+      "domainFail": "Bilinmeyen alan adı \"{0}\". Beklenen: pixelplush.dev.",
+      "https": "HTTPS",
+      "httpsPass": "Güvenli HTTPS bağlantısı kullanılıyor.",
+      "httpsFail": "HTTPS kullanılmıyor. Bazı özellikler çalışmayabilir.",
+      "channel": "Kanal",
+      "channelPass": "Kanal: {0}",
+      "channelFail": "\"channel\" parametresi bulunamadı. Oyun hangi sohbete bağlanacağını bilemez.",
+      "oauthToken": "OAuth Token",
+      "oauthPass": "Token bulundu ({0}...).",
+      "oauthFail": "OAuth token yok. Channel Points ve bazı özellikler token gerektirir. Oyunlar mümkünse tokenları otomatik yeniler.",
+      "gameTheme": "Oyun/Tema",
+      "gameThemeInfo": "Yol: /{0}",
+      "confettiDetected": "Konfeti Algılandı",
+      "confettiInfo": "Bu bir konfeti/overlay URL'sine benziyor. Unutma: tetiklenene kadar hiçbir şey göstermez.",
+      "urlFormatFail": "Geçersiz URL. https:// dahil tam URL'yi kopyaladığından emin ol."
+    }
   },
   "admin": {
     "title": "Yönetim Paneli",

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useTranslation } from '@/i18n';
 
 interface NoticeLink {
   text: string;
@@ -62,6 +63,7 @@ export function SiteNotices() {
   const [notices, setNotices] = useState<Notice[]>([]);
   const [dismissed, setDismissedState] = useState<string[]>([]);
   const pathname = usePathname();
+  const { t } = useTranslation();
 
   useEffect(() => {
     setDismissedState(getDismissed());
@@ -104,13 +106,13 @@ export function SiteNotices() {
           >
             <span className="flex-shrink-0">{s.icon}</span>
             <span className="flex-1">
-              {notice.message}
+              {(() => { const mk = `notices.${notice.id}.message`; const tv = t(mk); return tv !== mk ? tv : notice.message; })()}
               {notice.link && (
                 <a
                   href={notice.link.url}
                   className={`${s.text} font-semibold underline ml-2`}
                 >
-                  {notice.link.text}
+                  {(() => { const lk = `notices.${notice.id}.linkText`; const lv = t(lk); return lv !== lk ? lv : notice.link.text; })()}
                 </a>
               )}
             </span>
@@ -118,7 +120,7 @@ export function SiteNotices() {
               <button
                 onClick={() => dismiss(notice.id)}
                 className={`${s.text} opacity-60 hover:opacity-100 flex-shrink-0 text-lg leading-none cursor-pointer`}
-                aria-label="Dismiss notice"
+                aria-label={t('notices.dismiss')}
               >
                 ✕
               </button>

@@ -2,9 +2,11 @@
 
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useTranslation } from '@/i18n';
 
 export default function RedirectPage() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     // ComfyTwitch.Check() in AuthProvider handles the token exchange.
@@ -36,8 +38,8 @@ export default function RedirectPage() {
     <div className="flex min-h-[80vh] items-center justify-center">
       <div className="text-center">
         <div className="mx-auto mb-6 h-12 w-12 animate-spin rounded-full border-4 border-[var(--color-pp-accent)] border-t-transparent" />
-        <h1 className="text-xl font-bold text-[var(--color-pp-headings)]">Logging you in...</h1>
-        <p className="mt-2 text-sm text-[var(--color-pp-text)]">Please wait while we verify your Twitch account.</p>
+        <h1 className="text-xl font-bold text-[var(--color-pp-headings)]">{t('redirect.loggingIn')}</h1>
+        <p className="mt-2 text-sm text-[var(--color-pp-text)]">{t('redirect.pleaseWait')}</p>
       </div>
     </div>
   );
