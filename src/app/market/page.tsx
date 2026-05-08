@@ -44,7 +44,7 @@ const coinPackages = [
   { coins: 25, baseCoins: 25, price: '$5', bonus: '', bonusCoins: 0, popular: false },
   { coins: 55, baseCoins: 50, price: '$10', bonus: '+5 Bonus', bonusCoins: 5, popular: false },
   { coins: 120, baseCoins: 100, price: '$20', bonus: '+20 Bonus', bonusCoins: 20, popular: false },
-  { coins: 300, baseCoins: 250, price: '$50', bonus: '+50 Bonus', bonusCoins: 50, popular: true },
+  { coins: 300, baseCoins: 250, price: '$50', bonus: '+50 Bonus', bonusCoins: 50, popular: false },
   { coins: 625, baseCoins: 500, price: '$100', bonus: '+125 Bonus', bonusCoins: 125, popular: false },
 ];
 
