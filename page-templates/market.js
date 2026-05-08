@@ -653,6 +653,9 @@ function showCoinBuy( coins, amount ) {
     if( coins >= 500 ) {
         bonusCoins = 125;
     }
+    else if( coins >= 250 ) {
+        bonusCoins = 50;
+    }
     else if( coins >= 100 ) {
         bonusCoins = 20;
     }
