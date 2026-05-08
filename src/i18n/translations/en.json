@@ -91,7 +91,9 @@
     "obsStep1": "Copy the URL above",
     "obsStep2": "In OBS, add a new Browser Source",
     "obsStep3": "Paste the URL and set size to 1920×1080",
-    "obsStep4": "Check \"Refresh browser when scene becomes active\""
+    "obsStep4": "Check \"Refresh browser when scene becomes active\"",
+    "colorVariants": "Color Variants",
+    "selectVariants": "Select variants to cycle through during gameplay"
   },
   "market": {
     "title": "Marketplace",
@@ -230,9 +232,18 @@
     "subtitle": "Log in to redeem a PixelPlush code.",
     "placeholder": "ENTER-CODE-HERE",
     "submit": "Redeem",
+    "inputLabel": "Enter Coupon Code",
+    "hint": "Redeem your special coupon code for items or coins!",
     "pageSubtitle": "Enter a PixelPlush code to redeem coins, items, or other rewards.",
     "success": "Code redeemed successfully!",
-    "errorGeneric": "Something went wrong. Please try again."
+    "errorGeneric": "Something went wrong. Please try again.",
+    "redeemed": "Coupon Code Redeemed!",
+    "coinsReceived": "Coins",
+    "awesome": "Awesome!",
+    "useNowTitle": "Use {item}?",
+    "useNowDescription": "Would you like to set {item} as your active {type}?",
+    "yes": "Yes!",
+    "no": "No"
   },
   "login": {
     "title": "Log Into PixelPlush",
@@ -430,7 +441,8 @@
         "unjoin": "Unjoin Command",
         "win": "Claim Command",
         "skip": "Skip Command",
-        "chat": "Send Results in Chat"
+        "chat": "Send Results in Chat",
+        "messageFormat": "Message Format"
       },
       "weather": {
         "volume": "Volume",
@@ -445,7 +457,12 @@
         "hail": "Hail CP Cost",
         "hailTime": "Hail Duration",
         "blossoms": "Blossoms CP Cost",
-        "blossomsTime": "Blossoms Duration"
+        "blossomsTime": "Blossoms Duration",
+        "lightning": "Lightning CP Cost",
+        "rainbow": "Rainbow CP Cost",
+        "sunshine": "Sunshine CP Cost",
+        "leaf": "Leaf CP Cost",
+        "leafTime": "Leaf Duration"
       },
       "confetti": {
         "volume": "Volume",
@@ -468,7 +485,11 @@
         "commandOn": "Enable Chat Command",
         "command": "Command",
         "cooldown": "Refresh Timer",
-        "chat": "Announce in Chat"
+        "chat": "Announce in Chat",
+        "cpPlinkCost": "CP Per Plink Cost",
+        "cpQueueCost": "CP Group Plinko Cost",
+        "readyTime": "Game Ready Delay",
+        "messageFormat": "Message Format"
       },
       "parachute": {
         "overlay": "Background",
@@ -480,7 +501,13 @@
         "command": "Drop Command",
         "cooldown": "Refresh Timer",
         "droplets": "Bit Cheers",
-        "chat": "Score in Chat"
+        "chat": "Score in Chat",
+        "cpDropCost": "CP Drop Cost",
+        "cpDropletsCost": "CP Cheers Cost",
+        "cpQueueCost": "CP Group Drop Cost",
+        "readyTime": "Game Ready Delay",
+        "raidMode": "Raid Drop Timer",
+        "messageFormat": "Message Format"
       },
       "chatflakes": {
         "nth": "Message Interval",

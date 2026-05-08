@@ -8,6 +8,14 @@ import Link from 'next/link';
 import { assetPath } from '@/lib/assetPath';
 import { useAuth } from '@/lib/auth';
 
+interface ThemeVariant {
+  key: string;
+  name: string;
+  page: string;
+  preview: string;
+  requires?: string;
+}
+
 interface GameTheme {
   key: string;
   name: string;
@@ -17,6 +25,7 @@ interface GameTheme {
   requires?: string;
   bundle?: string;
   seasonal?: string;
+  variants?: ThemeVariant[];
 }
 
 const seasonalBadges: Record<string, { emoji: string; label: string; color: string }> = {
@@ -94,6 +103,7 @@ const games: GameDef[] = [
       { id: 'win', label: 'Claim Command', type: 'text', param: 'win', default: 'win' },
       { id: 'skip', label: 'Skip Command', type: 'text', param: 'skip', default: 'skip' },
       { id: 'chat', label: 'Send Results in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true },
+      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true },
     ],
   },
   {
@@ -122,6 +132,11 @@ const games: GameDef[] = [
       { id: 'hailTime', label: 'Hail Duration', type: 'number', param: 'hailTime', default: 5, min: 1, max: 1000, suffix: 's' },
       { id: 'blossoms', label: 'Blossoms CP Cost', type: 'number', param: 'blossoms', default: 100, min: 0, max: 100000 },
       { id: 'blossomsTime', label: 'Blossoms Duration', type: 'number', param: 'blossomsTime', default: 5, min: 1, max: 1000, suffix: 's' },
+      { id: 'lightning', label: 'Lightning CP Cost', type: 'number', param: 'lightning', default: 100, min: 0, max: 100000 },
+      { id: 'rainbow', label: 'Rainbow CP Cost', type: 'number', param: 'rainbow', default: 100, min: 0, max: 100000 },
+      { id: 'sunshine', label: 'Sunshine CP Cost', type: 'number', param: 'sunshine', default: 100, min: 0, max: 100000 },
+      { id: 'leaf', label: 'Leaf CP Cost', type: 'number', param: 'leaf', default: 100, min: 0, max: 100000 },
+      { id: 'leafTime', label: 'Leaf Duration', type: 'number', param: 'leafTime', default: 5, min: 1, max: 1000, suffix: 's' },
     ],
   },
   {
@@ -173,6 +188,10 @@ const games: GameDef[] = [
       { id: 'command', label: 'Command', type: 'text', param: 'command', default: 'plinko' },
       { id: 'cooldown', label: 'Refresh Timer', type: 'number', param: 'cooldown', default: 90, min: 60, max: 3600, suffix: 's' },
       { id: 'chat', label: 'Announce in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true },
+      { id: 'cpPlinkCost', label: 'CP Per Plink Cost', type: 'number', param: 'cpPlinkCost', default: 0, min: 0, max: 100000, requiresAuth: true },
+      { id: 'cpQueueCost', label: 'CP Group Plinko Cost', type: 'number', param: 'cpQueueCost', default: 0, min: 0, max: 100000, requiresAuth: true },
+      { id: 'readyTime', label: 'Game Ready Delay', type: 'number', param: 'readyTime', default: 0, min: 0, max: 3600, suffix: 's' },
+      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true },
     ],
   },
   {
@@ -185,23 +204,63 @@ const games: GameDef[] = [
     badge: 'Free',
     badgeColor: 'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
     themes: [
-      { key: 'pixelparachutes', name: 'Day (Free)', page: '/parachute/index.html', preview: '/app-assets/images/games/pixelparachuteday.gif' },
-      { key: 'pixelparachutesday', name: 'Day Alt', page: '/parachute/day.html', preview: '/app-assets/images/games/pixelparachuteday.gif' },
-      { key: 'pixelparachutesnight', name: 'Night', page: '/parachute/night.html', preview: '/app-assets/images/games/pixelparachutenight.gif' },
-      { key: 'pixelparachutesretro', name: 'Retro', page: '/parachute/retro.html', preview: '/app-assets/images/games/pixelparachuteretro.gif' },
+      { key: 'pixelparachutes', name: 'Classic (Free)', page: '/parachute/index.html', preview: '/app-assets/images/games/pixelparachuteday.gif', variants: [
+        { key: 'day', name: 'Day', page: '/parachute/index.html', preview: '/app-assets/images/games/pixelparachuteday.gif' },
+        { key: 'day_alt', name: 'Day Alt', page: '/parachute/day.html', preview: '/app-assets/images/games/pixelparachuteday.gif' },
+        { key: 'night', name: 'Night', page: '/parachute/night.html', preview: '/app-assets/images/games/pixelparachutenight.gif' },
+        { key: 'retro', name: 'Retro', page: '/parachute/retro.html', preview: '/app-assets/images/games/pixelparachuteretro.gif' },
+      ]},
       { key: 'pixelparachuteautumn', name: 'Autumn (Free)', page: '/parachute/autumn.html', preview: '/app-assets/images/games/drop_autumn_website.gif', seasonal: 'autumn' },
       { key: 'pixelparachutehalloween', name: 'Halloween (Free)', page: '/parachute/halloween.html', preview: '/app-assets/images/games/pixelparachutehalloween.gif', seasonal: 'halloween' },
       { key: 'pixelparachutechristmas', name: 'Christmas (Free)', page: '/parachute/christmas.html', preview: '/app-assets/images/games/pixelparachutechristmas.gif', seasonal: 'christmas' },
       { key: 'pixelparachutewinter', name: 'Winter (Free)', page: '/parachute/winter.html', preview: '/app-assets/images/games/pixelparachutewinter.gif', seasonal: 'christmas' },
       { key: 'pixelparachutespring', name: 'Spring Blossoms (Premium)', page: '/parachute/spring.html', premium: true, preview: '/app-assets/images/games/pixelparachutespring.gif', requires: 'addon_parachute_blossoms', seasonal: 'spring' },
       { key: 'pixelparachuterainbow', name: 'Rainbow (Premium)', page: '/parachute/pride.html', premium: true, preview: '/app-assets/images/games/pixelparachuterainbow.gif', requires: 'addon_parachute_rainbow' },
-      { key: 'pixelparachutecauldron', name: 'Cauldron (Premium)', page: '/parachute/cauldron_colors.html', premium: true, preview: '/app-assets/images/games/drop_cauldron_rainbow_website.gif', requires: 'addon_parachute_cauldron', seasonal: 'halloween' },
+      { key: 'pixelparachutecauldron', name: 'Cauldron (Premium)', page: '/parachute/cauldron_colors.html', premium: true, preview: '/app-assets/images/games/drop_cauldron_rainbow_website.gif', requires: 'addon_parachute_cauldron', seasonal: 'halloween', variants: [
+        { key: 'rainbow', name: 'Rainbow', page: '/parachute/cauldron_colors.html', preview: '/app-assets/images/games/drop_cauldron_rainbow_website.gif' },
+        { key: 'red', name: 'Red', page: '/parachute/cauldron_red.html', preview: '/app-assets/images/games/drop_cauldron_red_website.gif' },
+        { key: 'pink', name: 'Pink', page: '/parachute/cauldron_pink.html', preview: '/app-assets/images/games/drop_cauldron_pink_website.gif' },
+        { key: 'orange', name: 'Orange', page: '/parachute/cauldron_orange.html', preview: '/app-assets/images/games/drop_cauldron_orange_website.gif' },
+        { key: 'yellow', name: 'Yellow', page: '/parachute/cauldron_yellow.html', preview: '/app-assets/images/games/drop_cauldron_yellow_website.gif' },
+        { key: 'green', name: 'Green', page: '/parachute/cauldron_green.html', preview: '/app-assets/images/games/drop_cauldron_green_website.gif' },
+        { key: 'blue', name: 'Blue', page: '/parachute/cauldron_blue.html', preview: '/app-assets/images/games/drop_cauldron_blue_website.gif' },
+        { key: 'purple', name: 'Purple', page: '/parachute/cauldron_purple.html', preview: '/app-assets/images/games/drop_cauldron_purple_website.gif' },
+      ]},
       { key: 'pixelparachutechristmaseve', name: 'Christmas Eve (Premium)', page: '/parachute/christmas_eve.html', premium: true, preview: '/app-assets/images/games/drop_christmas_eve.gif', requires: 'addon_parachute_christmaseve', seasonal: 'christmas' },
-      { key: 'pixelparachutevalentines', name: 'Valentines (Premium)', page: '/parachute/valentines_brown_gold.html', premium: true, preview: '/app-assets/images/games/valentines_brown_gold.gif', requires: 'addon_parachute_valentines_brown_gold', bundle: 'bundle_parachute_valentines', seasonal: 'valentines' },
-      { key: 'pixelparachuteeaster', name: 'Easter (Free)', page: '/parachute/easter_free.html', preview: '/app-assets/images/games/drop_easter_main.gif', seasonal: 'easter' },
-      { key: 'pixelparachutesplashpool', name: 'Pool Party Red (Free)', page: '/parachute/pool_splash_red.html', preview: '/app-assets/images/games/pool_red.gif' },
-      { key: 'pixelparachutesplashpoolblue', name: 'Pool Party Blue (Free)', page: '/parachute/pool_splash_blue.html', preview: '/app-assets/images/games/pool_blue.gif' },
-      { key: 'pixelparachutescakes', name: 'Party Cakes (Premium)', page: '/parachute/cake_rainbow.html', premium: true, preview: '/app-assets/images/games/drop_cake_rainbow_website.gif', requires: 'addon_parachute_cakerainbow', bundle: 'bundle_parachute_cake' },
+      { key: 'pixelparachutevalentines', name: 'Valentines (Premium)', page: '/parachute/valentines_brown_gold.html', premium: true, preview: '/app-assets/images/games/valentines_brown_gold.gif', requires: 'addon_parachute_valentines_brown_gold', bundle: 'bundle_parachute_valentines', seasonal: 'valentines', variants: [
+        { key: 'brown_gold', name: 'Brown & Gold', page: '/parachute/valentines_brown_gold.html', preview: '/app-assets/images/games/valentines_brown_gold.gif', requires: 'addon_parachute_valentines_brown_gold' },
+        { key: 'brown_pink', name: 'Brown & Pink', page: '/parachute/valentines_brown_pink.html', preview: '/app-assets/images/games/valentines_brown_pink.gif', requires: 'addon_parachute_valentines_brown_pink' },
+        { key: 'brown_red', name: 'Brown & Red', page: '/parachute/valentines_brown_red.html', preview: '/app-assets/images/games/valentines_brown_red.gif', requires: 'addon_parachute_valentines_brown_red' },
+        { key: 'white_gold', name: 'White & Gold', page: '/parachute/valentines_white_gold.html', preview: '/app-assets/images/games/valentines_white_gold.gif', requires: 'addon_parachute_valentines_white_gold' },
+        { key: 'white_pink', name: 'White & Pink', page: '/parachute/valentines_white_pink.html', preview: '/app-assets/images/games/valentines_white_pink.gif', requires: 'addon_parachute_valentines_white_pink' },
+        { key: 'white_red', name: 'White & Red', page: '/parachute/valentines_white_red.html', preview: '/app-assets/images/games/valentines_white_red.gif', requires: 'addon_parachute_valentines_white_red' },
+      ]},
+      { key: 'pixelparachuteeaster', name: 'Easter (Free + Premium)', page: '/parachute/easter.html', preview: '/app-assets/images/games/drop_easter_main.gif', seasonal: 'easter', variants: [
+        { key: 'easter_free', name: 'Easter (Free)', page: '/parachute/easter.html', preview: '/app-assets/images/games/drop_easter_main.gif' },
+        { key: 'easter_1', name: 'Candy', page: '/parachute/easter_candy.html', preview: '/app-assets/images/games/drop_easter_1.gif', requires: 'addon_parachute_eastercandy' },
+        { key: 'easter_2', name: 'Chocolate', page: '/parachute/easter_choco.html', preview: '/app-assets/images/games/drop_easter_2.gif', requires: 'addon_parachute_easterchoco' },
+        { key: 'easter_3', name: 'Sweets', page: '/parachute/easter_sweets.html', preview: '/app-assets/images/games/drop_easter_3.gif', requires: 'addon_parachute_eastersweets' },
+        { key: 'easter_4', name: 'Marshmallow', page: '/parachute/easter_marshmallow.html', preview: '/app-assets/images/games/drop_easter_4.gif', requires: 'addon_parachute_eastermarshmallow' },
+        { key: 'easter_5', name: 'Cotton', page: '/parachute/easter_cotton.html', preview: '/app-assets/images/games/drop_easter_5.gif', requires: 'addon_parachute_eastercotton' },
+        { key: 'easter_6', name: 'Dots', page: '/parachute/easter_dots.html', preview: '/app-assets/images/games/drop_easter_5.gif', requires: 'addon_parachute_easterdots' },
+      ]},
+      { key: 'pixelparachutesplashpool', name: 'Pool Party (Free + Premium)', page: '/parachute/pool_splash_red.html', preview: '/app-assets/images/games/pool_red.gif', variants: [
+        { key: 'red', name: 'Red (Free)', page: '/parachute/pool_splash_red.html', preview: '/app-assets/images/games/pool_red.gif' },
+        { key: 'blue', name: 'Blue (Free)', page: '/parachute/pool_splash_blue.html', preview: '/app-assets/images/games/pool_blue.gif' },
+        { key: 'frog', name: 'Frog', page: '/parachute/pool_splash_frog.html', preview: '/app-assets/images/games/pool_frog.gif', requires: 'addon_parachute_poolfrog' },
+        { key: 'watermelon', name: 'Watermelon', page: '/parachute/pool_splash_watermelon.html', preview: '/app-assets/images/games/pool_melon.gif', requires: 'addon_parachute_poolmelon' },
+        { key: 'rainbow', name: 'Rainbow', page: '/parachute/pool_splash_rainbow.html', preview: '/app-assets/images/games/pool_rainbow.gif', requires: 'addon_parachute_poolrainbow' },
+        { key: 'dots', name: 'Dots', page: '/parachute/pool_splash_dots.html', preview: '/app-assets/images/games/pool_dots.gif', requires: 'addon_parachute_pooldots' },
+        { key: 'pink', name: 'Pink', page: '/parachute/pool_splash_pink.html', preview: '/app-assets/images/games/pool_pink.gif', requires: 'addon_parachute_poolsparklypink' },
+        { key: 'purple', name: 'Purple', page: '/parachute/pool_splash_purple.html', preview: '/app-assets/images/games/pool_purple.gif', requires: 'addon_parachute_poolsparklypurple' },
+        { key: 'yellow', name: 'Yellow', page: '/parachute/pool_splash_yellow.html', preview: '/app-assets/images/games/pool_yellow.gif', requires: 'addon_parachute_poolyellow' },
+      ]},
+      { key: 'pixelparachutescakes', name: 'Party Cakes (Premium)', page: '/parachute/cake_rainbow.html', premium: true, preview: '/app-assets/images/games/drop_cake_rainbow_website.gif', requires: 'addon_parachute_cakerainbow', bundle: 'bundle_parachute_cake', variants: [
+        { key: 'cake_rainbow', name: 'Rainbow', page: '/parachute/cake_rainbow.html', preview: '/app-assets/images/games/drop_cake_rainbow_website.gif', requires: 'addon_parachute_cakerainbow' },
+        { key: 'cake_fruit', name: 'Fruit', page: '/parachute/cake_fruit.html', preview: '/app-assets/images/games/drop_cake_fruit_website.gif', requires: 'addon_parachute_cakefruit' },
+        { key: 'cake_choco', name: 'Chocolate', page: '/parachute/cake_choco.html', preview: '/app-assets/images/games/drop_cake_choco_website.gif', requires: 'addon_parachute_cakechoco' },
+        { key: 'cake_pixelplush', name: 'PixelPlush', page: '/parachute/cake_pixelplush.html', preview: '/app-assets/images/games/drop_cake_pp_website.gif', requires: 'addon_parachute_cakeplush' },
+      ]},
     ],
     settings: [
       { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true },
@@ -214,6 +273,12 @@ const games: GameDef[] = [
       { id: 'cooldown', label: 'Refresh Timer', type: 'number', param: 'cooldown', default: 30, min: 1, max: 3600, suffix: 's' },
       { id: 'droplets', label: 'Bit Cheers', type: 'toggle', param: 'droplets', default: true },
       { id: 'chat', label: 'Score in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true },
+      { id: 'cpDropCost', label: 'CP Drop Cost', type: 'number', param: 'cpDropCost', default: 0, min: 0, max: 100000, requiresAuth: true },
+      { id: 'cpDropletsCost', label: 'CP Cheers Cost', type: 'number', param: 'cpDropletsCost', default: 0, min: 0, max: 100000, requiresAuth: true },
+      { id: 'cpQueueCost', label: 'CP Group Drop Cost', type: 'number', param: 'cpQueueCost', default: 0, min: 0, max: 100000, requiresAuth: true },
+      { id: 'readyTime', label: 'Game Ready Delay', type: 'number', param: 'readyTime', default: 0, min: 0, max: 3600, suffix: 's' },
+      { id: 'raidMode', label: 'Raid Drop Timer', type: 'number', param: 'raidMode', default: 0, min: 0, max: 3600, suffix: 's' },
+      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true },
     ],
   },
   {
@@ -298,10 +363,25 @@ const games: GameDef[] = [
   },
 ];
 
+const STORAGE_KEY = 'pixelplush-game-settings';
+
+function loadSavedSettings(): Record<string, unknown> {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  } catch { return {}; }
+}
+
+function saveSettings(patch: Record<string, unknown>) {
+  try {
+    const current = loadSavedSettings();
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({ ...current, ...patch }));
+  } catch { /* ignore */ }
+}
+
 function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; selectedTheme: string; onThemeChange: (key: string) => void }) {
   const { isLoggedIn, account, token } = useAuth();
   const { t } = useTranslation();
-  const [channelName, setChannelName] = useState(account?.username || '');
+  const [channelName, setChannelName] = useState('');
   const [copied, setCopied] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [settingsState, setSettingsState] = useState<Record<string, boolean | number | string>>(() => {
@@ -309,6 +389,77 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
     for (const s of game.settings || []) defaults[s.id] = s.default;
     return defaults;
   });
+  const [selectedVariants, setSelectedVariants] = useState<Record<string, boolean>>({});
+  const [restoredSettings, setRestoredSettings] = useState(false);
+
+  // Restore settings from localStorage on mount
+  useEffect(() => {
+    const saved = loadSavedSettings();
+    const savedChannel = (saved.channelName as string) || '';
+    const savedGameSettings = (saved.settings as Record<string, Record<string, boolean | number | string>>) || {};
+    const savedVariants = (saved.variants as Record<string, Record<string, boolean>>) || {};
+    if (savedChannel) setChannelName(savedChannel);
+    if (savedGameSettings[game.id]) {
+      setSettingsState((prev) => ({ ...prev, ...savedGameSettings[game.id] }));
+    }
+    if (savedVariants[selectedTheme]) {
+      setSelectedVariants(savedVariants[selectedTheme]);
+    }
+    if (account?.username && !savedChannel) {
+      setChannelName(account.username);
+    }
+    setRestoredSettings(true);
+  }, [game.id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Set channel from account if not yet set
+  useEffect(() => {
+    if (account?.username && !channelName) {
+      setChannelName(account.username);
+    }
+  }, [account?.username]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Save channel name to localStorage when it changes
+  useEffect(() => {
+    if (!restoredSettings) return;
+    saveSettings({ channelName });
+  }, [channelName, restoredSettings]);
+
+  // Save settings to localStorage when they change
+  useEffect(() => {
+    if (!restoredSettings) return;
+    const saved = loadSavedSettings();
+    const all = (saved.settings as Record<string, Record<string, boolean | number | string>>) || {};
+    all[game.id] = settingsState;
+    saveSettings({ settings: all });
+  }, [settingsState, game.id, restoredSettings]);
+
+  // Save variants to localStorage when they change
+  useEffect(() => {
+    if (!restoredSettings) return;
+    const saved = loadSavedSettings();
+    const all = (saved.variants as Record<string, Record<string, boolean>>) || {};
+    all[selectedTheme] = selectedVariants;
+    saveSettings({ variants: all });
+  }, [selectedVariants, selectedTheme, restoredSettings]);
+
+  // Initialize variant state when theme changes
+  useEffect(() => {
+    const theme = game.themes.find((t) => t.key === selectedTheme);
+    if (theme?.variants) {
+      const saved = loadSavedSettings();
+      const savedVariants = (saved.variants as Record<string, Record<string, boolean>>) || {};
+      if (savedVariants[selectedTheme]) {
+        setSelectedVariants(savedVariants[selectedTheme]);
+      } else {
+        // Default: first variant selected
+        const defaults: Record<string, boolean> = {};
+        theme.variants.forEach((v, i) => { defaults[v.key] = i === 0; });
+        setSelectedVariants(defaults);
+      }
+    } else {
+      setSelectedVariants({});
+    }
+  }, [selectedTheme, game.themes]);
 
   const theme = game.themes.find((t) => t.key === selectedTheme) || game.themes[0];
 
@@ -320,29 +471,69 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
     setSettingsState((prev) => ({ ...prev, [id]: value }));
   };
 
+  const toggleVariant = (key: string) => {
+    setSelectedVariants((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      // Ensure at least one variant is always selected
+      if (Object.values(next).every((v) => !v)) return prev;
+      return next;
+    });
+  };
+
   const isThemeLocked = theme?.premium && theme.requires && (!isLoggedIn || !account?.owned?.includes(theme.requires));
 
   const generateUrl = useCallback(() => {
     if (!channelName.trim() || !theme || isThemeLocked) return '';
-    const base = `https://www.pixelplush.dev${theme.page}`;
+    let basePage = theme.page;
     const params = new URLSearchParams();
     params.set('channel', channelName.trim().toLowerCase());
     if (token) {
       params.set('oauth', token);
     }
+    // Handle variants
+    if (theme.variants && theme.variants.length > 0) {
+      const enabledVariants = theme.variants.filter((v) => selectedVariants[v.key]);
+      if (enabledVariants.length > 0) {
+        basePage = enabledVariants[0].page;
+        if (enabledVariants.length > 1) {
+          const variationPages = enabledVariants.map((v) => {
+            const pagePath = v.page;
+            return pagePath.substring(pagePath.lastIndexOf('/') + 1);
+          });
+          params.set('variations', variationPages.join(','));
+        }
+      }
+    }
+    const base = `https://www.pixelplush.dev${basePage}`;
     for (const setting of game.settings || []) {
       if (setting.showFor && setting.showFor.length > 0 && !setting.showFor.includes(selectedTheme)) continue;
       const val = settingsState[setting.id];
       if (val !== undefined && val !== setting.default) {
-        if (setting.id === 'cooldown') {
+        if (setting.id === 'cooldown' || setting.id === 'readyTime' || setting.id === 'raidMode') {
           params.set(setting.param, String(Number(val) * 1000));
+        } else if (setting.id === 'cpDropCost' && Number(val) > 0) {
+          params.set('cpDrop', 'true');
+          params.set('cpDropCost', String(val));
+        } else if (setting.id === 'cpDropletsCost' && Number(val) > 0) {
+          params.set('cpDroplets', 'true');
+          params.set('cpDropletsCost', String(val));
+        } else if (setting.id === 'cpQueueCost' && Number(val) > 0) {
+          params.set('cpQueue', 'true');
+          params.set('cpQueueCost', String(val));
+        } else if (setting.id === 'cpPlinkCost' && Number(val) > 0) {
+          params.set('cpPlink', 'true');
+          params.set('cpPlinkCost', String(val));
+        } else if (setting.id === 'messageFormat') {
+          if (val && settingsState['chat']) {
+            params.set('messageFormat', String(val));
+          }
         } else {
           params.set(setting.param, String(val));
         }
       }
     }
     return `${base}?${params.toString()}`;
-  }, [channelName, theme, isThemeLocked, token, game.settings, settingsState, selectedTheme]);
+  }, [channelName, theme, isThemeLocked, token, game.settings, settingsState, selectedTheme, selectedVariants]);
 
   const url = generateUrl();
 
@@ -414,6 +605,40 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
               <p className="text-xs text-blue-700">
                 <Link href="/login" className="font-semibold underline">{t('common.loginWithTwitch')}</Link> {t('games.loginToCheckPremium')}
               </p>
+            </div>
+          </div>
+        )}
+
+        {/* Color Variants */}
+        {theme?.variants && theme.variants.length > 0 && (
+          <div>
+            <label className="mb-2 block text-xs font-medium text-[var(--color-pp-text-muted)]">{t('games.colorVariants')}</label>
+            <p className="mb-2 text-[10px] text-[var(--color-pp-text-muted)]">{t('games.selectVariants')}</p>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+              {theme.variants.map((v) => {
+                const isLocked = v.requires && (!isLoggedIn || !account?.owned?.includes(v.requires));
+                return (
+                  <label
+                    key={v.key}
+                    className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs transition cursor-pointer ${
+                      selectedVariants[v.key]
+                        ? 'border-[var(--color-pp-accent)] bg-[var(--color-pp-accent)]/10'
+                        : 'border-[var(--color-pp-border)] bg-[var(--color-pp-card)]'
+                    } ${isLocked ? 'opacity-50' : 'hover:border-[var(--color-pp-accent)]/50'}`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={!!selectedVariants[v.key]}
+                      onChange={() => !isLocked && toggleVariant(v.key)}
+                      disabled={!!isLocked}
+                      className="rounded"
+                    />
+                    <span className="truncate font-medium text-[var(--color-pp-text)]">
+                      {isLocked ? '🔒 ' : ''}{v.name}
+                    </span>
+                  </label>
+                );
+              })}
             </div>
           </div>
         )}
@@ -542,9 +767,34 @@ function GamesContent() {
   const [selectedTheme, setSelectedTheme] = useState(selectedGame?.themes[0]?.key || '');
   const currentTheme = selectedGame?.themes.find((t) => t.key === selectedTheme);
 
+  // Restore saved theme from localStorage
   useEffect(() => {
     if (selectedGame) {
-      setSelectedTheme(selectedGame.themes[0]?.key || '');
+      try {
+        const saved = loadSavedSettings();
+        const savedThemes = (saved.themes as Record<string, string>) || {};
+        const savedTheme = savedThemes[selectedGame.id];
+        if (savedTheme && selectedGame.themes.some((t) => t.key === savedTheme)) {
+          setSelectedTheme(savedTheme);
+        } else {
+          setSelectedTheme(selectedGame.themes[0]?.key || '');
+        }
+      } catch {
+        setSelectedTheme(selectedGame.themes[0]?.key || '');
+      }
+    }
+  }, [selectedGame]);
+
+  // Save theme to localStorage when it changes
+  const handleThemeChange = useCallback((themeKey: string) => {
+    setSelectedTheme(themeKey);
+    if (selectedGame) {
+      try {
+        const saved = loadSavedSettings();
+        const themes = (saved.themes as Record<string, string>) || {};
+        themes[selectedGame.id] = themeKey;
+        saveSettings({ themes });
+      } catch { /* ignore */ }
     }
   }, [selectedGame]);
 
@@ -588,7 +838,7 @@ function GamesContent() {
                   {selectedGame.themes.map((thm) => (
                     <button
                       key={thm.key}
-                      onClick={() => setSelectedTheme(thm.key)}
+                      onClick={() => handleThemeChange(thm.key)}
                       className={`rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
                         thm.key === selectedTheme
                           ? 'ring-2 ring-[var(--color-pp-accent)] bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]'
@@ -612,7 +862,7 @@ function GamesContent() {
             )}
 
             {/* Link Generator */}
-            <LinkGenerator game={selectedGame} selectedTheme={selectedTheme} onThemeChange={setSelectedTheme} />
+            <LinkGenerator game={selectedGame} selectedTheme={selectedTheme} onThemeChange={handleThemeChange} />
           </div>
         </div>
       </div>
