@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* Force light mode only — disable Tailwind's dark: variant so system dark mode doesn't affect our brand colors */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-pp-bg: #F2C079;
+  --color-pp-card: #FAEDCA;
+  --color-pp-card-hover: #f5e6b8;
+  --color-pp-surface: #fafbfb;
+  --color-pp-headings: #4F2727;
+  --color-pp-text: #4F2727;
+  --color-pp-text-muted: #734B45;
+  --color-pp-nav-text: #D8714F;
+  --color-pp-accent: #5A8DEE;
+  --color-pp-link: #B5651D;
+  --color-pp-border: #DFE3E7;
+  --color-pp-info: #6EB8A8;
+  --color-pp-success: #74A33F;
+  --color-pp-warning: #FDAC41;
+  --color-pp-danger: #FF5B5C;
+  --color-pp-active-bg: #F5E6B8;
+  --color-pp-footer: #FAEDCA;
+}
+
+:root {
+}
+
+body {
+  background-color: var(--color-pp-bg);
+  color: var(--color-pp-text);
+  min-height: 100vh;
+  font-family: var(--font-ibm), "IBM Plex Sans", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-pp-headings);
+  font-family: var(--font-fredoka), "Fredoka", "Rubik", sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+a:not([class*="text-"]) {
+  color: var(--color-pp-link);
+}
+a {
+  text-decoration: none;
+}
+a:not([class*="text-"]):hover {
+  color: #8B4513;
+}
+
+.pixelated {
+  image-rendering: auto;
+  image-rendering: crisp-edges;
+  image-rendering: pixelated;
+}
+
+/* Dashboard card */
+.pp-card {
+  background-color: var(--color-pp-card);
+  box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.1);
+  border-radius: 0.5rem;
+}
+
+.pp-card-header,
+.pp-card-footer {
+  background-color: var(--color-pp-card);
+  border-color: var(--color-pp-border);
+}
+
+/* Frest-style buttons */
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+}
+.btn:hover {
+  transform: translateY(-1px);
+  color: #fff;
+}
+.btn-info {
+  background-color: var(--color-pp-info);
+  box-shadow: 0 4px 10px 0 rgba(110, 184, 168, 0.25);
+}
+.btn-info:hover {
+  background-color: #5DA99A;
+  box-shadow: 0 6px 14px 0 rgba(110, 184, 168, 0.4);
+}
+.btn-success {
+  background-color: var(--color-pp-success);
+  box-shadow: 0 4px 10px 0 rgba(116, 163, 63, 0.25);
+}
+.btn-success:hover {
+  background-color: #638E35;
+  box-shadow: 0 6px 14px 0 rgba(116, 163, 63, 0.4);
+}
+.btn-primary {
+  background-color: var(--color-pp-accent);
+  box-shadow: 0 4px 10px 0 rgba(90, 141, 238, 0.2);
+  color: #fff !important;
+}
+.btn-primary:hover {
+  background-color: #4a7de0;
+  box-shadow: 0 6px 14px 0 rgba(90, 141, 238, 0.35);
+}
+.btn-warning {
+  background-color: var(--color-pp-warning);
+  box-shadow: 0 4px 10px 0 rgba(255, 159, 67, 0.2);
+}
+.btn-warning:hover {
+  background-color: #e68e3a;
+  box-shadow: 0 6px 14px 0 rgba(255, 159, 67, 0.35);
+}
