@@ -1,11 +1,11 @@
 {
   "nav": {
-    "home": "PixelPlush Domů",
+    "home": "PixelPlush",
     "games": "Hry pro streamy",
     "market": "Obchod s doplňky",
     "customize": "Moje šatna",
     "about": "O nás",
-    "credits": "Přispěvatelé",
+    "credits": "Zdroje",
     "troubleshoot": "Řešení problémů",
     "admin": "Admin"
   },
@@ -28,7 +28,7 @@
     "heroTitle": "Zábavné overlay hry pro Twitch streamy",
     "heroSubtitle": "Zdarma, interaktivní a oblíbené streamery po celém světě",
     "hello": "Ahoj všichni!",
-    "welcomeText": "Vítejte u PixelPlush, našeho 2členného herního studia s",
+    "welcomeText": "Vítejte u PixelPlush, našeho dvoučlenného herního studia s",
     "artLabel": "(Grafika)",
     "codeLabel": "(Kód)",
     "getCharacters": "Získej postavy a mazlíčky!",
@@ -132,7 +132,14 @@
     "free": "ZDARMA",
     "thisWillUse": "To bude stát",
     "coinsUnit": "mincí",
-    "youGot": "Získal/a jsi"
+    "youGot": "Získal/a jsi",
+    "filters": {
+      "character": "Postavy",
+      "pet": "Mazlíčci",
+      "addOn": "Hry",
+      "bundle": "Sety",
+      "outfit": "Oblečení"
+    }
   },
   "customize": {
     "title": "Šatna",
@@ -207,6 +214,18 @@
     "auth": "Autentizace (Twitch OAuth)",
     "marketplace": "Obchod",
     "website": "Webová stránka"
+  },
+  "links": {
+    "aboutTitle": "O nás",
+    "aboutSubtitle": "Sleduj nás na sociálních sítích:",
+    "streamBannersTitle": "Bannery",
+    "streamBannersDescription": "Chceš nás podpořit? Dej si jeden z našich bannerů pod tvůj stream!",
+    "gameJamGamesTitle": "Game Jam hry",
+    "gameJamGamesDescription": "Hry, které jsem vytvořili během game jamů - zahraj si je zdarma!",
+    "creditsTitle": "Zdroje",
+    "creditsSubtitle": "Zvukové efekty a assety použité v našich hrách.",
+    "freesoundAttributionPrefix": "Všechny efekty byly staženy z",
+    "freesoundAttributionSuffix": "pod licencí Creative Commons."
   },
   "transactions": {
     "title": "Transakce",
@@ -384,37 +403,37 @@
     "giveaway": {
       "name": "Giveaway Tool",
       "tagline": "Zábavný způsob, jak dělat giveawaye na Twitchi",
-      "description": "Pořádej giveawaye jednoduše a zábavně pro své diváky! Diváci napíšou příkaz do chatu, aby se zapojili, a náhodný víhertní je vybrán s veselou animací."
+      "description": "Pořádej giveawaye jednoduše a zábavně pro své diváky! Diváci napíšou příkaz do chatu, aby se zapojili. Náhodný výherce je následně vybrán s veselou animací."
     },
     "weather": {
       "name": "Stream Weather",
-      "tagline": "Meteorologický overlay pomocí kanálových bodů",
-      "description": "Overlay měnící počasí, který diváci ovládají pomocí kanálových bodů. Déšť, sníh, bouřky — tvoji diváci rozhodují!"
+      "tagline": "Různé typy počasí jako overlay",
+      "description": "Overlay měnící počasí, který diváci ovládají pomocí věrnostních bodů."
     },
     "confetti": {
       "name": "Pixel Confetti",
-      "tagline": "Stream konfetti overlay pomocí kanálových bodů",
-      "description": "Diváci posílají konfetti přes tvůj stream pomocí kanálových bodů! Skvělý vizuální efekt pro suby, raidy nebo jakýkoliv hype moment."
+      "tagline": "Konfety a jiné efekty",
+      "description": "Diváci posílají konfetti přes tvůj stream pomocí věrnostních bodů!"
     },
     "plinko": {
       "name": "Plinko Bounce",
-      "tagline": "Plinko stream overlay hra pro Twitch",
-      "description": "Hoď míček a sleduj, jak odskákuje přes kolíky a sbírá body! Diváci soutěží o nejvyšší skóre na žebříčku."
+      "tagline": "Plinko overlay hra pro Twitch",
+      "description": "Sleduj svou postavičku jak skáče přes kolíky! Trefí se doprostřed?"
     },
     "parachute": {
       "name": "Parachute Drop",
-      "tagline": "Padáková stream overlay hra pro Twitch",
+      "tagline": "Skok padákem - hra pro Twitch",
       "description": "Vyskoč z letadla, otevři padák a zkus přistát na cíli! Diváci soutěží psaním příkazů v chatu."
     },
     "chatflakes": {
       "name": "Chat Flakes",
-      "tagline": "Chatové zprávy přeměněné na stream částice",
-      "description": "Diváci přidávají jemné částicové efekty na tvou obrazovku prostě tím, že píšou do chatu. Krásný pasivní overlay!"
+      "tagline": "Chatové zprávy přeměněné na efekty přímo na obrazovce",
+      "description": "Diváci přidávají efekty na tvou obrazovku prostě tím, že píšou do chatu."
     },
     "hillroll": {
       "name": "Hill Rolling Race",
       "tagline": "Závodní stream overlay hra pro Twitch",
-      "description": "Kutálej se z kopce a závoď proti ostatním divákům! Vyhýbej se překážkám a zkus dojet do cíle jako první."
+      "description": "Kutálej se z kopce a závoď proti ostatním divákům! Pokus se dojet do cíle jako první."
     },
     "maze": {
       "name": "Pixel Maze",

@@ -48,6 +48,14 @@ const coinPackages = [
   { coins: 625, baseCoins: 500, price: '$100', bonus: '+125 Bonus', bonusCoins: 125, popular: false },
 ];
 
+const filterLabelKeys: Record<FilterType, string> = {
+  character: 'market.filters.character',
+  pet: 'market.filters.pet',
+  'add-on': 'market.filters.addOn',
+  bundle: 'market.filters.bundle',
+  outfit: 'market.filters.outfit',
+};
+
 function getItemPreview(item: CatalogItem): string {
   switch (item.type) {
     case 'bundle':
@@ -562,7 +570,7 @@ export default function MarketPage() {
                   : 'bg-[var(--color-pp-card)] text-slate-500 line-through'
               }`}
             >
-              {key}
+              {t(filterLabelKeys[key])}
             </button>
           ))}
         </div>
@@ -614,24 +622,24 @@ export default function MarketPage() {
                     <span className="text-xs font-medium text-[var(--color-pp-success)]">{t('market.owned')}</span>
                   ) : (
                     <>
-                      <span className="text-xs text-[var(--color-pp-text-muted)]">
+                      <span className="text-sm text-[var(--color-pp-text-muted)]">
                         <Image
                           src={assetPath('/app-assets/images/icon/plush_coin.gif')}
                           alt=""
-                          width={14}
-                          height={14}
-                          className="pixelated mr-0.5 inline"
+                          width={16}
+                          height={16}
+                          className="pixelated mr-1 inline align-[-2px]"
                           unoptimized
                         />
                         {item.sale ? (
                           <>
-                            <span className="line-through">{item.cost}</span>{' '}
-                            <span className="font-medium text-[var(--color-pp-success)]">{Math.floor(item.cost / 2)}</span>
+                            <span className="text-xs line-through">{item.cost}</span>{' '}
+                            <span className="font-semibold text-[var(--color-pp-success)]">{Math.floor(item.cost / 2)}</span>
                           </>
                         ) : item.cost === 0 ? (
-                          <span className="font-medium text-[var(--color-pp-success)]">{t('market.free')}</span>
+                          <span className="font-semibold text-[var(--color-pp-success)]">{t('market.free')}</span>
                         ) : (
-                          item.cost
+                          <span className="font-semibold text-[var(--color-pp-headings)]">{item.cost}</span>
                         )}
                         {isBundle && savings > 0 && (
                           <span className="ml-1 rounded-full bg-green-500/15 px-1.5 py-0.5 text-[10px] font-bold text-green-700">

@@ -134,7 +134,14 @@
     "free": "FREE",
     "thisWillUse": "This will use",
     "coinsUnit": "coins",
-    "youGot": "You got"
+    "youGot": "You got",
+    "filters": {
+      "character": "Character",
+      "pet": "Pet",
+      "addOn": "Add-on",
+      "bundle": "Bundle",
+      "outfit": "Outfit"
+    }
   },
   "customize": {
     "title": "Dressing Room",
@@ -209,6 +216,18 @@
     "auth": "Authentication (Twitch OAuth)",
     "marketplace": "Marketplace",
     "website": "Website"
+  },
+  "links": {
+    "aboutTitle": "About Us",
+    "aboutSubtitle": "Find us on social media and get banners for your stream.",
+    "streamBannersTitle": "Stream Banners",
+    "streamBannersDescription": "Want to show your support? Use these banners in your panels or overlays!",
+    "gameJamGamesTitle": "Game Jam Games",
+    "gameJamGamesDescription": "Games we made during game jams — play them for free!",
+    "creditsTitle": "Credits",
+    "creditsSubtitle": "Sound effects and assets used in PixelPlush games.",
+    "freesoundAttributionPrefix": "All sound effects sourced from",
+    "freesoundAttributionSuffix": "under Creative Commons licenses."
   },
   "transactions": {
     "title": "Transactions",
