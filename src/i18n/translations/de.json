@@ -132,7 +132,17 @@
     "free": "GRATIS",
     "thisWillUse": "Das kostet",
     "coinsUnit": "Münzen",
-    "youGot": "Du hast bekommen"
+    "youGot": "Du hast bekommen",
+    "gift": "Gift",
+    "createGiftCode": "Create Gift Code",
+    "giftThisItem": "Gift this item",
+    "giftDescription": "This will spend coins now and create a redeem code you can share with someone else.",
+    "giftCodeCreated": "Gift code created!",
+    "copyGiftLink": "Copy gift link",
+    "giftLinkCopied": "Gift link copied!",
+    "redeemLink": "Redeem link",
+    "giftCode": "Gift code",
+    "saveGiftCodeNote": "Copy or save this code before closing this window."
   },
   "customize": {
     "title": "Umkleide",

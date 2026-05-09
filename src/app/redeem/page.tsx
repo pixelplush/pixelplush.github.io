@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useTranslation } from '@/i18n';
 
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
+const API_URL = 'https://api.pixelplush.dev/v1';
 const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
 const ASSETS_BASE = 'https://www.pixelplush.dev/assets';
 
@@ -114,13 +115,11 @@ function RedeemContent() {
     setStatus('loading');
     setRedeemResult(null);
     try {
-      const res = await fetch(`${STATS_URL}/redeem`, {
+      const res = await fetch(`${API_URL}/coupon/redeem?code=${encodeURIComponent(code.trim())}`, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
           Twitch: token,
         },
-        body: JSON.stringify({ code: code.trim() }),
       });
       const data: RedeemResult = await res.json();
       if (data.error) {

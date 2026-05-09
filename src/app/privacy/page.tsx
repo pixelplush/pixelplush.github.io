@@ -11,7 +11,7 @@ export default function PrivacyPage() {
     <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
       <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] p-8 md:p-12">
         <h1 className="mb-2 text-3xl font-bold text-[var(--color-pp-headings)]">Privacy Notice</h1>
-        <p className="mb-8 text-sm text-[var(--color-pp-text-muted)]">Last updated: July 19, 2020</p>
+        <p className="mb-8 text-sm text-[var(--color-pp-text-muted)]">Last updated: May 9, 2026</p>
 
         <div className="space-y-8 text-sm leading-relaxed text-[var(--color-pp-text)]">
           <p>
@@ -37,6 +37,8 @@ export default function PrivacyPage() {
                 'What Are Your Privacy Rights?',
                 'Controls for Do-Not-Track Features',
                 'Do California Residents Have Specific Privacy Rights?',
+                'Children\u2019s Privacy',
+                'Data Deletion',
                 'Do We Make Updates to This Notice?',
                 'How Can You Contact Us About This Notice?',
               ].map((item, i) => (
@@ -47,11 +49,14 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">1. What Information Do We Collect?</h2>
-            <p><strong className="text-[var(--color-pp-headings)]">Personal Information Provided by You.</strong> We collect usernames, email addresses, and other similar information when you register on our Services.</p>
-            <p className="mt-2"><strong className="text-[var(--color-pp-headings)]">Payment Data.</strong> We may collect data necessary to process your payment if you make purchases. All payment data is stored by PayPal. You may find their privacy notice at{' '}
-              <a href="https://www.paypal.com/va/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-accent)] hover:underline">paypal.com/privacy</a>.
-            </p>
-            <p className="mt-2"><strong className="text-[var(--color-pp-headings)]">Social Media Login Data.</strong> We may provide you with the option to register using your existing Twitch account details.</p>
+            <p><strong className="text-[var(--color-pp-headings)]">Personal Information Provided by You.</strong> We collect usernames, email addresses, and other similar information when you register on our Services. When you log in via Twitch, we collect your Twitch username, display name, and profile picture to identify you on our gaming platform.</p>
+            <p className="mt-2"><strong className="text-[var(--color-pp-headings)]">Payment Data.</strong> We may collect data necessary to process your payment if you make purchases, including purchases of virtual currency (coins) and in-game cosmetic items. All payment data is stored by our payment processors. We do not store your full payment card details on our servers. You may find their privacy notices here:</p>
+            <ul className="ml-5 mt-1 list-disc space-y-1">
+              <li><a href="https://www.paypal.com/va/webapps/mpp/ua/privacy-full" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-accent)] hover:underline">PayPal Privacy Policy</a></li>
+              <li><a href="https://stripe.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[var(--color-pp-accent)] hover:underline">Stripe Privacy Policy</a></li>
+            </ul>
+            <p className="mt-2"><strong className="text-[var(--color-pp-headings)]">Social Media Login Data.</strong> We provide the option to register and log in using your Twitch account. When you do so, we receive your Twitch username, display name, email address, and profile picture. Twitch is the primary authentication method for our Services.</p>
+            <p className="mt-2"><strong className="text-[var(--color-pp-headings)]">Virtual Currency and Transaction Data.</strong> We process transactions related to virtual currency (coins) purchases and in-game cosmetic items (characters, outfits, pets, and add-ons). We maintain records of your purchases, account balances, and transaction history.</p>
             <p className="mt-2"><strong className="text-[var(--color-pp-headings)]">Automatically Collected Information.</strong> We automatically collect certain information when you visit our Services, including IP address, browser type, device information, and usage data. This information is needed to maintain security and for analytics.</p>
           </section>
 
@@ -78,8 +83,8 @@ export default function PrivacyPage() {
           <section>
             <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">4. Who Will Your Information Be Shared With?</h2>
             <ul className="ml-5 list-disc space-y-1">
-              <li><strong className="text-[var(--color-pp-headings)]">Cloud Computing Services:</strong> Amazon Web Services (AWS)</li>
-              <li><strong className="text-[var(--color-pp-headings)]">Invoice and Billing:</strong> PayPal</li>
+              <li><strong className="text-[var(--color-pp-headings)]">Cloud Computing Services:</strong> Amazon Web Services (AWS), Microsoft Azure</li>
+              <li><strong className="text-[var(--color-pp-headings)]">Invoice and Billing:</strong> PayPal, Stripe</li>
               <li><strong className="text-[var(--color-pp-headings)]">User Account Registration and Authentication:</strong> Twitch Authentication</li>
               <li><strong className="text-[var(--color-pp-headings)]">Web and Mobile Analytics:</strong> Google Analytics</li>
             </ul>
@@ -92,7 +97,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">6. How Do We Handle Your Social Logins?</h2>
-            <p>Our Services offer you the ability to register and login using your third-party social media account (Twitch). Where you choose to do this, we will receive certain profile information about you from your social media provider. We will use the information we receive only for the purposes described in this privacy notice.</p>
+            <p>Our Services offer you the ability to register and log in using your Twitch account. Twitch is the primary login method for PixelPlush Games. When you choose to do this, we receive your Twitch username, display name, email address, and profile picture. We use this information to create and manage your account, display your identity in games, and track your scores and purchases. We will use the information we receive only for the purposes described in this privacy notice.</p>
           </section>
 
           <section>
@@ -125,15 +130,41 @@ export default function PrivacyPage() {
           <section>
             <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">12. Do California Residents Have Specific Privacy Rights?</h2>
             <p>Yes. California Civil Code Section 1798.83, also known as the &ldquo;Shine The Light&rdquo; law, permits our users who are California residents to request information about personal information disclosed to third parties for direct marketing purposes.</p>
+            <p className="mt-2">Additionally, the California Consumer Privacy Act (CCPA), as amended by the California Privacy Rights Act (CPRA), provides California residents with the following rights:</p>
+            <ul className="ml-5 mt-1 list-disc space-y-1">
+              <li>The right to know what personal information we collect, use, disclose, and sell</li>
+              <li>The right to request deletion of your personal information</li>
+              <li>The right to opt out of the sale or sharing of your personal information</li>
+              <li>The right to non-discrimination for exercising your privacy rights</li>
+              <li>The right to correct inaccurate personal information</li>
+            </ul>
+            <p className="mt-2">We do not sell personal information. To exercise any of these rights, please contact us at{' '}
+              <a href="mailto:privacy@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">privacy@pixelplush.dev</a>.
+            </p>
           </section>
 
           <section>
-            <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">13. Do We Make Updates to This Notice?</h2>
+            <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">13. Children&apos;s Privacy</h2>
+            <p>Our Services are not directed to children under the age of 13. We do not knowingly collect personal information from children under 13. If we learn that we have collected personal information from a child under 13 without parental consent, we will take steps to delete that information as quickly as possible. If you believe we have collected information from a child under 13, please contact us at{' '}
+              <a href="mailto:privacy@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">privacy@pixelplush.dev</a>.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">14. Data Deletion</h2>
+            <p>You may request deletion of your account and associated personal data at any time by contacting us at{' '}
+              <a href="mailto:support@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">support@pixelplush.dev</a>.
+              Upon receiving a verified request, we will delete your personal information from our active databases within 30 days. Some information may be retained in backup archives or as required by law.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">15. Do We Make Updates to This Notice?</h2>
             <p>Yes, we will update this notice as necessary to stay compliant with relevant laws. The updated version will be indicated by an updated &ldquo;Revised&rdquo; date.</p>
           </section>
 
           <section>
-            <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">14. How Can You Contact Us About This Notice?</h2>
+            <h2 className="mb-3 text-lg font-semibold text-[var(--color-pp-headings)]">16. How Can You Contact Us About This Notice?</h2>
             <p>
               If you have questions or comments about this notice, you may email us at{' '}
               <a href="mailto:privacy@pixelplush.dev" className="text-[var(--color-pp-accent)] hover:underline">privacy@pixelplush.dev</a> or by post to:

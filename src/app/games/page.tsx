@@ -53,6 +53,7 @@ interface GameSetting {
   suffix?: string;
   requiresAuth?: boolean;
   showFor?: string[];
+  tooltip?: string;
 }
 
 interface GameDef {
@@ -96,14 +97,14 @@ const games: GameDef[] = [
       { id: 'lang', label: 'Language', type: 'select', param: 'lang', default: 'en', options: [
         { value: 'en', label: 'English' }, { value: 'fr', label: 'French' }, { value: 'de', label: 'German' }, { value: 'es', label: 'Spanish' }, { value: 'cs', label: 'Czech' },
       ]},
-      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%' },
-      { id: 'command', label: 'Start Command', type: 'text', param: 'command', default: 'giv' },
-      { id: 'join', label: 'Join Command', type: 'text', param: 'join', default: 'join' },
-      { id: 'unjoin', label: 'Unjoin Command', type: 'text', param: 'unjoin', default: 'unjoin' },
-      { id: 'win', label: 'Claim Command', type: 'text', param: 'win', default: 'win' },
-      { id: 'skip', label: 'Skip Command', type: 'text', param: 'skip', default: 'skip' },
-      { id: 'chat', label: 'Send Results in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true },
-      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true },
+      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%', tooltip: 'Choose how loud you want the sound effects. If you don\'t want any sound effects, type in 0' },
+      { id: 'command', label: 'Start Command', type: 'text', param: 'command', default: 'giv', tooltip: 'If you want a different chat command instead of !giv, type it in here' },
+      { id: 'join', label: 'Join Command', type: 'text', param: 'join', default: 'join', tooltip: 'If you want a different chat command instead of !join, type it in here' },
+      { id: 'unjoin', label: 'Unjoin Command', type: 'text', param: 'unjoin', default: 'unjoin', tooltip: 'If you want a different chat command instead of !unjoin, type it in here' },
+      { id: 'win', label: 'Claim Command', type: 'text', param: 'win', default: 'win', tooltip: 'If you want a different chat command instead of !win, type it in here' },
+      { id: 'skip', label: 'Skip Command', type: 'text', param: 'skip', default: 'skip', tooltip: 'If you want a different chat command instead of !skip, type it in here' },
+      { id: 'chat', label: 'Send Results in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true, tooltip: 'If you check this option, you will get a winner announcement in chat' },
+      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true, tooltip: 'Customize the message format for chat announcements' },
     ],
   },
   {
@@ -119,24 +120,24 @@ const games: GameDef[] = [
       { key: 'weather', name: 'Stream Weather', page: '/weather/index.html', premium: true, preview: '/app-assets/images/games/streamweather_square.gif', requires: 'addon_streamweather' },
     ],
     settings: [
-      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%' },
-      { id: 'rain', label: 'Rain CP Cost', type: 'number', param: 'rain', default: 100, min: 0, max: 100000 },
-      { id: 'rainTime', label: 'Rain Duration', type: 'number', param: 'rainTime', default: 5, min: 1, max: 1000, suffix: 's' },
-      { id: 'heavyrain', label: 'Heavy Rain CP Cost', type: 'number', param: 'heavyrain', default: 100, min: 0, max: 100000 },
-      { id: 'heavyrainTime', label: 'Heavy Rain Duration', type: 'number', param: 'heavyrainTime', default: 5, min: 1, max: 1000, suffix: 's' },
-      { id: 'snow', label: 'Snow CP Cost', type: 'number', param: 'snow', default: 100, min: 0, max: 100000 },
-      { id: 'snowTime', label: 'Snow Duration', type: 'number', param: 'snowTime', default: 5, min: 1, max: 1000, suffix: 's' },
-      { id: 'blizzard', label: 'Blizzard CP Cost', type: 'number', param: 'blizzard', default: 100, min: 0, max: 100000 },
-      { id: 'blizzardTime', label: 'Blizzard Duration', type: 'number', param: 'blizzardTime', default: 5, min: 1, max: 1000, suffix: 's' },
-      { id: 'hail', label: 'Hail CP Cost', type: 'number', param: 'hail', default: 100, min: 0, max: 100000 },
-      { id: 'hailTime', label: 'Hail Duration', type: 'number', param: 'hailTime', default: 5, min: 1, max: 1000, suffix: 's' },
-      { id: 'blossoms', label: 'Blossoms CP Cost', type: 'number', param: 'blossoms', default: 100, min: 0, max: 100000 },
-      { id: 'blossomsTime', label: 'Blossoms Duration', type: 'number', param: 'blossomsTime', default: 5, min: 1, max: 1000, suffix: 's' },
-      { id: 'lightning', label: 'Lightning CP Cost', type: 'number', param: 'lightning', default: 100, min: 0, max: 100000 },
-      { id: 'rainbow', label: 'Rainbow CP Cost', type: 'number', param: 'rainbow', default: 100, min: 0, max: 100000 },
-      { id: 'sunshine', label: 'Sunshine CP Cost', type: 'number', param: 'sunshine', default: 100, min: 0, max: 100000 },
-      { id: 'leaf', label: 'Leaf CP Cost', type: 'number', param: 'leaf', default: 100, min: 0, max: 100000 },
-      { id: 'leafTime', label: 'Leaf Duration', type: 'number', param: 'leafTime', default: 5, min: 1, max: 1000, suffix: 's' },
+      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%', tooltip: 'Choose how loud you want the sound effects. If you type in 0, there will be no sound effects' },
+      { id: 'rain', label: 'Rain CP Cost', type: 'number', param: 'rain', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'rainTime', label: 'Rain Duration', type: 'number', param: 'rainTime', default: 5, min: 1, max: 1000, suffix: 's', tooltip: 'Choose how many seconds you want the effect to stay on screen' },
+      { id: 'heavyrain', label: 'Heavy Rain CP Cost', type: 'number', param: 'heavyrain', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'heavyrainTime', label: 'Heavy Rain Duration', type: 'number', param: 'heavyrainTime', default: 5, min: 1, max: 1000, suffix: 's', tooltip: 'Choose how many seconds you want the effect to stay on screen' },
+      { id: 'snow', label: 'Snow CP Cost', type: 'number', param: 'snow', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'snowTime', label: 'Snow Duration', type: 'number', param: 'snowTime', default: 5, min: 1, max: 1000, suffix: 's', tooltip: 'Choose how many seconds you want the effect to stay on screen' },
+      { id: 'blizzard', label: 'Blizzard CP Cost', type: 'number', param: 'blizzard', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'blizzardTime', label: 'Blizzard Duration', type: 'number', param: 'blizzardTime', default: 5, min: 1, max: 1000, suffix: 's', tooltip: 'Choose how many seconds you want the effect to stay on screen' },
+      { id: 'hail', label: 'Hail CP Cost', type: 'number', param: 'hail', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'hailTime', label: 'Hail Duration', type: 'number', param: 'hailTime', default: 5, min: 1, max: 1000, suffix: 's', tooltip: 'Choose how many seconds you want the effect to stay on screen' },
+      { id: 'blossoms', label: 'Blossoms CP Cost', type: 'number', param: 'blossoms', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'blossomsTime', label: 'Blossoms Duration', type: 'number', param: 'blossomsTime', default: 5, min: 1, max: 1000, suffix: 's', tooltip: 'Choose how many seconds you want the effect to stay on screen' },
+      { id: 'lightning', label: 'Lightning CP Cost', type: 'number', param: 'lightning', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'rainbow', label: 'Rainbow CP Cost', type: 'number', param: 'rainbow', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'sunshine', label: 'Sunshine CP Cost', type: 'number', param: 'sunshine', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'leaf', label: 'Leaf CP Cost', type: 'number', param: 'leaf', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'leafTime', label: 'Leaf Duration', type: 'number', param: 'leafTime', default: 5, min: 1, max: 1000, suffix: 's', tooltip: 'Choose how many seconds you want the effect to stay on screen' },
     ],
   },
   {
@@ -152,15 +153,15 @@ const games: GameDef[] = [
       { key: 'confetti', name: 'Pixel Confetti', page: '/confetti/index.html', premium: true, preview: '/app-assets/images/games/pixelconfetti_square.gif', requires: 'addon_pixelconfetti' },
     ],
     settings: [
-      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%' },
-      { id: 'cpConfettiCost', label: 'Confetti CP Cost', type: 'number', param: 'cpConfettiCost', default: 100, min: 0, max: 100000 },
-      { id: 'cpConfettiIntensity', label: 'Confetti Intensity', type: 'number', param: 'cpConfettiIntensity', default: 300, min: 50, max: 10000 },
-      { id: 'cpBubblesCost', label: 'Bubbles CP Cost', type: 'number', param: 'cpBubblesCost', default: 100, min: 0, max: 100000 },
-      { id: 'cpBubblesIntensity', label: 'Bubbles Intensity', type: 'number', param: 'cpBubblesIntensity', default: 300, min: 50, max: 10000 },
-      { id: 'cpBalloonsCost', label: 'Balloons CP Cost', type: 'number', param: 'cpBalloonsCost', default: 100, min: 0, max: 100000 },
-      { id: 'cpBalloonsIntensity', label: 'Balloons Intensity', type: 'number', param: 'cpBalloonsIntensity', default: 20, min: 1, max: 1000 },
-      { id: 'cpHeartsCost', label: 'Hearts CP Cost', type: 'number', param: 'cpHeartsCost', default: 100, min: 0, max: 100000 },
-      { id: 'cpHeartsIntensity', label: 'Hearts Intensity', type: 'number', param: 'cpHeartsIntensity', default: 20, min: 1, max: 1000 },
+      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%', tooltip: 'Choose how loud you want the sound effects. If you type in 0, there will be no sound effects' },
+      { id: 'cpConfettiCost', label: 'Confetti CP Cost', type: 'number', param: 'cpConfettiCost', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'cpConfettiIntensity', label: 'Confetti Intensity', type: 'number', param: 'cpConfettiIntensity', default: 300, min: 50, max: 10000, tooltip: 'Choose how many confetti particles you want to appear on your screen' },
+      { id: 'cpBubblesCost', label: 'Bubbles CP Cost', type: 'number', param: 'cpBubblesCost', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'cpBubblesIntensity', label: 'Bubbles Intensity', type: 'number', param: 'cpBubblesIntensity', default: 300, min: 50, max: 10000, tooltip: 'Choose how many bubble particles you want to appear on your screen' },
+      { id: 'cpBalloonsCost', label: 'Balloons CP Cost', type: 'number', param: 'cpBalloonsCost', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'cpBalloonsIntensity', label: 'Balloons Intensity', type: 'number', param: 'cpBalloonsIntensity', default: 20, min: 1, max: 1000, tooltip: 'Choose how many balloon particles you want to appear on your screen' },
+      { id: 'cpHeartsCost', label: 'Hearts CP Cost', type: 'number', param: 'cpHeartsCost', default: 100, min: 0, max: 100000, tooltip: 'Choose the cost of this channel point redeem. If you type in 0, the redeem will not be created' },
+      { id: 'cpHeartsIntensity', label: 'Hearts Intensity', type: 'number', param: 'cpHeartsIntensity', default: 20, min: 1, max: 1000, tooltip: 'Choose how many heart particles you want to appear on your screen' },
     ],
   },
   {
@@ -178,20 +179,20 @@ const games: GameDef[] = [
       { key: 'pixelplinkohalloween', name: 'Halloween (Premium)', page: '/plinko/halloween.html', premium: true, preview: '/app-assets/images/games/pixelplinkohalloween.gif', requires: 'addon_plinko_halloween', seasonal: 'halloween' },
     ],
     settings: [
-      { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true },
-      { id: 'clouds', label: 'Clouds', type: 'toggle', param: 'clouds', default: false },
-      { id: 'hideTilStart', label: 'Hide Until Start', type: 'toggle', param: 'hideTilStart', default: true },
-      { id: 'pegOpacity', label: 'Peg Opacity', type: 'number', param: 'pegOpacity', default: 15, min: 0, max: 100, suffix: '%' },
-      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%' },
-      { id: 'notifVolume', label: 'Notification Volume', type: 'number', param: 'notifVolume', default: 25, min: 0, max: 100, suffix: '%' },
-      { id: 'commandOn', label: 'Enable Chat Command', type: 'toggle', param: 'commandOn', default: true },
-      { id: 'command', label: 'Command', type: 'text', param: 'command', default: 'plinko' },
-      { id: 'cooldown', label: 'Refresh Timer', type: 'number', param: 'cooldown', default: 90, min: 60, max: 3600, suffix: 's' },
-      { id: 'chat', label: 'Announce in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true },
-      { id: 'cpPlinkCost', label: 'CP Per Plink Cost', type: 'number', param: 'cpPlinkCost', default: 0, min: 0, max: 100000, requiresAuth: true },
-      { id: 'cpQueueCost', label: 'CP Group Plinko Cost', type: 'number', param: 'cpQueueCost', default: 0, min: 0, max: 100000, requiresAuth: true },
-      { id: 'readyTime', label: 'Game Ready Delay', type: 'number', param: 'readyTime', default: 0, min: 0, max: 3600, suffix: 's' },
-      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true },
+      { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true, tooltip: 'Check this for a background behind the game. Uncheck for a transparent background' },
+      { id: 'clouds', label: 'Clouds', type: 'toggle', param: 'clouds', default: false, tooltip: 'When checked, shows semi-transparent clouds moving on the screen' },
+      { id: 'hideTilStart', label: 'Hide Until Start', type: 'toggle', param: 'hideTilStart', default: true, tooltip: 'Hides the game until someone types the command in chat' },
+      { id: 'pegOpacity', label: 'Peg Opacity', type: 'number', param: 'pegOpacity', default: 15, min: 0, max: 100, suffix: '%', tooltip: 'How translucent the pegs should be when backgrounds are disabled' },
+      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%', tooltip: 'Choose how loud you want the sound effects. If you don\'t want any, type in 0' },
+      { id: 'notifVolume', label: 'Notification Volume', type: 'number', param: 'notifVolume', default: 25, min: 0, max: 100, suffix: '%', tooltip: 'How loud the notification sound for group plinko is. Type 0 for no sound' },
+      { id: 'commandOn', label: 'Enable Chat Command', type: 'toggle', param: 'commandOn', default: true, tooltip: 'Uncheck if you want viewers to only play through channel point redeems' },
+      { id: 'command', label: 'Command', type: 'text', param: 'command', default: 'plinko', tooltip: 'If you want a different chat command instead of !plinko, type it in here' },
+      { id: 'cooldown', label: 'Refresh Timer', type: 'number', param: 'cooldown', default: 90, min: 60, max: 3600, suffix: 's', tooltip: 'Choose how often you want the game to reset' },
+      { id: 'chat', label: 'Announce in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true, tooltip: 'Announcements in chat when someone lands in the middle' },
+      { id: 'cpPlinkCost', label: 'CP Per Plink Cost', type: 'number', param: 'cpPlinkCost', default: 0, min: 0, max: 100000, requiresAuth: true, tooltip: 'Channel point cost per play. Type 0 to disable' },
+      { id: 'cpQueueCost', label: 'CP Group Plinko Cost', type: 'number', param: 'cpQueueCost', default: 0, min: 0, max: 100000, requiresAuth: true, tooltip: 'Creates a Group Plinko channel point redeem. All players queue and release together 60s after redeem' },
+      { id: 'readyTime', label: 'Game Ready Delay', type: 'number', param: 'readyTime', default: 0, min: 0, max: 3600, suffix: 's', tooltip: 'Set a starting amount of time before the game will accept players' },
+      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true, tooltip: 'Customize the message format for chat announcements' },
     ],
   },
   {
@@ -263,22 +264,22 @@ const games: GameDef[] = [
       ]},
     ],
     settings: [
-      { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true },
-      { id: 'clouds', label: 'Clouds', type: 'toggle', param: 'clouds', default: false },
-      { id: 'hideTilDrop', label: 'Hide Until Drop', type: 'toggle', param: 'hideTilDrop', default: true },
-      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%' },
-      { id: 'notifVolume', label: 'Notification Volume', type: 'number', param: 'notifVolume', default: 25, min: 0, max: 100, suffix: '%' },
-      { id: 'commandOn', label: 'Enable Chat Command', type: 'toggle', param: 'commandOn', default: true },
-      { id: 'command', label: 'Drop Command', type: 'text', param: 'command', default: 'drop' },
-      { id: 'cooldown', label: 'Refresh Timer', type: 'number', param: 'cooldown', default: 30, min: 1, max: 3600, suffix: 's' },
-      { id: 'droplets', label: 'Bit Cheers', type: 'toggle', param: 'droplets', default: true },
-      { id: 'chat', label: 'Score in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true },
-      { id: 'cpDropCost', label: 'CP Drop Cost', type: 'number', param: 'cpDropCost', default: 0, min: 0, max: 100000, requiresAuth: true },
-      { id: 'cpDropletsCost', label: 'CP Cheers Cost', type: 'number', param: 'cpDropletsCost', default: 0, min: 0, max: 100000, requiresAuth: true },
-      { id: 'cpQueueCost', label: 'CP Group Drop Cost', type: 'number', param: 'cpQueueCost', default: 0, min: 0, max: 100000, requiresAuth: true },
-      { id: 'readyTime', label: 'Game Ready Delay', type: 'number', param: 'readyTime', default: 0, min: 0, max: 3600, suffix: 's' },
-      { id: 'raidMode', label: 'Raid Drop Timer', type: 'number', param: 'raidMode', default: 0, min: 0, max: 3600, suffix: 's' },
-      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true },
+      { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true, tooltip: 'Check this for a background behind the parachutes. Uncheck for a transparent background' },
+      { id: 'clouds', label: 'Clouds', type: 'toggle', param: 'clouds', default: false, tooltip: 'When checked, shows semi-transparent clouds moving on the screen' },
+      { id: 'hideTilDrop', label: 'Hide Until Drop', type: 'toggle', param: 'hideTilDrop', default: true, tooltip: 'Hides the target until someone drops in the game' },
+      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%', tooltip: 'Choose how loud you want the sound effects. Type 0 for no sound' },
+      { id: 'notifVolume', label: 'Notification Volume', type: 'number', param: 'notifVolume', default: 25, min: 0, max: 100, suffix: '%', tooltip: 'How loud the notification sound for group drop is. Type 0 for no sound' },
+      { id: 'commandOn', label: 'Enable Chat Command', type: 'toggle', param: 'commandOn', default: true, tooltip: 'Uncheck if you want viewers to only drop through channel point redeems' },
+      { id: 'command', label: 'Drop Command', type: 'text', param: 'command', default: 'drop', tooltip: 'If you want a different chat command instead of !drop, type it in here' },
+      { id: 'cooldown', label: 'Refresh Timer', type: 'number', param: 'cooldown', default: 30, min: 1, max: 3600, suffix: 's', tooltip: 'Choose how often you want the target to reset' },
+      { id: 'droplets', label: 'Bit Cheers', type: 'toggle', param: 'droplets', default: true, tooltip: 'Bit cheers trigger random items (droplets) that fall and interact with parachutes' },
+      { id: 'chat', label: 'Score in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true, tooltip: 'Announcements in chat whenever someone lands on the target' },
+      { id: 'cpDropCost', label: 'CP Drop Cost', type: 'number', param: 'cpDropCost', default: 0, min: 0, max: 100000, requiresAuth: true, tooltip: 'Channel point cost per drop. Type 0 to disable' },
+      { id: 'cpDropletsCost', label: 'CP Cheers Cost', type: 'number', param: 'cpDropletsCost', default: 0, min: 0, max: 100000, requiresAuth: true, tooltip: 'Same as Bit Cheers but redeemable with channel points' },
+      { id: 'cpQueueCost', label: 'CP Group Drop Cost', type: 'number', param: 'cpQueueCost', default: 0, min: 0, max: 100000, requiresAuth: true, tooltip: 'Creates a Group Drop channel point redeem. All drops queue and release together 60s after redeem' },
+      { id: 'readyTime', label: 'Game Ready Delay', type: 'number', param: 'readyTime', default: 0, min: 0, max: 3600, suffix: 's', tooltip: 'Set a starting amount of time before the game will accept players' },
+      { id: 'raidMode', label: 'Raid Drop Timer', type: 'number', param: 'raidMode', default: 0, min: 0, max: 3600, suffix: 's', tooltip: 'Duration of auto drops after a raid. Type 0 to disable' },
+      { id: 'messageFormat', label: 'Message Format', type: 'text', param: 'messageFormat', default: '', requiresAuth: true, tooltip: 'Customize the message format for chat announcements' },
     ],
   },
   {
@@ -294,14 +295,14 @@ const games: GameDef[] = [
       { key: 'chatflakes', name: 'Chat Flakes', page: '/flakes/index.html', premium: true, preview: '/app-assets/images/games/chatflakes.gif', requires: 'addon_chatflakes' },
     ],
     settings: [
-      { id: 'nth', label: 'Message Interval', type: 'number', param: 'nth', default: 1, min: 1, max: 1000 },
-      { id: 'num', label: 'Particles per Message', type: 'number', param: 'num', default: 3, min: 1, max: 100 },
-      { id: 'timer', label: 'Timer Particles', type: 'number', param: 'timer', default: 3000, min: 0, max: 1000000, suffix: 'ms' },
-      { id: 'rain', label: 'Rain Particles', type: 'toggle', param: 'rain', default: true },
-      { id: 'leaves', label: 'Leaf Particles', type: 'toggle', param: 'leaves', default: false },
-      { id: 'snow', label: 'Snow Particles', type: 'toggle', param: 'snow', default: false },
-      { id: 'blossoms', label: 'Blossom Particles', type: 'toggle', param: 'blossoms', default: false },
-      { id: 'hearts', label: 'Heart Particles', type: 'toggle', param: 'hearts', default: false },
+      { id: 'nth', label: 'Message Interval', type: 'number', param: 'nth', default: 1, min: 1, max: 1000, tooltip: 'How often particles appear. 1 = every message, 2 = every 2nd message, etc.' },
+      { id: 'num', label: 'Particles per Message', type: 'number', param: 'num', default: 3, min: 1, max: 100, tooltip: 'How many particles appear with each triggered chat message' },
+      { id: 'timer', label: 'Timer Particles', type: 'number', param: 'timer', default: 3000, min: 0, max: 1000000, suffix: 'ms', tooltip: 'If you want particles on screen at all times regardless of chat activity, set a timer in ms. Type 0 to disable' },
+      { id: 'rain', label: 'Rain Particles', type: 'toggle', param: 'rain', default: true, tooltip: 'Enable rain particles from chat' },
+      { id: 'leaves', label: 'Leaf Particles', type: 'toggle', param: 'leaves', default: false, tooltip: 'Enable leaf particles from chat' },
+      { id: 'snow', label: 'Snow Particles', type: 'toggle', param: 'snow', default: false, tooltip: 'Enable snow particles from chat' },
+      { id: 'blossoms', label: 'Blossom Particles', type: 'toggle', param: 'blossoms', default: false, tooltip: 'Enable cherry blossom particles from chat' },
+      { id: 'hearts', label: 'Heart Particles', type: 'toggle', param: 'hearts', default: false, tooltip: 'Enable heart particles from chat' },
     ],
   },
   {
@@ -317,15 +318,15 @@ const games: GameDef[] = [
       { key: 'pixelhillrollchristmas', name: 'Christmas (Free)', page: '/hillroll/christmas.html', preview: '/app-assets/images/games/hill_christmas_gif.gif', seasonal: 'christmas' },
     ],
     settings: [
-      { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true },
-      { id: 'clouds', label: 'Clouds', type: 'toggle', param: 'clouds', default: true },
-      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%' },
-      { id: 'command', label: 'Command', type: 'text', param: 'command', default: 'hill' },
-      { id: 'cooldown', label: 'Refresh Timer', type: 'number', param: 'cooldown', default: 90, min: 60, max: 3600, suffix: 's' },
-      { id: 'defaultCountdown', label: 'Default Countdown', type: 'number', param: 'defaultCountdown', default: 0, min: 0, max: 600, suffix: 's' },
-      { id: 'hideInstructions', label: 'Hide Instructions', type: 'toggle', param: 'hideInstructions', default: false },
-      { id: 'hideTime', label: 'Hide Timer', type: 'toggle', param: 'hideTime', default: false },
-      { id: 'chat', label: 'Results in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true },
+      { id: 'overlay', label: 'Background', type: 'toggle', param: 'overlay', default: true, tooltip: 'Check this for a background behind the game. Uncheck for a transparent background' },
+      { id: 'clouds', label: 'Clouds', type: 'toggle', param: 'clouds', default: true, tooltip: 'When checked, shows semi-transparent clouds moving on the screen' },
+      { id: 'volume', label: 'Volume', type: 'number', param: 'volume', default: 25, min: 0, max: 100, suffix: '%', tooltip: 'Choose how loud you want the sound effects. Type 0 for no sound' },
+      { id: 'command', label: 'Command', type: 'text', param: 'command', default: 'hill', tooltip: 'If you want a different chat command instead of !hill, type it in here' },
+      { id: 'cooldown', label: 'Refresh Timer', type: 'number', param: 'cooldown', default: 90, min: 60, max: 3600, suffix: 's', tooltip: 'Choose how often you want the game to reset' },
+      { id: 'defaultCountdown', label: 'Default Countdown', type: 'number', param: 'defaultCountdown', default: 0, min: 0, max: 600, suffix: 's', tooltip: 'Set a default countdown time before the rolling starts' },
+      { id: 'hideInstructions', label: 'Hide Instructions', type: 'toggle', param: 'hideInstructions', default: false, tooltip: 'Hides instructions at the top of the game' },
+      { id: 'hideTime', label: 'Hide Timer', type: 'toggle', param: 'hideTime', default: false, tooltip: 'Hides the timer at the top of the game' },
+      { id: 'chat', label: 'Results in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true, tooltip: 'Results from a group hill posted in chat' },
     ],
   },
   {
@@ -349,16 +350,16 @@ const games: GameDef[] = [
       { key: 'fairyforest', name: 'Fairy Forest (Free)', page: '/maze/fairy.html', preview: '/app-assets/images/games/fairyforest.gif' },
     ],
     settings: [
-      { id: 'bosses', label: 'Boss Count', type: 'number', param: 'bosses', default: 1, min: 0, max: 100 },
+      { id: 'bosses', label: 'Boss Count', type: 'number', param: 'bosses', default: 1, min: 0, max: 100, tooltip: 'How many bosses to spawn in the maze' },
       { id: 'bossEffect', label: 'Boss Effect', type: 'select', param: 'bossEffect', default: 'steal', options: [
         { value: 'steal', label: 'Steal Points' }, { value: 'base', label: 'Return to Spawn' },
-      ]},
-      { id: 'prizes', label: 'Prize Count', type: 'number', param: 'prizes', default: 7, min: 1, max: 214 },
-      { id: 'traps', label: 'Trap Count', type: 'number', param: 'traps', default: 5, min: 0, max: 214 },
+      ], tooltip: 'Return to spawn sends players back to center; Steal points takes a random percentage' },
+      { id: 'prizes', label: 'Prize Count', type: 'number', param: 'prizes', default: 7, min: 1, max: 214, tooltip: 'How many pickable items in the maze' },
+      { id: 'traps', label: 'Trap Count', type: 'number', param: 'traps', default: 5, min: 0, max: 214, tooltip: 'How many traps in the maze' },
       { id: 'trapEffect', label: 'Trap Effect', type: 'select', param: 'trapEffect', default: '0', options: [
         { value: '0', label: 'Points Penalty' }, { value: '1', label: 'Trap Tunnels' },
-      ]},
-      { id: 'chat', label: 'Results in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true },
+      ], tooltip: 'Points penalty removes 5 points; Trap tunnels teleports to another random trap' },
+      { id: 'chat', label: 'Results in Chat', type: 'toggle', param: 'chat', default: false, requiresAuth: true, tooltip: 'Results posted in chat after ending the game with !end' },
     ],
   },
 ];
@@ -658,9 +659,10 @@ function LinkGenerator({ game, selectedTheme, onThemeChange }: { game: GameDef; 
               <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2">
                 {visibleSettings.map((s) => (
                   <div key={s.id} className="flex flex-col gap-1">
-                    <label className="text-xs font-medium text-[var(--color-pp-text-muted)]">
+                    <label className="text-xs font-medium text-[var(--color-pp-text-muted)] cursor-help" title={s.tooltip || ''}>
                       {t(`gameData.settings.${game.id}.${s.id}`)}
                       {s.suffix && <span className="ml-1 text-[10px] text-[var(--color-pp-text-muted)]">({s.suffix})</span>}
+                      {s.tooltip && <span className="ml-1 text-[10px] text-[var(--color-pp-text-muted)]">ⓘ</span>}
                       {s.requiresAuth && !isLoggedIn && <span className="ml-1 text-[10px] text-amber-600">{t('games.requiresLogin')}</span>}
                     </label>
                     {s.type === 'toggle' && (
@@ -800,26 +802,26 @@ function GamesContent() {
 
   if (selectedGame) {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <Link href="/games" className="mb-6 inline-flex items-center gap-2 text-sm text-[var(--color-pp-accent)] hover:underline">
+      <div className="mx-auto max-w-4xl px-4 py-6 sm:px-6 lg:px-8">
+        <Link href="/games" className="mb-3 inline-flex items-center gap-2 text-sm font-bold text-[var(--color-pp-headings)] hover:underline">
           &larr; {t('games.allGames')}
         </Link>
 
         <div className="rounded-2xl border border-[var(--color-pp-border)] bg-[var(--color-pp-card)] overflow-hidden">
-          {/* Hero image */}
-          <div className="relative h-64 bg-gradient-to-br from-purple-900/40 to-blue-900/40 flex items-center justify-center">
-            <Image
-              key={currentTheme?.key}
-              src={assetPath(currentTheme?.preview || selectedGame.images[0])}
-              alt={`${selectedGame.name} - ${currentTheme?.name || ''}`}
-              width={400}
-              height={250}
-              className="pixelated max-h-56 w-auto object-contain"
-              unoptimized
-            />
-          </div>
-
-          <div className="p-8">
+          <div className="flex flex-col md:flex-row">
+            {/* Preview image on right for md+, on top for mobile */}
+            <div className="md:order-2 flex items-center justify-center bg-gradient-to-br from-purple-900/40 to-blue-900/40 p-6 md:w-80 md:shrink-0">
+              <Image
+                key={currentTheme?.key}
+                src={assetPath(currentTheme?.preview || selectedGame.images[0])}
+                alt={`${selectedGame.name} - ${currentTheme?.name || ''}`}
+                width={300}
+                height={200}
+                className="pixelated max-h-48 w-auto object-contain"
+                unoptimized
+              />
+            </div>
+            <div className="flex-1 p-8 md:order-1">
             <div className="mb-4 flex items-center gap-3">
               <h1 className="text-3xl font-bold text-[var(--color-pp-headings)]">{t(`gameData.${selectedGame.id}.name`)}</h1>
               <span className={`rounded-full px-3 py-1 text-xs font-medium ${selectedGame.badgeColor}`}>
@@ -839,7 +841,7 @@ function GamesContent() {
                     <button
                       key={thm.key}
                       onClick={() => handleThemeChange(thm.key)}
-                      className={`rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
+                      className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-all cursor-pointer ${
                         thm.key === selectedTheme
                           ? 'ring-2 ring-[var(--color-pp-accent)] bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]'
                           : thm.premium
@@ -847,9 +849,14 @@ function GamesContent() {
                             : 'bg-[var(--color-pp-success)]/15 text-[var(--color-pp-success)] hover:bg-[var(--color-pp-success)]/25'
                       }`}
                     >
+                      {thm.preview && (
+                        <img src={assetPath(thm.preview)} alt="" className="h-5 w-5 rounded object-cover" style={{ imageRendering: 'pixelated' }} />
+                      )}
                       {thm.premium && thm.requires && !account?.owned?.includes(thm.requires) ? '🔒 ' : ''}
                       {thm.premium && thm.requires && account?.owned?.includes(thm.requires) ? '✓ ' : ''}
-                      {translateThemeName(thm.name, t)}
+                      {translateThemeName(thm.name.replace(' (Premium)', '').replace(' (Free)', ''), t)}
+                      {thm.premium && <span className="ml-0.5">⭐</span>}
+                      {!thm.premium && <span className="ml-0.5 text-[10px]">{t('gameData.freeTag')}</span>}
                       {thm.seasonal && seasonalBadges[thm.seasonal] && (
                         <span className={`ml-1 text-[10px] ${seasonalBadges[thm.seasonal].color} rounded px-1`}>
                           {seasonalBadges[thm.seasonal].emoji}
@@ -863,6 +870,7 @@ function GamesContent() {
 
             {/* Link Generator */}
             <LinkGenerator game={selectedGame} selectedTheme={selectedTheme} onThemeChange={handleThemeChange} />
+            </div>
           </div>
         </div>
       </div>

@@ -98,6 +98,8 @@ export default function MarketPage() {
   const [selectedCoinPkg, setSelectedCoinPkg] = useState<(typeof coinPackages)[0] | null>(null);
   const [coinProcessing, setCoinProcessing] = useState(false);
   const [confirmItem, setConfirmItem] = useState<CatalogItem | null>(null);
+  const [confirmGiftItem, setConfirmGiftItem] = useState<CatalogItem | null>(null);
+  const [giftCode, setGiftCode] = useState<{ code: string; url: string; itemName: string } | null>(null);
   const [buyingItem, setBuyingItem] = useState<string | null>(null);
   const [notification, setNotification] = useState<{ type: string; message: string } | null>(null);
   const [paypalReady, setPaypalReady] = useState(false);
@@ -124,7 +126,22 @@ export default function MarketPage() {
   }, []);
 
   const owned = useMemo(() => {
-    return account?.styles ? new Set<string>(Object.values(account.styles).flat()) : new Set<string>();
+    const set = new Set<string>();
+    // account.owned is the authoritative list of purchased items
+    if (account?.owned) {
+      for (const id of account.owned) set.add(id);
+    }
+    // Also include equipped items from styles as a fallback
+    if (account?.styles) {
+      for (const ids of Object.values(account.styles)) {
+        if (Array.isArray(ids)) {
+          for (const id of ids) set.add(id);
+        } else if (typeof ids === 'string') {
+          set.add(ids);
+        }
+      }
+    }
+    return set;
   }, [account]);
 
   const catalogMap = useMemo(() => {
@@ -219,7 +236,40 @@ export default function MarketPage() {
       }
       setBuyingItem(null);
     },
-    [token, buyingItem, account, cheapestUnownedCost, refreshAccount, showNotification]
+    [token, buyingItem, account, cheapestUnownedCost, refreshAccount, showNotification, t]
+  );
+
+  const giftItem = useCallback(
+    async (item: CatalogItem) => {
+      if (!token || buyingItem) return;
+      setConfirmGiftItem(null);
+      setBuyingItem(item.id);
+      const cost = item.sale ? Math.floor(item.cost / 2) : item.cost;
+      if ((account?.coins ?? 0) < cost) {
+        showNotification('error', t('market.notEnoughCoins'));
+        setBuyingItem(null);
+        return;
+      }
+      try {
+        const result = await fetch(`${API_URL}/shop/buy`, {
+          method: 'POST',
+          headers: { Twitch: token, 'Content-Type': 'application/json' },
+          body: JSON.stringify({ item: item.id, coupon: true }),
+        }).then((r) => r.json());
+        if (result.error) throw new Error(result.error);
+        await refreshAccount();
+        const code = String(result.code || '').trim();
+        if (!code) throw new Error('Gift code was not returned');
+        const url = `${window.location.origin}/v2/redeem/?code=${encodeURIComponent(code)}`;
+        setGiftCode({ code, url, itemName: item.name });
+        showNotification('success', `${t('market.giftCodeCreated')} ${item.name}`);
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : 'Gift creation failed';
+        showNotification('error', message);
+      }
+      setBuyingItem(null);
+    },
+    [token, buyingItem, account, refreshAccount, showNotification, t]
   );
 
   // Handle Stripe Checkout
@@ -530,6 +580,85 @@ export default function MarketPage() {
         </div>
       )}
 
+      {/* Gift Confirm Modal */}
+      {confirmGiftItem && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" onClick={() => setConfirmGiftItem(null)}>
+          <div className="mx-4 w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-4 flex flex-col items-center gap-3 text-center">
+              <Image src={getItemPreview(confirmGiftItem)} alt={confirmGiftItem.name} width={64} height={64} className="pixelated" unoptimized />
+              <div>
+                <h3 className="text-lg font-bold text-[var(--color-pp-headings)]">{t('market.giftThisItem')}</h3>
+                <p className="text-sm font-medium text-[var(--color-pp-text)]">{confirmGiftItem.name}</p>
+              </div>
+              <p className="text-sm text-[var(--color-pp-text-muted)]">
+                {t('market.thisWillUse')}{' '}
+                <span className="font-semibold text-[var(--color-pp-text)]">
+                  {confirmGiftItem.sale ? Math.floor(confirmGiftItem.cost / 2) : confirmGiftItem.cost}
+                </span>{' '}
+                {t('market.coinsUnit')}
+              </p>
+              <p className="text-xs leading-relaxed text-[var(--color-pp-text-muted)]">{t('market.giftDescription')}</p>
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setConfirmGiftItem(null)}
+                className="flex-1 rounded-lg border border-[var(--color-pp-border)] py-2.5 text-sm font-medium text-[var(--color-pp-text-muted)] transition hover:bg-[var(--color-pp-card-hover)]"
+              >
+                {t('common.cancel')}
+              </button>
+              <button
+                onClick={() => giftItem(confirmGiftItem)}
+                className="flex-1 rounded-lg bg-cyan-600 py-2.5 text-sm font-medium text-white transition hover:bg-cyan-700"
+              >
+                {t('market.createGiftCode')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Gift Code Modal */}
+      {giftCode && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="mx-4 w-full max-w-md rounded-2xl bg-white p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
+            <div className="mb-5 text-center">
+              <h3 className="mb-1 text-xl font-bold text-[var(--color-pp-headings)]">{t('market.giftCodeCreated')}</h3>
+              <p className="text-sm text-[var(--color-pp-text-muted)]">{giftCode.itemName}</p>
+              <p className="mt-2 text-xs text-[var(--color-pp-text-muted)]">{t('market.saveGiftCodeNote')}</p>
+            </div>
+            <div className="space-y-4">
+              <div>
+                <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-pp-text-muted)]">{t('market.giftCode')}</div>
+                <div className="rounded-lg border border-cyan-200 bg-cyan-50 px-3 py-2 text-center font-mono text-lg font-bold text-cyan-900">
+                  {giftCode.code}
+                </div>
+              </div>
+              <div>
+                <div className="mb-1 text-xs font-semibold uppercase tracking-wide text-[var(--color-pp-text-muted)]">{t('market.redeemLink')}</div>
+                <div className="break-all rounded-lg border border-[var(--color-pp-border)] bg-[var(--color-pp-bg)]/50 px-3 py-2 text-xs text-[var(--color-pp-text)]">
+                  {giftCode.url}
+                </div>
+              </div>
+              <button
+                onClick={async () => {
+                  await navigator.clipboard.writeText(giftCode.url);
+                  showNotification('success', t('market.giftLinkCopied'));
+                }}
+                className="w-full rounded-lg bg-cyan-600 py-2.5 text-sm font-medium text-white transition hover:bg-cyan-700"
+              >
+                {t('market.copyGiftLink')}
+              </button>
+              <button
+                onClick={() => setGiftCode(null)}
+                className="w-full rounded-lg border border-[var(--color-pp-border)] py-2.5 text-sm font-medium text-[var(--color-pp-text-muted)] transition hover:bg-[var(--color-pp-card-hover)]"
+              >
+                {t('common.close')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Notification Toast */}
       {notification && (
         <div
@@ -605,8 +734,8 @@ export default function MarketPage() {
                       : 'border-[var(--color-pp-border)] bg-[var(--color-pp-card)] hover:border-[var(--color-pp-accent)]/30'
                 }`}
               >
-                <div className="mb-2 flex h-20 items-center justify-center">
-                  <Image src={getItemPreview(item)} alt={item.name} width={48} height={48} className="pixelated" unoptimized />
+                <div className={`mb-2 flex items-center justify-center ${isBundle ? 'h-32' : 'h-20'}`}>
+                  <Image src={getItemPreview(item)} alt={item.name} width={isBundle ? 120 : 48} height={isBundle ? 80 : 48} className={`pixelated ${isBundle ? 'object-contain' : ''}`} unoptimized />
                 </div>
                 <span
                   className={`mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-medium capitalize ${typeColors[item.type] || 'bg-[var(--color-pp-bg)]/50 text-[var(--color-pp-text-muted)]'}`}
@@ -618,17 +747,17 @@ export default function MarketPage() {
                   <p className="mt-0.5 text-[10px] text-[var(--color-pp-text-muted)]">{bundleItemIds.length} {t('market.itemsIncluded')}</p>
                 )}
                 <div className="mt-1.5">
-                  {isOwned ? (
-                    <span className="text-xs font-medium text-[var(--color-pp-success)]">{t('market.owned')}</span>
-                  ) : (
-                    <>
-                      <span className="text-sm text-[var(--color-pp-text-muted)]">
+                  <div className="space-y-1.5">
+                    {isOwned && <span className="block text-xs font-medium text-[var(--color-pp-success)]">{t('market.owned')}</span>}
+                    {!isOwned && (
+                      <>
+                        <span className="text-sm text-[var(--color-pp-text-muted)]">
                         <Image
                           src={assetPath('/app-assets/images/icon/plush_coin.gif')}
                           alt=""
-                          width={16}
-                          height={16}
-                          className="pixelated mr-1 inline align-[-2px]"
+                          width={24}
+                          height={24}
+                          className="pixelated mr-1 inline align-[-6px]"
                           unoptimized
                         />
                         {item.sale ? (
@@ -647,21 +776,37 @@ export default function MarketPage() {
                           </span>
                         )}
                       </span>
-                      {isLoggedIn && (
+                      </>
+                    )}
+                    {isLoggedIn && (
+                      <div className={!isOwned ? 'grid grid-cols-2 gap-1.5' : ''}>
+                        {!isOwned && (
+                          <button
+                            onClick={() => setConfirmItem(item)}
+                            disabled={!!buyingItem}
+                            className={`w-full cursor-pointer rounded-md py-1 text-[11px] font-medium text-white transition disabled:opacity-50 ${
+                              isBundle
+                                ? 'bg-cyan-600 hover:bg-cyan-700'
+                                : 'bg-[var(--color-pp-accent)] hover:bg-[#4a7de0]'
+                            }`}
+                          >
+                            {buyingItem === item.id ? '...' : isBundle ? t('market.buyBundle') : t('market.buy')}
+                          </button>
+                        )}
                         <button
-                          onClick={() => setConfirmItem(item)}
+                          onClick={() => setConfirmGiftItem(item)}
                           disabled={!!buyingItem}
-                          className={`mt-1.5 w-full cursor-pointer rounded-md py-1 text-[11px] font-medium text-white transition disabled:opacity-50 ${
+                          className={`w-full cursor-pointer rounded-md py-1 text-[11px] font-medium text-white transition disabled:opacity-50 ${
                             isBundle
-                              ? 'bg-cyan-600 hover:bg-cyan-700'
-                              : 'bg-[var(--color-pp-accent)] hover:bg-[#4a7de0]'
+                              ? 'bg-cyan-500 hover:bg-cyan-600'
+                              : 'bg-cyan-600 hover:bg-cyan-700'
                           }`}
                         >
-                          {buyingItem === item.id ? '...' : isBundle ? t('market.buyBundle') : t('market.buy')}
+                          {buyingItem === item.id ? '...' : t('market.gift')}
                         </button>
-                      )}
-                    </>
-                  )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             );

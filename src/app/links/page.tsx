@@ -44,6 +44,8 @@ const banners = [
   { src: '/app-assets/images/pages/banner1.png', alt: 'PixelPlush Banner 1' },
   { src: '/app-assets/images/pages/banner2.png', alt: 'PixelPlush Banner 2' },
   { src: '/app-assets/images/pages/banner3.png', alt: 'PixelPlush Banner 3' },
+  { src: '/app-assets/images/pages/banner4.png', alt: 'PixelPlush Banner 4' },
+  { src: '/app-assets/images/pages/banners_2026.png', alt: 'PixelPlush Banner 2026' },
 ];
 
 const legacyGames = [
@@ -136,13 +138,11 @@ export default function LinksPage() {
         <div className="space-y-4">
           {banners.map((banner) => (
             <div key={banner.src} className="overflow-hidden rounded-lg border border-white/5">
-              <Image
+              <img
                 src={assetPath(banner.src)}
                 alt={banner.alt}
-                width={800}
-                height={200}
-                className="mx-auto max-w-full object-contain"
-                unoptimized
+                className="mx-auto block"
+                style={{ imageRendering: 'pixelated' }}
               />
             </div>
           ))}

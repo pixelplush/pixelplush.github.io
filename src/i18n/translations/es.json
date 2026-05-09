@@ -132,7 +132,17 @@
     "free": "GRATIS",
     "thisWillUse": "Esto gastará",
     "coinsUnit": "monedas",
-    "youGot": "Obtuviste"
+    "youGot": "Obtuviste",
+    "gift": "Regalar",
+    "createGiftCode": "Crear código de regalo",
+    "giftThisItem": "Regalar este artículo",
+    "giftDescription": "Esto gastará monedas ahora y creará un código de canje que puedes compartir con otra persona.",
+    "giftCodeCreated": "¡Código de regalo creado!",
+    "copyGiftLink": "Copiar enlace de regalo",
+    "giftLinkCopied": "¡Enlace de regalo copiado!",
+    "redeemLink": "Enlace de canje",
+    "giftCode": "Código de regalo",
+    "saveGiftCodeNote": "Copia o guarda este código antes de cerrar esta ventana."
   },
   "customize": {
     "title": "Vestidor",

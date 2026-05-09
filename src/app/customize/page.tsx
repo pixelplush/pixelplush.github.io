@@ -302,16 +302,50 @@ function CharacterPreview({
 
   const isEmpty = resolvedItems.length === 0;
 
+  const [allLoaded, setAllLoaded] = useState(false);
+
+  // Preload all frames when items change
+  useEffect(() => {
+    if (resolvedItems.length === 0) {
+      setAllLoaded(true);
+      return;
+    }
+    setAllLoaded(false);
+    const urls = new Set<string>();
+    const directions = ['front', 'left', 'back', 'right'];
+    for (const { item } of resolvedItems) {
+      for (const dir of directions) {
+        for (let f = 0; f < 10; f++) {
+          const url = getItemFrameUrl(item, dir, f);
+          if (url) urls.add(url);
+        }
+      }
+    }
+    let cancelled = false;
+    Promise.all(
+      Array.from(urls).map(url => loadImage(url))
+    ).then(() => {
+      if (!cancelled) setAllLoaded(true);
+    });
+    return () => { cancelled = true; };
+  }, [resolvedItems, loadImage]);
+
   return (
     <div>
       <div className="relative rounded-lg bg-[var(--color-pp-bg)]/50 p-2">
+        {/* Loading spinner */}
+        {!allLoaded && !isEmpty && (
+          <div className="flex h-[160px] items-center justify-center">
+            <div className="h-6 w-6 animate-spin rounded-full border-2 border-[var(--color-pp-accent)] border-t-transparent" />
+          </div>
+        )}
         {/* Canvas */}
         <canvas
           ref={canvasRef}
           width={200}
           height={160}
           className="mx-auto block"
-          style={{ imageRendering: 'pixelated' }}
+          style={{ imageRendering: 'pixelated', display: allLoaded ? 'block' : 'none' }}
         />
 
         {isEmpty && (
