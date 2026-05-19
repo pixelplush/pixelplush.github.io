@@ -494,7 +494,7 @@
                     $( ".user-name" ).text( account.displayName || account.username );
                     $( ".user-coins" ).text( account.coins );
         
-                    catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+                    catalog = await fetch( "https://cdn.pixelplush.dev/assets/catalog.json", {
                     }).then( r => r.json() );
         
                     // console.log( catalog );

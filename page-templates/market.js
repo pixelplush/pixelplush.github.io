@@ -116,7 +116,7 @@ ComfyTwitch.Check()
         $( ".logged-in" ).hide();
     }
 
-    catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+    catalog = await fetch( "https://cdn.pixelplush.dev/assets/catalog.json", {
     // catalog = await fetch( "http://localhost:10000/catalog.json", {
     }).then( r => r.json() );
 
@@ -325,7 +325,7 @@ function populateItemList( searchText = "" ) {
                             <h5 class="mb-0">${item.name}</h5>
                             <div class="pt-1">
                                 <button class="btn btn-sm btn-outline-secondary" type="button" disabled><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost )}</strong></button>
-                                ${item.cost === 0 ? "" : `<button class="btn btn-sm btn-outline-secondary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost )}</strong></button>`}
+                                ${item.cost === 0 ? "" : `<button class="btn btn-sm btn-outline-secondary" type="button" onclick="giftItem('${item.id}')"><img src="https://cdn.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost )}</strong></button>`}
                             </div>
                             </div>
                         </div>
@@ -349,7 +349,7 @@ function populateItemList( searchText = "" ) {
                         <h5 class="mb-0">${item.name}</h5>
                         <div class="pt-1">
                             <button class="btn btn-sm btn-outline-primary" type="button" onclick="buyItem('${item.id}')"><img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-success">${item.cost / 2}</span>` : item.cost )}</strong></button>
-                            ${item.cost === 0 ? "" : `<button class="btn btn-sm btn-outline-primary" type="button" onclick="giftItem('${item.id}')"><img src="https://www.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost )}</strong></button>`}
+                            ${item.cost === 0 ? "" : `<button class="btn btn-sm btn-outline-primary" type="button" onclick="giftItem('${item.id}')"><img src="https://cdn.pixelplush.dev/assets/items/gift_smal_redl.png" height="20px" class="pixelated" /> <strong>${item.sale ? `<span class="strikeout">${item.cost}</span> -> ` : ""}${item.cost === 0 ? "FREE" : ( item.sale ? `<span class="text-secondary">${item.cost / 2}</span>` : item.cost )}</strong></button>`}
                         </div>
                         </div>
                     </div>
@@ -385,9 +385,9 @@ function getItemPreview( itemId, frame ) {
     let dir = "";
     switch( item.type ) {
         case "bundle":
-            return `https://www.pixelplush.dev/assets/bundles/${item.path}`;
+            return `https://cdn.pixelplush.dev/assets/bundles/${item.path}`;
         case "add-on":
-            return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
+            return `https://cdn.pixelplush.dev/assets/add-ons/${item.path}`;
             // return `http://localhost:10000/add-ons/${item.path}`;
         case "pet":
             dir = `pets/${item.path}`;
@@ -430,7 +430,7 @@ function getItemPreview( itemId, frame ) {
             break;
     }
 
-    return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
+    return `https://cdn.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
 }
 
 async function buyItem( itemId ) {
