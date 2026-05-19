@@ -15,7 +15,7 @@ export async function fetchAccount(token: string) {
 }
 
 export async function fetchCatalog() {
-  return fetch("https://www.pixelplush.dev/assets/catalog.json").then((r) =>
+  return fetch("https://cdn.pixelplush.dev/assets/catalog.json").then((r) =>
     r.json()
   );
 }

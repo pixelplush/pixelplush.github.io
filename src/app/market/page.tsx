@@ -7,7 +7,7 @@ import { useTranslation } from '@/i18n';
 import { useEffect, useState, useMemo, useRef, useCallback } from 'react';
 import { assetPath } from '@/lib/assetPath';
 
-const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
+const CATALOG_URL = 'https://cdn.pixelplush.dev/assets/catalog.json';
 const API_URL = 'https://api.pixelplush.dev/v1';
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
 const PAYPAL_CLIENT_ID = 'Ac8ThQDkE1sBoHpJD4cgrd4nEyF0gYuUzQwNzSolvCVjGondlvAYy7mlQdFaV5RpspBzBFjnn9Mt8dep';
@@ -59,23 +59,23 @@ const filterLabelKeys: Record<FilterType, string> = {
 function getItemPreview(item: CatalogItem): string {
   switch (item.type) {
     case 'bundle':
-      return `https://www.pixelplush.dev/assets/bundles/${item.path}`;
+      return `https://cdn.pixelplush.dev/assets/bundles/${item.path}`;
     case 'add-on':
-      return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
+      return `https://cdn.pixelplush.dev/assets/add-ons/${item.path}`;
     case 'pet':
-      return `https://www.pixelplush.dev/assets/pets/${item.path}/${item.path}_front/${item.path}_front1.png`;
+      return `https://cdn.pixelplush.dev/assets/pets/${item.path}/${item.path}_front/${item.path}_front1.png`;
     case 'body':
-      return `https://www.pixelplush.dev/assets/skins/body/${item.category}/${item.path}/${item.path}_front/${item.path}_front1.png`;
+      return `https://cdn.pixelplush.dev/assets/skins/body/${item.category}/${item.path}/${item.path}_front/${item.path}_front1.png`;
     case 'equipment':
-      return `https://www.pixelplush.dev/assets/skins/equipment/${item.category}/${item.path}/${item.path}_front/${item.path}_front1.png`;
+      return `https://cdn.pixelplush.dev/assets/skins/equipment/${item.category}/${item.path}/${item.path}_front/${item.path}_front1.png`;
     case 'accessory':
-      return `https://www.pixelplush.dev/assets/skins/accessories/${item.category}/${item.path}/${item.path}_front/${item.path}_front1.png`;
+      return `https://cdn.pixelplush.dev/assets/skins/accessories/${item.category}/${item.path}/${item.path}_front/${item.path}_front1.png`;
     case 'outfit':
-      return `https://www.pixelplush.dev/assets/skins/outfits/${item.category}/${item.path}/${item.path}_front/${item.path}_front1.png`;
+      return `https://cdn.pixelplush.dev/assets/skins/outfits/${item.category}/${item.path}/${item.path}_front/${item.path}_front1.png`;
     case 'effect':
-      return `https://www.pixelplush.dev/assets/skins/effects/${item.path}/${item.path}_front/${item.path}_front1.png`;
+      return `https://cdn.pixelplush.dev/assets/skins/effects/${item.path}/${item.path}_front/${item.path}_front1.png`;
     default:
-      return `https://www.pixelplush.dev/assets/${item.type}s/${item.id}/${item.id}_front/${item.id}_front1.png`;
+      return `https://cdn.pixelplush.dev/assets/${item.type}s/${item.id}/${item.id}_front/${item.id}_front1.png`;
   }
 }
 

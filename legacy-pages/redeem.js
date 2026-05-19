@@ -53,7 +53,7 @@ ComfyTwitch.Check()
         $( ".logged-in" ).hide();
     }
 
-    catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+    catalog = await fetch( "https://cdn.pixelplush.dev/assets/catalog.json", {
     }).then( r => r.json() );
 
     // Don't filter in Redemption page
@@ -211,5 +211,5 @@ function getItemPreview( itemId, frame ) {
             break;
     }
 
-    return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
+    return `https://cdn.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
 }

@@ -5,7 +5,7 @@ import { useEffect, useState, useMemo } from 'react';
 import { useTranslation } from '@/i18n';
 
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
-const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
+const CATALOG_URL = 'https://cdn.pixelplush.dev/assets/catalog.json';
 
 interface CatalogItem {
   id: string;

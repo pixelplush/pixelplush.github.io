@@ -155,11 +155,11 @@ export default function HomePage() {
             <h3 className="text-xl font-bold mb-3 !text-white">{t('home.getCharacters')}</h3>
             <div className="flex justify-center gap-3 py-3 mb-3">
               {[
-                { src: "https://www.pixelplush.dev/assets/characters/yeti_blue/yeti_blue_front/yeti_blue_front1.png", alt: "Yeti Blue" },
-                { src: "https://www.pixelplush.dev/assets/characters/snowman/snowman_front/snowman_front1.png", alt: "Snowman" },
-                { src: "https://www.pixelplush.dev/assets/characters/santa/santa_front/santa_front1.png", alt: "Santa" },
-                { src: "https://www.pixelplush.dev/assets/pets/yetchi_pink/yetchi_pink_front/yetchi_pink_front1.png", alt: "Yetchi Pink" },
-                { src: "https://www.pixelplush.dev/assets/pets/snowball/snowball_front/snowball_front1.png", alt: "Snowball" },
+                { src: "https://cdn.pixelplush.dev/assets/characters/yeti_blue/yeti_blue_front/yeti_blue_front1.png", alt: "Yeti Blue" },
+                { src: "https://cdn.pixelplush.dev/assets/characters/snowman/snowman_front/snowman_front1.png", alt: "Snowman" },
+                { src: "https://cdn.pixelplush.dev/assets/characters/santa/santa_front/santa_front1.png", alt: "Santa" },
+                { src: "https://cdn.pixelplush.dev/assets/pets/yetchi_pink/yetchi_pink_front/yetchi_pink_front1.png", alt: "Yetchi Pink" },
+                { src: "https://cdn.pixelplush.dev/assets/pets/snowball/snowball_front/snowball_front1.png", alt: "Snowball" },
               ].map((char) => (
                 <Image
                   key={char.alt}

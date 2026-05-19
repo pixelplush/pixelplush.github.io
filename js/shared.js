@@ -88,7 +88,7 @@ const PlushAuth = {
 
     // Fetch catalog data
     fetchCatalog: async function() {
-        const catalog = await fetch("https://www.pixelplush.dev/assets/catalog.json").then(r => r.json());
+        const catalog = await fetch("https://cdn.pixelplush.dev/assets/catalog.json").then(r => r.json());
         const items = {};
         
         catalog.forEach(x => {

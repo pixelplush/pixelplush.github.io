@@ -320,7 +320,7 @@ function showItemAlert( item, name ) {
     }
 
     alertCounter++;
-    // catalog[ body.item ].type === "add-on" ? dir : `https://www.pixelplush.dev/assets/${dir}/${catalog[ body.item ].path}_front/${catalog[ body.item ].path}_front1.png`
+    // catalog[ body.item ].type === "add-on" ? dir : `https://cdn.pixelplush.dev/assets/${dir}/${catalog[ body.item ].path}_front/${catalog[ body.item ].path}_front1.png`
     const x = 100, y = -400;
     const alertId = alertCounter;
     let alertBG = Unicorn.AddBacklay( "alert_" + alertId, "alert_market_dark", x, y, {
@@ -451,7 +451,7 @@ function showItemAlert( item, name ) {
 
 function showCoinAlert( coins, name ) {
     alertCounter++;
-    // catalog[ body.item ].type === "add-on" ? dir : `https://www.pixelplush.dev/assets/${dir}/${catalog[ body.item ].path}_front/${catalog[ body.item ].path}_front1.png`
+    // catalog[ body.item ].type === "add-on" ? dir : `https://cdn.pixelplush.dev/assets/${dir}/${catalog[ body.item ].path}_front/${catalog[ body.item ].path}_front1.png`
     const x = 100, y = -400;
     const alertId = alertCounter;
     let alertBG = Unicorn.AddObject( "alert_" + alertId, {
@@ -657,7 +657,7 @@ let clientId = "";
 
 async function CreateGame() {
 	try {
-        catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+        catalog = await fetch( "https://cdn.pixelplush.dev/assets/catalog.json", {
         // catalog = await fetch( "http://localhost:10000/catalog.json", {
         }).then( r => r.json() );
 

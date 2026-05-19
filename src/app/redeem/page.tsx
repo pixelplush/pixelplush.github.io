@@ -7,8 +7,8 @@ import { useTranslation } from '@/i18n';
 
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
 const API_URL = 'https://api.pixelplush.dev/v1';
-const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
-const ASSETS_BASE = 'https://www.pixelplush.dev/assets';
+const CATALOG_URL = 'https://cdn.pixelplush.dev/assets/catalog.json';
+const ASSETS_BASE = 'https://cdn.pixelplush.dev/assets';
 
 interface CatalogItem {
   id: string;

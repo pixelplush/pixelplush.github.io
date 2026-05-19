@@ -2712,7 +2712,7 @@ $( "#inputEnableConfettiHotPink" ).on( "change", ( e ) => {
     generateLink();
 });
 ( async () => {
-    catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+    catalog = await fetch( "https://cdn.pixelplush.dev/assets/catalog.json", {
         // catalog = await fetch( "http://localhost:10000/catalog.json", {
     }).then( r => r.json() );
 
@@ -3410,7 +3410,7 @@ function getItemPreview( itemId, frame ) {
     let dir = "";
     switch( item.type ) {
         case "add-on":
-            return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
+            return `https://cdn.pixelplush.dev/assets/add-ons/${item.path}`;
             // return `http://localhost:10000/add-ons/${item.path}`;
         case "pet":
             dir = `pets/${item.path}`;
@@ -3438,7 +3438,7 @@ function getItemPreview( itemId, frame ) {
             break;
     }
 
-    return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
+    return `https://cdn.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
 }
 
 async function buyItem( itemId ) {

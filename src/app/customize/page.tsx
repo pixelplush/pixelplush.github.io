@@ -5,9 +5,9 @@ import Link from 'next/link';
 import { useEffect, useState, useMemo, useCallback, useRef } from 'react';
 import { useTranslation } from '@/i18n';
 
-const CATALOG_URL = 'https://www.pixelplush.dev/assets/catalog.json';
+const CATALOG_URL = 'https://cdn.pixelplush.dev/assets/catalog.json';
 const STATS_URL = 'https://stats.pixelplush.dev/v1';
-const ASSETS_BASE = 'https://www.pixelplush.dev/assets';
+const ASSETS_BASE = 'https://cdn.pixelplush.dev/assets';
 
 interface CatalogItem {
   id: string;

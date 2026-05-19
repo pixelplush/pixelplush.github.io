@@ -70,7 +70,7 @@ ComfyTwitch.Check()
         $( ".logged-in" ).hide();
     }
 
-    catalog = await fetch( "https://www.pixelplush.dev/assets/catalog.json", {
+    catalog = await fetch( "https://cdn.pixelplush.dev/assets/catalog.json", {
     }).then( r => r.json() );
 
     // console.log( catalog );
@@ -551,9 +551,9 @@ function getItemPreview( itemId, frame ) {
     let dir = "";
     switch( item.type ) {
         case "bundle":
-            return `https://www.pixelplush.dev/assets/bundles/${item.path}`;
+            return `https://cdn.pixelplush.dev/assets/bundles/${item.path}`;
         case "add-on":
-            return `https://www.pixelplush.dev/assets/add-ons/${item.path}`;
+            return `https://cdn.pixelplush.dev/assets/add-ons/${item.path}`;
         case "pet":
             dir = `pets/${item.path}`;
             break;
@@ -595,7 +595,7 @@ function getItemPreview( itemId, frame ) {
             break;
     }
 
-    return `https://www.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
+    return `https://cdn.pixelplush.dev/assets/${dir}/${item.path}_${direction}/${item.path}_${direction}${animFrame + 1}.png`;
 }
 
 async function verifySub( itemId ) {
