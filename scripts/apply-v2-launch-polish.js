@@ -219,6 +219,21 @@ function upgradeMarketPreviewAnimation(content) {
   );
 }
 
+function patchTransactionStatusAuth(content) {
+  content = replaceExact(
+    content,
+    'fetch("".concat(p,"/transactions/status?id=").concat(a)).then',
+    'fetch("".concat(p,"/transactions/status?id=").concat(a),{headers:{Twitch:b}}).then',
+    'Stripe transaction status auth'
+  );
+  return replaceExact(
+    content,
+    'fetch("".concat(p,"/transactions/status?id=").concat(s.transactionId)).then',
+    'fetch("".concat(p,"/transactions/status?id=").concat(s.transactionId),{headers:{Twitch:b}}).then',
+    'PayPal transaction status auth'
+  );
+}
+
 function patchHomeBundle(content) {
   content = replaceExact(
     content,
@@ -348,6 +363,7 @@ for (const exportRoot of exportRoots) {
     if (content.includes('pixelplush-game-settings') && !content.includes('_themeMarketIcons')) content = patchThemeMarketIcons(content);
     if (content.includes('market.hideOwnedItems') && !content.includes('function _startPreviewAnimation')) content = patchMarketBundle(content);
     if (content.includes(previousMarketPreviewHelpers)) content = upgradeMarketPreviewAnimation(content);
+    if (content.includes('fetch("".concat(p,"/transactions/status?id=").concat(a)).then')) content = patchTransactionStatusAuth(content);
     if (content.includes('home.getCharacters') && content.includes('[r,m]=(0,n.useState)(0);')) content = patchHomeBundle(content);
     if (content.includes('src:(0,c.Q)("/app-assets/images/icon/maaya.gif"),alt:"",width:24,height:24')) content = patchLayoutBundle(content);
     if (content.includes('JSON.parse') && content.includes('"loginToAutoFill":')) content = patchLocaleBundle(content);

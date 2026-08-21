@@ -46,7 +46,9 @@ ComfyTwitch.Check()
                 let txnId = params.get( "txn" );
                 toastr.info( "One moment while we get your Plush Coins...", "Processing...", { positionClass:"toast-top-right", containerId:"toast-top-right" } );
                 let stripeTimer = setInterval( async () => {
-                    let result = await fetch( `${plushScoreUrl}/transactions/status?id=${txnId}` ).then( r => r.json() );
+                    let result = await fetch( `${plushScoreUrl}/transactions/status?id=${txnId}`, {
+                        headers: { Twitch: twitchToken }
+                    } ).then( r => r.json() );
                     if( result && result.status !== "pending" ) {
                         clearInterval( stripeTimer );
                         clearTimeout( stripeTimeout );
@@ -776,7 +778,9 @@ paypal.Buttons({
                     console.log( "Status:", itemStatus.status );
                 }
                 let transactionTimer = setInterval( async () => {
-                    let result = await fetch( `${plushScoreUrl}/transactions/status?id=${item.transactionId}` ).then( r => r.json() );
+                    let result = await fetch( `${plushScoreUrl}/transactions/status?id=${item.transactionId}`, {
+                        headers: { Twitch: twitchToken || ComfyTwitch.Token }
+                    } ).then( r => r.json() );
                     if( result && result.status !== "pending" ) {
                         clearInterval( transactionTimer );
                         if( result.status === "complete" ) {

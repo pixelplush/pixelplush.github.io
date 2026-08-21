@@ -241,7 +241,9 @@ export default function MarketPage() {
       setCoinProcessing(true);
       const timer = setInterval(async () => {
         try {
-          const r = await fetch(`${STATS_URL}/transactions/status?id=${txnId}`).then((x) => x.json());
+          const r = await fetch(`${STATS_URL}/transactions/status?id=${txnId}`, {
+            headers: { Twitch: token },
+          }).then((x) => x.json());
           if (r && r.status !== 'pending') {
             clearInterval(timer);
             clearTimeout(timeout);
@@ -327,7 +329,9 @@ export default function MarketPage() {
           await new Promise<void>((resolve, reject) => {
             const timer = setInterval(async () => {
               try {
-                const r = await fetch(`${STATS_URL}/transactions/status?id=${txn.transactionId}`).then((x) => x.json());
+                const r = await fetch(`${STATS_URL}/transactions/status?id=${txn.transactionId}`, {
+                  headers: { Twitch: token },
+                }).then((x) => x.json());
                 if (r && r.status !== 'pending') {
                   clearInterval(timer);
                   clearTimeout(timeout);
