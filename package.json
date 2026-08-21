@@ -9,6 +9,7 @@
   "devDependencies": {},
   "scripts": {
     "build": "node generatePages.js",
+    "v2:polish": "node scripts/apply-v2-launch-polish.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
