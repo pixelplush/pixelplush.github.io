@@ -85,6 +85,14 @@ const themeMarketIcons = {
 
 const previousMarketPreviewHelpers = 'function _startPreviewAnimation(e){let t=e.currentTarget,s=t.src.match(/^(.*_front)(\\d+)(\\.png(?:\\?.*)?)$/);if(!s||t.dataset.previewTimer||"1"===t.dataset.previewMax)return;t.dataset.previewOriginal=t.src;let a=2,r=()=>{if(!t.dataset.previewOriginal)return;let e=Number(t.dataset.previewMax||0);e>1&&a>e&&(a=1);let o="".concat(s[1]).concat(a).concat(s[3]);if(1===a){t.src=o,a=2,t.dataset.previewTimer=String(window.setTimeout(r,180));return}let n=new window.Image;n.onload=()=>{t.dataset.previewOriginal&&(t.src=o,a+=1,t.dataset.previewTimer=String(window.setTimeout(r,180)))},n.onerror=()=>{if(!t.dataset.previewOriginal)return;let e=a-1;t.dataset.previewMax=String(e),a=1,e>1?t.dataset.previewTimer=String(window.setTimeout(r,180)):_stopPreviewAnimation({currentTarget:t})},n.src=o};t.dataset.previewTimer=String(window.setTimeout(r,180))}function _stopPreviewAnimation(e){let t=e.currentTarget;t.dataset.previewTimer&&window.clearTimeout(Number(t.dataset.previewTimer)),t.dataset.previewOriginal&&(t.src=t.dataset.previewOriginal),delete t.dataset.previewTimer,delete t.dataset.previewOriginal}';
 const marketPreviewHelpers = 'function _startPreviewAnimation(e){let t=e.currentTarget;if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;let s=t.src.match(/^(.*_front)(\\d+)(\\.png(?:\\?.*)?)$/);if(!s||t.dataset.previewTimer||"1"===t.dataset.previewMax)return;let a=String(Number(t.dataset.previewRun||0)+1);t.dataset.previewRun=a,t.dataset.previewOriginal=t.src;let r=2,o=()=>t.dataset.previewRun===a&&!!t.dataset.previewOriginal,n=()=>{if(!o())return;let e=Number(t.dataset.previewMax||0);e>1&&r>e&&(r=1);let i="".concat(s[1]).concat(r).concat(s[3]);if(1===r){t.src=i,r=2,t.dataset.previewTimer=String(window.setTimeout(n,180));return}let l=new window.Image;l.onload=()=>{o()&&(t.src=i,r+=1,t.dataset.previewTimer=String(window.setTimeout(n,180)))},l.onerror=()=>{if(!o())return;let e=r-1;t.dataset.previewMax=String(e),r=1,e>1?t.dataset.previewTimer=String(window.setTimeout(n,180)):_stopPreviewAnimation({currentTarget:t})},l.src=i};t.dataset.previewTimer=String(window.setTimeout(n,180))}function _stopPreviewAnimation(e){let t=e.currentTarget;t.dataset.previewRun=String(Number(t.dataset.previewRun||0)+1),t.dataset.previewTimer&&window.clearTimeout(Number(t.dataset.previewTimer)),t.dataset.previewOriginal&&(t.src=t.dataset.previewOriginal),delete t.dataset.previewTimer,delete t.dataset.previewOriginal}';
+const clarityLoader = '(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script","wdlmotp71n");';
+const clarityHeadNode = JSON.stringify([
+  '$',
+  'head',
+  null,
+  { children: ['$', '$L2', null, { id: 'clarity', strategy: 'afterInteractive', children: clarityLoader }] },
+]);
+const emptyHeadNode = JSON.stringify(['$', 'head', null, {}]);
 
 function walk(directory) {
   return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
@@ -173,6 +181,58 @@ function patchGamesAccessibility(content) {
     '_&&(0,s.jsx)("div",{className:"mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2"',
     '_&&(0,s.jsx)("div",{id:"game-settings-panel",className:"mt-2 grid grid-cols-1 gap-3 sm:grid-cols-2"',
     'settings panel semantics'
+  );
+}
+
+function patchThemeSelectorAccessibility(content) {
+  content = replaceExact(
+    content,
+    '"label",{className:"mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]",children:h("games.themeLabel")}',
+    '"label",{htmlFor:"theme-select",className:"mb-1 block text-xs font-medium text-[var(--color-pp-text-muted)]",children:h("games.themeLabel")}',
+    'theme selector label'
+  );
+  content = replaceExact(
+    content,
+    '"select",{value:i,onChange:e=>n(e.target.value),className:',
+    '"select",{id:"theme-select",value:i,onChange:e=>n(e.target.value),className:',
+    'theme selector id'
+  );
+  return content;
+}
+
+function patchLayoutAccessibility(content) {
+  return replaceExact(
+    content,
+    '"button",{onClick:()=>h(!a),className:"flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]"',
+    '"button",{type:"button","aria-label":"Language: ".concat(null==N?"English":N.name),"aria-expanded":a,onClick:()=>h(!a),className:"flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]"',
+    'language menu name'
+  );
+}
+
+function patchScoresAccessibility(content) {
+  content = replaceExact(
+    content,
+    '"label",{className:"mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]",children:e("scores.timeRange")}',
+    '"label",{htmlFor:"score-time-range",className:"mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]",children:e("scores.timeRange")}',
+    'score time-range label'
+  );
+  content = replaceExact(
+    content,
+    '"select",{value:i,onChange:e=>d(e.target.value),className:',
+    '"select",{id:"score-time-range",value:i,onChange:e=>d(e.target.value),className:',
+    'score time-range select'
+  );
+  content = replaceExact(
+    content,
+    '"label",{className:"mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]",children:e("scores.theme")}',
+    '"label",{htmlFor:"score-theme",className:"mb-1 block text-sm font-medium text-[var(--color-pp-text-muted)]",children:e("scores.theme")}',
+    'score theme label'
+  );
+  return replaceExact(
+    content,
+    '"select",{value:p,onChange:e=>h(e.target.value),className:',
+    '"select",{id:"score-theme",value:p,onChange:e=>h(e.target.value),className:',
+    'score theme select'
   );
 }
 
@@ -330,6 +390,11 @@ function patchStaticMarkup(content) {
   content = replaceOptional(content, 'text-sm mb-4 text-white/90', 'text-sm mb-4 text-[var(--color-pp-text)]');
   content = replaceOptional(content, 'mb-2 flex items-center justify-center h-32', 'mb-2 flex items-center justify-center h-20');
   content = replaceOptional(content, 'width="120" height="80"', 'width="72" height="64"');
+  content = replaceOptional(
+    content,
+    '<button class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]">',
+    '<button type="button" aria-label="Language: English" aria-expanded="false" class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]">'
+  );
   let carouselDotIndex = 0;
   content = content.replace(
     /<button class="h-2 w-2 rounded-full transition-colors (bg-white(?:\/40)?)"><\/button>/g,
@@ -352,25 +417,104 @@ function patchStaticMarkup(content) {
   return patchLinks(content);
 }
 
+function removeClarity(content) {
+  content = replaceOptional(content, clarityHeadNode, emptyHeadNode);
+  const escapedClarityHeadNode = JSON.stringify(clarityHeadNode).slice(1, -1);
+  const escapedEmptyHeadNode = JSON.stringify(emptyHeadNode).slice(1, -1);
+  return replaceOptional(content, escapedClarityHeadNode, escapedEmptyHeadNode);
+}
+
+function patchStylesheet(content) {
+  const replacements = [
+    ['--color-pp-text-muted:#734b45', '--color-pp-text-muted:#5c3835'],
+    ['--color-pp-nav-text:#d8714f', '--color-pp-nav-text:#4f2727'],
+    ['--color-pp-accent:#5a8dee', '--color-pp-accent:#2e4f86'],
+    ['--color-pp-link:#b5651d', '--color-pp-link:#7a3708'],
+    ['--color-pp-info:#6eb8a8', '--color-pp-info:#28574f'],
+    ['--color-pp-success:#74a33f', '--color-pp-success:#375a1b'],
+    ['background-color:#5da99a', 'background-color:#20483f'],
+    ['background-color:#638e35', 'background-color:#2d4b16'],
+    ['background-color:#4a7de0', 'background-color:#24416f'],
+  ];
+  for (const [oldValue, newValue] of replacements) content = replaceOptional(content, oldValue, newValue);
+  if (!content.includes('a.hover\\:underline{text-decoration-line:underline')) {
+    content += 'a.hover\\:underline{text-decoration-line:underline;text-underline-offset:2px}';
+  }
+  if (!content.includes('@media (max-width:639px){footer.sticky{position:static')) {
+    content += '@media (max-width:639px){footer.sticky{position:static;bottom:auto}}';
+  }
+  return content;
+}
+
+function patchCategoryColors(content) {
+  for (const color of ['amber', 'blue', 'cyan', 'green', 'orange', 'pink', 'purple', 'red', 'teal']) {
+    content = replaceOptional(
+      content,
+      `bg-${color}-600/15 text-${color}-800`,
+      `bg-${color}-600/15 text-[var(--color-pp-headings)]`
+    );
+  }
+  return content;
+}
+
+function patchAccessibleTextClasses(content) {
+  content = replaceOptional(content, 'text-slate-500', 'text-[var(--color-pp-text-muted)]');
+  content = replaceOptional(content, 'text-pink-400', 'text-[var(--color-pp-headings)]');
+  content = replaceOptional(content, 'text-green-400', 'text-[var(--color-pp-success)]');
+  content = replaceOptional(
+    content,
+    'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-success)]',
+    'bg-[var(--color-pp-success)]/20 text-[var(--color-pp-headings)]'
+  );
+  content = replaceOptional(
+    content,
+    'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]',
+    'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-headings)]'
+  );
+  return replaceOptional(
+    content,
+    'bg-[var(--color-pp-warning)] text-white',
+    'bg-[var(--color-pp-warning)] text-[var(--color-pp-headings)]'
+  );
+}
+
 for (const exportRoot of exportRoots) {
-  const files = walk(exportRoot).filter((file) => /\.(?:html|js|txt)$/.test(file));
+  const files = walk(exportRoot).filter((file) => /\.(?:css|html|js|txt)$/.test(file));
   for (const file of files) {
     let content = fs.readFileSync(file, 'utf8');
     const original = content;
     if (content.includes('window.ComfyTwitch.Login(o,"".concat(e,"/redirect/"),[],"code")')) content = patchAuthBundle(content);
     if (content.includes('{isLoggedIn:m,account:c,token:g}=(0,d.A)()')) content = patchGamesBundle(content);
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('"aria-controls":"game-settings-panel"')) content = patchGamesAccessibility(content);
+    if (content.includes('children:h("games.settingsLabel")') && !content.includes('id:"theme-select"')) content = patchThemeSelectorAccessibility(content);
     if (content.includes('pixelplush-game-settings') && !content.includes('_themeMarketIcons')) content = patchThemeMarketIcons(content);
     if (content.includes('market.hideOwnedItems') && !content.includes('function _startPreviewAnimation')) content = patchMarketBundle(content);
     if (content.includes(previousMarketPreviewHelpers)) content = upgradeMarketPreviewAnimation(content);
     if (content.includes('fetch("".concat(p,"/transactions/status?id=").concat(a)).then')) content = patchTransactionStatusAuth(content);
     if (content.includes('home.getCharacters') && content.includes('[r,m]=(0,n.useState)(0);')) content = patchHomeBundle(content);
     if (content.includes('src:(0,c.Q)("/app-assets/images/icon/maaya.gif"),alt:"",width:24,height:24')) content = patchLayoutBundle(content);
+    if (content.includes('onClick:()=>h(!a),className:"flex items-center gap-1.5 px-2 py-1.5 rounded') && !content.includes('"aria-label":"Language: ".concat')) content = patchLayoutAccessibility(content);
+    if (content.includes('children:e("scores.timeRange")') && !content.includes('id:"score-time-range"')) content = patchScoresAccessibility(content);
     if (content.includes('JSON.parse') && content.includes('"loginToAutoFill":')) content = patchLocaleBundle(content);
     if (content.includes('[r,m]=(0,n.useState)(0),[p,g]=(0,n.useState)(!1);')) content = upgradeCarouselPauseState(content);
     if (/\.(?:html|txt)$/.test(file)) content = patchStaticMarkup(content);
+    if (content.includes('wdlmotp71n')) content = removeClarity(content);
+    if (file.endsWith('.css') && content.includes('--color-pp-bg:#f2c079')) content = patchStylesheet(content);
+    if (/\.(?:html|js|txt)$/.test(file) && content.includes('-600/15 text-')) content = patchCategoryColors(content);
+    if (/\.(?:html|js|txt)$/.test(file)) content = patchAccessibleTextClasses(content);
     if (content.includes('Twitter / X') || content.includes('https://twitter.com/pixelplushgames')) content = patchLinks(content);
     if (content !== original) fs.writeFileSync(file, content);
+  }
+}
+
+for (const exportRoot of exportRoots) {
+  const remainingClarity = walk(exportRoot).filter((file) => {
+    if (!/\.(?:html|js|txt)$/.test(file)) return false;
+    const content = fs.readFileSync(file, 'utf8');
+    return content.includes('clarity.ms') || content.includes('wdlmotp71n');
+  });
+  if (remainingClarity.length) {
+    throw new Error(`Broken Microsoft Clarity loader remains in: ${remainingClarity.map((file) => path.relative(repositoryRoot, file)).join(', ')}`);
   }
 }
 

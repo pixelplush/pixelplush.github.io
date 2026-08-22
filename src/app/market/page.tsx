@@ -29,15 +29,15 @@ interface CatalogItem {
 }
 
 const typeColors: Record<string, string> = {
-  character: 'bg-blue-600/15 text-blue-800',
-  pet: 'bg-red-600/15 text-red-800',
-  'add-on': 'bg-green-600/15 text-green-800',
-  bundle: 'bg-cyan-600/15 text-cyan-800',
-  body: 'bg-amber-600/15 text-amber-800',
-  equipment: 'bg-orange-600/15 text-orange-800',
-  accessory: 'bg-purple-600/15 text-purple-800',
-  outfit: 'bg-pink-600/15 text-pink-800',
-  effect: 'bg-teal-600/15 text-teal-800',
+  character: 'bg-blue-600/15 text-[var(--color-pp-headings)]',
+  pet: 'bg-red-600/15 text-[var(--color-pp-headings)]',
+  'add-on': 'bg-green-600/15 text-[var(--color-pp-headings)]',
+  bundle: 'bg-cyan-600/15 text-[var(--color-pp-headings)]',
+  body: 'bg-amber-600/15 text-[var(--color-pp-headings)]',
+  equipment: 'bg-orange-600/15 text-[var(--color-pp-headings)]',
+  accessory: 'bg-purple-600/15 text-[var(--color-pp-headings)]',
+  outfit: 'bg-pink-600/15 text-[var(--color-pp-headings)]',
+  effect: 'bg-teal-600/15 text-[var(--color-pp-headings)]',
 };
 
 const coinPackages = [
@@ -396,7 +396,7 @@ export default function MarketPage() {
               <span className="text-amber-800">Log in to purchase coins</span>
               <button
                 onClick={login}
-                className="rounded-lg bg-[var(--color-pp-accent)] px-4 py-1.5 text-sm font-medium text-white transition hover:bg-[#4a7de0]"
+                className="rounded-lg bg-[var(--color-pp-accent)] px-4 py-1.5 text-sm font-medium text-white transition hover:bg-[#24416f]"
               >
                 Log In
               </button>
@@ -514,7 +514,7 @@ export default function MarketPage() {
               </button>
               <button
                 onClick={() => buyItem(confirmItem)}
-                className="flex-1 rounded-lg bg-[var(--color-pp-accent)] py-2.5 text-sm font-medium text-white transition hover:bg-[#4a7de0]"
+                className="flex-1 rounded-lg bg-[var(--color-pp-accent)] py-2.5 text-sm font-medium text-white transition hover:bg-[#24416f]"
               >
                 Buy
               </button>
@@ -559,7 +559,7 @@ export default function MarketPage() {
               onClick={() => setFilters((f) => ({ ...f, [key]: !f[key] }))}
               className={`rounded-full px-3 py-1 text-sm font-medium capitalize transition ${
                 filters[key]
-                  ? typeColors[key] || 'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-accent)]'
+                  ? typeColors[key] || 'bg-[var(--color-pp-accent)]/20 text-[var(--color-pp-headings)]'
                   : 'bg-[var(--color-pp-card)] text-slate-500 line-through'
               }`}
             >
@@ -647,7 +647,7 @@ export default function MarketPage() {
                           className={`mt-1.5 w-full cursor-pointer rounded-md py-1 text-[11px] font-medium text-white transition disabled:opacity-50 ${
                             isBundle
                               ? 'bg-cyan-600 hover:bg-cyan-700'
-                              : 'bg-[var(--color-pp-accent)] hover:bg-[#4a7de0]'
+                              : 'bg-[var(--color-pp-accent)] hover:bg-[#24416f]'
                           }`}
                         >
                           {buyingItem === item.id ? '...' : isBundle ? 'Buy Bundle' : 'Buy'}
