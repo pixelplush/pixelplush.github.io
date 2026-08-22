@@ -235,6 +235,32 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
   await mobile.close();
 }
 
+async function auditNullScopes(browser, baseUrl, clarityRequests) {
+  const context = await browser.newContext({ viewport: viewports[0] });
+  await configureContext(context, clarityRequests);
+  await context.addInitScript(() => localStorage.setItem('twitchToken', 'null-scopes-token'));
+  await context.route('https://id.twitch.tv/oauth2/validate', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ client_id: 'test-client', login: 'teststreamer', user_id: '1', scopes: null }),
+  }));
+  await context.route('https://api.pixelplush.dev/v1/accounts', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ username: 'teststreamer', displayName: 'Test Streamer', coins: 0, owned: [], styles: {} }),
+  }));
+  const page = await context.newPage();
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.stack || error.message));
+  await page.goto(`${baseUrl}/games/?type=parachute`, { waitUntil: 'networkidle' });
+  await page.getByRole('button', { name: 'Grant Twitch Permissions' }).waitFor({ state: 'visible' });
+  const scopes = await page.evaluate(() => window.ComfyTwitch.Scopes);
+  if (!Array.isArray(scopes) || scopes.length !== 0) throw new Error(`Null Twitch scopes were not normalized: ${JSON.stringify(scopes)}`);
+  if (pageErrors.length) throw new Error(`Null Twitch scopes caused an uncaught exception: ${pageErrors.join('\n')}`);
+  await page.close();
+  await context.close();
+}
+
 async function main() {
   const { server, baseUrl } = await startStaticServer();
   const browser = await chromium.launch({ headless: true });
@@ -253,6 +279,7 @@ async function main() {
       await context.close();
     }
     await auditInteractions(browser, baseUrl, clarityRequests);
+    await auditNullScopes(browser, baseUrl, clarityRequests);
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));

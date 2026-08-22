@@ -136,6 +136,24 @@ function patchAuthBundle(content) {
   );
 }
 
+function patchNullScopeHandling(content) {
+  content = replaceOptional(
+    content,
+    'o.Scopes=n.scopes',
+    'o.Scopes=Array.isArray(n.scopes)?n.scopes:[]'
+  );
+  content = replaceOptional(
+    content,
+    'hasRequiredScopes:!!(g&&window.ComfyTwitch&&q.every(e=>window.ComfyTwitch.Scopes.includes(e)))',
+    'hasRequiredScopes:!!(g&&window.ComfyTwitch&&Array.isArray(window.ComfyTwitch.Scopes)&&q.every(e=>window.ComfyTwitch.Scopes.includes(e)))'
+  );
+  return replaceOptional(
+    content,
+    'Array.isArray(window.ComfyTwitch.Scopes)&&Array.isArray(window.ComfyTwitch.Scopes)',
+    'Array.isArray(window.ComfyTwitch.Scopes)'
+  );
+}
+
 function patchGamesBundle(content) {
   content = replaceExact(
     content,
@@ -484,6 +502,7 @@ for (const exportRoot of exportRoots) {
     let content = fs.readFileSync(file, 'utf8');
     const original = content;
     if (content.includes('window.ComfyTwitch.Login(o,"".concat(e,"/redirect/"),[],"code")')) content = patchAuthBundle(content);
+    if (content.includes('o.Scopes=n.scopes') || content.includes('hasRequiredScopes:!!(g&&window.ComfyTwitch&&q.every') || content.includes('Array.isArray(window.ComfyTwitch.Scopes)&&Array.isArray(window.ComfyTwitch.Scopes)')) content = patchNullScopeHandling(content);
     if (content.includes('{isLoggedIn:m,account:c,token:g}=(0,d.A)()')) content = patchGamesBundle(content);
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('"aria-controls":"game-settings-panel"')) content = patchGamesAccessibility(content);
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('id:"theme-select"')) content = patchThemeSelectorAccessibility(content);
