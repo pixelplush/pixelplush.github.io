@@ -192,6 +192,8 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
   await settings.click();
   if ((await settings.getAttribute('aria-expanded')) !== 'true') throw new Error('Game Settings did not expose its expanded state');
   if (!(await games.locator('#game-settings-panel').isVisible())) throw new Error('Game Settings panel is not visible after expansion');
+  const dayVariantIcon = games.getByText('Day', { exact: true }).locator('..').locator('img');
+  if (!(await dayVariantIcon.getAttribute('src'))?.startsWith('/v2/app-assets/')) throw new Error('Parachute relative variant icon lost the /v2 asset prefix');
   const autumn = games.getByRole('button', { name: /Autumn/ }).first();
   await autumn.click();
   await games.waitForTimeout(250);
@@ -261,6 +263,96 @@ async function auditNullScopes(browser, baseUrl, clarityRequests) {
   await context.close();
 }
 
+async function auditGiveawayHierarchy(browser, baseUrl, clarityRequests) {
+  const context = await browser.newContext({ viewport: viewports[0] });
+  await configureContext(context, clarityRequests);
+  await context.addInitScript(() => localStorage.setItem('twitchToken', 'giveaway-audit-token'));
+  await context.route('https://id.twitch.tv/oauth2/validate', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ client_id: 'test-client', login: 'teststreamer', user_id: '1', scopes: ['user:read:email', 'chat:read', 'chat:edit', 'channel:manage:redemptions', 'channel:read:redemptions'] }),
+  }));
+  await context.route('https://api.pixelplush.dev/v1/accounts', (route) => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      username: 'teststreamer',
+      displayName: 'Test Streamer',
+      coins: 100,
+      owned: ['addon_giveaway_blue', 'addon_giveaway_bw', 'addon_giveaway_green', 'addon_giveaway_orange', 'addon_giveaway_pink', 'addon_giveaway_purple', 'addon_giveaway_red', 'addon_giveaway_yellow', 'addon_giveaway_blossoms', 'addon_giveaway_autumn'],
+      styles: {},
+    }),
+  }));
+
+  const page = await context.newPage();
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.stack || error.message));
+  await page.goto(`${baseUrl}/games/?type=giveaway`, { waitUntil: 'networkidle' });
+  const themeSection = page.getByRole('heading', { name: /Available Themes/ }).locator('..');
+  const topButtons = themeSection.locator('> div > button');
+  const topLabels = (await topButtons.allInnerTexts()).map((text) => text.replace(/\s+/g, ' ').trim());
+  if (topLabels.length !== 4 || topLabels.some((label) => /^(Blue|Black & White|Green|Orange|Pink|Purple|Red|Yellow)/.test(label))) {
+    throw new Error(`Giveaway colors are not nested under Colorful: ${topLabels.join(', ')}`);
+  }
+  const colorful = topButtons.filter({ hasText: 'Colorful' });
+  const colorfulIcon = colorful.locator('img');
+  if ((await colorfulIcon.getAttribute('src')) !== 'https://cdn.pixelplush.dev/assets/bundles/icon_giveaway_bundle.gif') throw new Error('Colorful Giveaway does not use the animated bundle icon');
+  if ((await colorfulIcon.evaluate((image) => image.naturalWidth)) === 0) throw new Error('Colorful Giveaway bundle icon is broken');
+  const firstFrame = await colorfulIcon.screenshot();
+  await page.waitForTimeout(300);
+  const secondFrame = await colorfulIcon.screenshot();
+  if (firstFrame.equals(secondFrame)) throw new Error('Colorful Giveaway bundle icon did not animate');
+  await colorful.click();
+  const variantHeading = page.getByText('Color Variants', { exact: true });
+  await variantHeading.waitFor({ state: 'visible' });
+  const variantContainer = variantHeading.locator('..');
+  if ((await variantContainer.locator('input[type="radio"]').count()) !== 8) throw new Error('Colorful Giveaway does not have eight exclusive color choices');
+  await variantContainer.locator('label').filter({ hasText: 'Yellow' }).click();
+  await page.waitForTimeout(200);
+  if ((await variantContainer.locator('input[type="radio"]:checked').count()) !== 1) throw new Error('Colorful Giveaway color selection is not exclusive');
+  if (!(await page.getByAltText(/Giveaway Tool - Colorful/).getAttribute('src'))?.includes('giveaway_pp_yellow.gif')) throw new Error('Colorful Yellow did not update the game preview');
+  if (!(await page.locator('input[readonly]').last().inputValue()).includes('/giveaway/yellow.html')) throw new Error('Colorful Yellow did not update the browser-source URL');
+  if (pageErrors.length) throw new Error(`Giveaway hierarchy caused an uncaught exception: ${pageErrors.join('\n')}`);
+
+  await page.goto(`${baseUrl}/market/`, { waitUntil: 'networkidle' });
+  await page.evaluate(async () => {
+    for (let offset = 0; offset < document.documentElement.scrollHeight; offset += 700) {
+      window.scrollTo(0, offset);
+      await new Promise((resolve) => setTimeout(resolve, 20));
+    }
+    window.scrollTo(0, 0);
+  });
+  await page.waitForFunction(() => [...document.querySelectorAll('div.group')]
+    .filter((card) => card.textContent?.toLowerCase().includes('bundle'))
+    .every((card) => card.querySelector('img[alt]')?.complete), null, { timeout: 15000 });
+  const bundles = await page.locator('div.group').evaluateAll((cards) => cards
+    .filter((card) => card.textContent?.toLowerCase().includes('bundle'))
+    .map((card) => {
+      const image = card.querySelector('img[alt]');
+      const rect = image?.getBoundingClientRect();
+      return { alt: image?.alt, width: Math.round(rect?.width || 0), height: Math.round(rect?.height || 0), naturalWidth: image?.naturalWidth || 0 };
+    }));
+  if (bundles.length !== 16) throw new Error(`Expected 16 market bundle cards, found ${bundles.length}`);
+  const invalidBundles = bundles.filter((image) => image.width !== 48 || image.height !== 48 || image.naturalWidth === 0);
+  if (invalidBundles.length) throw new Error(`Invalid market bundle icons: ${JSON.stringify(invalidBundles)}`);
+  await page.close();
+  await context.close();
+
+  const restrictedContext = await browser.newContext({ viewport: viewports[0] });
+  await configureContext(restrictedContext, clarityRequests);
+  await restrictedContext.addInitScript(() => localStorage.setItem('twitchToken', 'restricted-giveaway-token'));
+  await restrictedContext.route('https://id.twitch.tv/oauth2/validate', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ client_id: 'test-client', login: 'teststreamer', user_id: '1', scopes: ['user:read:email'] }) }));
+  await restrictedContext.route('https://api.pixelplush.dev/v1/accounts', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ username: 'teststreamer', displayName: 'Test Streamer', coins: 0, owned: ['addon_giveaway_blue'], styles: {} }) }));
+  const restrictedPage = await restrictedContext.newPage();
+  await restrictedPage.goto(`${baseUrl}/games/?type=giveaway`, { waitUntil: 'networkidle' });
+  await restrictedPage.getByRole('button', { name: /Colorful/ }).click();
+  const restrictedVariants = restrictedPage.getByText('Color Variants', { exact: true }).locator('..');
+  if (await restrictedVariants.locator('label').filter({ hasText: 'Blue' }).locator('input').isDisabled()) throw new Error('Owned Blue Giveaway color is disabled');
+  if (!(await restrictedVariants.locator('label').filter({ hasText: 'Yellow' }).locator('input').isDisabled())) throw new Error('Unowned Yellow Giveaway color is not disabled');
+  await restrictedPage.close();
+  await restrictedContext.close();
+}
+
 async function main() {
   const { server, baseUrl } = await startStaticServer();
   const browser = await chromium.launch({ headless: true });
@@ -280,6 +372,7 @@ async function main() {
     }
     await auditInteractions(browser, baseUrl, clarityRequests);
     await auditNullScopes(browser, baseUrl, clarityRequests);
+    await auditGiveawayHierarchy(browser, baseUrl, clarityRequests);
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));

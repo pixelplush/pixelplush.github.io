@@ -599,7 +599,7 @@ export default function MarketPage() {
                 }`}
               >
                 <div className="mb-2 flex h-20 items-center justify-center">
-                  <Image src={getItemPreview(item)} alt={item.name} width={48} height={48} className="pixelated" unoptimized />
+                  <Image src={getItemPreview(item)} alt={item.name} width={48} height={48} className={`pixelated ${isBundle ? 'h-12 w-12 object-contain' : ''}`} unoptimized />
                 </div>
                 <span
                   className={`mb-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-medium capitalize ${typeColors[item.type] || 'bg-[var(--color-pp-bg)]/50 text-[var(--color-pp-text-muted)]'}`}

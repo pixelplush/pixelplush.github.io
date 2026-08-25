@@ -18,22 +18,27 @@ const permissionsCopy = [
   {
     grantPermissions: 'Grant Twitch Permissions',
     permissionsRequired: 'Additional Twitch permissions are required for chat and Channel Point features.',
+    chooseOneColor: 'Choose one color.',
   },
   {
     grantPermissions: 'Twitch-Berechtigungen erteilen',
     permissionsRequired: 'Fuer Chat- und Kanalpunktefunktionen sind zusaetzliche Twitch-Berechtigungen erforderlich.',
+    chooseOneColor: 'Waehle eine Farbe.',
   },
   {
     grantPermissions: 'Udelit opravneni Twitch',
     permissionsRequired: 'Pro funkce chatu a vernostnich bodu jsou vyzadovana dalsi opravneni Twitch.',
+    chooseOneColor: 'Vyberte jednu barvu.',
   },
   {
     grantPermissions: 'Twitch Izinleri Ver',
     permissionsRequired: 'Sohbet ve Kanal Puani ozellikleri icin ek Twitch izinleri gereklidir.',
+    chooseOneColor: 'Bir renk secin.',
   },
   {
     grantPermissions: 'Conceder permisos de Twitch',
     permissionsRequired: 'Se necesitan permisos adicionales de Twitch para las funciones de chat y Puntos de canal.',
+    chooseOneColor: 'Elige un color.',
   },
 ];
 
@@ -265,6 +270,127 @@ function patchThemeMarketIcons(content) {
   return replaceExact(content, '(0,m.Q)(e.preview)', '(0,m.Q)(_themeIcon(e))', 'theme pill icon');
 }
 
+function patchGiveawayHierarchy(content) {
+  const start = content.indexOf('themes:[{key:"giveaway"');
+  if (start < 0 || !content.includes('{key:"giveawayblue"')) return content;
+  const end = content.indexOf('],settings:', start);
+  if (end < 0) throw new Error('Unable to find the end of Giveaway themes');
+
+  const themes = 'themes:[{key:"giveaway",name:"PixelPlush (Free)",page:"/giveaway/index.html",preview:"/app-assets/images/games/giveaway_basic.gif"},{key:"giveawaycolors",name:"Colorful (Premium)",page:"/giveaway/blue.html",premium:!0,preview:"/app-assets/images/games/pp_blue.gif",singleVariant:!0,bundle:"bundle_giveaway_colors",variants:[{key:"blue",name:"Blue",page:"/giveaway/blue.html",preview:"/app-assets/images/games/pp_blue.gif",requires:"addon_giveaway_blue"},{key:"bw",name:"Black & White",page:"/giveaway/bw.html",preview:"/app-assets/images/games/pp_bw.gif",requires:"addon_giveaway_bw"},{key:"green",name:"Green",page:"/giveaway/green.html",preview:"/app-assets/images/games/giveaway_pp_green.gif",requires:"addon_giveaway_green"},{key:"orange",name:"Orange",page:"/giveaway/orange.html",preview:"/app-assets/images/games/giveaway_pp_orange.gif",requires:"addon_giveaway_orange"},{key:"pink",name:"Pink",page:"/giveaway/pink.html",preview:"/app-assets/images/games/pp_pink.gif",requires:"addon_giveaway_pink"},{key:"purple",name:"Purple",page:"/giveaway/purple.html",preview:"/app-assets/images/games/giveaway_pp_purple.gif",requires:"addon_giveaway_purple"},{key:"red",name:"Red",page:"/giveaway/red.html",preview:"/app-assets/images/games/giveaway_pp_red.gif",requires:"addon_giveaway_red"},{key:"yellow",name:"Yellow",page:"/giveaway/yellow.html",preview:"/app-assets/images/games/giveaway_pp_yellow.gif",requires:"addon_giveaway_yellow"}]},{key:"giveawayblossoms",name:"Blossoms (Premium)",page:"/giveaway/blossoms.html",premium:!0,preview:"/app-assets/images/games/giveaway_blossoms.gif",requires:"addon_giveaway_blossoms",seasonal:"spring"},{key:"giveawayautumn",name:"Autumn (Premium)",page:"/giveaway/autumn.html",premium:!0,preview:"/app-assets/images/games/giveaway_autumn.gif",requires:"addon_giveaway_autumn",seasonal:"autumn"}]';
+  content = `${content.slice(0, start)}${themes}${content.slice(end + 1)}`;
+
+  content = replaceExact(
+    content,
+    'function y(e){var a,t;let{game:r,selectedTheme:i,onThemeChange:n}=e,',
+    'function y(e){var a,t;let{game:r,selectedTheme:i,onThemeChange:n,onVariantPreviewChange:_onVariantPreviewChange}=e,',
+    'Giveaway variant preview callback'
+  );
+  content = replaceExact(
+    content,
+    '(0,o.useEffect)(()=>{let e=r.themes.find(e=>e.key===i);if(null==e?void 0:e.variants){let a=f().variants||{};if(a[i])P(a[i]);else{let a={};e.variants.forEach((e,t)=>{a[e.key]=0===t}),P(a)}}else P({})},[i,r.themes]);',
+    '(0,o.useEffect)(()=>{let e=r.themes.find(e=>e.key===i);if(null==e?void 0:e.variants){let a=f().variants||{};if(a[i]){P(a[i]);let t=e.variants.find(e=>a[i][e.key]);_onVariantPreviewChange((null==t?void 0:t.preview)||null)}else{let a={};e.variants.forEach((e,t)=>{a[e.key]=0===t}),P(a),_onVariantPreviewChange((null==e.variants[0]?void 0:e.variants[0].preview)||null)}}else{P({}),_onVariantPreviewChange(null)}},[i,r.themes,_onVariantPreviewChange]);',
+    'Giveaway restored variant preview'
+  );
+  content = replaceExact(
+    content,
+    'let T=r.themes.find(e=>e.key===i)||r.themes[0],D=(r.settings||[]).filter(e=>!e.showFor||0===e.showFor.length||e.showFor.includes(i)),S=(e,a)=>{j(t=>({...t,[e]:a}))},z=(null==T?void 0:T.premium)&&T.requires&&(!m||!(null==c||null==(a=c.owned)?void 0:a.includes(T.requires))),',
+    'let T=r.themes.find(e=>e.key===i)||r.themes[0],D=(r.settings||[]).filter(e=>!e.showFor||0===e.showFor.length||e.showFor.includes(i)),S=(e,a)=>{j(t=>({...t,[e]:a}))},selectedVariant=T.variants&&T.variants.find(e=>N[e.key]),requiredItem=T.requires||(null==selectedVariant?void 0:selectedVariant.requires),z=(null==T?void 0:T.premium)&&requiredItem&&(!m||!(null==c||null==(a=c.owned)?void 0:a.includes(requiredItem))),',
+    'Giveaway selected child entitlement'
+  );
+  content = replaceExact(
+    content,
+    '(null==T?void 0:T.premium)&&T.requires&&m&&!(null==c||null==(t=c.owned)?void 0:t.includes(T.requires))',
+    '(null==T?void 0:T.premium)&&requiredItem&&m&&!(null==c||null==(t=c.owned)?void 0:t.includes(requiredItem))',
+    'Giveaway owned child prompt'
+  );
+  content = replaceExact(
+    content,
+    '(null==T?void 0:T.premium)&&T.requires&&!m',
+    '(null==T?void 0:T.premium)&&requiredItem&&!m',
+    'Giveaway logged-out child prompt'
+  );
+  content = replaceExact(
+    content,
+    'type:"checkbox",checked:!!N[e.key],onChange:()=>{var a;return!t&&(a=e.key,void P(e=>{let t={...e,[a]:!e[a]};return Object.values(t).every(e=>!e)?e:t}))},disabled:!!t,className:"rounded"',
+    'type:T.singleVariant?"radio":"checkbox",name:T.singleVariant?"theme-variant":void 0,checked:!!N[e.key],onChange:()=>{if(t)return;let a=e.key;P(e=>{if(T.singleVariant)return Object.fromEntries(T.variants.map(e=>[e.key,e.key===a]));let t={...e,[a]:!e[a]};return Object.values(t).every(e=>!e)?e:t}),_onVariantPreviewChange(e.preview)},disabled:!!t,className:"rounded"',
+    'Giveaway single color selector'
+  );
+  content = replaceExact(
+    content,
+    'disabled:!!t,className:"rounded"}),(0,s.jsxs)("span",{className:"truncate font-medium text-[var(--color-pp-text)]"',
+    'disabled:!!t,className:"rounded"}),e.preview&&(0,s.jsx)("img",{src:_variantIcon(e),alt:"",className:"h-5 w-5 rounded object-cover",style:{imageRendering:"pixelated"}}),(0,s.jsxs)("span",{className:"truncate font-medium text-[var(--color-pp-text)]"',
+    'Giveaway child market icons'
+  );
+  content = replaceExact(
+    content,
+    '[x,v]=(0,o.useState)((null==w||null==(e=w.themes[0])?void 0:e.key)||""),_=null==w?void 0:w.themes.find(e=>e.key===x);',
+    '[x,v]=(0,o.useState)((null==w||null==(e=w.themes[0])?void 0:e.key)||""),[variantPreview,setVariantPreview]=(0,o.useState)(null),_=null==w?void 0:w.themes.find(e=>e.key===x);',
+    'Game detail variant preview state'
+  );
+  content = replaceExact(
+    content,
+    'let k=(0,o.useCallback)(e=>{if(v(e),w)',
+    'let k=(0,o.useCallback)(e=>{if(v(e),setVariantPreview(null),w)',
+    'Reset variant preview on theme change'
+  );
+  content = replaceExact(
+    content,
+    'src:(0,m.Q)((null==_?void 0:_.preview)||w.images[0])',
+    'src:(0,m.Q)(variantPreview||(null==_?void 0:_.preview)||w.images[0])',
+    'Render selected Giveaway color preview'
+  );
+  return replaceExact(
+    content,
+    '(0,s.jsx)(y,{game:w,selectedTheme:x,onThemeChange:k})',
+    '(0,s.jsx)(y,{game:w,selectedTheme:x,onThemeChange:k,onVariantPreviewChange:setVariantPreview})',
+    'Pass Giveaway preview callback'
+  );
+}
+
+function patchGiveawayChildIconHelper(content) {
+  return replaceExact(
+    content,
+    'disabled:!!t,className:"rounded"}),e.preview&&(0,s.jsx)("img",{src:(0,m.Q)(_themeIcon(e)),alt:"",className:"h-5 w-5 rounded object-cover"',
+    'disabled:!!t,className:"rounded"}),e.preview&&(0,s.jsx)("img",{src:_variantIcon(e),alt:"",className:"h-5 w-5 rounded object-cover"',
+    'Giveaway child absolute icon URL'
+  );
+}
+
+function patchVariantIconHelper(content) {
+  content = replaceOptional(
+    content,
+    '}function u(e,a){return e.replace("(Free)"',
+    '}function _variantIcon(e){return(0,m.Q)(_themeIcon(e))}function u(e,a){return e.replace("(Free)"'
+  );
+  return replaceOptional(
+    content,
+    'src:_themeIcon(e),alt:"",className:"h-5 w-5 rounded object-cover"',
+    'src:_variantIcon(e),alt:"",className:"h-5 w-5 rounded object-cover"'
+  );
+}
+
+function patchGiveawayBundleIconPath(content) {
+  return replaceExact(
+    content,
+    'return a?"https://cdn.pixelplush.dev/assets/add-ons/".concat(a):e.preview',
+    'return a?"https://cdn.pixelplush.dev/assets/".concat("giveawaycolors"===e.key?"bundles/":"add-ons/").concat(a):e.preview',
+    'Colorful Giveaway bundle icon path'
+  );
+}
+
+function patchGiveawayVariantUsability(content) {
+  content = replaceOptional(
+    content,
+    'className:"grid grid-cols-2 gap-2 sm:grid-cols-3"',
+    'className:"grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3"'
+  );
+  return replaceOptional(
+    content,
+    'children:h("games.selectVariants")',
+    'children:T.singleVariant?h("games.chooseOneColor"):h("games.selectVariants")'
+  );
+}
+
 function patchMarketBundle(content) {
   content = replaceExact(
     content,
@@ -279,13 +405,24 @@ function patchMarketBundle(content) {
     'market preview handlers'
   );
   content = replaceOptional(content, 'o?"h-32":"h-20"', '"h-20"');
-  content = replaceOptional(content, 'width:o?120:48,height:o?80:48', 'width:o?72:48,height:o?64:48');
+  content = replaceOptional(content, 'width:o?120:48,height:o?80:48', 'width:48,height:48');
+  content = replaceOptional(content, 'width:o?72:48,height:o?64:48', 'width:48,height:48');
   content = replaceOptional(
     content,
     ',!r&&(0,a.jsx)(a.Fragment,{children:',
     ',(0,a.jsx)(a.Fragment,{children:'
   );
   return content;
+}
+
+function patchBundleIconSize(content) {
+  content = replaceOptional(content, 'width:o?120:48,height:o?80:48', 'width:48,height:48');
+  content = replaceOptional(content, 'width:o?72:48,height:o?64:48', 'width:48,height:48');
+  return replaceOptional(
+    content,
+    'className:"pixelated ".concat(o?"object-contain":"")',
+    'className:"pixelated ".concat(o?"h-12 w-12 object-contain":"")'
+  );
 }
 
 function upgradeMarketPreviewAnimation(content) {
@@ -387,6 +524,7 @@ function patchLocaleBundle(content) {
     if (!copy) throw new Error('Unexpected extra locale bundle');
     locale.games.grantPermissions = copy.grantPermissions;
     locale.games.permissionsRequired = copy.permissionsRequired;
+    locale.games.chooseOneColor = copy.chooseOneColor;
     const serialized = JSON.stringify(locale)
       .replaceAll('\\', '\\\\')
       .replaceAll("'", "\\'")
@@ -407,7 +545,8 @@ function patchStaticMarkup(content) {
   content = replaceOptional(content, 'text-xl font-bold mb-3 !text-white', 'text-xl font-bold mb-3 text-[var(--color-pp-headings)]');
   content = replaceOptional(content, 'text-sm mb-4 text-white/90', 'text-sm mb-4 text-[var(--color-pp-text)]');
   content = replaceOptional(content, 'mb-2 flex items-center justify-center h-32', 'mb-2 flex items-center justify-center h-20');
-  content = replaceOptional(content, 'width="120" height="80"', 'width="72" height="64"');
+  content = replaceOptional(content, 'width="120" height="80"', 'width="48" height="48"');
+  content = replaceOptional(content, 'width="72" height="64"', 'width="48" height="48"');
   content = replaceOptional(
     content,
     '<button class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]">',
@@ -507,7 +646,13 @@ for (const exportRoot of exportRoots) {
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('"aria-controls":"game-settings-panel"')) content = patchGamesAccessibility(content);
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('id:"theme-select"')) content = patchThemeSelectorAccessibility(content);
     if (content.includes('pixelplush-game-settings') && !content.includes('_themeMarketIcons')) content = patchThemeMarketIcons(content);
+    if (content.includes('{key:"giveawayblue"')) content = patchGiveawayHierarchy(content);
+    if (content.includes('disabled:!!t,className:"rounded"}),e.preview&&(0,s.jsx)("img",{src:(0,m.Q)(_themeIcon(e))')) content = patchGiveawayChildIconHelper(content);
+    if (content.includes('singleVariant:!0') && (!content.includes('function _variantIcon(e)') || content.includes('src:_themeIcon(e),alt:"",className:"h-5 w-5 rounded object-cover"'))) content = patchVariantIconHelper(content);
+    if (content.includes('_themeMarketIcons') && content.includes('return a?"https://cdn.pixelplush.dev/assets/add-ons/".concat(a):e.preview')) content = patchGiveawayBundleIconPath(content);
+    if (content.includes('singleVariant:!0') && (content.includes('grid grid-cols-2 gap-2 sm:grid-cols-3') || content.includes('children:h("games.selectVariants")'))) content = patchGiveawayVariantUsability(content);
     if (content.includes('market.hideOwnedItems') && !content.includes('function _startPreviewAnimation')) content = patchMarketBundle(content);
+    if (content.includes('market.hideOwnedItems') && (content.includes('width:o?120:48,height:o?80:48') || content.includes('width:o?72:48,height:o?64:48') || content.includes('className:"pixelated ".concat(o?"object-contain":"")'))) content = patchBundleIconSize(content);
     if (content.includes(previousMarketPreviewHelpers)) content = upgradeMarketPreviewAnimation(content);
     if (content.includes('fetch("".concat(p,"/transactions/status?id=").concat(a)).then')) content = patchTransactionStatusAuth(content);
     if (content.includes('home.getCharacters') && content.includes('[r,m]=(0,n.useState)(0);')) content = patchHomeBundle(content);
