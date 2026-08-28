@@ -5,6 +5,9 @@ const repositoryRoot = path.resolve(__dirname, '..');
 const exportRoots = ['v2']
   .map((directory) => path.join(repositoryRoot, directory))
   .filter((directory) => fs.existsSync(directory));
+const oldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/';
+const birthdayCelebrationEnabled = process.env.PIXELPLUSH_BIRTHDAY_ENABLED !== '0';
+const birthdayScriptTag = '<script src="/v2/birthday-celebration.js" defer></script>';
 
 const requiredScopes = [
   'user:read:email',
@@ -19,26 +22,31 @@ const permissionsCopy = [
     grantPermissions: 'Grant Twitch Permissions',
     permissionsRequired: 'Additional Twitch permissions are required for chat and Channel Point features.',
     chooseOneColor: 'Choose one color.',
+    oldSite: 'Old PixelPlush Site',
   },
   {
     grantPermissions: 'Twitch-Berechtigungen erteilen',
     permissionsRequired: 'Fuer Chat- und Kanalpunktefunktionen sind zusaetzliche Twitch-Berechtigungen erforderlich.',
     chooseOneColor: 'Waehle eine Farbe.',
+    oldSite: 'Alte PixelPlush-Seite',
   },
   {
     grantPermissions: 'Udelit opravneni Twitch',
     permissionsRequired: 'Pro funkce chatu a vernostnich bodu jsou vyzadovana dalsi opravneni Twitch.',
     chooseOneColor: 'Vyberte jednu barvu.',
+    oldSite: 'Stary web PixelPlush',
   },
   {
     grantPermissions: 'Twitch Izinleri Ver',
     permissionsRequired: 'Sohbet ve Kanal Puani ozellikleri icin ek Twitch izinleri gereklidir.',
     chooseOneColor: 'Bir renk secin.',
+    oldSite: 'Eski PixelPlush Sitesi',
   },
   {
     grantPermissions: 'Conceder permisos de Twitch',
     permissionsRequired: 'Se necesitan permisos adicionales de Twitch para las funciones de chat y Puntos de canal.',
     chooseOneColor: 'Elige un color.',
+    oldSite: 'Sitio antiguo de PixelPlush',
   },
 ];
 
@@ -115,6 +123,9 @@ function replaceExact(content, oldValue, newValue, label, expected = 1) {
 }
 
 function replaceOptional(content, oldValue, newValue) {
+  if (oldValue instanceof RegExp) {
+    return oldValue.test(content) ? content.replace(oldValue, newValue) : content;
+  }
   return content.includes(oldValue) ? content.replaceAll(oldValue, newValue) : content;
 }
 
@@ -229,6 +240,48 @@ function patchLayoutAccessibility(content) {
     '"button",{onClick:()=>h(!a),className:"flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]"',
     '"button",{type:"button","aria-label":"Language: ".concat(null==N?"English":N.name),"aria-expanded":a,onClick:()=>h(!a),className:"flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]"',
     'language menu name'
+  );
+}
+
+function patchGlobalPermissionAction(content) {
+  content = replaceExact(
+    content,
+    '{isLoading:p,isLoggedIn:x,account:m,login:u,logout:v}=(0,i.A)()',
+    '{isLoading:p,isLoggedIn:x,hasRequiredScopes:W,account:m,login:u,logout:v}=(0,i.A)()',
+    'global permission state'
+  );
+  return replaceExact(
+    content,
+    'g("header.redeemCode")]}),(0,s.jsx)("div",{className:"border-t border-gray-200 my-1.5"})',
+    'g("header.redeemCode")]}),x&&!W&&(0,s.jsx)("button",{type:"button",onClick:()=>{u(),r(!1)},className:"w-full flex items-center px-4 py-2 text-left text-sm font-semibold text-[#5b21b6] hover:bg-purple-50",children:g("games.grantPermissions")}),(0,s.jsx)("div",{className:"border-t border-gray-200 my-1.5"})',
+    'global permission action'
+  );
+}
+
+function patchOldSiteFooterLink(content) {
+  const oldSiteLink = `(0,s.jsx)("a",{href:"${oldSitePath}",target:"_blank",rel:"noopener noreferrer","data-old-pixelplush-site":!0,className:"font-semibold underline hover:text-[var(--color-pp-accent)] transition-colors",children:e("footer.oldSite")})`;
+  const existingOldSiteLink = /\(0,s\.jsx\)\("a",\{href:"[^"]*",target:"_blank",rel:"noopener noreferrer","data-old-pixelplush-site":!0,className:"font-semibold underline hover:text-\[var\(--color-pp-accent\)\] transition-colors",children:e\("footer\.oldSite"\)\}\)/;
+  if (existingOldSiteLink.test(content)) return content.replace(existingOldSiteLink, oldSiteLink);
+  content = replaceExact(
+    content,
+    'className:"flex items-center gap-4",children:[(0,s.jsx)(n(),{href:"/terms"',
+    `className:"flex flex-wrap items-center justify-center gap-4",children:[${oldSiteLink},(0,s.jsx)("span",{className:"text-[var(--color-pp-border)]",children:"|"}),(0,s.jsx)(n(),{href:"/terms"`,
+    'old-site footer link'
+  );
+  return content;
+}
+
+function patchOAuthReturnUrl(content) {
+  const fullReturn = 'let r=new URL(t,window.location.origin);if(r.origin!==window.location.origin)throw Error("Invalid redirect origin");let a=r.pathname.startsWith("/v2")?r.pathname.slice(3)||"/":r.pathname;e.push("".concat(a).concat(r.search).concat(r.hash))';
+  content = replaceOptional(
+    content,
+    'let r=new URL(t),a=r.pathname.startsWith("/v2")?r.pathname.slice(3)||"/":r.pathname;e.push(a)',
+    fullReturn
+  );
+  return replaceOptional(
+    content,
+    'let r=new URL(t,window.location.origin);if(r.origin!==window.location.origin)throw Error("Invalid redirect origin");e.push("".concat(r.pathname).concat(r.search).concat(r.hash))',
+    fullReturn
   );
 }
 
@@ -525,6 +578,7 @@ function patchLocaleBundle(content) {
     locale.games.grantPermissions = copy.grantPermissions;
     locale.games.permissionsRequired = copy.permissionsRequired;
     locale.games.chooseOneColor = copy.chooseOneColor;
+    locale.footer.oldSite = copy.oldSite;
     const serialized = JSON.stringify(locale)
       .replaceAll('\\', '\\\\')
       .replaceAll("'", "\\'")
@@ -552,6 +606,16 @@ function patchStaticMarkup(content) {
     '<button class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]">',
     '<button type="button" aria-label="Language: English" aria-expanded="false" class="flex items-center gap-1.5 px-2 py-1.5 rounded hover:bg-[var(--color-pp-card-hover)] transition-colors text-sm text-[var(--color-pp-text)]">'
   );
+  content = replaceOptional(
+    content,
+    /<div class="flex flex-wrap items-center justify-center gap-4"><a href="[^"]*" target="_blank" rel="noopener noreferrer" data-old-pixelplush-site="true" class="font-semibold underline hover:text-\[var\(--color-pp-accent\)\] transition-colors">Old PixelPlush Site<\/a>/,
+    `<div class="flex flex-wrap items-center justify-center gap-4"><a href="${oldSitePath}" target="_blank" rel="noopener noreferrer" data-old-pixelplush-site="true" class="font-semibold underline hover:text-[var(--color-pp-accent)] transition-colors">Old PixelPlush Site</a>`
+  );
+  content = replaceOptional(
+    content,
+    '<div class="flex items-center gap-4"><a class="hover:text-[var(--color-pp-accent)] transition-colors" href="/v2/terms/">',
+    `<div class="flex flex-wrap items-center justify-center gap-4"><a href="${oldSitePath}" target="_blank" rel="noopener noreferrer" data-old-pixelplush-site="true" class="font-semibold underline hover:text-[var(--color-pp-accent)] transition-colors">Old PixelPlush Site</a><span class="text-[var(--color-pp-border)]">|</span><a class="hover:text-[var(--color-pp-accent)] transition-colors" href="/v2/terms/">`
+  );
   let carouselDotIndex = 0;
   content = content.replace(
     /<button class="h-2 w-2 rounded-full transition-colors (bg-white(?:\/40)?)"><\/button>/g,
@@ -572,6 +636,13 @@ function patchStaticMarkup(content) {
     content = replaceOptional(content, `<span class="ml-1 text-[10px] ${color} rounded px-1">${emoji}</span>`, '');
   }
   return patchLinks(content);
+}
+
+function patchBirthdayCelebration(content) {
+  if (birthdayCelebrationEnabled) {
+    return content.includes(birthdayScriptTag) ? content : content.replace('</body>', `${birthdayScriptTag}</body>`);
+  }
+  return replaceOptional(content, birthdayScriptTag, '');
 }
 
 function removeClarity(content) {
@@ -658,10 +729,14 @@ for (const exportRoot of exportRoots) {
     if (content.includes('home.getCharacters') && content.includes('[r,m]=(0,n.useState)(0);')) content = patchHomeBundle(content);
     if (content.includes('src:(0,c.Q)("/app-assets/images/icon/maaya.gif"),alt:"",width:24,height:24')) content = patchLayoutBundle(content);
     if (content.includes('onClick:()=>h(!a),className:"flex items-center gap-1.5 px-2 py-1.5 rounded') && !content.includes('"aria-label":"Language: ".concat')) content = patchLayoutAccessibility(content);
+    if (content.includes('{isLoading:p,isLoggedIn:x,account:m,login:u,logout:v}=(0,i.A)()')) content = patchGlobalPermissionAction(content);
+    if (content.includes('className:"flex items-center gap-4",children:[(0,s.jsx)(n(),{href:"/terms"') || content.includes('"data-old-pixelplush-site":!0')) content = patchOldSiteFooterLink(content);
     if (content.includes('children:e("scores.timeRange")') && !content.includes('id:"score-time-range"')) content = patchScoresAccessibility(content);
+    if (content.includes('let r=new URL(t),a=r.pathname.startsWith("/v2")') || content.includes('e.push("".concat(r.pathname).concat(r.search).concat(r.hash))')) content = patchOAuthReturnUrl(content);
     if (content.includes('JSON.parse') && content.includes('"loginToAutoFill":')) content = patchLocaleBundle(content);
     if (content.includes('[r,m]=(0,n.useState)(0),[p,g]=(0,n.useState)(!1);')) content = upgradeCarouselPauseState(content);
     if (/\.(?:html|txt)$/.test(file)) content = patchStaticMarkup(content);
+    if (file.endsWith('.html') && !file.includes(`${path.sep}app-assets${path.sep}`)) content = patchBirthdayCelebration(content);
     if (content.includes('wdlmotp71n')) content = removeClarity(content);
     if (file.endsWith('.css') && content.includes('--color-pp-bg:#f2c079')) content = patchStylesheet(content);
     if (/\.(?:html|js|txt)$/.test(file) && content.includes('-600/15 text-')) content = patchCategoryColors(content);

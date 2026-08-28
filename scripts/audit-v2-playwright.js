@@ -233,6 +233,11 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
   if ((await languageButton.getAttribute('aria-label')) === 'Language: English') throw new Error('Language selection did not update');
   const footerPosition = await home.locator('footer').evaluate((footer) => getComputedStyle(footer).position);
   if (footerPosition !== 'static') throw new Error(`Mobile footer overlays content with position: ${footerPosition}`);
+  const expectedOldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/';
+  if ((await home.locator('[data-old-pixelplush-site]').getAttribute('href')) !== expectedOldSitePath) throw new Error(`Old PixelPlush Site link does not point to ${expectedOldSitePath}`);
+  const layoutChunk = fs.readdirSync(path.join(repositoryRoot, 'v2', '_next', 'static', 'chunks', 'app')).find((file) => /^layout-.*\.js$/.test(file));
+  const layoutContent = fs.readFileSync(path.join(repositoryRoot, 'v2', '_next', 'static', 'chunks', 'app', layoutChunk), 'utf8');
+  if (!layoutContent.includes(`href:"${expectedOldSitePath}",target:"_blank",rel:"noopener noreferrer","data-old-pixelplush-site":!0`)) throw new Error(`Hydrated old-site link does not point to ${expectedOldSitePath}`);
   await home.close();
   await mobile.close();
 }
@@ -258,9 +263,47 @@ async function auditNullScopes(browser, baseUrl, clarityRequests) {
   await page.getByRole('button', { name: 'Grant Twitch Permissions' }).waitFor({ state: 'visible' });
   const scopes = await page.evaluate(() => window.ComfyTwitch.Scopes);
   if (!Array.isArray(scopes) || scopes.length !== 0) throw new Error(`Null Twitch scopes were not normalized: ${JSON.stringify(scopes)}`);
+  await page.locator('header button').filter({ hasText: 'Test Streamer' }).click();
+  const globalGrant = page.getByRole('button', { name: 'Grant Twitch Permissions' }).last();
+  await globalGrant.waitFor({ state: 'visible' });
+  await page.evaluate(() => {
+    window.__auditPermissionLogin = null;
+    window.ComfyTwitch.Login = (...args) => { window.__auditPermissionLogin = args; };
+  });
+  await globalGrant.click();
+  const permissionLogin = await page.evaluate(() => window.__auditPermissionLogin);
+  if (JSON.stringify(permissionLogin?.[2]) !== JSON.stringify(['user:read:email', 'chat:read', 'chat:edit', 'channel:manage:redemptions', 'channel:read:redemptions'])) throw new Error('Global Twitch permission action did not request every required scope');
+  const savedReturnUrl = await page.evaluate(() => localStorage.getItem('redirectPage'));
+  if (!savedReturnUrl?.includes('/v2/games/?type=parachute')) throw new Error(`Global permission action lost its originating URL: ${savedReturnUrl}`);
   if (pageErrors.length) throw new Error(`Null Twitch scopes caused an uncaught exception: ${pageErrors.join('\n')}`);
   await page.close();
   await context.close();
+}
+
+async function auditOAuthReturnUrl(browser, baseUrl, clarityRequests) {
+  const context = await browser.newContext({ viewport: viewports[0] });
+  await configureContext(context, clarityRequests);
+  const expectedUrl = `${baseUrl}/games/?type=giveaway#colors`;
+  await context.addInitScript((returnUrl) => {
+    localStorage.setItem('twitchToken', 'oauth-return-token');
+    localStorage.setItem('redirectPage', returnUrl);
+  }, expectedUrl);
+  await context.route('https://id.twitch.tv/oauth2/validate', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ client_id: 'test-client', login: 'teststreamer', user_id: '1', scopes: ['user:read:email', 'chat:read', 'chat:edit', 'channel:manage:redemptions', 'channel:read:redemptions'] }) }));
+  await context.route('https://api.pixelplush.dev/v1/accounts', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ username: 'teststreamer', displayName: 'Test Streamer', coins: 0, owned: [], styles: {} }) }));
+  const page = await context.newPage();
+  await page.goto(`${baseUrl}/redirect/`, { waitUntil: 'networkidle' });
+  await page.waitForURL((url) => url.pathname === '/v2/games/' && url.search === '?type=giveaway' && url.hash === '#colors', { timeout: 5000 });
+  await page.close();
+  await context.close();
+
+  const unsafeContext = await browser.newContext({ viewport: viewports[0] });
+  await configureContext(unsafeContext, clarityRequests);
+  await unsafeContext.addInitScript(() => localStorage.setItem('redirectPage', 'https://example.com/stolen?token=1#outside'));
+  const unsafePage = await unsafeContext.newPage();
+  await unsafePage.goto(`${baseUrl}/redirect/`, { waitUntil: 'networkidle' });
+  await unsafePage.waitForURL((url) => url.pathname === '/v2/' && url.origin === new URL(baseUrl).origin, { timeout: 5000 });
+  await unsafePage.close();
+  await unsafeContext.close();
 }
 
 async function auditGiveawayHierarchy(browser, baseUrl, clarityRequests) {
@@ -313,6 +356,8 @@ async function auditGiveawayHierarchy(browser, baseUrl, clarityRequests) {
   if (!(await page.getByAltText(/Giveaway Tool - Colorful/).getAttribute('src'))?.includes('giveaway_pp_yellow.gif')) throw new Error('Colorful Yellow did not update the game preview');
   if (!(await page.locator('input[readonly]').last().inputValue()).includes('/giveaway/yellow.html')) throw new Error('Colorful Yellow did not update the browser-source URL');
   if (pageErrors.length) throw new Error(`Giveaway hierarchy caused an uncaught exception: ${pageErrors.join('\n')}`);
+  await page.locator('header button').filter({ hasText: 'Test Streamer' }).click();
+  if (await page.getByRole('button', { name: 'Grant Twitch Permissions' }).count()) throw new Error('Global Twitch permission action shown for a fully scoped account');
 
   await page.goto(`${baseUrl}/market/`, { waitUntil: 'networkidle' });
   await page.evaluate(async () => {
@@ -353,6 +398,49 @@ async function auditGiveawayHierarchy(browser, baseUrl, clarityRequests) {
   await restrictedContext.close();
 }
 
+async function auditBirthdayCelebration(browser, baseUrl, clarityRequests) {
+  const htmlFiles = fs.readdirSync(path.join(repositoryRoot, 'v2'), { recursive: true })
+    .filter((file) => file.endsWith('.html') && !file.startsWith(`app-assets${path.sep}`));
+  const birthdayTags = htmlFiles.filter((file) => fs.readFileSync(path.join(repositoryRoot, 'v2', file), 'utf8').includes('/v2/birthday-celebration.js'));
+  const birthdayEnabled = birthdayTags.length > 0;
+  if (birthdayEnabled && birthdayTags.length !== htmlFiles.length) throw new Error(`Birthday script is missing from ${htmlFiles.length - birthdayTags.length} generated page(s)`);
+  if (!birthdayEnabled) return;
+  const context = await browser.newContext({ viewport: viewports[1] });
+  await configureContext(context, clarityRequests);
+  const page = await context.newPage();
+  const pageErrors = [];
+  page.on('pageerror', (error) => pageErrors.push(error.stack || error.message));
+  await page.goto(`${baseUrl}/`, { waitUntil: 'load' });
+  const banner = page.getByRole('status', { name: "PixelPlush's 7th birthday celebration" });
+  await banner.waitFor({ state: 'visible', timeout: 5000 });
+  if (!(await banner.innerText()).includes("Celebrate PixelPlush's 7th birthday!")) throw new Error('Birthday banner text is missing');
+  const confetti = page.locator('#pp-birthday-confetti-layer i');
+  if ((await confetti.count()) !== 56) throw new Error(`Expected 56 confetti pieces, found ${await confetti.count()}`);
+  if ((await page.locator('#pp-birthday-confetti-layer').evaluate((element) => getComputedStyle(element).pointerEvents)) !== 'none') throw new Error('Birthday confetti blocks page interaction');
+  const before = await confetti.first().boundingBox();
+  await page.waitForTimeout(350);
+  const after = await confetti.first().boundingBox();
+  if (!before || !after || before.y === after.y) throw new Error('Birthday confetti did not animate');
+  await page.getByRole('button', { name: 'Dismiss birthday celebration' }).click();
+  if (await banner.count()) throw new Error('Birthday banner did not dismiss');
+  if (await page.locator('#pp-birthday-confetti-layer').count()) throw new Error('Birthday confetti did not dismiss with the banner');
+  await page.reload({ waitUntil: 'load' });
+  await page.waitForTimeout(2000);
+  if (await page.locator('#pp-birthday-banner').count()) throw new Error('Birthday dismissal did not persist for the browser session');
+  if (pageErrors.length) throw new Error(`Birthday celebration caused an uncaught exception: ${pageErrors.join('\n')}`);
+  await page.close();
+  await context.close();
+
+  const reducedContext = await browser.newContext({ viewport: viewports[1], reducedMotion: 'reduce' });
+  await configureContext(reducedContext, clarityRequests);
+  const reducedPage = await reducedContext.newPage();
+  await reducedPage.goto(`${baseUrl}/`, { waitUntil: 'load' });
+  await reducedPage.getByRole('status', { name: "PixelPlush's 7th birthday celebration" }).waitFor({ state: 'visible', timeout: 5000 });
+  if (await reducedPage.locator('#pp-birthday-confetti-layer').count()) throw new Error('Birthday confetti rendered for a reduced-motion user');
+  await reducedPage.close();
+  await reducedContext.close();
+}
+
 async function main() {
   const { server, baseUrl } = await startStaticServer();
   const browser = await chromium.launch({ headless: true });
@@ -372,7 +460,9 @@ async function main() {
     }
     await auditInteractions(browser, baseUrl, clarityRequests);
     await auditNullScopes(browser, baseUrl, clarityRequests);
+    await auditOAuthReturnUrl(browser, baseUrl, clarityRequests);
     await auditGiveawayHierarchy(browser, baseUrl, clarityRequests);
+    await auditBirthdayCelebration(browser, baseUrl, clarityRequests);
   } finally {
     await browser.close();
     await new Promise((resolve) => server.close(resolve));

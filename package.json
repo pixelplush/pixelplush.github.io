@@ -12,7 +12,7 @@
   },
   "scripts": {
     "build": "node generatePages.js",
-    "v2:audit": "node scripts/audit-v2-playwright.js",
+    "v2:audit": "npm run v2:polish && node scripts/audit-v2-playwright.js",
     "v2:polish": "node scripts/apply-v2-launch-polish.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
