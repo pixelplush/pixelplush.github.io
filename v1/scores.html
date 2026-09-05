@@ -31,7 +31,7 @@
     <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
     <meta property="og:url" content="https://www.pixelplush.dev">
     <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff">
-    <title>PAGE_NAME - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <title>Scoreboard - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
     <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
     <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -140,7 +140,7 @@
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
                         <li class="nav-item d-lg-block not-logged-in">
                             <div class="not-logged-in">
-                                <a id="login" href="login.html?redirect=PAGE_FILE.html" class="btn btn-primary mr-25">Log In</a>
+                                <a id="login" href="login.html?redirect=scores.html" class="btn btn-primary mr-25">Log In</a>
                             </div>
                         </li>
                         <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
@@ -289,10 +289,167 @@
                         <div class="col-12">
                             <div class="row">
                                 <!-- left menu section -->
-PAGE_MENU
+                                <div class="col-md-3 mb-2 mb-md-0 pills-stacked">
+                                    <ul class="nav nav-pills flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="index.html">
+                                                <i class="bx bx-home"></i>
+                                                <span>PixelPlush Home</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="twitch.html">
+                                                <i class="bx bxl-twitch"></i>
+                                                <span>Games for Twitch</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center active" href="scores.html">
+                                                <i class="bx bx-list-ol"></i>
+                                                <span>Top Scores</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="market.html">
+                                                <img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                <span>Goodies Market</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="customize.html">
+                                                <i class="bx bx-user"></i>
+                                                <span>My Dressing Room</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="transactions.html">
+                                                <i class="bx bx-check-square"></i>
+                                                <span>My Shopping History</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="links.html">
+                                                <i class="bx bx-link"></i>
+                                                <span>Follow Us!</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="credits.html">
+                                                <i class="bx bxs-megaphone"></i>
+                                                <span>Credits</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="troubleshoot.html">
+                                                <i class="bx bx-wrench"></i>
+                                                <span>Troubleshoot</span>
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                    <!-- <ul class="nav nav-pills flex-column mt-1">
+                                        <li class="nav-item" style="background-color:#ffffff; border-radius: 0.267rem;">
+                                            <div class="nav-link d-flex align-items-center" style="background-color:#6868f0">
+                                                <strong style="color:#ffffff">UPDATE: OBS Screen Flicker Fixed!</strong>
+                                            </div>
+                                            <div class="nav-link d-flex align-items-center">
+                                                <p style="color:#475F7B">We've now built a fix to work around an OBS Studio update causing a <a href="https://github.com/obsproject/obs-studio/issues/6010" target="_blank"><u>screen flicker bug</u></a>! It should no longer flicker even if you select multiple themes in Cauldron/Valentines/Easter themes!</p>
+                                            </div>
+                                        </li>
+                                    </ul> -->
+                                </div>
+                                
                                 <!-- right content section -->
         <div class="col-md-9">
-PAGE_CONTENT
+                                    <div class="card">
+                                        <div class="card-content">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <div class="controls">
+                                                                <label>Twitch Channel Name</label>
+                                                                <input id="inputChannelName" type="text" class="form-control" placeholder="Twitch Channel Name" value="" required="">
+                                                            <div class="help-block"></div></div>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Timeframe</label>
+                                                            <select class="form-control" id="inputScoresTime">
+                                                                <option value="1m">Monthly</option>
+                                                                <option value="1w">Weekly</option>
+                                                                <option value="12h">Recent (12 hour)</option>
+                                                                <!-- <option value="2m">2-Month</option>
+                                                                <option value="3m">3-Month</option>
+                                                                <option value="6m">6-Month</option>
+                                                                <option value="1y">Yearly</option> -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="form-group">
+                                                            <label>Choose Game</label>
+                                                            <select class="form-control" id="inputGameType">
+                                                              <option value="parachute">Pixel Parachute</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Choose Theme</label>
+                                                            <select class="form-control" id="inputGameTheme">
+                                                              <option value="pixelparachuteall">All</option>
+                                                              <option value="pixelparachutespring">Pixel Parachute (Spring Blossoms)</option>
+                                                              <option value="pixelparachuteeaster">Pixel Parachute (Easter)</option>
+                                                              <option value="pixelparachuteday">Pixel Parachute (Day)</option>
+                                                              <option value="pixelparachutenight">Pixel Parachute (Night)</option>
+                                                              <option value="pixelparachuteretro">Pixel Parachute (Retro)</option>
+                                                              <option value="pixelparachutepoolred">Pixel Parachute (Pool Party - Red)</option>
+                                                              <option value="pixelparachutepoolblue">Pixel Parachute (Pool Party - Blue)</option>
+                                                              <option value="pixelparachuteautumn">Pixel Parachute (Autumn)</option>
+                                                              <option value="pixelparachutehalloween">Pixel Parachute (Halloween)</option>
+                                                              <option value="pixelparachutechristmas">Pixel Parachute (Christmas)</option>
+                                                              <option value="pixelparachutewinter">Pixel Parachute (Winter)</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-group">
+                                                          <label for="outputScoresLink">Scoreboard Link</label>
+                                                          <div class="input-group">
+                                                            <input type="text" class="form-control" id="outputScoresLink" readonly>
+                                                            <div class="input-group-append">
+                                                              <button class="btn btn-secondary clipboard" type="button" id="copy-btn" data-clipboard-target="#outputScoresLink">Click to Copy</button>
+                                                            </div>
+                                                          </div>
+                                                          <small id="scoreHelp" class="form-text text-muted">Copy to share this scoreboard with friends!</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="users-list-table">
+                                                    <div class="card">
+                                                        <div class="card-content">
+                                                            <div class="card-body">
+                                                                <!-- datatable start -->
+                                                                <div class="table-responsive">
+                                                                    <table id="scores-list-datatable" class="table">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Rank</th>
+                                                                                <th>Score</th>
+                                                                                <th>User</th>
+                                                                                <th>Date</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                                <!-- datatable ends -->
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
         </div>
                             </div>
                         </div>
@@ -353,7 +510,191 @@ PAGE_CONTENT
     src="https://www.paypal.com/sdk/js?client-id=Ac8ThQDkE1sBoHpJD4cgrd4nEyF0gYuUzQwNzSolvCVjGondlvAYy7mlQdFaV5RpspBzBFjnn9Mt8dep"></script>
     <script src="public/comfytwitch.min.js"></script>
     <script>
-PAGE_SCRIPT
+        const params = new URLSearchParams( location.search );
+        const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
+        const baseUrl = window.location.origin;
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+        const plushScoreUrl = "https://stats.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+        let twitch = {};
+        let account = {};
+        
+        $( ".not-logged-in" ).show();
+        $( ".logged-in" ).hide();
+        $( ".additional-permissions" ).hide();
+        
+        ComfyTwitch.SetAuthEndpoint( `${plushScoreUrl}/auth/code` );
+        ComfyTwitch.SetRefreshEndpoint( `${plushScoreUrl}/auth/refresh` );
+        
+        ComfyTwitch.Check()
+        .then( async result => {
+            // console.log( result );
+            if( result ) {
+                try {
+                    account = await fetch( `${plushScoreUrl}/accounts`, {
+                        headers: {
+                            Twitch: result.token
+                        }
+                    } ).then( r => r.json() );
+        
+                    // console.log( account );
+        
+                    if( account.error ) {
+                        throw "Login Error";
+                    }
+        
+                    $( ".not-logged-in" ).hide();
+                    $( ".logged-in" ).show();
+        
+                    $( ".account-image" ).attr( "src", account.profileImage );
+                    $( ".user-name" ).text( account.displayName || account.username );
+                    $( ".user-coins" ).text( account.coins );
+        
+                    $( ".logout" ).on( "click", function() {
+                        ComfyTwitch.Logout();
+                        window.location.reload();
+                    });
+        
+                    if( !channelName ) {
+                        channelName = result.login;
+                    }
+                    $( "#inputChannelName" ).val( channelName );
+                    generateLink();
+                    getScores();
+                }
+                catch( error ) {
+                    // TODO: Auth Failed
+                    console.log( "Auth Validate Failed", error );
+                }
+            }
+            else {
+                $( ".not-logged-in" ).show();
+                $( ".logged-in" ).hide();
+                if( channelName ) {
+                    $( "#inputChannelName" ).val( channelName );
+                    generateLink();
+                    getScores();
+                }
+            }
+        });
+        
+        const gameTypes = [ "parachute" ];
+        const gameThemes = [ "pixelparachuteall", "pixelparachutespring", "pixelparachuteeaster", "pixelparachuteday", "pixelparachutenight", "pixelparachuteretro", "pixelparachutepoolred", "pixelparachutepoolblue", "pixelparachuteautumn", "pixelparachutehalloween", "pixelparachutechristmas", "pixelparachutewinter" ];
+        const gameThemeNames = {
+            "pixelparachuteall": "",
+            "pixelparachutespring": "Pixel Parachute (Spring Blossoms)",
+            "pixelparachuteeaster": "Pixel Parachute (Easter)",
+            "pixelparachuteday": "Pixel Parachute (Day)",
+            "pixelparachutenight": "Pixel Parachute (Night)",
+            "pixelparachuteretro": "Pixel Parachute (Retro)",
+            "pixelparachutepoolred": "Pixel Parachute (Pool Party, Red)",
+            "pixelparachutepoolblue": "Pixel Parachute (Pool Party, Blue)",
+            "pixelparachuteautumn": "Pixel Parachute (Autumn)",
+            "pixelparachutehalloween": "Pixel Parachute (Halloween)",
+            "pixelparachutechristmas": "Pixel Parachute (Christmas)",
+            "pixelparachutewinter": "Pixel Parachute (Winter)"
+        }
+        
+        let scoresTime = params.get( "time" ) || "1m";
+        const gameType = params.get( "game" ) || "parachute";
+        let gameTheme = params.get( "theme" ) || "pixelparachuteall";
+        let channelName = params.get( "channel" );
+        let scoresTable = null;
+        let channelRefreshTimer = null;
+        
+        $( "#inputChannelName" ).on( "input", ( e ) => {
+            // console.log( e, "input" );
+            channelName = e.target.value;
+            generateLink();
+            if( channelRefreshTimer ) {
+                clearTimeout( channelRefreshTimer );
+            }
+            channelRefreshTimer = setTimeout( () => {
+                getScores();
+            }, 2000 );
+        });
+        $( "#inputScoresTime" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            scoresTime = $( "#inputScoresTime" ).val();
+            // setThemeDefaults();
+            generateLink();
+            getScores();
+        });
+        $( "#inputGameType" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            // setThemeDefaults();
+            // getScores();
+            generateLink();
+        });
+        $( "#inputGameTheme" ).on( "change", ( e ) => {
+            // console.log( e, "changed" );
+            gameTheme = gameThemes[ e.target.selectedIndex ];
+            // setThemeDefaults();
+            generateLink();
+            getScores();
+        });
+        
+        $( "#inputScoresTime" ).val( scoresTime );
+        $( "#inputGameType" ).val( gameType );
+        $( "#inputGameTheme" ).val( gameTheme );
+        
+        const highscoreEndpoint = "scores/high";
+        function  generateLink() {
+            let baseLink = `${baseUrl}/scores.html?`;
+            let linkParams = [];
+            linkParams.push( `channel=${channelName}` );
+            linkParams.push( `time=${scoresTime}` );
+            linkParams.push( `game=${gameType}` );
+            linkParams.push( `theme=${gameTheme}` );
+            $( "#outputScoresLink" ).val( baseLink + linkParams.join( "&" ) );
+        }
+        async function getScores() {
+            let date = new Date();
+            switch( scoresTime ) {
+            case "12h":
+                date.setTime( date.getTime() - 12 * 60 * 60 * 1000 );
+                break;
+            case "1w":
+                date = new Date( date.getFullYear(), date.getMonth(), date.getDate() - date.getDay() );
+                // date.setTime( date.getTime() - ( 7 * 24 + date.getHours() ) * 60 * 60 * 1000 );
+                break;
+            case "1m":
+                date = new Date( date.getFullYear(), date.getMonth(), 1 );
+                break;
+            }
+            const timestamp = date.toISOString();
+            const daystamp = timestamp.split( "T" )[ 0 ];
+            const scoreUrl = gameThemeNames[ gameTheme ] ? `${plushScoreUrl}/${highscoreEndpoint}?channel=${channelName}&game=${gameType}&theme=${gameThemeNames[ gameTheme ]}&date=${daystamp}` : `${plushScoreUrl}/${highscoreEndpoint}?channel=${channelName}&game=${gameType}&date=${daystamp}`;
+            const scores = await fetch( scoreUrl, {
+                method: "GET"
+            } )
+            .then( r => r.json() );
+            let uniqueIds = Array.from( new Set( scores.map( ( item ) => item.userId ) ) );
+            let uniqueScores = uniqueIds.slice( 0, 100 ).map( id => scores.find( s => s.userId === id ) );
+            // console.log( uniqueScores );
+        
+            if( scoresTable ) {
+                scoresTable.clear().rows.add( scores ).draw();
+            }
+            else {
+                scoresTable = $("#scores-list-datatable").DataTable({
+                    responsive: true,
+                    "data": scores,
+                    "columns": [
+                        { "data": "rank", render: function ( data, type, full, meta ) { return  meta.row + 1; } },
+                        { "data": "score" },
+                        { "data": "user" },
+                        { "data": "created", render: function( data, type ) { return moment( data ).format( "llll" ); } },
+                    ],
+                    "order": [
+                        [ 1, "desc" ]
+                    ],
+                });
+            }
+        }
+        
+        $( document ).ready(function() {
+            var clipboard = new ClipboardJS('.clipboard');
+        });
     </script>
     <script>
     $( function () {

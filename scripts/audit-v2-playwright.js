@@ -5,6 +5,9 @@ const { chromium } = require('playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
 
 const repositoryRoot = path.resolve(__dirname, '..');
+const siteBasePath = process.env.PIXELPLUSH_V2_BASE_PATH || '/';
+const siteRoot = siteBasePath === '/' ? repositoryRoot : path.join(repositoryRoot, siteBasePath.slice(1));
+const siteRoute = (route) => `${siteBasePath === '/' ? '' : siteBasePath}${route}`;
 const routes = [
   '/',
   '/games/',
@@ -78,7 +81,7 @@ function startStaticServer() {
     server.once('error', reject);
     server.listen(0, '127.0.0.1', () => {
       const address = server.address();
-      resolve({ server, baseUrl: `http://127.0.0.1:${address.port}/v2` });
+      resolve({ server, baseUrl: `http://127.0.0.1:${address.port}${siteBasePath === '/' ? '' : siteBasePath}` });
     });
   });
 }
@@ -193,13 +196,40 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
   if ((await settings.getAttribute('aria-expanded')) !== 'true') throw new Error('Game Settings did not expose its expanded state');
   if (!(await games.locator('#game-settings-panel').isVisible())) throw new Error('Game Settings panel is not visible after expansion');
   const dayVariantIcon = games.getByText('Day', { exact: true }).locator('..').locator('img');
-  if (!(await dayVariantIcon.getAttribute('src'))?.startsWith('/v2/app-assets/')) throw new Error('Parachute relative variant icon lost the /v2 asset prefix');
+  if (!(await dayVariantIcon.getAttribute('src'))?.startsWith(`${siteRoute('/app-assets/')}`)) throw new Error('Parachute relative variant icon lost the site asset prefix');
   const autumn = games.getByRole('button', { name: /Autumn/ }).first();
   await autumn.click();
   await games.waitForTimeout(250);
   const autumnPreview = await games.locator('img').evaluateAll((images) => images.some((image) => image.src.includes('drop_autumn_website.gif')));
   if (!autumnPreview) throw new Error('Selecting Autumn did not update the game preview');
+  const seafaring = games.getByRole('button', { name: /Seafaring Chutes/ }).first();
+  if (!(await seafaring.isVisible())) throw new Error('Seafaring Chutes is missing from Parachute themes');
+  if (!(await seafaring.locator('img').getAttribute('src'))?.includes('/assets/add-ons/icon_boat_chutes.png')) throw new Error('Seafaring Chutes is missing its catalog icon');
+  await seafaring.click();
+  await games.waitForTimeout(250);
+  const seafaringPreview = games.locator('img[src*="boat_chutes.png"]').first();
+  await seafaringPreview.waitFor({ state: 'visible' });
+  if (!(await seafaringPreview.evaluate((image) => image.complete && image.naturalWidth > 0))) throw new Error('Seafaring Chutes preview did not load');
+  if ((await games.locator('#theme-select').inputValue()) !== 'boatchutes') throw new Error('Seafaring Chutes did not become the selected theme');
   await games.close();
+
+  const maze = await desktop.newPage();
+  await maze.goto(`${baseUrl}/games/?type=maze`, { waitUntil: 'networkidle' });
+  const summerCamp = maze.getByRole('button', { name: /Summer Camp/ }).first();
+  if (!(await summerCamp.isVisible())) throw new Error('Summer Camp is missing from Maze themes');
+  if (!(await summerCamp.locator('img').getAttribute('src'))?.includes('/assets/add-ons/icon_summer_camp_maze.png')) throw new Error('Summer Camp is missing its catalog icon');
+  await summerCamp.click();
+  await maze.waitForTimeout(250);
+  const summerCampPreview = maze.locator('img[src*="summercamp.png"]').first();
+  await summerCampPreview.waitFor({ state: 'visible' });
+  if (!(await summerCampPreview.evaluate((image) => image.complete && image.naturalWidth > 0))) throw new Error('Summer Camp preview did not load');
+  if ((await maze.locator('#theme-select').inputValue()) !== 'summercamp') throw new Error('Summer Camp did not become the selected theme');
+  await maze.close();
+
+  const gamesChunk = fs.readdirSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app', 'games')).find((file) => /^page-.*\.js$/.test(file));
+  const gamesContent = fs.readFileSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app', 'games', gamesChunk), 'utf8');
+  if (!gamesContent.includes('{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",requires:"addon_parachute_boat"}')) throw new Error('Seafaring Chutes paid-page contract is missing from Games data');
+  if (!gamesContent.includes('{key:"summercamp",name:"Summer Camp (Premium)",page:"/maze/summercamp.html",premium:!0,preview:"/app-assets/images/games/summercamp.png",requires:"addon_maze_summercamp"}')) throw new Error('Summer Camp paid-page contract is missing from Games data');
 
   const scores = await desktop.newPage();
   await scores.goto(`${baseUrl}/scores/`, { waitUntil: 'networkidle' });
@@ -215,8 +245,10 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
 
   const navigation = await desktop.newPage();
   await navigation.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
-  await navigation.getByRole('link', { name: 'Games for Streams' }).click();
-  await navigation.waitForURL(/\/v2\/games\/?$/);
+  const gamesLink = navigation.getByRole('link', { name: 'Games for Streams' });
+  if (await gamesLink.getAttribute('href') !== siteRoute('/games/')) throw new Error('Games navigation link does not target the canonical Games route');
+  await navigation.goto(`${baseUrl}${siteRoute('/games/')}`, { waitUntil: 'networkidle' });
+  if (new URL(navigation.url()).pathname !== siteRoute('/games/')) throw new Error('Canonical Games route did not load');
   await navigation.close();
   await desktop.close();
 
@@ -233,10 +265,10 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
   if ((await languageButton.getAttribute('aria-label')) === 'Language: English') throw new Error('Language selection did not update');
   const footerPosition = await home.locator('footer').evaluate((footer) => getComputedStyle(footer).position);
   if (footerPosition !== 'static') throw new Error(`Mobile footer overlays content with position: ${footerPosition}`);
-  const expectedOldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/';
+  const expectedOldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/v1/';
   if ((await home.locator('[data-old-pixelplush-site]').getAttribute('href')) !== expectedOldSitePath) throw new Error(`Old PixelPlush Site link does not point to ${expectedOldSitePath}`);
-  const layoutChunk = fs.readdirSync(path.join(repositoryRoot, 'v2', '_next', 'static', 'chunks', 'app')).find((file) => /^layout-.*\.js$/.test(file));
-  const layoutContent = fs.readFileSync(path.join(repositoryRoot, 'v2', '_next', 'static', 'chunks', 'app', layoutChunk), 'utf8');
+  const layoutChunk = fs.readdirSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app')).find((file) => /^layout-.*\.js$/.test(file));
+  const layoutContent = fs.readFileSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app', layoutChunk), 'utf8');
   if (!layoutContent.includes(`href:"${expectedOldSitePath}",target:"_blank",rel:"noopener noreferrer","data-old-pixelplush-site":!0`)) throw new Error(`Hydrated old-site link does not point to ${expectedOldSitePath}`);
   await home.close();
   await mobile.close();
@@ -274,7 +306,7 @@ async function auditNullScopes(browser, baseUrl, clarityRequests) {
   const permissionLogin = await page.evaluate(() => window.__auditPermissionLogin);
   if (JSON.stringify(permissionLogin?.[2]) !== JSON.stringify(['user:read:email', 'chat:read', 'chat:edit', 'channel:manage:redemptions', 'channel:read:redemptions'])) throw new Error('Global Twitch permission action did not request every required scope');
   const savedReturnUrl = await page.evaluate(() => localStorage.getItem('redirectPage'));
-  if (!savedReturnUrl?.includes('/v2/games/?type=parachute')) throw new Error(`Global permission action lost its originating URL: ${savedReturnUrl}`);
+  if (!savedReturnUrl?.includes(`${siteRoute('/games/')}?type=parachute`)) throw new Error(`Global permission action lost its originating URL: ${savedReturnUrl}`);
   if (pageErrors.length) throw new Error(`Null Twitch scopes caused an uncaught exception: ${pageErrors.join('\n')}`);
   await page.close();
   await context.close();
@@ -292,7 +324,7 @@ async function auditOAuthReturnUrl(browser, baseUrl, clarityRequests) {
   await context.route('https://api.pixelplush.dev/v1/accounts', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ username: 'teststreamer', displayName: 'Test Streamer', coins: 0, owned: [], styles: {} }) }));
   const page = await context.newPage();
   await page.goto(`${baseUrl}/redirect/`, { waitUntil: 'networkidle' });
-  await page.waitForURL((url) => url.pathname === '/v2/games/' && url.search === '?type=giveaway' && url.hash === '#colors', { timeout: 5000 });
+  await page.waitForURL((url) => url.pathname === siteRoute('/games/') && url.search === '?type=giveaway' && url.hash === '#colors', { timeout: 5000 });
   await page.close();
   await context.close();
 
@@ -301,7 +333,7 @@ async function auditOAuthReturnUrl(browser, baseUrl, clarityRequests) {
   await unsafeContext.addInitScript(() => localStorage.setItem('redirectPage', 'https://example.com/stolen?token=1#outside'));
   const unsafePage = await unsafeContext.newPage();
   await unsafePage.goto(`${baseUrl}/redirect/`, { waitUntil: 'networkidle' });
-  await unsafePage.waitForURL((url) => url.pathname === '/v2/' && url.origin === new URL(baseUrl).origin, { timeout: 5000 });
+  await unsafePage.waitForURL((url) => url.pathname === siteRoute('/') && url.origin === new URL(baseUrl).origin, { timeout: 5000 });
   await unsafePage.close();
   await unsafeContext.close();
 }
@@ -399,9 +431,15 @@ async function auditGiveawayHierarchy(browser, baseUrl, clarityRequests) {
 }
 
 async function auditBirthdayCelebration(browser, baseUrl, clarityRequests) {
-  const htmlFiles = fs.readdirSync(path.join(repositoryRoot, 'v2'), { recursive: true })
-    .filter((file) => file.endsWith('.html') && !file.startsWith(`app-assets${path.sep}`));
-  const birthdayTags = htmlFiles.filter((file) => fs.readFileSync(path.join(repositoryRoot, 'v2', file), 'utf8').includes('/v2/birthday-celebration.js'));
+  const htmlFiles = fs.readdirSync(siteRoot, { recursive: true })
+    .filter((file) => file.endsWith('.html')
+      && !file.startsWith(`app-assets${path.sep}`)
+      && !file.startsWith(`v1${path.sep}`)
+      && !file.startsWith(`out${path.sep}`)
+      && !file.startsWith(`node_modules${path.sep}`)
+      && !file.startsWith(`page-templates${path.sep}`)
+      && !file.startsWith('template_'));
+  const birthdayTags = htmlFiles.filter((file) => fs.readFileSync(path.join(siteRoot, file), 'utf8').includes('/birthday-celebration.js'));
   const birthdayEnabled = birthdayTags.length > 0;
   if (birthdayEnabled && birthdayTags.length !== htmlFiles.length) throw new Error(`Birthday script is missing from ${htmlFiles.length - birthdayTags.length} generated page(s)`);
   if (!birthdayEnabled) return;

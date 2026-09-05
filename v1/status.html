@@ -31,7 +31,7 @@
     <meta property="og:image" content="https://www.pixelplush.dev/public/app-assets/images/logo/silhouette.png">
     <meta property="og:url" content="https://www.pixelplush.dev">
     <meta property="og:title" content="PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff">
-    <title>PAGE_NAME - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
+    <title>Status - PixelPlush Studio - Games to Relax and Play Made By Maaya and Instafluff</title>
     <!-- <link rel="apple-touch-icon" href="public/app-assets/images/ico/apple-icon-120.png"> -->
     <link rel="shortcut icon" type="image/x-icon" href="public/app-assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,600%7CIBM+Plex+Sans:300,400,500,600,700" rel="stylesheet">
@@ -140,7 +140,7 @@
                     <ul class="nav navbar-nav float-right d-flex align-items-center">
                         <li class="nav-item d-lg-block not-logged-in">
                             <div class="not-logged-in">
-                                <a id="login" href="login.html?redirect=PAGE_FILE.html" class="btn btn-primary mr-25">Log In</a>
+                                <a id="login" href="login.html?redirect=status.html" class="btn btn-primary mr-25">Log In</a>
                             </div>
                         </li>
                         <!-- <li class="dropdown dropdown-notification nav-item"><a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon bx bx-bell bx-tada bx-flip-horizontal"></i><span class="badge badge-pill badge-danger badge-up">5</span></a>
@@ -289,10 +289,103 @@
                         <div class="col-12">
                             <div class="row">
                                 <!-- left menu section -->
-PAGE_MENU
+                                <div class="col-md-3 mb-2 mb-md-0 pills-stacked">
+                                    <ul class="nav nav-pills flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="index.html">
+                                                <i class="bx bx-home"></i>
+                                                <span>PixelPlush Home</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="twitch.html">
+                                                <i class="bx bxl-twitch"></i>
+                                                <span>Games for Twitch</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="scores.html">
+                                                <i class="bx bx-list-ol"></i>
+                                                <span>Top Scores</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="market.html">
+                                                <img src="public/app-assets/images/icon/plush_coin.gif" height="20px" class="pixelated" />
+                                                <span>Goodies Market</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="customize.html">
+                                                <i class="bx bx-user"></i>
+                                                <span>My Dressing Room</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="transactions.html">
+                                                <i class="bx bx-check-square"></i>
+                                                <span>My Shopping History</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="links.html">
+                                                <i class="bx bx-link"></i>
+                                                <span>Follow Us!</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="credits.html">
+                                                <i class="bx bxs-megaphone"></i>
+                                                <span>Credits</span>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link d-flex align-items-center" href="troubleshoot.html">
+                                                <i class="bx bx-wrench"></i>
+                                                <span>Troubleshoot</span>
+                                            </a>
+                                        </li>
+                                        
+                                    </ul>
+                                    <!-- <ul class="nav nav-pills flex-column mt-1">
+                                        <li class="nav-item" style="background-color:#ffffff; border-radius: 0.267rem;">
+                                            <div class="nav-link d-flex align-items-center" style="background-color:#6868f0">
+                                                <strong style="color:#ffffff">UPDATE: OBS Screen Flicker Fixed!</strong>
+                                            </div>
+                                            <div class="nav-link d-flex align-items-center">
+                                                <p style="color:#475F7B">We've now built a fix to work around an OBS Studio update causing a <a href="https://github.com/obsproject/obs-studio/issues/6010" target="_blank"><u>screen flicker bug</u></a>! It should no longer flicker even if you select multiple themes in Cauldron/Valentines/Easter themes!</p>
+                                            </div>
+                                        </li>
+                                    </ul> -->
+                                </div>
+                                
                                 <!-- right content section -->
         <div class="col-md-9">
-PAGE_CONTENT
+                                <div class="card">
+                                    <div class="card-content">
+                                        <div class="card-body">
+                                            <div class="tab-content">
+                                                <div class="tab-pane active" id="account" aria-labelledby="account-tab" role="tabpanel">
+                                                    <!-- users edit account form start -->
+                                                    <form novalidate="">
+                                                        <div class="row">
+                                                            <div class="col-12">
+                                                                <div class="form-group">
+                                                                    <label>PixelPlush Status:</label>
+                                                                    <ul class="list-group link-group">
+                                                                        <li class="link-group-item list-group-item list-group-item-action list-group-item-warning">API: <span id="status_api">Checking...</span></li>
+                                                                        <li class="link-group-item list-group-item list-group-item-action list-group-item-warning">DB: <span id="status_db">Checking...</span></li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                    <!-- users edit account form ends -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
         </div>
                             </div>
                         </div>
@@ -353,7 +446,66 @@ PAGE_CONTENT
     src="https://www.paypal.com/sdk/js?client-id=Ac8ThQDkE1sBoHpJD4cgrd4nEyF0gYuUzQwNzSolvCVjGondlvAYy7mlQdFaV5RpspBzBFjnn9Mt8dep"></script>
     <script src="public/comfytwitch.min.js"></script>
     <script>
-PAGE_SCRIPT
+        const params = new URLSearchParams( location.search );
+        const clientId = "8m07ghhogjy0q09moeunnpdu51i60n";
+        const baseUrl = window.location.origin;
+        const plushApiUrl = "https://api.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+        const plushScoreUrl = "https://stats.pixelplush.dev/v1"; //"http://localhost:3000/v1";
+        let twitch = {};
+        let account = {};
+        
+        $( ".not-logged-in" ).show();
+        $( ".logged-in" ).hide();
+        
+        ComfyTwitch.SetAuthEndpoint( `${plushScoreUrl}/auth/code` );
+        ComfyTwitch.SetRefreshEndpoint( `${plushScoreUrl}/auth/refresh` );
+        
+        ComfyTwitch.Check()
+        .then( async result => {
+            // console.log( result );
+            if( result ) {
+                try {
+                    account = await fetch( `${plushScoreUrl}/accounts`, {
+                        headers: {
+                            Twitch: result.token
+                        }
+                    } ).then( r => r.json() );
+        
+                    // console.log( account );
+        
+                    if( account.error ) {
+                        throw "Login Error";
+                    }
+        
+                    $( ".not-logged-in" ).hide();
+                    $( ".logged-in" ).show();
+        
+                    $( ".account-image" ).attr( "src", account.profileImage );
+                    $( ".user-name" ).text( account.displayName || account.username );
+                    $( ".user-coins" ).text( account.coins );
+        
+                    $( ".logout" ).on( "click", function() {
+                        ComfyTwitch.Logout();
+                        window.location.reload();
+                    });
+                }
+                catch( error ) {
+                    // TODO: Auth Failed
+                    console.log( "Auth Validate Failed", error );
+                }
+            }
+            else {
+                $( ".not-logged-in" ).show();
+                $( ".logged-in" ).hide();
+            }
+        });
+        
+        (async () => {
+            const result = await fetch( "https://api.pixelplush.dev/v1/status" ).then( r => r.json() );
+            console.log( result );
+            document.getElementById( "status_api" ).innerText = result.status;
+            document.getElementById( "status_db" ).innerText = result.db;
+        })();
     </script>
     <script>
     $( function () {

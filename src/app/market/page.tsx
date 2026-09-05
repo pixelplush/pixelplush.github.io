@@ -221,7 +221,7 @@ export default function MarketPage() {
       const res = await fetch(`${API_URL}/stripe/checkout`, {
         method: 'POST',
         headers: { Twitch: token, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ coins: selectedCoinPkg.baseCoins, returnUrl: window.location.origin + '/v2/market/' }),
+        body: JSON.stringify({ coins: selectedCoinPkg.baseCoins, returnUrl: window.location.origin + '/market/' }),
       }).then((r) => r.json());
       if (!res.success) throw new Error(res.error || 'Failed to start Stripe checkout');
       window.location.href = res.url;

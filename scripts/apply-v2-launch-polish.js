@@ -2,12 +2,15 @@ const fs = require('fs');
 const path = require('path');
 
 const repositoryRoot = path.resolve(__dirname, '..');
-const exportRoots = ['v2']
+const siteBasePath = process.env.PIXELPLUSH_V2_BASE_PATH || '/';
+const exportDirectories = siteBasePath === '/' ? ['.'] : ['v2'];
+const exportRoots = exportDirectories
   .map((directory) => path.join(repositoryRoot, directory))
   .filter((directory) => fs.existsSync(directory));
-const oldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/';
+const oldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/v1/';
 const birthdayCelebrationEnabled = process.env.PIXELPLUSH_BIRTHDAY_ENABLED !== '0';
-const birthdayScriptTag = '<script src="/v2/birthday-celebration.js" defer></script>';
+const birthdayScriptTag = '<script src="/birthday-celebration.js" defer></script>';
+const sourceOnlyFiles = new Set(['generatePages.js', 'index.js', 'pages.js', 'template_page.html', 'template_left.html', 'template_left_live.html', 'template_menu_item.html']);
 
 const requiredScopes = [
   'user:read:email',
@@ -93,6 +96,8 @@ const themeMarketIcons = {
   addon_parachute_cakefruit: 'icon_cake_fruit.png',
   addon_parachute_cakechoco: 'icon_cake_choco2.png',
   addon_parachute_cakeplush: 'icon_cake_pixelplush.png',
+  addon_maze_summercamp: 'icon_summer_camp_maze.png',
+  addon_parachute_boat: 'icon_boat_chutes.png',
   addon_chatflakes: 'icon_chatflakes.png',
 };
 
@@ -272,10 +277,10 @@ function patchOldSiteFooterLink(content) {
 }
 
 function patchOAuthReturnUrl(content) {
-  const fullReturn = 'let r=new URL(t,window.location.origin);if(r.origin!==window.location.origin)throw Error("Invalid redirect origin");let a=r.pathname.startsWith("/v2")?r.pathname.slice(3)||"/":r.pathname;e.push("".concat(a).concat(r.search).concat(r.hash))';
+  const fullReturn = 'let r=new URL(t,window.location.origin);if(r.origin!==window.location.origin)throw Error("Invalid redirect origin");let a=r.pathname.r.pathname;e.push("".concat(a).concat(r.search).concat(r.hash))';
   content = replaceOptional(
     content,
-    'let r=new URL(t),a=r.pathname.startsWith("/v2")?r.pathname.slice(3)||"/":r.pathname;e.push(a)',
+    'let r=new URL(t),a=r.pathname.r.pathname;e.push(a)',
     fullReturn
   );
   return replaceOptional(
@@ -321,6 +326,39 @@ function patchThemeMarketIcons(content) {
     'theme market icon map'
   );
   return replaceExact(content, '(0,m.Q)(e.preview)', '(0,m.Q)(_themeIcon(e))', 'theme pill icon');
+}
+
+function patchNewGameThemes(content) {
+  const appendTheme = (firstThemeKey, theme, label) => {
+    if (content.includes(`${theme}],settings:`)) return;
+    if (content.includes(`${theme},`)) content = replaceExact(content, `${theme},`, '', `${label} placement`);
+    const start = content.indexOf(`themes:[{key:"${firstThemeKey}"`);
+    if (start < 0) throw new Error(`${label}: unable to find themes array`);
+    const end = content.indexOf('],settings:', start);
+    if (end < 0) throw new Error(`${label}: unable to find themes array end`);
+    content = `${content.slice(0, end)},${theme}${content.slice(end)}`;
+  };
+  appendTheme(
+    'wanderingwizards',
+    '{key:"summercamp",name:"Summer Camp (Premium)",page:"/maze/summercamp.html",premium:!0,preview:"/app-assets/images/games/summercamp.png",requires:"addon_maze_summercamp"}',
+    'Summer Camp Maze theme'
+  );
+  appendTheme(
+    'pixelparachutes',
+    '{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",requires:"addon_parachute_boat"}',
+    'Seafaring Chutes theme'
+  );
+  return content;
+}
+
+function patchNewThemeIcons(content) {
+  if (content.includes('"addon_maze_summercamp":"icon_summer_camp_maze.png"')) return content;
+  return replaceExact(
+    content,
+    '"addon_chatflakes":"icon_chatflakes.png"',
+    '"addon_maze_summercamp":"icon_summer_camp_maze.png","addon_parachute_boat":"icon_boat_chutes.png","addon_chatflakes":"icon_chatflakes.png"',
+    'new Games theme icons'
+  );
 }
 
 function patchGiveawayHierarchy(content) {
@@ -593,8 +631,8 @@ function patchLocaleBundle(content) {
 }
 
 function patchStaticMarkup(content) {
-  content = replaceOptional(content, 'width="24" height="24" class="pixelated" src="/v2/app-assets/images/icon/maaya.gif"', 'width="30" height="30" class="pixelated" src="/v2/app-assets/images/icon/maaya.gif"');
-  content = replaceOptional(content, 'width="26" height="26" class="pixelated" src="/v2/app-assets/images/icon/instafluff.gif"', 'width="30" height="30" class="pixelated" src="/v2/app-assets/images/icon/instafluff.gif"');
+  content = replaceOptional(content, 'width="24" height="24" class="pixelated" src="/app-assets/images/icon/maaya.gif"', 'width="30" height="30" class="pixelated" src="/app-assets/images/icon/maaya.gif"');
+  content = replaceOptional(content, 'width="26" height="26" class="pixelated" src="/app-assets/images/icon/instafluff.gif"', 'width="30" height="30" class="pixelated" src="/app-assets/images/icon/instafluff.gif"');
   content = replaceOptional(content, 'p-5 text-center text-white', 'p-5 text-center text-[var(--color-pp-headings)]');
   content = replaceOptional(content, 'text-xl font-bold mb-3 !text-white', 'text-xl font-bold mb-3 text-[var(--color-pp-headings)]');
   content = replaceOptional(content, 'text-sm mb-4 text-white/90', 'text-sm mb-4 text-[var(--color-pp-text)]');
@@ -613,8 +651,8 @@ function patchStaticMarkup(content) {
   );
   content = replaceOptional(
     content,
-    '<div class="flex items-center gap-4"><a class="hover:text-[var(--color-pp-accent)] transition-colors" href="/v2/terms/">',
-    `<div class="flex flex-wrap items-center justify-center gap-4"><a href="${oldSitePath}" target="_blank" rel="noopener noreferrer" data-old-pixelplush-site="true" class="font-semibold underline hover:text-[var(--color-pp-accent)] transition-colors">Old PixelPlush Site</a><span class="text-[var(--color-pp-border)]">|</span><a class="hover:text-[var(--color-pp-accent)] transition-colors" href="/v2/terms/">`
+    '<div class="flex items-center gap-4"><a class="hover:text-[var(--color-pp-accent)] transition-colors" href="/terms/">',
+    `<div class="flex flex-wrap items-center justify-center gap-4"><a href="${oldSitePath}" target="_blank" rel="noopener noreferrer" data-old-pixelplush-site="true" class="font-semibold underline hover:text-[var(--color-pp-accent)] transition-colors">Old PixelPlush Site</a><span class="text-[var(--color-pp-border)]">|</span><a class="hover:text-[var(--color-pp-accent)] transition-colors" href="/terms/">`
   );
   let carouselDotIndex = 0;
   content = content.replace(
@@ -707,7 +745,12 @@ function patchAccessibleTextClasses(content) {
 }
 
 for (const exportRoot of exportRoots) {
-  const files = walk(exportRoot).filter((file) => /\.(?:css|html|js|txt)$/.test(file));
+  const files = walk(exportRoot).filter((file) => {
+    if (!/\.(?:css|html|js|txt)$/.test(file)) return false;
+    const relative = path.relative(repositoryRoot, file).split(path.sep);
+    return !['v1', 'out', 'scripts', 'src', 'page-templates', 'public', 'node_modules'].includes(relative[0])
+      && !sourceOnlyFiles.has(relative[relative.length - 1]);
+  });
   for (const file of files) {
     let content = fs.readFileSync(file, 'utf8');
     const original = content;
@@ -716,7 +759,9 @@ for (const exportRoot of exportRoots) {
     if (content.includes('{isLoggedIn:m,account:c,token:g}=(0,d.A)()')) content = patchGamesBundle(content);
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('"aria-controls":"game-settings-panel"')) content = patchGamesAccessibility(content);
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('id:"theme-select"')) content = patchThemeSelectorAccessibility(content);
+    if (content.includes('{key:"wanderingwizards"') && content.includes('{key:"pixelparachutes"')) content = patchNewGameThemes(content);
     if (content.includes('pixelplush-game-settings') && !content.includes('_themeMarketIcons')) content = patchThemeMarketIcons(content);
+    if (content.includes('_themeMarketIcons=') && !content.includes('"addon_maze_summercamp":"icon_summer_camp_maze.png"')) content = patchNewThemeIcons(content);
     if (content.includes('{key:"giveawayblue"')) content = patchGiveawayHierarchy(content);
     if (content.includes('disabled:!!t,className:"rounded"}),e.preview&&(0,s.jsx)("img",{src:(0,m.Q)(_themeIcon(e))')) content = patchGiveawayChildIconHelper(content);
     if (content.includes('singleVariant:!0') && (!content.includes('function _variantIcon(e)') || content.includes('src:_themeIcon(e),alt:"",className:"h-5 w-5 rounded object-cover"'))) content = patchVariantIconHelper(content);
@@ -732,7 +777,7 @@ for (const exportRoot of exportRoots) {
     if (content.includes('{isLoading:p,isLoggedIn:x,account:m,login:u,logout:v}=(0,i.A)()')) content = patchGlobalPermissionAction(content);
     if (content.includes('className:"flex items-center gap-4",children:[(0,s.jsx)(n(),{href:"/terms"') || content.includes('"data-old-pixelplush-site":!0')) content = patchOldSiteFooterLink(content);
     if (content.includes('children:e("scores.timeRange")') && !content.includes('id:"score-time-range"')) content = patchScoresAccessibility(content);
-    if (content.includes('let r=new URL(t),a=r.pathname.startsWith("/v2")') || content.includes('e.push("".concat(r.pathname).concat(r.search).concat(r.hash))')) content = patchOAuthReturnUrl(content);
+    if (content.includes('let r=new URL(t),a=r.pathname.startsWith("/")') || content.includes('e.push("".concat(r.pathname).concat(r.search).concat(r.hash))')) content = patchOAuthReturnUrl(content);
     if (content.includes('JSON.parse') && content.includes('"loginToAutoFill":')) content = patchLocaleBundle(content);
     if (content.includes('[r,m]=(0,n.useState)(0),[p,g]=(0,n.useState)(!1);')) content = upgradeCarouselPauseState(content);
     if (/\.(?:html|txt)$/.test(file)) content = patchStaticMarkup(content);
@@ -749,6 +794,9 @@ for (const exportRoot of exportRoots) {
 for (const exportRoot of exportRoots) {
   const remainingClarity = walk(exportRoot).filter((file) => {
     if (!/\.(?:html|js|txt)$/.test(file)) return false;
+    const relative = path.relative(repositoryRoot, file).split(path.sep);
+    if (['v1', 'out', 'scripts', 'src', 'page-templates', 'public', 'node_modules'].includes(relative[0])) return false;
+    if (sourceOnlyFiles.has(relative[relative.length - 1])) return false;
     const content = fs.readFileSync(file, 'utf8');
     return content.includes('clarity.ms') || content.includes('wdlmotp71n');
   });
