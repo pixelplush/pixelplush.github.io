@@ -1,12 +1,3 @@
 {
-  "notices": [
-    {
-      "id": "new-website-2026",
-      "type": "info",
-      "message": "Welcome to the new PixelPlush website! We're still working on some features.",
-      "link": { "text": "Learn more", "url": "/links" },
-      "dismissible": true,
-      "pages": []
-    }
-  ]
+  "notices": []
 }

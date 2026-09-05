@@ -451,9 +451,11 @@ async function auditBirthdayCelebration(browser, baseUrl, clarityRequests) {
   await page.goto(`${baseUrl}/`, { waitUntil: 'load' });
   const banner = page.getByRole('status', { name: "PixelPlush's 7th birthday celebration" });
   await banner.waitFor({ state: 'visible', timeout: 5000 });
-  if (!(await banner.innerText()).includes("Celebrate PixelPlush's 7th birthday!")) throw new Error('Birthday banner text is missing');
+  if (!(await banner.innerText()).includes("We're celebrating 7 years of PixelPlush with a brand new site look!")) throw new Error('Birthday banner text is missing the requested message');
   const confetti = page.locator('#pp-birthday-confetti-layer i');
-  if ((await confetti.count()) !== 56) throw new Error(`Expected 56 confetti pieces, found ${await confetti.count()}`);
+  if ((await page.locator('#pp-birthday-confetti-layer .pp-birthday-confetti').count()) !== 72) throw new Error('Birthday confetti count is wrong');
+  if (await page.locator('#pp-birthday-confetti-layer .pp-birthday-balloon').count() !== 3) throw new Error('Birthday balloons are missing');
+  if (await page.locator('#pp-birthday-confetti-layer .pp-birthday-burst').count() !== 3) throw new Error('Birthday fireworks are missing');
   if ((await page.locator('#pp-birthday-confetti-layer').evaluate((element) => getComputedStyle(element).pointerEvents)) !== 'none') throw new Error('Birthday confetti blocks page interaction');
   const before = await confetti.first().boundingBox();
   await page.waitForTimeout(350);
