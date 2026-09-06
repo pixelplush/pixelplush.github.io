@@ -540,6 +540,14 @@ function patchTransactionStatusAuth(content) {
   );
 }
 
+function patchPurchaseError(content) {
+  return replaceOptional(
+    content,
+    'if(a.error)throw Error(a.error);',
+    'if(a.error)throw Error("string"==typeof a.error?a.error:a.error.message||a.error.error||a.error.detail||JSON.stringify(a.error));'
+  );
+}
+
 function patchHomeBundle(content) {
   content = replaceExact(
     content,
@@ -771,6 +779,7 @@ for (const exportRoot of exportRoots) {
     if (content.includes('market.hideOwnedItems') && (content.includes('width:o?120:48,height:o?80:48') || content.includes('width:o?72:48,height:o?64:48') || content.includes('className:"pixelated ".concat(o?"object-contain":"")'))) content = patchBundleIconSize(content);
     if (content.includes(previousMarketPreviewHelpers)) content = upgradeMarketPreviewAnimation(content);
     if (content.includes('fetch("".concat(p,"/transactions/status?id=").concat(a)).then')) content = patchTransactionStatusAuth(content);
+    if (content.includes('"/shop/buy"') && content.includes('if(a.error)throw Error(a.error);')) content = patchPurchaseError(content);
     if (content.includes('home.getCharacters') && content.includes('[r,m]=(0,n.useState)(0);')) content = patchHomeBundle(content);
     if (content.includes('src:(0,c.Q)("/app-assets/images/icon/maaya.gif"),alt:"",width:24,height:24')) content = patchLayoutBundle(content);
     if (content.includes('onClick:()=>h(!a),className:"flex items-center gap-1.5 px-2 py-1.5 rounded') && !content.includes('"aria-label":"Language: ".concat')) content = patchLayoutAccessibility(content);

@@ -28,6 +28,23 @@ interface CatalogItem {
   category?: string;
 }
 
+function errorMessage(error: unknown): string {
+  if (typeof error === 'string') return error;
+  if (error instanceof Error) return error.message;
+  if (error && typeof error === 'object') {
+    const value = error as { message?: unknown; error?: unknown; detail?: unknown };
+    if (typeof value.message === 'string') return value.message;
+    if (typeof value.error === 'string') return value.error;
+    if (typeof value.detail === 'string') return value.detail;
+    try {
+      return JSON.stringify(error);
+    } catch {
+      return 'Purchase failed';
+    }
+  }
+  return 'Purchase failed';
+}
+
 const typeColors: Record<string, string> = {
   character: 'bg-blue-600/15 text-[var(--color-pp-headings)]',
   pet: 'bg-red-600/15 text-[var(--color-pp-headings)]',
@@ -195,7 +212,7 @@ export default function MarketPage() {
           headers: { Twitch: token, 'Content-Type': 'application/json' },
           body: JSON.stringify({ item: item.id }),
         }).then((r) => r.json());
-        if (result.error) throw new Error(result.error);
+        if (result.error) throw new Error(errorMessage(result.error));
         await refreshAccount();
         showNotification('success', `You got ${item.name}!`);
         const expectedRemaining = (account?.coins ?? 0) - cost;
@@ -205,7 +222,7 @@ export default function MarketPage() {
           }, 3000);
         }
       } catch (err: unknown) {
-        const message = err instanceof Error ? err.message : 'Purchase failed';
+        const message = errorMessage(err);
         showNotification('error', message);
       }
       setBuyingItem(null);
