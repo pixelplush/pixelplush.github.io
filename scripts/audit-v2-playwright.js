@@ -228,7 +228,10 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
 
   const gamesChunk = fs.readdirSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app', 'games')).find((file) => /^page-.*\.js$/.test(file));
   const gamesContent = fs.readFileSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app', 'games', gamesChunk), 'utf8');
-  if (!gamesContent.includes('{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",requires:"addon_parachute_boat"}')) throw new Error('Seafaring Chutes paid-page contract is missing from Games data');
+  if (!gamesContent.includes('{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",singleVariant:!0,requires:"addon_parachute_boat",variants:[')) throw new Error('Seafaring Chutes variant contract is missing from Games data');
+  if (!gamesContent.includes('{key:"black",name:"Brown Boat / Black Flag",page:"/parachute/boat_chutes.html"}')) throw new Error('Seafaring Chutes black flag variant is missing from Games data');
+  if (!gamesContent.includes('{key:"yellow",name:"Brown Boat / Yellow Flag",page:"/parachute/boat_chutes.html"}')) throw new Error('Seafaring Chutes yellow flag variant is missing from Games data');
+  if (gamesContent.includes('boat_chutes_pastel') || gamesContent.includes('boat_chutes_blackwhite')) throw new Error('Unlaunched Boat Chutes variants must not be exposed in Games data');
   if (!gamesContent.includes('{key:"summercamp",name:"Summer Camp (Premium)",page:"/maze/summercamp.html",premium:!0,preview:"/app-assets/images/games/summercamp.png",requires:"addon_maze_summercamp"}')) throw new Error('Summer Camp paid-page contract is missing from Games data');
 
   const scores = await desktop.newPage();

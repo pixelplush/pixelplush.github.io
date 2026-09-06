@@ -345,7 +345,7 @@ function patchNewGameThemes(content) {
   );
   appendTheme(
     'pixelparachutes',
-    '{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",requires:"addon_parachute_boat"}',
+    '{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",singleVariant:!0,requires:"addon_parachute_boat",variants:[{key:"black",name:"Brown Boat / Black Flag",page:"/parachute/boat_chutes.html"},{key:"blue",name:"Brown Boat / Blue Flag",page:"/parachute/boat_chutes.html"},{key:"green",name:"Brown Boat / Green Flag",page:"/parachute/boat_chutes.html"},{key:"orange",name:"Brown Boat / Orange Flag",page:"/parachute/boat_chutes.html"},{key:"pink",name:"Brown Boat / Pink Flag",page:"/parachute/boat_chutes.html"},{key:"purple",name:"Brown Boat / Purple Flag",page:"/parachute/boat_chutes.html"},{key:"red",name:"Brown Boat / Red Flag",page:"/parachute/boat_chutes.html"},{key:"white",name:"Brown Boat / White Flag",page:"/parachute/boat_chutes.html"},{key:"yellow",name:"Brown Boat / Yellow Flag",page:"/parachute/boat_chutes.html"}]}',
     'Seafaring Chutes theme'
   );
   return content;
