@@ -10,7 +10,7 @@ const exportRoots = exportDirectories
 const oldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/v1/';
 const birthdayCelebrationEnabled = process.env.PIXELPLUSH_BIRTHDAY_ENABLED !== '0';
 const authChunkName = '924-511b76c74bad2ef1.js';
-const authChunkCacheKey = 'oauth-redirect-20260908';
+const authChunkCacheKey = 'oauth-canonical-20260908';
 const birthdayScriptTag = '<script src="/birthday-celebration.js" defer></script>';
 const sourceOnlyFiles = new Set(['generatePages.js', 'index.js', 'pages.js', 'template_page.html', 'template_left.html', 'template_left_live.html', 'template_menu_item.html']);
 
@@ -179,9 +179,17 @@ function patchAuthChunkReference(content) {
     `"/_next/static/chunks/${authChunkName}"`,
     `"/_next/static/chunks/${authChunkName}?v=${authChunkCacheKey}"`
   );
+  content = replaceOptional(
+    content,
+    `"/_next/static/chunks/${authChunkName}?v=oauth-redirect-20260908"`,
+    `"/_next/static/chunks/${authChunkName}?v=${authChunkCacheKey}"`
+  );
   return replaceOptional(
     content,
     `"static/chunks/${authChunkName}"`,
+    `"static/chunks/${authChunkName}?v=${authChunkCacheKey}"`
+  ).replaceAll(
+    `"static/chunks/${authChunkName}?v=oauth-redirect-20260908"`,
     `"static/chunks/${authChunkName}?v=${authChunkCacheKey}"`
   );
 }
