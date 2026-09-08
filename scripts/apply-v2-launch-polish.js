@@ -9,6 +9,8 @@ const exportRoots = exportDirectories
   .filter((directory) => fs.existsSync(directory));
 const oldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/v1/';
 const birthdayCelebrationEnabled = process.env.PIXELPLUSH_BIRTHDAY_ENABLED !== '0';
+const authChunkName = '924-511b76c74bad2ef1.js';
+const authChunkCacheKey = 'oauth-redirect-20260908';
 const birthdayScriptTag = '<script src="/birthday-celebration.js" defer></script>';
 const sourceOnlyFiles = new Set(['generatePages.js', 'index.js', 'pages.js', 'template_page.html', 'template_left.html', 'template_left_live.html', 'template_menu_item.html']);
 
@@ -164,6 +166,19 @@ function patchAuthRedirectOrigin(content) {
     'let e=window.location.origin;',
     'auth redirect origin',
     2
+  );
+}
+
+function patchAuthChunkReference(content) {
+  content = replaceOptional(
+    content,
+    `"/_next/static/chunks/${authChunkName}"`,
+    `"/_next/static/chunks/${authChunkName}?v=${authChunkCacheKey}"`
+  );
+  return replaceOptional(
+    content,
+    `"static/chunks/${authChunkName}"`,
+    `"static/chunks/${authChunkName}?v=${authChunkCacheKey}"`
   );
 }
 
@@ -803,6 +818,7 @@ for (const exportRoot of exportRoots) {
     if (content.includes('JSON.parse') && content.includes('"loginToAutoFill":')) content = patchLocaleBundle(content);
     if (content.includes('[r,m]=(0,n.useState)(0),[p,g]=(0,n.useState)(!1);')) content = upgradeCarouselPauseState(content);
     if (/\.(?:html|txt)$/.test(file)) content = patchStaticMarkup(content);
+    if (/\.(?:html|txt)$/.test(file)) content = patchAuthChunkReference(content);
     if (file.endsWith('.html') && !file.includes(`${path.sep}app-assets${path.sep}`)) content = patchBirthdayCelebration(content);
     if (content.includes('wdlmotp71n')) content = removeClarity(content);
     if (file.endsWith('.css') && content.includes('--color-pp-bg:#f2c079')) content = patchStylesheet(content);
