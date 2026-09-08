@@ -157,6 +157,16 @@ function patchAuthBundle(content) {
   );
 }
 
+function patchAuthRedirectOrigin(content) {
+  return replaceExact(
+    content,
+    'let e="".concat(window.location.origin).concat("/");',
+    'let e=window.location.origin;',
+    'auth redirect origin',
+    2
+  );
+}
+
 function patchNullScopeHandling(content) {
   content = replaceOptional(
     content,
@@ -765,6 +775,7 @@ for (const exportRoot of exportRoots) {
     let content = fs.readFileSync(file, 'utf8');
     const original = content;
     if (content.includes('window.ComfyTwitch.Login(o,"".concat(e,"/redirect/"),[],"code")')) content = patchAuthBundle(content);
+    if (content.includes('let e="".concat(window.location.origin).concat("/");')) content = patchAuthRedirectOrigin(content);
     if (content.includes('o.Scopes=n.scopes') || content.includes('hasRequiredScopes:!!(g&&window.ComfyTwitch&&q.every') || content.includes('Array.isArray(window.ComfyTwitch.Scopes)&&Array.isArray(window.ComfyTwitch.Scopes)')) content = patchNullScopeHandling(content);
     if (content.includes('{isLoggedIn:m,account:c,token:g}=(0,d.A)()')) content = patchGamesBundle(content);
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('"aria-controls":"game-settings-panel"')) content = patchGamesAccessibility(content);

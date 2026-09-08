@@ -308,6 +308,7 @@ async function auditNullScopes(browser, baseUrl, clarityRequests) {
   await globalGrant.click();
   const permissionLogin = await page.evaluate(() => window.__auditPermissionLogin);
   if (JSON.stringify(permissionLogin?.[2]) !== JSON.stringify(['user:read:email', 'chat:read', 'chat:edit', 'channel:manage:redemptions', 'channel:read:redemptions'])) throw new Error('Global Twitch permission action did not request every required scope');
+  if (permissionLogin?.[1] !== `${new URL(baseUrl).origin}/redirect/`) throw new Error(`Global Twitch permission action used the wrong redirect URI: ${permissionLogin?.[1]}`);
   const savedReturnUrl = await page.evaluate(() => localStorage.getItem('redirectPage'));
   if (!savedReturnUrl?.includes(`${siteRoute('/games/')}?type=parachute`)) throw new Error(`Global permission action lost its originating URL: ${savedReturnUrl}`);
   if (pageErrors.length) throw new Error(`Null Twitch scopes caused an uncaught exception: ${pageErrors.join('\n')}`);
