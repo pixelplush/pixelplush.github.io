@@ -5,7 +5,13 @@ const { chromium } = require('playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
 
 const repositoryRoot = path.resolve(__dirname, '..');
-const siteBasePath = process.env.PIXELPLUSH_V2_BASE_PATH || '/';
+function normalizeBasePath(value) {
+  const trimmed = value.trim();
+  if (!trimmed || trimmed === '/') return '/';
+  return `/${trimmed.replace(/^\/+|\/+$/g, '')}`;
+}
+
+const siteBasePath = normalizeBasePath(process.env.PIXELPLUSH_V2_BASE_PATH || '/');
 const siteRoot = siteBasePath === '/' ? repositoryRoot : path.join(repositoryRoot, siteBasePath.slice(1));
 const siteRoute = (route) => `${siteBasePath === '/' ? '' : siteBasePath}${route}`;
 const routes = [
@@ -220,7 +226,7 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
   if (!(await summerCamp.locator('img').getAttribute('src'))?.includes('/assets/add-ons/icon_summer_camp_maze.png')) throw new Error('Summer Camp is missing its catalog icon');
   await summerCamp.click();
   await maze.waitForTimeout(250);
-  const summerCampPreview = maze.locator('img[src*="summercamp.png"]').first();
+  const summerCampPreview = maze.locator('img[src*="icon_summer_camp_maze.png"]').first();
   await summerCampPreview.waitFor({ state: 'visible' });
   if (!(await summerCampPreview.evaluate((image) => image.complete && image.naturalWidth > 0))) throw new Error('Summer Camp preview did not load');
   if ((await maze.locator('#theme-select').inputValue()) !== 'summercamp') throw new Error('Summer Camp did not become the selected theme');
@@ -228,11 +234,11 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
 
   const gamesChunk = fs.readdirSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app', 'games')).find((file) => /^page-.*\.js$/.test(file));
   const gamesContent = fs.readFileSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app', 'games', gamesChunk), 'utf8');
-  if (!gamesContent.includes('{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",singleVariant:!0,requires:"addon_parachute_boat",variants:[')) throw new Error('Seafaring Chutes variant contract is missing from Games data');
+  if (!gamesContent.includes('{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"https://cdn.pixelplush.dev/assets/add-ons/icon_boat_chutes.png",singleVariant:!0,requires:"addon_parachute_boat",variants:[')) throw new Error('Seafaring Chutes variant contract is missing from Games data');
   if (!gamesContent.includes('{key:"black",name:"Brown Boat / Black Flag",page:"/parachute/boat_chutes.html"}')) throw new Error('Seafaring Chutes black flag variant is missing from Games data');
   if (!gamesContent.includes('{key:"yellow",name:"Brown Boat / Yellow Flag",page:"/parachute/boat_chutes.html"}')) throw new Error('Seafaring Chutes yellow flag variant is missing from Games data');
   if (gamesContent.includes('boat_chutes_pastel') || gamesContent.includes('boat_chutes_blackwhite')) throw new Error('Unlaunched Boat Chutes variants must not be exposed in Games data');
-  if (!gamesContent.includes('{key:"summercamp",name:"Summer Camp (Premium)",page:"/maze/summercamp.html",premium:!0,preview:"/app-assets/images/games/summercamp.png",requires:"addon_maze_summercamp"}')) throw new Error('Summer Camp paid-page contract is missing from Games data');
+  if (!gamesContent.includes('{key:"summercamp",name:"Summer Camp (Premium)",page:"/maze/summercamp.html",premium:!0,preview:"https://cdn.pixelplush.dev/assets/add-ons/icon_summer_camp_maze.png",requires:"addon_maze_summercamp"}')) throw new Error('Summer Camp paid-page contract is missing from Games data');
 
   const scores = await desktop.newPage();
   await scores.goto(`${baseUrl}/scores/`, { waitUntil: 'networkidle' });
@@ -250,7 +256,7 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
   await navigation.goto(`${baseUrl}/`, { waitUntil: 'networkidle' });
   const gamesLink = navigation.getByRole('link', { name: 'Games for Streams' });
   if (await gamesLink.getAttribute('href') !== siteRoute('/games/')) throw new Error('Games navigation link does not target the canonical Games route');
-  await navigation.goto(`${baseUrl}${siteRoute('/games/')}`, { waitUntil: 'networkidle' });
+  await navigation.goto(`${new URL(baseUrl).origin}${siteRoute('/games/')}`, { waitUntil: 'networkidle' });
   if (new URL(navigation.url()).pathname !== siteRoute('/games/')) throw new Error('Canonical Games route did not load');
   await navigation.close();
   await desktop.close();
@@ -268,7 +274,7 @@ async function auditInteractions(browser, baseUrl, clarityRequests) {
   if ((await languageButton.getAttribute('aria-label')) === 'Language: English') throw new Error('Language selection did not update');
   const footerPosition = await home.locator('footer').evaluate((footer) => getComputedStyle(footer).position);
   if (footerPosition !== 'static') throw new Error(`Mobile footer overlays content with position: ${footerPosition}`);
-  const expectedOldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/v1/';
+  const expectedOldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/';
   if ((await home.locator('[data-old-pixelplush-site]').getAttribute('href')) !== expectedOldSitePath) throw new Error(`Old PixelPlush Site link does not point to ${expectedOldSitePath}`);
   const layoutChunk = fs.readdirSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app')).find((file) => /^layout-.*\.js$/.test(file));
   const layoutContent = fs.readFileSync(path.join(siteRoot, '_next', 'static', 'chunks', 'app', layoutChunk), 'utf8');
@@ -319,7 +325,7 @@ async function auditNullScopes(browser, baseUrl, clarityRequests) {
 async function auditOAuthReturnUrl(browser, baseUrl, clarityRequests) {
   const context = await browser.newContext({ viewport: viewports[0] });
   await configureContext(context, clarityRequests);
-  const expectedUrl = `${baseUrl}/games/?type=giveaway#colors`;
+  const expectedUrl = `${new URL(baseUrl).origin}${siteRoute('/games/')}?type=giveaway#colors`;
   await context.addInitScript((returnUrl) => {
     localStorage.setItem('twitchToken', 'oauth-return-token');
     localStorage.setItem('redirectPage', returnUrl);
@@ -327,7 +333,7 @@ async function auditOAuthReturnUrl(browser, baseUrl, clarityRequests) {
   await context.route('https://id.twitch.tv/oauth2/validate', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ client_id: 'test-client', login: 'teststreamer', user_id: '1', scopes: ['user:read:email', 'chat:read', 'chat:edit', 'channel:manage:redemptions', 'channel:read:redemptions'] }) }));
   await context.route('https://api.pixelplush.dev/v1/accounts', (route) => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ username: 'teststreamer', displayName: 'Test Streamer', coins: 0, owned: [], styles: {} }) }));
   const page = await context.newPage();
-  await page.goto(`${baseUrl}/redirect/`, { waitUntil: 'networkidle' });
+  await page.goto(`${new URL(baseUrl).origin}/redirect/`, { waitUntil: 'networkidle' });
   await page.waitForURL((url) => url.pathname === siteRoute('/games/') && url.search === '?type=giveaway' && url.hash === '#colors', { timeout: 5000 });
   await page.close();
   await context.close();
@@ -336,7 +342,7 @@ async function auditOAuthReturnUrl(browser, baseUrl, clarityRequests) {
   await configureContext(unsafeContext, clarityRequests);
   await unsafeContext.addInitScript(() => localStorage.setItem('redirectPage', 'https://example.com/stolen?token=1#outside'));
   const unsafePage = await unsafeContext.newPage();
-  await unsafePage.goto(`${baseUrl}/redirect/`, { waitUntil: 'networkidle' });
+  await unsafePage.goto(`${new URL(baseUrl).origin}/redirect/`, { waitUntil: 'networkidle' });
   await unsafePage.waitForURL((url) => url.pathname === siteRoute('/') && url.origin === new URL(baseUrl).origin, { timeout: 5000 });
   await unsafePage.close();
   await unsafeContext.close();

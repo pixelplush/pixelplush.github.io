@@ -2,16 +2,26 @@ const fs = require('fs');
 const path = require('path');
 
 const repositoryRoot = path.resolve(__dirname, '..');
-const siteBasePath = process.env.PIXELPLUSH_V2_BASE_PATH || '/';
+function normalizeBasePath(value) {
+  const trimmed = value.trim();
+  if (!trimmed || trimmed === '/') return '/';
+  return `/${trimmed.replace(/^\/+|\/+$/g, '')}`;
+}
+
+const siteBasePath = normalizeBasePath(process.env.PIXELPLUSH_V2_BASE_PATH || '/');
+const sitePath = (route) => {
+  const normalizedRoute = route.startsWith('/') ? route : `/${route}`;
+  return siteBasePath === '/' ? normalizedRoute : `${siteBasePath}${normalizedRoute}`;
+};
 const exportDirectories = siteBasePath === '/' ? ['.'] : ['v2'];
 const exportRoots = exportDirectories
   .map((directory) => path.join(repositoryRoot, directory))
   .filter((directory) => fs.existsSync(directory));
-const oldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/v1/';
+const oldSitePath = process.env.PIXELPLUSH_OLD_SITE_PATH || '/';
 const birthdayCelebrationEnabled = process.env.PIXELPLUSH_BIRTHDAY_ENABLED !== '0';
 const authChunkName = '924-511b76c74bad2ef1.js';
 const authChunkCacheKey = 'oauth-canonical-20260908';
-const birthdayScriptTag = '<script src="/birthday-celebration.js" defer></script>';
+const birthdayScriptTag = `<script src="${sitePath('/birthday-celebration.js')}" defer></script>`;
 const sourceOnlyFiles = new Set(['generatePages.js', 'index.js', 'pages.js', 'template_page.html', 'template_left.html', 'template_left_live.html', 'template_menu_item.html']);
 
 const requiredScopes = [
@@ -136,6 +146,10 @@ function replaceOptional(content, oldValue, newValue) {
   return content.includes(oldValue) ? content.replaceAll(oldValue, newValue) : content;
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
 function patchAuthBundle(content) {
   const scopeLiteral = JSON.stringify(requiredScopes);
   content = replaceExact(
@@ -161,29 +175,28 @@ function patchAuthBundle(content) {
 
 function patchAuthRedirectOrigin(content) {
   const canonicalOrigin = 'let e=["pixelplush.dev","www.pixelplush.dev"].includes(window.location.hostname)?"https://www.pixelplush.dev":window.location.origin;';
-  if (content.includes('let e="".concat(window.location.origin).concat("/");')) {
-    return replaceExact(
-      content,
-      'let e="".concat(window.location.origin).concat("/");',
-      canonicalOrigin,
-      'auth redirect origin',
-      2
-    );
+  const originExpressions = [
+    'let e="".concat(window.location.origin).concat("/");',
+    'let e="".concat(window.location.origin).concat("/v2");',
+    'let e=window.location.origin;',
+  ];
+  if (siteBasePath !== '/') originExpressions.push(`let e="".concat(window.location.origin).concat("${siteBasePath}");`);
+  for (const originExpression of originExpressions) {
+    if (content.includes(originExpression)) {
+      return replaceExact(content, originExpression, canonicalOrigin, 'auth redirect origin', 2);
+    }
   }
-  return replaceExact(content, 'let e=window.location.origin;', canonicalOrigin, 'auth redirect origin', 2);
+  return content;
 }
 
 function patchAuthChunkReference(content) {
-  content = replaceOptional(
-    content,
-    `"/_next/static/chunks/${authChunkName}"`,
-    `"/_next/static/chunks/${authChunkName}?v=${authChunkCacheKey}"`
-  );
-  content = replaceOptional(
-    content,
-    `"/_next/static/chunks/${authChunkName}?v=oauth-redirect-20260908"`,
-    `"/_next/static/chunks/${authChunkName}?v=${authChunkCacheKey}"`
-  );
+  const chunkPath = sitePath(`/_next/static/chunks/${authChunkName}`);
+  for (const candidatePath of new Set([`/_next/static/chunks/${authChunkName}`, chunkPath])) {
+    content = content.replace(
+      new RegExp(`"${escapeRegExp(candidatePath)}(?:\\?v=[^"]*)?"`, 'g'),
+      `"${chunkPath}?v=${authChunkCacheKey}"`
+    );
+  }
   return replaceOptional(
     content,
     `"static/chunks/${authChunkName}"`,
@@ -375,18 +388,23 @@ function patchNewGameThemes(content) {
     if (end < 0) throw new Error(`${label}: unable to find themes array end`);
     content = `${content.slice(0, end)},${theme}${content.slice(end)}`;
   };
-  appendTheme(
-    'wanderingwizards',
-    '{key:"summercamp",name:"Summer Camp (Premium)",page:"/maze/summercamp.html",premium:!0,preview:"/app-assets/images/games/summercamp.png",requires:"addon_maze_summercamp"}',
-    'Summer Camp Maze theme'
-  );
-  const legacyBoatTheme = '{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",requires:"addon_parachute_boat"},';
+  const campPreview = 'https://cdn.pixelplush.dev/assets/add-ons/icon_summer_camp_maze.png';
+  const campTheme = `{key:"summercamp",name:"Summer Camp (Premium)",page:"/maze/summercamp.html",premium:!0,preview:"${campPreview}",requires:"addon_maze_summercamp"}`;
+  content = content.replaceAll('preview:"/app-assets/images/games/summercamp.png"', `preview:"${campPreview}"`);
+  content = content.replaceAll(campTheme, '');
+  appendTheme('wanderingwizards', campTheme, 'Summer Camp Maze theme');
+  const boatPreview = 'https://cdn.pixelplush.dev/assets/add-ons/icon_boat_chutes.png';
+  const boatTheme = `{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"${boatPreview}",singleVariant:!0,requires:"addon_parachute_boat",variants:[{key:"black",name:"Brown Boat / Black Flag",page:"/parachute/boat_chutes.html"},{key:"blue",name:"Brown Boat / Blue Flag",page:"/parachute/boat_chutes.html"},{key:"green",name:"Brown Boat / Green Flag",page:"/parachute/boat_chutes.html"},{key:"orange",name:"Brown Boat / Orange Flag",page:"/parachute/boat_chutes.html"},{key:"pink",name:"Brown Boat / Pink Flag",page:"/parachute/boat_chutes.html"},{key:"purple",name:"Brown Boat / Purple Flag",page:"/parachute/boat_chutes.html"},{key:"red",name:"Brown Boat / Red Flag",page:"/parachute/boat_chutes.html"},{key:"white",name:"Brown Boat / White Flag",page:"/parachute/boat_chutes.html"},{key:"yellow",name:"Brown Boat / Yellow Flag",page:"/parachute/boat_chutes.html"}]}`;
+  content = content.replaceAll('preview:"/app-assets/images/games/boat_chutes.png"', `preview:"${boatPreview}"`);
+  content = content.replaceAll(boatTheme, '');
+  const legacyBoatTheme = '{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"https://cdn.pixelplush.dev/assets/add-ons/icon_boat_chutes.png",requires:"addon_parachute_boat"},';
   content = content.replace(legacyBoatTheme, '');
   appendTheme(
     'pixelparachutes',
-    '{key:"boatchutes",name:"Seafaring Chutes (Premium)",page:"/parachute/boat_chutes.html",premium:!0,preview:"/app-assets/images/games/boat_chutes.png",singleVariant:!0,requires:"addon_parachute_boat",variants:[{key:"black",name:"Brown Boat / Black Flag",page:"/parachute/boat_chutes.html"},{key:"blue",name:"Brown Boat / Blue Flag",page:"/parachute/boat_chutes.html"},{key:"green",name:"Brown Boat / Green Flag",page:"/parachute/boat_chutes.html"},{key:"orange",name:"Brown Boat / Orange Flag",page:"/parachute/boat_chutes.html"},{key:"pink",name:"Brown Boat / Pink Flag",page:"/parachute/boat_chutes.html"},{key:"purple",name:"Brown Boat / Purple Flag",page:"/parachute/boat_chutes.html"},{key:"red",name:"Brown Boat / Red Flag",page:"/parachute/boat_chutes.html"},{key:"white",name:"Brown Boat / White Flag",page:"/parachute/boat_chutes.html"},{key:"yellow",name:"Brown Boat / Yellow Flag",page:"/parachute/boat_chutes.html"}]}',
+    boatTheme,
     'Seafaring Chutes theme'
   );
+  content = content.replace(/,+(?=\{key:"(?:boatchutes|summercamp)")/g, ',');
   return content;
 }
 
@@ -802,7 +820,11 @@ for (const exportRoot of exportRoots) {
     let content = fs.readFileSync(file, 'utf8');
     const original = content;
     if (content.includes('window.ComfyTwitch.Login(o,"".concat(e,"/redirect/"),[],"code")')) content = patchAuthBundle(content);
-    if (content.includes('let e="".concat(window.location.origin).concat("/");') || content.includes('let e=window.location.origin;')) content = patchAuthRedirectOrigin(content);
+    if (content.includes('let e="".concat(window.location.origin).concat("/");')
+      || content.includes('let e=window.location.origin;')
+      || (siteBasePath !== '/' && content.includes(`let e="".concat(window.location.origin).concat("${siteBasePath}");`))) {
+      content = patchAuthRedirectOrigin(content);
+    }
     if (content.includes('o.Scopes=n.scopes') || content.includes('hasRequiredScopes:!!(g&&window.ComfyTwitch&&q.every') || content.includes('Array.isArray(window.ComfyTwitch.Scopes)&&Array.isArray(window.ComfyTwitch.Scopes)')) content = patchNullScopeHandling(content);
     if (content.includes('{isLoggedIn:m,account:c,token:g}=(0,d.A)()')) content = patchGamesBundle(content);
     if (content.includes('children:h("games.settingsLabel")') && !content.includes('"aria-controls":"game-settings-panel"')) content = patchGamesAccessibility(content);
